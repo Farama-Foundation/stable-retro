@@ -1,0 +1,20 @@
+{
+  "info": {
+    "health_com": {
+      "address": 920,
+      "type": ">u1"
+    },
+    "health_mac": {
+      "address": 913,
+      "type": ">u1"
+    },
+    "heart": {
+      "address": 801,
+      "type": ">n4"
+    },
+    "score": {
+      "address": 1000,
+      "type": ">n6"
+    }
+  }
+}

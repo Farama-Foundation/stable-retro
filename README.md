@@ -1,4 +1,7 @@
-**Status:** Maintenance (expect bug fixes and minor updates)
+# Stable-Retro
+
+A fork of gym-retro with additional games. Since gym-retro is in maintenance now and doesn't accept new games or plateforms, you can instead submit PRs with new games or features here in stable-retro.
+
 
 # Gym Retro
 

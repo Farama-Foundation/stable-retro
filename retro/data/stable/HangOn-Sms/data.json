@@ -1,0 +1,20 @@
+{
+  "info": {
+    "left": {
+      "address": 49248,
+      "type": ">d2"
+    },
+    "score": {
+      "address": 49154,
+      "type": ">d5"
+    },
+    "speed": {
+      "address": 49946,
+      "type": "<u2"
+    },
+    "time": {
+      "address": 49165,
+      "type": "<u1"
+    }
+  }
+}

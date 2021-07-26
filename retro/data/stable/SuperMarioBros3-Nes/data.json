@@ -1,5 +1,9 @@
 {
   "info": {
+    "hpos": {
+      "address": 144,
+      "type": "|u1"
+    },
     "lives": {
       "address": 1846,
       "type": "|i1"

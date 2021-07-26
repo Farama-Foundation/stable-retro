@@ -1,4 +1,10 @@
 {
+  "crop": [
+    0,
+    0,
+    0,
+    0
+  ],
   "done": {
     "variables": {
       "lives": {
@@ -8,8 +14,15 @@
   },
   "reward": {
     "variables": {
+      "hpos": {
+        "penalty": 1.0,
+        "reward": 1.0
+      },
+      "lives": {
+        "penalty": 100.0
+      },
       "score": {
-        "reward": 10.0
+        "reward": 1.0
       }
     }
   }

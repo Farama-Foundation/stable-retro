@@ -2,6 +2,12 @@
 
 A fork of gym-retro with additional games. Since gym-retro is in maintenance now and doesn't accept new games or plateforms, you can instead submit PRs with new games or features here in stable-retro.
 
+Currently added games on top of gym-retro:
+*	SuperMarioBros2 Japan version
+*	Hang On
+*	Punch Out
+
+As well as additional states on already integrated games
 
 # Gym Retro
 

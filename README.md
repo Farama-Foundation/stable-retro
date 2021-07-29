@@ -7,7 +7,15 @@ Currently added games on top of gym-retro:
 *	Hang On
 *	Punch Out
 
-As well as additional states on already integrated games
+As well as additional states on already integrated games.
+
+## Installation
+
+```
+git clone
+cd stable-retro
+pip3 install -e .
+```
 
 # Gym Retro
 

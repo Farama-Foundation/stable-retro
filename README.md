@@ -12,7 +12,7 @@ As well as additional states on already integrated games.
 ## Installation
 
 ```
-git clone
+git clone https://github.com/MatPoliquin/stable-retro.git
 cd stable-retro
 pip3 install -e .
 ```

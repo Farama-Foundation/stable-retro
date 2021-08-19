@@ -1,0 +1,29 @@
+{
+  "crop": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "done": {
+    "variables": {
+      "lives": {
+        "op": "equal",
+        "reference": -1
+      }
+    }
+  },
+  "reward": {
+    "variables": {
+      "deathsound": {
+        "reward": -500.0
+      },
+      "lives": {
+        "penalty": 10.0
+      },
+      "xscrollLo": {
+        "reward": 1.0
+      }
+    }
+  }
+}

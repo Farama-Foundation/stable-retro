@@ -1,4 +1,10 @@
 {
+  "crop": [
+    0,
+    0,
+    0,
+    0
+  ],
   "done": {
     "variables": {
       "enemy_rounds_won": {
@@ -12,9 +18,17 @@
       "enemy_health": {
         "penalty": -1.0
       },
+      "health": {
+        "penalty": 1.0
+      },
       "wins": {
         "reward": 10.0
       }
     }
-  }
+  },
+  "actions": [
+    [[], ["UP"], ["DOWN"]],
+    [[], ["LEFT"], ["RIGHT"]],
+    [[], ["A"], ["B"], ["C"], ["X"], ["Y"], ["Z"], ["START"]]
+   ]
 }

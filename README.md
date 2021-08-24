@@ -6,6 +6,7 @@ Currently added games on top of gym-retro:
 *	Super Mario Bros 2 Japan version
 *	Hang On
 *	Punch Out
+*	WWF Wrestlemania the Arcade Game - Genesis
 
 As well as additional states on already integrated games.
 

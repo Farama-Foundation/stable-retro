@@ -1,7 +1,13 @@
 {
+  "crop": [
+    0,
+    0,
+    0,
+    0
+  ],
   "done": {
     "variables": {
-      "enemy_rounds_won": {
+      "enemy_wons": {
         "op": "equal",
         "reference": 2
       }
@@ -11,9 +17,6 @@
     "variables": {
       "enemy_health": {
         "penalty": -1.0
-      },
-      "wins": {
-        "reward": 10.0
       }
     }
   }

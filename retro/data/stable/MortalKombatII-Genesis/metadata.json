@@ -1,3 +1,7 @@
 {
-  "default_state": "Level1.LiuKangVsJax"
+  "default_state": "Level1.JaxVsBaraka",
+  "default_player_state": [
+    "Level1.JaxVsBaraka",
+    "Level1.LiuKangVsJax.2P"
+  ]
 }

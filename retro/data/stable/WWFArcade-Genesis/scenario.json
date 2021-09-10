@@ -15,6 +15,12 @@
   },
   "reward": {
     "variables": {
+      "enemy2_health": {
+        "penalty": -1.0
+      },
+      "enemy3_health": {
+        "penalty": -1.0
+      },
       "enemy_health": {
         "penalty": -1.0
       }

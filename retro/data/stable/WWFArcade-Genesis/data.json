@@ -1,5 +1,13 @@
 {
   "info": {
+    "enemy2_health": {
+      "address": 16757564,
+      "type": ">u2"
+    },
+    "enemy3_health": {
+      "address": 16757578,
+      "type": ">u2"
+    },
     "enemy_health": {
       "address": 16757550,
       "type": ">u2"
@@ -10,6 +18,10 @@
     },
     "health": {
       "address": 16757522,
+      "type": ">u2"
+    },
+    "won_rounds": {
+      "address": 16755456,
       "type": ">u2"
     }
   }

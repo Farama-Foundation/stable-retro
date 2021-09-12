@@ -3,9 +3,9 @@
 A fork of gym-retro with additional games. Since gym-retro is in maintenance now and doesn't accept new games or plateforms, you can instead submit PRs with new games or features here in stable-retro.
 
 Currently added games on top of gym-retro:
-*	Super Mario Bros 2 Japan version
-*	Hang On
-*	Punch Out
+*	Super Mario Bros 2 Japan (Lost Levels) - NES
+*	Hang On - SMS
+*	Punch Out - NES
 *	WWF Wrestlemania the Arcade Game - Genesis
 
 As well as additional states on already integrated games.

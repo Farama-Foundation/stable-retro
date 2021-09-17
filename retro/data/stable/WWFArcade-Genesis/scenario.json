@@ -10,6 +10,10 @@
       "enemy_wons": {
         "op": "equal",
         "reference": 2
+      },
+      "won_rounds": {
+        "op": "equal",
+        "reference": 2
       }
     }
   },

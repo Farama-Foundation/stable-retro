@@ -27,6 +27,9 @@
       },
       "enemy_health": {
         "penalty": -1.0
+      },
+      "health": {
+        "penalty": 1.0
       }
     }
   }

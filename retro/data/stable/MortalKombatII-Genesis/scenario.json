@@ -1,4 +1,48 @@
 {
+  "actions": [
+    [
+      [],
+      [
+        "UP"
+      ],
+      [
+        "DOWN"
+      ]
+    ],
+    [
+      [],
+      [
+        "LEFT"
+      ],
+      [
+        "RIGHT"
+      ]
+    ],
+    [
+      [],
+      [
+        "B"
+      ],
+      [
+        "A"
+      ],
+      [
+        "START"
+      ],
+      [
+        "C"
+      ],
+      [
+        "Y"
+      ],
+      [
+        "X"
+      ],
+      [
+        "Z"
+      ]
+    ]
+  ],
   "crop": [
     0,
     0,
@@ -8,6 +52,10 @@
   "done": {
     "variables": {
       "enemy_rounds_won": {
+        "op": "equal",
+        "reference": 2
+      },
+      "rounds_won": {
         "op": "equal",
         "reference": 2
       }
@@ -25,10 +73,5 @@
         "reward": 10.0
       }
     }
-  },
-  "actions": [
-    [[], ["UP"], ["DOWN"]],
-    [[], ["LEFT"], ["RIGHT"]],
-    [[], ["A"], ["B"], ["C"], ["X"], ["Y"], ["Z"], ["START"]]
-   ]
+  }
 }

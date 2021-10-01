@@ -1,4 +1,10 @@
 {
+  "crop": [
+    0,
+    0,
+    0,
+    0
+  ],
   "done": {
     "variables": {
       "lives": {
@@ -9,8 +15,11 @@
   },
   "reward": {
     "variables": {
+      "health": {
+        "penalty": 1.0
+      },
       "score": {
-        "reward": 1
+        "reward": 1.0
       }
     }
   }

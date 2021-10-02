@@ -1,0 +1,60 @@
+{
+  "info": {
+    "icing": {
+      "address": 16768680,
+      "type": ">u4"
+    },
+    "p1_bodychecks": {
+      "address": 16762590,
+      "type": ">u2"
+    },
+    "p1_faceoffwon": {
+      "address": 16762588,
+      "type": ">u2"
+    },
+    "p1_onetimer": {
+      "address": 16763432,
+      "type": ">u4"
+    },
+    "p1_passing": {
+      "address": 16762594,
+      "type": ">u2"
+    },
+    "p1_score": {
+      "address": 16762586,
+      "type": ">u2"
+    },
+    "p1_shots": {
+      "address": 16762572,
+      "type": ">u4"
+    },
+    "p2_bodychecks": {
+      "address": 16763458,
+      "type": ">u2"
+    },
+    "p2_faceoffwon": {
+      "address": 16763454,
+      "type": ">u2"
+    },
+    "p2_onetimer": {
+      "address": 16764300,
+      "type": ">u4"
+    },
+    "p2_passing": {
+      "address": 16763462,
+      "type": ">u2"
+    },
+    "p2_score": {
+      "address": 16763454,
+      "type": ">u2"
+    },
+    "p2_shots": {
+      "address": 16763440,
+      "type": ">u4"
+    },
+    "period": {
+      "address": 16761958,
+      "type": ">u2"
+    }
+  }
+}

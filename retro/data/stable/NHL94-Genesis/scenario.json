@@ -1,0 +1,45 @@
+{
+  "crop": [
+    0,
+    0,
+    256,
+    224
+  ],
+  "done": {
+    "variables": {
+      "period": {
+        "measurement": "delta",
+        "op": "equal",
+        "reference": 1
+      }
+    }
+  },
+  "reward": {
+    "variables": {
+      "p1_bodychecks": {
+        "reward": 1.0
+      },
+      "p1_faceoffwon": {
+        "reward": 1.0
+      },
+      "p1_onetimer": {
+        "reward": 1.0
+      },
+      "p1_passing": {
+        "reward": 1.0
+      },
+      "p1_score": {
+        "reward": 1.0
+      },
+      "p1_shots": {
+        "reward": 1.0
+      },
+      "p2_score": {
+        "reward": -1.0
+      },
+      "p2_shots": {
+        "reward": -1.0
+      }
+    }
+  }
+}

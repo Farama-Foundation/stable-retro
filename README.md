@@ -8,6 +8,12 @@ Currently added games on top of gym-retro:
 *	Punch Out - NES
 *	WWF Wrestlemania the Arcade Game - Genesis
 
+
+PvP game that support two models fighting each other:
+*	Samurai Showdown - Genesis
+*	WWF Wrestlemania the Arcade Game - Genesis
+*	Mortal Kombat II - Genesis
+
 As well as additional states on already integrated games.
 
 ## Installation

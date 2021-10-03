@@ -1,3 +1,7 @@
 {
   "default_state": "canadiensvsnordique"
+  "default_player_state": [
+    "canadiensvsnordique",
+    "canadiensvsnordique.2P"
+  ]
 }

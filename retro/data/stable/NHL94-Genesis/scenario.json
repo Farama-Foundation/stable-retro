@@ -2,8 +2,8 @@
   "crop": [
     0,
     0,
-    256,
-    224
+    0,
+    0
   ],
   "done": {
     "variables": {
@@ -33,6 +33,9 @@
       },
       "p1_shots": {
         "reward": 1.0
+      },
+      "p2_attackzone": {
+        "reward": -1.0
       },
       "p2_score": {
         "reward": -1.0

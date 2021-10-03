@@ -1,9 +1,5 @@
 {
   "info": {
-    "icing": {
-      "address": 16768680,
-      "type": ">u4"
-    },
     "p1_bodychecks": {
       "address": 16762590,
       "type": ">u2"
@@ -26,6 +22,10 @@
     },
     "p1_shots": {
       "address": 16762572,
+      "type": ">u4"
+    },
+    "p2_attackzone": {
+      "address": 16763450,
       "type": ">u4"
     },
     "p2_bodychecks": {

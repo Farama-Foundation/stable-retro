@@ -7,7 +7,7 @@ Currently added games on top of gym-retro:
 *	Hang On - SMS
 *	Punch Out - NES
 *	WWF Wrestlemania the Arcade Game - Genesis
-*	NHL 94
+*	NHL 94 - Genesis
 
 
 PvP game that support two models fighting each other:

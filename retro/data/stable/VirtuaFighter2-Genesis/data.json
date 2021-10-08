@@ -1,0 +1,16 @@
+{
+  "info": {
+    "enemy_health": {
+      "address": 16768738,
+      "type": "|u1"
+    },
+    "health": {
+      "address": 16768227,
+      "type": "|u1"
+    },
+    "time": {
+      "address": 16712216,
+      "type": ">d4"
+    }
+  }
+}

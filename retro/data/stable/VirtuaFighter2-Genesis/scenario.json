@@ -1,0 +1,31 @@
+{
+  "crop": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "done": {
+    "variables": {
+      "enemy_health": {
+        "op": "equal"
+      },
+      "health": {
+        "op": "equal"
+      },
+      "time": {
+        "op": "equal"
+      }
+    }
+  },
+  "reward": {
+    "variables": {
+      "enemy_health": {
+        "penalty": -1.0
+      },
+      "health": {
+        "penalty": 1.0
+      }
+    }
+  }
+}

@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	QSurfaceFormat format;
 	format.setDepthBufferSize(0);
 	format.setSwapInterval(0);
-	format.setSwapBehavior(QSurfaceFormat::SingleBuffer);
+	format.setSwapBehavior(QSurfaceFormat::DoubleBuffer);
 	QSurfaceFormat::setDefaultFormat(format);
 
 	EmulatorController controller;

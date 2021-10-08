@@ -17,6 +17,9 @@ PvP game that support two models fighting each other:
 
 As well as additional states on already integrated games.
 
+## Bug Fixes
+*	Fixed UI flickering issue in OpenAI integration tool
+
 ## Installation
 
 ```
@@ -24,6 +27,7 @@ git clone https://github.com/MatPoliquin/stable-retro.git
 cd stable-retro
 pip3 install -e .
 ```
+
 
 # Gym Retro
 

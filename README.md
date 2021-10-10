@@ -9,6 +9,8 @@ Currently added games on top of gym-retro:
 *	WWF Wrestlemania the Arcade Game - Genesis
 *	NHL 94 - Genesis
 *	Super Hang On - Genesis
+*	Tetris - GameBoy
+*	Virtua Fighter 2 - Genesis
 
 PvP game that support two models fighting each other:
 *	Samurai Showdown - Genesis

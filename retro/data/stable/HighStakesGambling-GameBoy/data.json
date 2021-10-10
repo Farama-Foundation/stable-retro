@@ -1,0 +1,12 @@
+{
+  "info": {
+    "bet": {
+      "address": 65499,
+      "type": ">d2"
+    },
+    "cash": {
+      "address": 65489,
+      "type": ">d4"
+    }
+  }
+}

@@ -7,18 +7,19 @@
   ],
   "done": {
     "variables": {
-      "time": {
-        "op": "equal"
+      "cash": {
+        "op": "equal",
+        "reference": 9000
       }
     }
   },
   "reward": {
     "variables": {
-      "score": {
+      "bet": {
+        "penalty": 1.0,
         "reward": 1.0
       },
-      "speed": {
-        "penalty": -1.0,
+      "cash": {
         "reward": 1.0
       }
     }

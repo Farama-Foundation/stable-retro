@@ -1,5 +1,9 @@
 {
   "info": {
+    "p1_attackzone": {
+      "address": 16762582,
+      "type": ">u4"
+    },
     "p1_bodychecks": {
       "address": 16762590,
       "type": ">u2"

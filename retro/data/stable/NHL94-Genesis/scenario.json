@@ -2,8 +2,8 @@
   "crop": [
     0,
     0,
-    256,
-    224
+    0,
+    0
   ],
   "done": {
     "variables": {
@@ -16,8 +16,11 @@
   },
   "reward": {
     "variables": {
+      "p1_attackzone": {
+        "reward": 0.6000000238418579
+      },
       "p1_bodychecks": {
-        "reward": 1.0
+        "reward": 0.10000000149011612
       },
       "p1_faceoffwon": {
         "reward": 1.0
@@ -26,16 +29,16 @@
         "reward": 1.0
       },
       "p1_passing": {
-        "reward": 1.0
+        "reward": 0.5
       },
       "p1_score": {
         "reward": 1.0
       },
       "p1_shots": {
-        "reward": 1.0
+        "reward": 0.5
       },
       "p2_attackzone": {
-        "reward": -1.0
+        "reward": -0.20000000298023224
       },
       "p2_score": {
         "reward": -1.0

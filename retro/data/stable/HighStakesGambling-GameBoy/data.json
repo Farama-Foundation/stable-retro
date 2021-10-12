@@ -7,6 +7,14 @@
     "cash": {
       "address": 65489,
       "type": ">d4"
+    },
+    "pay": {
+      "address": 65498,
+      "type": ">d3"
+    },
+    "select": {
+      "address": 54340,
+      "type": "<u1"
     }
   }
 }

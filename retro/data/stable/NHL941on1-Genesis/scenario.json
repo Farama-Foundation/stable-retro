@@ -1,0 +1,27 @@
+{
+  "crop": [
+    0,
+    0,
+    256,
+    224
+  ],
+  "done": {
+    "variables": {
+      "period": {
+        "measurement": "delta",
+        "op": "equal",
+        "reference": 1
+      }
+    }
+  },
+  "reward": {
+    "variables": {
+      "p1_score": {
+        "reward": 1.0
+      },
+      "p2_score": {
+        "penalty": 1.0
+      }
+    }
+  }
+}

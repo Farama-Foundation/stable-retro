@@ -1,0 +1,16 @@
+{
+  "info": {
+    "p1_score": {
+      "address": 16762586,
+      "type": ">u2"
+    },
+    "p2_score": {
+      "address": 16763454,
+      "type": ">u2"
+    },
+    "period": {
+      "address": 16761958,
+      "type": ">u2"
+    }
+  }
+}

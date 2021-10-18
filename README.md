@@ -8,6 +8,7 @@ Currently added games on top of gym-retro:
 *	Punch Out - NES
 *	WWF Wrestlemania the Arcade Game - Genesis
 *	NHL 94 - Genesis
+*	NHL 94 (1 on 1 rom hack) - Genesis
 *	Super Hang On - Genesis
 *	Tetris - GameBoy
 *	Virtua Fighter 2 - Genesis

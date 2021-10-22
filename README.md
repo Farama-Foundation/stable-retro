@@ -33,6 +33,15 @@ cd stable-retro
 pip3 install -e .
 ```
 
+## Citation
+@misc{stable-retro,
+  author = {Mathieu and Poliquin},
+  title = {Stable Retro},
+  year = {2021},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/MatPoliquin/stable-retro}},
+}
 
 # Gym Retro
 

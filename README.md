@@ -38,7 +38,7 @@ pip3 install -e .
 ```
 @misc{stable-retro,
   author = {Mathieu and Poliquin},
-  title = {Stable Retro},
+  title = {Stable Retro, a fork of OpenAI's gym-retro},
   year = {2021},
   publisher = {GitHub},
   journal = {GitHub repository},

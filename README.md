@@ -34,6 +34,8 @@ pip3 install -e .
 ```
 
 ## Citation
+
+```
 @misc{stable-retro,
   author = {Mathieu and Poliquin},
   title = {Stable Retro},
@@ -42,6 +44,7 @@ pip3 install -e .
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/MatPoliquin/stable-retro}},
 }
+```
 
 # Gym Retro
 

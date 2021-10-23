@@ -13,7 +13,7 @@ Currently added games on top of gym-retro:
 *	Tetris - GameBoy
 *	Virtua Fighter 2 - Genesis
 
-PvP game that support two models fighting each other:
+PvP games that support two models fighting each other:
 *	Samurai Showdown - Genesis
 *	WWF Wrestlemania the Arcade Game - Genesis
 *	Mortal Kombat II - Genesis

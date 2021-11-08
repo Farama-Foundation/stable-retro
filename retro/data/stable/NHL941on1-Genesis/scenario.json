@@ -6,13 +6,7 @@
     224
   ],
   "done": {
-    "variables": {
-      "period": {
-        "measurement": "delta",
-        "op": "equal",
-        "reference": 1
-      }
-    }
+    "script": "lua:nhl94_done"
   },
   "reward": {
     "script": "lua:nhl94_reward"

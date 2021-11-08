@@ -67,6 +67,18 @@
     "period": {
       "address": 16761958,
       "type": ">u2"
+    },
+    "puck_x": {
+      "address": 16758630,
+      "type": ">i2"
+    },
+    "puck_y": {
+      "address": 16758634,
+      "type": ">i2"
+    },
+    "time": {
+      "address": 16761958,
+      "type": ">u4"
     }
   }
 }

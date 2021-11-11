@@ -64,6 +64,14 @@
       "address": 16763440,
       "type": ">u4"
     },
+    "p2_x": {
+      "address": 16760300,
+      "type": ">i2"
+    },
+    "p2_y": {
+      "address": 16760320,
+      "type": ">i2"
+    },
     "period": {
       "address": 16761958,
       "type": ">u2"

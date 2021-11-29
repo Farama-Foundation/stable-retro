@@ -28,9 +28,7 @@ As well as additional states on already integrated games.
 ## Installation
 
 ```
-git clone https://github.com/MatPoliquin/stable-retro.git
-cd stable-retro
-pip3 install -e .
+pip3 install git+https://github.com/MatPoliquin/stable-retro.git
 ```
 
 ## Citation

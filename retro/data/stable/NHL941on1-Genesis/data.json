@@ -1,5 +1,13 @@
 {
   "info": {
+    "g1_x": {
+      "address": 16756938,
+      "type": ">i2"
+    },
+    "g1_y": {
+      "address": 16756958,
+      "type": ">i2"
+    },
     "p1_attackzone": {
       "address": 16762582,
       "type": ">u4"

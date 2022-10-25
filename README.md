@@ -31,6 +31,9 @@ As well as additional states on already integrated games.
 pip3 install git+https://github.com/MatPoliquin/stable-retro.git
 ```
 
+Video on how to setup on Ubuntu and Windows:
+https://youtu.be/LRgGSQGNZeE
+
 ## Citation
 
 ```

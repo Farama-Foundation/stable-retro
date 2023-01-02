@@ -76,11 +76,11 @@ end
 
 function nhl94_done()
 
-    distance = calc_distance(data.puck_x, data.puck_y, data.p1_x, data.p1_y)
+    --distance = calc_distance(data.puck_x, data.puck_y, data.p1_x, data.p1_y)
 
-    if distance > 300 then
-        return true
-    end
+    --if distance > 300 then
+    --    return true
+    --end
 
 
     if data.time == 10 then

@@ -5,6 +5,11 @@
     256,
     224
   ],
+  "actions": [
+    [[], ["UP"], ["DOWN"]],
+    [[], ["LEFT"], ["RIGHT"]],
+    [[], ["B"], ["C"]]
+  ],
   "done": {
     "script": "lua:nhl94_done"
   },

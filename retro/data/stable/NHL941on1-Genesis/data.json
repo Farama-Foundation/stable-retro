@@ -73,11 +73,11 @@
       "type": ">u4"
     },
     "p2_x": {
-      "address": 16760300,
+      "address": 16757606,
       "type": ">i2"
     },
     "p2_y": {
-      "address": 16760320,
+      "address": 16758870,
       "type": ">i2"
     },
     "period": {
@@ -91,6 +91,14 @@
     "puck_y": {
       "address": 16758634,
       "type": ">i2"
+    },
+    "puck_vel_x": {
+      "address": 16758642,
+      "type": "|i1"
+    },
+    "puck_vel_y": {
+      "address": 16758644,
+      "type": "|i1"
     },
     "time": {
       "address": 16761958,

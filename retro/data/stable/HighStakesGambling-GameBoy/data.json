@@ -14,7 +14,7 @@
     },
     "select": {
       "address": 54340,
-      "type": "<u1"
+      "type": "|u1"
     }
   }
 }

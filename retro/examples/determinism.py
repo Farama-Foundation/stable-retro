@@ -5,7 +5,7 @@ Example wrapper to improve determinism of Retro environments
 import retro
 import numpy as np
 import argparse
-import gym
+import gymnasium as gym
 import multiprocessing as mp
 
 CHUNK_LENGTH = 128

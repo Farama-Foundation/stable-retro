@@ -3,7 +3,7 @@ import os
 import pytest
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def custom_cleanup():
 	retro.data.Integrations.clear_custom_paths()
 	assert not retro.data.Integrations.CUSTOM_ONLY.paths

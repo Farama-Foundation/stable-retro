@@ -14,7 +14,8 @@ import argparse
 
 import numpy as np
 import retro
-import gym
+import gymnasium as gym
+from gymnasium.wrappers.time_limit import TimeLimit
 
 
 EXPLORATION_PARAM = 0.005
@@ -30,33 +31,15 @@ class Frameskip(gym.Wrapper):
 
     def step(self, act):
         total_rew = 0.0
-        done = None
+        terminated = False
+        truncated = False
         for i in range(self._skip):
-            obs, rew, done, info = self.env.step(act)
+            obs, rew, terminated, truncated, info = self.env.step(act)
             total_rew += rew
-            if done:
+            if terminated or truncated:
                 break
 
-        return obs, total_rew, done, info
-
-
-class TimeLimit(gym.Wrapper):
-    def __init__(self, env, max_episode_steps=None):
-        super().__init__(env)
-        self._max_episode_steps = max_episode_steps
-        self._elapsed_steps = 0
-
-    def step(self, ac):
-        observation, reward, done, info = self.env.step(ac)
-        self._elapsed_steps += 1
-        if self._elapsed_steps >= self._max_episode_steps:
-            done = True
-            info['TimeLimit.truncated'] = True
-        return observation, reward, done, info
-
-    def reset(self, **kwargs):
-        self._elapsed_steps = 0
-        return self.env.reset(**kwargs)
+        return obs, total_rew, terminated, truncated, info
 
 
 class Node:
@@ -132,10 +115,10 @@ def rollout(env, acts):
     env.reset()
     steps = 0
     for act in acts:
-        _obs, rew, done, _info = env.step(act)
+        _obs, rew, terminated, truncated, _info = env.step(act)
         steps += 1
         total_rew += rew
-        if done:
+        if terminated or truncated:
             break
 
     return steps, total_rew

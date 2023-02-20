@@ -14,7 +14,7 @@ def pytest_collection_modifyitems(items):
 
     for item in items:
         if item.originalname in ('test_load', 'test_rom', 'test_state', 'test_hash'):
-            for key in item.keywords.keys():
+            for key in list(item.keywords):
                 if '[' + key + ']' not in item.nodeid:
                     continue
 

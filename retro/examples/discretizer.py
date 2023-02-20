@@ -2,7 +2,7 @@
 Define discrete action spaces for Gym Retro environments with a limited set of button combos
 """
 
-import gym
+import gymnasium as gym
 import numpy as np
 import retro
 

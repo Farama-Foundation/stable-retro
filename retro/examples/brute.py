@@ -197,6 +197,7 @@ def brute_retro(
             print("timestep limit exceeded")
             break
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--game', default='Airstriker-Genesis')

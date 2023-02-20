@@ -21,6 +21,7 @@ class Interactive(abc.ABC):
     """
     Base class for making gym environments interactive for human use
     """
+
     def __init__(self, env, sync=True, tps=60, aspect_ratio=None):
         obs = env.reset()
         self._image = self.get_image(obs, env)
@@ -204,10 +205,11 @@ class RetroInteractive(Interactive):
     """
     Interactive setup for retro games
     """
+
     def __init__(self, game, state, scenario, record):
         env = retro.make(game=game, state=state, scenario=scenario, record=record, render_mode='rgb_array')
         self._buttons = env.buttons
-        super().__init__(env=env, sync=False, tps=60, aspect_ratio=4/3)
+        super().__init__(env=env, sync=False, tps=60, aspect_ratio=4 / 3)
 
     def get_image(self, _obs, env):
         return env.render()

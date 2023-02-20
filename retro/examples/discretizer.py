@@ -6,6 +6,7 @@ import gymnasium as gym
 import numpy as np
 import retro
 
+
 class Discretizer(gym.ActionWrapper):
     """
     Wrap a gym environment and make it use discrete actions.
@@ -36,6 +37,7 @@ class SonicDiscretizer(Discretizer):
     Use Sonic-specific discrete actions
     based on https://github.com/openai/retro-baselines/blob/master/agents/sonic_util.py
     """
+
     def __init__(self, env):
         super().__init__(env=env, combos=[['LEFT'], ['RIGHT'], ['LEFT', 'DOWN'], ['RIGHT', 'DOWN'], ['DOWN'], ['DOWN', 'B'], ['B']])
 

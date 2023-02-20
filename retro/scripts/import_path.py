@@ -52,7 +52,5 @@ def main():
     print('Imported %i games' % imported_games)
 
 
-
-
 if __name__ == '__main__':
     main()

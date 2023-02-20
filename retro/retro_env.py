@@ -106,7 +106,7 @@ class RetroEnv(gym.Env):
             self.action_space = gym.spaces.MultiDiscrete([len(combos) for combos in self.button_combos] * players)
         else:
             self.action_space = gym.spaces.MultiBinary(self.num_buttons * players)
-        
+
         if self._obs_type == retro.Observations.RAM:
             shape = self.get_ram().shape
         else:
@@ -122,7 +122,7 @@ class RetroEnv(gym.Env):
             self.auto_record()
         elif record is not False:
             self.auto_record(record)
-        
+
         self.render_mode = render_mode
 
     def _update_obs(self):
@@ -256,7 +256,7 @@ class RetroEnv(gym.Env):
 
     def load_state(self, statename, inttype=retro.data.Integrations.DEFAULT):
         if not statename.endswith('.state'):
-                statename += '.state'
+            statename += '.state'
 
         with gzip.open(retro.data.get_file_path(self.gamename, statename, inttype), 'rb') as fh:
             self.initial_state = fh.read()

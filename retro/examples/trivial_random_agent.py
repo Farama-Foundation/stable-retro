@@ -1,5 +1,6 @@
 import retro
 
+
 def main():
     env = retro.make(game='Airstriker-Genesis')
     obs = env.reset()

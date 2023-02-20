@@ -8,7 +8,7 @@ import numpy as np
 import gymnasium as gym
 from gymnasium.wrappers.time_limit import TimeLimit
 from stable_baselines3.common.vec_env import SubprocVecEnv, VecFrameStack, VecTransposeImage
-from stable_baselines3.common.atari_wrappers import WarpFrame, ClipRewardEnv 
+from stable_baselines3.common.atari_wrappers import WarpFrame, ClipRewardEnv
 from stable_baselines3 import PPO
 
 import retro
@@ -36,18 +36,19 @@ class StochasticFrameSkip(gym.Wrapper):
             if self.curac is None:
                 self.curac = ac
             # First substep, delay with probability=stickprob
-            elif i==0:
+            elif i == 0:
                 if self.rng.rand() > self.stickprob:
                     self.curac = ac
             # Second substep, new action definitely kicks in
-            elif i==1:
+            elif i == 1:
                 self.curac = ac
-            if self.supports_want_render and i<self.n-1:
+            if self.supports_want_render and i < self.n - 1:
                 ob, rew, terminated, truncated, info = self.env.step(self.curac, want_render=False)
             else:
                 ob, rew, terminated, truncated, info = self.env.step(self.curac)
             totrew += rew
-            if terminated or truncated: break
+            if terminated or truncated:
+                break
         return ob, totrew, terminated, truncated, info
 
 
@@ -99,7 +100,7 @@ def main():
     model = PPO(
         policy='CnnPolicy',
         env=venv,
-        learning_rate=lambda f : f * 2.5e-4,
+        learning_rate=lambda f: f * 2.5e-4,
         n_steps=128,
         batch_size=32,
         n_epochs=4,

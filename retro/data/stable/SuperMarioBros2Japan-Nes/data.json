@@ -6,7 +6,7 @@
     },
     "deathsound": {
       "address": 1810,
-      "type": ">u1"
+      "type": "|u1"
     },
     "levelHi": {
       "address": 1887,
@@ -34,7 +34,7 @@
     },
     "worldskip": {
       "address": 1904,
-      "type": ">n1"
+      "type": "|n1"
     },
     "xscrollHi": {
       "address": 1818,

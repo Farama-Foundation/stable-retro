@@ -5,7 +5,7 @@ Example wrapper to improve determinism of Retro environments
 import retro
 import numpy as np
 import argparse
-import gym
+import gymnasium as gym
 import multiprocessing as mp
 
 CHUNK_LENGTH = 128
@@ -25,6 +25,7 @@ class MoreDeterministicRetroState(gym.Wrapper):
     to support get_state() and reset(state=state), and then this class would need
     to make sure parent methods are called.
     """
+
     def __init__(self, *args, reset_on_step=True, **kwargs):
         super().__init__(*args, **kwargs)
         self._last_obs = None
@@ -63,7 +64,7 @@ def rollout(env, acts):
             break
     return total_rew
 
-    
+
 def chunk(L, length):
     result = []
     while True:
@@ -74,7 +75,7 @@ def chunk(L, length):
         result.append(sublist)
     return result
 
-    
+
 def partition(L, pieces):
     return chunk(L, len(L) // pieces + 1)
 
@@ -108,14 +109,14 @@ def check_env_helper(make_env, all_acts, verbose, out_success):
     success = True
     for start_idx in range(len(in_states)):
         if verbose:
-            print(start_idx+1, len(in_states))
+            print(start_idx + 1, len(in_states))
         env.reset(state=in_states[start_idx])
 
         for offset, acts in enumerate(in_acts[start_idx:]):
-            if not np.array_equal(rollout(env, acts), out_rews[start_idx+offset]):
+            if not np.array_equal(rollout(env, acts), out_rews[start_idx + offset]):
                 print('failed rew')
                 success = False
-            if not np.array_equal(env.get_ram(), out_rams[start_idx+offset]):
+            if not np.array_equal(env.get_ram(), out_rams[start_idx + offset]):
                 print('failed ram')
                 success = False
 
@@ -149,6 +150,7 @@ def main():
         failed_games = []
         for game in games:
             print(game)
+
             def make_env():
                 env = retro.make(game=game)
                 if args.deterministic:
@@ -164,7 +166,7 @@ def main():
 
             if not check_env(make_env, acts, timeout=128):
                 failed_games.append(game)
-        
+
         for game in failed_games:
             print('failed:', game)
 

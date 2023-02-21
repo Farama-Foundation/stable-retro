@@ -11,18 +11,20 @@ def test_env_create(testenv):
 
 @pytest.mark.parametrize('obs_type', [retro.Observations.IMAGE, retro.Observations.RAM])
 def test_env_basic(obs_type, testenv):
-    import gym
+    import gymnasium as gym
     import numpy as np
     json_path = os.path.join(os.path.dirname(__file__), 'dummy.json')
     env = testenv(info=json_path, scenario=json_path, obs_type=obs_type)
-    obs = env.reset()
+    obs, _info = env.reset()
     assert obs.shape == env.observation_space.shape
-    obs, rew, done, info = env.step(env.action_space.sample())
+    obs, rew, terminated, truncated, info = env.step(env.action_space.sample())
     assert obs.shape == env.observation_space.shape
     assert isinstance(rew, float)
     assert rew == 0
-    assert isinstance(done, bool)
-    assert not done
+    assert isinstance(terminated, bool)
+    assert isinstance(truncated, bool)
+    assert not terminated
+    assert not truncated
     assert isinstance(info, dict)
 
 

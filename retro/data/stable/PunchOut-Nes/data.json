@@ -2,11 +2,11 @@
   "info": {
     "health_com": {
       "address": 920,
-      "type": ">u1"
+      "type": "|u1"
     },
     "health_mac": {
       "address": 913,
-      "type": ">u1"
+      "type": "|u1"
     },
     "heart": {
       "address": 801,

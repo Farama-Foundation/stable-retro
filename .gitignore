@@ -137,3 +137,6 @@ retro/VERSION.txt
 Temporary
 *.mkv
 *.search
+
+# VSCode config
+/.vscode/

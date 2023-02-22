@@ -67,7 +67,7 @@ def branch_new(upstream='master', downstream=None):
     return list(check)
 
 
-@pytest.yield_fixture(params=[os.path.splitext(g)[0] for g in os.listdir(os.path.join(os.path.dirname(__file__), '../../tests/roms'))])
+@pytest.fixture(params=[os.path.splitext(g)[0] for g in os.listdir(os.path.join(os.path.dirname(__file__), '../../tests/roms'))])
 def testenv(request):
     import retro.data
     path = os.path.join(os.path.dirname(__file__), '../../tests/roms')

@@ -10,7 +10,6 @@ from google.oauth2 import service_account
 from google.cloud import storage
 
 
-
 class Fold:
     def __init__(self, name, description=None):
         self.fold_name = name

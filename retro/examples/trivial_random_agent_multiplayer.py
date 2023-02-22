@@ -1,5 +1,6 @@
 import retro
 
+
 def main():
     env = retro.make(game='Pong-Atari2600', players=2)
     obs = env.reset()

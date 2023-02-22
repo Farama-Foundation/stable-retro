@@ -21,6 +21,7 @@ class Interactive(abc.ABC):
     """
     Base class for making gym environments interactive for human use
     """
+
     def __init__(self, env, sync=True, tps=60, aspect_ratio=None):
         obs = env.reset()
         self._image = self.get_image(obs, env)
@@ -117,7 +118,8 @@ class Interactive(abc.ABC):
             act = self.keys_to_act(keys)
 
             if not self._sync or act is not None:
-                obs, rew, done, _info = self._env.step(act)
+                obs, rew, terminated, truncated, _info = self._env.step(act)
+                done = terminated or truncated
                 self._image = self.get_image(obs, self._env)
                 self._episode_returns += rew
                 self._steps += 1
@@ -203,13 +205,14 @@ class RetroInteractive(Interactive):
     """
     Interactive setup for retro games
     """
+
     def __init__(self, game, state, scenario, record):
-        env = retro.make(game=game, state=state, scenario=scenario, record=record)
+        env = retro.make(game=game, state=state, scenario=scenario, record=record, render_mode='rgb_array')
         self._buttons = env.buttons
-        super().__init__(env=env, sync=False, tps=60, aspect_ratio=4/3)
+        super().__init__(env=env, sync=False, tps=60, aspect_ratio=4 / 3)
 
     def get_image(self, _obs, env):
-        return env.render(mode='rgb_array')
+        return env.render()
 
     def keys_to_act(self, keys):
         inputs = {

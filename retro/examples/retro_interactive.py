@@ -9,6 +9,7 @@ class RetroInteractive(Interactive):
     """
     Interactive setup for retro games
     """
+
     def __init__(self, game, state, scenario):
         def make_env():
             return retro.make(game=game, state=state, scenario=scenario)
@@ -17,7 +18,7 @@ class RetroInteractive(Interactive):
         self._buttons = env.buttons
         env.close()
         venv = SubprocVecEnv([make_env])
-        super().__init__(venv=venv, sync=False, tps=60, aspect_ratio=4/3)
+        super().__init__(venv=venv, sync=False, tps=60, aspect_ratio=4 / 3)
 
     def get_screen(self, _obs, venv):
         return venv.render(mode='rgb_array')

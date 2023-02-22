@@ -22,7 +22,7 @@ try:
         totrew = [0] * args.players
         while True:
             ac = env.action_space.sample()
-            ob, rew, done, info = env.step(ac)
+            ob, rew, terminated, truncated, info = env.step(ac)
             t += 1
             if t % 10 == 0:
                 if verbosity > 1:
@@ -40,7 +40,7 @@ try:
                         print('t=%i p=%i got reward: %g, current reward: %g' % (t, i, r, totrew[i]))
                     if r < 0:
                         print('t=%i p=%i got penalty: %g, current reward: %g' % (t, i, r, totrew[i]))
-            if done:
+            if terminated or truncated:
                 env.render()
                 try:
                     if verbosity >= 0:

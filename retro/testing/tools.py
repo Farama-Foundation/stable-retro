@@ -136,7 +136,7 @@ def verify_scenario(game, inttype, scenario='scenario', raw=None, dataraw=None):
                 if 'reward' not in definition and 'penalty' not in definition:
                     errors.append((file, 'blank reward %s' % variable))
         if done and 'variables' in done:
-            if 'score'in done['variables']:
+            if 'score' in done['variables']:
                 warnings.append((file, 'suspicious variable in done condition: score'))
             if 'health' in done['variables'] and 'lives' in done['variables'] and 'condition' not in done:
                 warnings.append((file, 'suspicious done condition: health OR lives'))

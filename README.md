@@ -34,6 +34,10 @@ pip3 install git+https://github.com/MatPoliquin/stable-retro.git
 Video on how to setup on Ubuntu and Windows:
 https://youtu.be/LRgGSQGNZeE
 
+Docker image for M1 Macs:
+https://github.com/arvganesh/stable-retro-docker
+
+
 ## Citation
 
 ```

@@ -97,4 +97,3 @@ test: pngtest.exe
 	pngtest
 
 # End of makefile for libpng
-

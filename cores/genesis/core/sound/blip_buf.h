@@ -1,7 +1,7 @@
 /** Sample buffer that resamples from input clock rate to output sample rate \file */
 
 /* blip_buf $vers */
-#ifndef BLIP_BUF_H 
+#ifndef BLIP_BUF_H
 #define BLIP_BUF_H
 
 #ifdef __cplusplus
@@ -63,7 +63,7 @@ void blip_end_frame( blip_t*, unsigned int clock_duration );
 /** Number of buffered samples available for reading. */
 int blip_samples_avail( const blip_t* );
 
-/** Reads and removes at most 'count' samples and writes them to to every other 
+/** Reads and removes at most 'count' samples and writes them to to every other
 element of 'out', allowing easy interleaving of two buffers into a stereo sample
 stream. Outputs 16-bit signed samples. Returns number of samples actually read.  */
 int blip_read_samples( blip_t*, short out [], int count);

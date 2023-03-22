@@ -1028,8 +1028,8 @@ void S9xSetC4 (uint8 byte, uint16 Address)
 					if (r1 & 0x8000)
 					        r1 |= ~0x7fff;
 					else
-					        r1 &= 0x7fff;				
-										
+					        r1 &= 0x7fff;
+
 					tmp = SAR(r1 * C4CosTable[READ_WORD(Memory.C4RAM + 0x1f80) & 0x1ff] * 2, 16);
 					WRITE_3WORD(Memory.C4RAM + 0x1f86, tmp);
 					tmp = SAR(r1 * C4SinTable[READ_WORD(Memory.C4RAM + 0x1f80) & 0x1ff] * 2, 16);

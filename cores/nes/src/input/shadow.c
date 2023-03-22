@@ -132,5 +132,3 @@ INPUTCFC *FCEU_InitSpaceShadow(void) {
 	memset(&ZD, 0, sizeof(ZAPPER));
 	return(&SHADOWC);
 }
-
-

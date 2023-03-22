@@ -17,7 +17,7 @@
   3. The names of the authors may not be used to endorse or promote
      products derived from this software without specific prior
      written permission.
- 
+
   THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS
   OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -88,7 +88,7 @@ main(int argc, char *argv[])
 	}
     }
 
-    
+
     if (argc-optind != 1) {
         fprintf(stderr, USAGE, prg);
         return 1;
@@ -160,7 +160,7 @@ main(int argc, char *argv[])
     else {
         fail += do_read(z, "new_file", 0, WHEN_OPEN, ZIP_ER_CHANGED, 0);
     }
-    
+
     zip_unchange_all(z);
     if (zip_close(z) == -1) {
         fprintf(stderr, "%s: can't close zip archive '%s': %s\n", prg, archive, zip_strerror(z));
@@ -186,7 +186,7 @@ do_read(zip_t *z, const char *name, zip_flags_t flags, enum when when_ex, int ze
     zip_error_init(&error_got);
     zip_error_init(&error_ex);
     zip_error_set(&error_ex, ze_ex, se_ex);
-    
+
     if ((zf=zip_fopen(z, name, flags)) == NULL) {
 	when_got = WHEN_OPEN;
 	zf_error = zip_get_error(z);
@@ -210,7 +210,7 @@ do_read(zip_t *z, const char *name, zip_flags_t flags, enum when when_ex, int ze
     if (when_got != when_ex || zip_error_code_zip(&error_got) != zip_error_code_zip(&error_ex) || zip_error_code_system(&error_got) != zip_error_code_system(&error_ex)) {
 	printf("%s: %s: got %s error (%s), expected %s error (%s)\n",
 	       prg, name,
-	       when_name[when_got], zip_error_strerror(&error_got), 
+	       when_name[when_got], zip_error_strerror(&error_got),
 	       when_name[when_ex], zip_error_strerror(&error_ex));
 	zip_error_fini(&error_got);
 	zip_error_fini(&error_ex);

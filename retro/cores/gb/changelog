@@ -305,25 +305,25 @@ gambatte_qt:
     - Add alternate key support to input settings dialog.
     - Auto-focus to next likely input box after settings key in input dialog.
     - Add "Play" and "State" input settings dialog tabs.
-    - Avoid using the most convenient keys as forced menu short-cuts, set them 
-      as default keys in input settings dialog instead. This unfortunately 
-      makes the more useful shortcuts less visible, but it allows remapping 
+    - Avoid using the most convenient keys as forced menu short-cuts, set them
+      as default keys in input settings dialog instead. This unfortunately
+      makes the more useful shortcuts less visible, but it allows remapping
       the most convenient keyboard keys.
-    - Avoid duplicate joystick axis "press" events by keeping a map of axis 
+    - Avoid duplicate joystick axis "press" events by keeping a map of axis
       states.
     - Make sure to discard irrelevant/old joystick events.
     - Don't give MediaSource button events when stopped.
-    - Allow joystick-based button events while paused by using a very 
+    - Allow joystick-based button events while paused by using a very
       low-frequency poll timer.
     - Make some of the joystick event wrapping stuff less messy.
     - missing string include
     - use QString for videoSourceLabel passed to MainWindow constructor
-    - store currently selected scheme as string, since it appears ModelIndex 
+    - store currently selected scheme as string, since it appears ModelIndex
       is neither tied to the data it points to nor invalidated by changes.
-      enforce valid state on reject since the list of schemes may have 
+      enforce valid state on reject since the list of schemes may have
       changed.
     - Direct3DCreate function pointer typedef needs WINAPI macro
-    - disable page flipping dependent checkboxes in constructor to ensure 
+    - disable page flipping dependent checkboxes in constructor to ensure
       correct start state
     - add custom sample rate support
     - change default buffer latency to 67 ms

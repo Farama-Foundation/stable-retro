@@ -21,7 +21,7 @@ SOURCES		:=	core core/m68k core/z80 core/sound core/tremor core/ntsc core/input_
 			gx gx/utils gx/gui gx/fileio gx/images gx/sounds
 INCLUDES	:=	core core/m68k core/z80 core/sound core/tremor core/ntsc core/input_hw core/cd_hw core/cart_hw core/cart_hw/svp \
 			gx gx/utils gx/gui gx/fileio gx/images gx/sounds \
-			$(BUILD) 
+			$(BUILD)
 
 #---------------------------------------------------------------------------------
 # options for code generation

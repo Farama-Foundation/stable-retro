@@ -686,4 +686,3 @@ return {
   disass = disass,
   regname = regname
 }
-

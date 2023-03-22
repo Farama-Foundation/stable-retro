@@ -10,4 +10,3 @@ Description: library for handling zip archives
 Version: @VERSION@
 Libs: @PKG_CONFIG_RPATH@ -L${libdir} -lzip @LIBS@
 Cflags: -I${includedir}
-

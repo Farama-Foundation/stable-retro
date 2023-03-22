@@ -30,12 +30,12 @@ struct GB::Priv {
 	CPU cpu;
 	int stateNo;
 	bool gbaCgbMode;
-	
+
 	Priv() : stateNo(1), gbaCgbMode(false) {}
 
    void full_init();
 };
-	
+
 GB::GB() : p_(new Priv) {}
 
 GB::~GB() {
@@ -44,21 +44,21 @@ GB::~GB() {
 
 long GB::runFor(gambatte::video_pixel_t *const videoBuf, const int pitch,
 			gambatte::uint_least32_t *const soundBuf, unsigned &samples) {
-	
+
 	p_->cpu.setVideoBuffer(videoBuf, pitch);
 	p_->cpu.setSoundBuffer(soundBuf);
 	const long cyclesSinceBlit = p_->cpu.runFor(samples * 2);
 	samples = p_->cpu.fillSoundBuffer();
-	
+
 	return cyclesSinceBlit < 0 ? cyclesSinceBlit : static_cast<long>(samples) - (cyclesSinceBlit >> 1);
 }
-   
+
 void GB::Priv::full_init() {
    SaveState state;
-   
+
    cpu.setStatePtrs(state);
    setInitState(state, cpu.isCgb(), gbaCgbMode);
-   
+
    cpu.mem_.bootloader.reset();
    cpu.mem_.bootloader.set_address_space_start((void*)cpu.rombank0_ptr());
    cpu.mem_.bootloader.load(cpu.isCgb(), gbaCgbMode);
@@ -75,7 +75,7 @@ void GB::Priv::full_init() {
       ioamhram[0x148] = 0xFC;//object palette 0
       ioamhram[0x149] = 0xFC;//object palette 1
    }
-   
+
    cpu.loadState(state);
 }
 
@@ -104,13 +104,13 @@ unsigned GB::rtcdata_size() { return p_->cpu.rtcdata_size(); }
 
 int GB::load(const void *romdata, unsigned romsize, const unsigned flags) {
 	const int failed = p_->cpu.load(romdata, romsize, flags & (FORCE_DMG | FORCE_CGB), flags & MULTICART_COMPAT);
-	
+
    if (!failed) {
       p_->gbaCgbMode = flags & GBA_CGB;
       p_->full_init();
       p_->stateNo = 1;
    }
-	
+
 	return failed;
 }
 
@@ -129,7 +129,7 @@ void GB::setDmgPaletteColor(unsigned palNum, unsigned colorNum, unsigned rgb32) 
 void GB::loadState(const void *data) {
    SaveState state;
    p_->cpu.setStatePtrs(state);
-   
+
    if (StateSaver::loadState(state, data)) {
       p_->cpu.loadState(state);
       p_->cpu.mem_.bootloader.choosebank(state.mem.ioamhram.get()[0x150] != 0xFF);
@@ -202,4 +202,3 @@ void *GB::oamram_ptr() const {
 #endif
 
 }
-

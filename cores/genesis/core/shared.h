@@ -32,4 +32,3 @@
 #include "state.h"
 
 #endif /* _SHARED_H_ */
-

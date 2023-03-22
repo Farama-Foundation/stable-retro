@@ -284,7 +284,7 @@ bool CDAccess_CCD::Load(const std::string& path, bool image_memcache)
          return false;
       }
 
-      img_numsectors = ss / 2352;  
+      img_numsectors = ss / 2352;
    }
 
    // Open subchannel stream
@@ -449,4 +449,3 @@ bool CDAccess_CCD::Read_TOC(TOC *toc)
    *toc = tocd;
    return true;
 }
-

@@ -3671,4 +3671,3 @@ constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::RequestedFile::Impo
 
 }  // namespace
 }  // namespace
-

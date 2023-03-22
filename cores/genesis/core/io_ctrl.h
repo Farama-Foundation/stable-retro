@@ -65,4 +65,3 @@ extern void io_gg_write(unsigned int offset, unsigned int data);
 extern unsigned int io_gg_read(unsigned int offset);
 
 #endif /* _IO_CTRL_H_ */
-

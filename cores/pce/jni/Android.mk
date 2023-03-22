@@ -29,7 +29,7 @@ LOCAL_CFLAGS   += $(ANDROID_FLAGS)
 CORE_DIR       := ..
 LOCAL_MODULE    := libretro
 
-# If you have a system with 1GB RAM or more - cache the whole 
+# If you have a system with 1GB RAM or more - cache the whole
 # CD for CD-based systems in order to prevent file access delays/hiccups
 CACHE_CD = 0
 
@@ -62,7 +62,7 @@ FLAGS += $(fpic) $(NEW_GCC_FLAGS) $(INCFLAGS)
 
 FLAGS += $(ENDIANNESS_DEFINES) -DSIZEOF_DOUBLE=8 $(WARNINGS) -DPACKAGE=\"mednafen\" -DMEDNAFEN_VERSION_NUMERIC=926 -DPSS_STYLE=1 -DMPC_FIXED_POINT $(CORE_DEFINE) -DSTDC_HEADERS -D__STDC_LIMIT_MACROS -D__LIBRETRO__ -DNDEBUG -D_LOW_ACCURACY_ $(SOUND_DEFINE) -DINLINE="inline"
 
-LOCAL_CFLAGS =  $(FLAGS) 
+LOCAL_CFLAGS =  $(FLAGS)
 LOCAL_CXXFLAGS += $(FLAGS) -fexceptions
 
 include $(BUILD_SHARED_LIBRARY)

@@ -101,7 +101,7 @@ void psg_init(PSG_TYPE type)
   for (i=0; i<4; i++)
   {
     psg.chanAmp[i][0] = 100;
-    psg.chanAmp[i][1] = 100; 
+    psg.chanAmp[i][1] = 100;
   }
 
   /* Initialize Tone zero frequency increment value */
@@ -438,7 +438,7 @@ void psg_config(unsigned int clocks, unsigned int preamp, unsigned int panning)
         psg.chanOut[i][1] = (volume * psg.chanAmp[i][1]) / 100;
       }
     }
-    
+
     /* noise channel */
     else
     {
@@ -600,4 +600,4 @@ static void psg_update(unsigned int clocks)
     /* save channel generator polarity */
     psg.polarity[i] = polarity;
   }
-}  
+}

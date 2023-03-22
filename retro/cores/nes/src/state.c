@@ -250,7 +250,7 @@ void FCEUSS_Save_Mem(void)
 
    uint32 totalsize;
    uint8 header[16] = {0};
-   
+
    header[0] = 'F';
    header[1] = 'C';
    header[2] = 'S';
@@ -287,7 +287,7 @@ void FCEUSS_Load_Mem(void)
    uint8 header[16];
    int stateversion;
    int x;
-   
+
    memstream_read(mem, header, 16);
 
    if (memcmp(header,"FCS",3) != 0)
@@ -337,4 +337,3 @@ void AddExState(void *v, uint32 s, int type, char *desc)
 void FCEU_DrawSaveStates(uint8 *XBuf)
 {
 }
-

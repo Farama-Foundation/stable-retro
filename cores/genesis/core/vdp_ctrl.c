@@ -148,7 +148,7 @@ static void (*set_irq_line)(unsigned int level);
 static void (*set_irq_line_delay)(unsigned int level);
 
 /* Vertical counter overflow values (see hvc.h) */
-static const uint16 vc_table[4][2] = 
+static const uint16 vc_table[4][2] =
 {
   /* NTSC, PAL */
   {0xDA , 0xF2},  /* Mode 4 (192 lines) */
@@ -158,16 +158,16 @@ static const uint16 vc_table[4][2] =
 };
 
 /* FIFO access slots timings */
-static const int fifo_timing_h32[16+4] = 
+static const int fifo_timing_h32[16+4] =
 {
   230, 510, 810, 970, 1130, 1450, 1610, 1770, 2090, 2250, 2410, 2730, 2890, 3050, 3350, 3370,
-  MCYCLES_PER_LINE + 230, MCYCLES_PER_LINE + 510, MCYCLES_PER_LINE + 810, MCYCLES_PER_LINE + 970, 
+  MCYCLES_PER_LINE + 230, MCYCLES_PER_LINE + 510, MCYCLES_PER_LINE + 810, MCYCLES_PER_LINE + 970,
 };
 
-static const int fifo_timing_h40[18+4] = 
+static const int fifo_timing_h40[18+4] =
 {
   352, 820, 948, 1076, 1332, 1460, 1588, 1844, 1972, 2100, 2356, 2484, 2612, 2868, 2996, 3124, 3364, 3380,
-  MCYCLES_PER_LINE + 352, MCYCLES_PER_LINE + 820, MCYCLES_PER_LINE + 948, MCYCLES_PER_LINE + 1076, 
+  MCYCLES_PER_LINE + 352, MCYCLES_PER_LINE + 820, MCYCLES_PER_LINE + 948, MCYCLES_PER_LINE + 1076,
 };
 
 /* DMA Timings (number of access slots per line) */
@@ -399,7 +399,7 @@ void vdp_reset(void)
 
   /* H-INT is disabled on startup (verified on VA4 MD1 with 315-5313 VDP) */
   reg[10] = 0xFF;
-  
+
   /* Master System specific */
   if ((system_hw & SYSTEM_SMS) && (!(config.bios & 1) || !(system_bios & SYSTEM_SMS)))
   {
@@ -479,7 +479,7 @@ int vdp_context_load(uint8 *state)
   {
     if (system_hw >= SYSTEM_MARKIII)
     {
-      for (i=0;i<0x10;i++) 
+      for (i=0;i<0x10;i++)
       {
         pending = 1;
         addr_latch = temp_reg[i];
@@ -489,7 +489,7 @@ int vdp_context_load(uint8 *state)
     else
     {
       /* TMS-99xx registers are updated directly to prevent spurious 4K->16K VRAM switching */
-      for (i=0;i<0x08;i++) 
+      for (i=0;i<0x08;i++)
       {
         reg[i] = temp_reg[i];
       }
@@ -500,7 +500,7 @@ int vdp_context_load(uint8 *state)
   }
   else
   {
-    for (i=0;i<0x20;i++) 
+    for (i=0;i<0x20;i++)
     {
       vdp_reg_w(i, temp_reg[i], 0);
     }
@@ -557,7 +557,7 @@ int vdp_context_load(uint8 *state)
   }
 
   /* invalidate tile cache */
-  for (i=0;i<bg_list_index;i++) 
+  for (i=0;i<bg_list_index;i++)
   {
     bg_name_list[i]=i;
     bg_name_dirty[i]=0xFF;
@@ -575,7 +575,7 @@ void vdp_dma_update(unsigned int cycles)
 {
   unsigned int dma_cycles, dma_bytes;
 
-  /* DMA transfer rate (bytes per line) 
+  /* DMA transfer rate (bytes per line)
 
       DMA Mode      Width       Display      Transfer Count
       -----------------------------------------------------
@@ -819,20 +819,20 @@ void vdp_68k_ctrl_w(unsigned int data)
     }
   }
 
-  /* 
-     FIFO emulation (Chaos Engine/Soldier of Fortune, Double Clutch, Sol Deace) 
+  /*
+     FIFO emulation (Chaos Engine/Soldier of Fortune, Double Clutch, Sol Deace)
      --------------------------------------------------------------------------
      Each VRAM access is byte wide, so one VRAM write (word) need two slot access.
 
       NOTE: Invalid code 0x02 (register write) should not behave the same as VRAM
-      access, i.e data is ignored and only one access slot is used for each word, 
-      BUT a few games ("Clue", "Microcosm") which accidentally corrupt code value 
+      access, i.e data is ignored and only one access slot is used for each word,
+      BUT a few games ("Clue", "Microcosm") which accidentally corrupt code value
       will have issues when emulating FIFO timings. They likely work fine on real
       hardware because of periodical 68k wait-states which have been observed and
       would naturaly add some delay between writes. Until those wait-states are
       accurately measured and emulated, delay is forced when invalid code value
       is being used.
-  */ 
+  */
   fifo_byte_access = ((code & 0x0F) <= 0x02);
 }
 
@@ -1004,7 +1004,7 @@ void vdp_sms_ctrl_w(unsigned int data)
       /* Check VDP mode changes */
       mode = (reg[0] & 0x06) | (reg[1] & 0x18);
       prev ^= mode;
- 
+
       if (prev)
       {
         /* Check for extended modes */
@@ -1120,7 +1120,7 @@ void vdp_tms_ctrl_w(unsigned int data)
 
       /* Write VDP register */
       vdp_reg_w(data, addr_latch, Z80.cycles);
- 
+
       /* Check VDP mode changes */
       if (data < 2)
       {
@@ -1241,7 +1241,7 @@ unsigned int vdp_z80_ctrl_r(unsigned int cycles)
     {
       /* update line counter */
       int line = (v_counter + 1) % lines_per_frame;
-    
+
       /* check if we are within active display range */
       if ((line < bitmap.viewport.h) && !(work_ram[0x1ffb] & cart.special & HW_3D_GLASSES))
       {
@@ -1378,7 +1378,7 @@ unsigned int vdp_hvc_r(unsigned int cycles)
 
   /* return HCounter in LSB & VCounter in MSB */
   data |= ((vc & 0xff) << 8);
-  
+
 #ifdef LOGVDP
   error("[%d(%d)][%d(%d)] HVC read -> 0x%x (%x)\n", v_counter, (v_counter + (cycles - mcycles_vdp)/MCYCLES_PER_LINE)%lines_per_frame, cycles, cycles%MCYCLES_PER_LINE, data, m68k_get_reg(M68K_REG_PC));
 #endif
@@ -1555,7 +1555,7 @@ static void vdp_reg_w(unsigned int r, unsigned int d, unsigned int cycles)
         if (system_hw == SYSTEM_SG)
         {
           int i;
-          
+
           /* make temporary copy of 16KB VRAM */
           memcpy(vram + 0x4000, vram, 0x4000);
 
@@ -1640,7 +1640,7 @@ static void vdp_reg_w(unsigned int r, unsigned int d, unsigned int cycles)
       if (r & vint_pending)
       {
         /* Update IRQ status */
-        if (d & 0x20) 
+        if (d & 0x20)
         {
           set_irq_line_delay(6);
         }
@@ -1750,7 +1750,7 @@ static void vdp_reg_w(unsigned int r, unsigned int d, unsigned int cycles)
           }
 
           /* Invalidate pattern cache */
-          for (i=0;i<bg_list_index;i++) 
+          for (i=0;i<bg_list_index;i++)
           {
             bg_name_list[i] = i;
             bg_name_dirty[i] = 0xFF;
@@ -1760,7 +1760,7 @@ static void vdp_reg_w(unsigned int r, unsigned int d, unsigned int cycles)
           vc_max = vc_table[(d >> 2) & 3][vdp_pal];
 
           /* Display height change should be applied on next frame */
-          bitmap.viewport.changed |= 2; 
+          bitmap.viewport.changed |= 2;
         }
         else
         {
@@ -2376,7 +2376,7 @@ static void vdp_68k_data_w_m5(unsigned int data)
       fifo_slots += (fifo_byte_access + 1);
     }
   }
-  
+
   /* Write data */
   vdp_bus_w(data);
 
@@ -2880,7 +2880,7 @@ static void vdp_z80_data_w_gg(unsigned int data)
       {
         /* Color index (0-31) */
         int index = (addr >> 1) & 0x1F;
-        
+
         /* Write CRAM data */
         *p = data;
 
@@ -2953,7 +2953,7 @@ static void vdp_dma_68k_ext(unsigned int length)
     {
       data = *(uint16 *)(m68k.memory_map[source>>16].base + (source & 0xFFFF));
     }
- 
+
     /* Increment source address */
     source += 2;
 
@@ -2981,7 +2981,7 @@ static void vdp_dma_68k_ram(unsigned int length)
   {
     /* access Work-RAM by default  */
     data = *(uint16 *)(work_ram + (source & 0xFFFF));
-   
+
     /* Increment source address */
     source += 2;
 
@@ -3015,7 +3015,7 @@ static void vdp_dma_68k_io(unsigned int length)
       data = ((zstate ^ 3) ? *(uint16 *)(work_ram + (source & 0xFFFF)) : 0xFFFF);
     }
 
-    /* The I/O chip and work RAM try to drive the data bus which results 
+    /* The I/O chip and work RAM try to drive the data bus which results
        in both values being combined in random ways when read.
        We return the I/O chip values which seem to have precedence, */
     else if (source <= 0xA1001F)
@@ -3053,7 +3053,7 @@ static void vdp_dma_copy(unsigned int length)
   {
     int name;
     uint8 data;
-    
+
     /* VRAM source address */
     uint16 source = dma_src;
 
@@ -3158,7 +3158,7 @@ static void vdp_dma_fill(unsigned int length)
             color_update_m5(0x00, data);
           }
         }
-          
+
         /* Increment CRAM address */
         addr += reg[15];
       }
@@ -3175,7 +3175,7 @@ static void vdp_dma_fill(unsigned int length)
       {
         /* Write VSRAM data */
         *(uint16 *)&vsram[addr & 0x7E] = data;
-          
+
         /* Increment VSRAM address */
         addr += reg[15];
       }

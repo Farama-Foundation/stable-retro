@@ -17,7 +17,7 @@
   3. The names of the authors may not be used to endorse or promote
      products derived from this software without specific prior
      written permission.
- 
+
   THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS
   OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -361,14 +361,14 @@ list_directory(const char *name, struct archive *a)
 		    exit(1);
 		}
 	    }
-	    
+
 	    a->entry[a->nentry].name = strdup(ent->fts_path+prefix_length);
 	    a->entry[a->nentry].size = (zip_uint64_t)ent->fts_statp->st_size;
 	    if ((crc = compute_crc(ent->fts_accpath)) < 0) {
 		fts_close(fts);
 		return -1;
 	    }
-	    
+
 	    a->entry[a->nentry].crc = (zip_uint32_t)crc;
 	    a->nentry++;
 	    break;
@@ -403,7 +403,7 @@ list_zip(const char *name, struct archive *a)
 
     a->za = za;
     a->nentry = (zip_uint64_t)zip_get_num_entries(za, 0);
-    
+
     if (a->nentry == 0)
 	a->entry = NULL;
     else {
@@ -455,7 +455,7 @@ comment_compare(const char *c1, size_t l1, const char *c2, size_t l2) {
 
     if (c1 == NULL || c2 == NULL)
         return c1 == c2;
-    
+
     return memcmp(c1, c2, (size_t)l2);
 }
 
@@ -526,9 +526,9 @@ ef_read(zip_t *za, zip_uint64_t idx, struct entry *e)
         || (n_central = zip_file_extra_fields_count(za, idx, ZIP_FL_CENTRAL)) < 0) {
         return -1;
     }
-    
+
     e->n_extra_fields = (zip_uint16_t)(n_local + n_central);
-    
+
     if ((e->extra_fields=(struct ef *)malloc(sizeof(e->extra_fields[0])*e->n_extra_fields)) == NULL)
 	return -1;
 
@@ -689,7 +689,7 @@ test_file(zip_t *za, zip_uint64_t idx, zip_uint64_t size, zip_uint32_t crc)
     zip_uint64_t nsize;
     zip_int64_t n;
     zip_uint32_t ncrc;
-    
+
     if ((zf=zip_fopen_index(za, idx, 0)) == NULL) {
 	fprintf(stderr, "%s: cannot open file %" PRIu64 " in archive: %s\n", prg, idx, zip_strerror(za));
 	return -1;
@@ -697,7 +697,7 @@ test_file(zip_t *za, zip_uint64_t idx, zip_uint64_t size, zip_uint32_t crc)
 
     ncrc = (zip_uint32_t)crc32(0, NULL, 0);
     nsize = 0;
-    
+
     while ((n=zip_fread(zf, buf, sizeof(buf))) > 0) {
 	nsize += (zip_uint64_t)n;
 	ncrc = (zip_uint32_t)crc32(ncrc, (const Bytef *)buf, (unsigned int)n);

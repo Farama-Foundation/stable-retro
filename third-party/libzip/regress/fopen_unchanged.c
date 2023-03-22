@@ -17,7 +17,7 @@
   3. The names of the authors may not be used to endorse or promote
      products derived from this software without specific prior
      written permission.
- 
+
   THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS
   OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -56,7 +56,7 @@ main(int argc, char *argv[])
     }
 
     archive = argv[1];
-    
+
     if ((za=zip_open(archive, ZIP_CREATE, &err)) == NULL) {
 	zip_error_t error;
 	zip_error_init_with_code(&error, err);

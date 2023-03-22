@@ -46,7 +46,7 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 
 # All Google Mock headers. Note that all Google Test headers are
 # included here too, as they are #included by Google Mock headers.
-# Usually you shouldn't change this definition.	
+# Usually you shouldn't change this definition.
 GMOCK_HEADERS = $(GMOCK_DIR)/include/gmock/*.h \
                 $(GMOCK_DIR)/include/gmock/internal/*.h \
                 $(GTEST_HEADERS)

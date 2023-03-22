@@ -62,7 +62,7 @@ to do:
 #define EG_REL      1
 #define EG_OFF      0
 
-typedef struct 
+typedef struct
 {
   UINT32  ar;       /* attack rate: AR<<2           */
   UINT32  dr;       /* decay rate:  DR<<2           */
@@ -107,7 +107,7 @@ typedef struct
   unsigned int wavetable;
 } YM2413_OPLL_SLOT;
 
-typedef struct 
+typedef struct
 {
   YM2413_OPLL_SLOT SLOT[2];
 

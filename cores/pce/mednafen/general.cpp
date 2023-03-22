@@ -69,8 +69,8 @@ bool MDFN_IsFIROPSafe(const std::string &path)
  return(true);
 }
 
-void MDFN_GetFilePathComponents(const std::string &file_path, 
-      std::string *dir_path_out, std::string *file_base_out, 
+void MDFN_GetFilePathComponents(const std::string &file_path,
+      std::string *dir_path_out, std::string *file_base_out,
       std::string *file_ext_out)
 {
  size_t final_ds;		                  // in file_path
@@ -179,7 +179,7 @@ void MDFN_rtrim(std::string &string)
 
    if(!(string[x] == ' ' || string[x] == '\r' || string[x] == '\n' || string[x] == '\t' || string[x] == 0x0b))
     break;
- 
+
    new_len--;
   } while(x);
 
@@ -193,4 +193,3 @@ void MDFN_trim(std::string &string)
  MDFN_rtrim(string);
  MDFN_ltrim(string);
 }
-

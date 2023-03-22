@@ -25,4 +25,3 @@ class ARMCore:
         self.gprs = _ARMRegisters(self)
         self.cpsr = self._native.cpsr
         self.spsr = self._native.spsr
-

@@ -17,7 +17,7 @@
   3. The names of the authors may not be used to endorse or promote
      products derived from this software without specific prior
      written permission.
- 
+
   THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS
   OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -237,7 +237,7 @@ merge_zip(zip_t *za, const char *tname, const char *sname)
     zip_uint64_t i;
     int err;
     const char *fname;
-    
+
     if ((zs=zip_open(sname, 0, &err)) == NULL) {
 	zip_error_t error;
 	zip_error_init_with_code(&error, err);
@@ -258,7 +258,7 @@ merge_zip(zip_t *za, const char *tname, const char *sname)
 	    switch (confirm_replace(za, tname, (zip_uint64_t)idx, zs, sname, i)) {
 	    case 0:
 		break;
-		
+
 	    case 1:
 		if ((source=zip_source_zip(za, zs, i, 0, 0, 0)) == NULL
 		    || zip_replace(za, (zip_uint64_t)idx, source) < 0) {
@@ -274,7 +274,7 @@ merge_zip(zip_t *za, const char *tname, const char *sname)
 	    case -1:
 		zip_close(zs);
 		return NULL;
-		
+
 	    default:
 		fprintf(stderr,	"%s: internal error: "
 			"unexpected return code from confirm (%d)\n",

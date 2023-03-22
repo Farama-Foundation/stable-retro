@@ -456,7 +456,7 @@ static void DSP4_OP01 (void)
 		// scan next command
 		DSP4.in_count = 2;
 		DSP4_WAIT(1);
-		
+
 		resume1:
 
 		// check for termination

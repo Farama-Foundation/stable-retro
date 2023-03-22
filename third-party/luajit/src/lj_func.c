@@ -184,4 +184,3 @@ void LJ_FASTCALL lj_func_free(global_State *g, GCfunc *fn)
 			       sizeCfunc((MSize)fn->c.nupvalues);
   lj_mem_free(g, fn, size);
 }
-

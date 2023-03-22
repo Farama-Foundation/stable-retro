@@ -327,7 +327,7 @@ void mastertap_1_write(unsigned char data, unsigned char mask)
 {
   /* update bits set as output only */
   data = (flipflop[0].Latch & ~mask) | (data & mask);
-  
+
   /* check TH 1->0 transitions */
   if ((flipflop[0].Latch & 0x40) && !(data & 0x40))
   {
@@ -342,7 +342,7 @@ void mastertap_2_write(unsigned char data, unsigned char mask)
 {
   /* update bits set as output only */
   data = (flipflop[1].Latch & ~mask) | (data & mask);
-  
+
   /* check TH 1->0 transition */
   if ((flipflop[1].Latch & 0x40) && !(data & 0x40))
   {

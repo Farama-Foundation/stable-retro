@@ -96,7 +96,7 @@ unsigned char mouse_read()
     case 6: /* X Axis MSB */
       temp = (x >> 4) & 0x0F;
       break;
-      
+
     case 7: /* X Axis LSB */
       temp = (x & 0x0F);
       break;
@@ -104,7 +104,7 @@ unsigned char mouse_read()
     case 8: /* Y Axis MSB */
       temp = (y >> 4) & 0x0F;
       break;
-      
+
     case 9: /* Y Axis LSB */
       temp = (y & 0x0F);
       break;
@@ -114,7 +114,7 @@ unsigned char mouse_read()
   if (mouse.Wait)
   {
     /* wait before acknowledging handshake request */
-    mouse.Wait--; 
+    mouse.Wait--;
 
     /* TL = !TR (handshake in progress) */
     temp |= (~mouse.State & 0x20) >> 1;;

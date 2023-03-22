@@ -207,4 +207,3 @@ int MemoryStream::get_line(std::string &str)
 
  return(-1);
 }
-

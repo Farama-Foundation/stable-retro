@@ -78,4 +78,3 @@ extern void gen_zbank_w(unsigned int state);
 extern int z80_irq_callback(int param);
 
 #endif /* _GEN_H_ */
-

@@ -119,7 +119,7 @@ static void mapper_i2c_acclaim_16M_init(void);
 static void mapper_i2c_acclaim_32M_init(void);
 static void mapper_i2c_jcart_init(void);
 
-static const T_I2C_GAME i2c_database[] = 
+static const T_I2C_GAME i2c_database[] =
 {
   {"T-50176"  , 0          , 0      , mapper_i2c_ea_init          , EEPROM_X24C01 }, /* Rings of Power */
   {"T-50396"  , 0          , 0      , mapper_i2c_ea_init          , EEPROM_X24C01 }, /* NHLPA Hockey 93 */
@@ -443,7 +443,7 @@ static void eeprom_i2c_update(void)
             eeprom_i2c.word_address |= (eeprom_i2c.sda << (16 - eeprom_i2c.cycles));
           }
         }
-      }  
+      }
 
       break;
     }
@@ -451,7 +451,7 @@ static void eeprom_i2c_update(void)
     /* Get Word Address LSB: 7bits (24C01) or 8bits (24C02-24C512)
      * MODE-2 and MODE-3 only (24C01 - 24C512)
      */
-    case GET_WORD_ADR_LOW: 
+    case GET_WORD_ADR_LOW:
     {
       Detect_START();
       Detect_STOP();
@@ -576,12 +576,12 @@ static void eeprom_i2c_update(void)
         {
           /* write back to memory array (max 64kB) */
           sram.sram[(eeprom_i2c.device_address | eeprom_i2c.word_address) & 0xffff] = eeprom_i2c.buffer;
-          
+
           /* clear write buffer */
           eeprom_i2c.buffer = 0;
 
           /* increment Word Address (roll over at maximum page size) */
-          eeprom_i2c.word_address = (eeprom_i2c.word_address & ~eeprom_i2c.spec.pagewrite_mask) | 
+          eeprom_i2c.word_address = (eeprom_i2c.word_address & ~eeprom_i2c.spec.pagewrite_mask) |
                                     ((eeprom_i2c.word_address + 1) & eeprom_i2c.spec.pagewrite_mask);
         }
       }
@@ -761,12 +761,12 @@ static void mapper_acclaim_32M_write8(uint32 address, uint32 data)
   }
 
   eeprom_i2c_update();
-} 
+}
 
 static void mapper_acclaim_32M_write16(uint32 address, uint32 data)
 {
   int i;
-  
+
   /* custom bankshifting when both /LWR and /UWR are asserted */
   if (data & 0x01)
   {
@@ -823,7 +823,7 @@ static uint32 mapper_i2c_jcart_read8(uint32 address)
   {
     return ((eeprom_i2c_out() << 7) | (jcart_read(address) & 0x7f));
   }
-  
+
   return (jcart_read(address) >> 8);
 }
 

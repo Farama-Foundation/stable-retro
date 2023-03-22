@@ -38,7 +38,7 @@ LIBS	  = `sdl-config --libs` -lz -lm
 
 OBJDIR = ./build_sdl
 
-OBJECTS	=       $(OBJDIR)/z80.o	
+OBJECTS	=       $(OBJDIR)/z80.o
 
 OBJECTS	+=     	$(OBJDIR)/m68kcpu.o \
 		$(OBJDIR)/s68kcpu.o
@@ -52,7 +52,7 @@ OBJECTS	+=     	$(OBJDIR)/genesis.o	 \
 		$(OBJDIR)/memz80.o	 \
 		$(OBJDIR)/membnk.o	 \
 		$(OBJDIR)/state.o        \
-		$(OBJDIR)/loadrom.o	
+		$(OBJDIR)/loadrom.o
 
 OBJECTS	+=      $(OBJDIR)/input.o	  \
 		$(OBJDIR)/gamepad.o	  \
@@ -69,11 +69,11 @@ OBJECTS	+=      $(OBJDIR)/input.o	  \
 OBJECTS	+=      $(OBJDIR)/sound.o	\
 		$(OBJDIR)/psg.o         \
 		$(OBJDIR)/ym2413.o      \
-		$(OBJDIR)/ym2612.o    
+		$(OBJDIR)/ym2612.o
 
-OBJECTS	+=	$(OBJDIR)/blip_buf.o 
+OBJECTS	+=	$(OBJDIR)/blip_buf.o
 
-OBJECTS	+=	$(OBJDIR)/eq.o 
+OBJECTS	+=	$(OBJDIR)/eq.o
 
 OBJECTS	+=      $(OBJDIR)/sram.o        \
 		$(OBJDIR)/svp.o	        \
@@ -84,8 +84,8 @@ OBJECTS	+=      $(OBJDIR)/sram.o        \
 		$(OBJDIR)/eeprom_i2c.o  \
 		$(OBJDIR)/eeprom_spi.o  \
 		$(OBJDIR)/md_cart.o	\
-		$(OBJDIR)/sms_cart.o	
-		
+		$(OBJDIR)/sms_cart.o
+
 OBJECTS	+=      $(OBJDIR)/scd.o	\
 		$(OBJDIR)/cdd.o	\
 		$(OBJDIR)/cdc.o	\
@@ -100,7 +100,7 @@ OBJECTS	+=	$(OBJDIR)/main.o	\
 		$(OBJDIR)/config.o	\
 		$(OBJDIR)/error.o	\
 		$(OBJDIR)/unzip.o       \
-		$(OBJDIR)/fileio.o	
+		$(OBJDIR)/fileio.o
 
 OBJECTS	+=	$(OBJDIR)/bitwise.o	 \
 		$(OBJDIR)/block.o      \
@@ -129,57 +129,57 @@ $(NAME): $(OBJDIR) $(OBJECTS)
 
 $(OBJDIR) :
 		@[ -d $@ ] || mkdir -p $@
-		
+
 $(OBJDIR)/%.o : $(SRCDIR)/%.c $(SRCDIR)/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
-	        	        
-$(OBJDIR)/%.o :	$(SRCDIR)/sound/%.c $(SRCDIR)/sound/%.h	        
+
+$(OBJDIR)/%.o :	$(SRCDIR)/sound/%.c $(SRCDIR)/sound/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/input_hw/%.c $(SRCDIR)/input_hw/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/input_hw/%.c $(SRCDIR)/input_hw/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/cart_hw/%.c $(SRCDIR)/cart_hw/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/cart_hw/%.c $(SRCDIR)/cart_hw/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/cart_hw/svp/%.c      
+$(OBJDIR)/%.o :	$(SRCDIR)/cart_hw/svp/%.c
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/cart_hw/svp/%.c $(SRCDIR)/cart_hw/svp/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/cart_hw/svp/%.c $(SRCDIR)/cart_hw/svp/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/cd_hw/%.c $(SRCDIR)/cd_hw/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/cd_hw/%.c $(SRCDIR)/cd_hw/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/z80/%.c $(SRCDIR)/z80/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/z80/%.c $(SRCDIR)/z80/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/m68k/%.c       
+$(OBJDIR)/%.o :	$(SRCDIR)/m68k/%.c
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/ntsc/%.c $(SRCDIR)/ntsc/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/ntsc/%.c $(SRCDIR)/ntsc/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/tremor/%.c $(SRCDIR)/tremor/%.h	        
-		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
-     
-$(OBJDIR)/%.o :	$(SRCDIR)/tremor/%.c 	        
+$(OBJDIR)/%.o :	$(SRCDIR)/tremor/%.c $(SRCDIR)/tremor/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/../sdl/%.c $(SRCDIR)/../sdl/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/tremor/%.c
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/../sdl/sdl1/%.c $(SRCDIR)/../sdl/sdl1/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/../sdl/%.c $(SRCDIR)/../sdl/%.h
+		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
+
+$(OBJDIR)/%.o :	$(SRCDIR)/../sdl/sdl1/%.c $(SRCDIR)/../sdl/sdl1/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
 ifeq ($(OS),Windows_NT)
-$(OBJDIR)/icon.o :	
+$(OBJDIR)/icon.o :
 		windres $(SRCDIR)/../sdl/icon.rc $@
 endif
 
 pack	:
 		strip $(NAME)
-		upx -9 $(NAME)	        
+		upx -9 $(NAME)
 
 clean:
 	rm -f $(OBJECTS) $(NAME)

@@ -1169,7 +1169,7 @@ ogg_int64_t ov_pcm_total(OggVorbis_File *vf,int i){
 /* returns: total milliseconds of content if i==-1
             milliseconds in that logical bitstream for i==0 to n
             OV_EINVAL if the stream is not seekable (we can't know the
-            length) or only partially open 
+            length) or only partially open
 */
 ogg_int64_t ov_time_total(OggVorbis_File *vf,int i){
   if(vf->ready_state<OPENED)return(OV_EINVAL);
@@ -1706,7 +1706,7 @@ int ov_time_seek(OggVorbis_File *vf,ogg_int64_t milliseconds){
   }
 }
 
-/* page-granularity version of ov_time_seek 
+/* page-granularity version of ov_time_seek
    returns zero on success, nonzero on failure */
 int ov_time_seek_page(OggVorbis_File *vf,ogg_int64_t milliseconds){
   /* translate time to PCM position and call ov_pcm_seek */

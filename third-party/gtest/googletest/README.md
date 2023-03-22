@@ -122,9 +122,9 @@ main build with `add_subdirectory()`. For example:
 New file `CMakeLists.txt.in`:
 
     cmake_minimum_required(VERSION 2.8.2)
- 
+
     project(googletest-download NONE)
- 
+
     include(ExternalProject)
     ExternalProject_Add(googletest
       GIT_REPOSITORY    https://github.com/google/googletest.git
@@ -136,7 +136,7 @@ New file `CMakeLists.txt.in`:
       INSTALL_COMMAND   ""
       TEST_COMMAND      ""
     )
-    
+
 Existing build's `CMakeLists.txt`:
 
     # Download and unpack googletest at configure time
@@ -157,7 +157,7 @@ Existing build's `CMakeLists.txt`:
     # Prevent overriding the parent project's compiler/linker
     # settings on Windows
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    
+
     # Add googletest directly to our build. This defines
     # the gtest and gtest_main targets.
     add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
@@ -177,7 +177,7 @@ Existing build's `CMakeLists.txt`:
 
 Note that this approach requires CMake 2.8.2 or later due to
 its use of the `ExternalProject_Add()` command. The above
-technique is discussed in more detail in 
+technique is discussed in more detail in
 [this separate article](http://crascit.com/2015/07/25/cmake-gtest/)
 which also contains a link to a fully generalized implementation
 of the technique.

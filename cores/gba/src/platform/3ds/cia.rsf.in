@@ -26,10 +26,10 @@ AccessControlInfo:
 
   # Minimum Required Kernel Version (below is for 4.5.0)
   ReleaseKernelMajor            : "02"
-  ReleaseKernelMinor            : "33" 
+  ReleaseKernelMinor            : "33"
 
   # ExtData
-  UseExtSaveData                : false # enables ExtData       
+  UseExtSaveData                : false # enables ExtData
   #ExtSaveDataId                : 0x300 # only set this when the ID is different to the UniqueId
 
   # FS:USER Archive Access Permissions
@@ -84,11 +84,11 @@ AccessControlInfo:
   # Virtual Address Mappings
   IORegisterMapping:
    - 1ff00000-1ff7ffff   # DSP memory
-  MemoryMapping: 
+  MemoryMapping:
    - 1f000000-1f5fffff:r # VRAM
 
   # Accessible SVCs, <Name>:<ID>
-  SystemCallAccess: 
+  SystemCallAccess:
     ArbitrateAddress: 34
     Break: 60
     CancelTimer: 28
@@ -186,7 +186,7 @@ SystemControlInfo:
   # If a module is listed that isn't present on the 3DS, the title will get stuck at the logo (3ds waves)
   # So act, nfc and qtm are commented for 4.x support. Uncomment if you need these.
   # <module name>:<module titleid>
-  Dependency: 
+  Dependency:
     ac: 0x0004013000002402L
     am: 0x0004013000001502L
     boss: 0x0004013000003402L

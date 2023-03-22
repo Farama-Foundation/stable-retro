@@ -126,7 +126,7 @@ void TextCodec::decode(kj::StringPtr input, DynamicStruct::Builder output) const
 
 Orphan<DynamicValue> TextCodec::decode(kj::StringPtr input, Type type, Orphanage orphanage) const {
   Orphan<DynamicValue> output;
-  
+
   lexAndParseExpression(input, [&type, &orphanage, &output](compiler::Expression::Reader expression) {
     ThrowingErrorReporter errorReporter;
     ExternalResolver nullResolver;
@@ -138,7 +138,7 @@ Orphan<DynamicValue> TextCodec::decode(kj::StringPtr input, Type type, Orphanage
       // An error should have already been given to the errorReporter.
     }
   });
-  
+
   return output;
 }
 

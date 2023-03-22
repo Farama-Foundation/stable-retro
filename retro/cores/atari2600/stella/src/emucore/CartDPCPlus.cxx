@@ -104,7 +104,7 @@ void CartridgeDPCPlus::setInitialState()
 
   // Initialize the DPC data fetcher registers
   for(int i = 0; i < 8; ++i)
-    myTops[i] = myBottoms[i] = myCounters[i] = myFractionalIncrements[i] = 
+    myTops[i] = myBottoms[i] = myCounters[i] = myFractionalIncrements[i] =
     myFractionalCounters[i] = 0;
 
   // Set waveforms to first waveform entry
@@ -258,9 +258,9 @@ uInt8 CartridgeDPCPlus::peek(uInt16 address)
     uInt32 index = address & 0x07;
     uInt32 function = (address >> 3) & 0x07;
 
-    // Update flag for selected data fetcher  
+    // Update flag for selected data fetcher
     flag = (((myTops[index]-(myCounters[index] & 0x00ff)) & 0xFF) > ((myTops[index]-myBottoms[index]) & 0xFF)) ? 0xFF : 0;
-    
+
     switch(function)
     {
       case 0x00:

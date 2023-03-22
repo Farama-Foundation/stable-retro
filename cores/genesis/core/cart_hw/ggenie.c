@@ -58,7 +58,7 @@ static void ggenie_write_word(unsigned int address, unsigned int data);
 static void ggenie_write_regs(unsigned int offset, unsigned int data);
 
 void ggenie_init(void)
-{  
+{
   memset(&ggenie,0,sizeof(ggenie));
 
   /* Store Game Genie ROM (32k) above cartridge ROM + SRAM area */
@@ -208,23 +208,23 @@ static void ggenie_write_regs(unsigned int offset, unsigned int data)
     {
       /* $0000-$7ffff reads mapped to Cartridge ROM */
       m68k.memory_map[0].base = cart.rom;
-      m68k.memory_map[0].read8 = NULL; 
-      m68k.memory_map[0].read16 = NULL; 
+      m68k.memory_map[0].read8 = NULL;
+      m68k.memory_map[0].read16 = NULL;
     }
     else
     {
       /* $0000-$7ffff reads mapped to Game Genie ROM */
       m68k.memory_map[0].base = ggenie.rom;
-      m68k.memory_map[0].read8 = NULL; 
-      m68k.memory_map[0].read16 = NULL; 
+      m68k.memory_map[0].read8 = NULL;
+      m68k.memory_map[0].read16 = NULL;
 
       /* READ_ENABLE bit */
       if (data & 0x200)
       {
         /* $0000-$7ffff reads mapped to Game Genie Registers */
         /* code doing this should execute in RAM so we don't need to modify base address */
-        m68k.memory_map[0].read8 = ggenie_read_byte; 
-        m68k.memory_map[0].read16 = ggenie_read_word; 
+        m68k.memory_map[0].read8 = ggenie_read_byte;
+        m68k.memory_map[0].read16 = ggenie_read_word;
       }
     }
 

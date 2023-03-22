@@ -80,7 +80,7 @@ if($size > 0)
   print "\nDelete extra snapshots [yN]: ";
   chomp ($input = <STDIN>);
   if($input eq 'y')
-  { 
+  {
     foreach $file (@delete)
     {
       $cmd = "rm \"$file\"";

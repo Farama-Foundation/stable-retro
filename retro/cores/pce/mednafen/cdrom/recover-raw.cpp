@@ -49,7 +49,7 @@ void Kill_LEC_Correct(void)
  */
 
 int CheckEDC(const unsigned char *cd_frame, bool xa_mode)
-{ 
+{
  unsigned int expected_crc, real_crc;
  unsigned int crc_base = xa_mode ? 2072 : 2064;
 
@@ -58,7 +58,7 @@ int CheckEDC(const unsigned char *cd_frame, bool xa_mode)
  expected_crc |= cd_frame[crc_base + 2] << 16;
  expected_crc |= cd_frame[crc_base + 3] << 24;
 
- if(xa_mode) 
+ if(xa_mode)
   real_crc = EDCCrc32(cd_frame+16, 2056);
  else
   real_crc = EDCCrc32(cd_frame, 2064);
@@ -81,7 +81,7 @@ int CheckEDC(const unsigned char *cd_frame, bool xa_mode)
  */
 
 static int simple_lec(unsigned char *frame)
-{ 
+{
    unsigned char byte_state[2352];
    unsigned char p_vector[P_VECTOR_SIZE];
    unsigned char q_vector[Q_VECTOR_SIZE];
@@ -115,8 +115,8 @@ static int simple_lec(unsigned char *frame)
      {  q_failures++;
         FillQVector(byte_state, 1, q);
      }
-     else         /* Correctable */ 
-     {  if(err == 1 || err == 2) /* Store back corrected vector */ 
+     else         /* Correctable */
+     {  if(err == 1 || err == 2) /* Store back corrected vector */
 	{  SetQVector(frame, q_vector, q);
 	   q_corrected++;
 	}
@@ -155,8 +155,8 @@ static int simple_lec(unsigned char *frame)
       if(err < 0)  /* Uncorrectable. */
       {  p_failures++;
       }
-      else         /* Correctable. */ 
-      {  if(err == 1 || err == 2) /* Store back corrected vector */ 
+      else         /* Correctable. */
+      {  if(err == 1 || err == 2) /* Store back corrected vector */
 	 {  SetPVector(frame, p_vector, p);
 	    p_corrected++;
 	 }
@@ -178,7 +178,7 @@ static int simple_lec(unsigned char *frame)
  ***/
 
 int ValidateRawSector(unsigned char *frame, bool xaMode)
-{  
+{
  int lec_did_sth = false;
 
   /* Do simple L-EC.
@@ -210,4 +210,3 @@ int ValidateRawSector(unsigned char *frame, bool xaMode)
 
   return true;
 }
-

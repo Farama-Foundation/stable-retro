@@ -130,4 +130,3 @@ void Mapper18_Init(CartInfo *info) {
 
 	AddExState(&StateRegs, ~0, 0, 0);
 }
-

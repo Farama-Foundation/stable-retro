@@ -3,8 +3,8 @@
  *
  *  libwiiuse wrapper for 3rd-party Classic Controller & Wii U Pro Controller support
  *
- *  Copyright (C) 2015 Eke-Eke, based on technical info & code from Tueidj 
- * 
+ *  Copyright (C) 2015 Eke-Eke, based on technical info & code from Tueidj
+ *
  *  Redistribution and use in source and binary forms, with or without modification,
  *  are permitted provided that the following conditions are met:
  *
@@ -72,7 +72,7 @@ void __wrap_wiiuse_handshake(struct wiimote_t *wm,ubyte *data,uword len)
         return;
       }
     }
-    else 
+    else
     {
       /* 3rd step: finish handshake without trying to read internal memory if Wii U pro controller is detected */
       if ((data[0]==0x01) && (data[1]==0x20))

@@ -3,7 +3,7 @@
  *  Project home page: http://www.dvdisaster.com
  *  Email: carsten@dvdisaster.com  -or-  cgnoerlich@fsfe.org
  *
- *  CRC32 code based upon public domain code by Ross Williams (see notes below)  
+ *  CRC32 code based upon public domain code by Ross Williams (see notes below)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -120,7 +120,7 @@ static const unsigned long  edctable[256] =
  */
 
 uint32_t EDCCrc32(const unsigned char *data, int len)
-{  
+{
  uint32_t crc = 0;
 
  while(len--)

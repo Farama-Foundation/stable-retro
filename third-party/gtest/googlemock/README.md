@@ -129,20 +129,20 @@ build Google Mock and its tests, which has further requirements:
 
 If you have CMake available, it is recommended that you follow the
 [build instructions][gtest_cmakebuild]
-as described for Google Test. 
+as described for Google Test.
 
 If are using Google Mock with an
 existing CMake project, the section
 [Incorporating Into An Existing CMake Project][gtest_incorpcmake]
-may be of particular interest. 
-To make it work for Google Mock you will need to change 
+may be of particular interest.
+To make it work for Google Mock you will need to change
 
     target_link_libraries(example gtest_main)
 
-to 
+to
 
     target_link_libraries(example gmock_main)
-    
+
 This works because `gmock_main` library is compiled with Google Test.
 However, it does not automatically add Google Test includes.
 Therefore you will also have to change
@@ -161,8 +161,8 @@ to
         "${gtest_SOURCE_DIR}/include" "${gmock_SOURCE_DIR}/include")
     endif()
 
-This will addtionally mark Google Mock includes as system, which will 
-silence compiler warnings when compiling your tests using clang with 
+This will addtionally mark Google Mock includes as system, which will
+silence compiler warnings when compiling your tests using clang with
 `-Wpedantic -Wall -Wextra -Wconversion`.
 
 

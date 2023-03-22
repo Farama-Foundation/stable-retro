@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -36,7 +36,7 @@ CartridgeFA2::CartridgeFA2(const uInt8* image, uInt32 size, const OSystem& osyst
   if(size >= 29 * 1024)
   {
     image += 1024;
-    mySize = 28 * 1024; 
+    mySize = 28 * 1024;
   }
 
   // Allocate array for the ROM image
@@ -52,7 +52,7 @@ CartridgeFA2::CartridgeFA2(const uInt8* image, uInt32 size, const OSystem& osyst
   // Remember startup bank
   myStartBank = 0;
 }
- 
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 CartridgeFA2::~CartridgeFA2()
 {
@@ -93,7 +93,7 @@ void CartridgeFA2::install(System& system)
     access.codeAccessBase = &myCodeAccessBase[j & 0x00FF];
     mySystem->setPageAccess(j >> shift, access);
   }
- 
+
   // Set the page accessing method for the RAM reading pages
   access.directPokeBase = 0;
   access.type = System::PA_READ;
@@ -137,7 +137,7 @@ uInt8 CartridgeFA2::peek(uInt16 address)
       // Set the current bank to the third 4k bank
       bank(2);
       break;
-  
+
     case 0x0FF8:
       // Set the current bank to the fourth 4k bank
       bank(3);
@@ -175,7 +175,7 @@ uInt8 CartridgeFA2::peek(uInt16 address)
       triggerReadFromWritePort(peekAddress);
       return myRAM[address] = value;
     }
-  }  
+  }
   else
     return myImage[(myCurrentBank << 12) + address];
 }
@@ -208,7 +208,7 @@ bool CartridgeFA2::poke(uInt16 address, uInt8)
       // Set the current bank to the third 4k bank
       bank(2);
       break;
-  
+
     case 0x0FF8:
       // Set the current bank to the fourth 4k bank
       bank(3);
@@ -299,7 +299,7 @@ bool CartridgeFA2::patch(uInt16 address, uInt8 value)
     myImage[(myCurrentBank << 12) + address] = value;
 
   return myBankChanged = true;
-} 
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const uInt8* CartridgeFA2::getImage(int& size) const

@@ -358,4 +358,3 @@ int lj_bcwrite(lua_State *L, GCproto *pt, lua_Writer writer, void *data,
   lj_buf_free(G(sbufL(&ctx.sb)), &ctx.sb);
   return status;
 }
-

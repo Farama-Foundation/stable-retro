@@ -78,7 +78,7 @@ typedef enum {
 	KBDK_GREATER		= 62,
 	KBDK_QUESTION		= 63,
 	KBDK_AT			= 64,
-	/* 
+	/*
 	   Skip uppercase letters
 	 */
 	KBDK_LEFTBRACKET	= 91,

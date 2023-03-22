@@ -25,7 +25,7 @@
 #include <assert.h>
 
 // lookup table for crc calculation
-static uint16_t subq_crctab[256] = 
+static uint16_t subq_crctab[256] =
 {
    0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7, 0x8108,
    0x9129, 0xA14A, 0xB16B, 0xC18C, 0xD1AD, 0xE1CE, 0xF1EF, 0x1231, 0x0210,
@@ -288,7 +288,7 @@ void synth_leadout_sector_lba(uint8_t mode, const TOC& toc, const int32_t lba, u
 
    if(out_buf[2352 + 1] & 0x40)
    {
-      if(mode == 0xFF) 
+      if(mode == 0xFF)
       {
          if(toc.disc_type == DISC_TYPE_CD_XA || toc.disc_type == DISC_TYPE_CD_I)
             mode = 0x02;
@@ -384,7 +384,7 @@ void synth_udapp_sector_lba(uint8_t mode, const TOC& toc, const int32_t lba, int
 
    if(out_buf[2352 + 1] & 0x40)
    {
-      if(mode == 0xFF) 
+      if(mode == 0xFF)
       {
          if(toc.disc_type == DISC_TYPE_CD_XA || toc.disc_type == DISC_TYPE_CD_I)
             mode = 0x02;

@@ -80,7 +80,7 @@ endif
 
 CORE_DIR  ?= ..
 BUILD_DIR ?= .
-INCLUDES   = 
+INCLUDES   =
 
 include $(BUILD_DIR)/Makefile.common
 

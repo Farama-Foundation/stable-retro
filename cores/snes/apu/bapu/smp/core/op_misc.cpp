@@ -343,4 +343,3 @@ case 0x9e: {
   regs.p.z = (regs.a == 0);
   break;
 }
-

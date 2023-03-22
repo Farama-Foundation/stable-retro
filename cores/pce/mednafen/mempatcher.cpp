@@ -81,7 +81,7 @@ static void RebuildSubCheats(void)
      shiftie = (chit->length - 1 - x) * 8;
     else
      shiftie = x * 8;
-    
+
     tmpsub.addr = chit->addr + x;
     tmpsub.value = (chit->val >> shiftie) & 0xFF;
     if(chit->type == 'C')
@@ -119,7 +119,7 @@ void MDFNMP_Kill(void)
 void MDFNMP_AddRAM(uint32 size, uint32 A, uint8 *RAM)
 {
  uint32 AB = A / PageSize;
- 
+
  size /= PageSize;
 
  for(unsigned int x = 0; x < size; x++)
@@ -244,12 +244,12 @@ int MDFNI_DelCheat(uint32 which)
 
 /*
  Condition format(ws = white space):
- 
+
   <variable size><ws><endian><ws><address><ws><operation><ws><value>
 	  [,second condition...etc.]
 
   Value should be unsigned integer, hex(with a 0x prefix) or
-  base-10.  
+  base-10.
 
   Operations:
    >=
@@ -330,7 +330,7 @@ static bool TestConditions(const char *string)
    if(!(value_at_address < v_value))
     passed = 0;
   }
-  else if(!strcmp(operation, "==")) 
+  else if(!strcmp(operation, "=="))
   {
    if(!(value_at_address == v_value))
     passed = 0;
@@ -433,7 +433,7 @@ int MDFNI_GetCheat(uint32 which, char **name, uint32 *a, uint64 *v, uint64 *comp
  if(name)
   *name=next->name;
  if(a)
-  *a=next->addr; 
+  *a=next->addr;
  if(v)
   *v=next->val;
  if(s)
@@ -579,7 +579,7 @@ int MDFNI_DecodeGG(const char *str, uint32 *a, uint8 *v, uint8 *c, char *type)
   t=GGtobin(*str++);
   C|=(t&0x07);
   C|=(t&0x08)<<4;
-  
+
   t=GGtobin(*str++);
   C|=(t&0x07)<<4;
   V|=(t&0x08);

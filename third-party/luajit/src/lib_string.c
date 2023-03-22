@@ -745,4 +745,3 @@ LUALIB_API int luaopen_string(lua_State *L)
   mt->nomm = (uint8_t)(~(1u<<MM_index));
   return 1;
 }
-

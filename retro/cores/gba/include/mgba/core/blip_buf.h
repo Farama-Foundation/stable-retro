@@ -2,7 +2,7 @@
 Sample buffer that resamples from input clock rate to output sample rate */
 
 /* blip_buf 1.1.0 */
-#ifndef BLIP_BUF_H 
+#ifndef BLIP_BUF_H
 #define BLIP_BUF_H
 
 #ifdef __cplusplus

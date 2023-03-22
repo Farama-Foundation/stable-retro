@@ -2052,4 +2052,3 @@ constexpr ::capnp::_::RawSchema const* Exception::_capnpPrivate::schema;
 
 }  // namespace
 }  // namespace
-

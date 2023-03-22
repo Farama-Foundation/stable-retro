@@ -36,7 +36,7 @@ class SerialIO;
 class Memory {
 public:
    Bootloader bootloader;
-   
+
 	explicit Memory(Interrupter const &interrupter);
 	bool loaded() const { return cart_.loaded(); }
 	void setStatePtrs(SaveState &state);

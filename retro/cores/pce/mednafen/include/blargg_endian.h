@@ -118,7 +118,7 @@ inline void set_be32( void* p, blargg_ulong n ) {
 		#define SET_BE16( addr, data )  (void) (*(BOOST::uint16_t*) (addr) = (data))
 		#define SET_BE32( addr, data )  (void) (*(BOOST::uint32_t*) (addr) = (data))
 	#endif
-	
+
 	#if BLARGG_CPU_POWERPC && defined (__MWERKS__)
 		// PowerPC has special byte-reversed instructions
 		// to do: assumes that PowerPC is running in big-endian mode

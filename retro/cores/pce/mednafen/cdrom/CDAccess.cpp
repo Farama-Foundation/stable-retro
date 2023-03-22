@@ -55,4 +55,3 @@ CDAccess* CDAccess_Open(const std::string& path, bool image_memcache)
 
    return ret;
 }
-

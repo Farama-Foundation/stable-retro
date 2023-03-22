@@ -435,4 +435,3 @@ BOOL png2pnm (FILE *png_file, FILE *pnm_file, FILE *alpha_file,
   return TRUE;
 
 } /* end of source */
-

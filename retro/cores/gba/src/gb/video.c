@@ -441,7 +441,7 @@ void GBVideoWriteLCDC(struct GBVideo* video, GBRegisterLCDC value) {
 		video->ly = 0;
 		video->p->memory.io[REG_LY] = 0;
 		video->renderer->writePalette(video->renderer, 0, video->dmgPalette[0]);
-	
+
 		mTimingDeschedule(&video->p->timing, &video->modeEvent);
 		mTimingSchedule(&video->p->timing, &video->frameEvent, GB_VIDEO_TOTAL_LENGTH);
 	}

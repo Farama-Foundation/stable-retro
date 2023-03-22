@@ -851,4 +851,3 @@ void *lj_mem_grow(lua_State *L, void *p, MSize *szp, MSize lim, MSize esz)
   *szp = sz;
   return p;
 }
-

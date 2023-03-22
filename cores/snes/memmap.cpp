@@ -1531,7 +1531,7 @@ bool8 CMemory::LoadROMMem (const uint8 *source, uint32 sourceSize)
         return FALSE;
 
     strcpy(ROMFilename,"MemoryROM");
-   
+
     //allows headered roms to be loaded from ram instead of file
     uint32	calc_size = (sourceSize / 0x2000) * 0x2000;
     if ((sourceSize - calc_size == 512 && !Settings.ForceNoHeader) || Settings.ForceHeader)

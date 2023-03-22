@@ -61,7 +61,7 @@
 #define TIMERS_SCYCLES_RATIO (384 * 4)
 
 /* CD hardware */
-typedef struct 
+typedef struct
 {
   cd_cart_t cartridge;        /* ROM/RAM Cartridge */
   uint8 bootrom[0x20000];     /* 128K internal BOOT ROM */

@@ -146,7 +146,7 @@ static INLINE uint8 VDC_Read(unsigned int A, bool SGX)
              vdc->MARR += vram_inc_tab[(vdc->CR >> 11) & 0x3];
 
              if(vdc->MARR >= VRAM_Size)
-              VDC_UNDEFINED("Unmapped VRAM VRR read"); 
+              VDC_UNDEFINED("Unmapped VRAM VRR read");
              vdc->read_buffer = vdc->VRAM[vdc->MARR & VRAM_SizeMask];
             }
            }

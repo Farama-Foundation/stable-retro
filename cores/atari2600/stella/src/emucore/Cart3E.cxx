@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -160,7 +160,7 @@ bool Cartridge3E::poke(uInt16 address, uInt8 value)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool Cartridge3E::bank(uInt16 bank)
-{ 
+{
   if(bankLocked()) return false;
 
   if(bank < 256)
@@ -176,10 +176,10 @@ bool Cartridge3E::bank(uInt16 bank)
       // around to a valid bank number
       myCurrentBank = bank % (mySize >> 11);
     }
-  
+
     uInt32 offset = myCurrentBank << 11;
     uInt16 shift = mySystem->pageShift();
-  
+
     // Setup the page access methods for the current bank
     System::PageAccess access(0, 0, 0, this, System::PA_READ);
 
@@ -200,7 +200,7 @@ bool Cartridge3E::bank(uInt16 bank)
     uInt32 offset = bank << 10;
     uInt16 shift = mySystem->pageShift();
     uInt32 address;
-  
+
     // Setup the page access methods for the current bank
     System::PageAccess access(0, 0, 0, this, System::PA_READ);
 
@@ -259,7 +259,7 @@ bool Cartridge3E::patch(uInt16 address, uInt8 value)
     myImage[(address & 0x07FF) + mySize - 2048] = value;
 
   return myBankChanged = true;
-} 
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const uInt8* Cartridge3E::getImage(int& size) const

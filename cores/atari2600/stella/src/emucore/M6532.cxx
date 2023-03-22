@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -33,12 +33,12 @@ M6532::M6532(const Console& console, const Settings& settings)
     mySettings(settings)
 {
 }
- 
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 M6532::~M6532()
 {
 }
- 
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void M6532::reset()
 {
@@ -121,7 +121,7 @@ void M6532::install(System& system, Device& device)
 
   // Make sure the system we're being installed in has a page size that'll work
   assert((0x1080 & mask) == 0);
-  
+
   // All accesses are to the given device
   System::PageAccess access(0, 0, 0, &device, System::PA_READWRITE);
 
@@ -157,7 +157,7 @@ uInt8 M6532::peek(uInt16 addr)
       return (myOutA | ~myDDRA) & value;
     }
 
-    case 0x01:    // SWACNT - Port A Data Direction Register 
+    case 0x01:    // SWACNT - Port A Data Direction Register
     {
       return myDDRA;
     }
@@ -219,7 +219,7 @@ uInt8 M6532::peek(uInt16 addr)
     }
 
     default:
-    {    
+    {
 #ifdef DEBUG_ACCESSES
       cerr << "BAD M6532 Peek: " << hex << addr << endl;
 #endif
@@ -264,7 +264,7 @@ bool M6532::poke(uInt16 addr, uInt8 value)
         break;
       }
 
-      case 1:     // SWACNT - Port A Data Direction Register 
+      case 1:     // SWACNT - Port A Data Direction Register
       {
         myDDRA = value;
         setPinState(false);
@@ -277,7 +277,7 @@ bool M6532::poke(uInt16 addr, uInt8 value)
         break;
       }
 
-      case 3:     // SWBCNT - Port B Data Direction Register 
+      case 3:     // SWBCNT - Port B Data Direction Register
       {
         myDDRB = value;
         break;
@@ -408,7 +408,7 @@ uInt8 M6532::intim() const
   // debugger can read INTIM without changing the state of the system
 
   // Get number of clocks since timer was set
-  Int32 timer = timerClocks();  
+  Int32 timer = timerClocks();
   if(!(timer & 0x40000))
     return (timer >> myIntervalShift) & 0xff;
   else
@@ -437,7 +437,7 @@ Int32 M6532::intimClocks() const
   // INTIM value and the next
 
   // Get number of clocks since timer was set
-  Int32 timer = timerClocks();  
+  Int32 timer = timerClocks();
   if(!(timer & 0x40000))
     return timerClocks() & ((1 << myIntervalShift) - 1);
   else

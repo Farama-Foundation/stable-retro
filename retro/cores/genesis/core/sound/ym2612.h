@@ -7,7 +7,7 @@
 ** Copyright (C) 2001, 2002, 2003 Jarek Burczynski (bujar at mame dot net)
 ** Copyright (C) 1998 Tatsuyuki Satoh , MultiArcadeMachineEmulator development
 **
-** Version 1.4 (final beta) 
+** Version 1.4 (final beta)
 **
 ** Additional code & fixes by Eke-Eke for Genesis Plus GX
 **

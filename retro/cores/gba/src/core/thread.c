@@ -640,4 +640,3 @@ struct mLogger* mCoreThreadLogger(void) {
 	}
 	return NULL;
 }
-

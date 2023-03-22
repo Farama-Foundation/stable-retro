@@ -63,7 +63,7 @@ function nhl94_reward ()
     if distance < 30 then
         diff_reward = 0.1
     end
-  
+
 
     prev_distance = distance
 

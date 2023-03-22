@@ -213,7 +213,7 @@ _zip_source_file_or_p(const char *fname, FILE *file, zip_uint64_t start, zip_int
 	    if (ctx->end == 0) {
 		ctx->st.size = (zip_uint64_t)sb.st_size - ctx->start;
 		ctx->st.valid |= ZIP_STAT_SIZE;
-		
+
 		if (ctx->fname && start == 0) {
 		    ctx->supports = ZIP_SOURCE_SUPPORTS_WRITABLE;
 		}

@@ -531,7 +531,7 @@ void CPU::process(unsigned long const cycles) {
 				inc_r(b);
 				break;
 			case 0x05:
-				dec_r(b); 
+				dec_r(b);
 				break;
 			case 0x06:
 				PC_READ(b);

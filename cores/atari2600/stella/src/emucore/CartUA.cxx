@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -133,7 +133,7 @@ bool CartridgeUA::poke(uInt16 address, uInt8 value)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool CartridgeUA::bank(uInt16 bank)
-{ 
+{
   if(bankLocked()) return false;
 
   // Remember what bank we're in
@@ -171,7 +171,7 @@ bool CartridgeUA::patch(uInt16 address, uInt8 value)
 {
   myImage[(myCurrentBank << 12) + (address & 0x0FFF)] = value;
   return myBankChanged = true;
-} 
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const uInt8* CartridgeUA::getImage(int& size) const

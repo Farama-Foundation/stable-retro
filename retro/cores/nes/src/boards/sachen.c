@@ -406,4 +406,3 @@ static void TCA01Power(void) {
 void TCA01_Init(CartInfo *info) {
 	info->Power = TCA01Power;
 }
-

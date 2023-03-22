@@ -179,7 +179,7 @@ libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_OBJECTS =  \
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
-am__v_lt_1 = 
+am__v_lt_1 =
 libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_LINK = $(LIBTOOL) $(AM_V_lt) \
 	--tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link \
 	$(CCLD) $(AM_CFLAGS) $(CFLAGS) \
@@ -215,11 +215,11 @@ am__v_P_1 = :
 AM_V_GEN = $(am__v_GEN_@AM_V@)
 am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
 am__v_GEN_0 = @echo "  GEN     " $@;
-am__v_GEN_1 = 
+am__v_GEN_1 =
 AM_V_at = $(am__v_at_@AM_V@)
 am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
 am__v_at_0 = @
-am__v_at_1 = 
+am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -233,7 +233,7 @@ LTCPPASCOMPILE = $(LIBTOOL) $(AM_V_lt) $(AM_LIBTOOLFLAGS) \
 AM_V_CPPAS = $(am__v_CPPAS_@AM_V@)
 am__v_CPPAS_ = $(am__v_CPPAS_@AM_DEFAULT_V@)
 am__v_CPPAS_0 = @echo "  CPPAS   " $@;
-am__v_CPPAS_1 = 
+am__v_CPPAS_1 =
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
@@ -243,7 +243,7 @@ LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CC = $(am__v_CC_@AM_V@)
 am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
 am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
+am__v_CC_1 =
 CCLD = $(CC)
 LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
@@ -251,7 +251,7 @@ LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
+am__v_CCLD_1 =
 SOURCES = $(libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_SOURCES) \
 	$(nodist_libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_SOURCES) \
 	$(png_fix_itxt_SOURCES) $(pngfix_SOURCES) $(pngimage_SOURCES) \
@@ -801,7 +801,7 @@ config.h: stamp-h1
 stamp-h1: $(srcdir)/config.h.in $(top_builddir)/config.status
 	@rm -f stamp-h1
 	cd $(top_builddir) && $(SHELL) ./config.status config.h
-$(srcdir)/config.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps) 
+$(srcdir)/config.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	($(am__cd) $(top_srcdir) && $(AUTOHEADER))
 	rm -f stamp-h1
 	touch $@
@@ -858,7 +858,7 @@ arm/filter_neon.lo: arm/$(am__dirstamp) arm/$(DEPDIR)/$(am__dirstamp)
 arm/filter_neon_intrinsics.lo: arm/$(am__dirstamp) \
 	arm/$(DEPDIR)/$(am__dirstamp)
 
-libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@.la: $(libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_OBJECTS) $(libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_DEPENDENCIES) $(EXTRA_libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_DEPENDENCIES) 
+libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@.la: $(libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_OBJECTS) $(libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_DEPENDENCIES) $(EXTRA_libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_LINK) -rpath $(libdir) $(libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_OBJECTS) $(libpng@PNGLIB_MAJOR@@PNGLIB_MINOR@_la_LIBADD) $(LIBS)
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
@@ -927,13 +927,13 @@ contrib/tools/$(DEPDIR)/$(am__dirstamp):
 contrib/tools/png-fix-itxt.$(OBJEXT): contrib/tools/$(am__dirstamp) \
 	contrib/tools/$(DEPDIR)/$(am__dirstamp)
 
-png-fix-itxt$(EXEEXT): $(png_fix_itxt_OBJECTS) $(png_fix_itxt_DEPENDENCIES) $(EXTRA_png_fix_itxt_DEPENDENCIES) 
+png-fix-itxt$(EXEEXT): $(png_fix_itxt_OBJECTS) $(png_fix_itxt_DEPENDENCIES) $(EXTRA_png_fix_itxt_DEPENDENCIES)
 	@rm -f png-fix-itxt$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(png_fix_itxt_OBJECTS) $(png_fix_itxt_LDADD) $(LIBS)
 contrib/tools/pngfix.$(OBJEXT): contrib/tools/$(am__dirstamp) \
 	contrib/tools/$(DEPDIR)/$(am__dirstamp)
 
-pngfix$(EXEEXT): $(pngfix_OBJECTS) $(pngfix_DEPENDENCIES) $(EXTRA_pngfix_DEPENDENCIES) 
+pngfix$(EXEEXT): $(pngfix_OBJECTS) $(pngfix_DEPENDENCIES) $(EXTRA_pngfix_DEPENDENCIES)
 	@rm -f pngfix$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pngfix_OBJECTS) $(pngfix_LDADD) $(LIBS)
 contrib/libtests/$(am__dirstamp):
@@ -945,30 +945,30 @@ contrib/libtests/$(DEPDIR)/$(am__dirstamp):
 contrib/libtests/pngimage.$(OBJEXT): contrib/libtests/$(am__dirstamp) \
 	contrib/libtests/$(DEPDIR)/$(am__dirstamp)
 
-pngimage$(EXEEXT): $(pngimage_OBJECTS) $(pngimage_DEPENDENCIES) $(EXTRA_pngimage_DEPENDENCIES) 
+pngimage$(EXEEXT): $(pngimage_OBJECTS) $(pngimage_DEPENDENCIES) $(EXTRA_pngimage_DEPENDENCIES)
 	@rm -f pngimage$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pngimage_OBJECTS) $(pngimage_LDADD) $(LIBS)
 contrib/libtests/pngstest.$(OBJEXT): contrib/libtests/$(am__dirstamp) \
 	contrib/libtests/$(DEPDIR)/$(am__dirstamp)
 
-pngstest$(EXEEXT): $(pngstest_OBJECTS) $(pngstest_DEPENDENCIES) $(EXTRA_pngstest_DEPENDENCIES) 
+pngstest$(EXEEXT): $(pngstest_OBJECTS) $(pngstest_DEPENDENCIES) $(EXTRA_pngstest_DEPENDENCIES)
 	@rm -f pngstest$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pngstest_OBJECTS) $(pngstest_LDADD) $(LIBS)
 
-pngtest$(EXEEXT): $(pngtest_OBJECTS) $(pngtest_DEPENDENCIES) $(EXTRA_pngtest_DEPENDENCIES) 
+pngtest$(EXEEXT): $(pngtest_OBJECTS) $(pngtest_DEPENDENCIES) $(EXTRA_pngtest_DEPENDENCIES)
 	@rm -f pngtest$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pngtest_OBJECTS) $(pngtest_LDADD) $(LIBS)
 contrib/libtests/pngunknown.$(OBJEXT):  \
 	contrib/libtests/$(am__dirstamp) \
 	contrib/libtests/$(DEPDIR)/$(am__dirstamp)
 
-pngunknown$(EXEEXT): $(pngunknown_OBJECTS) $(pngunknown_DEPENDENCIES) $(EXTRA_pngunknown_DEPENDENCIES) 
+pngunknown$(EXEEXT): $(pngunknown_OBJECTS) $(pngunknown_DEPENDENCIES) $(EXTRA_pngunknown_DEPENDENCIES)
 	@rm -f pngunknown$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pngunknown_OBJECTS) $(pngunknown_LDADD) $(LIBS)
 contrib/libtests/pngvalid.$(OBJEXT): contrib/libtests/$(am__dirstamp) \
 	contrib/libtests/$(DEPDIR)/$(am__dirstamp)
 
-pngvalid$(EXEEXT): $(pngvalid_OBJECTS) $(pngvalid_DEPENDENCIES) $(EXTRA_pngvalid_DEPENDENCIES) 
+pngvalid$(EXEEXT): $(pngvalid_OBJECTS) $(pngvalid_DEPENDENCIES) $(EXTRA_pngvalid_DEPENDENCIES)
 	@rm -f pngvalid$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pngvalid_OBJECTS) $(pngvalid_LDADD) $(LIBS)
 install-binSCRIPTS: $(bin_SCRIPTS)

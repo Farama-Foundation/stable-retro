@@ -117,7 +117,7 @@ void sound_reset(void)
 
   /* reset FM buffer pointer */
   fm_ptr = fm_buffer;
-  
+
   /* reset FM cycle counters */
   fm_cycles_start = fm_cycles_count = 0;
 }
@@ -201,7 +201,7 @@ int sound_update(unsigned int cycles)
 int sound_context_save(uint8 *state)
 {
   int bufferptr = 0;
-  
+
   if ((system_hw & SYSTEM_PBC) == SYSTEM_MD)
   {
     bufferptr = YM2612SaveContext(state);
@@ -256,7 +256,7 @@ void fm_write(unsigned int cycles, unsigned int address, unsigned int data)
   {
     fm_update(cycles);
   }
-  
+
   /* write FM register */
   YM_Write(address, data);
 }

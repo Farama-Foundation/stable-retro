@@ -43,10 +43,10 @@
 #define CONFIG_VERSION "GENPLUS-GX 1.7.5"
 
 /****************************************************************************
- * Config Option 
+ * Config Option
  *
  ****************************************************************************/
-typedef struct 
+typedef struct
 {
   char version[16];
   uint8 hq_fm;
@@ -130,4 +130,3 @@ extern void config_default(void);
 
 
 #endif /* _CONFIG_H_ */
-

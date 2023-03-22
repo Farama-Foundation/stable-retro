@@ -259,4 +259,3 @@ case 0x1a: {
   regs.p.z = (rd == 0);
   break;
 }
-

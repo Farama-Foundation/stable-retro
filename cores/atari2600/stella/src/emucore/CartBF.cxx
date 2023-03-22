@@ -131,7 +131,7 @@ bool CartridgeBF::patch(uInt16 address, uInt8 value)
 {
   myImage[(myCurrentBank << 12) + (address & 0x0FFF)] = value;
   return myBankChanged = true;
-} 
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const uInt8* CartridgeBF::getImage(int& size) const

@@ -194,4 +194,3 @@ local src = read_files(arg)
 local defs = find_defs(src)
 local hdr = gen_header(defs)
 write_file(outfile, hdr)
-

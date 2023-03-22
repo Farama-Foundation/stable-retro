@@ -26,19 +26,19 @@ template<typename T, class Less>
 void insertionSort(T *const start, T *const end, Less less) {
 	if (start >= end)
 		return;
-	
+
 	T *a = start;
-	
+
 	while (++a < end) {
 		const T e = *a;
-		
+
 		T *b = a;
-		
+
 		while (b != start && less(e, *(b - 1))) {
 			*b = *(b - 1);
 			b = b - 1;
 		}
-		
+
 		*b = e;
 	}
 }

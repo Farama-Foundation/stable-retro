@@ -667,7 +667,7 @@ IDAT_list_extend(struct IDAT_list *tail)
 
       if (length < tail->length) /* arithmetic overflow */
          length = tail->length;
-            
+
       next = png_voidcast(IDAT_list*, malloc(IDAT_list_size(NULL, length)));
       CLEAR(*next);
 
@@ -921,7 +921,7 @@ emit_string(const char *str, FILE *out)
 
       else if (isspace(UCHAR_MAX & *str))
          putc('_', out);
-   
+
       else
          fprintf(out, "\\%.3o", *str);
 }
@@ -1945,7 +1945,7 @@ process_IDAT(struct file *file)
       list->count = 0;
       file->idat->idat_list_tail = list;
    }
-   
+
    /* And fill in the next IDAT information buffer. */
    list->lengths[(list->count)++] = file->chunk->chunk_length;
 
@@ -2585,7 +2585,7 @@ zlib_run(struct zlib *zlib)
    {
       struct chunk *chunk = zlib->chunk;
       int rc;
-      
+
       assert(zlib->rewrite_offset < chunk->chunk_length);
 
       rc = zlib_advance(zlib, chunk->chunk_length - zlib->rewrite_offset);
@@ -4042,4 +4042,3 @@ main(void)
    return 77;
 }
 #endif /* PNG_SETJMP_SUPPORTED */
-

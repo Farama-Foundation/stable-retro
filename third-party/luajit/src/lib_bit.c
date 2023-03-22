@@ -177,4 +177,3 @@ LUALIB_API int luaopen_bit(lua_State *L)
   LJ_LIB_REG(L, LUA_BITLIBNAME, bit);
   return 1;
 }
-

@@ -30,4 +30,3 @@ bool PCECD_IsBRAMEnabled(void);
 int PCECD_StateAction(StateMem *sm, int load, int data_only);
 
 #endif
-

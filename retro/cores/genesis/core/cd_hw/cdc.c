@@ -490,7 +490,7 @@ void cdc_reg_w(unsigned char data)
         /* set MODE bit according to CTRL1 register & clear FORM bit */
         cdc.stat[2] = cdc.ctrl[1] & BIT_MODRQ;
       }
-      else 
+      else
       {
         /* set MODE & FORM bits according to CTRL1 register */
         cdc.stat[2] = cdc.ctrl[1] & (BIT_MODRQ | BIT_FORMRQ);
@@ -509,7 +509,7 @@ void cdc_reg_w(unsigned char data)
         /* set MODE bit according to CTRL1 register & clear FORM bit */
         cdc.stat[2] = data & BIT_MODRQ;
       }
-      else 
+      else
       {
         /* set MODE & FORM bits according to CTRL1 register */
         cdc.stat[2] = data & (BIT_MODRQ | BIT_FORMRQ);
@@ -524,7 +524,7 @@ void cdc_reg_w(unsigned char data)
       cdc.pt.byte.l = data;
       scd.regs[0x04>>1].byte.l = 0x0d;
       break;
-  
+
     case 0x0d:  /* PTH */
       cdc.pt.byte.h = data;
       scd.regs[0x04>>1].byte.l = 0x0e;
@@ -612,7 +612,7 @@ unsigned char cdc_reg_r(void)
 
       /* clear pending decoder interrupt */
       cdc.ifstat |= BIT_DECI;
-      
+
 #if 0
       /* no pending data transfer end interrupt */
       if ((cdc.ifstat | BIT_DTEI) || !(cdc.ifctrl & BIT_DTEIEN))
@@ -650,7 +650,7 @@ unsigned short cdc_host_r(void)
 #ifdef LOG_CDC
     error("CDC host read 0x%04x -> 0x%04x (dbc=0x%x) (%X)\n", cdc.dac.w, data, cdc.dbc.w, s68k.pc);
 #endif
- 
+
     /* increment data address counter */
     cdc.dac.w += 2;
 

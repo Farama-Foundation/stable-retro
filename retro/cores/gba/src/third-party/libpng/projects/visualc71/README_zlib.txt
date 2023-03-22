@@ -41,4 +41,3 @@ This project builds the zlib binaries as follows:
 * Win32_DLL_Debug\zlib1d.dll        DLL build (debug version)
 * Win32_LIB_Release\zlib.lib        static build
 * Win32_LIB_Debug\zlibd.lib         static build (debug version)
-

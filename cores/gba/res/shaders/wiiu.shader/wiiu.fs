@@ -20,7 +20,7 @@ void main() {
 	scale[26] = 159.0/255.0; scale[27] = 166.0/255.0;
 	scale[28] = 172.0/255.0; scale[29] = 178.0/255.0;
 	scale[30] = 184.0/255.0; scale[31] = 191.0/255.0;
-	
+
 	vec4 color = texture2D(tex, texCoord);
 	color.r = scale[int(floor(color.r * 31.0 + 0.5))];
 	color.g = scale[int(floor(color.g * 31.0 + 0.5))];

@@ -177,4 +177,3 @@ THREAD_ENTRY _rewindThread(void* context) {
 	return 0;
 }
 #endif
-

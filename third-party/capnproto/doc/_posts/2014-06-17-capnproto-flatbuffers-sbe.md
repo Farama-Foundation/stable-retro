@@ -203,4 +203,3 @@ The fact of the matter is that the relative performance of these libraries depen
 With that said, my intuition is that SBE will probably edge Cap'n Proto and FlatBuffers on performance in the average case, due to its decision to forgo support for random access. Between Cap'n Proto and FlatBuffers, it's harder to say. FlatBuffers' vtable approach seems like it would make access more expensive, though its simpler pointer format may be cheaper to follow. FlatBuffers also appears to do a lot of bookkeeping at encoding time which could get costly (such as de-duping vtables), but I don't know how costly.
 
 For most people, the performance difference is probably small enough that qualitative (feature) differences in the libraries matter more.
-

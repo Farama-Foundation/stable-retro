@@ -19,20 +19,20 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA	02110-1301	USA
  */
- 
+
 /*
 	MMC3-based multicart mapper with CHR RAM, CHR ROM and PRG RAM
-	
+
 	$6000-7FFF:	A~[011xxxxx xxMRSBBB]	Multicart reg
 		This register can only be written to if PRG-RAM is enabled and writable (see $A001)
 		and BBB = 000 (power on state)
-	
+
 	BBB = CHR+PRG block select bits (A19, A18, A17 for both PRG and CHR)
 	S = PRG block size (0=256k	 1=128k)
 	R = CHR mode (0=CHR ROM	 1=CHR RAM)
 	M = CHR block size (0=256k	 1=128k)
 		ignored when S is 0 for some reason
-		
+
  Example Game:
  --------------------------
  6 in 1 multicart (SMB3, TMNT2, Contra, Ninja Cat, Ninja Crusaders, Rainbow Islands 2)
@@ -47,7 +47,7 @@ static uint32 CHRRAMSize;
 static void BMC1024CA1PW(uint32 A, uint8 V) {
 	if ((EXPREGS[0]>>3)&1)
 		setprg8(A, (V&0x1F) | ((EXPREGS[0] & 7) << 4));
-	else 
+	else
 		setprg8(A, (V&0x0F) | ((EXPREGS[0] & 7) << 4));
 }
 

@@ -834,7 +834,7 @@ char * S9xParseArgs (char **argv, int argc)
 		#endif
 
 			// HACKING OR DEBUGGING OPTIONS
-		
+
 		#ifdef DEBUGGER
 			if (!strcasecmp(argv[i], "-debug"))
 				CPU.Flags |= DEBUG_MODE_FLAG;
@@ -907,4 +907,3 @@ char * S9xParseArgs (char **argv, int argc)
 	return (rom_filename);
 }
 #endif
-

@@ -17,7 +17,7 @@
   3. The names of the authors may not be used to endorse or promote
      products derived from this software without specific prior
      written permission.
- 
+
   THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS
   OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -86,7 +86,7 @@ _zip_source_zip_new(zip_t *za, zip_t *srcza, zip_uint64_t srcidx, zip_flags_t fl
     needs_decompress = ((flags & ZIP_FL_COMPRESSED) == 0) && (st.comp_method != ZIP_CM_STORE);
     /* when reading the whole file, check for CRC errors */
     needs_crc = ((flags & ZIP_FL_COMPRESSED) == 0 || st.comp_method == ZIP_CM_STORE) && !partial_data;
-    
+
     if (needs_decrypt) {
         if (password == NULL) {
             password = za->default_password;
@@ -103,20 +103,20 @@ _zip_source_zip_new(zip_t *za, zip_t *srcza, zip_uint64_t srcidx, zip_flags_t fl
 
     if (partial_data && !needs_decrypt && !needs_decompress) {
 	struct zip_stat st2;
-	
+
 	st2.size = len;
 	st2.comp_size = len;
 	st2.comp_method = ZIP_CM_STORE;
 	st2.mtime = st.mtime;
 	st2.valid = ZIP_STAT_SIZE|ZIP_STAT_COMP_SIZE|ZIP_STAT_COMP_METHOD|ZIP_STAT_MTIME;
-	
+
 	if ((src = _zip_source_window_new(srcza->src, start, len, &st2, 0, srcza, srcidx, &za->error)) == NULL) {
 	    return NULL;
 	}
     }
     else {
 	zip_dirent_t *de;
-	
+
 	if ((de = _zip_get_dirent(srcza, srcidx, flags, &za->error)) == NULL) {
 	    return NULL;
 	}
@@ -124,17 +124,17 @@ _zip_source_zip_new(zip_t *za, zip_t *srcza, zip_uint64_t srcidx, zip_flags_t fl
 	    return NULL;
 	}
     }
-    
+
     if (_zip_source_set_source_archive(src, srcza) < 0) {
 	zip_source_free(src);
 	return NULL;
     }
 
     /* creating a layered source calls zip_keep() on the lower layer, so we free it */
-	
+
     if (needs_decrypt) {
 	zip_encryption_implementation enc_impl;
-	
+
 	if ((enc_impl = _zip_get_encryption_implementation(st.encryption_method, ZIP_CODEC_DECODE)) == NULL) {
 	    zip_error_set(&za->error, ZIP_ER_ENCRNOTSUPP, 0);
 	    return NULL;

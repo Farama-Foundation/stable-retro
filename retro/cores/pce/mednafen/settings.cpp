@@ -47,9 +47,9 @@ uint64 MDFN_GetSettingUI(const char *name)
    if (!strcmp("pce_fast.slstart", name))
       return setting_initial_scanline;
    if (!strcmp("pce_fast.slend", name))
-      return setting_last_scanline; 
+      return setting_last_scanline;
    if (!strcmp("pce_fast.hoverscan", name))
-      return setting_pce_hoverscan; 
+      return setting_pce_hoverscan;
 
    fprintf(stderr, "unhandled setting UI: %s\n", name);
    return 0;

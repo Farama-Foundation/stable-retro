@@ -109,27 +109,27 @@ void gx_audio_Shutdown(void)
   }
 }
 
-/*** 
+/***
       gx_audio_Update
 
-     This function retrieves samples for the frame then set the next DMA parameters 
+     This function retrieves samples for the frame then set the next DMA parameters
      Parameters will be taken in account only when current DMA operation is over
 
-     To keep audio & video synchronized, DMA from external memory to audio interface is 
-     started once by video update function when first frame is ready to be displayed, 
+     To keep audio & video synchronized, DMA from external memory to audio interface is
+     started once by video update function when first frame is ready to be displayed,
      then anytime video mode is changed and emulation resynchronized to video hardware.
 
      Once started, audio DMA restarts automatically when all samples have been played.
      At that time:
        - if DMA settings have not been updated, previous sound buffer will be played again
        - if DMA settings are updated too fast, one sound buffer frame might be skipped
-     
-     Therefore, in order to maintain perfect audio playback without any sound skipping  
-     or lagging, we need to make sure frame emulation is completed and this function is 
+
+     Therefore, in order to maintain perfect audio playback without any sound skipping
+     or lagging, we need to make sure frame emulation is completed and this function is
      called before previous DMA transfer is finished and after it has been started.
 
      This is done by synchronizing frame emulation with audio DMA interrupt (which happens
-     anytime audio DMA restarts). When video sync is enabled, to keep emulation in sync 
+     anytime audio DMA restarts). When video sync is enabled, to keep emulation in sync
      with both video AND audio, an appropriate number of samples is rendered per frame by
      adjusting emulator output samplerate.
  ***/
@@ -165,10 +165,10 @@ int gx_audio_Update(int status)
     status &= ~AUDIO_WAIT;
   }
 
-  return status;  
+  return status;
 }
 
-/*** 
+/***
       gx_audio_Start
 
      This function restarts the audio engine
@@ -177,9 +177,9 @@ int gx_audio_Update(int status)
 void gx_audio_Start(void)
 {
   /* shutdown background music */
-  PauseOgg(1);	
-  StopOgg();	
-  
+  PauseOgg(1);
+  StopOgg();
+
   /* shutdown menu audio processing */
   ASND_Pause(1);
   ASND_End();
@@ -212,12 +212,12 @@ void gx_audio_Stop(void)
   DSP_Unhalt();
   ASND_Init();
   ASND_Pause(0);
-	
+
   /* play background music */
   if (Bg_music_ogg && !Shutdown)
   {
-    PauseOgg(0);	
-    PlayOgg((char *)Bg_music_ogg, Bg_music_ogg_size, 0, OGG_INFINITE_TIME);	
-    SetVolumeOgg(((int)config.bgm_volume * 255) / 100);	
+    PauseOgg(0);
+    PlayOgg((char *)Bg_music_ogg, Bg_music_ogg_size, 0, OGG_INFINITE_TIME);
+    SetVolumeOgg(((int)config.bgm_volume * 255) / 100);
   }
 }

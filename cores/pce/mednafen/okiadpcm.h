@@ -31,7 +31,7 @@ extern const int OKIADPCM_StepSizes[49];
 extern const int OKIADPCM_StepIndexDeltas[16];
 extern const int32 OKIADPCM_DeltaTable[49][16];
 
-template <OKIADPCM_Chip CHIP_TYPE> 
+template <OKIADPCM_Chip CHIP_TYPE>
 class OKIADPCM_Decoder
 {
  public:
@@ -48,7 +48,7 @@ class OKIADPCM_Decoder
  {
 
  }
- 
+
  INLINE uint16 GetSample(void)
  {
   return(CurSample);

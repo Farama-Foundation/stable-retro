@@ -404,4 +404,3 @@ You can alternatively specify --includedir=/usr/include, /usr/local/include,
 If you find that the configure script is out-of-date or is not supporting
 your platform properly, try running autogen.sh to regenerate "configure",
 "Makefile.in", and the other configuration files. Then try configure again.
-

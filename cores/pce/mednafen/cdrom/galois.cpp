@@ -28,7 +28,7 @@
 
 /***
  *** Galois field arithmetic.
- *** 
+ ***
  * Calculations are done over the extension field GF(2**n).
  * Be careful not to overgeneralize these arithmetics;
  * they only work for the case of GF(p**n) with p being prime.
@@ -38,7 +38,7 @@
 
 
 GaloisTables* CreateGaloisTables(int32_t gf_generator)
-{  
+{
    GaloisTables *gt = (GaloisTables *)calloc(1, sizeof(GaloisTables));
    int32_t b,log;
 
@@ -51,7 +51,7 @@ GaloisTables* CreateGaloisTables(int32_t gf_generator)
    gt->indexOf     = (int32_t *)calloc(GF_FIELDSIZE, sizeof(int32_t));
    gt->alphaTo     = (int32_t *)calloc(GF_FIELDSIZE, sizeof(int32_t));
    gt->encAlphaTo  = (int32_t *)calloc(2*GF_FIELDSIZE, sizeof(int32_t));
-   
+
    /* create the log/ilog values */
 
    for(b=1, log=0; log<GF_FIELDMAX; log++)
@@ -62,7 +62,7 @@ GaloisTables* CreateGaloisTables(int32_t gf_generator)
 	b = b ^ gf_generator;
    }
 
-   if(b!=1) 
+   if(b!=1)
    {
     printf("Failed to create the Galois field log tables!\n");
     exit(1);
@@ -120,7 +120,7 @@ ReedSolomonTables *CreateReedSolomonTables(GaloisTables *gt,
      for(j=i; j>0; j--)
      {
        if(rt->gpoly[j] != 0)
-         rt->gpoly[j] = rt->gpoly[j-1] ^ gt->alphaTo[mod_fieldmax(gt->indexOf[rt->gpoly[j]] + root)]; 
+         rt->gpoly[j] = rt->gpoly[j-1] ^ gt->alphaTo[mod_fieldmax(gt->indexOf[rt->gpoly[j]] + root)];
        else
 	 rt->gpoly[j] = rt->gpoly[j-1];
      }
@@ -128,7 +128,7 @@ ReedSolomonTables *CreateReedSolomonTables(GaloisTables *gt,
      rt->gpoly[0] = gt->alphaTo[mod_fieldmax(gt->indexOf[rt->gpoly[0]] + root)];
    }
 
-   /* Store the polynomials index for faster encoding */ 
+   /* Store the polynomials index for faster encoding */
 
    for(i=0; i<=rt->nroots; i++)
      rt->gpoly[i] = gt->indexOf[rt->gpoly[i]];

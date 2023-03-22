@@ -9,16 +9,16 @@ void create_default_directories(void) {
     if ((homedir = getenv("HOME")) == NULL) {
         homedir = getpwuid(getuid())->pw_dir;
     }
-   
+
     char pathname[MAXPATHLEN];
-     
+
 	/* base directory */
     sprintf (pathname, "%s%s", homedir, DEFAULT_PATH);
     DIR *dir = opendir(pathname);
     if (dir) closedir(dir);
     else mkdir(pathname,S_IRWXU);
-    
-    /* default SRAM & Savestate files directories */ 
+
+    /* default SRAM & Savestate files directories */
     sprintf (pathname, "%s%s/saves", homedir, DEFAULT_PATH);
     dir = opendir(pathname);
     if (dir) closedir(dir);
@@ -44,7 +44,7 @@ void create_default_directories(void) {
     if (dir) closedir(dir);
     else mkdir(pathname,S_IRWXU);
 
-    /* default Snapshot files directories */ 
+    /* default Snapshot files directories */
     sprintf (pathname, "%s%s/snaps", homedir, DEFAULT_PATH);
     dir = opendir(pathname);
     if (dir) closedir(dir);
@@ -70,7 +70,7 @@ void create_default_directories(void) {
     if (dir) closedir(dir);
     else mkdir(pathname,S_IRWXU);
 
-    /* default Cheat files directories */ 
+    /* default Cheat files directories */
     sprintf (pathname, "%s%s/cheats", homedir, DEFAULT_PATH);
     dir = opendir(pathname);
     if (dir) closedir(dir);
@@ -96,13 +96,13 @@ void create_default_directories(void) {
     if (dir) closedir(dir);
     else mkdir(pathname,S_IRWXU);
 
-    /* default BIOS ROM files directories */ 
+    /* default BIOS ROM files directories */
     sprintf (pathname, "%s%s/bios", homedir, DEFAULT_PATH);
     dir = opendir(pathname);
     if (dir) closedir(dir);
     else mkdir(pathname,S_IRWXU);
 
-    /* default LOCK-ON ROM files directories */ 
+    /* default LOCK-ON ROM files directories */
     sprintf (pathname, "%s%s/lock-on", homedir, DEFAULT_PATH);
     dir = opendir(pathname);
     if (dir) closedir(dir);
@@ -116,9 +116,9 @@ char* get_save_directory(void) {
     if ((homedir = getenv("HOME")) == NULL) {
         homedir = getpwuid(getuid())->pw_dir;
     }
-   
+
     char pathname[MAXPATHLEN];
-    
+
 	if(system_hw <= SYSTEM_MARKIII){
 		system_dir = "/saves/sg";
 	} else if (system_hw > SYSTEM_MARKIII && system_hw <= SYSTEM_SMS2) {
@@ -132,11 +132,11 @@ char* get_save_directory(void) {
 	} else {
 		system_dir = "/saves/";
 	}
-	
+
     sprintf (pathname, "%s%s%s", homedir, DEFAULT_PATH, system_dir);
-    
+
     return pathname;
-	
+
 }
 
 char* gcw0_get_key_name(int keycode)
@@ -159,12 +159,11 @@ char* gcw0_get_key_name(int keycode)
 char *get_file_name(char *full_path) {
 	char file_name[256];
 	sprintf(file_name, "%s", basename(full_path));
-	
+
 	/* remove file extension */
 	int i = strlen(file_name) - 1;
 	while ((i > 0) && (file_name[i] != '.')) i--;
 	if (i > 0) file_name[i] = 0;
-	
+
 	return file_name;
 }
-

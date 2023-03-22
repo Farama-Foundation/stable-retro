@@ -124,7 +124,7 @@ void pcm_run(unsigned int length)
   if (pcm.enabled)
   {
     int i, j, l, r;
-  
+
     /* generate PCM samples */
     for (i=0; i<length; i++)
     {
@@ -397,10 +397,10 @@ void pcm_ram_dma_w(unsigned int words)
 
   /* CDC buffer source address */
   uint16 src_index = cdc.dac.w & 0x3ffe;
-  
+
   /* PCM-RAM destination address*/
   uint16 dst_index = (scd.regs[0x0a>>1].w << 2) & 0xffe;
-  
+
   /* update DMA destination address */
   scd.regs[0x0a>>1].w += (words >> 1);
 
@@ -423,4 +423,3 @@ void pcm_ram_dma_w(unsigned int words)
     dst_index = (dst_index + 2) & 0xffe;
   }
 }
-

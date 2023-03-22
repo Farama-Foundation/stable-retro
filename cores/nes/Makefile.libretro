@@ -399,7 +399,7 @@ ifneq (,$(findstring msvc,$(platform)))
 	LD = link.exe
 else
 	OBJOUT   = -o
-	LINKOUT  = -o 
+	LINKOUT  = -o
 	LD = $(CC)
 endif
 

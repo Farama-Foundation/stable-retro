@@ -61,21 +61,21 @@ void sms_ntsc_init( sms_ntsc_t* ntsc, sms_ntsc_setup_t const* setup )
   if ( !setup )
     setup = &sms_ntsc_composite;
   init( &impl, setup );
-  
+
   for ( entry = 0; entry < sms_ntsc_palette_size; entry++ )
   {
     float bb = impl.to_float [entry >> 8 & 0x0F];
     float gg = impl.to_float [entry >> 4 & 0x0F];
     float rr = impl.to_float [entry      & 0x0F];
-    
+
     float y, i, q = RGB_TO_YIQ( rr, gg, bb, y, i );
-    
+
     int r, g, b = YIQ_TO_RGB( y, i, q, impl.to_rgb, int, r, g );
     sms_ntsc_rgb_t rgb = PACK_RGB( r, g, b );
-    
+
     if ( setup->palette_out )
       RGB_PALETTE_OUT( rgb, &setup->palette_out [entry * 3] );
-    
+
     if ( ntsc )
     {
       gen_kernel( &impl, y, i, q, ntsc->table [entry] );
@@ -113,11 +113,11 @@ void sms_ntsc_blit( sms_ntsc_t const* ntsc, SMS_NTSC_IN_T const* table, unsigned
     SMS_NTSC_COLOR_IN( 0, ntsc, SMS_NTSC_ADJ_IN( table[*input++] ) );
     SMS_NTSC_RGB_OUT( 0, *line_out++ );
     SMS_NTSC_RGB_OUT( 1, *line_out++ );
-    
+
     SMS_NTSC_COLOR_IN( 1, ntsc, SMS_NTSC_ADJ_IN( table[*input++] ) );
     SMS_NTSC_RGB_OUT( 2, *line_out++ );
     SMS_NTSC_RGB_OUT( 3, *line_out++ );
-      
+
     SMS_NTSC_COLOR_IN( 2, ntsc, SMS_NTSC_ADJ_IN( table[*input++] ) );
     SMS_NTSC_RGB_OUT( 4, *line_out++ );
     SMS_NTSC_RGB_OUT( 5, *line_out++ );

@@ -1021,7 +1021,7 @@ static s8 WPAD_StickX(u8 chan, u8 right) {
 		mag = -1.0;
 	}
 	double val = mag * sinf(M_PI * ang / 180.0f);
- 
+
 	return (s8)(val * 128.0f);
 }
 
@@ -1052,13 +1052,13 @@ static s8 WPAD_StickY(u8 chan, u8 right) {
 	}
 
 	/* calculate X value (angle need to be converted into radian) */
-	if (mag > 1.0) { 
+	if (mag > 1.0) {
 		mag = 1.0;
 	} else if (mag < -1.0) {
 		mag = -1.0;
 	}
 	double val = mag * cosf(M_PI * ang / 180.0f);
- 
+
 	return (s8)(val * 128.0f);
 }
 

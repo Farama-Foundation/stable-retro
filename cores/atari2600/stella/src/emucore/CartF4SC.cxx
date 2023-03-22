@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -114,10 +114,10 @@ uInt8 CartridgeF4SC::peek(uInt16 address)
       triggerReadFromWritePort(peekAddress);
       return myRAM[address] = value;
     }
-  }  
+  }
 
-  // NOTE: This does not handle accessing RAM, however, this function 
-  // should never be called for RAM because of the way page accessing 
+  // NOTE: This does not handle accessing RAM, however, this function
+  // should never be called for RAM because of the way page accessing
   // has been setup
   return myImage[(myCurrentBank << 12) + address];
 }
@@ -131,15 +131,15 @@ bool CartridgeF4SC::poke(uInt16 address, uInt8)
   if((address >= 0x0FF4) && (address <= 0x0FFB))
     bank(address - 0x0FF4);
 
-  // NOTE: This does not handle accessing RAM, however, this function 
-  // should never be called for RAM because of the way page accessing 
+  // NOTE: This does not handle accessing RAM, however, this function
+  // should never be called for RAM because of the way page accessing
   // has been setup
   return false;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool CartridgeF4SC::bank(uInt16 bank)
-{ 
+{
   if(bankLocked()) return false;
 
   // Remember what bank we're in
@@ -196,7 +196,7 @@ bool CartridgeF4SC::patch(uInt16 address, uInt8 value)
     myImage[(myCurrentBank << 12) + address] = value;
 
   return myBankChanged = true;
-} 
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const uInt8* CartridgeF4SC::getImage(int& size) const

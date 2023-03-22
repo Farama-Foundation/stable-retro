@@ -99,4 +99,3 @@
 #define FKB_BREAK		0x63
 #define FKB_RESET		0x64
 #define FKB_GRETURN		0x65
-

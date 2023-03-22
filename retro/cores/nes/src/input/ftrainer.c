@@ -66,4 +66,3 @@ INPUTCFC *FCEU_InitFamilyTrainerB(void) {
 	FTVal = FTValR = 0;
 	return(&FamilyTrainer);
 }
-

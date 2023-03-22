@@ -1,5 +1,5 @@
 /* license:BSD-3-Clause
- * copyright-holders:Aaron Giles 
+ * copyright-holders:Aaron Giles
  */
 /***************************************************************************
 
@@ -122,4 +122,3 @@ uint32_t bitstream_flush(struct bitstream* bitstream)
 	bitstream->bits = bitstream->buffer = 0;
 	return bitstream->doffset;
 }
-

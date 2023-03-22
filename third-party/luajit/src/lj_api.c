@@ -1289,4 +1289,3 @@ LUA_API void lua_setallocf(lua_State *L, lua_Alloc f, void *ud)
   g->allocd = ud;
   g->allocf = f;
 }
-

@@ -54,7 +54,7 @@ void teamplayer_init(int port)
   /* this table determines which gamepad input should be returned during acquisition sequence
      index  = teamplayer read table index: 0=1st read, 1=2nd read, ...
      table  = high bits are pad index, low bits are pad input shift: 0=RLDU, 4=SABC, 8=MXYZ
-  */  
+  */
   for (i=0; i<4; i++)
   {
     padnum = (4 * port) + i;
@@ -139,7 +139,7 @@ INLINE void teamplayer_write(int port, unsigned char data, unsigned char mask)
   unsigned int state = (teamplayer[port].State & ~mask) | (data & mask);
 
   /* check if TH is HIGH */
-  if (state & 0x40) 
+  if (state & 0x40)
   {
     /* reset counter */
     teamplayer[port].Counter = 0;

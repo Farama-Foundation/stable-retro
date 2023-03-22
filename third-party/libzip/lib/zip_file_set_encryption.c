@@ -17,7 +17,7 @@
   3. The names of the authors may not be used to endorse or promote
      products derived from this software without specific prior
      written permission.
- 
+
   THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS
   OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -59,9 +59,9 @@ zip_file_set_encryption(zip_t *za, zip_uint64_t idx, zip_uint16_t method, const 
     }
 
     e = za->entry+idx;
-    
+
     old_method = (e->orig == NULL ? ZIP_EM_NONE : e->orig->encryption_method);
-    
+
     if (method == old_method && password == NULL) {
 	if (e->changes) {
 	    if (e->changes->changed & ZIP_DIRENT_PASSWORD) {
@@ -85,7 +85,7 @@ zip_file_set_encryption(zip_t *za, zip_uint64_t idx, zip_uint16_t method, const 
 		return -1;
 	    }
 	}
-	
+
         if (e->changes == NULL) {
             if ((e->changes=_zip_dirent_clone(e->orig)) == NULL) {
 		if (our_password) {
@@ -112,6 +112,6 @@ zip_file_set_encryption(zip_t *za, zip_uint64_t idx, zip_uint16_t method, const 
 	    }
 	}
     }
-    
+
     return 0;
 }

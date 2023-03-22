@@ -25,8 +25,8 @@ class OSystem;
 #include "bspf.hxx"
 
 /**
-  This is a quick-and-dirty random number generator.  It is based on 
-  information in Chapter 7 of "Numerical Recipes in C".  It's a simple 
+  This is a quick-and-dirty random number generator.  It is based on
+  information in Chapter 7 of "Numerical Recipes in C".  It's a simple
   linear congruential generator.
 
   @author  Bradford W. Mott
@@ -39,7 +39,7 @@ class Random
       Create a new random number generator
     */
     Random();
-    
+
   public:
     /**
       Re-initialize the random number generator with a new seed,

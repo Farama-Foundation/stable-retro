@@ -35,7 +35,7 @@ static const char * const g_Dlls =
 void LoadSecurityDlls()
 {
   #ifndef UNDER_CE
-  
+
   wchar_t buf[MAX_PATH + 100];
 
   {
@@ -63,7 +63,7 @@ void LoadSecurityDlls()
 
     if (buf[pos - 1] != '\\')
       buf[pos++] = '\\';
-    
+
     for (dll = g_Dlls; dll[0] != 0;)
     {
       unsigned k = 0;
@@ -80,7 +80,7 @@ void LoadSecurityDlls()
       LoadLibraryExW(buf, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
     }
   }
-  
+
   #endif
 }
 

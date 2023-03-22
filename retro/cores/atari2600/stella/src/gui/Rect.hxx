@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -87,7 +87,7 @@ struct Size
 /*
   This small class is an helper for rectangles.
   Note: This implementation is built around the assumption that (top,left) is
-  part of the rectangle, but (bottom,right) is not! This is reflected in 
+  part of the rectangle, but (bottom,right) is not! This is reflected in
   various methods, including contains(), intersects() and others.
 
   Another very wide spread approach to rectangle classes treats (bottom,right)
@@ -127,7 +127,7 @@ struct Rect
 
   /*
     @param x the horizontal position to check
-    @param y the vertical position to check	
+    @param y the vertical position to check
 
     @return true if the given position is inside this rectangle, false otherwise
   */

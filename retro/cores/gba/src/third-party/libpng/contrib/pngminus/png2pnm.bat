@@ -38,4 +38,3 @@ png2pnm.exe -raw ..\pngsuite\basn4a16.png rawn4a16.pgm
 REM -- color with alpha-channel
 png2pnm.exe -noraw -alpha rawn6a08.pgm ..\pngsuite\basn6a08.png rawn6a08.ppm
 png2pnm.exe -noraw -alpha rawn6a16.pgm ..\pngsuite\basn6a16.png rawn6a16.ppm
-

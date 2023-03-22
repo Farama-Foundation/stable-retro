@@ -60,7 +60,7 @@ static void ar_write_ram_8(uint32 address, uint32 data);
 void areplay_init(void)
 {
   int size;
-  
+
   memset(&action_replay,0,sizeof(action_replay));
 
   /* store Action replay ROM (max. 128k) & RAM (64k) above cartridge ROM + SRAM area */
@@ -74,13 +74,13 @@ void areplay_init(void)
   /* detect Action Replay board type */
   switch (size)
   {
-    case 0x8000:  
+    case 0x8000:
     {
       if (!memcmp(action_replay.rom + 0x120, "ACTION REPLAY   ", 16))
       {
         /* normal Action Replay (32K) */
         action_replay.enabled = TYPE_AR;
-    
+
         /* internal registers mapped at $010000-$01ffff */
         m68k.memory_map[0x01].write16 = ar_write_regs;
         break;
@@ -301,4 +301,3 @@ static void ar_write_ram_8(uint32 address, uint32 data)
   /* byte writes are handled as word writes, with LSB duplicated in MSB (/LWR is not used) */
   *(uint16 *)(action_replay.ram + (address & 0xfffe)) = (data | (data << 8));
 }
-

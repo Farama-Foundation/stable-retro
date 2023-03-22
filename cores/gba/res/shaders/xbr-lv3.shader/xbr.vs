@@ -1,6 +1,6 @@
 /*
    Hyllian's xBR-lv3 Shader
-   
+
    Copyright (C) 2011-2015 Hyllian - sergiogdb@gmail.com
 
    Permission is hereby granted, free of charge, to any person obtaining a copy

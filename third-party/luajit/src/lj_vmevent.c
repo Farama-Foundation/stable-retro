@@ -55,4 +55,3 @@ void lj_vmevent_call(lua_State *L, ptrdiff_t argbase)
   if (g->vmevmask != VMEVENT_NOCACHE)
     g->vmevmask = oldmask;  /* Restore event mask, but not if not modified. */
 }
-

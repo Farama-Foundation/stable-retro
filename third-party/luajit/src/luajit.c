@@ -582,4 +582,3 @@ int main(int argc, char **argv)
   lua_close(L);
   return (status || smain.status > 0) ? EXIT_FAILURE : EXIT_SUCCESS;
 }
-

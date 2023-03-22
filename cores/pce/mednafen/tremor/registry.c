@@ -45,6 +45,3 @@ vorbis_func_residue   *_residue_P[]={
 vorbis_func_mapping   *_mapping_P[]={
   &mapping0_exportbundle,
 };
-
-
-

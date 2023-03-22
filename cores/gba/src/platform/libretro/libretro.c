@@ -117,7 +117,7 @@ static void _reloadSettings(void) {
 			mCoreConfigSetDefaultIntValue(&core->config, "sgb.borders", false);
 		}
 	}
-	
+
 	var.key = "mgba_frameskip";
 	var.value = 0;
 	if (environCallback(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
@@ -298,23 +298,23 @@ int16_t cycleturbo(bool x/*turbo A*/, bool y/*turbo B*/, bool l2/*turbo L*/, boo
       turboclock = 0;
       indownstate = !indownstate;
    }
-   
+
    if (x) {
       buttons |= indownstate << 0;
    }
-   
+
    if (y) {
       buttons |= indownstate << 1;
    }
-   
+
    if (l2) {
       buttons |= indownstate << 9;
    }
-   
+
    if (r2) {
       buttons |= indownstate << 8;
    }
-   
+
    return buttons;
 }
 
@@ -339,7 +339,7 @@ void retro_run(void) {
 			mCoreConfigSetUIntValue(&core->config, "frameskip", strtol(var.value, NULL, 10));
 			mCoreLoadConfig(core);
 		}
-		
+
 		var.key = "mgba_frameskip";
 		var.value = 0;
 		if (environCallback(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
@@ -359,10 +359,10 @@ void retro_run(void) {
 	keys |= (!!inputCallback(0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_DOWN)) << 7;
 	keys |= (!!inputCallback(0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R)) << 8;
 	keys |= (!!inputCallback(0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L)) << 9;
-   
+
    //turbo keys
    keys |= cycleturbo(RDKEYP1(X),RDKEYP1(Y),RDKEYP1(L2),RDKEYP1(R2));
-   
+
 	core->setKeys(core, keys);
 
 	static bool wasAdjustingLux = false;

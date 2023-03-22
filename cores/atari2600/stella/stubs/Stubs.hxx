@@ -52,12 +52,12 @@ uInt64 OSystem::getTicks() const
 
 EventHandler::EventHandler(OSystem*)
 {
-    
+
 }
 
 EventHandler::~EventHandler()
 {
-    
+
 }
 
 FrameBuffer::FrameBuffer()

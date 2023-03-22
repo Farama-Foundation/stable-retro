@@ -15,7 +15,7 @@
 // this file, and for a DISCLAIMER OF ALL WARRANTIES.
 //============================================================================
 
-/** 
+/**
   Code and cases to emulate each of the 6502 instructions.
 
   Recompile with the following:
@@ -431,8 +431,8 @@ define(M6502_ARR, `{
     {
       A = (A & 0xf0) | ((A + 0x06) & 0x0f);
     }
-    
-    if(((value & 0xf0) + (value & 0x10)) > 0x50) 
+
+    if(((value & 0xf0) + (value & 0x10)) > 0x50)
     {
       A = (A + 0x60) & 0xff;
       C = 1;
@@ -904,26 +904,26 @@ define(M6502_SEI, `{
 define(M6502_SHA, `{
   // NOTE: There are mixed reports on the actual operation
   // of this instruction!
-  poke(operandAddress, A & X & (((operandAddress >> 8) & 0xff) + 1)); 
+  poke(operandAddress, A & X & (((operandAddress >> 8) & 0xff) + 1));
 }')
 
 define(M6502_SHS, `{
   // NOTE: There are mixed reports on the actual operation
   // of this instruction!
   SP = A & X;
-  poke(operandAddress, A & X & (((operandAddress >> 8) & 0xff) + 1)); 
+  poke(operandAddress, A & X & (((operandAddress >> 8) & 0xff) + 1));
 }')
 
 define(M6502_SHX, `{
   // NOTE: There are mixed reports on the actual operation
   // of this instruction!
-  poke(operandAddress, X & (((operandAddress >> 8) & 0xff) + 1)); 
+  poke(operandAddress, X & (((operandAddress >> 8) & 0xff) + 1));
 }')
 
 define(M6502_SHY, `{
   // NOTE: There are mixed reports on the actual operation
   // of this instruction!
-  poke(operandAddress, Y & (((operandAddress >> 8) & 0xff) + 1)); 
+  poke(operandAddress, Y & (((operandAddress >> 8) & 0xff) + 1));
 }')
 
 define(M6502_SLO, `{

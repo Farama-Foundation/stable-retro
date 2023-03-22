@@ -7,4 +7,3 @@ void error_shutdown(void);
 void error(char *format, ...);
 
 #endif /* _ERROR_H_ */
-

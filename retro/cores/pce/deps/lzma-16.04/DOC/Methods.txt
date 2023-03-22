@@ -13,11 +13,11 @@ If you want to add some new ID, you have two ways:
   1) Write request for allocating IDs to 7-Zip developers.
   2) Generate 8-bytes ID:
 
-    3F ZZ ZZ ZZ ZZ ZZ MM MM 
+    3F ZZ ZZ ZZ ZZ ZZ MM MM
 
     3F              - Prefix for random IDs (1 byte)
-    ZZ ZZ ZZ ZZ ZZ  - Developer ID (5 bytes). Use real random bytes. 
-                      
+    ZZ ZZ ZZ ZZ ZZ  - Developer ID (5 bytes). Use real random bytes.
+
     MM MM           - Method ID (2 bytes)
 
     You can notify 7-Zip developers about your Developer ID / Method ID.
@@ -27,7 +27,7 @@ If you want to add some new ID, you have two ways:
 
 List of defined IDs
 -------------------
-      
+
 00 - Copy
 
 03 - Delta
@@ -39,36 +39,36 @@ List of defined IDs
 09 - SPARC
 
 21 - LZMA2
-          
+
 02.. - Common
    03 [Swap]
       - 2 Swap2
       - 4 Swap4
 
 03.. - 7z
-   01 - 
+   01 -
       01 - LZMA
-  
+
    03 - [Branch Codecs]
       01 - [x86 Codecs]
          03  - BCJ
          1B  - BCJ2 (4 packed streams)
-      02 - 
+      02 -
          05 - PPC (big-endian)
-      03 - 
+      03 -
          01 - Alpha
-      04 - 
+      04 -
          01 - IA64
-      05 - 
+      05 -
          01 - ARM (little-endian)
-      06 - 
+      06 -
          05 - M68 (big-endian)
-      07 - 
+      07 -
          01 - ARMT (little-endian)
-      08 - 
+      08 -
          05 - SPARC
 
-   04 - 
+   04 -
       01 - PPMD
 
    7F -
@@ -94,7 +94,7 @@ List of defined IDs
       62 - PPMd (PPMd-zip)
       63 - wzAES
 
-   02 - 
+   02 -
       02 - BZip2
 
    03 - [Rar]
@@ -126,7 +126,7 @@ List of defined IDs
       11 xx - reserved (Zstd)
 
 
-06.. - Crypto 
+06.. - Crypto
 
    F0 - Ciphers without hashing algo
 
@@ -148,7 +148,7 @@ List of defined IDs
          01 - ZipCrypto (Main Zip crypto algo)
 
       03 - [RAR]
-         02 - 
+         02 -
          03 - Rar29AES (AES-128 + modified SHA-1)
 
       07 - [7z]

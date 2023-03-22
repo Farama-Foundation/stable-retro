@@ -74,14 +74,14 @@ typedef unsigned char bool;
 
 #define CHEATS_UPDATE() ROMCheatUpdate()
 
-typedef struct 
+typedef struct
 {
   int8 device;
   uint8 port;
   uint8 padtype;
 } t_input_config;
 
-struct 
+struct
 {
   char version[16];
   uint8 hq_fm;

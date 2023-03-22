@@ -696,4 +696,3 @@ LUALIB_API void luaL_traceback (lua_State *L, lua_State *L1, const char *msg,
   }
   lua_concat(L, (int)(L->top - L->base) - top);
 }
-

@@ -235,4 +235,3 @@ static void emit_spsub(ASMState *as, int32_t ofs)
 	     CFRAME_SIZE + (as->parent ? as->parent->spadjust : 0));
   }
 }
-

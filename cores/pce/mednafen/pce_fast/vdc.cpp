@@ -18,8 +18,8 @@
 /* VDC and VCE emulation */
 
 /*
-"Tonight I hooked up my Turbo Duo(with no games or CDs in it)'s video output to my PC sound card, recorded it, 
-and did a FFT and looked at the spectrum(around the line rate, 15-16KHz), and I also counted the number 
+"Tonight I hooked up my Turbo Duo(with no games or CDs in it)'s video output to my PC sound card, recorded it,
+and did a FFT and looked at the spectrum(around the line rate, 15-16KHz), and I also counted the number
 of samples between the ~60Hz peaks(just to verify that the math shown below is remotely accurate).
 
 The spectrum peaked at 15734 Hz.  21477272.727272... / 3 / 15734 = 455.00(CPU cycles per scanline)"
@@ -296,7 +296,7 @@ static void DoDMA(vdc_t *vdc)
             vdc->spr_tile_clean[vdc->DESR >> 6] = 0;
          }
 
-         //if(vdc->DCR & 0xC) 
+         //if(vdc->DCR & 0xC)
          //printf("Pllal: %02x\n", vdc->DCR);
 
          vdc->SOUR += (((vdc->DCR & 0x4) >> 1) ^ 2) - 1;
@@ -357,7 +357,7 @@ DECLFW(VDC_Write)
                                     vdc->VRAM[vdc->MAWR] = (V << 8) | vdc->write_latch;
                                     FixTileCache(vdc, vdc->MAWR);
                                     vdc->spr_tile_clean[vdc->MAWR >> 6] = 0;
-                                 } 
+                                 }
                                  else
                                  {
                                     //VDC_UNDEFINED("Unmapped VRAM write");
@@ -639,7 +639,7 @@ static void DrawSprites(vdc_t *vdc, const int32 end, uint16 *spr_linebuf)
             const uint32 raw_pixel = pix_source[x_second];
             if(raw_pixel)
             {
-               if(((uint32)pos + x) >= (uint32)end) // Covers negative and overflowing the right side(to prevent spurious sprite hits)   
+               if(((uint32)pos + x) >= (uint32)end) // Covers negative and overflowing the right side(to prevent spurious sprite hits)
                   continue;
 
                if(dest_pix[x] & 0x100)
@@ -669,7 +669,7 @@ static void DrawSprites(vdc_t *vdc, const int32 end, uint16 *spr_linebuf)
 }
 
 static INLINE void MixBGSPR(const uint32 count_in, const uint8 *bg_linebuf_in, const uint16 *spr_linebuf_in, uint16_t *target_in)
-{   
+{
    for(unsigned int x = 0; x < count_in; x++)
    {
       const uint32 bg_pixel = bg_linebuf_in[x];
@@ -739,11 +739,11 @@ void VDC_RunFrame(EmulateSpecStruct *espec, bool IsHES)
       DisplayRect->y = MDFN_GetSettingUI("pce_fast.slstart");
       DisplayRect->h = MDFN_GetSettingUI("pce_fast.slend") - DisplayRect->y + 1;
    }
-	
+
 	//Change 352 mode width without restart
    if (defined_width[1] != MDFN_GetSettingUI("pce_fast.hoverscan"))
       defined_width[1] = MDFN_GetSettingUI("pce_fast.hoverscan");
-	
+
    do
    {
       const bool SHOULD_DRAW = (!skip && (int)frame_counter >= (DisplayRect->y + 14) && (int)frame_counter < (DisplayRect->y + DisplayRect->h + 14));
@@ -854,7 +854,7 @@ void VDC_RunFrame(EmulateSpecStruct *espec, bool IsHES)
          {
             VDC_DEBUG("RCR IRQ");
             vdc->status |= VDCS_RR;
-            HuC6280_IRQBegin(MDFN_IQIRQ1); 
+            HuC6280_IRQBegin(MDFN_IQIRQ1);
          }
       }
 
@@ -913,22 +913,22 @@ void VDC_RunFrame(EmulateSpecStruct *espec, bool IsHES)
                   int32 width = end - start;
                   int32 source_offset = 0;
                   int32 target_offset = 0;
-                  
+
                   //Centre any picture thinner than its display mode width
                   if(width > 0 && width < defined_width[vce.dot_clock]){
                      target_offset = (defined_width[vce.dot_clock] - width)/2;
                   }
-				  
+
                   //Centre overscan cropping
                   if(vce.dot_clock == 1 && defined_width[1] < width){
                      target_offset += (defined_width[1] - width) / 2;
                   }
-				  
+
                   // Align TV Sport Basketball
                   if(vce.dot_clock ==2 && width > 512){
                      target_offset = - 16;
                   }
-		       
+
                   // Semi-hack for Asuka 120%
                   if(vce.dot_clock == 1 && M_vdc_HDS == 5 && M_vdc_HDE == 6 && M_vdc_HDW == 43 && M_vdc_HSW == 2)
                      target_offset += 8;
@@ -937,7 +937,7 @@ void VDC_RunFrame(EmulateSpecStruct *espec, bool IsHES)
                   // and for Addams Family
                   else if(vce.dot_clock == 1 && M_vdc_HDS == 4 && M_vdc_HDE == 4 && M_vdc_HDW == 43 && M_vdc_HSW == 9)
                      target_offset += 4;
-		       
+
                   if(target_offset < 0)
                   {
                      width += target_offset;
@@ -990,7 +990,7 @@ void VDC_RunFrame(EmulateSpecStruct *espec, bool IsHES)
       if(vdc->status & VDCS_VD)
       {
          VDC_DEBUG("VBlank IRQ");
-         HuC6280_IRQBegin(MDFN_IQIRQ1);   
+         HuC6280_IRQBegin(MDFN_IQIRQ1);
       }
 
       HuC6280_Run(455 - line_leadin1 - 2);
@@ -1084,7 +1084,7 @@ int VDC_StateAction(StateMem *sm, int load, int data_only)
 
    int chip = 0;
    {
-      SFORMAT VDC_StateRegs[] = 
+      SFORMAT VDC_StateRegs[] =
       {
          SFVARN(vdc->display_counter, "display_counter"),
          SFVARN(vdc->sat_dma_slcounter, "sat_dma_slcounter"),

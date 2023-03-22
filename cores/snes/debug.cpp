@@ -2417,7 +2417,7 @@ static void debug_whats_missing (void)
 	debug_print_window(missing.window1);
 
 	printf("\n");
-	
+
 	printf("Window 2 enabled on: ");
 	debug_print_window(missing.window2);
 

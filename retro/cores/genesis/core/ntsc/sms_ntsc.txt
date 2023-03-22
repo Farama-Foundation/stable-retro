@@ -115,5 +115,5 @@ author) for significant ongoing testing and feedback as the library has
 improved. Thanks to byuu (bsnes author) and pagefault (ZSNES team) for
 feedback about the SNES version.
 
--- 
+--
 Shay Green <gblargg@gmail.com>

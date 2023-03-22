@@ -167,7 +167,7 @@ ZIP_EXTERN void
 zip_register_progress_callback(zip_t *za, zip_progress_callback_t progress_callback)
 {
     struct legacy_ud *ud;
-    
+
     if (progress_callback == NULL) {
         zip_register_progress_callback_with_state(za, 0, NULL, NULL, NULL);
     }

@@ -449,7 +449,7 @@ else
 endif
 
 OBJOUT   = -o
-LINKOUT  = -o 
+LINKOUT  = -o
 
 ifneq (,$(findstring msvc,$(platform)))
 	OBJOUT = -Fo

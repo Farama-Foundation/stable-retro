@@ -22,7 +22,7 @@ else ifneq (,$(findstring rpi,$(platform)))
    override platform += unix
 endif
 
-# If you have a system with 1GB RAM or more - cache the whole 
+# If you have a system with 1GB RAM or more - cache the whole
 # CD for CD-based systems in order to prevent file access delays/hiccups
 CACHE_CD = 0
 
@@ -60,7 +60,7 @@ ifneq (,$(findstring unix,$(platform)))
    SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
    LDFLAGS += -lrt
    FLAGS += -DHAVE_MKDIR
-   
+
    # Raspberry Pi
    ifneq (,$(findstring rpi,$(platform)))
       FLAGS += -fomit-frame-pointer -ffast-math
@@ -372,7 +372,7 @@ CXXFLAGS += $(FLAGS)
 CFLAGS += $(FLAGS)
 
 OBJOUT   = -o
-LINKOUT  = -o 
+LINKOUT  = -o
 
 ifneq (,$(findstring msvc,$(platform)))
 	OBJOUT = -Fo

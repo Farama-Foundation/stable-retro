@@ -14,4 +14,3 @@ return {
   disass = dis_mips.disass,
   regname = dis_mips.regname
 }
-

@@ -230,7 +230,7 @@ typedef struct
 
 	// Pointer to sound buffer, set by the driver code, that the emulation code should render sound to.
 	// Guaranteed to be at least 500ms in length, but emulation code really shouldn't exceed 40ms or so.  Additionally, if emulation code
-	// generates >= 100ms, 
+	// generates >= 100ms,
 	// DEPRECATED: Emulation code may set this pointer to a sound buffer internal to the emulation module.
 	int16 *SoundBuf;
 

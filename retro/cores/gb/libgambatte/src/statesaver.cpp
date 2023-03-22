@@ -144,14 +144,14 @@ static void put32(omemstream &file, const unsigned long data) {
 
 static void write(omemstream &file, const unsigned char data) {
 	static const char inf[] = { 0x00, 0x00, 0x01 };
-	
+
 	file.write(inf, sizeof(inf));
 	file.put(data & 0xFF);
 }
 
 static void write(omemstream &file, const unsigned short data) {
 	static const char inf[] = { 0x00, 0x00, 0x02 };
-	
+
 	file.write(inf, sizeof(inf));
 	file.put(data >> 8 & 0xFF);
 	file.put(data & 0xFF);
@@ -159,7 +159,7 @@ static void write(omemstream &file, const unsigned short data) {
 
 static void write(omemstream &file, const unsigned long data) {
 	static const char inf[] = { 0x00, 0x00, 0x04 };
-	
+
 	file.write(inf, sizeof(inf));
 	put32(file, data);
 }
@@ -175,36 +175,36 @@ static void write(omemstream &file, const unsigned char *data, const unsigned lo
 
 static void write(omemstream &file, const bool *data, const unsigned long sz) {
 	put24(file, sz);
-	
+
 	for (unsigned long i = 0; i < sz; ++i)
 		file.put(data[i]);
 }
 
 static unsigned long get24(imemstream &file) {
 	unsigned long tmp = file.get() & 0xFF;
-	
+
 	tmp = tmp << 8 | (file.get() & 0xFF);
-	
+
 	return tmp << 8 | (file.get() & 0xFF);
 }
 
 static unsigned long read(imemstream &file) {
 	unsigned long size = get24(file);
-	
+
 	if (size > 4) {
 		file.ignore(size - 4);
 		size = 4;
 	}
-	
+
 	unsigned long out = 0;
-	
+
 	switch (size) {
 	case 4: out = (out | (file.get() & 0xFF)) << 8;
 	case 3: out = (out | (file.get() & 0xFF)) << 8;
 	case 2: out = (out | (file.get() & 0xFF)) << 8;
 	case 1: out = out | (file.get() & 0xFF);
 	}
-	
+
 	return out;
 }
 
@@ -226,13 +226,13 @@ static inline void read(imemstream &file, bool &data) {
 
 static void read(imemstream &file, unsigned char *data, unsigned long sz) {
 	const unsigned long size = get24(file);
-	
+
 	if (size < sz)
 		sz = size;
-	
+
 	file.read(reinterpret_cast<char*>(data), sz);
 	file.ignore(size - sz);
-	
+
 	if (static_cast<unsigned char>(0x100)) {
 		for (unsigned long i = 0; i < sz; ++i)
 			data[i] &= 0xFF;
@@ -241,13 +241,13 @@ static void read(imemstream &file, unsigned char *data, unsigned long sz) {
 
 static void read(imemstream &file, bool *data, unsigned long sz) {
 	const unsigned long size = get24(file);
-	
+
 	if (size < sz)
 		sz = size;
-	
+
 	for (unsigned long i = 0; i < sz; ++i)
 		data[i] = file.get();
-	
+
 	file.ignore(size - sz);
 }
 
@@ -259,11 +259,11 @@ class SaverList {
 public:
 	typedef std::vector<Saver> list_t;
 	typedef list_t::const_iterator const_iterator;
-	
+
 private:
 	list_t list;
 	unsigned char maxLabelsize_;
-	
+
 public:
 	SaverList();
 	const_iterator begin() const { return list.begin(); }
@@ -305,7 +305,7 @@ SaverList::SaverList() {
 	\
 	pushSaver(list, label, Func::save, Func::load, sizeof label); \
 } while (0)
-	
+
 	{ static const char label[] = { c,c,           NUL }; ADD(cpu.cycleCounter); }
 	{ static const char label[] = { p,c,           NUL }; ADD(cpu.pc); }
 	{ static const char label[] = { s,p,           NUL }; ADD(cpu.sp); }
@@ -419,16 +419,16 @@ SaverList::SaverList() {
 	{ static const char label[] = { r,t,c,m,       NUL }; ADD(rtc.dataM); }
 	{ static const char label[] = { r,t,c,s,       NUL }; ADD(rtc.dataS); }
 	{ static const char label[] = { r,t,c,l,l,d,   NUL }; ADD(rtc.lastLatchData); }
-	
+
 #undef ADD
 #undef ADDPTR
 #undef ADDARRAY
 
 	list.resize(list.size());
 	std::sort(list.begin(), list.end());
-	
+
 	maxLabelsize_ = 0;
-	
+
 	for (std::size_t i = 0; i < list.size(); ++i) {
 		if (list[i].labelsize > maxLabelsize_)
 			maxLabelsize_ = list[i].labelsize;
@@ -451,14 +451,14 @@ namespace gambatte {
 
 void StateSaver::saveState(const SaveState &state, void *data) {
    omemstream file(data);
-	
+
 	if (file.fail())
 		return;
-	
+
 	{ static const char ver[] = { 0, 1 }; file.write(ver, sizeof(ver)); }
-	
+
 	writeSnapShot(file);
-	
+
 	for (SaverList::const_iterator it = list.begin(); it != list.end(); ++it) {
 		file.write(it->label, it->labelsize);
 		(*it->save)(file, state);
@@ -522,4 +522,3 @@ size_t StateSaver::stateSize(const SaveState &state) {
 }
 
 }
-

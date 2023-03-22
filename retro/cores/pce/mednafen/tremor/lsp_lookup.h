@@ -129,8 +129,3 @@ static const ogg_int32_t COS_LOOKUP_I[COS_LOOKUP_I_SZ+1]={
 };
 
 #endif
-
-
-
-
-

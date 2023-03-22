@@ -589,4 +589,3 @@ GCstr * LJ_FASTCALL lj_strfmt_num(lua_State *L, cTValue *o)
   MSize len = (MSize)(lj_strfmt_wfnum(NULL, STRFMT_G14, o->n, buf) - buf);
   return lj_str_new(L, buf, len);
 }
-

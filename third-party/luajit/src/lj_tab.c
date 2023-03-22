@@ -662,4 +662,3 @@ MSize LJ_FASTCALL lj_tab_len(GCtab *t)
     return j;
   return unbound_search(t, j);
 }
-

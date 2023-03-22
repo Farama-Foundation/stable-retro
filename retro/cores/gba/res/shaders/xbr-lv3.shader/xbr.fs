@@ -1,6 +1,6 @@
 /*
    Hyllian's xBR-lv3 Shader
-   
+
    Copyright (C) 2011-2015 Hyllian - sergiogdb@gmail.com
 
    Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -176,7 +176,7 @@ void main()
 	vec4 Bw = vec4( 6.0, 2.0, -6.0,-2.0 );
 	vec4 Cw = vec4( 5.0, -1.0, -3.0, 3.0 );
 
-	fx      = (Ao*fp.y+Bo*fp.x); 
+	fx      = (Ao*fp.y+Bo*fp.x);
 	fx_left = (Ax*fp.y+Bx*fp.x);
 	fx_up   = (Ay*fp.y+By*fp.x);
 	fx3_left= (Az*fp.y+Bz*fp.x);
@@ -248,4 +248,4 @@ void main()
     vec3 res = mix(res1, res2, step(c_df(E, res1), c_df(E, res2)));
 
     FragColor = vec4(res, 1.0);
-} 
+}

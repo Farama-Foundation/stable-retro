@@ -11,9 +11,9 @@ Thanks.
 Use monospace font and disable word wrap when reading this document.
 
 -------------------------------------------------------------------------------
- Table of Contents 
+ Table of Contents
 -------------------------------------------------------------------------------
- 
+
   0. Introduction
   1. Overview
   2. The SSP160x DSP
@@ -521,4 +521,3 @@ The SVP code doesn't seem to be timing sensitive, so it can be emulated without
 knowing timing of the instructions or even how fast the chip is clocked.
 Overclocking doesn't have any effect, underclocking causes slowdowns. Running
 10-12M instructions/sec (or possibly less) is sufficient.
-

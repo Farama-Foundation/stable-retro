@@ -134,7 +134,7 @@ getopt_libgetopt_la_OBJECTS = $(am_getopt_libgetopt_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
-am__v_lt_1 = 
+am__v_lt_1 =
 grabbag_libgrabbag_la_LIBADD =
 am_grabbag_libgrabbag_la_OBJECTS = grabbag/alloc.lo \
 	grabbag/cuesheet.lo grabbag/file.lo grabbag/picture.lo \
@@ -174,11 +174,11 @@ am__v_P_1 = :
 AM_V_GEN = $(am__v_GEN_@AM_V@)
 am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
 am__v_GEN_0 = @echo "  GEN     " $@;
-am__v_GEN_1 = 
+am__v_GEN_1 =
 AM_V_at = $(am__v_at_@AM_V@)
 am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
 am__v_at_0 = @
-am__v_at_1 = 
+am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -192,7 +192,7 @@ LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CC = $(am__v_CC_@AM_V@)
 am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
 am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
+am__v_CC_1 =
 CCLD = $(CC)
 LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
@@ -200,7 +200,7 @@ LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
+am__v_CCLD_1 =
 SOURCES = $(getopt_libgetopt_la_SOURCES) \
 	$(grabbag_libgrabbag_la_SOURCES) \
 	$(replaygain_analysis_libreplaygain_analysis_la_SOURCES) \
@@ -433,9 +433,9 @@ noinst_LTLIBRARIES = \
 	replaygain_analysis/libreplaygain_analysis.la \
 	replaygain_synthesis/libreplaygain_synthesis.la
 
-@OS_IS_WINDOWS_FALSE@win_utf8_io_libwin_utf8_io_la_SOURCES = 
+@OS_IS_WINDOWS_FALSE@win_utf8_io_libwin_utf8_io_la_SOURCES =
 @OS_IS_WINDOWS_TRUE@win_utf8_io_libwin_utf8_io_la_SOURCES = win_utf8_io/win_utf8_io.c
-@OS_IS_WINDOWS_FALSE@libwin_utf8_io = 
+@OS_IS_WINDOWS_FALSE@libwin_utf8_io =
 @OS_IS_WINDOWS_TRUE@libwin_utf8_io = win_utf8_io/libwin_utf8_io.la
 @OS_IS_WINDOWS_TRUE@win_utf8_io_libwin_utf8_io_la_LIBADD = $(top_builddir)/src/libFLAC/libFLAC.la -lm
 getopt_libgetopt_la_SOURCES = getopt/getopt.c getopt/getopt1.c

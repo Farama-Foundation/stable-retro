@@ -22,35 +22,35 @@ void Bootloader::load(bool isgbc, bool isgba) {
       using_bootloader = false;
       return;
    }
-   
+
    //the gba only uses the gbc bios
    if (isgba)
       isgbc = true;
-   
+
    bool bootloaderavail = get_raw_bootloader_data((void*)this, isgbc, bootromswapspace, 0x900/*buf_size*/);
    if (!bootloaderavail) {
       using_bootloader = false;
       return;
    }
-   
+
    if (isgbc)
       bootloadersize = 0x900;
    else
       bootloadersize = 0x100;
-   
+
    if (isgba)//patch bootloader to fake gba mode
       patch_gbc_to_gba_mode();
-   
+
    //backup rom segment that is shared with bootloader
    std::memcpy(rombackup, (uint8_t*)addrspace_start, bootloadersize);
-   
+
    //put back cartridge data in a 256 byte window of the bios that is not mapped(GBC only)
    if (isgbc)
       std::memcpy(bootromswapspace + 0x100, rombackup + 0x100, 0x100);
-   
+
    //put bootloader in main memory
    std::memcpy((uint8_t*)addrspace_start, bootromswapspace, bootloadersize);
-   
+
    using_bootloader = true;
 }
 
@@ -72,17 +72,17 @@ void Bootloader::set_address_space_start(void* start) {
 void Bootloader::choosebank(bool inbootloader) {
    //inbootloader = (state.mem.ioamhram.get()[0x150] != 0xFF);//do not uncomment this is just for reference
    if (using_bootloader) {
-      
+
       //switching from game to bootloader with savestate
       if (inbootloader && has_called_FF50)
          uncall_FF50();
-      
+
       //switching from bootloader to game with savestate
       else if (!inbootloader && !has_called_FF50)
          call_FF50();
-      
+
       //switching from game to game or bootloader to bootloader needs no changes
-      
+
    }
 }
 
@@ -99,5 +99,5 @@ void Bootloader::uncall_FF50() {
    std::memcpy((uint8_t*)addrspace_start, bootromswapspace, bootloadersize);
    has_called_FF50 = false;
 }
-   
+
 }

@@ -774,4 +774,3 @@ LUALIB_API int luaopen_jit(lua_State *L)
   L->top -= 2;
   return 1;
 }
-

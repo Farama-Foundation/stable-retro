@@ -6,4 +6,3 @@ extern "C" {
 #include "lualib.h"
 #include "luajit.h"
 }
-

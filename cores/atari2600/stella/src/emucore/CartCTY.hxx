@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -88,7 +88,7 @@ class System;
 
   DPC+:
     The music functionality is quite similar to the DPC+ scheme.
-    
+
     Fast Fetcher
       The music frequency value is fetched using a fast fetcher operation.
       This operation is aliased to the instruction "LDA #$F2". Whenever this
@@ -123,7 +123,7 @@ class CartridgeCTY : public Cartridge
       @param osystem   A reference to the OSystem currently in use
     */
     CartridgeCTY(const uInt8* image, uInt32 size, const OSystem& osystem);
- 
+
     /**
       Destructor
     */
@@ -262,7 +262,7 @@ class CartridgeCTY : public Cartridge
     void saveScore(uInt8 index);
     void wipeAllScores();
 
-    /** 
+    /**
       Updates any data fetchers in music mode based on the number of
       CPU cycles which have passed since the last update.
     */

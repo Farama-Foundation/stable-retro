@@ -47,4 +47,3 @@ const void * LJ_FASTCALL lj_obj_ptr(cTValue *o)
   else
     return NULL;
 }
-

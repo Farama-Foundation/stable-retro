@@ -92,7 +92,7 @@ all: $(BUILD)
 
 lib:
 	@[ -d $@ ] || mkdir -p $@
-	
+
 $(BUILD): lib
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile

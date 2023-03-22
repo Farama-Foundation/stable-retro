@@ -474,7 +474,7 @@ void MMC5Synco(void) {
 
 void MMC5_hb(int scanline) {
 	//zero 24-jul-2014 - revised for newer understanding, to fix metal slader glory credits. see r7371 in bizhawk
-	
+
 	int sl = scanline + 1;
 	int ppuon = (PPU[1] & 0x18);
 

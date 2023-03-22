@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -35,7 +35,7 @@ class FixedStack
 {
   public:
     FixedStack<T, MAX_SIZE>() : _size(0) {}
-	
+
     bool empty() const { return _size <= 0; }
     bool full() const {return _size >= MAX_SIZE; }
     void clear() { _size = 0; }

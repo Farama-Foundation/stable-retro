@@ -61,14 +61,14 @@ int utf8_encode(const char *from, char **to)
 
 		utf8 = (char*) safe_malloc_mul_2op_((size_t)len, sizeof(char));
 		if(utf8 == NULL) break;
-		
+
 		len = WideCharToMultiByte(CP_UTF8, 0, unicode, -1, utf8, len, NULL, NULL);
 		if(len == 0) break;
 
 		ret = 0;
 
 	} while(0);
-		
+
 	free(unicode);
 
 	if(ret == 0) {

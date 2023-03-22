@@ -25,4 +25,3 @@
 CDAFReader* CDAFR_Vorbis_Open(Stream* fp);
 
 #endif
-

@@ -39,16 +39,16 @@ class GB {
 public:
 	GB();
 	~GB();
-	
+
 	enum LoadFlag {
       FORCE_DMG        = 1, /**< Treat the ROM as not having CGB support regardless of what its header advertises. */
       GBA_CGB          = 2, /**< Use GBA intial CPU register values when in CGB mode. */
       MULTICART_COMPAT = 4,  /**< Use heuristics to detect and support some multicart MBCs disguised as MBC1. */
       FORCE_CGB        = 8
 	};
-	
+
    int load(const void *romdata, unsigned size, unsigned flags = 0);
-	
+
 	/** Emulates until at least 'samples' stereo sound samples are produced in the supplied buffer,
 	  * or until a video frame has been drawn.
 	  *
@@ -72,12 +72,12 @@ public:
 	  */
 	long runFor(gambatte::video_pixel_t *videoBuf, int pitch,
 			gambatte::uint_least32_t *soundBuf, unsigned &samples);
-	
+
 	/** Reset to initial state.
 	  * Equivalent to reloading a ROM image, or turning a Game Boy Color off and on again.
 	  */
 	void reset();
-	
+
 	/** @param palNum 0 <= palNum < 3. One of BG_PALETTE, SP1_PALETTE and SP2_PALETTE.
 	  * @param colorNum 0 <= colorNum < 4
 	  */
@@ -85,7 +85,7 @@ public:
 
 	/** Sets the callback used for getting input state. */
 	void setInputGetter(InputGetter *getInput);
-   
+
    /** Sets the callback used for getting the bootloader data. */
    void setBootloaderGetter(bool (*getter)(void *userdata, bool isgbc, uint8_t *data, uint32_t buf_size));
 
@@ -93,7 +93,7 @@ public:
 	/** Sets the callback used for transferring serial data. */
 	void setSerialIO(SerialIO *serial_io);
 #endif
-	
+
 	/** Sets the directory used for storing save data. The default is the same directory as the ROM Image file. */
 	void setSaveDir(const std::string &sdir);
 
@@ -101,13 +101,13 @@ public:
    unsigned savedata_size();
    void *rtcdata_ptr();
    unsigned rtcdata_size();
-	
+
 	/** Returns true if the currently loaded ROM image is treated as having CGB support. */
 	bool isCgb() const;
-	
+
 	/** Returns true if a ROM image is loaded. */
 	bool isLoaded() const;
-	
+
    void saveState(void *data);
    void loadState(const void *data);
    size_t stateSize() const;
@@ -126,7 +126,7 @@ public:
    void setGameShark(const std::string &codes);
 
    void clearCheats();
-   
+
 #ifdef __LIBRETRO__
    void *vram_ptr() const;
    void *rambank0_ptr() const;

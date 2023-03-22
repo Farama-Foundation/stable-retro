@@ -355,4 +355,3 @@ unsigned int eeprom_spi_read(unsigned int address)
 {
   return (spi_eeprom.out << BIT_DATA);
 }
-

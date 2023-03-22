@@ -54,5 +54,5 @@ sms_ntsc.h          Library header and source
 sms_ntsc.c
 sms_ntsc_impl.h
 
--- 
+--
 Shay Green <gblargg@gmail.com>

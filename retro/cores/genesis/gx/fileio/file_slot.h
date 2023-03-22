@@ -40,7 +40,7 @@
 #ifndef _FILE_SLOT_H
 #define _FILE_SLOT_H
 
-typedef struct 
+typedef struct
 {
   int valid;
   u16 year;

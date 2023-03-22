@@ -165,7 +165,7 @@ static void sdl_video_update()
   {
     system_frame_gen(0);
   }
-  else	
+  else
   {
     system_frame_sms(0);
   }

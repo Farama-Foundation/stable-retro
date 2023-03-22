@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -30,12 +30,12 @@ class Sound;
 #include "TIATables.hxx"
 
 /**
-  This class is a device that emulates the Television Interface Adaptor 
-  found in the Atari 2600 and 7800 consoles.  The Television Interface 
-  Adaptor is an integrated circuit designed to interface between an 
-  eight bit microprocessor and a television video modulator. It converts 
-  eight bit parallel data into serial outputs for the color, luminosity, 
-  and composite sync required by a video modulator.  
+  This class is a device that emulates the Television Interface Adaptor
+  found in the Atari 2600 and 7800 consoles.  The Television Interface
+  Adaptor is an integrated circuit designed to interface between an
+  eight bit microprocessor and a television video modulator. It converts
+  eight bit parallel data into serial outputs for the color, luminosity,
+  and composite sync required by a video modulator.
 
   This class outputs the serial data into a frame buffer which can then
   be displayed on screen.
@@ -57,7 +57,7 @@ class TIA : public Device
       @param settings The settings object for this TIA device
     */
     TIA(Console& console, Sound& sound, Settings& settings);
- 
+
     /**
       Destructor
     */
@@ -163,7 +163,7 @@ class TIA : public Device
     bool poke(uInt16 address, uInt8 value);
 
     /**
-      This method should be called at an interval corresponding to the 
+      This method should be called at an interval corresponding to the
       desired frame rate to update the TIA.  Invoking this method will update
       the graphics buffer and generate the corresponding audio samples.
     */
@@ -448,8 +448,8 @@ class TIA : public Device
     // Indicates color clocks when the frame was last updated
     Int32 myClockAtLastUpdate;
 
-    // Indicates how many color clocks remain until the end of 
-    // current scanline.  This value is valid during the 
+    // Indicates how many color clocks remain until the end of
+    // current scanline.  This value is valid during the
     // displayed portion of the frame.
     Int32 myClocksToEndOfScanLine;
 
@@ -463,7 +463,7 @@ class TIA : public Device
     uInt32 myStartScanline;
 
     // Color clock when VSYNC ending causes a new frame to be started
-    Int32 myVSYNCFinishClock; 
+    Int32 myVSYNCFinishClock;
 
     uInt8 myVSYNC;        // Holds the VSYNC register value
     uInt8 myVBLANK;       // Holds the VBLANK register value
@@ -486,7 +486,7 @@ class TIA : public Device
 
     uInt8 myGRP0;         // Player 0 graphics register
     uInt8 myGRP1;         // Player 1 graphics register
-    
+
     uInt8 myDGRP0;        // Player 0 delayed graphics register
     uInt8 myDGRP1;        // Player 1 delayed graphics register
 
@@ -520,7 +520,7 @@ class TIA : public Device
     // are controlled by 6 objects
     uInt32 myCollisionEnabledMask;
 
-    // Note that these position registers contain the color clock 
+    // Note that these position registers contain the color clock
     // on which the object's serial output should begin (0 to 159)
     Int16 myPOSP0;        // Player 0 position register
     Int16 myPOSP1;        // Player 1 position register

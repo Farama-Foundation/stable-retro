@@ -17,12 +17,12 @@ void main() {
 	vec4 screen = pow(texture2D(tex, texCoord), vec4(target_gamma + darken_screen)).rgba;
 	vec4 avglum = vec4(0.5);
 	screen = mix(screen, avglum, (1.0 - contrast));
- 
+
 	mat4 color = mat4(	r.r,	r.g,	r.b,	0.0,
 				g.r,	g.g,	g.b,	0.0,
 				b.r,	b.g,	b.b,	0.0,
 				bl.r,	bl.g,	bl.b,	1.0);
-			  
+
 	mat4 adjust = mat4(	(1.0 - sat) * 0.3086 + sat,	(1.0 - sat) * 0.3086,		(1.0 - sat) * 0.3086,		1.0,
 				(1.0 - sat) * 0.6094,		(1.0 - sat) * 0.6094 + sat,	(1.0 - sat) * 0.6094,		1.0,
 				(1.0 - sat) * 0.0820,		(1.0 - sat) * 0.0820,		(1.0 - sat) * 0.0820 + sat,	1.0,

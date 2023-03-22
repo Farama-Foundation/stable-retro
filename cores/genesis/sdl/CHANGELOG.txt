@@ -145,7 +145,7 @@ Genesis Plus GX 1.7.0 (01/07/2012) (Eke-Eke)
 
 NOTES:
 ~~~~~~
-* to play CD games, original BIOS ROM files are required in /genplus/bios/ directory: unzip & rename them to bios_CD_U.bin, bios_CD_E.bin, bios_CD_J.bin 
+* to play CD games, original BIOS ROM files are required in /genplus/bios/ directory: unzip & rename them to bios_CD_U.bin, bios_CD_E.bin, bios_CD_J.bin
 * CD audio tracks (CD-DA) are not supported (yet)
 
 [Core/CPU]
@@ -403,7 +403,7 @@ of samples per frame and keeping PSG & FM chips in sync.
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
- [12/14/08] version 1.3.0 (Eke-Eke) 
+ [12/14/08] version 1.3.0 (Eke-Eke)
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 * YM2612 bugfixes (MAME core):
@@ -432,7 +432,7 @@ of samples per frame and keeping PSG & FM chips in sync.
 * YM2612(MAME): replaced sample interpolation with libsamplerate support, High Quality mode is now more accurate
 * implemented cycle-accurate HINT timings: every timing sensitive games/demos are now *finally* working fine
 * fixed a bug affecting CRAM/VSRAM DMA timings
-* fixed Sprite Attribute Table address mask for VRAM writes 
+* fixed Sprite Attribute Table address mask for VRAM writes
 * improved accuracy of 68k access to Z80: fix music in Pacman 2 when entering PAUSE menu
 * disabled "Address Error" emulation when UMK3 hack is loaded: fix game crashing after a round ends up
 * added support for some more unlicensed games: Pocket Monster, King of Fighter 98, Soul Blade (credits to Haze)
@@ -467,7 +467,7 @@ of samples per frame and keeping PSG & FM chips in sync.
 * improved HINT timing accuracy: fix flickering in "Zero The Kamikaze Squirrel (USA)"
 * improved rendering accuracy when backdrop color is modified during HBLANK (Road Rash I/II/III)
 * fixed broken Game Genie support
- 
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
  [04/19/08] (Eke-Eke)
@@ -526,11 +526,11 @@ used in a few games (now use internal game database) as external RAM. This shoul
   . College Slam, Frank Thomas Big Hurt Baseball (24C65 type)
   . NHLPA Hockey 93, Rings of Power (EA mapper)
   . Micro Machines serie, Brian Lara Cricket 96/Shane Warne Cricket (Codemasters mapper)
-* external RAM is now initialized to 0xFF by default: fix Micromachines 2, Dino Dini Soccer 
+* external RAM is now initialized to 0xFF by default: fix Micromachines 2, Dino Dini Soccer
 * fixed SRAM 16-bits memory handlers: fix some Sega Sports and EA Sports games (NFL95, NBA Action 95, NHL97, NHL98,...)
-* modified WRITE_xxx & READ_xxx macros for better portability and faster memory access on BIG ENDIAN platform 
+* modified WRITE_xxx & READ_xxx macros for better portability and faster memory access on BIG ENDIAN platform
 * completely rewrote BIG ENDIAN support in render.c and vdp.c: rendering should be a little faster
-* rewrote ROM bankswitch emulation (Super Street Fighter II): ROM access are faster, using memory pointers instead of reading ROM copy from ARAM 
+* rewrote ROM bankswitch emulation (Super Street Fighter II): ROM access are faster, using memory pointers instead of reading ROM copy from ARAM
 * fixed leftmost Window/PlaneA column render and implemented Window bug (as described by Charles Mc Donald)
 * improved "Sprite Limit" and "Sprite Collision" detection accuracy
 * modified RGB565 Color Palette to use the full available color range (0-31;0-63)
@@ -592,7 +592,7 @@ For information, games that are actually detected and need special timings to ru
 
 * VINT timings are now a little more accurate: fixes Sesame's Street Counting Cafe
 * SN76496 MAX_OUTPUT back to normal
-* modified FB_WNOISE value in SN76496 core according to John Kortink's last informations 
+* modified FB_WNOISE value in SN76496 core according to John Kortink's last informations
 * added support for Maxim's PSG core, same as used in SMSPLUS (it becomes the default PSG core)
 * updated FM core to the latest MAME version
 * corrected DAC output level (fixes voices and some special FX being too low)
@@ -691,4 +691,3 @@ For information, games that are actually detected and need special timings to ru
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
  * Completed implementation of Z80 banked memory handlers.
-

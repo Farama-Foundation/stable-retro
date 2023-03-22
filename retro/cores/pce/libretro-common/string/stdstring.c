@@ -62,12 +62,12 @@ char *string_replace_substring(const char *in,
    const char *inprev = NULL;
    char          *out = NULL;
    char        *outat = NULL;
-   
+
    /* if either pattern or replacement is NULL,
     * duplicate in and let caller handle it. */
    if (!pattern || !replacement)
       return strdup(in);
-   
+
    pattern_len     = strlen(pattern);
    replacement_len = strlen(replacement);
    numhits         = 0;
@@ -78,7 +78,7 @@ char *string_replace_substring(const char *in,
       inat += pattern_len;
       numhits++;
    }
-   
+
    outlen          = strlen(in) - pattern_len*numhits + replacement_len*numhits;
    out             = (char *)malloc(outlen+1);
    outat           = out;
@@ -95,7 +95,7 @@ char *string_replace_substring(const char *in,
       inprev = inat;
    }
    strcpy(outat, inprev);
-   
+
    return out;
 }
 

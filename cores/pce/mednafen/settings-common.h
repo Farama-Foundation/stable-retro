@@ -15,7 +15,7 @@ typedef enum
 
 
 //#define MDFNST_EX_DRIVER = (1 << 16),    // If this is not set, the setting is assumed to be internal.  This...should probably be set automatically?
-        
+
 #define MDFNSF_NOFLAGS		0	  // Always 0, makes setting definitions prettier...maybe.
 
 // TODO(cats)

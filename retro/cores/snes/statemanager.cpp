@@ -76,7 +76,7 @@ bool StateManager::init(size_t buffer_size) {
 
     top_ptr = 1;
 
-    
+
     buf_size = nearest_pow2_size(buffer_size) / sizeof(uint64_t); // Works in multiple of 8.
     buf_size_mask = buf_size - 1;
 
@@ -96,7 +96,7 @@ bool StateManager::init(size_t buffer_size) {
 }
 
 int StateManager::pop()
-{ 
+{
     if(!init_done)
         return 0;
 
@@ -126,7 +126,7 @@ int StateManager::pop()
 
     if (top_ptr == bottom_ptr) // Our stack is completely empty... :v
     {
-      top_ptr = (top_ptr + 1) & buf_size_mask; 
+      top_ptr = (top_ptr + 1) & buf_size_mask;
     }
 
     return S9xUnfreezeGameMem((uint8 *)tmp_state,real_state_size);

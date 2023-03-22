@@ -22,7 +22,7 @@ NAME	  = gen_gcw0
 SDL-CONFIG = /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/bin/sdl-config
 
 CC        = /opt/gcw0-toolchain/usr/bin/mipsel-gcw0-linux-uclibc-gcc
-#CFLAGS    = `$(SDL-CONFIG) --cflags` -03 -fomit-frame-pointer -Wall  -ansi -std=c99  
+#CFLAGS    = `$(SDL-CONFIG) --cflags` -03 -fomit-frame-pointer -Wall  -ansi -std=c99
 #CFLAGS    = `sdl-config --cflags` -O6 -fomit-frame-pointer -Wall -Wno-strict-aliasing -ansi -std=c99
 CFLAGS    = `$(SDL-CONFIG) --cflags` -O3 -fomit-frame-pointer -Wall  -ansi -std=c99 -march=mips32 -mtune=mips32r2 -mhard-float
 #-fomit-frame-pointer
@@ -35,14 +35,14 @@ INCLUDES  =     -I$(SRCDIR) -I$(SRCDIR)/z80 -I$(SRCDIR)/m68k \
 		-I$(SRCDIR)/cd_hw -I$(SRCDIR)/ntsc \
 		-I$(SRCDIR)/../gcw0 \
 -I/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/
-#		-I$(SRCDIR)/tremor 
+#		-I$(SRCDIR)/tremor
 
 LIBS	  = `$(SDL-CONFIG) --libs --libs` -lz -lm -lSDL_ttf -lSDL_image \
 -L/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/lib -lvorbisfile
 
 OBJDIR = ./build_gcw0
 
-OBJECTS	=       $(OBJDIR)/z80.o	
+OBJECTS	=       $(OBJDIR)/z80.o
 
 OBJECTS	+=     	$(OBJDIR)/m68kcpu.o \
 		$(OBJDIR)/s68kcpu.o
@@ -56,7 +56,7 @@ OBJECTS	+=     	$(OBJDIR)/genesis.o	 \
 		$(OBJDIR)/memz80.o	 \
 		$(OBJDIR)/membnk.o	 \
 		$(OBJDIR)/state.o        \
-		$(OBJDIR)/loadrom.o	
+		$(OBJDIR)/loadrom.o
 
 OBJECTS	+=      $(OBJDIR)/input.o	  \
 		$(OBJDIR)/gamepad.o	  \
@@ -73,11 +73,11 @@ OBJECTS	+=      $(OBJDIR)/input.o	  \
 OBJECTS	+=      $(OBJDIR)/sound.o	\
 		$(OBJDIR)/psg.o     \
 		$(OBJDIR)/ym2413.o      \
-		$(OBJDIR)/ym2612.o    
+		$(OBJDIR)/ym2612.o
 
-OBJECTS	+=	$(OBJDIR)/blip_buf.o 
+OBJECTS	+=	$(OBJDIR)/blip_buf.o
 
-OBJECTS	+=	$(OBJDIR)/eq.o 
+OBJECTS	+=	$(OBJDIR)/eq.o
 
 OBJECTS	+=      $(OBJDIR)/sram.o        \
 		$(OBJDIR)/svp.o	        \
@@ -88,8 +88,8 @@ OBJECTS	+=      $(OBJDIR)/sram.o        \
 		$(OBJDIR)/eeprom_i2c.o  \
 		$(OBJDIR)/eeprom_spi.o  \
 		$(OBJDIR)/md_cart.o	\
-		$(OBJDIR)/sms_cart.o	
-		
+		$(OBJDIR)/sms_cart.o
+
 OBJECTS	+=      $(OBJDIR)/scd.o	\
 		$(OBJDIR)/cdd.o	\
 		$(OBJDIR)/cdc.o	\
@@ -106,7 +106,7 @@ OBJECTS	+=	$(OBJDIR)/main.o	\
 		$(OBJDIR)/unzip.o       \
 		$(OBJDIR)/fileio.o	\
 		$(OBJDIR)/utils.o       #\
-#		$(OBJDIR)/menu.o	
+#		$(OBJDIR)/menu.o
 
 #OBJECTS	+=	$(OBJDIR)/block.o      \
 #		$(OBJDIR)/codebook.o   \
@@ -132,50 +132,50 @@ $(NAME): $(OBJDIR) $(OBJECTS)
 
 $(OBJDIR) :
 		@[ -d $@ ] || mkdir -p $@
-		
+
 $(OBJDIR)/%.o : $(SRCDIR)/%.c $(SRCDIR)/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
-	        	        
-$(OBJDIR)/%.o :	$(SRCDIR)/sound/%.c $(SRCDIR)/sound/%.h	        
+
+$(OBJDIR)/%.o :	$(SRCDIR)/sound/%.c $(SRCDIR)/sound/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/input_hw/%.c $(SRCDIR)/input_hw/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/input_hw/%.c $(SRCDIR)/input_hw/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/cart_hw/%.c $(SRCDIR)/cart_hw/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/cart_hw/%.c $(SRCDIR)/cart_hw/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/cart_hw/svp/%.c      
+$(OBJDIR)/%.o :	$(SRCDIR)/cart_hw/svp/%.c
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/cart_hw/svp/%.c $(SRCDIR)/cart_hw/svp/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/cart_hw/svp/%.c $(SRCDIR)/cart_hw/svp/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/cd_hw/%.c $(SRCDIR)/cd_hw/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/cd_hw/%.c $(SRCDIR)/cd_hw/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/z80/%.c $(SRCDIR)/z80/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/z80/%.c $(SRCDIR)/z80/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/m68k/%.c       
+$(OBJDIR)/%.o :	$(SRCDIR)/m68k/%.c
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/ntsc/%.c $(SRCDIR)/ntsc/%.h	        
+$(OBJDIR)/%.o :	$(SRCDIR)/ntsc/%.c $(SRCDIR)/ntsc/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-#$(OBJDIR)/%.o :	$(SRCDIR)/tremor/%.c $(SRCDIR)/tremor/%.h	        
-#		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
-     
-#$(OBJDIR)/%.o :	$(SRCDIR)/tremor/%.c 	        
+#$(OBJDIR)/%.o :	$(SRCDIR)/tremor/%.c $(SRCDIR)/tremor/%.h
 #		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
-$(OBJDIR)/%.o :	$(SRCDIR)/../gcw0/%.c $(SRCDIR)/../gcw0/%.h	        
+#$(OBJDIR)/%.o :	$(SRCDIR)/tremor/%.c
+#		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
+
+$(OBJDIR)/%.o :	$(SRCDIR)/../gcw0/%.c $(SRCDIR)/../gcw0/%.h
 		$(CC) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 
 
 pack	:
 		strip $(NAME)
-		upx -9 $(NAME)	        
+		upx -9 $(NAME)
 
 clean:
 	rm -f $(OBJECTS) $(NAME)

@@ -190,7 +190,7 @@
 
 // Read in the specified crosshair file, replacing whatever data might be in that slot.
 // Available slots are 1-31.
-// The input file must be a PNG or a text file. 
+// The input file must be a PNG or a text file.
 // PNG:  15x15 pixels, palettized, with 3 colors (white, black, and transparent).
 // text: 15 lines of 16 characters (counting the \n), consisting of ' ', '#', or '.'.
 

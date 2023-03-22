@@ -2963,4 +2963,3 @@ constexpr ::capnp::_::RawSchema const* ParsedFile::_capnpPrivate::schema;
 
 }  // namespace
 }  // namespace
-

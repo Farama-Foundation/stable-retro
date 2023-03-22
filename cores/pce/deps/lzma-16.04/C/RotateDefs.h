@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 /* don't use _rotl with MINGW. It can insert slow call to function. */
- 
+
 /* #if (_MSC_VER >= 1200) */
 #pragma intrinsic(_rotl)
 #pragma intrinsic(_rotr)

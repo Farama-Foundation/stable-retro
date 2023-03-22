@@ -454,4 +454,3 @@ void emit_lib(BuildCtx *ctx)
     fprintf(ctx->fp, "\n};\n\n");
   }
 }
-

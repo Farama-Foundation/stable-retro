@@ -54,7 +54,7 @@
 
 
 /* Key configuration structure */
-typedef struct 
+typedef struct
 {
   s8 device;
   u8 port;

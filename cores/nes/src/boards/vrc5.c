@@ -200,4 +200,3 @@ static void M190Close(void) {
 static void StateRestore(int version) {
 	Sync();
 }
-

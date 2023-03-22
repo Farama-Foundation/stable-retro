@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -106,7 +106,7 @@ class FrameBuffer
 
     /**
       Enables/disables fullscreen mode.
-      Grabmouse activated when in fullscreen mode.  
+      Grabmouse activated when in fullscreen mode.
 
       @param enable  Set the fullscreen mode to this value
     */
@@ -203,7 +203,7 @@ class FrameBuffer
       @param data The actual pixel data (in bytes)
     */
     //virtual void scanline(uInt32 row, uInt8* data) const = 0;
-    
+
     //virtual uInt32 mapRGB(uInt8 r, uInt8 g, uInt8 b) const = 0;
 };
 

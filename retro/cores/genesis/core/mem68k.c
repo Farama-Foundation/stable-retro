@@ -106,7 +106,7 @@ void m68k_lockup_w_16 (unsigned int address, unsigned int data)
 }
 
 unsigned int m68k_lockup_r_8 (unsigned int address)
-{ 
+{
 #ifdef LOGERROR
   error ("Lockup %08X.b (%08X)\n", address, m68k_get_reg(M68K_REG_PC));
 #endif
@@ -203,7 +203,7 @@ void z80_write_byte(unsigned int address, unsigned int data)
         }
       }
     }
-      
+
     default: /* ZRAM */
     {
       zram[address & 0x1FFF] = data;
@@ -382,7 +382,7 @@ unsigned int ctrl_io_read_byte(unsigned int address)
         }
       }
 
-      return m68k_read_bus_8(address); 
+      return m68k_read_bus_8(address);
     }
 
     case 0x30:  /* TIME */
@@ -458,7 +458,7 @@ unsigned int ctrl_io_read_word(unsigned int address)
         unsigned int data = io_68k_read((address >> 1) & 0x0F);
         return (data << 8 | data);
       }
-      return m68k_read_bus_16(address); 
+      return m68k_read_bus_16(address);
     }
 
     case 0x11:  /* Z80 BUSACK */
@@ -533,13 +533,13 @@ unsigned int ctrl_io_read_word(unsigned int address)
 
             m68k_poll_detect(3 << (index - 0x10));
           }
-          
+
           return scd.regs[index >> 1].w;
         }
       }
 
       /* invalid address */
-      return m68k_read_bus_16(address); 
+      return m68k_read_bus_16(address);
     }
 
     case 0x30:  /* TIME */
@@ -548,7 +548,7 @@ unsigned int ctrl_io_read_word(unsigned int address)
       {
         return cart.hw.time_r(address);
       }
-      return m68k_read_bus_16(address); 
+      return m68k_read_bus_16(address);
     }
 
     case 0x50:  /* SVP */
@@ -1091,7 +1091,7 @@ void ctrl_io_write_word(unsigned int address, unsigned int data)
       m68k_unused_16_w (address, data);
       return;
     }
-            
+
     default:  /* Invalid address */
     {
       m68k_lockup_w_16 (address, data);
@@ -1277,7 +1277,7 @@ void vdp_write_word(unsigned int address, unsigned int data)
       m68k_unused_16_w(address, data);
       return;
     }
-    
+
     case 0x1C:  /* Test register */
     {
       vdp_test_w(data);

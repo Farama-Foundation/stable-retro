@@ -77,7 +77,7 @@ void CartridgeBFSC::install(System& system)
     access.codeAccessBase = &myCodeAccessBase[j & 0x007F];
     mySystem->setPageAccess(j >> shift, access);
   }
- 
+
   // Set the page accessing method for the RAM reading pages
   access.directPokeBase = 0;
   access.type = System::PA_READ;
@@ -114,7 +114,7 @@ uInt8 CartridgeBFSC::peek(uInt16 address)
       triggerReadFromWritePort(peekAddress);
       return myRAM[address] = value;
     }
-  }  
+  }
   else
     return myImage[(myCurrentBank << 12) + address];
 }
@@ -193,7 +193,7 @@ bool CartridgeBFSC::patch(uInt16 address, uInt8 value)
     myImage[(myCurrentBank << 12) + address] = value;
 
   return myBankChanged = true;
-} 
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const uInt8* CartridgeBFSC::getImage(int& size) const

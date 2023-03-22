@@ -100,4 +100,3 @@ void GBSIOWriteSC(struct GBSIO* sio, uint8_t sc) {
 		sio->driver->writeSC(sio->driver, sc);
 	}
 }
-

@@ -49,7 +49,7 @@ static unsigned int cart_ram_read_byte(unsigned int address)
   {
     return scd.cartridge.area[(address >> 1) & scd.cartridge.mask];
   }
-  
+
   return 0xff;
 }
 

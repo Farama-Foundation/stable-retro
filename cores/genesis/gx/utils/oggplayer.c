@@ -443,7 +443,7 @@ int PlayOgg(char * buf, int buflen, int time_pos, int mode)
   StopOgg();
 
   private_ogg.fd = mem_open(buf, buflen);
-  
+
   if (private_ogg.fd < 0)
   {
     private_ogg.fd = -1;
@@ -533,4 +533,3 @@ void SetTimeOgg(s32 time_pos)
   if (time_pos >= 0)
     private_ogg.seek_time = time_pos;
 }
-

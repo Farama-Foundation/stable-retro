@@ -126,7 +126,7 @@ static void Bcj2Enc_Encode_2(CBcj2Enc *p)
             return;
           }
         }
-       
+
         srcLim = src + num;
 
         if (p->prevByte == 0x0F && (src[0] & 0xF0) == 0x80)
@@ -152,9 +152,9 @@ static void Bcj2Enc_Encode_2(CBcj2Enc *p)
           *dest = *src;
           break;
         }
-        
+
         num = src - p->src;
-        
+
         if (src == srcLim)
         {
           p->prevByte = src[-1];
@@ -163,7 +163,7 @@ static void Bcj2Enc_Encode_2(CBcj2Enc *p)
           p->ip += (UInt32)num;
           continue;
         }
- 
+
         {
           Byte context = (Byte)(num == 0 ? p->prevByte : src[-1]);
           Bool needConvert;
@@ -171,7 +171,7 @@ static void Bcj2Enc_Encode_2(CBcj2Enc *p)
           p->bufs[BCJ2_STREAM_MAIN] = dest + 1;
           p->ip += (UInt32)num + 1;
           src++;
-          
+
           needConvert = False;
 
           if ((SizeT)(p->srcLim - src) >= 4)
@@ -190,7 +190,7 @@ static void Bcj2Enc_Encode_2(CBcj2Enc *p)
 
             ttt = *prob;
             bound = (p->range >> kNumModelBits) * ttt;
-            
+
             if (!needConvert)
             {
               p->range = bound;
@@ -199,7 +199,7 @@ static void Bcj2Enc_Encode_2(CBcj2Enc *p)
               p->prevByte = b;
               continue;
             }
-            
+
             p->low += bound;
             p->range -= bound;
             *prob = (CProb)(ttt - (ttt >> kNumMoveBits));
@@ -249,22 +249,22 @@ void Bcj2Enc_Encode(CBcj2Enc *p)
   if (p->tempPos != 0)
   {
     unsigned extra = 0;
-   
+
     for (;;)
     {
       const Byte *src = p->src;
       const Byte *srcLim = p->srcLim;
       unsigned finishMode = p->finishMode;
-      
+
       p->src = p->temp;
       p->srcLim = p->temp + p->tempPos;
       if (src != srcLim)
         p->finishMode = BCJ2_ENC_FINISH_MODE_CONTINUE;
-      
+
       PRF(printf("     ip = %8d   tempPos = %8d   src = %8d\n", p->ip, p->tempPos, p->srcLim - p->src));
 
       Bcj2Enc_Encode_2(p);
-      
+
       {
         unsigned num = (unsigned)(p->src - p->temp);
         unsigned tempPos = p->tempPos - num;
@@ -272,21 +272,21 @@ void Bcj2Enc_Encode(CBcj2Enc *p)
         p->tempPos = tempPos;
         for (i = 0; i < tempPos; i++)
           p->temp[i] = p->temp[i + num];
-      
+
         p->src = src;
         p->srcLim = srcLim;
         p->finishMode = finishMode;
-        
+
         if (p->state != BCJ2_ENC_STATE_ORIG || src == srcLim)
           return;
-        
+
         if (extra >= tempPos)
         {
           p->src = src - tempPos;
           p->tempPos = 0;
           break;
         }
-        
+
         p->temp[tempPos] = src[0];
         p->tempPos = tempPos + 1;
         p->src = src + 1;
@@ -298,7 +298,7 @@ void Bcj2Enc_Encode(CBcj2Enc *p)
   PRF(printf("++++ ip = %8d   tempPos = %8d   src = %8d\n", p->ip, p->tempPos, p->srcLim - p->src));
 
   Bcj2Enc_Encode_2(p);
-  
+
   if (p->state == BCJ2_ENC_STATE_ORIG)
   {
     const Byte *src = p->src;

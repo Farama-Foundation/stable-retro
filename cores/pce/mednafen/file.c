@@ -125,7 +125,7 @@ int file_seek(struct MDFNFILE *file, int64_t offset, int whence)
 
          file->location += offset;
          break;
-   }    
+   }
 
    return 0;
 }

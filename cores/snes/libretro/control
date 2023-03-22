@@ -1,6 +1,6 @@
 Package: com.libretro.snes9x
 Name: snes9x
-Depends: 
+Depends:
 Version: 0.0.1
 Architecture: iphoneos-arm
 Description: Libretro iOS core of SNES9x

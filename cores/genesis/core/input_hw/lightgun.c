@@ -130,7 +130,7 @@ void lightgun_refresh(int port)
         }
 
         /* External Interrupt enabled ? */
-        if (reg[11] & 0x08) 
+        if (reg[11] & 0x08)
         {
           m68k_update_irq(2);
         }
@@ -148,7 +148,7 @@ void lightgun_refresh(int port)
         }
 
         /* pixel accurate H-Counter value */
-        if (reg[12] & 1) 
+        if (reg[12] & 1)
         {
           hvc_latch |= hc_320[((x / 2) + input.x_offset) % 210];
         }

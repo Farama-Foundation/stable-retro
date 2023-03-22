@@ -108,7 +108,7 @@ void slot_autoload(int slot, int device)
       /* update CRC */
       brm_crc[0] = crc32(0, scd.bram, 0x2000);
     }
-    else 
+    else
     {
       /* force internal backup RAM format (does not use previous region backup RAM) */
       scd.bram[0x1fff] = 0;
@@ -139,7 +139,7 @@ void slot_autoload(int slot, int device)
       {
         int filesize = scd.cartridge.mask + 1;
         int done = 0;
-        
+
         /* Read into buffer (2k blocks) */
         while (filesize > CHUNKSIZE)
         {
@@ -184,7 +184,7 @@ void slot_autoload(int slot, int device)
   }
 
   if (strlen(rom_filename))
-  {  
+  {
     SILENT = 1;
     slot_load(slot, device);
     SILENT = 0;
@@ -225,7 +225,7 @@ void slot_autosave(int slot, int device)
         {
           int filesize = scd.cartridge.mask + 1;
           int done = 0;
-        
+
           /* Write to file (2k blocks) */
           while (filesize > CHUNKSIZE)
           {
@@ -267,7 +267,7 @@ void slot_autosave(int slot, int device)
 void slot_autodetect(int slot, int device, t_slot *ptr)
 {
   if (!ptr) return;
-  
+
   char filename[MAXPATHLEN];
   memset(ptr,0,sizeof(t_slot));
 
@@ -489,7 +489,7 @@ int slot_load(int slot, int device)
       GUI_WaitPrompt("Error","Unable to mount memory card");
       return 0;
     }
-    
+
     /* Retrieve the sector size */
     u32 SectorSize = 0;
     int CardError = CARD_GetSectorSize(device, &SectorSize);
@@ -760,7 +760,7 @@ int slot_save(int slot, int device)
     /* uncompressed size */
     done = filesize;
     memcpy(&out[2112], &done, 4);
-  
+
     /* compress file */
     compress2 ((Bytef *)&out[2112 + 4], &filesize, (Bytef *)buffer, done, 9);
 

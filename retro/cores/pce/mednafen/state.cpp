@@ -196,7 +196,7 @@ static bool SubWrite(StateMem *st, SFORMAT *sf, const char *name_prefix = NULL)
       else if(sf->flags & RLSB)
          Endian_V_LE_to_NE(sf->v, bytesize);
 #endif
-      sf++; 
+      sf++;
    }
 
    return true;
@@ -236,7 +236,7 @@ static int WriteStateChunk(StateMem *st, const char *sname, SFORMAT *sf)
 static SFORMAT *FindSF(const char *name, SFORMAT *sf)
 {
    /* Size can sometimes be zero, so also check for the text name.  These two should both be zero only at the end of a struct. */
-   while(sf->size || sf->name) 
+   while(sf->size || sf->name)
    {
       if(!sf->size || !sf->v)
       {
@@ -266,7 +266,7 @@ static SFORMAT *FindSF(const char *name, SFORMAT *sf)
 // Fast raw chunk reader
 static void DOReadChunk(StateMem *st, SFORMAT *sf)
 {
-   while(sf->size || sf->name)       // Size can sometimes be zero, so also check for the text name.  
+   while(sf->size || sf->name)       // Size can sometimes be zero, so also check for the text name.
       // These two should both be zero only at the end of a struct.
    {
       if(!sf->size || !sf->v)
@@ -408,7 +408,7 @@ static int MDFNSS_StateAction_internal(void *st_p, int load, int data_only, std:
                   }
                   found = 1;
                   break;
-               } 
+               }
                else
                {
                   if(smem_seek(st, tmp_size, SEEK_CUR) < 0)

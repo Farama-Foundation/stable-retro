@@ -60,7 +60,7 @@ void MY_FAST_CALL Crc64GenerateTable()
     UInt64 r = g_Crc64Table[i - 256];
     g_Crc64Table[i] = g_Crc64Table[r & 0xFF] ^ (r >> 8);
   }
-  
+
   #ifdef MY_CPU_LE
 
   g_Crc64Update = XzCrc64UpdateT4;

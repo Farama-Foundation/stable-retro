@@ -533,4 +533,3 @@ case 0x7f: {
   regs.pc = rd;
   break;
 }
-

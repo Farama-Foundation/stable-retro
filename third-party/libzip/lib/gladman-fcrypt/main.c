@@ -85,7 +85,7 @@ char *err_string[] =
 
 /* Modified in 2008 to add revised entropy generation courtesy of   */
 /* WinZip Inc. This code now performs the following sequence of     */
-/* entropy generation operations on sequential calls:               */ 
+/* entropy generation operations on sequential calls:               */
 /*                                                                  */
 /*      - the current 8-byte Windows performance counter value      */
 /*      - an 8-byte representation of the current date/time         */
@@ -102,13 +102,13 @@ int entropy_fun(unsigned char buf[], unsigned int len)
     switch(num)
     {
     /* use a value that is unlikely to repeat across system reboots         */
-    case 1: 
+    case 1:
         ++num;
         GetSystemTimeAsFileTime((FILETIME *)pentium_tsc);
         break;
     /* use a value that distinguishes between different instances of this   */
     /* code that might be running on different processors at the same time  */
-    case 2: 
+    case 2:
         ++num;
         {   unsigned __int32 processtest = GetCurrentProcessId();
             unsigned __int32 threadtest  = GetCurrentThreadId();
@@ -117,10 +117,10 @@ int entropy_fun(unsigned char buf[], unsigned int len)
             pentium_tsc[0] = (pentium_tsc[0] << 32) + threadtest;
         }
         break;
-    
+
     /* use a rapidly-changing value -- check QueryPerformanceFrequency()    */
     /* to ensure that QueryPerformanceCounter() will work                   */
-    case 0: 
+    case 0:
         ++num;
     default:
         QueryPerformanceCounter((LARGE_INTEGER *)pentium_tsc);

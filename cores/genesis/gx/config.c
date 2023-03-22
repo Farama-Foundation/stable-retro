@@ -156,7 +156,7 @@ void config_default(void)
     case VI_EURGB60:
       config.tv_mode = 2; /* 50/60hz */
       break;
-    
+
     default:
       config.tv_mode = 0; /* 60hz only */
       break;
@@ -258,7 +258,7 @@ void config_default(void)
 
   /* try to restore user config */
   int loaded = config_load();
-  
+
 #ifdef HW_RVL
   /* initialize WPAD timeout */
   WPAD_SetIdleTimeout(config.autosleep ? 300 : 1800);

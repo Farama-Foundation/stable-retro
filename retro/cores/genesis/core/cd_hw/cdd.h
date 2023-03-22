@@ -75,7 +75,7 @@ typedef struct
   int start;
   int end;
   int type;
-} track_t; 
+} track_t;
 
 /* CD TOC */
 typedef struct
@@ -84,7 +84,7 @@ typedef struct
   int last;
   track_t tracks[100];
   cdStream *sub;
-} toc_t; 
+} toc_t;
 
 #if defined(USE_LIBCHDR)
 /* CHD file */
@@ -115,7 +115,7 @@ typedef struct
   chd_t chd;
 #endif
   int16 audio[2];
-} cdd_t; 
+} cdd_t;
 
 /* Function prototypes */
 extern void cdd_init(int samplerate);

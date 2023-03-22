@@ -106,7 +106,7 @@ void Ppmd7_EncodeSymbol(CPpmd7 *p, CPpmd7z_RangeEnc *rc, int symbol)
       sum += s->Freq;
     }
     while (--i);
-    
+
     p->HiBitsFlag = p->HB2Flag[p->FoundState->Symbol];
     PPMD_SetAllBitsIn256Bytes(charMask);
     MASK(s->Symbol) = 0;
@@ -151,7 +151,7 @@ void Ppmd7_EncodeSymbol(CPpmd7 *p, CPpmd7z_RangeEnc *rc, int symbol)
       p->MinContext = Ppmd7_GetContext(p, p->MinContext->Suffix);
     }
     while (p->MinContext->NumStats == numMasked);
-    
+
     see = Ppmd7_MakeEscFreq(p, numMasked, &escFreq);
     s = Ppmd7_GetStats(p, p->MinContext);
     sum = 0;
@@ -180,7 +180,7 @@ void Ppmd7_EncodeSymbol(CPpmd7 *p, CPpmd7z_RangeEnc *rc, int symbol)
       s++;
     }
     while (--i);
-    
+
     RangeEnc_Encode(rc, sum, escFreq, sum + escFreq);
     see->Summ = (UInt16)(see->Summ + sum + escFreq);
   }

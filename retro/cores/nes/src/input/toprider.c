@@ -49,4 +49,3 @@ static INPUTCFC TopRider = { Read, Write, 0, Update, 0, 0 };
 INPUTCFC *FCEU_InitTopRider(void) {
 	return(&TopRider);
 }
-

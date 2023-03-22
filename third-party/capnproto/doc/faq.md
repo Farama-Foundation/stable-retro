@@ -208,4 +208,3 @@ Please email [security@sandstorm.io](mailto:security@sandstorm.io).
 ### How does Sandstorm use Cap'n Proto?
 
 See [this Sandstorm blog post](https://blog.sandstorm.io/news/2014-12-15-capnproto-0.5.html).
-

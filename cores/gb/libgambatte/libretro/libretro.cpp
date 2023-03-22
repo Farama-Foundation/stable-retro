@@ -63,19 +63,19 @@ bool file_present_in_system(std::string fname)
    bool worked = environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &systemdirtmp);
    if (!worked)
       return false;
-   
+
    std::string fullpath = systemdirtmp;
    fullpath += "/";
    fullpath += fname;
-   
+
    RFILE *fp = filestream_open(fullpath.c_str(), RFILE_MODE_READ, 0);
-   
+
    if (fp)
    {
       filestream_close(fp);
       return true;
    }
-   
+
    return false;
 }
 
@@ -92,7 +92,7 @@ bool get_bootloader_from_file(void* userdata, bool isgbc, uint8_t* data, uint32_
 
    std::string path = systemdirtmp;
    path += "/"; //retroarch/libretro does not add a slash at the end of directory names
-   
+
    unsigned int size;
 
    if (isgbc)
@@ -108,7 +108,7 @@ bool get_bootloader_from_file(void* userdata, bool isgbc, uint8_t* data, uint32_
 
    if (size > buf_size)
       return false;
-   
+
    // open file
    int n = 0;
    RFILE *fp = filestream_open(path.c_str(), RFILE_MODE_READ, 0);
@@ -120,10 +120,10 @@ bool get_bootloader_from_file(void* userdata, bool isgbc, uint8_t* data, uint32_
    }
    else
       return false;
-   
+
    if (n != size)
       return false;
-   
+
    return true;
 }
 
@@ -246,13 +246,13 @@ void retro_init(void)
    video_pitch = 256 * NUM_GAMEBOYS;
 
    check_system_specs();
-   
+
    //gb/gbc bootloader support
    gb.setBootloaderGetter(get_bootloader_from_file);
 #ifdef DUAL_MODE
    gb2.setBootloaderGetter(get_bootloader_from_file);
 #endif
-   
+
    struct retro_variable var = {0};
    var.key = "gambatte_gb_bootloader";
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
@@ -264,7 +264,7 @@ void retro_init(void)
    }
    else
       use_official_bootloader = false;
-   
+
 }
 
 void retro_deinit()
@@ -388,7 +388,7 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code)
       gb.setGameShark(code);
 }
 
-   
+
 static std::string basename(std::string filename)
 {
    // Remove directory if present.
@@ -496,7 +496,7 @@ static void load_custom_palette(void)
       else if (startswith(line, "Background1="))
          gb.setDmgPaletteColor(0, 1, rgb32);
       else if (startswith(line, "Background2="))
-         gb.setDmgPaletteColor(0, 2, rgb32);       
+         gb.setDmgPaletteColor(0, 2, rgb32);
       else if (startswith(line, "Background3="))
          gb.setDmgPaletteColor(0, 3, rgb32);
       else if (startswith(line, "Sprite%2010="))
@@ -512,7 +512,7 @@ static void load_custom_palette(void)
       else if (startswith(line, "Sprite%2021="))
          gb.setDmgPaletteColor(2, 1, rgb32);
       else if (startswith(line, "Sprite%2022="))
-         gb.setDmgPaletteColor(2, 2, rgb32);  
+         gb.setDmgPaletteColor(2, 2, rgb32);
       else if (startswith(line, "Sprite%2023="))
          gb.setDmgPaletteColor(2, 3, rgb32);
       else log_cb(RETRO_LOG_WARN, "[Gambatte]: error in %s, line %d (color left as default).\n", custom_palette_path.c_str(), line_count);
@@ -582,7 +582,7 @@ static void check_variables(void)
 
    if (!environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) || !var.value)
       return;
-   
+
    if (gb.isCgb())
       return;
 
@@ -606,7 +606,7 @@ static void check_variables(void)
 
    switch (gb_colorization_enable)
    {
-      case 1:   
+      case 1:
         gbc_bios_palette = const_cast<unsigned short*>(findGbcTitlePal(internal_game_name));
         if (!gbc_bios_palette)
         {
@@ -614,11 +614,11 @@ static void check_variables(void)
            gbc_bios_palette = const_cast<unsigned short*>(findGbcDirPal("GBC - Dark Green"));
         }
       break;
-        
+
       case 2:
        load_custom_palette();
       break;
-     
+
       case 3:
        var.key = "gambatte_gb_internal_palette";
        if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
@@ -632,7 +632,7 @@ static void check_variables(void)
        gbc_bios_palette = const_cast<unsigned short*>(findGbcDirPal("GBC - Grayscale"));
      break;
    }
-   //gambatte is using custom colorization then we have a previously palette loaded, 
+   //gambatte is using custom colorization then we have a previously palette loaded,
    //skip this loop then
    if (gb_colorization_enable != 2)
    {
@@ -699,7 +699,7 @@ bool retro_load_game(const struct retro_game_info *info)
       return false;
    }
 #endif
-   
+
    bool has_gbc_bootloader = file_present_in_system("gbc_bios.bin");
 
    unsigned flags = 0;
@@ -711,7 +711,7 @@ bool retro_load_game(const struct retro_game_info *info)
       {
           flags |= gambatte::GB::FORCE_DMG;
       }
-      
+
       if (!strcmp(var.value, "GBC"))
       {
          if (has_gbc_bootloader && use_official_bootloader)
@@ -755,15 +755,15 @@ bool retro_load_game(const struct retro_game_info *info)
       { rom, gb.rombank0_ptr(), 0, 0x0000,               0, 0, 0x4000,  NULL },
       { rom, gb.rombank1_ptr(), 0, 0x4000,               0, 0, 0x4000,  NULL },
    };
-   
+
    struct retro_memory_map mmaps =
    {
       descs,
       sizeof(descs) / sizeof(descs[0]) - (sramlen == 0)
    };
-   
+
    environ_cb(RETRO_ENVIRONMENT_SET_MEMORY_MAPS, &mmaps);
-   
+
    bool yes = true;
    environ_cb(RETRO_ENVIRONMENT_SET_SUPPORT_ACHIEVEMENTS, &yes);
 
@@ -787,9 +787,9 @@ void *retro_get_memory_data(unsigned id)
       case RETRO_MEMORY_RTC:
          return gb.rtcdata_ptr();
       case RETRO_MEMORY_SYSTEM_RAM:
-         /* Really ugly hack here, relies upon 
+         /* Really ugly hack here, relies upon
           * libgambatte/src/memory/memptrs.cpp MemPtrs::reset not
-          * realizing that that memchunk hack is ugly, or 
+          * realizing that that memchunk hack is ugly, or
           * otherwise getting rearranged. */
          return gb.rambank0_ptr();
    }
@@ -806,9 +806,9 @@ size_t retro_get_memory_size(unsigned id)
       case RETRO_MEMORY_RTC:
          return gb.rtcdata_size();
       case RETRO_MEMORY_SYSTEM_RAM:
-         /* This is rather hacky too... it relies upon 
+         /* This is rather hacky too... it relies upon
           * libgambatte/src/memory/cartridge.cpp not changing
-          * the call to memptrs.reset, but this is 
+          * the call to memptrs.reset, but this is
           * probably mostly safe.
           *
           * GBC will probably not get a
@@ -907,4 +907,3 @@ void retro_run()
 }
 
 unsigned retro_api_version() { return RETRO_API_VERSION; }
-

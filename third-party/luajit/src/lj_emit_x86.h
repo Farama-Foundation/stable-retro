@@ -550,4 +550,3 @@ static void emit_addptr(ASMState *as, Reg r, int32_t ofs)
 
 /* Prefer rematerialization of BASE/L from global_State over spills. */
 #define emit_canremat(ref)	((ref) <= REF_BASE)
-

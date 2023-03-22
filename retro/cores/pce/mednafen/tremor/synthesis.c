@@ -31,7 +31,7 @@ static int _vorbis_synthesis1(vorbis_block *vb,ogg_packet *op,int decodep){
   codec_setup_info     *ci= vi ? (codec_setup_info *)vi->codec_setup : 0;
   oggpack_buffer       *opb=vb ? &vb->opb : 0;
   int                   type,mode,i;
- 
+
   if (!vd || !b || !vi || !ci || !opb) {
     return OV_EBADPACKET;
   }
@@ -49,7 +49,7 @@ static int _vorbis_synthesis1(vorbis_block *vb,ogg_packet *op,int decodep){
   /* read our mode and pre/post windowsize */
   mode=oggpack_read(opb,b->modebits);
   if(mode==-1)return(OV_EBADPACKET);
-  
+
   vb->mode=mode;
   if(!ci->mode_param[mode]){
     return(OV_EBADPACKET);
@@ -64,7 +64,7 @@ static int _vorbis_synthesis1(vorbis_block *vb,ogg_packet *op,int decodep){
     vb->lW=0;
     vb->nW=0;
   }
-  
+
   /* more setup */
   vb->granulepos=op->granulepos;
   vb->sequence=op->packetno-3; /* first block is third packet */
@@ -76,16 +76,16 @@ static int _vorbis_synthesis1(vorbis_block *vb,ogg_packet *op,int decodep){
     vb->pcm=(ogg_int32_t **)_vorbis_block_alloc(vb,sizeof(*vb->pcm)*vi->channels);
     for(i=0;i<vi->channels;i++)
       vb->pcm[i]=(ogg_int32_t *)_vorbis_block_alloc(vb,vb->pcmend*sizeof(*vb->pcm[i]));
-    
+
     /* unpack_header enforces range checking */
     type=ci->map_type[ci->mode_param[mode]->mapping];
-    
+
     return(_mapping_P[type]->inverse(vb,b->mode[mode]));
   }else{
     /* no pcm */
     vb->pcmend=0;
     vb->pcm=NULL;
-    
+
     return(0);
   }
 }
@@ -104,7 +104,7 @@ long vorbis_packet_blocksize(vorbis_info *vi,ogg_packet *op){
   codec_setup_info     *ci=(codec_setup_info *)vi->codec_setup;
   oggpack_buffer       opb;
   int                  mode;
- 
+
   oggpack_readinit(&opb,op->packet,op->bytes);
 
   /* Check the packet type */
@@ -127,5 +127,3 @@ long vorbis_packet_blocksize(vorbis_info *vi,ogg_packet *op){
   if(mode==-1)return(OV_EBADPACKET);
   return(ci->blocksizes[ci->mode_param[mode]->blockflag]);
 }
-
-

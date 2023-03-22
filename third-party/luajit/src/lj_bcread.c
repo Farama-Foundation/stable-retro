@@ -454,4 +454,3 @@ GCproto *lj_bcread(LexState *ls)
   L->top--;
   return protoV(L->top);
 }
-

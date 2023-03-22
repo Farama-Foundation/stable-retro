@@ -194,4 +194,3 @@ void LJ_FASTCALL lj_str_free(global_State *g, GCstr *s)
   g->strnum--;
   lj_mem_free(g, s, sizestring(s));
 }
-

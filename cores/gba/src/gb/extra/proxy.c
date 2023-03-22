@@ -231,8 +231,8 @@ void GBVideoProxyRendererDrawRange(struct GBVideoRenderer* renderer, int startX,
 	if (!proxyRenderer->logger->block) {
 		proxyRenderer->backend->drawRange(proxyRenderer->backend, startX, endX, y, obj, oamMax);
 	}
-	mVideoLoggerWriteBuffer(proxyRenderer->logger, BUFFER_OAM, 0, oamMax * sizeof(*obj), obj);	
-	mVideoLoggerRendererDrawRange(proxyRenderer->logger, startX, endX, y);	
+	mVideoLoggerWriteBuffer(proxyRenderer->logger, BUFFER_OAM, 0, oamMax * sizeof(*obj), obj);
+	mVideoLoggerRendererDrawRange(proxyRenderer->logger, startX, endX, y);
 }
 
 void GBVideoProxyRendererFinishScanline(struct GBVideoRenderer* renderer, int y) {

@@ -20,7 +20,7 @@ typedef struct sms_ntsc_setup_t
   double contrast;   /* -1 = dark (0.5)       +1 = light (1.5) */
   double brightness; /* -1 = dark (0.5)       +1 = light (1.5) */
   double sharpness;  /* edge contrast enhancement/blurring */
-  
+
   /* Advanced parameters */
   double gamma;      /* -1 = dark (1.5)       +1 = light (0.5) */
   double resolution; /* image resolution */
@@ -28,7 +28,7 @@ typedef struct sms_ntsc_setup_t
   double fringing;   /* color artifacts caused by brightness changes */
   double bleed;      /* color bleed (color resolution reduction) */
   float const* decoder_matrix; /* optional RGB decoder matrix, 6 elements */
-  
+
   unsigned char* palette_out;  /* optional RGB palette out, 3 bytes per color */
 } sms_ntsc_setup_t;
 

@@ -224,7 +224,7 @@ uInt8 System::peek(uInt16 addr, uInt8 flags)
     access.device->setAccessFlags(addr, flags);
 #endif
 
-  // See if this page uses direct accessing or not 
+  // See if this page uses direct accessing or not
   uInt8 result;
   if(access.directPeekBase)
     result = *(access.directPeekBase + (addr & myPageMask));
@@ -244,8 +244,8 @@ void System::poke(uInt16 addr, uInt8 value)
 {
   uInt16 page = (addr & myAddressMask) >> myPageShift;
   PageAccess& access = myPageAccessTable[page];
-  
-  // See if this page uses direct accessing or not 
+
+  // See if this page uses direct accessing or not
   if(access.directPokeBase)
   {
     // Since we have direct access to this poke, we can dirty its page

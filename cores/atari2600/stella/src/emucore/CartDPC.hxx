@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -29,7 +29,7 @@ class System;
 #endif
 
 /**
-  Cartridge class used for Pitfall II.  There are two 4K program banks, a 
+  Cartridge class used for Pitfall II.  There are two 4K program banks, a
   2K display bank, and the DPC chip.  The bankswitching itself is the same
   as F8 scheme (hotspots at $1FF8 and $1FF9).  DPC chip access is mapped to
   $1000 - $1080 ($1000 - $103F is read port, $1040 - $107F is write port).
@@ -53,7 +53,7 @@ class CartridgeDPC : public Cartridge
       @param settings  A reference to the various settings (read-only)
     */
     CartridgeDPC(const uInt8* image, uInt32 size, const Settings& settings);
- 
+
     /**
       Destructor
     */
@@ -167,12 +167,12 @@ class CartridgeDPC : public Cartridge
     bool poke(uInt16 address, uInt8 value);
 
   private:
-    /** 
+    /**
       Clocks the random number generator to move it to its next state
     */
     void clockRandomNumberGenerator();
 
-    /** 
+    /**
       Updates any data fetchers in music mode based on the number of
       CPU cycles which have passed since the last update.
     */

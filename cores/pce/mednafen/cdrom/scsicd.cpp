@@ -356,7 +356,7 @@ static void GenSubQFromSubPW(void)
 
 // NEC sub-errors(ASC), no ASCQ.
 #define NSE_NO_DISC			0x0B		// Used with SENSEKEY_NOT_READY	- This condition occurs when tray is closed with no disc present.
-#define NSE_TRAY_OPEN			0x0D		// Used with SENSEKEY_NOT_READY 
+#define NSE_TRAY_OPEN			0x0D		// Used with SENSEKEY_NOT_READY
 #define NSE_SEEK_ERROR			0x15
 #define NSE_HEADER_READ_ERROR		0x16		// Used with SENSEKEY_MEDIUM_ERROR
 #define NSE_NOT_AUDIO_TRACK		0x1C		// Used with SENSEKEY_MEDIUM_ERROR
@@ -560,18 +560,18 @@ static void DoMODESELECT6(const uint8_t *cdb)
 	Datumama: 10, 00 00 00 00 00 00 00 00 00 0f
 
  Last Imperial Prince:
-	Datumama: 10, 00 00 00 00 00 00 00 00 00 0f 
-	Datumama: 10, 00 00 00 00 00 00 00 00 00 0f 
+	Datumama: 10, 00 00 00 00 00 00 00 00 00 0f
+	Datumama: 10, 00 00 00 00 00 00 00 00 00 0f
 
  Megami Paradise II:
 	Datumama: 10, 00 00 00 00 00 00 00 00 00 0a
 
  Miraculum:
-	Datumama: 7, 00 00 00 00 29 01 00 
-	Datumama: 10, 00 00 00 00 00 00 00 00 00 0f 
-	Datumama: 7, 00 00 00 00 29 01 00 
-	Datumama: 10, 00 00 00 00 00 00 00 00 00 00 
-	Datumama: 7, 00 00 00 00 29 01 00 
+	Datumama: 7, 00 00 00 00 29 01 00
+	Datumama: 10, 00 00 00 00 00 00 00 00 00 0f
+	Datumama: 7, 00 00 00 00 29 01 00
+	Datumama: 10, 00 00 00 00 00 00 00 00 00 00
+	Datumama: 7, 00 00 00 00 29 01 00
 
  Pachio Kun FX:
 	Datumama: 10, 00 00 00 00 00 00 00 00 00 14
@@ -583,8 +583,8 @@ static void DoMODESELECT6(const uint8_t *cdb)
 	Datumama: 10, 00 00 00 00 01 00 00 00 00 01
 
  Tokimeki Card Paradise:
-	Datumama: 10, 00 00 00 00 00 00 00 00 00 14 
-	Datumama: 10, 00 00 00 00 00 00 00 00 00 07 
+	Datumama: 10, 00 00 00 00 00 00 00 00 00 14
+	Datumama: 10, 00 00 00 00 00 00 00 00 00 07
 
  Tonari no Princess Rolfee:
 	Datumama: 10, 00 00 00 00 00 00 00 00 00 00
@@ -736,7 +736,7 @@ static void UpdateMPCacheP(const ModePage* mp)
 	     // the sound output amplitude to approach overflow levels.
 	     // But, until there's a killer PC-FX homebrew game that necessitates more computationally-expensive CD-DA handling,
 	     // I don't see a good reason to change how CD-DA resampling is currently implemented.
-	     // 
+	     //
 	     speed = std::max<int>(-32, std::min<int>(32, (int8_t)mp->current_value[0]));
 	     rate = 44100 + 441 * speed;
 
@@ -752,7 +752,7 @@ static void UpdateMPCacheP(const ModePage* mp)
 static void UpdateMPCache(uint8_t code)
 {
  for(int pi = 0; pi < NumModePages; pi++)
- { 
+ {
   const ModePage* mp = &ModePages[pi];
 
   if(mp->code == code)
@@ -854,7 +854,7 @@ static void FinishMODESELECT6(const uint8_t *data, const uint8_t data_len)
 	  if(code == mp->code)
 	  {
 	   page_found = true;
-	
+
 	   if(param_len != mp->param_length)
 	   {
             CommandCCError(SENSEKEY_ILLEGAL_REQUEST, NSE_INVALID_PARAMETER);
@@ -944,7 +944,7 @@ static void DoMODESENSE6(const uint8_t *cdb)
   data_in[index++] = 0x00;	// Density code.
   MDFN_en24msb(&data_in[index], 0x6E); // FIXME: Number of blocks?
   index += 3;
- 
+
   data_in[index++] = 0x00;	// Reserved
   MDFN_en24msb(&data_in[index], 0x800); // Block length;
   index += 3;
@@ -966,7 +966,7 @@ static void DoMODESENSE6(const uint8_t *cdb)
 
   data_in[index++] = mp->code;
   data_in[index++] = mp->param_length;
-  
+
   for(int parami = 0; parami < mp->param_length; parami++)
   {
    uint8_t data;
@@ -1018,7 +1018,7 @@ static void DoREZEROUNIT(const uint8_t *cdb)
 // it was 3 bytes too long, and the last real byte was 0x45 instead of 0x20.
 // TODO:  Investigate this discrepancy by testing an FXGA with the official loader software.
 #if 0
-static const uint8_t InqData[0x24] = 
+static const uint8_t InqData[0x24] =
 {
  // Standard
  0x05, 0x80, 0x02, 0x00,
@@ -1027,9 +1027,9 @@ static const uint8_t InqData[0x24] =
  0x1F,
 
  // Vendor Specific
- 0x00, 0x00, 0x00, 0x4E, 0x45, 0x43, 0x20, 0x20, 
- 0x20, 0x20, 0x20, 0x43, 0x44, 0x2D, 0x52, 0x4F, 
- 0x4D, 0x20, 0x44, 0x52, 0x49, 0x56, 0x45, 0x3A, 
+ 0x00, 0x00, 0x00, 0x4E, 0x45, 0x43, 0x20, 0x20,
+ 0x20, 0x20, 0x20, 0x43, 0x44, 0x2D, 0x52, 0x4F,
+ 0x4D, 0x20, 0x44, 0x52, 0x49, 0x56, 0x45, 0x3A,
  0x46, 0x58, 0x20, 0x31, 0x2E, 0x30, 0x20
 };
 #endif
@@ -1065,15 +1065,15 @@ static const uint8_t InqData[0x24] =
  0x00,
 
  // 8-15, vendor ID
- // NEC     
+ // NEC
  0x4E, 0x45, 0x43, 0x20, 0x20, 0x20, 0x20, 0x20,
 
  // 16-31, product ID
- // CD-ROM DRIVE:FX 
+ // CD-ROM DRIVE:FX
  0x43, 0x44, 0x2D, 0x52, 0x4F, 0x4D, 0x20, 0x44, 0x52, 0x49, 0x56, 0x45, 0x3A, 0x46, 0x58, 0x20,
 
  // 32-35, product revision level
- // 1.0 
+ // 1.0
  0x31, 0x2E, 0x30, 0x20
 };
 
@@ -1190,7 +1190,7 @@ static void DoNEC_GETDIRINFO(const uint8_t *cdb)
      lilba++;
      offset += 0xA;
     }
-  
+
     if(!match || match == 0xA2)
     {
      EncodeM3TOC(&data_in[offset], 0xA2, lilba, toc.tracks[100].lba, toc.tracks[100].control);
@@ -1495,7 +1495,7 @@ static void DoPABase(const uint32_t lba, const uint32_t length, unsigned int sta
   CommandCCError(SENSEKEY_ILLEGAL_REQUEST, NSE_INVALID_PARAMETER);
   return;
  }
-  
+
  if(lba < toc.tracks[toc.first_track].lba)
  {
   CommandCCError(SENSEKEY_ILLEGAL_REQUEST, NSE_INVALID_PARAMETER);
@@ -1544,7 +1544,7 @@ static void DoNEC_SAPSP(const uint8_t *cdb)
 
  switch (cdb[9] & 0xc0)
  {
-  default: 
+  default:
 	CommandCCError(SENSEKEY_ILLEGAL_REQUEST, NSE_INVALID_PARAMETER);
 	return;
 	break;
@@ -1614,7 +1614,7 @@ static void DoNEC_SAPEP(const uint8_t *cdb)
 
  switch (cdb[9] & 0xc0)
  {
-  default: 
+  default:
 	CommandCCError(SENSEKEY_ILLEGAL_REQUEST, NSE_INVALID_PARAMETER);
 	return;
 	break;
@@ -1795,7 +1795,7 @@ static void DoPATRBase(const uint32_t lba, const uint32_t length)
   return;
  }
  else
- {  
+ {
   if(toc.tracks[toc.FindTrackByLBA(lba)].control & 0x04)
   {
    CommandCCError(SENSEKEY_MEDIUM_ERROR, NSE_NOT_AUDIO_TRACK);
@@ -1848,7 +1848,7 @@ static void DoPATR12(const uint8_t *cdb)
  const uint32_t length = MDFN_de32msb(cdb + 0x6);
 
  if(!StartTrack || StartTrack < toc.first_track || StartTrack > toc.last_track)
- { 
+ {
   CommandCCError(SENSEKEY_ILLEGAL_REQUEST, NSE_INVALID_PARAMETER);
   return;
  }
@@ -1859,7 +1859,7 @@ static void DoPATR12(const uint8_t *cdb)
 static void DoPAUSERESUME(const uint8_t *cdb)
 {
  // Pause/resume
- // "It shall not be considered an error to request a pause when a pause is already in effect, 
+ // "It shall not be considered an error to request a pause when a pause is already in effect,
  // or to request a resume when a play operation is in progress."
 
  if(cdda.CDDAStatus == CDDASTATUS_STOPPED)
@@ -2021,7 +2021,7 @@ static void DoSEEKBase(uint32_t lba)
  {
   CommandCCError(SENSEKEY_ILLEGAL_REQUEST, NSE_END_OF_VOLUME);
   return;
- } 
+ }
 
  cdda.CDDAStatus = CDDASTATUS_STOPPED;
  SendStatusAndMessage(STATUS_GOOD, 0x00);
@@ -2152,7 +2152,7 @@ static void DoREADSUBCHANNEL(const uint8_t *cdb)
     data_in[offset++] = tmp_lba >> 8;
     data_in[offset++] = tmp_lba >> 0;
    }
-  }  
+  }
 
   if(!DataFormat || DataFormat == 0x02)
   {
@@ -2394,7 +2394,7 @@ static SCSICH PCFXCommandDefs[] =
  { 0xFF, 0, 0, NULL, NULL },
 };
 
-static SCSICH PCECommandDefs[] = 
+static SCSICH PCECommandDefs[] =
 {
  { 0x00, SCF_REQUIRES_MEDIUM, DoTESTUNITREADY, "Test Unit Ready" },
  { 0x03, 0, DoREQUESTSENSE, "Request Sense" },
@@ -2608,7 +2608,7 @@ static INLINE void RunCDDA(uint32_t system_timestamp, int32_t run_time)
     __m128i f0 = _mm_load_si128((__m128i *)&f[0]);
     __m128i f1 = _mm_load_si128((__m128i *)&f[8]);
 #endif
-      
+
     for(unsigned lr = 0; lr < 2; lr++)
     {
      const int16* b = &cdda.OversampleBuffer[lr][((cdda.OversamplePos >> 1) + 1) & 0xF];
@@ -2692,7 +2692,7 @@ static INLINE void RunCDDA(uint32_t system_timestamp, int32_t run_time)
 
     for(unsigned c = 0; c < CDDA_FILTER_NUMCONVOLUTIONS; c++)
     {
-     coeff[c] = (CDDA_Filter[1 + synthtime_phase_int + 0][c] * mult_a + 
+     coeff[c] = (CDDA_Filter[1 + synthtime_phase_int + 0][c] * mult_a +
 		 CDDA_Filter[1 + synthtime_phase_int + 1][c] * mult_b);
     }
 
@@ -2725,7 +2725,7 @@ static INLINE void RunCDRead(uint32_t system_timestamp, int32_t run_time)
    {
     //printf("Carp: %d %d %d\n", din->CanWrite(), SectorCount, CDReadTimer);
     //CDReadTimer = (cd.data_in_size - cd.data_in_pos) * 10;
-    
+
     CDReadTimer += (uint64_t) 1 * 2048 * System_Clock / CD_DATA_TRANSFER_RATE;
 
     //CDReadTimer += (uint64_t) 1 * 128 * System_Clock / CD_DATA_TRANSFER_RATE;
@@ -2865,14 +2865,14 @@ uint32_t SCSICD_Run(scsicd_timestamp_t system_timestamp)
 
       while(cmd_info_ptr->pretty_name && cmd_info_ptr->cmd != cd.command_buffer[0])
        cmd_info_ptr++;
-  
+
       if(SCSILog)
       {
        char log_buffer[1024];
        int lb_pos;
 
        log_buffer[0] = 0;
-       
+
        lb_pos = snprintf(log_buffer, 1024, "Command: %02x, %s%s  ", cd.command_buffer[0], cmd_info_ptr->pretty_name ? cmd_info_ptr->pretty_name : "!!BAD COMMAND!!",
 			(cmd_info_ptr->flags & SCF_UNTESTED) ? "(UNTESTED)" : "");
 
@@ -2964,7 +2964,7 @@ uint32_t SCSICD_Run(scsicd_timestamp_t system_timestamp)
     }
     break;
 
-  
+
   case PHASE_MESSAGE_OUT:
    //printf("%d %d, %02x\n", REQ_signal, ACK_signal, cd_bus.DB);
    if(REQ_signal && ACK_signal)
@@ -3143,7 +3143,7 @@ void SCSICD_SetCDDAVolume(double left, double right)
 
 int SCSICD_StateAction(StateMem* sm, const unsigned load, const bool data_only, const char *sname)
 {
- SFORMAT StateRegs[] = 
+ SFORMAT StateRegs[] =
  {
   SFVARN(cd_bus.DB, "DB"),
   SFVARN(cd_bus.signals, "Signals"),

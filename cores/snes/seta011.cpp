@@ -202,7 +202,7 @@ uint8 S9xGetST011 (uint32 Address)
 
 	// status check
 	if (address == 0x01)
-		t = 0xFF;	
+		t = 0xFF;
 	else
 		t = Memory.SRAM[address]; // read directly from s-ram
 

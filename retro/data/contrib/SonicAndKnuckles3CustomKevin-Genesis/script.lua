@@ -119,5 +119,3 @@ function contest_reward()
     end
     return reward
 end
-
-

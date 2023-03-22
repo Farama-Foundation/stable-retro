@@ -47,10 +47,10 @@ t_history history;
  * history_add_file
  *
  * Adds the given file path to the top of the history list, shifting each
- * existing entry in the history down one place. If given file path is 
+ * existing entry in the history down one place. If given file path is
  * already in the list then the existing entry is (in effect) moved to the
  * top instead.
-  ****************************************************************************/ 
+  ****************************************************************************/
 void history_add_file(char *filepath, char *filename, u8 filetype)
 {
   /* Create the new entry for this path. */
@@ -60,10 +60,10 @@ void history_add_file(char *filepath, char *filename, u8 filetype)
   newentry.filepath[MAXJOLIET - 1] = '\0';
   newentry.filename[MAXJOLIET - 1] = '\0';
   newentry.filetype = filetype;
-  
-  t_history_entry oldentry;  /* Old entry is the one being shuffled down a spot. */  
+
+  t_history_entry oldentry;  /* Old entry is the one being shuffled down a spot. */
   t_history_entry currentry;  /* Curr entry is the one that just replaced old path. */
-  
+
   /* Initially set curr entry to the new value. */
   memcpy(&currentry, &newentry, sizeof(t_history_entry));
 
@@ -133,6 +133,3 @@ void history_default(void)
   /* restore history */
   history_load();
 }
-
-
-

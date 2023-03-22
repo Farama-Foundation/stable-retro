@@ -6,7 +6,7 @@
 //
 // (c) Neil C / Etanza Systems / 2K6
 //
-// Shouts / Loves / Moans = etanza at lycos dot co dot uk 
+// Shouts / Loves / Moans = etanza at lycos dot co dot uk
 //
 // This work is hereby placed in the public domain for all purposes, including
 // use in commercial applications.
@@ -80,8 +80,8 @@ void init_3band_state(EQSTATE * es, int lowfreq, int highfreq, int mixfreq)
 
 /* - sample can be any range you like :)
 //
-// Note that the output will depend on the gain settings for each band 
-// (especially the bass) so may require clipping before output, but you 
+// Note that the output will depend on the gain settings for each band
+// (especially the bass) so may require clipping before output, but you
 // knew that anyway :)*/
 
 double do_3band(EQSTATE * es, int sample)

@@ -25,7 +25,7 @@ Random::Random()
 {
   initSeed();
 }
- 
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void Random::initSeed()
 {

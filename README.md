@@ -88,6 +88,8 @@ You should probably start with the [Getting Started Guide](https://retro.readthe
 
 [See CONTRIBUTING.md](https://github.com/openai/retro/blob/master/CONTRIBUTING.md)
 
+There is an effort to get this project to the [Farama Foundation Project Standards](https://farama.org/project_standards). These development efforts are being coordinated in the `stable-retro` channel of the Farama Foundation's Discord. Click [here](https://discord.gg/aPjhD5cf) for the invite
+
 # Changelog
 
 [See CHANGES.md](https://github.com/openai/retro/blob/master/CHANGES.md)

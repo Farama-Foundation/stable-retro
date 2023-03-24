@@ -58,4 +58,3 @@ P.S. VisualPng was written based on preliminary work of:
     - Simon-Pierre Cadieux
     - Glenn Randers-Pehrson
     - Greg Roelofs
-

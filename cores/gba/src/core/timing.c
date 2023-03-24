@@ -82,7 +82,7 @@ int32_t mTimingTick(struct mTiming* timing, int32_t cycles) {
 	if (timing->reroot) {
 		timing->root = timing->reroot;
 		timing->reroot = NULL;
-		*timing->nextEvent = mTimingNextEvent(timing); 
+		*timing->nextEvent = mTimingNextEvent(timing);
 	}
 	return *timing->nextEvent;
 }

@@ -3,7 +3,7 @@
  *
  *  Load a normal file, or ZIP/GZ archive into ROM buffer.
  *  Returns loaded ROM size (zero if an error occured)
- *  
+ *
  *
  *  Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003  Charles Mac Donald
  *  modified by Eke-Eke (Genesis Plus GX)
@@ -48,7 +48,7 @@ static int check_zip(char *filename);
 int load_archive(char *filename, unsigned char *buffer, int maxsize, char *extension)
 {
   int size = 0;
-  
+
   if(check_zip(filename))
   {
     unz_file_info info;

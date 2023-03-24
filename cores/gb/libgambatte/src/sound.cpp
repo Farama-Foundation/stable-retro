@@ -157,7 +157,7 @@ namespace gambatte
       while (n--)
       {
          sum += *b;
-         /* xor away the initial rsum value of 0x8000 (which prevents 
+         /* xor away the initial rsum value of 0x8000 (which prevents
           * borrows from the high word) from the low word */
          *b++ = sum ^ 0x8000;
       }
@@ -177,7 +177,7 @@ namespace gambatte
 
    void PSG::setSoVolume(const unsigned nr50)
    {
-      soVol_ = (((nr50      & 0x7) + 1) * so1Mul 
+      soVol_ = (((nr50      & 0x7) + 1) * so1Mul
             +  ((nr50 >> 4 & 0x7) + 1) * so2Mul) * 64;
    }
 

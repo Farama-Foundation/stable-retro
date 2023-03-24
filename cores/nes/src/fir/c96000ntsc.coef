@@ -5,13 +5,13 @@
 ;; Grid density: 10257
 ;; Deviation parameter: y=-3.41994150089587e-6
 ;;
-;; Specifications: 
+;; Specifications:
 ;; (limit > 48000 894886.363636 0 0.5)
 ;; (limit < 48000 894886.363636 0 0.5)
 ;; (limit > 0 36000 1 1)
 ;; (limit < 0 36000 1 1)
 ;;
-;; Coefficients: 
+;; Coefficients:
 
 6.25765784406859e-7
 -5.74349474884059e-7

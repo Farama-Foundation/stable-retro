@@ -395,4 +395,3 @@ ziptool_post_close(const char *archive) {
 
     return 0;
 }
-

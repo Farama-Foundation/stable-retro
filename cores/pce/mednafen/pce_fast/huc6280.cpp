@@ -169,7 +169,7 @@ static INLINE uint8 RdOp(unsigned int A)
 {       \
    HU_Page1[0x100 + HU_S] = V; \
    HU_S--;  \
-}       
+}
 
 #define PUSH_PC()	\
 {	\
@@ -314,10 +314,10 @@ static uint8 ZNTable[256];
 #define TMA	for(int i = 0; i < 8; i ++) {		\
    if(x & (1 << i))	\
    HU_A = HuCPU.MPR[i];	\
-}	
+}
 
-#define CSL	
-#define CSH	
+#define CSL
+#define CSH
 
 #define RMB(bitto)	x &= ~(1 << (bitto & 7))
 #define SMB(bitto)	x |= 1 << (bitto & 7)
@@ -458,8 +458,8 @@ static uint8 ZNTable[256];
 
 #define BMT_TDD	BMT_PREHONK(TDD); do { ADDCYC(6); WrMem(HuCPU.bmt_dest, RdMem(HuCPU.bmt_src)); HuCPU.bmt_src--; HuCPU.bmt_dest--; BMT_HONKHONK(TDD); HuCPU.bmt_length--; } while(HuCPU.bmt_length);
 #define BMT_TAI BMT_PREHONK(TAI); {HuCPU.bmt_alternate = 0; do { ADDCYC(6); WrMem(HuCPU.bmt_dest, RdMem(HuCPU.bmt_src + HuCPU.bmt_alternate)); HuCPU.bmt_dest++; HuCPU.bmt_alternate ^= 1; BMT_HONKHONK(TAI); HuCPU.bmt_length--; } while(HuCPU.bmt_length); }
-#define BMT_TIA BMT_PREHONK(TIA); {HuCPU.bmt_alternate = 0; do { ADDCYC(6); WrMem(HuCPU.bmt_dest + HuCPU.bmt_alternate, RdMem(HuCPU.bmt_src)); HuCPU.bmt_src++; HuCPU.bmt_alternate ^= 1; BMT_HONKHONK(TIA); HuCPU.bmt_length--; } while(HuCPU.bmt_length); } 
-#define BMT_TII BMT_PREHONK(TII); do { ADDCYC(6); WrMem(HuCPU.bmt_dest, RdMem(HuCPU.bmt_src)); HuCPU.bmt_src++; HuCPU.bmt_dest++; BMT_HONKHONK(TII); HuCPU.bmt_length--; } while(HuCPU.bmt_length); 
+#define BMT_TIA BMT_PREHONK(TIA); {HuCPU.bmt_alternate = 0; do { ADDCYC(6); WrMem(HuCPU.bmt_dest + HuCPU.bmt_alternate, RdMem(HuCPU.bmt_src)); HuCPU.bmt_src++; HuCPU.bmt_alternate ^= 1; BMT_HONKHONK(TIA); HuCPU.bmt_length--; } while(HuCPU.bmt_length); }
+#define BMT_TII BMT_PREHONK(TII); do { ADDCYC(6); WrMem(HuCPU.bmt_dest, RdMem(HuCPU.bmt_src)); HuCPU.bmt_src++; HuCPU.bmt_dest++; BMT_HONKHONK(TII); HuCPU.bmt_length--; } while(HuCPU.bmt_length);
 #define BMT_TIN BMT_PREHONK(TIN); do { ADDCYC(6); WrMem(HuCPU.bmt_dest, RdMem(HuCPU.bmt_src)); HuCPU.bmt_src++; BMT_HONKHONK(TIN); HuCPU.bmt_length--; } while(HuCPU.bmt_length);
 
 // Block memory transfer load
@@ -478,24 +478,24 @@ static uint8 ZNTable[256];
 #define ST_IY(r)	{unsigned int EA; GetIY(EA); WrMem(EA,r); break; }
 
 static const uint8 CycTable[256] =
-{                             
-   /*0x00*/ 8, 7, 3, 4, 6, 4, 6, 7, 3, 2, 2, 2, 7, 5, 7, 6, 
-   /*0x10*/ 2, 7, 7, 4, 6, 4, 6, 7, 2, 5, 2, 2, 7, 5, 7, 6, 
-   /*0x20*/ 7, 7, 3, 4, 4, 4, 6, 7, 4, 2, 2, 2, 5, 5, 7, 6, 
-   /*0x30*/ 2, 7, 7, 2, 4, 4, 6, 7, 2, 5, 2, 2, 5, 5, 7, 6, 
-   /*0x40*/ 7, 7, 3, 4, 8, 4, 6, 7, 3, 2, 2, 2, 4, 5, 7, 6, 
-   /*0x50*/ 2, 7, 7, 5, 3, 4, 6, 7, 2, 5, 3, 2, 2, 5, 7, 6, 
-   /*0x60*/ 7, 7, 2, 2, 4, 4, 6, 7, 4, 2, 2, 2, 7, 5, 7, 6, 
-   /*0x70*/ 2, 7, 7, 17, 4, 4, 6, 7, 2, 5, 4, 2, 7, 5, 7, 6, 
+{
+   /*0x00*/ 8, 7, 3, 4, 6, 4, 6, 7, 3, 2, 2, 2, 7, 5, 7, 6,
+   /*0x10*/ 2, 7, 7, 4, 6, 4, 6, 7, 2, 5, 2, 2, 7, 5, 7, 6,
+   /*0x20*/ 7, 7, 3, 4, 4, 4, 6, 7, 4, 2, 2, 2, 5, 5, 7, 6,
+   /*0x30*/ 2, 7, 7, 2, 4, 4, 6, 7, 2, 5, 2, 2, 5, 5, 7, 6,
+   /*0x40*/ 7, 7, 3, 4, 8, 4, 6, 7, 3, 2, 2, 2, 4, 5, 7, 6,
+   /*0x50*/ 2, 7, 7, 5, 3, 4, 6, 7, 2, 5, 3, 2, 2, 5, 7, 6,
+   /*0x60*/ 7, 7, 2, 2, 4, 4, 6, 7, 4, 2, 2, 2, 7, 5, 7, 6,
+   /*0x70*/ 2, 7, 7, 17, 4, 4, 6, 7, 2, 5, 4, 2, 7, 5, 7, 6,
 
-   /*0x80*/ 4, 7, 2, 7, 4, 4, 4, 7, 2, 2, 2, 2, 5, 5, 5, 6, 
-   /*0x90*/ 2, 7, 7, 8, 4, 4, 4, 7, 2, 5, 2, 2, 5, 5, 5, 6, 
-   /*0xA0*/ 2, 7, 2, 7, 4, 4, 4, 7, 2, 2, 2, 2, 5, 5, 5, 6, 
-   /*0xB0*/ 2, 7, 7, 8, 4, 4, 4, 7, 2, 5, 2, 2, 5, 5, 5, 6, 
-   /*0xC0*/ 2, 7, 2, 17, 4, 4, 6, 7, 2, 2, 2, 2, 5, 5, 7, 6, 
-   /*0xD0*/ 2, 7, 7, 17, 3, 4, 6, 7, 2, 5, 3, 2, 2, 5, 7, 6, 
-   /*0xE0*/ 2, 7, 2, 17, 4, 4, 6, 7, 2, 2, 2, 2, 5, 5, 7, 6, 
-   /*0xF0*/ 2, 7, 7, 17, 2, 4, 6, 7, 2, 5, 4, 2, 2, 5, 7, 6, 
+   /*0x80*/ 4, 7, 2, 7, 4, 4, 4, 7, 2, 2, 2, 2, 5, 5, 5, 6,
+   /*0x90*/ 2, 7, 7, 8, 4, 4, 4, 7, 2, 5, 2, 2, 5, 5, 5, 6,
+   /*0xA0*/ 2, 7, 2, 7, 4, 4, 4, 7, 2, 2, 2, 2, 5, 5, 5, 6,
+   /*0xB0*/ 2, 7, 7, 8, 4, 4, 4, 7, 2, 5, 2, 2, 5, 5, 5, 6,
+   /*0xC0*/ 2, 7, 2, 17, 4, 4, 6, 7, 2, 2, 2, 2, 5, 5, 7, 6,
+   /*0xD0*/ 2, 7, 7, 17, 3, 4, 6, 7, 2, 5, 3, 2, 2, 5, 7, 6,
+   /*0xE0*/ 2, 7, 2, 17, 4, 4, 6, 7, 2, 2, 2, 2, 5, 5, 7, 6,
+   /*0xF0*/ 2, 7, 7, 17, 2, 4, 6, 7, 2, 5, 4, 2, 2, 5, 7, 6,
 };
 #if 0
 static bool WillIRQOccur(void) NO_INLINE;
@@ -600,7 +600,7 @@ void HuC6280_Power(void)
    {
       HuCPU.MPR[i] = 0;
       HuCPU.FastPageR[i] = NULL;
-   }  
+   }
    HuC6280_Reset();
 }
 
@@ -689,7 +689,7 @@ void HuC6280_Run(int32 cycles)
          switch(b1)
          {
 #include "huc6280_ops.inc"
-         } 
+         }
 
 #ifndef HUC6280_EXTRA_CRAZY
          FixPC_PC();

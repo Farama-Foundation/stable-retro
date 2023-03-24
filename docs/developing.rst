@@ -57,7 +57,7 @@ Linux prerequisites
 .. code-block:: shell
 
     sudo apt-get install zlib1g-dev
-    
+
 Building
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -701,7 +701,7 @@ static void prefmenu ()
   int ret, quit = 0;
   gui_menu *m = &menu_prefs;
   gui_item *items = m->items;
-  
+
   sprintf (items[0].text, "Auto ROM Load: %s", config.autoload ? "ON":"OFF");
   sprintf (items[1].text, "Auto Cheats: %s", config.autocheat ? "ON":"OFF");
   if (config.s_auto == 3) sprintf (items[2].text, "Auto Saves: ALL");
@@ -1134,7 +1134,7 @@ static void rompathmenu ()
   int i, ret;
   gui_menu *m = &menu_rompaths;
   gui_item *items = m->items;
-  
+
   for (i=0; i<12; i++)
   {
     f = fopen(config.sys_rom[i],"rb");
@@ -1160,7 +1160,7 @@ static void rompathmenu ()
       GUI_DeleteMenu(m);
       return;
     }
-    
+
     /* Initialize System ROM browser */
     if (OpenDirectory(config.l_device, ret + FILETYPE_MAX))
     {
@@ -1246,7 +1246,7 @@ static void rompathmenu ()
  * System Settings menu
  *
  ****************************************************************************/
-static const uint16 vc_table[4][2] = 
+static const uint16 vc_table[4][2] =
 {
   /* NTSC, PAL */
   {0xDA , 0xF2},  /* Mode 4 (192 lines) */
@@ -1431,7 +1431,7 @@ static void systemmenu ()
           /* restore SRAM */
           slot_autoload(0,config.s_device);
         }
-        
+
         break;
       }
 
@@ -1510,7 +1510,7 @@ static void systemmenu ()
       case 6:  /*** 68k Address Error ***/
       {
         config.addr_error ^= 1;
-        m68k.aerr_enabled = config.addr_error; 
+        m68k.aerr_enabled = config.addr_error;
         sprintf (items[6].text, "68k Address Error: %s", config.addr_error ? "ON" : "OFF");
         break;
       }
@@ -1624,7 +1624,7 @@ static void systemmenu ()
 
       /* reinitialize VDP timings */
       lines_per_frame = vdp_pal ? 313 : 262;
- 
+
       /* reinitialize NTSC/PAL mode in VDP status */
       if (system_hw & SYSTEM_MD)
       {
@@ -1710,7 +1710,7 @@ static void videomenu ()
   {
     sprintf (items[VI_OFFSET].text, "LCD Ghosting Filter: OFF");
   }
-  
+
   if (config.ntsc == 1)
     sprintf (items[VI_OFFSET+1].text, "NTSC Filter: COMPOSITE");
   else if (config.ntsc == 2)
@@ -1855,7 +1855,7 @@ static void videomenu ()
 
       case 6: /*** VIDEO Gamma correction ***/
       {
-        if (system_hw) 
+        if (system_hw)
         {
           update_gamma();
           state[0] = m->arrows[0]->state;
@@ -2051,7 +2051,7 @@ static void videomenu ()
 
       case VI_OFFSET+10: /*** screen position ***/
       {
-        if (system_hw) 
+        if (system_hw)
         {
           state[0] = m->arrows[0]->state;
           state[1] = m->arrows[1]->state;
@@ -2081,7 +2081,7 @@ static void videomenu ()
 
       case VI_OFFSET+11: /*** screen scaling ***/
       {
-        if (system_hw) 
+        if (system_hw)
         {
           state[0] = m->arrows[0]->state;
           state[1] = m->arrows[1]->state;
@@ -2160,7 +2160,7 @@ static void ctrlmenu_cb(void)
     {
       FONT_writeCenter("Player", 14, m->buttons[i].x + 4, m->buttons[i].x + 54, m->buttons[i].y + (m->buttons[i].h - 14)/2 + 14, (GXColor)DARK_GREY);
     }
-    
+
     if (input.dev[i-2] != NO_DEVICE)
     {
       sprintf(msg,"%d",cnt++);
@@ -2313,7 +2313,7 @@ static void ctrlmenu(void)
       {NULL,Ctrl_teamplayer_png     ,"","Select Port 2 device", 94,279,80,92},
       {NULL,Ctrl_4wayplay_png       ,"","Select Port 2 device", 98,280,72,92}
     }
-  };    
+  };
 
   /* Specific controller options */
   gui_item items_special[4][4] =
@@ -2445,9 +2445,9 @@ static void ctrlmenu(void)
           /* Menacer & Justifiers on Port B only */
           if (input.system[0] == SYSTEM_MENACER)
           {
-            input.system[0] += 2; 
+            input.system[0] += 2;
           }
- 
+
           /* allow only one gun type */
           if ((input.system[0] == SYSTEM_LIGHTPHASER) && ((input.system[1] == SYSTEM_MENACER) || (input.system[1] == SYSTEM_JUSTIFIER)))
           {
@@ -2650,7 +2650,7 @@ static void ctrlmenu(void)
           {
             /* if already displayed, do nothing */
             if (old_player == player) break;
-            
+
             /* slide out configuration window */
             GUI_DrawMenuFX(m, 20, 1);
           }
@@ -3008,7 +3008,7 @@ static void ctrlmenu(void)
         player = old_player;
 
         /* no input connected */
-        if (i == MAX_DEVICES) 
+        if (i == MAX_DEVICES)
         {
           /* stay in menu */
           GUI_WaitPrompt("Error","No input connected !");
@@ -3155,7 +3155,7 @@ static void savemenu_cb(void)
 {
   int i;
   char msg[16];
-  
+
   if (sram.on)
   {
     FONT_write("Backup Memory",16,buttons_saves[0].x+16,buttons_saves[0].y+(buttons_saves[0].h-16)/2+16,buttons_saves[0].x+buttons_saves[0].w,(GXColor)DARK_GREY);
@@ -3348,7 +3348,7 @@ static int savemenu(void)
           if (slots[slot].valid)
           {
             ret = slot_load(slot,config.s_device);
-         
+
             /* force exit */
             if (ret > 0)
             {
@@ -3491,7 +3491,7 @@ static int loadgamemenu ()
     switch (ret)
     {
       /*** Button B ***/
-      case -1: 
+      case -1:
         GUI_DrawMenuFX(m,30,1);
         GUI_DeleteMenu(m);
         return 0;
@@ -3549,7 +3549,7 @@ static void showrominfo (void)
   sprintf (items[8], "Product ID: %s", rominfo.product);
   sprintf (items[9], "Checksum: %04x (%04x) (%s)", rominfo.checksum, rominfo.realchecksum,
                                                   (rominfo.checksum == rominfo.realchecksum) ? "GOOD" : "BAD");
-  
+
   sprintf (items[10], "Supports: ");
   if (rominfo.peripherals & (1 << 1))
   {
@@ -3593,11 +3593,11 @@ static void showrominfo (void)
   else
     sprintf (items[12], "No Backup Memory specified");
 
-  if (sram.custom == 1) 
+  if (sram.custom == 1)
     sprintf (items[13], "Type: I2C (24Cxx)");
-  else if (sram.custom == 2) 
+  else if (sram.custom == 2)
     sprintf (items[13], "Type: SPI (25x512/95x512)");
-  else if (sram.custom == 3) 
+  else if (sram.custom == 3)
     sprintf (items[13], "Type: I2C (93C46)");
   else if (sram.detected)
     sprintf (items[13], "SRAM End: $%06X", sram.end);
@@ -3605,7 +3605,7 @@ static void showrominfo (void)
     sprintf (items[13], "SRAM enabled by default");
   else
     sprintf (items[13], "SRAM disabled by default");
-  
+
   if (region_code == REGION_USA)
     sprintf (items[14], "Region Code: %s (USA)", rominfo.country);
   else if (region_code == REGION_EUROPE)
@@ -3614,7 +3614,7 @@ static void showrominfo (void)
     sprintf (items[14], "Region Code: %s (JPN)", rominfo.country);
   else if (region_code == REGION_JAPAN_PAL)
     sprintf (items[14], "Region Code: %s (JPN-PAL)", rominfo.country);
-  
+
   GUI_TextWindow(&menu_main, "ROM Header Info", items, 15, 15);
 }
 
@@ -3624,7 +3624,7 @@ static void showrominfo (void)
 static void showcredits(void)
 {
   int offset = 0;
-  
+
   gx_texture *texture = gxTextureOpenPNG(Bg_credits_png,0);
   s16 p = 0;
 
@@ -4063,7 +4063,7 @@ void mainmenu(void)
     PAD_ScanPads();
   }
 #ifdef HW_RVL
-  while (WPAD_ButtonsHeld(0)) 
+  while (WPAD_ButtonsHeld(0))
   {
     VIDEO_WaitVSync();
     WPAD_ScanPads();

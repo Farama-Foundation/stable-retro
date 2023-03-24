@@ -436,7 +436,7 @@ int load_bios(int system)
 
         return size;
       }
-      
+
       return -1;
     }
 
@@ -445,7 +445,7 @@ int load_bios(int system)
     {
       /* check if Game Gear BOOTROM is already loaded */
       if (!(system_bios & SYSTEM_GG))
-      {      
+      {
         /* mark both Master System & Game Gear BOOTROM as unloaded */
         system_bios &= ~(SYSTEM_SMS | SYSTEM_GG);
 
@@ -464,7 +464,7 @@ int load_bios(int system)
 
         return size;
       }
-      
+
       return -1;
     }
 
@@ -473,7 +473,7 @@ int load_bios(int system)
     {
       /* check if Master System BOOTROM is already loaded */
       if (!(system_bios & SYSTEM_SMS) || ((system_bios & 0x0c) != (region_code >> 4)))
-      {      
+      {
         /* mark both Master System & Game Gear BOOTROM as unloaded */
         system_bios &= ~(SYSTEM_SMS | SYSTEM_GG);
 
@@ -506,7 +506,7 @@ int load_bios(int system)
 
         return size;
       }
-      
+
       return -1;
     }
 
@@ -589,7 +589,7 @@ int load_rom(char *filename)
     {
       /* mark all BOOTROM as unloaded since they could have been overwritten */
       system_bios &= ~(0x10 | SYSTEM_SMS | SYSTEM_GG);
-      
+
       /* error loading file */
       return 0;
     }
@@ -658,7 +658,7 @@ int load_rom(char *filename)
       }
     }
   }
-    
+
   /* initialize ROM size */
   cart.romsize = size;
 
@@ -691,10 +691,10 @@ int load_rom(char *filename)
 
   /* Save auto-detected system hardware  */
   romtype = system_hw;
-  
+
   /* CD image file */
   if (system_hw == SYSTEM_MCD)
-  {   
+  {
     /* try to load CD BOOTROM for selected region */
     if (!load_bios(SYSTEM_MCD))
     {
@@ -741,9 +741,9 @@ int load_rom(char *filename)
     {
       /* unmount CD image */
       cdd_unload();
-    }    
+    }
   }
-  
+
   /* ROM cartridge with CD support */
   else if ((strstr(rominfo.domestic,"FLUX") != NULL) ||
            (strstr(rominfo.domestic,"WONDER LIBRARY") != NULL) ||
@@ -980,8 +980,8 @@ int load_rom(char *filename)
 /****************************************************************************
  * get_region
  *
- * Set console region from ROM header passed as parameter or 
- * from previous auto-detection (if NULL) 
+ * Set console region from ROM header passed as parameter or
+ * from previous auto-detection (if NULL)
  *
  ****************************************************************************/
 void get_region(char *romheader)
@@ -998,7 +998,7 @@ void get_region(char *romheader)
         case 0x64:
           region_code = REGION_EUROPE;
           break;
-   
+
         case 0xa1:
           region_code = REGION_JAPAN_NTSC;
           break;
@@ -1064,7 +1064,7 @@ void get_region(char *romheader)
         /* need PAL settings */
         region_code = REGION_EUROPE;
       }
-      else if ((rominfo.realchecksum == 0x532e) && (strstr(rominfo.product,"1011-00") != NULL)) 
+      else if ((rominfo.realchecksum == 0x532e) && (strstr(rominfo.product,"1011-00") != NULL))
       {
         /* On Dal Jang Goon (Korea) needs JAPAN region code */
         region_code = REGION_JAPAN_NTSC;
@@ -1085,7 +1085,7 @@ void get_region(char *romheader)
     /* restore auto-detected region */
     region_code = rom_region;
   }
-  
+
   /* force console region if requested */
   if (config.region_detect == 1) region_code = REGION_USA;
   else if (config.region_detect == 2) region_code = REGION_EUROPE;
@@ -1122,7 +1122,7 @@ char *get_company(void)
   int i;
   char company[10];
 
-  for (i = 3; i < 8; i++) 
+  for (i = 3; i < 8; i++)
   {
     company[i - 3] = rominfo.copyright[i];
   }
@@ -1167,4 +1167,3 @@ char *get_peripheral(int index)
     return (char *)peripheralinfo[index].pName;
   return (char *)companyinfo[MAXCOMPANY - 1].company;
 }
-

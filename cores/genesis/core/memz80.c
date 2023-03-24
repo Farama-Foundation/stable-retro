@@ -115,7 +115,7 @@ unsigned char z80_memory_r(unsigned int address)
       }
       return z80_unused_r(address);
     }
-      
+
     default: /* $8000-$FFFF: 68k bank (32K) */
     {
       address = zbank | (address & 0x7FFF);
@@ -134,7 +134,7 @@ void z80_memory_w(unsigned int address, unsigned char data)
   switch((address >> 13) & 7)
   {
     case 0: /* $0000-$3FFF: Z80 RAM (8K mirrored) */
-    case 1: 
+    case 1:
     {
       zram[address & 0x1FFF] = data;
       return;
@@ -300,7 +300,7 @@ unsigned char z80_md_port_r(unsigned int port)
       /* read FM chip if enabled */
       if ((port >= 0xF0) && (config.ym2413 & 1))
       {
-        return YM2413Read(); 
+        return YM2413Read();
       }
 
       return z80_unused_port_r(port);

@@ -11,4 +11,3 @@
 
 /* Bytecode offsets and bytecode instruction modes. */
 #include "lj_bcdef.h"
-

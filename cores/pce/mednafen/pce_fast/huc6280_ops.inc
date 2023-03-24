@@ -50,7 +50,7 @@ case 0x40:  /* RTI */
 	    // T-flag handling here:
 	    TEST_WEIRD_TFLAG("RTI");
             break;
-            
+
 case 0x60:  /* RTS */
 	    POP_PC_AP();
             break;
@@ -216,7 +216,7 @@ case 0x58: /* CLI */
            if((HU_P & I_FLAG) && (HU_IRQlow & MDFN_IQIRQ1))
            {
             uint8 moo_op = RdAtPC();
-            if((moo_op == 0xAC || moo_op == 0xAD || moo_op == 0xAE) && 
+            if((moo_op == 0xAC || moo_op == 0xAD || moo_op == 0xAE) &&
                 ((RdOp(GetRealPC() + 1) & 0x3) == 0) && ((RdOp(GetRealPC() + 2) & 0xFC) == 0))
             {
              HU_IRQlow |= 0x200;
@@ -620,7 +620,7 @@ case 0xF4: /* SET */
 	   }
            break;
 
-case 0xFC: 
+case 0xFC:
 	   {
 	    int32 ec_tmp;
 	    ec_tmp = next_event - HuCPU.timestamp;

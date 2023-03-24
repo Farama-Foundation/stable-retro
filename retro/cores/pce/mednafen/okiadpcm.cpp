@@ -46,4 +46,3 @@ const int32 OKIADPCM_DeltaTable[49][16] =
  #include "okiadpcm-deltatable.h"
  #endif
 };
-

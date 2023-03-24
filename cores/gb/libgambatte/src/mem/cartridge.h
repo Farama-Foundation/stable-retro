@@ -62,7 +62,7 @@ namespace gambatte
             return memptrs_.vramdata();
          }
 
-         unsigned char * romdata(unsigned area) const 
+         unsigned char * romdata(unsigned area) const
          {
             return memptrs_.romdata(area);
          }
@@ -123,11 +123,11 @@ namespace gambatte
             rtc_.write(data);
          }
 
-         unsigned char rtcRead() const 
+         unsigned char rtcRead() const
          {
             return *rtc_.getActive();
          }
-         
+
          const std::string saveBasePath() const;
          void setSaveDir(const std::string &dir);
          int loadROM(const void *romdata, unsigned int romsize, unsigned int forceModel, bool multicartCompat);

@@ -71,7 +71,7 @@ static void update_input()
    ev.set(Event::Type(Event::ConsoleSelect), input_state_cb(Controller::Left, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_SELECT));
    ev.set(Event::Type(Event::ConsoleReset), input_state_cb(Controller::Left, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_START));
 
-   //Events for right player's joystick 
+   //Events for right player's joystick
    ev.set(Event::Type(Event::JoystickOneUp), input_state_cb(Controller::Right, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_UP));
    ev.set(Event::Type(Event::JoystickOneDown), input_state_cb(Controller::Right, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_DOWN));
    ev.set(Event::Type(Event::JoystickOneLeft), input_state_cb(Controller::Right, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_LEFT));
@@ -126,7 +126,7 @@ void retro_set_controller_port_device(unsigned port, unsigned device)
    (void)device;
 }
 
-size_t retro_serialize_size(void) 
+size_t retro_serialize_size(void)
 {
    Serializer state;
    if(!stateManager.saveState(state))
@@ -248,7 +248,7 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
    return false;
 }
 
-void retro_unload_game(void) 
+void retro_unload_game(void)
 {
    if (console)
    {

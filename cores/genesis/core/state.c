@@ -144,7 +144,7 @@ int state_load(unsigned char *state)
     load_param(&tmp32, 4); m68k_set_reg(M68K_REG_A5, tmp32);
     load_param(&tmp32, 4); m68k_set_reg(M68K_REG_A6, tmp32);
     load_param(&tmp32, 4); m68k_set_reg(M68K_REG_A7, tmp32);
-    load_param(&tmp32, 4); m68k_set_reg(M68K_REG_PC, tmp32);  
+    load_param(&tmp32, 4); m68k_set_reg(M68K_REG_PC, tmp32);
     load_param(&tmp16, 2); m68k_set_reg(M68K_REG_SR, tmp16);
     load_param(&tmp32, 4); m68k_set_reg(M68K_REG_USP,tmp32);
     load_param(&tmp32, 4); m68k_set_reg(M68K_REG_ISP,tmp32);
@@ -154,7 +154,7 @@ int state_load(unsigned char *state)
     load_param(&m68k.stopped, sizeof(m68k.stopped));
   }
 
-  /* Z80 */ 
+  /* Z80 */
   load_param(&Z80, sizeof(Z80_Regs));
   Z80.irq_callback = z80_irq_callback;
 
@@ -176,7 +176,7 @@ int state_load(unsigned char *state)
     bufferptr += scd_context_load(&state[bufferptr]);
   }
   else if ((system_hw & SYSTEM_PBC) == SYSTEM_MD)
-  {  
+  {
     /* MD cartridge hardware */
     bufferptr += md_cart_context_load(&state[bufferptr]);
   }
@@ -222,7 +222,7 @@ int state_save(unsigned char *state)
   /* SOUND */
   bufferptr += sound_context_save(&state[bufferptr]);
 
-  /* 68000 */ 
+  /* 68000 */
   if ((system_hw & SYSTEM_PBC) == SYSTEM_MD)
   {
     uint16 tmp16;
@@ -244,7 +244,7 @@ int state_save(unsigned char *state)
     tmp32 = m68k_get_reg(M68K_REG_A6);  save_param(&tmp32, 4);
     tmp32 = m68k_get_reg(M68K_REG_A7);  save_param(&tmp32, 4);
     tmp32 = m68k_get_reg(M68K_REG_PC);  save_param(&tmp32, 4);
-    tmp16 = m68k_get_reg(M68K_REG_SR);  save_param(&tmp16, 2); 
+    tmp16 = m68k_get_reg(M68K_REG_SR);  save_param(&tmp16, 2);
     tmp32 = m68k_get_reg(M68K_REG_USP); save_param(&tmp32, 4);
     tmp32 = m68k_get_reg(M68K_REG_ISP); save_param(&tmp32, 4);
 
@@ -253,7 +253,7 @@ int state_save(unsigned char *state)
     save_param(&m68k.stopped, sizeof(m68k.stopped));
   }
 
-  /* Z80 */ 
+  /* Z80 */
   save_param(&Z80, sizeof(Z80_Regs));
 
   /* External HW */

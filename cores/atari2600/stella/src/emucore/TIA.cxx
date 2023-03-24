@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -58,7 +58,7 @@ TIA::TIA(Console& console, Sound& sound, Settings& settings)
     myPALFrameCounter(0),
     myBitsEnabled(true),
     myCollisionsEnabled(true)
-   
+
 {
   // Allocate buffers for two frame buffers
   myCurrentFrameBuffer = new uInt8[160 * 320];
@@ -240,7 +240,7 @@ void TIA::systemCyclesReset()
   myClockAtLastUpdate -= clocks;
   myVSYNCFinishClock -= clocks;
 }
- 
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void TIA::install(System& system)
 {
@@ -989,7 +989,7 @@ void TIA::updateFrame(Int32 clock)
       if(myHMM1mmr) { myPOSM1 -= 17;  if(myPOSM1 < 0) myPOSM1 += 160;  posChanged = true; }
       if(myHMBLmmr) { myPOSBL -= 17;  if(myPOSBL < 0) myPOSBL += 160;  posChanged = true; }
 
-      // Scanline change, so reset PF mask based on current CTRLPF reflection state 
+      // Scanline change, so reset PF mask based on current CTRLPF reflection state
       myPFMask = TIATables::PFMask[myCTRLPF & 0x01];
 
       // TODO - handle changes to player timing
@@ -1174,7 +1174,7 @@ void TIA::updateFrame(Int32 clock)
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 inline void TIA::waitHorizontalSync()
 {
-  uInt32 cyclesToEndOfLine = 76 - ((mySystem->cycles() - 
+  uInt32 cyclesToEndOfLine = 76 - ((mySystem->cycles() -
       (myClockWhenFrameStarted / 3)) % 76);
 
   if(cyclesToEndOfLine < 76)
@@ -1195,7 +1195,7 @@ inline void TIA::waitHorizontalRSync()
   // effect over a proper three line VSYNC. 3*76 = 228 cycles properly needed:
   //
   // ======  SHORT TIME CASE  ======
-  // 
+  //
   //     lda    #3      ;2  @67
   //     sta    VSYNC   ;3  @70      vsync starts
   //     sta    RSYNC   ;3  @73  +3
@@ -1231,7 +1231,7 @@ inline void TIA::waitHorizontalRSync()
   // cycle occurs before the counter warps around to zero. Therefore the positioning
   // code will hit RESPx one cycle sooner after a RSYNC than after a WSYNC.
 
-  uInt32 cyclesToEndOfLine = 76 - ((mySystem->cycles() - 
+  uInt32 cyclesToEndOfLine = 76 - ((mySystem->cycles() -
       (myClockWhenFrameStarted / 3)) % 76);
 
   mySystem->incrementCycles(cyclesToEndOfLine-1);
@@ -1403,8 +1403,8 @@ bool TIA::poke(uInt16 addr, uInt8 value)
 
       if(myVSYNC & 0x02)
       {
-        // Indicate when VSYNC should be finished.  This should really 
-        // be 3 * 228 according to Atari's documentation, however, some 
+        // Indicate when VSYNC should be finished.  This should really
+        // be 3 * 228 according to Atari's documentation, however, some
         // games don't supply the full 3 scanlines of VSYNC.
         myVSYNCFinishClock = clock + 228;
       }
@@ -1453,7 +1453,7 @@ bool TIA::poke(uInt16 addr, uInt8 value)
       // we test here for follow-on writes which should be ignored as
       // far as halting the processor is concerned.
       //
-      // TODO - 08-30-2006: This halting isn't correct since it's 
+      // TODO - 08-30-2006: This halting isn't correct since it's
       // still halting on the original write.  The 6507 emulation
       // should be expanded to include a READY line.
       if(mySystem->m6502().lastAccessWasRead())
@@ -1537,11 +1537,11 @@ bool TIA::poke(uInt16 addr, uInt8 value)
       myCTRLPF = value;
 
       // The playfield priority and score bits from the control register
-      // are accessed when the frame is being drawn.  We precompute the 
+      // are accessed when the frame is being drawn.  We precompute the
       // necessary value here so we can save time while drawing.
       myPlayfieldPriorityAndScore = ((myCTRLPF & 0x06) << 5);
 
-      // Update the playfield mask based on reflection state if 
+      // Update the playfield mask based on reflection state if
       // we're still on the left hand side of the playfield
       if(((clock - myClockWhenFrameStarted) % 228) < (68 + 79))
         myPFMask = TIATables::PFMask[myCTRLPF & 0x01];
@@ -1795,35 +1795,35 @@ bool TIA::poke(uInt16 addr, uInt8 value)
       mySound.set(addr, value, mySystem->cycles());
       break;
     }
-  
+
     case AUDC1:   // Audio control 1
     {
       myAUDC1 = value & 0x0f;
       mySound.set(addr, value, mySystem->cycles());
       break;
     }
-  
+
     case AUDF0:   // Audio frequency 0
     {
       myAUDF0 = value & 0x1f;
       mySound.set(addr, value, mySystem->cycles());
       break;
     }
-  
+
     case AUDF1:   // Audio frequency 1
     {
       myAUDF1 = value & 0x1f;
       mySound.set(addr, value, mySystem->cycles());
       break;
     }
-  
+
     case AUDV0:   // Audio volume 0
     {
       myAUDV0 = value & 0x0f;
       mySound.set(addr, value, mySystem->cycles());
       break;
     }
-  
+
     case AUDV1:   // Audio volume 1
     {
       myAUDV1 = value & 0x0f;
@@ -1841,11 +1841,11 @@ bool TIA::poke(uInt16 addr, uInt8 value)
 
       // Get the "current" data for GRP0 base on delay register and reflect
       uInt8 grp0 = myVDELP0 ? myDGRP0 : myGRP0;
-      myCurrentGRP0 = myREFP0 ? TIATables::GRPReflect[grp0] : grp0; 
+      myCurrentGRP0 = myREFP0 ? TIATables::GRPReflect[grp0] : grp0;
 
       // Get the "current" data for GRP1 base on delay register and reflect
       uInt8 grp1 = myVDELP1 ? myDGRP1 : myGRP1;
-      myCurrentGRP1 = myREFP1 ? TIATables::GRPReflect[grp1] : grp1; 
+      myCurrentGRP1 = myREFP1 ? TIATables::GRPReflect[grp1] : grp1;
 
       // Set enabled object bits
       if(myCurrentGRP0 != 0)
@@ -1879,11 +1879,11 @@ bool TIA::poke(uInt16 addr, uInt8 value)
 
       // Get the "current" data for GRP0 base on delay register
       uInt8 grp0 = myVDELP0 ? myDGRP0 : myGRP0;
-      myCurrentGRP0 = myREFP0 ? TIATables::GRPReflect[grp0] : grp0; 
+      myCurrentGRP0 = myREFP0 ? TIATables::GRPReflect[grp0] : grp0;
 
       // Get the "current" data for GRP1 base on delay register
       uInt8 grp1 = myVDELP1 ? myDGRP1 : myGRP1;
-      myCurrentGRP1 = myREFP1 ? TIATables::GRPReflect[grp1] : grp1; 
+      myCurrentGRP1 = myREFP1 ? TIATables::GRPReflect[grp1] : grp1;
 
       // Set enabled object bits
       if(myCurrentGRP0 != 0)
@@ -1978,7 +1978,7 @@ bool TIA::poke(uInt16 addr, uInt8 value)
       myVDELP0 = value & 0x01;
 
       uInt8 grp0 = myVDELP0 ? myDGRP0 : myGRP0;
-      myCurrentGRP0 = myREFP0 ? TIATables::GRPReflect[grp0] : grp0; 
+      myCurrentGRP0 = myREFP0 ? TIATables::GRPReflect[grp0] : grp0;
 
       if(myCurrentGRP0 != 0)
         myEnabledObjects |= P0Bit;
@@ -1992,7 +1992,7 @@ bool TIA::poke(uInt16 addr, uInt8 value)
       myVDELP1 = value & 0x01;
 
       uInt8 grp1 = myVDELP1 ? myDGRP1 : myGRP1;
-      myCurrentGRP1 = myREFP1 ? TIATables::GRPReflect[grp1] : grp1; 
+      myCurrentGRP1 = myREFP1 ? TIATables::GRPReflect[grp1] : grp1;
 
       if(myCurrentGRP1 != 0)
         myEnabledObjects |= P1Bit;
@@ -2075,7 +2075,7 @@ bool TIA::poke(uInt16 addr, uInt8 value)
       myCurrentHMOVEPos = hpos;
 
       // See if we need to enable the HMOVE blank bug
-      myHMOVEBlankEnabled = myAllowHMOVEBlanks ? 
+      myHMOVEBlankEnabled = myAllowHMOVEBlanks ?
         TIATables::HMOVEBlankEnableCycles[((clock - myClockWhenFrameStarted) % 228) / 3] : false;
 
       // Do we have to undo some of the already applied cycles from an

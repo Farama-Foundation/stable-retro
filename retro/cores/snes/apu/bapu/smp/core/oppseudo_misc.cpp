@@ -308,4 +308,3 @@ case 0x9e: {
   regs.p.z = (regs.B.a == 0);
   break;
 }
-

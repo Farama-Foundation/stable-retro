@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -159,7 +159,7 @@ bool CartridgeE7::poke(uInt16 address, uInt8)
     bankRAM(address & 0x0003);
   }
 
-  // NOTE: This does not handle writing to RAM, however, this 
+  // NOTE: This does not handle writing to RAM, however, this
   // function should never be called for RAM because of the
   // way page accessing has been setup
   return false;
@@ -200,7 +200,7 @@ void CartridgeE7::bankRAM(uInt16 bank)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool CartridgeE7::bank(uInt16 slice)
-{ 
+{
   if(bankLocked()) return false;
 
   // Remember what bank we're in
@@ -286,7 +286,7 @@ bool CartridgeE7::patch(uInt16 address, uInt8 value)
     myImage[(myCurrentSlice[address >> 11] << 11) + (address & 0x07FF)] = value;
 
   return myBankChanged = true;
-} 
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const uInt8* CartridgeE7::getImage(int& size) const

@@ -99,7 +99,7 @@ static char msg[16];
 static GXRModeObj *rmode;
 
 /* 288 lines progressive (PAL 50Hz) */
-static GXRModeObj TV50hz_288p = 
+static GXRModeObj TV50hz_288p =
 {
   VI_TVMODE_PAL_DS,             // viDisplayMode
   640,                          // fbWidth
@@ -134,7 +134,7 @@ static GXRModeObj TV50hz_288p =
 };
 
 /* 288 lines interlaced (PAL 50Hz) */
-static GXRModeObj TV50hz_288i = 
+static GXRModeObj TV50hz_288i =
 {
   VI_TVMODE_PAL_INT,            // viDisplayMode
   640,                          // fbWidth
@@ -169,7 +169,7 @@ static GXRModeObj TV50hz_288i =
 };
 
 /* 576 lines interlaced (PAL 50Hz, scaled) */
-static GXRModeObj TV50hz_576i = 
+static GXRModeObj TV50hz_576i =
 {
   VI_TVMODE_PAL_INT,  // viDisplayMode
   640,                // fbWidth
@@ -204,7 +204,7 @@ static GXRModeObj TV50hz_576i =
 };
 
 /* 240 lines progressive (NTSC or PAL 60Hz) */
-static GXRModeObj TV60hz_240p = 
+static GXRModeObj TV60hz_240p =
 {
   VI_TVMODE_EURGB60_DS, // viDisplayMode
   640,                  // fbWidth
@@ -239,7 +239,7 @@ static GXRModeObj TV60hz_240p =
 };
 
 /* 240 lines interlaced (NTSC or PAL 60Hz) */
-static GXRModeObj TV60hz_240i = 
+static GXRModeObj TV60hz_240i =
 {
     VI_TVMODE_EURGB60_INT,  // viDisplayMode
     640,                    // fbWidth
@@ -274,7 +274,7 @@ static GXRModeObj TV60hz_240i =
 };
 
 /* 480 lines interlaced (NTSC or PAL 60Hz) */
-static GXRModeObj TV60hz_480i = 
+static GXRModeObj TV60hz_480i =
 {
   VI_TVMODE_EURGB60_INT,// viDisplayMode
   640,                  // fbWidth
@@ -319,7 +319,7 @@ static GXRModeObj *tvmodes[6] =
    /* 50Hz modes */
    &TV50hz_288p,
    &TV50hz_288i,
-   &TV50hz_576i   
+   &TV50hz_576i
 };
 
 /***************************************************************************************/
@@ -443,9 +443,9 @@ static void gxResetRendering(u8 type)
     GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
     GX_SetVtxDesc(GX_VA_TEX0, GX_DIRECT);
     GX_SetVtxDesc (GX_VA_CLR0, GX_DIRECT);
-    /* 
+    /*
        Color.out = Color.rasterized*Color.texture
-       Alpha.out = Alpha.rasterized*Alpha.texture 
+       Alpha.out = Alpha.rasterized*Alpha.texture
     */
     GX_SetTevOp (GX_TEVSTAGE0, GX_MODULATE);
     GX_SetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
@@ -464,9 +464,9 @@ static void gxResetRendering(u8 type)
     GX_SetVtxDesc(GX_VA_POS, GX_INDEX8);
     GX_SetVtxDesc(GX_VA_TEX0, GX_DIRECT);
     GX_SetArray(GX_VA_POS, square, 2 * sizeof (s16));
-    /* 
+    /*
        Color.out = Color.texture
-       Alpha.out = Alpha.texture 
+       Alpha.out = Alpha.texture
     */
     GX_SetTevOp (GX_TEVSTAGE0, GX_REPLACE);
     GX_SetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLORNULL);
@@ -486,7 +486,7 @@ static void gxResetMode(GXRModeObj *tvmode, int vfilter_enabled)
   Mtx44 p;
   f32 yScale = GX_GetYScaleFactor(tvmode->efbHeight, tvmode->xfbHeight);
   u16 xfbHeight = GX_SetDispCopyYScale(yScale);
-  u16 xfbWidth  = VIDEO_PadFramebufferWidth(tvmode->fbWidth);  
+  u16 xfbWidth  = VIDEO_PadFramebufferWidth(tvmode->fbWidth);
 
   GX_SetCopyClear((GXColor)BLACK,0x00ffffff);
   GX_SetViewport(0.0F, 0.0F, tvmode->fbWidth, tvmode->efbHeight, 0.0F, 1.0F);
@@ -529,12 +529,12 @@ static void gxSetAspectRatio(int *xscale, int *yscale)
       if (reg[12] & 1)
       {
         /* 348 "H40" pixels = 348 * Wii/GC pixel clock / "H40" pixel clock = approx. 700 (NTSC) or 707 (PAL) Wii/GC pixels */
-        *xscale = (system_clock == MCLOCK_NTSC) ? 350 : 354; 
+        *xscale = (system_clock == MCLOCK_NTSC) ? 350 : 354;
       }
       else
       {
         /* 284 "H32" pixels = 284 * Wii/GC pixel clock / "H32" pixel clock = approx. 714 (NTSC) or 721 (PAL) Wii/GC pixels */
-        *xscale = (system_clock == MCLOCK_NTSC) ? 357 : 361; 
+        *xscale = (system_clock == MCLOCK_NTSC) ? 357 : 361;
       }
     }
     else
@@ -548,7 +548,7 @@ static void gxSetAspectRatio(int *xscale, int *yscale)
       else
       {
         /* 320 "H40" pixels = 256 "H32" pixels = 256 * Wii/GC pixel clock / "H32" pixel clock = approx. 644 (NTSC) or 650 (PAL) Wii/GC pixels */
-        *xscale = (system_clock == MCLOCK_NTSC) ? 322 : 325; 
+        *xscale = (system_clock == MCLOCK_NTSC) ? 322 : 325;
       }
     }
 
@@ -565,7 +565,7 @@ static void gxSetAspectRatio(int *xscale, int *yscale)
   {
     /* By default, disable horizontal scaling */
     *xscale = bitmap.viewport.w + (2 * bitmap.viewport.x);
-      
+
     /* Keep original aspect ratio in H32 modes */
     if (!(reg[12] & 1))
     {
@@ -649,7 +649,7 @@ static void gxResetScaler(u32 width)
       /* no filtering, reduce EFB width to increase VI upscaling */
       if (!config.bilinear && !config.ntsc)
         rmode->fbWidth -= (offset * 2);
-      
+
       /* increase GX horizontal scaling */
       else
         xscale += offset;
@@ -1386,7 +1386,7 @@ void gxTextureWritePNG(gx_texture *texture, FILE *png_file)
   png_init_io(png_ptr, png_file);
 
   /* set PNG file properties */
-  png_set_IHDR(png_ptr, info_ptr, texture->width, texture->height, 8, PNG_COLOR_TYPE_RGB_ALPHA, 
+  png_set_IHDR(png_ptr, info_ptr, texture->width, texture->height, 8, PNG_COLOR_TYPE_RGB_ALPHA,
                PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
   /* allocate row pointer data */
@@ -1440,12 +1440,12 @@ void gx_video_Stop(void)
 {
   /* disable VSYNC callbacks */
   VIDEO_SetPostRetraceCallback(NULL);
-  
+
   /* wait for next even field */
   /* this prevents screen artefacts when switching between interlaced & non-interlaced modes */
   do VIDEO_WaitVSync();
   while (!VIDEO_GetNextField());
-   
+
   /* adjust TV width */
   vmode->viWidth = config.screen_w;
   vmode->viXOrigin = (VI_MAX_WIDTH_NTSC - vmode->viWidth)/2;
@@ -1844,7 +1844,7 @@ int gx_video_Update(int status)
       do VIDEO_WaitVSync();
       while (VIDEO_GetNextField() != odd_frame);
 
-      /* resynchronize audio playback with video */                    
+      /* resynchronize audio playback with video */
       AUDIO_StopDMA();
       AUDIO_StartDMA();
     }
@@ -1877,7 +1877,7 @@ void gx_video_Init(void)
       TV60hz_240i.viTVMode = VI_TVMODE_EURGB60_INT;
       TV60hz_480i.viTVMode = VI_TVMODE_EURGB60_INT;
       break;
-    
+
     default:  /* 480 lines (NTSC, MPAL or PAL 60Hz) */
       TV60hz_240p.viTVMode = VI_TVMODE(vmode->viTVMode >> 2, VI_NON_INTERLACE);
       TV60hz_240i.viTVMode = VI_TVMODE(vmode->viTVMode >> 2, VI_INTERLACE);
@@ -1969,13 +1969,13 @@ void sms_ntsc_blit( sms_ntsc_t const* ntsc, SMS_NTSC_IN_T const* table, unsigned
     if ((offset % 4) == 0) offset += 12;
     SMS_NTSC_RGB_OUT( 1, line_out[offset++] );
     if ((offset % 4) == 0) offset += 12;
-    
+
     SMS_NTSC_COLOR_IN( 1, ntsc, SMS_NTSC_ADJ_IN( table[*input++] ) );
     SMS_NTSC_RGB_OUT( 2, line_out[offset++] );
     if ((offset % 4) == 0) offset += 12;
     SMS_NTSC_RGB_OUT( 3, line_out[offset++] );
     if ((offset % 4) == 0) offset += 12;
-      
+
     SMS_NTSC_COLOR_IN( 2, ntsc, SMS_NTSC_ADJ_IN( table[*input++] ) );
     SMS_NTSC_RGB_OUT( 4, line_out[offset++] );
     if ((offset % 4) == 0) offset += 12;

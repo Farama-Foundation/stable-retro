@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -128,7 +128,7 @@ bool CartridgeE0::poke(uInt16 address, uInt8)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void CartridgeE0::segmentZero(uInt16 slice)
-{ 
+{
   if(bankLocked()) return;
 
   // Remember the new slice
@@ -150,7 +150,7 @@ void CartridgeE0::segmentZero(uInt16 slice)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void CartridgeE0::segmentOne(uInt16 slice)
-{ 
+{
   if(bankLocked()) return;
 
   // Remember the new slice
@@ -172,7 +172,7 @@ void CartridgeE0::segmentOne(uInt16 slice)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void CartridgeE0::segmentTwo(uInt16 slice)
-{ 
+{
   if(bankLocked()) return;
 
   // Remember the new slice
@@ -220,7 +220,7 @@ bool CartridgeE0::patch(uInt16 address, uInt8 value)
   address &= 0x0FFF;
   myImage[(myCurrentSlice[address >> 10] << 10) + (address & 0x03FF)] = value;
   return true;
-} 
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const uInt8* CartridgeE0::getImage(int& size) const

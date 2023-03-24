@@ -4042,7 +4042,7 @@ Version 1.6.0beta16 [March 6, 2012]
     (in fact this is harmless, but the PNG data produced may be sub-optimal).
 
 Version 1.6.0beta17 [March 10, 2012]
-  Fixed PNG_LIBPNG_BUILD_BASE_TYPE definition. 
+  Fixed PNG_LIBPNG_BUILD_BASE_TYPE definition.
   Reject all iCCP chunks after the first, even if the first one is invalid.
   Deflate/inflate was reworked to move common zlib calls into single
     functions [rw]util.c.  A new shared keyword check routine was also added
@@ -4951,7 +4951,7 @@ Version 1.6.13beta01 [July 4, 2014]
   Changed "if defined(__ARM_NEON__)" to
     "if (defined(__ARM_NEON__) || defined(__ARM_NEON))" (James Wu).
   Fixed clang no-warning builds: png_digit was defined but never used.
-    
+
 Version 1.6.13beta02 [July 21, 2014]
   Fixed an incorrect separator ("/" should be "\") in scripts/makefile.vcwin32
     (bug report from Wolfgang S. Kechel).  Bug was introduced in libpng-1.6.11.

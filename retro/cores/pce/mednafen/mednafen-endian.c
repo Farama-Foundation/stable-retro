@@ -243,4 +243,3 @@ int read16le(char *d, FILE *fp)
    return((fread(d,1,2,fp)<2)?0:2);
 #endif
 }
-

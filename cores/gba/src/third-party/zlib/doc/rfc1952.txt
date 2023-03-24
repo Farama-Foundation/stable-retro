@@ -56,7 +56,7 @@ Abstract
 
 
 Deutsch                      Informational                      [Page 1]
-
+
 RFC 1952             GZIP File Format Specification             May 1996
 
 
@@ -112,7 +112,7 @@ Table of Contents
 
 
 Deutsch                      Informational                      [Page 2]
-
+
 RFC 1952             GZIP File Format Specification             May 1996
 
 
@@ -168,7 +168,7 @@ RFC 1952             GZIP File Format Specification             May 1996
 
 
 Deutsch                      Informational                      [Page 3]
-
+
 RFC 1952             GZIP File Format Specification             May 1996
 
 
@@ -224,7 +224,7 @@ RFC 1952             GZIP File Format Specification             May 1996
 
 
 Deutsch                      Informational                      [Page 4]
-
+
 RFC 1952             GZIP File Format Specification             May 1996
 
 
@@ -280,7 +280,7 @@ RFC 1952             GZIP File Format Specification             May 1996
 
 
 Deutsch                      Informational                      [Page 5]
-
+
 RFC 1952             GZIP File Format Specification             May 1996
 
 
@@ -336,7 +336,7 @@ RFC 1952             GZIP File Format Specification             May 1996
 
 
 Deutsch                      Informational                      [Page 6]
-
+
 RFC 1952             GZIP File Format Specification             May 1996
 
 
@@ -392,7 +392,7 @@ RFC 1952             GZIP File Format Specification             May 1996
 
 
 Deutsch                      Informational                      [Page 7]
-
+
 RFC 1952             GZIP File Format Specification             May 1996
 
 
@@ -448,7 +448,7 @@ RFC 1952             GZIP File Format Specification             May 1996
 
 
 Deutsch                      Informational                      [Page 8]
-
+
 RFC 1952             GZIP File Format Specification             May 1996
 
 
@@ -504,7 +504,7 @@ RFC 1952             GZIP File Format Specification             May 1996
 
 
 Deutsch                      Informational                      [Page 9]
-
+
 RFC 1952             GZIP File Format Specification             May 1996
 
 
@@ -560,7 +560,7 @@ RFC 1952             GZIP File Format Specification             May 1996
 
 
 Deutsch                      Informational                     [Page 10]
-
+
 RFC 1952             GZIP File Format Specification             May 1996
 
 
@@ -616,7 +616,7 @@ RFC 1952             GZIP File Format Specification             May 1996
 
 
 Deutsch                      Informational                     [Page 11]
-
+
 RFC 1952             GZIP File Format Specification             May 1996
 
 
@@ -672,4 +672,3 @@ RFC 1952             GZIP File Format Specification             May 1996
 
 
 Deutsch                      Informational                     [Page 12]
-

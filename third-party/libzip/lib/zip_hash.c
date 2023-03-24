@@ -17,7 +17,7 @@
   3. The names of the authors may not be used to endorse or promote
      products derived from this software without specific prior
      written permission.
- 
+
   THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS
   OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -179,7 +179,7 @@ _zip_hash_new(zip_error_t *error)
     hash->table_size = 0;
     hash->nentries = 0;
     hash->table = NULL;
-    
+
     return hash;
 }
 
@@ -379,7 +379,7 @@ _zip_hash_revert(zip_hash_t *hash, zip_error_t *error)
 {
     zip_uint32_t i;
     zip_hash_entry_t *entry, *previous;
-    
+
     for (i = 0; i < hash->table_size; i++) {
         previous = NULL;
         entry = hash->table[i];

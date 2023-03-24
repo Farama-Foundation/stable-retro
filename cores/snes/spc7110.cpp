@@ -256,26 +256,26 @@ static void SetSPC7110SRAMMap (uint8 newstate)
 uint8 * S9xGetBasePointerSPC7110 (uint32 address)
 {
 	uint32	i;
-	
+
 	switch (address & 0xf00000)
 	{
 		case 0xd00000:
 			i = s7emu.dx_offset;
 			break;
-			
+
 		case 0xe00000:
 			i = s7emu.ex_offset;
 			break;
-			
+
 		case 0xf00000:
 			i = s7emu.fx_offset;
 			break;
-			
+
 		default:
 			i = 0;
 			break;
 	}
-	
+
 	i += address & 0x0f0000;
 
 	return (&Memory.ROM[i]);
@@ -313,7 +313,7 @@ uint8 S9xGetSPC7110 (uint16 address)
 {
 	if (!Settings.SPC7110RTC && address > 0x483f)
 		return (OpenBus);
-	
+
 	return (s7emu.mmio_read(address));
 }
 

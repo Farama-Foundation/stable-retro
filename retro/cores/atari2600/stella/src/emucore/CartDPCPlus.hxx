@@ -56,7 +56,7 @@ class CartridgeDPCPlus : public Cartridge
       @param settings  A reference to the various settings (read-only)
     */
     CartridgeDPCPlus(const uInt8* image, uInt32 size, const Settings& settings);
- 
+
     /**
       Destructor
     */
@@ -170,28 +170,28 @@ class CartridgeDPCPlus : public Cartridge
     bool poke(uInt16 address, uInt8 value);
 
   private:
-    /** 
+    /**
       Sets the initial state of the DPC pointers and RAM
     */
     void setInitialState();
 
-    /** 
+    /**
       Clocks the random number generator to move it to its next state
     */
     void clockRandomNumberGenerator();
-  
-    /** 
+
+    /**
       Clocks the random number generator to move it to its prior state
     */
     void priorClockRandomNumberGenerator();
 
-    /** 
+    /**
       Updates any data fetchers in music mode based on the number of
       CPU cycles which have passed since the last update.
     */
     void updateMusicModeDataFetchers();
 
-    /** 
+    /**
       Call Special Functions
     */
     void callFunction(uInt8 value);
@@ -220,7 +220,7 @@ class CartridgeDPCPlus : public Cartridge
 
     // Indicates which bank is currently active
     uInt16 myCurrentBank;
-  
+
     // The top registers for the data fetchers
     uInt8 myTops[8];
 
@@ -229,7 +229,7 @@ class CartridgeDPCPlus : public Cartridge
 
     // The counter registers for the data fetchers
     uInt16 myCounters[8];
-  
+
     // The counter registers for the fractional data fetchers
     uInt32 myFractionalCounters[8];
 
@@ -238,7 +238,7 @@ class CartridgeDPCPlus : public Cartridge
 
     // The Fast Fetcher Enabled flag
     bool myFastFetch;
-  
+
     // Flags that last byte peeked was A9 (LDA #)
     bool myLDAimmediate;
 
@@ -253,10 +253,10 @@ class CartridgeDPCPlus : public Cartridge
 
     // The music frequency
     uInt32 myMusicFrequencies[3];
-  
+
     // The music waveforms
     uInt16 myMusicWaveforms[3];
-  
+
     // The random number generator register
     uInt32 myRandomNumber;
 

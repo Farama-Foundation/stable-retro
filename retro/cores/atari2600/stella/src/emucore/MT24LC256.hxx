@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -43,7 +43,7 @@ class MT24LC256
       @param system   The system using the controller of this device
     */
     MT24LC256(const string& filename, const System& system);
- 
+
     /**
       Destructor
     */
@@ -59,7 +59,7 @@ class MT24LC256
 
     /**
       Notification method invoked by the system right before the
-      system resets its cycle counter to zero.  It may be necessary 
+      system resets its cycle counter to zero.  It may be necessary
       to override this method for devices that remember cycle counts.
     */
     void systemCyclesReset();
@@ -113,7 +113,7 @@ class MT24LC256
   private:
     // Copy constructor isn't supported by this class so make it private
     MT24LC256(const MT24LC256&);
- 
+
     // Assignment operator isn't supported by this class so make it private
     MT24LC256& operator = (const MT24LC256&);
 };

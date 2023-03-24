@@ -1,6 +1,6 @@
 /*
  *  filesel.c
- * 
+ *
  *  File Browser
  *
  *  Copyright Eke-Eke (2009-2014)
@@ -237,8 +237,8 @@ static void selector_cb(void)
 
     yoffset += 26;
   }
-}  
-  
+}
+
 
 /****************************************************************************
  * FileSelector
@@ -246,7 +246,7 @@ static void selector_cb(void)
  * Browse directories and select a file from the file listing
  * return ROM size
  *
- ****************************************************************************/ 
+ ****************************************************************************/
 int FileSelector(int type)
 {
   short p;
@@ -546,7 +546,7 @@ int FileSelector(int type)
         strcpy(action_select.comment,"Load File");
       }
     }
- 
+
     /* Draw menu*/
     GUI_DrawMenu(m);
 
@@ -642,7 +642,7 @@ int FileSelector(int type)
     }
 
     /* go back one page */
-    else if (p & (PAD_TRIGGER_L | PAD_BUTTON_LEFT)) 
+    else if (p & (PAD_TRIGGER_L | PAD_BUTTON_LEFT))
     {
       if (maxfiles >= 10)
       {

@@ -602,4 +602,3 @@ png_uint_32 get_value (FILE *pnm_file, int depth)
 }
 
 /* end of source */
-

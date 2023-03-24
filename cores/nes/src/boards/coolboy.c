@@ -42,7 +42,7 @@ static void COOLBOYCW(uint32 A, uint8 V) {
 			}
 		}
 		// Highest bit goes from MMC3 registers when EXPREGS[3]&0x80==0 or from EXPREGS[0]&0x08 otherwise
-		setchr1(A, 
+		setchr1(A,
 			(V & 0x80 & mask) | ((((EXPREGS[0] & 0x08) << 4) & ~mask)) // 7th bit
 			| ((EXPREGS[2] & 0x0F) << 3) // 6-3 bits
 			| ((A >> 10) & 7) // 2-0 bits
@@ -105,7 +105,7 @@ static DECLFW(COOLBOYWrite) {
 		CartBW(A,V);
 
 	// Deny any further writes when 7th bit is 1 AND 4th is 0
-	if ((EXPREGS[3] & 0x90) != 0x80) { 
+	if ((EXPREGS[3] & 0x90) != 0x80) {
 		EXPREGS[A & 3] = V;
 		FixMMC3PRG(MMC3_cmd);
 		FixMMC3CHR(MMC3_cmd);

@@ -66,7 +66,7 @@ buildvm -m folddef -o lj_folddef.h lj_opt_fold.c
 @if "%1"=="debug" (
   @shift
   @set LJCOMPILE=%LJCOMPILE% /Zi /MDd /Od
-  @set LJLINK=%LJLINK% /debug 
+  @set LJLINK=%LJLINK% /debug
 ) else (
   @set LJCOMPILE=%LJCOMPILE% /MD /O2 /DNDEBUG
 )

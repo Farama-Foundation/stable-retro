@@ -14,12 +14,12 @@
   198 mapper - (...) defined for "Tenchi o Kurau II - Shokatsu Koumei Den (J) (C)"
   199 mapper - (Martin) defined for new dumps "Dragon Ball Z 2 - Gekishin Freeza! (C)", "Dragon Ball Z Gaiden - Saiya Jin Zetsumetsu Keikaku (C)"
   BMC-70in1 - fixed UNIF board for supporting menu selecting by pressing Reset
-  BMC-FK23C - fixed UNIF board for dump "4-in-1 (FK23C8244) [p1][U][!].nes" 
+  BMC-FK23C - fixed UNIF board for dump "4-in-1 (FK23C8244) [p1][U][!].nes"
   UNL-22211 - new UNIF board for dump "Qi Wang - Chinese Chess (MGC-001) [U][!].nes"
   BMC-D1038 - UNIF board for mapper 60.
   BMC-A65AS - new UNIF board for dump "3-in-1 (N068) [p1][U][!].nes"
   BMC-GF1004 - new UNIF board for dump "4-in-1 (JY-066) [p1][U][!].nes"
-  UNL-6035052 - new UNIF board for dump "Contra Fighter (Unl) [U][!].nes"   
+  UNL-6035052 - new UNIF board for dump "Contra Fighter (Unl) [U][!].nes"
 
 
 10.04.06
@@ -39,7 +39,7 @@
 
   004 mapper - (...) "Yong Zhe Dou E Long - Dragon Quest VI (As).nes" fixed CHR glitch (probably others).
                (Nestopia) forced to MMC3 RevB board IRQ, fixes map mode "My Life My Love - Boku no Yume - Watashi no Negai (J).nes",
-               wave effect at level start for "Mickey Mouse 3 - Yume Fuusen (J).nes", "Kid Klown (U).nes", probaly crashes others non-RevB games... 
+               wave effect at level start for "Mickey Mouse 3 - Yume Fuusen (J).nes", "Kid Klown (U).nes", probaly crashes others non-RevB games...
                Small fix  to mapper source to allow to run "Colour 2001 Streetfighter II (Unl) [!].nes",
                "King of Fighters 99 [p1].nes" and "Super HIK 7-in-1 (Multicart k7006) [p1][!].nes"
   037 mapper - (...) "Super Mario Bros. + Tetris + Nintendo World Cup (E) [!]" redefined from 47 by CRC check.
@@ -100,7 +100,7 @@
                (...) added new IRQ counting mode that allow to run normally pirate hack of "Astyanax" - "Aladdin - Return of Jaffar, The [p1].nes"
   163 mapper - (...) new TPU's dump
   191 mapper - (VNES) "Sachen Q-Bert.nes"
-  211 mapper - (...) new dump "Tiny Toon Adentures 6 (Pirate Original) [!].nes" now work fine 
+  211 mapper - (...) new dump "Tiny Toon Adentures 6 (Pirate Original) [!].nes" now work fine
   212 mapper - (...) playable again "Super HIK 300-in-1 (1994).nes"
   216 mapper - (...) debug mapper for cart with SIM reader aboard "Bonza"
   245 mapper - (...) fixed old CHR switching bug
@@ -156,7 +156,7 @@
   added 205 mapper (...) mapper for new dumps "15-in-1 [p2].nes", "3-in-1 [p2].nes"
 
 23.10.03
- 
+
   added 231 mapper (VirtuaNES source), "20-in-1 (Mapper 231) [p1][!].nes"
   fixed 115 mapper (VirtuaNES source), "Yuu Yuu Hakusho Final - Makai Saikyou Retsuden [T-Chi].nes" glitches
 

@@ -8,9 +8,9 @@
  * Config Option
  *
  ****************************************************************************/
- 
+
 enum {A = 0, B, C, X, Y, Z, START, MODE};
- 
+
 typedef struct
 {
   uint8 padtype;
@@ -75,4 +75,3 @@ extern void config_save(void);
 extern void set_config_defaults(void);
 
 #endif /* _CONFIG_H_ */
-

@@ -484,4 +484,3 @@ _::OrphanBuilder copyOutOfMembrane(ListReader from, Orphanage to,
 }  // namespace _ (private)
 
 }  // namespace capnp
-

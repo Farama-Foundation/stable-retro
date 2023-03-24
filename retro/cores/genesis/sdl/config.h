@@ -3,15 +3,15 @@
 #define _CONFIG_H_
 
 /****************************************************************************
- * Config Option 
+ * Config Option
  *
  ****************************************************************************/
-typedef struct 
+typedef struct
 {
   uint8 padtype;
 } t_input_config;
 
-typedef struct 
+typedef struct
 {
   uint8 hq_fm;
   uint8 filter;
@@ -51,4 +51,3 @@ extern t_config config;
 extern void set_config_defaults(void);
 
 #endif /* _CONFIG_H_ */
-

@@ -164,7 +164,7 @@ PCEFast_PSG::PCEFast_PSG(Blip_Buffer *bb_l, Blip_Buffer *bb_r)
       double flub = 1;
 
       if(vl)
-         flub /= powf(2, (double)1 / 4 * vl);                  // ~1.5dB reduction per increment of vl 
+         flub /= powf(2, (double)1 / 4 * vl);                  // ~1.5dB reduction per increment of vl
 
       if(vl == 0x1F)
          flub = 0;
@@ -190,7 +190,7 @@ PCEFast_PSG::~PCEFast_PSG()
 int32 PCEFast_PSG::GetVL(const int chnum, const int lr)
 {
    // Note: Changing the 0x1F(not that there should be) would require changing the channel pseudo-off volume check logic later on.
-   static const uint8 scale_tab[] = 
+   static const uint8 scale_tab[] =
    {
       0x00, 0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F,
       0x10, 0x13, 0x15, 0x17, 0x19, 0x1B, 0x1D, 0x1F
@@ -212,7 +212,7 @@ int32 PCEFast_PSG::GetVL(const int chnum, const int lr)
 }
 
 void PCEFast_PSG::Write(int32 timestamp, uint8 A, uint8 V)
-{	
+{
    A &= 0x0F;
 
    if(A == 0x00)
@@ -263,7 +263,7 @@ void PCEFast_PSG::Write(int32 timestamp, uint8 A, uint8 V)
                   ch->counter = ch->freq_cache;
                }
 
-               if(!(ch->control & 0x80) && (V & 0x80)) 
+               if(!(ch->control & 0x80) && (V & 0x80))
                {
                   if(!(V & 0x40))
                   {
@@ -592,7 +592,7 @@ int PCEFast_PSG::StateAction(StateMem *sm, int load, int data_only)
       char tmpstr[5] = "SCHx";
       psg_channel *pt = &channel[ch];
 
-      SFORMAT CH_StateRegs[] = 
+      SFORMAT CH_StateRegs[] =
       {
          SFVARN(pt->counter, "counter"),
          SFVARN(pt->frequency, "frequency"),
@@ -666,5 +666,5 @@ int PCEFast_PSG::StateAction(StateMem *sm, int load, int data_only)
          RecalcUOFunc(ch);
       }
    }
-   return(ret); 
+   return(ret);
 }

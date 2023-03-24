@@ -3391,7 +3391,7 @@ void z80_reset(void)
 }
 
 /****************************************************************************
- * Run until given cycle count 
+ * Run until given cycle count
  ****************************************************************************/
 void z80_run(unsigned int cycles)
 {
@@ -3408,7 +3408,7 @@ void z80_run(unsigned int cycles)
     R++;
     EXEC_INLINE(op,ROP());
   }
-} 
+}
 
 /****************************************************************************
  * Get all registers in given buffer
@@ -3454,4 +3454,3 @@ void z80_set_nmi_line(unsigned int state)
 
   Z80.nmi_state = state;
 }
-

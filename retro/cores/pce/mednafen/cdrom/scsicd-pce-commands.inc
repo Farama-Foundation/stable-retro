@@ -256,4 +256,3 @@ static void DoNEC_PCE_GETDIRINFO(const uint8_t *cdb)
 
  DoSimpleDataIn(data_in, data_in_size);
 }
-

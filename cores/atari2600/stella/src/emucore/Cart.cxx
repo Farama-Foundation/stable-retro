@@ -398,7 +398,7 @@ string Cartridge::autodetectType(const uInt8* image, uInt32 size)
       type = "CV";
     else if(isProbably4KSC(image,size))
       type = "4KSC";
-    else 
+    else
       type = "4K";
   }
   else if(size == 8*1024)  // 8K

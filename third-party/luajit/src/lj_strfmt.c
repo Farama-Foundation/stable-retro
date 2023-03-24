@@ -469,4 +469,3 @@ const char *lj_strfmt_pushf(lua_State *L, const char *fmt, ...)
   va_end(argp);
   return msg;
 }
-

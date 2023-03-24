@@ -554,7 +554,7 @@ static unsigned int scd_read_byte(unsigned int address)
 
     /* color code */
     uint8 code = scd.regs[0x4c>>1].byte.l;
-    
+
     /* 16-bit font data (4 pixels = 16 bits) */
     uint16 data = (code >> (bits & 4)) & 0x0f;
 
@@ -645,7 +645,7 @@ static unsigned int scd_read_word(unsigned int address)
 
     /* color code */
     uint8 code = scd.regs[0x4c>>1].byte.l;
-    
+
     /* 16-bit font data (4 pixels = 16 bits) */
     uint16 data = (code >> (bits & 4)) & 0x0f;
 
@@ -781,7 +781,7 @@ static void scd_write_byte(unsigned int address, unsigned int data)
 
     case 0x01: /* RESET status */
     {
-      /* RESET bit cleared ? */      
+      /* RESET bit cleared ? */
       if (!(data & 0x01))
       {
         /* reset CD hardware */
@@ -908,7 +908,7 @@ static void scd_write_byte(unsigned int address, unsigned int data)
 
             /* RET bit set during 1M mode ? */
             data |= ~scd.dmna & 0x01;
-            
+
             /* check if RET bit is cleared */
             if (!(data & 0x01))
             {
@@ -1059,7 +1059,7 @@ static void scd_write_word(unsigned int address, unsigned int data)
       /* only update LED status (register $00 is reserved for MAIN-CPU, use $06 instead) */
       scd.regs[0x06>>1].byte.h = data >> 8;
 
-      /* RESET bit cleared ? */      
+      /* RESET bit cleared ? */
       if (!(data & 0x01))
       {
         /* reset CD hardware */
@@ -1295,7 +1295,7 @@ static void scd_write_word(unsigned int address, unsigned int data)
     case 0x66: /* Trace vector base address */
     {
       scd.regs[0x66>>1].w = data;
-      
+
       /* start GFX operation */
       gfx_start(data, s68k.cycles);
       return;
@@ -1353,7 +1353,7 @@ void scd_init(void)
         m68k.memory_map[i].write8  = m68k_unused_8_w;
         m68k.memory_map[i].write16 = m68k_unused_16_w;
         zbank_memory_map[i].read   = NULL;
-        zbank_memory_map[i].write  = zbank_unused_w;        
+        zbank_memory_map[i].write  = zbank_unused_w;
         break;
       }
 
@@ -1420,7 +1420,7 @@ void scd_init(void)
   for (i=0x00; i<0x100; i++)
   {
     /* only A1-A19 are connected to SUB-CPU */
-    switch (i & 0x0f) 
+    switch (i & 0x0f)
     {
       case 0x00:
       case 0x01:
@@ -1778,7 +1778,7 @@ int scd_context_save(uint8 *state)
   tmp32 = s68k_get_reg(M68K_REG_A6);  save_param(&tmp32, 4);
   tmp32 = s68k_get_reg(M68K_REG_A7);  save_param(&tmp32, 4);
   tmp32 = s68k_get_reg(M68K_REG_PC);  save_param(&tmp32, 4);
-  tmp16 = s68k_get_reg(M68K_REG_SR);  save_param(&tmp16, 2); 
+  tmp16 = s68k_get_reg(M68K_REG_SR);  save_param(&tmp16, 2);
   tmp32 = s68k_get_reg(M68K_REG_USP); save_param(&tmp32, 4);
   tmp32 = s68k_get_reg(M68K_REG_ISP); save_param(&tmp32, 4);
 
@@ -2003,7 +2003,7 @@ int scd_context_load(uint8 *state)
   load_param(&tmp32, 4); s68k_set_reg(M68K_REG_A5, tmp32);
   load_param(&tmp32, 4); s68k_set_reg(M68K_REG_A6, tmp32);
   load_param(&tmp32, 4); s68k_set_reg(M68K_REG_A7, tmp32);
-  load_param(&tmp32, 4); s68k_set_reg(M68K_REG_PC, tmp32);  
+  load_param(&tmp32, 4); s68k_set_reg(M68K_REG_PC, tmp32);
   load_param(&tmp16, 2); s68k_set_reg(M68K_REG_SR, tmp16);
   load_param(&tmp32, 4); s68k_set_reg(M68K_REG_USP,tmp32);
   load_param(&tmp32, 4); s68k_set_reg(M68K_REG_ISP,tmp32);

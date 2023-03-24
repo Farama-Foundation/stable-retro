@@ -74,4 +74,3 @@ extern char *get_peripheral(int index);
 extern void getrominfo(char *romheader);
 
 #endif /* _LOADROM_H_ */
-

@@ -1,6 +1,6 @@
 /*
     error.c --
-    Error logging 
+    Error logging
 */
 
 #include "osd.h"

@@ -38,4 +38,3 @@ pnm2png.exe -alpha rawn6a16.pgm rawn4a16.pgm rawn4a16.png
 REM -- color with alpha-channel
 pnm2png.exe -alpha rawn6a08.pgm rawn6a08.ppm rawn6a08.png
 pnm2png.exe -alpha rawn6a16.pgm rawn6a16.ppm rawn6a16.png
-

@@ -470,4 +470,3 @@ bool mCoreLoadStateNamed(struct mCore* core, struct VFile* vf, int flags) {
 	mStateExtdataDeinit(&extdata);
 	return success;
 }
-

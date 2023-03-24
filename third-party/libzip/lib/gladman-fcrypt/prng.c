@@ -152,4 +152,3 @@ INTERNAL void prng_end(prng_ctx ctx[1])
 #if defined(__cplusplus)
 }
 #endif
-

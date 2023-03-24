@@ -1227,7 +1227,7 @@ void gambatte::setInitState(SaveState &state, bool const cgb, bool const gbaCgbM
    }
    //set initial gbc gb mode sprite palette
    std::memcpy(state.ppu.dmgPalette + 8, cgbObjpDump, 8 * 2);
-   
+
 	std::memcpy(state.ppu.objpData.ptr, cgbObjpDump, sizeof cgbObjpDump);
 
 	if (!cgb) {

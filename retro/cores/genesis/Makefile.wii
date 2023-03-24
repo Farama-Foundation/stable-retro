@@ -25,7 +25,7 @@ SOURCES		:=	core core/m68k core/z80 core/sound core/tremor core/ntsc core/input_
 INCLUDES	:=	core core/m68k core/z80 core/sound core/tremor core/ntsc core/input_hw core/cd_hw core/cart_hw core/cart_hw/svp \
 			$(CHDLIBDIR)/src $(CHDLIBDIR)/deps/libFLAC/include $(CHDLIBDIR)/deps/lzma \
 			gx gx/utils gx/gui gx/fileio gx/images gx/sounds \
-			$(BUILD) 
+			$(BUILD)
 
 #---------------------------------------------------------------------------------
 # options for code generation

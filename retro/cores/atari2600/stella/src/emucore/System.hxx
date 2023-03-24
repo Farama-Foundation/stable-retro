@@ -39,7 +39,7 @@ class NullDevice;
   into 2^m byte pages (1 <= m <= n), where a page is the smallest unit
   a device can use when installing itself in the system.
 
-  In general the addressing space will be 8192 (2^13) bytes for a 
+  In general the addressing space will be 8192 (2^13) bytes for a
   6507 based system and 65536 (2^16) bytes for a 6502 based system.
 
   @author  Bradford W. Mott
@@ -77,7 +77,7 @@ class System : public Serializable
     void reset(bool autodetect = false);
 
     /**
-      Attach the specified device and claim ownership of it.  The device 
+      Attach the specified device and claim ownership of it.  The device
       will be asked to install itself.
 
       @param device The device to attach to the system
@@ -101,7 +101,7 @@ class System : public Serializable
     void attach(M6532* m6532);
 
     /**
-      Attach the specified TIA device and claim ownership of it.  The device 
+      Attach the specified TIA device and claim ownership of it.  The device
       will be asked to install itself.
 
       @param tia The TIA device to attach to the system
@@ -140,8 +140,8 @@ class System : public Serializable
     Random& randGenerator() { return *myRandom; }
 
     /**
-      Get the null device associated with the system.  Every system 
-      has a null device associated with it that's used by pages which 
+      Get the null device associated with the system.  Every system
+      has a null device associated with it that's used by pages which
       aren't mapped to "real" devices.
 
       @return The null device associated with the system
@@ -168,7 +168,7 @@ class System : public Serializable
       @return The mask to apply to an address to obtain its page offset
     */
     uInt16 pageMask() const { return myPageMask; }
- 
+
   public:
     /**
       Get the number of system cycles which have passed since the last
@@ -187,8 +187,8 @@ class System : public Serializable
 
     /**
       Reset the system cycle count to zero.  The first thing that
-      happens is that all devices are notified of the reset by invoking 
-      their systemCyclesReset method then the system cycle count is 
+      happens is that all devices are notified of the reset by invoking
+      their systemCyclesReset method then the system cycle count is
       reset to zero.
     */
     void resetCycles();
@@ -204,7 +204,7 @@ class System : public Serializable
       state is the last data that was accessed by the system.
 
       @return  The data bus state
-    */  
+    */
     uInt8 getDataBusState() const { return myDataBusState; }
 
     /**
@@ -221,7 +221,7 @@ class System : public Serializable
       @param zmask  The bits which are in Z-state
       @param hmask  The bits which should always be driven high
       @return  The data bus state
-    */  
+    */
     uInt8 getDataBusState(uInt8 zmask, uInt8 hmask = 0x00)
     {
       // For the pins that are floating, randomly decide which are high or low
@@ -295,7 +295,7 @@ class System : public Serializable
       /**
         Pointer to a block of memory or the null pointer.  The null pointer
         indicates that the device's peek method should be invoked for reads
-        to this page, while other values are the base address of an array 
+        to this page, while other values are the base address of an array
         to directly access for reads to this page.
       */
       uInt8* directPeekBase;
@@ -303,7 +303,7 @@ class System : public Serializable
       /**
         Pointer to a block of memory or the null pointer.  The null pointer
         indicates that the device's poke method should be invoked for writes
-        to this page, while other values are the base address of an array 
+        to this page, while other values are the base address of an array
         to directly access for pokes to this page.
       */
       uInt8* directPokeBase;
@@ -318,7 +318,7 @@ class System : public Serializable
       uInt8* codeAccessBase;
 
       /**
-        Pointer to the device associated with this page or to the system's 
+        Pointer to the device associated with this page or to the system's
         null device if the page hasn't been mapped to a device.
       */
       Device* device;
@@ -361,7 +361,7 @@ class System : public Serializable
       @return The accessing methods used by the page
     */
     const PageAccess& getPageAccess(uInt16 page) const;
- 
+
     /**
       Get the page type for the given address.
 
@@ -423,7 +423,7 @@ class System : public Serializable
 
     // Mask to apply to an address to obtain its page offset
     const uInt16 myPageMask;
- 
+
     // Number of pages in the system
     const uInt16 myNumberOfPages;
 
@@ -456,7 +456,7 @@ class System : public Serializable
     uInt32 myCycles;
 
     // Null device to use for page which are not installed
-    NullDevice myNullDevice; 
+    NullDevice myNullDevice;
 
     // The current state of the Data Bus
     uInt8 myDataBusState;

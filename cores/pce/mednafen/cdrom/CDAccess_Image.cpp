@@ -85,7 +85,7 @@ static const int32_t DI_Size_Table[8] =
    2352  // CD-I RAW
 };
 
-static const char *DI_CDRDAO_Strings[8] = 
+static const char *DI_CDRDAO_Strings[8] =
 {
    "AUDIO",
    "MODE1",
@@ -97,7 +97,7 @@ static const char *DI_CDRDAO_Strings[8] =
    "CDI_RAW"
 };
 
-static const char *DI_CUE_Strings[8] = 
+static const char *DI_CUE_Strings[8] =
 {
    "AUDIO",
    "MODE1/2048",
@@ -561,7 +561,7 @@ bool CDAccess_Image::ImageOpen(const std::string& path, bool image_memcache)
             const char *binoffset = NULL;
             const char *length = NULL;
 
-            if(args[1].c_str()[0] == '#') 
+            if(args[1].c_str()[0] == '#')
             {
                binoffset = args[1].c_str() + 1;
                length = args[2].c_str();
@@ -622,7 +622,7 @@ bool CDAccess_Image::ImageOpen(const std::string& path, bool image_memcache)
 
             if(args[0] == "COPY")
             {
-               TmpTrack.subq_control &= ~SUBQ_CTRLF_DCP; 
+               TmpTrack.subq_control &= ~SUBQ_CTRLF_DCP;
             }
             else if(args[0] == "PRE_EMPHASIS")
             {
@@ -637,7 +637,7 @@ bool CDAccess_Image::ImageOpen(const std::string& path, bool image_memcache)
          else if(cmdbuf == "COPY")
          {
             TmpTrack.subq_control |= SUBQ_CTRLF_DCP;
-         } 
+         }
          else if(cmdbuf == "PRE_EMPHASIS")
          {
             TmpTrack.subq_control |= SUBQ_CTRLF_PRE;
@@ -882,7 +882,7 @@ bool CDAccess_Image::ImageOpen(const std::string& path, bool image_memcache)
                case DI_FORMAT_MODE2_FORM1:
                case DI_FORMAT_MODE2_FORM2:
                case DI_FORMAT_MODE2_RAW:
-                        disc_type = DISC_TYPE_CD_XA;	
+                        disc_type = DISC_TYPE_CD_XA;
                         break;
 
                case DI_FORMAT_CDI_RAW:
@@ -901,7 +901,7 @@ bool CDAccess_Image::ImageOpen(const std::string& path, bool image_memcache)
       }
       else // else handle CUE sheet...
       {
-         if(Tracks[x].FirstFileInstance) 
+         if(Tracks[x].FirstFileInstance)
          {
             LastIndex = 0;
             FileOffset = 0;
@@ -929,7 +929,7 @@ bool CDAccess_Image::ImageOpen(const std::string& path, bool image_memcache)
 
          }
          else
-         { 
+         {
             // Fix the sector count if we have multiple tracks per one binary image file.
             if(Tracks[x + 1].index[0] == -1)
                Tracks[x].sectors = Tracks[x + 1].index[1] - Tracks[x].index[1];
@@ -1369,5 +1369,3 @@ void CDAccess_Image::GenerateTOC(void)
    toc.tracks[100].control = Tracks[FirstTrack + NumTracks - 1].subq_control;
    toc.tracks[100].valid = true;
 }
-
-

@@ -1334,7 +1334,7 @@ uint8 S9xGetPPU (uint16 Address)
 		else
 		if (Settings.BS      && Address >= 0x2188 && Address <= 0x219f)
 			return (S9xGetBSXPPU(Address));
-		else	
+		else
 		if (Settings.SRTC    && Address == 0x2800)
 			return (S9xGetSRTC(Address));
 		else
@@ -1912,7 +1912,7 @@ void S9xSoftResetPPU (void)
 	PPU.BGMosaic[1] = FALSE;
 	PPU.BGMosaic[2] = FALSE;
 	PPU.BGMosaic[3] = FALSE;
-	
+
 	PPU.Window1Left = 1;
 	PPU.Window1Right = 0;
 	PPU.Window2Left = 1;

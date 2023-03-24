@@ -5,7 +5,7 @@ dnl AM_PATH_LIBFLAC([ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND]])
 dnl Test for libFLAC, and define LIBFLAC_CFLAGS, LIBFLAC_LIBS, LIBFLAC_LIBDIR
 dnl
 AC_DEFUN([AM_PATH_LIBFLAC],
-[dnl 
+[dnl
 dnl Get the cflags and libraries
 dnl
 AC_ARG_WITH(libFLAC,[  --with-libFLAC=PFX   Prefix where libFLAC is installed (optional)], libFLAC_prefix="$withval", libFLAC_prefix="")
@@ -73,7 +73,7 @@ int main ()
 
   if test "x$no_libFLAC" = "x" ; then
      AC_MSG_RESULT(yes)
-     ifelse([$1], , :, [$1])     
+     ifelse([$1], , :, [$1])
   else
      AC_MSG_RESULT(no)
      if test -f conf.libFLACtest ; then

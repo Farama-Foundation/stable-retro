@@ -1,6 +1,6 @@
 /*
  *  cheats.c
- * 
+ *
  *  Genesis Plus GX Cheats menu
  *
  *  Copyright Eke-Eke (2010-2014)
@@ -58,7 +58,7 @@ extern const u8 Key_L_gcn_png[];
 #endif
 extern const u8 Key_DPAD_png[];
 
-typedef struct 
+typedef struct
 {
   char code[12];
   char text[MAX_DESC_LENGTH];
@@ -280,7 +280,7 @@ static u32 decode_cheat(char *string, int index)
         case 3:
         address |= (n & 0xF) << 20 | (n >> 4) << 8;
         break;
-    
+
         case 4:
         data |= (n & 1) << 12;
         address |= (n >> 1) << 16;
@@ -447,7 +447,7 @@ static u32 decode_cheat(char *string, int index)
 static void apply_cheats(void)
 {
   u8 *ptr;
-  
+
   /* clear ROM&RAM patches counter */
   maxROMcheats = maxRAMcheats = 0;
 
@@ -797,7 +797,7 @@ static void cheatmenu_cb(void)
  *
  * Manage cheats for the currently loaded game
  *
- ****************************************************************************/ 
+ ****************************************************************************/
 void CheatMenu(void)
 {
   int i, update = 0;
@@ -822,7 +822,7 @@ void CheatMenu(void)
   {
     bg_cheats[1].state &= ~IMAGE_VISIBLE;
   }
-  
+
   /* additional textures */
   star.texture = gxTextureOpenPNG(Star_full_png,0);
   bar_over.texture = gxTextureOpenPNG(Overlay_bar_png,0);
@@ -1040,7 +1040,7 @@ void CheatMenu(void)
 
           /* select first digit */
           m->selected = 10;
-          
+
           /* reset scrolling */
           string_offset = 0;
           break;
@@ -1155,13 +1155,13 @@ void CheatMenu(void)
 
         case 29:  /* Validate entry */
         {
-          /* finalize cheat description */  
+          /* finalize cheat description */
           if (type && ((offset + selection) != maxcheats))
           {
             str[digit_cnt] = 0;
             update = -1;
           }
-          
+
           /* finalize cheat code edition */
           else if (max && (digit_cnt > max))
           {
@@ -1273,7 +1273,7 @@ void CheatMenu(void)
                 m->buttons[maxcheats].state &= ~BUTTON_ACTIVE;
                 m->buttons[maxcheats-1].shift[1] = 0;
               }
-              else 
+              else
               {
                 /* scroll down cheat list if there is less than 10 visible entries */
                 if ((maxcheats < (offset + 10)) && (maxcheats < MAX_CHEATS))
@@ -1375,7 +1375,7 @@ void CheatMenu(void)
   m->bg_images[2].state |= IMAGE_SLIDE_TOP;
   m->bg_images[3].state |= IMAGE_SLIDE_BOTTOM;
   m->bg_images[4].state |= IMAGE_SLIDE_TOP;
-  
+
   /* leave menu */
   GUI_DrawMenuFX(m,30,1);
   GUI_DeleteMenu(m);
@@ -1396,7 +1396,7 @@ void CheatMenu(void)
  * ROM patches are automatically applied.
  * RAM patches are applied once per frame.
  *
- ****************************************************************************/ 
+ ****************************************************************************/
 void CheatLoad(void)
 {
   int len;
@@ -1405,7 +1405,7 @@ void CheatLoad(void)
 
   /* reset cheat count */
   maxcheats = 0;
-  
+
   /* make cheat filename */
   sprintf(temp, "%s/cheats/%s.pat", DEFAULT_PATH, rom_filename);
 
@@ -1498,11 +1498,11 @@ void CheatLoad(void)
  *
  * Apply RAM patches (this should be called once per frame)
  *
- ****************************************************************************/ 
+ ****************************************************************************/
 void RAMCheatUpdate(void)
 {
   int index, cnt = maxRAMcheats;
-  
+
   while (cnt)
   {
     /* get cheat index */
@@ -1528,12 +1528,12 @@ void RAMCheatUpdate(void)
  *
  * Apply ROM patches (this should be called each time banking is changed)
  *
- ****************************************************************************/ 
+ ****************************************************************************/
 void ROMCheatUpdate(void)
 {
   int index, cnt = maxROMcheats;
   u8 *ptr;
-  
+
   while (cnt)
   {
     /* get cheat index */

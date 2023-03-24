@@ -236,7 +236,7 @@ struct _lzma_allocator
 };
 
 typedef struct _lzma_codec_data lzma_codec_data;
-struct _lzma_codec_data 
+struct _lzma_codec_data
 {
 	CLzmaDec		decoder;
 	lzma_allocator	allocator;
@@ -550,7 +550,7 @@ chd_error lzma_codec_init(void* codec, uint32_t hunkbytes)
 	// do memory allocations
 	if (LzmaDec_Allocate(&lzma_codec->decoder, decoder_props, LZMA_PROPS_SIZE, (ISzAlloc*)alloc) != SZ_OK)
 		return CHDERR_DECOMPRESSION_ERROR;
-	
+
 	// Okay
 	return CHDERR_NONE;
 }
@@ -599,7 +599,7 @@ chd_error cdlz_codec_init(void* codec, uint32_t hunkbytes)
 
 	// allocate buffer
 	cdlz->buffer = (uint8_t*)malloc(sizeof(uint8_t) * hunkbytes);
-	
+
 	// make sure the CHD's hunk size is an even multiple of the frame size
 	lzma_codec_init(&cdlz->base_decompressor, (hunkbytes / CD_FRAME_SIZE) * CD_MAX_SECTOR_DATA);
 	zlib_codec_init(&cdlz->subcode_decompressor, (hunkbytes / CD_FRAME_SIZE) * CD_MAX_SUBCODE_DATA);
@@ -681,7 +681,7 @@ chd_error cdzl_codec_decompress(void *codec, const uint8_t *src, uint32_t comple
 {
    uint32_t framenum;
 	cdzl_codec_data* cdzl = (cdzl_codec_data*)codec;
-	
+
 	// determine header bytes
 	uint32_t frames = destlen / CD_FRAME_SIZE;
 	uint32_t complen_bytes = (destlen < 65536) ? 2 : 3;
@@ -876,7 +876,7 @@ static const codec_interface codec_interfaces[] =
 		cdzl_codec_free,
 		cdzl_codec_decompress,
 		NULL
-	},	
+	},
 
 	/* V5 CD lzma compression */
 	{
@@ -887,7 +887,7 @@ static const codec_interface codec_interfaces[] =
 		cdlz_codec_free,
 		cdlz_codec_decompress,
 		NULL
-	},		
+	},
 
 	/* V5 CD flac compression */
 	{
@@ -898,7 +898,7 @@ static const codec_interface codec_interfaces[] =
 		cdfl_codec_free,
 		cdfl_codec_decompress,
 		NULL
-	},		
+	},
 };
 
 /***************************************************************************
@@ -952,7 +952,7 @@ static INLINE UINT64 get_bigendian_uint48(const UINT8 *base)
 
 static INLINE void put_bigendian_uint48(UINT8 *base, UINT64 value)
 {
-	value &= 0xffffffffffff; 
+	value &= 0xffffffffffff;
 	base[0] = value >> 40;
 	base[1] = value >> 32;
 	base[2] = value >> 24;
@@ -1354,7 +1354,7 @@ chd_error chd_open_file(core_file *file, int mode, chd_file *parent, chd_file **
 		if (err != CHDERR_NONE)
 			EARLY_EXIT(err);
 	}
-	else 
+	else
 	{
 		err = decompress_v5_map(newchd, &(newchd->header));
 	}
@@ -1405,7 +1405,7 @@ chd_error chd_open_file(core_file *file, int mode, chd_file *parent, chd_file **
 						err = CHDERR_UNSUPPORTED_FORMAT;
 
 					/* initialize the codec */
-					if (newchd->codecintf[decompnum]->init != NULL) 
+					if (newchd->codecintf[decompnum]->init != NULL)
 					{
 						void* codec = NULL;
 						switch (newchd->header.compression[decompnum])
@@ -1527,7 +1527,7 @@ void chd_close(chd_file *chd)
 				case CHD_CODEC_CD_FLAC:
 					codec = &chd->cdfl_codec_data;
 					break;
-			}		
+			}
 			if (codec)
 			{
 				(*chd->codecintf[i]->free)(codec);
@@ -1773,11 +1773,11 @@ const char *chd_get_codec_name(UINT32 codec)
 static chd_error header_validate(const chd_header *header)
 {
 	int intfnum;
-  
+
 	/* require a valid version */
 	if (header->version == 0 || header->version > CHD_HEADER_VERSION)
 		return CHDERR_UNSUPPORTED_VERSION;
-  
+
 	/* require a valid length */
 	if ((header->version == 1 && header->length != CHD_V1_HEADER_SIZE) ||
 		(header->version == 2 && header->length != CHD_V2_HEADER_SIZE) ||
@@ -1785,7 +1785,7 @@ static chd_error header_validate(const chd_header *header)
 		(header->version == 4 && header->length != CHD_V4_HEADER_SIZE) ||
 		(header->version == 5 && header->length != CHD_V5_HEADER_SIZE))
 		return CHDERR_INVALID_PARAMETER;
-  
+
 	/* Do not validate v5 header */
 	if (header->version <= 4)
 	{
@@ -1873,7 +1873,7 @@ static chd_error header_read(core_file *file, chd_header *header)
 		(header->version == 3 && header->length != CHD_V3_HEADER_SIZE) ||
 		(header->version == 4 && header->length != CHD_V4_HEADER_SIZE) ||
 		(header->version == 5 && header->length != CHD_V5_HEADER_SIZE))
-		
+
 		return CHDERR_INVALID_DATA;
 
 	/* extract the common data */
@@ -1948,7 +1948,7 @@ static chd_error header_read(core_file *file, chd_header *header)
 	}
 
 	/* Unknown version */
-	else 
+	else
 	{
 		/* TODO */
 	}

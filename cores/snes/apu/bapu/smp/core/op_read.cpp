@@ -741,4 +741,3 @@ case 0x2a: {
   regs.p.c = regs.p.c | !(rd & (1 << bit));
   break;
 }
-

@@ -95,7 +95,7 @@ void MyCPUID(UInt32 function, UInt32 *a, UInt32 *b, UInt32 *c, UInt32 *d)
     : "0" (function)) ;
 
   #endif
-  
+
   #else
 
   int CPUInfo[4];
@@ -147,7 +147,7 @@ Bool CPU_Is_InOrder()
 
   family = x86cpuid_GetFamily(p.ver);
   model = x86cpuid_GetModel(p.ver);
-  
+
   firm = x86cpuid_GetFirm(&p);
 
   switch (firm)

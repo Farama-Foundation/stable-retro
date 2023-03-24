@@ -85,7 +85,7 @@ Now, when you click "Build and Go", the test will be executed. Dumping out somet
 [==========] 2 tests from 1 test case ran.
 [  PASSED  ] 2 tests.
 
-The Debugger has exited with status 0.  
+The Debugger has exited with status 0.
 ```
 
 # Summary #

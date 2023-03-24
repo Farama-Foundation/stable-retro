@@ -536,4 +536,3 @@ LUALIB_API int luaopen_io(lua_State *L)
   io_std_new(L, stderr, "stderr");
   return 1;
 }
-

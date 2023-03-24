@@ -2,9 +2,9 @@
  *  vi_encoder.c
  *
  *  Wii Audio/Video Encoder support
- * 
- *  Copyright (C) 2009 Eke-Eke, with some code from libogc (C) Hector Martin 
- * 
+ *
+ *  Copyright (C) 2009 Eke-Eke, with some code from libogc (C) Hector Martin
+ *
  *  Redistribution and use in source and binary forms, with or without modification,
  *  are permitted provided that the following conditions are met:
  *

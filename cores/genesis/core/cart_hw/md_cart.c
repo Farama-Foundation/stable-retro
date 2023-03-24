@@ -128,7 +128,7 @@ static const md_entry_t rom_database[] =
 /* Super King Kong 99 */
   {0x0000,0x7d6e,0x60,0x7f,{{0x00,0x00,0x00,0x00},{0xf00007,0xf00007,0xf00007,0xffffff},{0x600001,0x600003,0x600005,0x000000},0,1,NULL,NULL,default_regs_r,custom_regs_w}},
 /* Gunfight 3-in-1 */
-  {0x0000,0x6ff8,0x60,0x7f,{{0x00,0x00,0x00,0x00},{0xf00007,0xf00007,0xf00007,0xffffff},{0x600001,0x600003,0x600005,0x000000},0,1,NULL,NULL,default_regs_r,custom_regs_w}}, 
+  {0x0000,0x6ff8,0x60,0x7f,{{0x00,0x00,0x00,0x00},{0xf00007,0xf00007,0xf00007,0xffffff},{0x600001,0x600003,0x600005,0x000000},0,1,NULL,NULL,default_regs_r,custom_regs_w}},
 /* Pokemon Stadium */
   {0x0000,0x843c,0x70,0x7f,{{0x00,0x00,0x00,0x00},{0xffffff,0xffffff,0xffffff,0xffffff},{0x000000,0x000000,0x000000,0x000000},0,1,NULL,NULL,NULL,custom_regs_w}},
 
@@ -244,7 +244,7 @@ static const md_entry_t rom_database[] =
 
 
 /************************************************************
-          Cart Hardware initialization 
+          Cart Hardware initialization
 *************************************************************/
 
 void md_cart_init(void)
@@ -252,9 +252,9 @@ void md_cart_init(void)
   int i;
 
   /***************************************************************************************************************
-                CARTRIDGE ROM MIRRORING                                                                                   
+                CARTRIDGE ROM MIRRORING
    ***************************************************************************************************************
-  
+
     MD Cartridge area is mapped to $000000-$3fffff:
 
       -> when accessing ROM, 68k address lines A1 to A21 can be used by the internal cartridge hardware to decode
@@ -290,7 +290,7 @@ void md_cart_init(void)
       2/ total ROM size is not a factor of 2: ROM is padded up to 2^k then mirrored each 2^k bytes.
 
   ******************************************************************************************************************/
-  
+
   /* calculate nearest size with factor of 2 */
   unsigned int size = 0x10000;
   while (cart.romsize > size)
@@ -326,7 +326,7 @@ void md_cart_init(void)
   cart.special = 0;
 
   /**********************************************
-          DEFAULT CARTRIDGE MAPPING 
+          DEFAULT CARTRIDGE MAPPING
   ***********************************************/
   for (i=0; i<0x40; i++)
   {
@@ -371,7 +371,7 @@ void md_cart_init(void)
   }
 
   /**********************************************
-          BACKUP MEMORY 
+          BACKUP MEMORY
   ***********************************************/
   sram_init();
   eeprom_i2c_init();
@@ -390,7 +390,7 @@ void md_cart_init(void)
   }
 
   /**********************************************
-          SVP CHIP 
+          SVP CHIP
   ***********************************************/
   svp = NULL;
   if (strstr(rominfo.international,"Virtua Racing"))
@@ -399,9 +399,9 @@ void md_cart_init(void)
   }
 
   /**********************************************
-          LOCK-ON 
+          LOCK-ON
   ***********************************************/
-  
+
   /* clear existing patches */
   ggenie_shutdown();
   areplay_shutdown();
@@ -434,7 +434,7 @@ void md_cart_init(void)
         {
           /* try to load Sonic 2 & Knuckles UPMEM ROM (256 KB) */
           if (load_archive(SK_UPMEM, cart.rom + 0x900000, 0x40000, NULL) == 0x40000)
-          {          
+          {
             /* $000000-$1FFFFF is mapped to S&K ROM */
             for (i=0x00; i<0x20; i++)
             {
@@ -449,7 +449,7 @@ void md_cart_init(void)
               cart.rom[i + 0x600000] = cart.rom[i + 0x600000 + 1];
               cart.rom[i + 0x600000 + 1] = temp;
             }
-            
+
             for (i=0; i<0x40000; i+=2)
             {
               /* Byteswap ROM */
@@ -701,7 +701,7 @@ void md_cart_reset(int hard_reset)
       m68k.memory_map[i].base = cart.rom + ((i<<16) & cart.mask);
     }
   }
-  
+
   /* SVP chip */
   if (svp)
   {
@@ -754,7 +754,7 @@ int md_cart_context_save(uint8 *state)
   {
     /* get base address */
     base = m68k.memory_map[i].base;
-      
+
     if (base == sram.sram)
     {
       /* SRAM */
@@ -838,10 +838,10 @@ int md_cart_context_load(uint8 *state)
 }
 
 /************************************************************
-          MAPPER handlers 
+          MAPPER handlers
 *************************************************************/
 
-/* 
+/*
   "official" ROM/SRAM bankswitch (Phantasy Star IV, Story of Thor/Beyond Oasis, Sonic 3 & Knuckles)
 */
 static void mapper_sega_w(uint32 data)
@@ -901,7 +901,7 @@ static void mapper_sega_w(uint32 data)
 
 /*
    Everdrive extended SSF ROM bankswitch
-   documented by Krikzz (http://krikzz.com/pub/support/mega-ed/dev/extended_ssf.txt) 
+   documented by Krikzz (http://krikzz.com/pub/support/mega-ed/dev/extended_ssf.txt)
 */
 static void mapper_512k_w(uint32 address, uint32 data)
 {
@@ -912,7 +912,7 @@ static void mapper_512k_w(uint32 address, uint32 data)
 
   /* cartridge area ($000000-$3FFFFF) is divided into 8 x 512K banks */
   address = (address << 2) & 0x38;
-  
+
   /* remap selected ROM page to selected bank */
   for (i=0; i<8; i++)
   {
@@ -922,7 +922,7 @@ static void mapper_512k_w(uint32 address, uint32 data)
 
 /*
    Super Street Fighter 2 ROM bankswitch
-   documented by Bart Trzynadlowski (http://emu-docs.org/Genesis/ssf2.txt) 
+   documented by Bart Trzynadlowski (http://emu-docs.org/Genesis/ssf2.txt)
 */
 static void mapper_ssf2_w(uint32 address, uint32 data)
 {
@@ -933,7 +933,7 @@ static void mapper_ssf2_w(uint32 address, uint32 data)
   }
 }
 
-/* 
+/*
   SF-001 mapper
 */
 static void mapper_sf001_w(uint32 address, uint32 data)
@@ -1029,7 +1029,7 @@ static void mapper_sf001_w(uint32 address, uint32 data)
   }
 }
 
-/* 
+/*
   SF-002 mapper
 */
 static void mapper_sf002_w(uint32 address, uint32 data)
@@ -1053,7 +1053,7 @@ static void mapper_sf002_w(uint32 address, uint32 data)
   }
 }
 
-/* 
+/*
   SF-004 mapper
 */
 static void mapper_sf004_w(uint32 address, uint32 data)
@@ -1194,7 +1194,7 @@ static uint32 mapper_sf004_r(uint32 address)
   return (((m68k.memory_map[0x00].base - cart.rom) >> 18) << 4);
 }
 
-/* 
+/*
   T-5740xx-xx mapper
 */
 static void mapper_t5740_w(uint32 address, uint32 data)
@@ -1276,8 +1276,8 @@ static uint32 mapper_t5740_r(uint32 address)
   return READ_BYTE(cart.rom, address);
 }
 
-/* 
-  FlashKit MD mapper (very limited M29W320xx Flash memory support -- enough for unlicensed games using device signature as protection) 
+/*
+  FlashKit MD mapper (very limited M29W320xx Flash memory support -- enough for unlicensed games using device signature as protection)
 */
 static void mapper_flashkit_w(uint32 address, uint32 data)
 {
@@ -1314,7 +1314,7 @@ static uint32 mapper_flashkit_r(uint32 address)
   }
 }
 
-/* 
+/*
   Super Mario World 64 (unlicensed) mapper
 */
 static void mapper_smw_64_w(uint32 address, uint32 data)
@@ -1481,7 +1481,7 @@ static uint32 mapper_smw_64_r(uint32 address)
   }
 }
 
-/* 
+/*
   Realtec ROM bankswitch (Earth Defend, Balloon Boy & Funny World, Whac-A-Critter)
   (Note: register usage is inverted in TascoDlx documentation)
 */
@@ -1489,7 +1489,7 @@ static void mapper_realtec_w(uint32 address, uint32 data)
 {
   switch (address)
   {
-    case 0x402000:  
+    case 0x402000:
     {
       /* number of mapped 64k blocks (the written value is a number of 128k blocks) */
       cart.hw.regs[2] = data << 1;
@@ -1503,7 +1503,7 @@ static void mapper_realtec_w(uint32 address, uint32 data)
       return;
     }
 
-    case 0x400000:  
+    case 0x400000:
     {
       /* 00000yy1 */
       cart.hw.regs[1] = data & 6;
@@ -1555,13 +1555,13 @@ static void mapper_seganet_w(uint32 address, uint32 data)
   }
 }
 
-/* 
+/*
   Custom ROM Bankswitch used in Soul Edge VS Samurai Spirits, Top Fighter, Mulan, Pocket Monsters II, Lion King 3, Super King Kong 99, Pokemon Stadium
 */
 static void mapper_32k_w(uint32 data)
 {
   int i;
-  
+
   /* 64 x 32k banks */
   if (data)
   {
@@ -1585,7 +1585,7 @@ static void mapper_32k_w(uint32 data)
   }
 }
 
-/* 
+/*
   Custom ROM Bankswitch used in Chinese Fighter III
 */
 static void mapper_64k_w(uint32 data)
@@ -1611,7 +1611,7 @@ static void mapper_64k_w(uint32 data)
   }
 }
 
-/* 
+/*
   Custom ROM Bankswitch used in pirate "Multi-in-1" cartridges, A Bug's Life, King of Fighter 99, Pocket Monster, Rockman X3
  */
 static void mapper_64k_multi_w(uint32 address)
@@ -1632,7 +1632,7 @@ static uint32 mapper_radica_r(uint32 address)
 {
   int i = 0;
   address = (address >> 1);
-  
+
   /* 64 x 64k banks */
   for (i = 0; i < 64; i++)
   {
@@ -1644,7 +1644,7 @@ static uint32 mapper_radica_r(uint32 address)
 
 
 /************************************************************
-          default !TIME signal handler 
+          default !TIME signal handler
 *************************************************************/
 
 static void default_time_w(uint32 address, uint32 data)
@@ -1731,7 +1731,7 @@ static uint32 custom_regs_r(uint32 address)
 static void custom_regs_w(uint32 address, uint32 data)
 {
   uint8 temp;
-  
+
   /* ROM bankswitch */
   if ((address >> 16) > 0x6f)
   {
@@ -1805,25 +1805,25 @@ static void tekken_regs_w(uint32 address, uint32 data)
       cart.hw.regs[0]= 0x00;
       break;
     }
-  
+
     case 0x02:
     {
       /* read only ? */
       break;
     }
-  
+
     case 0x0c:
     {
       /* data output mode bit 0 ? (game writes $01) */
       break;
     }
-  
+
     case 0x0e:
     {
       /* data output mode bit 1 ? (never written by game) */
       break;
     }
-  
+
     default:
     {
       /* data input (only connected to D0 ?)*/
@@ -1905,9 +1905,9 @@ static void topshooter_w(uint32 address, uint32 data)
 
 
 /* Sega Channel hardware (not emulated) */
-/* 
+/*
 
-$A13004: BUSY ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? 
+$A13004: BUSY ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?
 
 Unused read16 00A13004 (00005B54)
 Unused read16 00A13004 (00005B70)

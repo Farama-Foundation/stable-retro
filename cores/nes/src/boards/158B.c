@@ -28,7 +28,7 @@ static uint8 lut[8] = { 0x00, 0x00, 0x00, 0x01, 0x02, 0x04, 0x0F, 0x00 };
 
 static void UNL158BPW(uint32 A, uint8 V) {
 	if (EXPREGS[0] & 0x80) {
-		uint32 bank = EXPREGS[0] & 7; 
+		uint32 bank = EXPREGS[0] & 7;
 		if(EXPREGS[0] & 0x20) { // 32Kb mode
 			setprg32(0x8000, bank >> 1);
 		} else {				// 16Kb mode

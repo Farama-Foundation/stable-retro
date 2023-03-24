@@ -35,4 +35,3 @@ else:
 
 with open(save, 'w') as sf:
     sf.write(str(libsize))
-

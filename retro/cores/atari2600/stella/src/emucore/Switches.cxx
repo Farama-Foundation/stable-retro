@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -21,7 +21,7 @@
 #include "Props.hxx"
 #include "Switches.hxx"
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Switches::Switches(const Event& event, const Properties& properties)
   : myEvent(event),
     mySwitches(0xFF)
@@ -54,12 +54,12 @@ Switches::Switches(const Event& event, const Properties& properties)
   }
 }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Switches::~Switches()
 {
 }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void Switches::update()
 {
   if(myEvent.get(Event::ConsoleColor) != 0)
@@ -75,7 +75,7 @@ void Switches::update()
   {
     mySwitches |= 0x80;
   }
-  else if(myEvent.get(Event::ConsoleRightDiffB) != 0) 
+  else if(myEvent.get(Event::ConsoleRightDiffB) != 0)
   {
     mySwitches &= ~0x80;
   }
@@ -93,7 +93,7 @@ void Switches::update()
   {
     mySwitches &= ~0x02;
   }
-  else 
+  else
   {
     mySwitches |= 0x02;
   }
@@ -102,13 +102,13 @@ void Switches::update()
   {
     mySwitches &= ~0x01;
   }
-  else 
+  else
   {
     mySwitches |= 0x01;
   }
 }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool Switches::save(Serializer& out) const
 {
   try
@@ -123,7 +123,7 @@ bool Switches::save(Serializer& out) const
   return true;
 }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool Switches::load(Serializer& in)
 {
   try

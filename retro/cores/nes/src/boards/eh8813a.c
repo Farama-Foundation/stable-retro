@@ -56,7 +56,7 @@ static DECLFR(EH8813ARead) {
 		A= (A & 0xFFF0) + hw_mode;
 	return CartBR(A);
 }
-	
+
 static void EH8813APower(void) {
 	addrlatch = datalatch = hw_mode = 0;
 	Sync();

@@ -9,7 +9,7 @@ PLEASE DO NOT DISTRIBUTE WIN32 BINARIES WITHOUT THIS NOTICE.
 END USERS SHOULD PREFERABLY USE LIBRETRO PORT WITH RETROARCH.
 
 ----------------------------------------------------------------------------
- Genesis Plus (SDL Port) 
+ Genesis Plus (SDL Port)
 ----------------------------------------------------------------------------
 
  based on the original version 1.3
@@ -29,7 +29,7 @@ END USERS SHOULD PREFERABLY USE LIBRETRO PORT WITH RETROARCH.
  see CHANGELOG.txt
 
 
- Features 
+ Features
  ---------
 
     * accurate emulation of SG-1000, Mark-III, Master System (I & II), Game Gear, Genesis / Mega Drive, Sega / Mega CD hardware models (incl. backwards compatibility modes)
@@ -50,7 +50,7 @@ END USERS SHOULD PREFERABLY USE LIBRETRO PORT WITH RETROARCH.
     * support for Blargg's software NTSC filters
     * preliminary PICO emulation
     * support for raw (.bin, .gen, .md, .sms, .gg & .sg) and interleaved (.smd & .mdx) ROM files
-    * support for CUE+BIN, ISO+OGG & ISO+WAV CD image files 
+    * support for CUE+BIN, ISO+OGG & ISO+WAV CD image files
     * 2-buttons, 3-buttons & 6-buttons controllers emulation
     * Sega Team Player & EA 4-Way Play multitaps emulation
     * Sega Mouse emulation
@@ -68,7 +68,7 @@ END USERS SHOULD PREFERABLY USE LIBRETRO PORT WITH RETROARCH.
     * emulation of all known Master System & Game Gear cartridge “mappers” (incl. unlicensed Korean ones)
     * Game Genie & Action Replay hardware emulation
     * Sonic & Knuckles “Lock-On” hardware emulation
-    * support for ROM image up to 10MB (Ultimate MK3 hack) 
+    * support for ROM image up to 10MB (Ultimate MK3 hack)
 
 
  Usage
@@ -77,14 +77,14 @@ END USERS SHOULD PREFERABLY USE LIBRETRO PORT WITH RETROARCH.
  The Windows version runs windowed in a 16-bit desktop with 48Hz sound using SDL but
  without joystick support.
 
- 
+
  Controls
  -----
 
  Arrow Keys -   Directional pad
  A/Q,S,D,F  -   buttons A, B(1), C(2), START
  W,X,C,V    -   buttons X, Y, Z, MODE if 6-buttons controller is enabled
- Tab        -   Hard Reset 
+ Tab        -   Hard Reset
  Esc        -   Exit program
 
  F2         -   Toggle Fullscreen/Windowed mode
@@ -97,7 +97,7 @@ END USERS SHOULD PREFERABLY USE LIBRETRO PORT WITH RETROARCH.
  F11	    -   Toggle Border emulation
  F12        -   Toggle Player # (test only)
 
- 
+
  The mouse is used for lightguns, Sega Mouse, PICO & Terebi Oekaki tablet (automatically detected when loading supported game).
 
  A SRAM file (game.srm) is automatically saved on exit and loaded on startup.
@@ -137,8 +137,7 @@ END USERS SHOULD PREFERABLY USE LIBRETRO PORT WITH RETROARCH.
  The MAME team for the CPU and sound chip emulators.
 
  Nemesis for the researches on the YM2612 and VDP.
- 
+
  Tasco Deluxe for the documentation of Realtec mapper.
 
  Haze for the reverse-engineering of many unlicensed games protection.
-

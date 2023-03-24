@@ -658,4 +658,3 @@ end
 return {
   start = docmd -- Process -b command line option.
 }
-

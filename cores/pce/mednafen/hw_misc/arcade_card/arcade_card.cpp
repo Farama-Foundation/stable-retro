@@ -14,7 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-/* 
+/*
  Arcade Card emulation based on information provided by Ki and David Shadoff
 */
 
@@ -277,7 +277,7 @@ void ArcadeCard::Write(uint32 A, uint8 V)
 ArcadeCard::ArcadeCard(void)
 {
  ACRAMUsed = false;
- 
+
  memset(&AC, 0, sizeof(AC));
 
  memset(ACRAM, 0, sizeof(ACRAM));
@@ -296,7 +296,7 @@ void ArcadeCard::Power(void)
 
 int ArcadeCard::StateAction(StateMem *sm, int load, int data_only)
 {
- SFORMAT ACUsedRegs[] = 
+ SFORMAT ACUsedRegs[] =
  {
   SFVAR(ACRAMUsed),
   SFEND
@@ -363,4 +363,3 @@ void ArcadeCard::PokeRAM(uint32 Address, uint32 Length, const uint8 *Buffer)
  if(used)
   ACRAMUsed = true;
 }
-

@@ -39,4 +39,3 @@
 # -- color with alpha-channel
 ./png2pnm -noraw -alpha rawn6a08.pgm ../pngsuite/basn6a08.png rawn6a08.ppm
 ./png2pnm -noraw -alpha rawn6a16.pgm ../pngsuite/basn6a16.png rawn6a16.ppm
-

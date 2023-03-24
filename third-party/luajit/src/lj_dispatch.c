@@ -554,4 +554,3 @@ void LJ_FASTCALL lj_dispatch_profile(lua_State *L, const BCIns *pc)
   ERRNO_RESTORE
 }
 #endif
-

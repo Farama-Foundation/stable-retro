@@ -19,7 +19,7 @@
     "variables": {
       "lives": {
         "op": "zero"
-      }  
+      }
     }
   },
   "reward": {

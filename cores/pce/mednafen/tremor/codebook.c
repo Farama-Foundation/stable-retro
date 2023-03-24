@@ -70,7 +70,7 @@ static_codebook *vorbis_staticbook_unpack(oggpack_buffer *opb){
 	s->lengthlist[i]=num+1;
       }
     }
-    
+
     break;
   }
   case 1:
@@ -97,7 +97,7 @@ static_codebook *vorbis_staticbook_unpack(oggpack_buffer *opb){
     /* EOF */
     goto _eofout;
   }
-  
+
   /* Do we have a mapping to unpack? */
   switch((s->maptype=oggpack_read(opb,4))){
   case 0:
@@ -123,14 +123,14 @@ static_codebook *vorbis_staticbook_unpack(oggpack_buffer *opb){
 	quantvals=s->entries*s->dim;
 	break;
       }
-      
+
       /* quantized values */
       if((quantvals*s->q_quant+7)>>3>opb->storage-oggpack_bytes(opb))
         goto _eofout;
       s->quantlist=(long *)_ogg_malloc(sizeof(*s->quantlist)*quantvals);
       for(i=0;i<quantvals;i++)
 	s->quantlist[i]=oggpack_read(opb,s->q_quant);
-      
+
       if(quantvals&&s->quantlist[quantvals-1]==-1)goto _eofout;
     }
     break;
@@ -140,11 +140,11 @@ static_codebook *vorbis_staticbook_unpack(oggpack_buffer *opb){
 
   /* all set */
   return(s);
-  
+
  _errout:
  _eofout:
   vorbis_staticbook_destroy(s);
-  return(NULL); 
+  return(NULL);
 }
 
 /* the 'eliminate the decode tree' optimization actually requires the
@@ -163,12 +163,12 @@ static ogg_uint32_t bitreverse(ogg_uint32_t x){
   return((x>> 1)&0x55555555) | ((x<< 1)&0xaaaaaaaa);
 }
 
-STIN long decode_packed_entry_number(codebook *book, 
+STIN long decode_packed_entry_number(codebook *book,
 					      oggpack_buffer *b){
   int  read=book->dec_maxlength;
   long lo,hi;
   long lok = oggpack_look(b,book->dec_firsttablen);
- 
+
   if (lok >= 0) {
     long entry = book->dec_firsttable[lok];
     if(entry&0x80000000UL){
@@ -199,7 +199,7 @@ STIN long decode_packed_entry_number(codebook *book,
 
     while(hi-lo>1){
       long p=(hi-lo)>>1;
-      long test=book->codelist[lo+p]>testword;    
+      long test=book->codelist[lo+p]>testword;
       lo+=p&(test-1);
       hi-=p&(-test);
     }
@@ -209,7 +209,7 @@ STIN long decode_packed_entry_number(codebook *book,
       return(lo);
     }
   }
-  
+
   oggpack_adv(b, read+1);
   return(-1);
 }
@@ -217,13 +217,13 @@ STIN long decode_packed_entry_number(codebook *book,
 /* Decode side is specced and easier, because we don't need to find
    matches using different criteria; we simply read and map.  There are
    two things we need to do 'depending':
-   
+
    We may need to support interleave.  We don't really, but it's
    convenient to do it here rather than rebuild the vector later.
 
    Cascades may be additive or multiplicitive; this is not inherent in
    the codebook, but set in the code using the codebook.  Like
-   interleaving, it's easiest to do it here.  
+   interleaving, it's easiest to do it here.
    addmul==0 -> declarative (set the value)
    addmul==1 -> additive
    addmul==2 -> multiplicitive */
@@ -244,13 +244,13 @@ long vorbis_book_decode(codebook *book, oggpack_buffer *b){
 /* decode vector / dim granularity gaurding is done in the upper layer */
 long vorbis_book_decodevs_add(codebook *book,ogg_int32_t *a,
 			      oggpack_buffer *b,int n,int point){
-  if(book->used_entries>0){  
+  if(book->used_entries>0){
     int step=n/book->dim;
     long *entry = (long *)alloca(sizeof(*entry)*step);
     ogg_int32_t **t = (ogg_int32_t **)alloca(sizeof(*t)*step);
     int i,j,o;
     int shift=point-book->binarypoint;
-    
+
     if(shift>=0){
       for (i = 0; i < step; i++) {
 	entry[i]=decode_packed_entry_number(book,b);
@@ -281,7 +281,7 @@ long vorbis_book_decodev_add(codebook *book,ogg_int32_t *a,
     int i,j,entry;
     ogg_int32_t *t;
     int shift=point-book->binarypoint;
-    
+
     if(shift>=0){
       for(i=0;i<n;){
 	entry = decode_packed_entry_number(book,b);
@@ -312,9 +312,9 @@ long vorbis_book_decodev_set(codebook *book,ogg_int32_t *a,
     int i,j,entry;
     ogg_int32_t *t;
     int shift=point-book->binarypoint;
-    
+
     if(shift>=0){
-      
+
       for(i=0;i<n;){
 	entry = decode_packed_entry_number(book,b);
 	if(entry==-1)return(-1);
@@ -324,7 +324,7 @@ long vorbis_book_decodev_set(codebook *book,ogg_int32_t *a,
 	}
       }
     }else{
-      
+
       for(i=0;i<n;){
 	entry = decode_packed_entry_number(book,b);
 	if(entry==-1)return(-1);
@@ -352,9 +352,9 @@ long vorbis_book_decodevv_add(codebook *book,ogg_int32_t **a,\
     long i,j,entry;
     int chptr=0;
     int shift=point-book->binarypoint;
-    
+
     if(shift>=0){
-      
+
       for(i=offset;i<offset+n;){
 	entry = decode_packed_entry_number(book,b);
 	if(entry==-1)return(-1);
@@ -370,7 +370,7 @@ long vorbis_book_decodevv_add(codebook *book,ogg_int32_t **a,\
 	}
       }
     }else{
-      
+
       for(i=offset;i<offset+n;){
 	entry = decode_packed_entry_number(book,b);
 	if(entry==-1)return(-1);

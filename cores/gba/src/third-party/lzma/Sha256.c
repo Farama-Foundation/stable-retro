@@ -164,7 +164,7 @@ static void Sha256_WriteByteBlock(CSha256 *p)
   for (j = 0; j < 8; j++)
     state[j] += T[j];
   #endif
-  
+
   /* Wipe variables */
   /* memset(W, 0, sizeof(W)); */
   /* memset(T, 0, sizeof(T)); */
@@ -183,16 +183,16 @@ void Sha256_Update(CSha256 *p, const Byte *data, size_t size)
   {
     unsigned pos = (unsigned)p->count & 0x3F;
     unsigned num;
-    
+
     p->count += size;
-    
+
     num = 64 - pos;
     if (num > size)
     {
       memcpy(p->buffer + pos, data, size);
       return;
     }
-    
+
     size -= num;
     memcpy(p->buffer + pos, data, num);
     data += num;
@@ -216,9 +216,9 @@ void Sha256_Final(CSha256 *p, Byte *digest)
 {
   unsigned pos = (unsigned)p->count & 0x3F;
   unsigned i;
-  
+
   p->buffer[pos++] = 0x80;
-  
+
   while (pos != (64 - 8))
   {
     pos &= 0x3F;
@@ -232,7 +232,7 @@ void Sha256_Final(CSha256 *p, Byte *digest)
     SetBe32(p->buffer + 64 - 8, (UInt32)(numBits >> 32));
     SetBe32(p->buffer + 64 - 4, (UInt32)(numBits));
   }
-  
+
   Sha256_WriteByteBlock(p);
 
   for (i = 0; i < 8; i += 2)
@@ -243,6 +243,6 @@ void Sha256_Final(CSha256 *p, Byte *digest)
     SetBe32(digest + 4, v1);
     digest += 8;
   }
-  
+
   Sha256_Init(p);
 }

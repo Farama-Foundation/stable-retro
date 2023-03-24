@@ -84,10 +84,10 @@ void LCD::saveState(SaveState &state) const
    state.mem.hdmaTransfer = hdmaIsEnabled();
    state.ppu.nextM0Irq = eventTimes_(MODE0_IRQ) - ppu_.now();
    state.ppu.pendingLcdstatIrq = eventTimes_(ONESHOT_LCDSTATIRQ) != disabled_time;
-   
+
    if (isCgb())
       std::memcpy(state.ppu.dmgPalette, dmgColorsGBC_, 8 * 3);
-   
+
 
    lycIrq_.saveState(state);
    m0Irq_.saveState(state);
@@ -131,7 +131,7 @@ void LCD::loadState(const SaveState &state, const unsigned char *const oamram)
 
    if (isCgb())
       std::memcpy(dmgColorsGBC_, state.ppu.dmgPalette, 8 * 3);
-   
+
    refreshPalettes();
 }
 
@@ -547,7 +547,7 @@ void LCD::lcdstatChange(const unsigned data, const unsigned long cc)
 
          if ((data & 0x28) == 0x20 && !(old & 0x20)
                && ((timeToNextLy <= 4 && ppu_.lyCounter().ly() < 143)
-                  || (timeToNextLy == 456*2 && ppu_.lyCounter().ly() < 144))) 
+                  || (timeToNextLy == 456*2 && ppu_.lyCounter().ly() < 144)))
          {
             eventTimes_.flagIrq(2);
          }

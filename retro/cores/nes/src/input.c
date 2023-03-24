@@ -374,4 +374,3 @@ void FCEUI_PowerNES(void)
 {
 	FCEU_QSimpleCommand(FCEUNPCMD_POWER);
 }
-

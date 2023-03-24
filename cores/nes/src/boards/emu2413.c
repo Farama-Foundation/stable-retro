@@ -1072,4 +1072,3 @@ void OPLL_writeIO(OPLL * opll, uint32 adr, uint32 val) {
 	else
 		opll->adr = val;
 }
-

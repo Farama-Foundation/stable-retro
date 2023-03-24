@@ -233,9 +233,9 @@ unsigned char NetSerial::send(unsigned char data, bool fastCgb)
 
 //	std::cout <<  "(" << master_txn_cnt << "," << slave_txn_cnt << ") Master waiting for response... " << std::endl;
 #ifdef _WIN32
-	if (recv(sockfd_, (char*) buffer, 2, 0) <= 0) 
+	if (recv(sockfd_, (char*) buffer, 2, 0) <= 0)
 #else
-   if (read(sockfd_, buffer, 2) <= 0) 
+   if (read(sockfd_, buffer, 2) <= 0)
 #endif
    {
 		log_cb(RETRO_LOG_ERROR, "Error reading from socket: %s\n", strerror(errno));
@@ -286,9 +286,9 @@ bool NetSerial::check(unsigned char out, unsigned char& in, bool& fastCgb)
 	}
 
 #ifdef _WIN32
-	if (recv(sockfd_, (char*) buffer, 2, 0) <= 0) 
+	if (recv(sockfd_, (char*) buffer, 2, 0) <= 0)
 #else
-   if (read(sockfd_, buffer, 2) <= 0) 
+   if (read(sockfd_, buffer, 2) <= 0)
 #endif
    {
 		log_cb(RETRO_LOG_ERROR, "Error reading from socket: %s\n", strerror(errno));

@@ -60,7 +60,7 @@ typedef struct _CMatchFinderMt
   const UInt32 *crc;
 
   Mf_Mix_Matches MixMatchesFunc;
-  
+
   /* LZ + BT */
   CMtSync btSync;
   Byte btDummy[kMtCacheLineDummy];
@@ -83,7 +83,7 @@ typedef struct _CMatchFinderMt
   /* BT + Hash */
   CMtSync hashSync;
   /* Byte hashDummy[kMtCacheLineDummy]; */
-  
+
   /* Hash */
   Mf_GetHeads GetHeadsFunc;
   CMatchFinder *MatchFinder;

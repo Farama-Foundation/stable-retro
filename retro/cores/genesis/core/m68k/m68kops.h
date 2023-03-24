@@ -20967,7 +20967,7 @@ static void m68k_op_stop(void)
     uint new_sr = OPER_I_16();
     CPU_STOPPED |= STOP_LEVEL_STOP;
     m68ki_set_sr(new_sr);
-    SET_CYCLES(m68ki_cpu.cycle_end - 4*MUL); 
+    SET_CYCLES(m68ki_cpu.cycle_end - 4*MUL);
     return;
   }
   m68ki_exception_privilege_violation();
@@ -25483,5 +25483,3 @@ static void m68ki_build_opcode_table(void)
 /* ======================================================================== */
 /* ============================== END OF FILE ============================= */
 /* ======================================================================== */
-
-

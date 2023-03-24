@@ -56,7 +56,7 @@ static int32 pcecd_drive_ne = 0;
 // ADPCM variables and whatnot
 static inline void ADPCM_DEBUG(const char *format, ...)
 {
-/*printf("[Half=%d, End=%d, Playing=%d] "x, ADPCM.HalfReached, ADPCM.EndReached, ADPCM.Playing, ## __VA_ARGS__);*/ 
+/*printf("[Half=%d, End=%d, Playing=%d] "x, ADPCM.HalfReached, ADPCM.EndReached, ADPCM.Playing, ## __VA_ARGS__);*/
 }
 
 typedef Blip_Synth ADSynth;
@@ -211,7 +211,7 @@ static void UpdateADPCMIRQState(void)
 {
    _Port[0x3] &= ~0xC;
 
-   _Port[0x3] |= ADPCM.HalfReached ? 0x4 : 0x0;	
+   _Port[0x3] |= ADPCM.HalfReached ? 0x4 : 0x0;
    _Port[0x3] |= ADPCM.EndReached ? 0x8 : 0x0;
 
    update_irq_state();
@@ -420,13 +420,13 @@ uint8 PCECD_Read(uint32 timestamp, uint32 A)
                    ret = read_1808(timestamp);
                    break;
 
-         case 0xa: 
+         case 0xa:
                    ADPCM_DEBUG("ReadBuffer\n");
                    ADPCM.ReadPending = 19 * 3; //24 * 3;
                    ret = ADPCM.ReadBuffer;
                    break;
 
-         case 0xb: 
+         case 0xb:
                    ret = _Port[0xb];
                    break;
 
@@ -438,9 +438,9 @@ uint8 PCECD_Read(uint32 timestamp, uint32 A)
                    ret |= (ADPCM.Playing) ? 0x08 : 0x00;
                    ret |= (ADPCM.WritePending > 0) ? 0x04 : 0x00;
                    ret |= (ADPCM.ReadPending > 0) ? 0x80 : 0x00;
-                   break;   
+                   break;
 
-         case 0xd: 
+         case 0xd:
                    ret = ADPCM.LastCmd;
                    break;
       }
@@ -539,7 +539,7 @@ void PCECD_Write(uint32 timestamp, uint32 physAddr, uint8 data)
          }
          break;
 
-      case 0x7:	// $1807: D7=1 enables backup ram 
+      case 0x7:	// $1807: D7=1 enables backup ram
          if (data & 0x80)
          {
             bBRAMEnabled = TRUE;

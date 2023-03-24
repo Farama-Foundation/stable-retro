@@ -298,4 +298,3 @@ const int GBAMap[] = {
 	mCheatAddSet(cheats, cheatSet);
 }
 @end
-

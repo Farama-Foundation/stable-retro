@@ -443,7 +443,7 @@ void SettingsView::updateConfig() {
 	emit biosLoaded(PLATFORM_GBA, m_ui.gbaBios->text());
 }
 
-void SettingsView::reloadConfig() {	
+void SettingsView::reloadConfig() {
 	loadSetting("bios", m_ui.gbaBios);
 	loadSetting("gba.bios", m_ui.gbaBios);
 	loadSetting("gb.bios", m_ui.gbBios);

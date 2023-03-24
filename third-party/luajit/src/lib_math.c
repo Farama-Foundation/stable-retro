@@ -223,4 +223,3 @@ LUALIB_API int luaopen_math(lua_State *L)
   LJ_LIB_REG(L, LUA_MATHLIBNAME, math);
   return 1;
 }
-

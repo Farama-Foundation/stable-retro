@@ -388,5 +388,3 @@ void SNROM_Init(CartInfo *info) {
 void SOROM_Init(CartInfo *info) {
 	GenMMC1Init(info, 256, 0, 16, info->battery);
 }
-
-

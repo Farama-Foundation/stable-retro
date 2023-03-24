@@ -11,7 +11,7 @@ stdout mtime: 'Mon Apr 24 2006 16:01:34'
 stdout crc: '7e3265a8'
 stdout compression method: '0'
 stdout encryption method: '1'
-stdout 
+stdout
 stdout name: 'plain'
 stdout index: '1'
 stdout size: '4'
@@ -20,4 +20,4 @@ stdout mtime: 'Mon Apr 24 2006 16:01:42'
 stdout crc: '7e3265a8'
 stdout compression method: '0'
 stdout encryption method: '0'
-stdout 
+stdout

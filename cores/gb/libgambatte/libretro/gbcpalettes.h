@@ -513,7 +513,7 @@ static const unsigned short * findGbcTitlePal(const char *const title) {
 static const unsigned short * findGbcPal(const char *const title) {
 	if (const unsigned short *const pal = findGbcDirPal(title))
 		return pal;
-	
+
 	return findGbcTitlePal(title);
 }
 

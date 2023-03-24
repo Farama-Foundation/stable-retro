@@ -1,6 +1,6 @@
 /*
  * file_load.c
- * 
+ *
  *  File loading support
  *
  *  Copyright Eke-Eke (2008-2014)
@@ -149,7 +149,7 @@ static bool dvdReadSectors(u32 offset,u32 len,void *buffer)
  * MountDVD
  *
  * return 0 on error, 1 on success
- ***************************************************************************/ 
+ ***************************************************************************/
 static int MountDVD(void)
 {
   GUI_MsgBoxOpen("Information", "Mounting DVD ...",1);
@@ -168,7 +168,7 @@ static int MountDVD(void)
     dvd->readSectors = (FN_MEDIUM_READSECTORS)dvdReadSectors;
 #endif
     dvdInited = 1;
-  }    
+  }
 
   /* check if DVD is already mounted */
   if (dvdMounted)
@@ -207,7 +207,7 @@ static int MountDVD(void)
  *   ..
  *   <dirs>
  *   <files>
- ***************************************************************************/ 
+ ***************************************************************************/
 static int FileSortCallback(const void *f1, const void *f2)
 {
   /* Special case for implicit directories */
@@ -218,11 +218,11 @@ static int FileSortCallback(const void *f1, const void *f2)
     if(strcmp(((FILEENTRIES *)f1)->filename, "..") == 0) { return -1; }
     if(strcmp(((FILEENTRIES *)f2)->filename, "..") == 0) { return 1; }
   }
-  
+
   /* If one is a file and one is a directory the directory is first. */
   if(((FILEENTRIES *)f1)->flags && !((FILEENTRIES *)f2)->flags) return -1;
   if(!((FILEENTRIES *)f1)->flags  && ((FILEENTRIES *)f2)->flags) return 1;
-  
+
   return stricmp(((FILEENTRIES *)f1)->filename, ((FILEENTRIES *)f2)->filename);
 }
 
@@ -232,7 +232,7 @@ static int FileSortCallback(const void *f1, const void *f2)
  * Update current browser directory
  * return zero if going up while in root
  * when going up, return previous dir name
- ***************************************************************************/ 
+ ***************************************************************************/
 int UpdateDirectory(bool go_up, char *dirname)
 {
   /* go up to parent directory */
@@ -275,7 +275,7 @@ int UpdateDirectory(bool go_up, char *dirname)
  * ParseDirectory
  *
  * List files into one directory
- ***************************************************************************/ 
+ ***************************************************************************/
 int ParseDirectory(void)
 {
   int nbfiles = 0;
@@ -293,9 +293,9 @@ int ParseDirectory(void)
   while ((entry != NULL)&& (nbfiles < MAXFILES))
   {
     /* filter entries */
-    if ((entry->d_name[0] != '.') 
-       && strncasecmp(".wav", &entry->d_name[strlen(entry->d_name) - 4], 4) 
-       && strncasecmp(".ogg", &entry->d_name[strlen(entry->d_name) - 4], 4) 
+    if ((entry->d_name[0] != '.')
+       && strncasecmp(".wav", &entry->d_name[strlen(entry->d_name) - 4], 4)
+       && strncasecmp(".ogg", &entry->d_name[strlen(entry->d_name) - 4], 4)
        && strncasecmp(".mp3", &entry->d_name[strlen(entry->d_name) - 4], 4))
     {
       memset(&filelist[nbfiles], 0, sizeof (FILEENTRIES));
@@ -326,8 +326,8 @@ int ParseDirectory(void)
  * This function will load a game file into the ROM buffer.
  * This functions return the actual size of data copied into the buffer
  *
- ****************************************************************************/ 
-int LoadFile(int selection) 
+ ****************************************************************************/
+int LoadFile(int selection)
 {
   int size, cd_mode1, filetype;
   char filename[MAXPATHLEN];
@@ -457,7 +457,7 @@ int LoadFile(int selection)
  * OpenDir
  *
  * Function to open a directory and load ROM file list.
- ****************************************************************************/ 
+ ****************************************************************************/
 int OpenDirectory(int device, int type)
 {
   int max = 0;
@@ -524,7 +524,7 @@ int OpenDirectory(int device, int type)
       /* parse last ROM type directory on selected device */
       fileDir = config.lastdir[type][device];
     }
-    
+
     max = ParseDirectory();
     if (max <= 0)
     {

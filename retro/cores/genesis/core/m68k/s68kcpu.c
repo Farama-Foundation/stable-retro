@@ -29,7 +29,7 @@ static unsigned char s68ki_cycles[0x10000];
 static int irq_latency;
 
 /* IRQ priority */
-static const uint8 irq_level[0x40] = 
+static const uint8 irq_level[0x40] =
 {
   0, 1, 2, 2, 3, 3, 3, 3,
   4, 4, 4, 4, 4, 4, 4, 4,
@@ -211,13 +211,13 @@ void s68k_update_irq(unsigned int mask)
 
   /* Set IRQ level */
   CPU_INT_LEVEL = mask << 8;
-  
+
 #ifdef LOG_SCD
   error("[%d][%d] IRQ Level = %d(0x%02x) (%x)\n", v_counter, s68k.cycles, CPU_INT_LEVEL>>8,FLAG_INT_MASK,s68k.pc);
 #endif
 }
 
-void s68k_run(unsigned int cycles) 
+void s68k_run(unsigned int cycles)
 {
   /* Make sure CPU is not already ahead */
   if (s68k.cycles >= cycles)
@@ -244,7 +244,7 @@ void s68k_run(unsigned int cycles)
 #ifdef LOG_SCD
   error("[%d][%d] s68k run to %d cycles (%x), irq mask = %x (%x)\n", v_counter, s68k.cycles, cycles, s68k.pc,FLAG_INT_MASK, CPU_INT_LEVEL);
 #endif
- 
+
   while (s68k.cycles < cycles)
   {
     /* Set tracing accodring to T1. */

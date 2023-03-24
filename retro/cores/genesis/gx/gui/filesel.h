@@ -1,6 +1,6 @@
 /*
  *  filesel.c
- * 
+ *
  *  File Browser
  *
  *  Copyright Eke-Eke (2009-2014)

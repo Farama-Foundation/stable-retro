@@ -8,9 +8,9 @@ MACRO(GET_TARGET_PROPERTY_WITH_DEFAULT _variable _target _property _default_valu
   IF(${_variable} STREQUAL NOTFOUND)
     SET(${_variable} ${_default_value})
   ENDIF()
-  
+
 ENDMACRO()
-  
+
 MACRO(CREATE_LIBTOOL_FILE _target _install_DIR)
   GET_TARGET_PROPERTY(_target_location ${_target} LOCATION)
   GET_TARGET_PROPERTY_WITH_DEFAULT(_target_static_lib ${_target} STATIC_LIB "")
@@ -49,7 +49,7 @@ MACRO(CREATE_LIBTOOL_FILE _target _install_DIR)
   FILE(APPEND ${_laname} "libdir='${CMAKE_INSTALL_PREFIX}/${_install_DIR}'\n")
   INSTALL( FILES ${_laname} ${_soname} DESTINATION ${CMAKE_INSTALL_PREFIX}${_install_DIR})
 ENDMACRO()
- 
+
 SET(LIBZIP_SOURCES
   gladman-fcrypt.c
   zip_add.c

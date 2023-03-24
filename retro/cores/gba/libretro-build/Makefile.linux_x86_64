@@ -1,6 +1,6 @@
 ##############
 # Works on hosts Linux
-# 
+#
 
 ##########################
 # Checks the host platform
@@ -35,7 +35,7 @@ SOEXT  = .linux_x86_64.so
 
 STATIC_LINKING = 0
 platform       = unix
-PLATDEFS       = 
+PLATDEFS       =
 PLATCFLAGS     = -m64 -fpic -fstrict-aliasing
 PLATCXXFLAGS   = -m64 -fpic -fstrict-aliasing
 PLATLDFLAGS    = -m64 -shared -lm -Wl,-version-script=$(BUILD_DIR)/link.T -Wl,-no-undefined
@@ -80,7 +80,7 @@ endif
 
 CORE_DIR  ?= ..
 BUILD_DIR ?= .
-INCLUDES   = 
+INCLUDES   =
 
 include $(BUILD_DIR)/Makefile.common
 

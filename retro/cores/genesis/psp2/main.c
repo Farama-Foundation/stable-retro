@@ -29,7 +29,7 @@ int main(int argc,char *argv[])
   pl_snd_init(SOUND_SAMPLES, 1);
   pspCtrlInit();
   pspVideoInit();
-  
+
   /* Initialize callbacks */
   pl_psp_register_callback(PSP_EXIT_CALLBACK,
                            ExitCallback,

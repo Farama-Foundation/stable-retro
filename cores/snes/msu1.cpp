@@ -621,4 +621,3 @@ void S9xMSU1PostLoadState(void)
 
 	partial_samples = 0;
 }
-

@@ -1,7 +1,7 @@
 7z Format description (4.59)
 ----------------------------
 
-This file contains description of 7z archive format. 
+This file contains description of 7z archive format.
 7z archive can contain files compressed with any method.
 See "Methods.txt" for description for defined compressing methods.
 
@@ -12,13 +12,13 @@ Format structure Overview
 Some fields can be optional.
 
 Archive structure
-~~~~~~~~~~~~~~~~~  
+~~~~~~~~~~~~~~~~~
 SignatureHeader
 [PackedStreams]
 [PackedStreamsForHeaders]
 [
-  Header 
-  or 
+  Header
+  or
   {
     Packed Header
     HeaderInfo
@@ -28,7 +28,7 @@ SignatureHeader
 
 
 Header structure
-~~~~~~~~~~~~~~~~  
+~~~~~~~~~~~~~~~~
 {
   ArchiveProperties
   AdditionalStreams
@@ -112,7 +112,7 @@ UINT64 means real UINT64 encoded with the following scheme:
 
   Size of encoding sequence depends from first byte:
   First_Byte  Extra_Bytes        Value
-  (binary)   
+  (binary)
   0xxxxxxx               : ( xxxxxxx           )
   10xxxxxx    BYTE y[1]  : (  xxxxxx << (8 * 1)) + y
   110xxxxx    BYTE y[2]  : (   xxxxx << (8 * 2)) + y
@@ -131,11 +131,11 @@ Property IDs
 0x01 = kHeader
 
 0x02 = kArchiveProperties
-    
+
 0x03 = kAdditionalStreamsInfo
 0x04 = kMainStreamsInfo
 0x05 = kFilesInfo
-    
+
 0x06 = kPackInfo
 0x07 = kUnPackInfo
 0x08 = kSubStreamsInfo
@@ -239,14 +239,14 @@ Folder
   UINT64 NumCoders;
   for (NumCoders)
   {
-    BYTE 
+    BYTE
     {
       0:3 CodecIdSize
       4:  Is Complex Coder
       5:  There Are Attributes
       6:  Reserved
       7:  There are more alternative methods. (Not used anymore, must be 0).
-    } 
+    }
     BYTE CodecId[CodecIdSize]
     if (Is Complex Coder)
     {
@@ -259,7 +259,7 @@ Folder
       BYTE Properties[PropertiesSize]
     }
   }
-    
+
   NumBindPairs = NumOutStreamsTotal - 1;
 
   for (NumBindPairs)
@@ -307,7 +307,7 @@ Coders Info
   UnPackDigests[NumFolders]
   []
 
-  
+
 
   BYTE NID::kEnd
 
@@ -334,7 +334,7 @@ SubStreams Info
   Digests[Number of streams with unknown CRC]
   []
 
-  
+
   BYTE NID::kEnd
 
 
@@ -384,7 +384,7 @@ FilesInfo
       kAnti:          (0x10)
         for(EmptyStreams)
           BIT IsAntiFile
-      
+
       case kCTime: (0x12)
       case kATime: (0x13)
       case kMTime: (0x14)
@@ -401,7 +401,7 @@ FilesInfo
         for(Definded Items)
           UINT64 Time
         []
-      
+
       kNames:     (0x11)
         BYTE External;
         if(External != 0)

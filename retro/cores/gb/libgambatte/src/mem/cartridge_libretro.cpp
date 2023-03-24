@@ -62,7 +62,7 @@ namespace gambatte
    }
 
    unsigned Cartridge::rtcdata_size()
-   { 
+   {
       if (hasRtc(memptrs_.romdata()[0x147]))
          return sizeof(rtc_.getBaseTime());
       return 0;

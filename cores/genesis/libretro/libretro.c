@@ -186,9 +186,9 @@ int load_archive(char *filename, unsigned char *buffer, int maxsize, char *exten
     {
       return 0;
     }
-  
+
     /* Mega CD BIOS are required files */
-    if (!strcmp(filename,CD_BIOS_US) || !strcmp(filename,CD_BIOS_EU) || !strcmp(filename,CD_BIOS_JP)) 
+    if (!strcmp(filename,CD_BIOS_US) || !strcmp(filename,CD_BIOS_EU) || !strcmp(filename,CD_BIOS_JP))
     {
        if (log_cb)
           log_cb(RETRO_LOG_ERROR, "Unable to open CD BIOS: %s.\n", filename);
@@ -444,7 +444,7 @@ void osd_input_update(void)
         {
          input.analog[i+1][0] = (rx + 0x8000) >> 8;
         }
-        else 
+        else
         {
          input.analog[i+1][0] = (0x7fff - ry) >> 8;
         }
@@ -499,7 +499,7 @@ static void init_bitmap(void)
 static void config_default(void)
 {
    int i;
-   
+
    /* sound options */
    config.psg_preamp     = 150;
    config.fm_preamp      = 100;
@@ -512,7 +512,7 @@ static void config_default(void)
    config.lg             = 100.0;
    config.mg             = 100.0;
    config.hg             = 100.0;
-   config.dac_bits       = 14; /* MAX DEPTH */ 
+   config.dac_bits       = 14; /* MAX DEPTH */
    config.ym2413         = 2; /* AUTO */
    config.mono           = 0; /* STEREO output */
 
@@ -603,7 +603,7 @@ static void bram_load(void)
       {
         int filesize = scd.cartridge.mask + 1;
         int done = 0;
-        
+
         /* Read into buffer (2k blocks) */
         while (filesize > CHUNKSIZE)
         {
@@ -688,7 +688,7 @@ static void bram_save(void)
         {
           int filesize = scd.cartridge.mask + 1;
           int done = 0;
-        
+
           /* Write to file (2k blocks) */
           while (filesize > CHUNKSIZE)
           {
@@ -910,7 +910,7 @@ static void check_variables(void)
       if (system_hw)
       {
         get_region(NULL);
-        
+
         if ((system_hw == SYSTEM_MCD) || ((system_hw & SYSTEM_SMS) && config.bios))
         {
           /* system with region BIOS should be reinitialized */
@@ -918,7 +918,7 @@ static void check_variables(void)
         }
         else
         {
-          static const uint16 vc_table[4][2] = 
+          static const uint16 vc_table[4][2] =
           {
             /* NTSC, PAL */
             {0xDA , 0xF2},  /* Mode 4 (192 lines) */
@@ -929,7 +929,7 @@ static void check_variables(void)
 
           /* framerate might have changed, reinitialize audio timings */
           audio_set_rate(44100, 0);
-          
+
           /* reinitialize I/O region register */
           if (system_hw == SYSTEM_MD)
           {
@@ -946,7 +946,7 @@ static void check_variables(void)
 
           /* reinitialize VDP timings */
           lines_per_frame = vdp_pal ? 313 : 262;
-     
+
           /* reinitialize NTSC/PAL mode in VDP status */
           if (system_hw & SYSTEM_MD)
           {
@@ -1032,14 +1032,14 @@ static void check_variables(void)
       }
     }
   }
-	
+
   var.key = "genesis_plus_gx_audio_filter";
   environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var);
   {
     if (!strcmp(var.value, "Lowpass"))
       config.filter = 1;
 
-    #if HAVE_EQ 
+    #if HAVE_EQ
     else if (!strcmp(var.value, "EQ"))
       config.filter = 2;
     #endif
@@ -1052,8 +1052,8 @@ static void check_variables(void)
   environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var);
   {
     config.lp_range = (atoi(var.value) * 65536) / 100;
-  } 
-	
+  }
+
   #if HAVE_EQ
   var.key = "genesis_plus_gx_audio_eq_low";
   environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var);
@@ -1062,7 +1062,7 @@ static void check_variables(void)
     if (new_lg != config.lg) restart_eq = true;
     config.lg = new_lg;
   }
-	
+
   var.key = "genesis_plus_gx_audio_eq_mid";
   environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var);
   {
@@ -1070,7 +1070,7 @@ static void check_variables(void)
     if (new_mg != config.mg) restart_eq = true;
     config.mg = new_mg;
   }
-	
+
   var.key = "genesis_plus_gx_audio_eq_high";
   environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var);
   {
@@ -1572,12 +1572,12 @@ static void RAMCheatUpdate(void)
  *
  * Apply ROM patches (this should be called each time banking is changed)
  *
- ****************************************************************************/ 
+ ****************************************************************************/
 void ROMCheatUpdate(void)
 {
   int index, cnt = maxROMcheats;
   uint8_t *ptr;
-  
+
   while (cnt)
   {
     /* get cheat index */
@@ -1630,13 +1630,13 @@ void retro_set_environment(retro_environment_t cb)
       { "genesis_plus_gx_dac_bits", "YM2612 DAC quantization; disabled|enabled" },
       { "genesis_plus_gx_audio_filter", "Audio filter; disabled|Lowpass" },
       { "genesis_plus_gx_lowpass_range", "Low-pass filter %; 60|65|70|75|80|85|90|95|5|10|15|20|25|30|35|40|45|50|55"},
-      
-      #if HAVE_EQ     
+
+      #if HAVE_EQ
       { "genesis_plus_gx_audio_eq_low",  "EQ Low;  100|0|5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95" },
       { "genesis_plus_gx_audio_eq_mid",  "EQ Mid;  100|0|5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95" },
       { "genesis_plus_gx_audio_eq_high", "EQ High; 100|0|5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95" },
       #endif
-      
+
       { "genesis_plus_gx_blargg_ntsc_filter", "Blargg NTSC filter; disabled|monochrome|composite|svideo|rgb" },
       { "genesis_plus_gx_lcd_filter", "LCD Ghosting filter; disabled|enabled" },
       { "genesis_plus_gx_overscan", "Borders; disabled|top/bottom|left/right|full" },
@@ -1963,7 +1963,7 @@ void retro_set_controller_port_device(unsigned port, unsigned device)
 
    old_system[0] = input.system[0];
    old_system[1] = input.system[1];
-   
+
    io_init();
    input_reset();
 }
@@ -1971,7 +1971,7 @@ void retro_set_controller_port_device(unsigned port, unsigned device)
 size_t retro_serialize_size(void) { return STATE_SIZE; }
 
 bool retro_serialize(void *data, size_t size)
-{ 
+{
    if (size != STATE_SIZE)
       return FALSE;
 
@@ -2173,7 +2173,7 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
    return FALSE;
 }
 
-void retro_unload_game(void) 
+void retro_unload_game(void)
 {
    if (system_hw == SYSTEM_MCD)
       bram_save();
@@ -2270,7 +2270,7 @@ void retro_reset(void)
    gen_reset(0);
 }
 
-void retro_run(void) 
+void retro_run(void)
 {
    bool updated = false;
    is_running = true;
@@ -2289,7 +2289,7 @@ void retro_run(void)
       if (bitmap.viewport.changed & 8)
       {
         struct retro_system_av_info info;
-        bitmap.viewport.changed &= ~8; 
+        bitmap.viewport.changed &= ~8;
         retro_get_system_av_info(&info);
         environ_cb(RETRO_ENVIRONMENT_SET_SYSTEM_AV_INFO, &info);
       }

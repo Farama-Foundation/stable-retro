@@ -871,9 +871,9 @@ class Unprintable {
   char c_;
 };
 
-inline bool operator==(const Unprintable& /* lhs */, 
-                       const Unprintable& /* rhs */) { 
-    return true; 
+inline bool operator==(const Unprintable& /* lhs */,
+                       const Unprintable& /* rhs */) {
+    return true;
 }
 
 TEST(EqTest, CanDescribeSelf) {

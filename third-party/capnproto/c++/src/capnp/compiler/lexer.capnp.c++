@@ -497,4 +497,3 @@ constexpr ::capnp::_::RawSchema const* LexedStatements::_capnpPrivate::schema;
 
 }  // namespace
 }  // namespace
-

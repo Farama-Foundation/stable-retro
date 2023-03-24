@@ -40,7 +40,7 @@ This file defines the reward function and done condition using the variables def
 ``metadata.json``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This file defines the default starting state if no state is specified by the user as well as some miscellaneous debugging information. 
+This file defines the default starting state if no state is specified by the user as well as some miscellaneous debugging information.
 
 .. literalinclude:: ../retro/data/stable/Airstriker-Genesis/metadata.json
 
@@ -131,7 +131,7 @@ For more information on the conditions that can be defined, see :ref:`appendix-o
 The Integration UI
 --------------------------------------
 
-The integration UI helps you easily find variables and see what is going on with the reward function. 
+The integration UI helps you easily find variables and see what is going on with the reward function.
 
 You can normally download the compiled UI package for your platform here:
 
@@ -223,11 +223,11 @@ It's best to keep a consistent pattern for the different types of variables you 
 6. It's very uncommon, but some games track health symbolically rather than with one set #. For example, the starting health bar could be represented by ``9999999``, which displays as a full health bar, but becomes ``99999`` after losing two health units.
 7. In defining a game over variable, look for a binary value that switches between 0 and 1 – 0 when the game is in play, 1 when the game is over.  And make sure to test it by playing a few consecutive levels.
 
-Once you've found a variable, making sure the address and type are correct is important for avoiding issues later.  One of the best ways to do this is to change the value in memory, then change it in the game and make sure it updates correctly.  
+Once you've found a variable, making sure the address and type are correct is important for avoiding issues later.  One of the best ways to do this is to change the value in memory, then change it in the game and make sure it updates correctly.
 
 For instance if you have a variable called "score" and you want to see if it is ``>d2`` or ``>d4``, set the type to ``>d4`` and set the value to the maximum for ``>d2``, 9999, and then increase the score by playing the game.  If the score increases by 1, and the value in the memory viewer is 10000 and the value in the game is 10000, then ``>d4`` is correct.  If the value in the memory viewer or game is 0 or 9999, then it's likely that ``>d2`` is the correct type or that the address is wrong. You may also want to check if >d3 is the correct type by changing the score to 999999 and playing for a bit.
 
-You can also check to see if the data type is correct by watching how it increments and decrements in the search window as you play the game. For example, if the value of the variable jumps from ``0`` to ``255``, it's likely that this is a signed value (represented by ``i``) -- unsigned values (represented by ``u``) are either positive or zero. 
+You can also check to see if the data type is correct by watching how it increments and decrements in the search window as you play the game. For example, if the value of the variable jumps from ``0`` to ``255``, it's likely that this is a signed value (represented by ``i``) -- unsigned values (represented by ``u``) are either positive or zero.
 
 When you search for a variable, different formats at the same location will appear next to each other in the search window. For example, at address ``16769105``, you might see ``>u2``, ``>i2``, as well as ``>d2`` return as search results. Play the game for a little bit, and you might notice that one of the search results increments/decrements in uneven or unusual ways in relation to the other search results at the same address.
 

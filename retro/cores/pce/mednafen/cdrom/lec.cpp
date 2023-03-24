@@ -96,7 +96,7 @@ static void gf8_create_log_tables()
 
     b <<= 1;
 
-    if ((b & 0x100) != 0) 
+    if ((b & 0x100) != 0)
       b ^= GF8_PRIM_POLY;
   }
 }
@@ -150,7 +150,7 @@ Gf8_Q_Coeffs_Results_01::Gf8_Q_Coeffs_Results_01()
 {
   int i, j;
   uint16_t c;
-  gf8_t GF8_COEFFS_HELP[2][45]; 
+  gf8_t GF8_COEFFS_HELP[2][45];
   uint8_t GF8_Q_COEFFS[2][45];
 
 
@@ -160,7 +160,7 @@ Gf8_Q_Coeffs_Results_01::Gf8_Q_Coeffs_Results_01()
    *  1    1   ...  1   1
    * a^44 a^43 ... a^1 a^0
    *
-   * 
+   *
    */
 
   for (j = 0; j < 45; j++) {
@@ -168,9 +168,9 @@ Gf8_Q_Coeffs_Results_01::Gf8_Q_Coeffs_Results_01()
     GF8_COEFFS_HELP[1][j] = GF8_ILOG[44-j];  /* e1 */
   }
 
-  
+
   /* resolve equation system for parity byte 0 and 1 */
- 
+
   /* e1' = e1 + e0 */
   for (j = 0; j < 45; j++) {
     GF8_Q_COEFFS[1][j] = gf8_add(GF8_COEFFS_HELP[1][j],
@@ -187,23 +187,23 @@ Gf8_Q_Coeffs_Results_01::Gf8_Q_Coeffs_Results_01()
     GF8_Q_COEFFS[0][j] = gf8_add(GF8_COEFFS_HELP[0][j],
 				 gf8_div(GF8_COEFFS_HELP[1][j],
 					 GF8_ILOG[1]));
-  }    
+  }
 
   /* e0'' = e0' / (1 + 1 / a^1) */
   for (j = 0; j < 45; j++) {
     GF8_Q_COEFFS[0][j] = gf8_div(GF8_Q_COEFFS[0][j], GF8_Q_COEFFS[0][44]);
   }
 
-  /* 
+  /*
    * Compute the products of 0..255 with all of the Q coefficients in
    * advance. When building the scalar product between the data vectors
    * and the P/Q vectors the individual products can be looked up in
    * this table
    *
    * The P parity coefficients are just a subset of the Q coefficients so
-   * that we do not need to create a separate table for them. 
+   * that we do not need to create a separate table for them.
    */
-  
+
   for (j = 0; j < 43; j++) {
 
     table[j][0] = 0;
@@ -247,7 +247,7 @@ CrcTable::CrcTable ()
 {
   uint32_t i, j;
   uint32_t r;
-  
+
   for (i = 0; i < 256; i++) {
     r = mirror_bits(i, 8);
 
@@ -358,7 +358,7 @@ static void set_sync_pattern(uint8_t *sector)
 {
   sector[0] = 0;
 
-  sector[1] = sector[2] = sector[3] = sector[4] = sector[5] = 
+  sector[1] = sector[2] = sector[3] = sector[4] = sector[5] =
     sector[6] = sector[7] = sector[8] = sector[9] = sector[10] = 0xff;
 
   sector[11] = 0;
@@ -414,7 +414,7 @@ static void calc_P_parity(uint8_t *sector)
 
     *p0 = p01_lsb;
     *(p0 + 1) = p01_msb;
-    
+
     *p1 = p01_lsb>>8;
     *(p1 + 1) = p01_msb>>8;
 
@@ -464,7 +464,7 @@ static void calc_Q_parity(uint8_t *sector)
 
     *q0 = q01_lsb;
     *(q0 + 1) = q01_msb;
-    
+
     *q1 = q01_lsb>>8;
     *(q1 + 1) = q01_msb>>8;
 
@@ -548,7 +548,7 @@ void lec_encode_mode2_form1_sector(uint32_t adr, uint8_t *sector)
 
   calc_P_parity(sector);
   calc_Q_parity(sector);
-  
+
   /* finally add the sector header */
   set_sector_header(2, adr, sector);
 }

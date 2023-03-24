@@ -667,4 +667,3 @@ LUALIB_API int luaopen_base(lua_State *L)
   LJ_LIB_REG(L, LUA_COLIBNAME, coroutine);
   return 2;
 }
-

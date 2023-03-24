@@ -10,7 +10,7 @@ stdout mtime: 'Fri Apr 27 2012 23:21:42'
 stdout crc: '9ee760e5'
 stdout compression method: '0'
 stdout encryption method: '0'
-stdout 
+stdout
 stdout name: 'file2'
 stdout index: '1'
 stdout size: '5'
@@ -19,4 +19,4 @@ stdout mtime: 'Fri Apr 27 2012 23:21:44'
 stdout crc: '7ee315f'
 stdout compression method: '0'
 stdout encryption method: '0'
-stdout 
+stdout

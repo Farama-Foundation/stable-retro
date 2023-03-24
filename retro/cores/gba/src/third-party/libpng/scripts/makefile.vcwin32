@@ -110,4 +110,3 @@ clean:
 	-$(RM) pngout.png
 
 # End of makefile for libpng
-

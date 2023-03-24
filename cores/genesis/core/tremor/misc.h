@@ -22,14 +22,14 @@
 
 #include "asm_arm.h"
 #include <stdlib.h> /* for abs() */
-  
+
 #if defined(GEKKO) && !defined(__LIBRETRO__)
 #include <gctypes.h>
 #endif
-  
+
 #ifndef _V_WIDE_MATH
 #define _V_WIDE_MATH
-  
+
 #ifndef  _LOW_ACCURACY_
 /* 64 bit multiply */
 
@@ -82,7 +82,7 @@ STIN ogg_int32_t MULT31_SHIFT15(ogg_int32_t x, ogg_int32_t y) {
 
 /*
  * For MULT32 and MULT31: The second argument is always a lookup table
- * value already preshifted from 31 to 8 bits.  We therefore take the 
+ * value already preshifted from 31 to 8 bits.  We therefore take the
  * opportunity to save on text space and use unsigned char for those
  * tables in this case.
  */
@@ -181,7 +181,7 @@ STIN ogg_int32_t VFLOAT_MULT(ogg_int32_t a,ogg_int32_t ap,
     return MULT32(a,b);
 #else
     *p=ap+bp+31;
-    return (a>>15)*(b>>16); 
+    return (a>>15)*(b>>16);
 #endif
   }else
     return 0;
@@ -231,7 +231,7 @@ STIN ogg_int32_t VFLOAT_ADD(ogg_int32_t a,ogg_int32_t ap,
   }
 
   a+=b;
-  if((a&0xc0000000)==0xc0000000 || 
+  if((a&0xc0000000)==0xc0000000 ||
      (a&0xc0000000)==0){
     a<<=1;
     (*p)--;
@@ -240,7 +240,3 @@ STIN ogg_int32_t VFLOAT_ADD(ogg_int32_t a,ogg_int32_t ap,
 }
 
 #endif
-
-
-
-

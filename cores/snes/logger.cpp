@@ -194,7 +194,7 @@ void S9xResetLogger (void)
 
 void S9xCloseLogger (void)
 {
-}	
+}
 
 void S9xAudioLogger (void *samples, int length)
 {

@@ -71,7 +71,7 @@ void gen_init(void)
   {
     /* initialize main 68k */
     m68k_init();
-    m68k.aerr_enabled = config.addr_error; 
+    m68k.aerr_enabled = config.addr_error;
 
     /* initialize main 68k memory map */
 
@@ -108,7 +108,7 @@ void gen_init(void)
       m68k.memory_map[i].write16  = NULL;
 
       /* Z80 can ONLY write to 68k RAM, not read it */
-      zbank_memory_map[i].read    = zbank_unused_r; 
+      zbank_memory_map[i].read    = zbank_unused_r;
       zbank_memory_map[i].write   = NULL;
     }
 
@@ -280,7 +280,7 @@ void gen_reset(int hard_reset)
         scd_reset(1);
       }
     }
-    
+
     /* reset MD cartridge hardware */
     md_cart_reset(hard_reset);
 
@@ -292,7 +292,7 @@ void gen_reset(int hard_reset)
     zstate = 0;
 
     /* assume default bank is $000000-$007FFF */
-    zbank = 0;  
+    zbank = 0;
 
     /* TMSS support */
     if ((config.bios & 1) && (system_hw == SYSTEM_MD) && hard_reset)
@@ -440,7 +440,7 @@ unsigned int gen_bankswitch_r(void)
   {
     return (m68k.memory_map[0].base == cart.base);
   }
-  
+
   return 0xff;
 }
 
@@ -456,7 +456,7 @@ void gen_zbusreq_w(unsigned int data, unsigned int cycles)
     /* check if Z80 is going to be stopped */
     if (zstate == 1)
     {
-      /* resynchronize with 68k */ 
+      /* resynchronize with 68k */
       z80_run(cycles);
 
       /* enable 68k access to Z80 bus */

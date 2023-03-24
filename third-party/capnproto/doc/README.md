@@ -2,7 +2,7 @@
 
 This directory contains the "source code" for the Cap'n Proto web site.
 
-The site is built with [Jekyll](http://jekyllrb.com/), which depends on Ruby. 
+The site is built with [Jekyll](http://jekyllrb.com/), which depends on Ruby.
 Start by installing ruby1.9.1-dev. On Debian-based operating systems:
 
     sudo apt-get install ruby-dev

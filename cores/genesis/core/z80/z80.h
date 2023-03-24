@@ -68,4 +68,3 @@ extern void z80_set_irq_line(unsigned int state);
 extern void z80_set_nmi_line(unsigned int state);
 
 #endif
-

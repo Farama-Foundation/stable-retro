@@ -245,7 +245,7 @@ bool path_mkdir(const char *dir)
 #elif defined(PSP) || defined(_3DS) || defined(WIIU)
       if ((ret == -1) && path_is_directory(dir))
          ret = 0;
-#else 
+#else
       if (ret < 0 && errno == EEXIST && path_is_directory(dir))
          ret = 0;
 #endif
@@ -345,7 +345,7 @@ bool path_is_compressed_file(const char* path)
 {
    const char *ext = path_get_extension(path);
 
-   if (     strcasestr(ext, "zip") 
+   if (     strcasestr(ext, "zip")
          || strcasestr(ext, "apk")
          || strcasestr(ext, "7z"))
       return true;
@@ -665,7 +665,7 @@ void path_parent_dir(char *path)
  **/
 const char *path_basename(const char *path)
 {
-   /* We cut either at the first compression-related hash 
+   /* We cut either at the first compression-related hash
     * or the last slash; whichever comes last */
    const char *last  = find_last_slash(path);
    const char *delim = path_get_archive_delim(path);
@@ -694,8 +694,8 @@ bool path_is_absolute(const char *path)
 #ifdef _WIN32
    /* Many roads lead to Rome ... */
    if ((    strstr(path, "\\\\") == path)
-         || strstr(path, ":/") 
-         || strstr(path, ":\\") 
+         || strstr(path, ":/")
+         || strstr(path, ":\\")
          || strstr(path, ":\\\\"))
       return true;
 #endif

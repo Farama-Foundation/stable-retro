@@ -55,7 +55,7 @@ typedef struct
   int cycles;
   void (*dma_w)(unsigned int words);  /* DMA transfer callback */
   uint8 ram[0x4000 + 2352]; /* 16K external RAM (with one block overhead to handle buffer overrun) */
-} cdc_t; 
+} cdc_t;
 
 /* Function prototypes */
 extern void cdc_init(void);

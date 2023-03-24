@@ -474,4 +474,3 @@ void LJ_FASTCALL lj_meta_for(lua_State *L, TValue *o)
     }
   }
 }
-

@@ -241,4 +241,3 @@ void S9xMSU1SetOutput(int16 *out, size_t size);
 void S9xMSU1PostLoadState(void);
 
 #endif
-

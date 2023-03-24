@@ -112,7 +112,7 @@ public:
 	void doLyCountEvent() { p_.lyCounter.doEvent(); }
 	unsigned long doSpriteMapEvent(unsigned long time) { return p_.spriteMapper.doEvent(time); }
 	PPUFrameBuf const & frameBuf() const { return p_.framebuf; }
-   
+
 	bool inactivePeriodAfterDisplayEnable(unsigned long cc) const {
 		return p_.spriteMapper.inactivePeriodAfterDisplayEnable(cc);
 	}

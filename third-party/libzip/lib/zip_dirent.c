@@ -851,7 +851,7 @@ _zip_dirent_write(zip_t *za, zip_dirent_t *de, zip_flags_t flags)
 	zip_uint8_t data[EF_WINZIP_AES_SIZE];
         zip_buffer_t *ef_buffer = _zip_buffer_new(data, sizeof(data));
 	zip_extra_field_t *ef_winzip;
-	
+
         if (ef_buffer == NULL) {
             zip_error_set(&za->error, ZIP_ER_MEMORY, 0);
 	    _zip_ef_free(ef);
@@ -1121,7 +1121,7 @@ _zip_dirent_set_version_needed(zip_dirent_t *de, bool force_zip64) {
 	de->version_needed = 45;
 	return;
     }
-    
+
     if (de->comp_method == ZIP_CM_DEFLATE || de->encryption_method == ZIP_EM_TRAD_PKWARE) {
 	de->version_needed = 20;
 	return;
@@ -1134,6 +1134,6 @@ _zip_dirent_set_version_needed(zip_dirent_t *de, bool force_zip64) {
 	    return;
 	}
     }
-    
+
     de->version_needed = 10;
 }

@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -197,7 +197,7 @@ string Settings::loadCommandLine(int argc, char** argv)
       buf.str("");
       buf << "  key = '" << key << "', value = '" << value << "'";
 
-      // Settings read from the commandline must not be saved to 
+      // Settings read from the commandline must not be saved to
       // the rc-file, unless they were previously set
       if(int idx = getInternalPos(key) != -1)
       {

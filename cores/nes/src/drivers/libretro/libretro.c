@@ -1787,7 +1787,7 @@ bool retro_load_game(const struct retro_game_info *game)
    mmaps.descriptors = descs;
    mmaps.num_descriptors = i;
    environ_cb(RETRO_ENVIRONMENT_SET_MEMORY_MAPS, &mmaps);
- 
+
    return true;
 }
 

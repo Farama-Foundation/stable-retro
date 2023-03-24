@@ -71,7 +71,7 @@
 
 #ifdef HW_RVL
 
-#define PAD_UP    0   
+#define PAD_UP    0
 #define PAD_DOWN  1
 #define PAD_LEFT  2
 #define PAD_RIGHT 3
@@ -289,7 +289,7 @@ static void pad_update(s8 chan, u8 i)
       {
        input.analog[i+1][0] = (x + 128);
       }
-      else 
+      else
       {
        input.analog[i+1][0] = (y + 128);
       }
@@ -515,11 +515,11 @@ static int wpad_StickX(WPADData *data, u8 right)
     int min = js->min.x;
     int max = js->max.x;
     int center = js->center.x;
- 
+
     /* value returned could be above calibration limits */
     if (pos > max) return 127;
     if (pos < min) return -128;
-    
+
     /* adjust against center position */
     pos -= center;
 
@@ -564,11 +564,11 @@ static int wpad_StickY(WPADData *data, u8 right)
     int min = js->min.y;
     int max = js->max.y;
     int center = js->center.y;
- 
+
     /* value returned could be above calibration limits */
     if (pos > max) return 127;
     if (pos < min) return -128;
-    
+
     /* adjust against center position */
     pos -= center;
 
@@ -783,7 +783,7 @@ static void wpad_update(s8 chan, u8 i, u32 exp)
         {
          input.analog[i+1][0] = (x + 128);
         }
-        else 
+        else
         {
          input.analog[i+1][0] = (y + 128);
         }
@@ -793,7 +793,7 @@ static void wpad_update(s8 chan, u8 i, u32 exp)
         /* Wiimote D-PAD */
         if ((p & wpad_dirmap[exp][PAD_DOWN]) || (p & wpad_dirmap[exp][PAD_LEFT])) input.analog[i+1][0]-=2;
         else if ((p & wpad_dirmap[exp][PAD_UP]) || (p & wpad_dirmap[exp][PAD_RIGHT])) input.analog[i+1][0]+=2;
- 
+
         /* Limits */
         if (input.analog[i+1][0] < 0) input.analog[i+1][0] = 0;
         else if (input.analog[i+1][0] > 255) input.analog[i+1][0] = 255;

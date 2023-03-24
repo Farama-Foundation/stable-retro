@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -190,11 +190,11 @@ void SoundSDL::set(uInt16 addr, uInt8 value, Int32 cycle)
 {
   // First, calculate how many seconds would have past since the last
   // register write on a real 2600
-  double delta = (((double)(cycle - myLastRegisterSetCycle)) / 
+  double delta = (((double)(cycle - myLastRegisterSetCycle)) /
       (1193191.66666667));
 
   // Now, adjust the time based on the frame rate the user has selected. For
-  // the sound to "scale" correctly, we have to know the games real frame 
+  // the sound to "scale" correctly, we have to know the games real frame
   // rate (e.g., 50 or 60) and the currently emulated frame rate. We use these
   // values to "scale" the time before the register change occurs.
   RegWrite info;
@@ -264,7 +264,7 @@ void SoundSDL::processFragment(Int16* stream, uInt32 length)
           // round the count passed to process up if needed.
           double samples = (31400 * info.delta);
           myTIASound.process(stream + ((uInt32)position * channels),
-              (uInt32)samples + (uInt32)(position + samples) - 
+              (uInt32)samples + (uInt32)(position + samples) -
               ((uInt32)position + (uInt32)samples));
 
           position += samples;
@@ -285,10 +285,10 @@ void SoundSDL::processFragment(Int16* stream, uInt32 length)
       }
     }
   }
-    
+
 //    double position = 0.0;
 //    double remaining = length;
-//    
+//
 //    while(remaining > 0.0)
 //    {
 //        if(myRegWriteQueue.size() == 0)
@@ -303,11 +303,11 @@ void SoundSDL::processFragment(Int16* stream, uInt32 length)
 //            // There are pending TIA sound register updates so we need to
 //            // update the sound buffer to the point of the next register update
 //            RegWrite& info = myRegWriteQueue.front();
-//            
+//
 //            // How long will the remaining samples in the fragment take to play
 //            //      double duration = remaining / (double)myHardwareSpec.freq;
 //            double duration = remaining / 31400.0;
-//            
+//
 //            // Does the register update occur before the end of the fragment?
 //            if(info.delta <= duration)
 //            {
@@ -320,7 +320,7 @@ void SoundSDL::processFragment(Int16* stream, uInt32 length)
 //                    //          double samples = (myHardwareSpec.freq * info.delta);
 //                    double samples = (31400.0 * info.delta);
 //                    myTIASound.process(stream + ((uInt32)position * 2), (uInt32)samples + (uInt32)(position + samples) - ((uInt32)position + (uInt32)samples));
-//                    
+//
 //                    position += samples;
 //                    remaining -= samples;
 //                }

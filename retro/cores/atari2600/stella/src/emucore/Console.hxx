@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -65,7 +65,7 @@ class Console : public Serializable
 
       @param osystem  The OSystem object to use
       @param cart     The cartridge to use with this console
-      @param props    The properties for the cartridge  
+      @param props    The properties for the cartridge
     */
     Console(OSystem* osystem, Cartridge* cart, const Properties& props);
 
@@ -75,7 +75,7 @@ class Console : public Serializable
       @param console The object to copy
     */
     Console(const Console& console);
- 
+
     /**
       Destructor
     */
@@ -350,13 +350,13 @@ class Console : public Serializable
     // Pointers to the left and right controllers
     Controller* myControllers[2];
 
-    // Pointer to the TIA object 
+    // Pointer to the TIA object
     TIA* myTIA;
 
     // Pointer to the switches on the front of the console
     Switches* mySwitches;
- 
-    // Pointer to the 6502 based system being emulated 
+
+    // Pointer to the 6502 based system being emulated
     System* mySystem;
 
     // Pointer to the Cartridge (the debugger needs it)

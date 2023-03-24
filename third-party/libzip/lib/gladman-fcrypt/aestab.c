@@ -526,4 +526,3 @@ INTERNAL void gen_tabs(aes_ctx cx[1])
 #if defined(__cplusplus)
 }
 #endif
-

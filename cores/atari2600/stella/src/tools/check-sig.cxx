@@ -45,7 +45,7 @@ int main(int ac, char* av[])
     cout << "usage: " << av[0] << " <filename> <hex pattern>\n";
     exit(0);
   }
-  
+
   ifstream in(av[1], ios_base::binary);
   in.seekg(0, ios::end);
   int i_size = (int) in.tellg();

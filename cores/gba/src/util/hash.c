@@ -68,9 +68,9 @@ uint32_t hash32(const void* key, int len, uint32_t seed) {
     k1 *= c1;
     k1 = ROTL32(k1,15);
     k1 *= c2;
-    
+
     h1 ^= k1;
-    h1 = ROTL32(h1,13); 
+    h1 = ROTL32(h1,13);
     h1 = h1*5+0xe6546b64;
   }
 
@@ -97,4 +97,4 @@ uint32_t hash32(const void* key, int len, uint32_t seed) {
   h1 = fmix32(h1);
 
   return h1;
-} 
+}

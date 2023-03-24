@@ -961,22 +961,22 @@ void Memory::nontrivial_ff_write(unsigned const p, unsigned data, unsigned long 
 		oamDmaInitSetup();
 		return;
 	case 0x47:
-         
+
 		if (!isCgb() || (ioamhram_[0x14C] == 0x04))//allow in gbc gb mode
 			lcd_.dmgBgPaletteChange(data, cc);
 
 		break;
 	case 0x48:
-         
+
 		if (!isCgb() || (ioamhram_[0x14C] == 0x04))//allow in gbc gb mode
 			lcd_.dmgSpPalette1Change(data, cc);
-         
+
 		break;
 	case 0x49:
-         
+
 		if (!isCgb() || (ioamhram_[0x14C] == 0x04))//allow in gbc gb mode
 			lcd_.dmgSpPalette2Change(data, cc);
-         
+
 		break;
 	case 0x4A:
 		lcd_.wyChange(data, cc);
@@ -993,7 +993,7 @@ void Memory::nontrivial_ff_write(unsigned const p, unsigned data, unsigned long 
          }
          else if (data == 0x80)
             ioamhram_[0x14C] = 0x80;//0x80 is gbc mode, no special operations needed, just lock this register
-         
+
          //any other write to this register is invalid and will just be ignored
       }
       return;

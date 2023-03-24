@@ -200,7 +200,7 @@ libFLAC_static_la_OBJECTS = $(am_libFLAC_static_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
-am__v_lt_1 = 
+am__v_lt_1 =
 libFLAC_la_DEPENDENCIES = $(LOCAL_EXTRA_LIBADD)
 am__libFLAC_la_SOURCES_DIST = bitmath.c bitreader.c bitwriter.c cpu.c \
 	crc.c fixed.c fixed_intrin_sse2.c fixed_intrin_ssse3.c float.c \
@@ -224,11 +224,11 @@ am__v_P_1 = :
 AM_V_GEN = $(am__v_GEN_@AM_V@)
 am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
 am__v_GEN_0 = @echo "  GEN     " $@;
-am__v_GEN_1 = 
+am__v_GEN_1 =
 AM_V_at = $(am__v_at_@AM_V@)
 am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
 am__v_at_0 = @
-am__v_at_1 = 
+am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -242,7 +242,7 @@ LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CC = $(am__v_CC_@AM_V@)
 am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
 am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
+am__v_CC_1 =
 CCLD = $(CC)
 LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
@@ -250,7 +250,7 @@ LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
+am__v_CCLD_1 =
 SOURCES = $(libFLAC_static_la_SOURCES) $(libFLAC_la_SOURCES)
 DIST_SOURCES = $(am__libFLAC_static_la_SOURCES_DIST) \
 	$(am__libFLAC_la_SOURCES_DIST)
@@ -635,10 +635,10 @@ clean-noinstLTLIBRARIES:
 	  rm -f $${locs}; \
 	}
 
-libFLAC-static.la: $(libFLAC_static_la_OBJECTS) $(libFLAC_static_la_DEPENDENCIES) $(EXTRA_libFLAC_static_la_DEPENDENCIES) 
+libFLAC-static.la: $(libFLAC_static_la_OBJECTS) $(libFLAC_static_la_DEPENDENCIES) $(EXTRA_libFLAC_static_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(LINK)  $(libFLAC_static_la_OBJECTS) $(libFLAC_static_la_LIBADD) $(LIBS)
 
-libFLAC.la: $(libFLAC_la_OBJECTS) $(libFLAC_la_DEPENDENCIES) $(EXTRA_libFLAC_la_DEPENDENCIES) 
+libFLAC.la: $(libFLAC_la_OBJECTS) $(libFLAC_la_DEPENDENCIES) $(EXTRA_libFLAC_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(libFLAC_la_LINK) -rpath $(libdir) $(libFLAC_la_OBJECTS) $(libFLAC_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:

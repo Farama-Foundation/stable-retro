@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -48,11 +48,11 @@ enum PropertyType {
 };
 
 /**
-  This class represents objects which maintain a collection of 
+  This class represents objects which maintain a collection of
   properties.  A property is a key and its corresponding value.
 
   A properties object can contain a reference to another properties
-  object as its "defaults"; this second properties object is searched 
+  object as its "defaults"; this second properties object is searched
   if the property key is not found in the original property list.
 
   @author  Bradford W. Mott
@@ -64,7 +64,7 @@ class Properties
 
   public:
     /**
-      Creates an empty properties object with the specified defaults.  The 
+      Creates an empty properties object with the specified defaults.  The
       new properties object does not claim ownership of the defaults.
     */
     Properties();
@@ -87,7 +87,7 @@ class Properties
       not exist then the empty string is returned.
 
       @param key  The key of the property to lookup
-      @return     The value of the property 
+      @return     The value of the property
     */
     const string& get(PropertyType key) const;
 
@@ -105,7 +105,7 @@ class Properties
       @param in The input stream to use
     */
     void load(istream& in);
- 
+
     /**
       Save properties to the specified output stream
 
@@ -135,7 +135,7 @@ class Properties
   private:
     /**
       Helper function to perform a deep copy of the specified
-      properties.  Assumes that old properties have already been 
+      properties.  Assumes that old properties have already been
       freed.
 
       @param properties The properties object to copy myself from
@@ -148,30 +148,30 @@ class Properties
 
       @param in The input stream to use
       @return The string inside the quotes
-    */ 
+    */
     static string readQuotedString(istream& in);
-     
+
     /**
-      Write the specified string to the given output stream as a 
+      Write the specified string to the given output stream as a
       quoted string.
 
       @param out The output stream to use
       @param s The string to output
-    */ 
+    */
     static void writeQuotedString(ostream& out, const string& s);
 
     /**
       Get the property type associated with the named property
 
       @param name  The PropertyType key associated with the given string
-    */ 
+    */
     static PropertyType getPropertyType(const string& name);
 
     /**
       When printing each collection of ROM properties, it is useful to
       see which columns correspond to the output fields; this method
       provides that output.
-    */ 
+    */
     static void printHeader();
 
   private:

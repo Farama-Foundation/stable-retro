@@ -81,7 +81,7 @@ print N <<EOF;
           <Subnodes>
 EOF
 
-    
+
 my $id = 1001;
 
 for my $html (@files) {
@@ -186,7 +186,7 @@ sub process_file {
 			description => $description,
 			id => $id };
     }
-    
+
     copy_html($html, "$docset/Contents/Resources/Documents/$html");
 }
 

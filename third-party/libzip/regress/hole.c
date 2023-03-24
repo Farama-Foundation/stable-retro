@@ -1,10 +1,10 @@
 /*
  hole.c -- convert huge files with mostly NULs to/from source_hole
  Copyright (C) 2014-2017 Dieter Baron and Thomas Klausner
- 
+
  This file is part of libzip, a library to manipulate ZIP archives.
  The authors can be contacted at <libzip@nih.at>
- 
+
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions
  are met:
@@ -17,7 +17,7 @@
  3. The names of the authors may not be used to endorse or promote
  products derived from this software without specific prior
  written permission.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS
  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -59,18 +59,18 @@ copy_source(zip_source_t *from, zip_source_t *to)
 {
     zip_uint8_t buf[8192];
     zip_int64_t n;
-    
+
     if (zip_source_open(from) < 0) {
         fprintf(stderr, "%s: can't open source for reading: %s\n", prg, zip_error_strerror(zip_source_error(from)));
         return -1;
     }
-    
+
     if (zip_source_begin_write(to) < 0) {
         fprintf(stderr, "%s: can't open source for writing: %s\n", prg, zip_error_strerror(zip_source_error(to)));
         zip_source_close(from);
         return -1;
     }
-        
+
     while ((n = zip_source_read(from, buf, sizeof(buf))) > 0) {
         if (zip_source_write(to, buf, (zip_uint64_t)n) != n) {
             fprintf(stderr, "%s: can't write to source: %s\n", prg, zip_error_strerror(zip_source_error(to)));
@@ -79,7 +79,7 @@ copy_source(zip_source_t *from, zip_source_t *to)
             return -1;
         }
     }
-    
+
     if (n < 0) {
         fprintf(stderr, "%s: can't read from source: %s\n", prg, zip_error_strerror(zip_source_error(from)));
         zip_source_close(from);
@@ -88,13 +88,13 @@ copy_source(zip_source_t *from, zip_source_t *to)
     }
 
     zip_source_close(from);
-    
+
     if (zip_source_commit_write(to) < 0) {
         fprintf(stderr, "%s: can't commit source: %s\n", prg, zip_error_strerror(zip_source_error(to)));
         zip_source_rollback_write(to);
         return -1;
     }
-    
+
     return 0;
 }
 
@@ -104,15 +104,15 @@ open_compressed(const char *fname, int flags)
 {
     zip_error_t error;
     zip_source_t *src;
-    
+
     zip_error_init(&error);
-    
+
     if ((src = source_hole_create(fname, flags, &error)) == NULL) {
         fprintf(stderr, "%s: can't open compressed file %s: %s\n", prg, fname, zip_error_strerror(&error));
         zip_error_fini(&error);
         exit(1);
     }
-    
+
     return src;
 }
 
@@ -122,15 +122,15 @@ open_file(const char *fname)
 {
     zip_error_t error;
     zip_source_t *src;
-    
+
     zip_error_init(&error);
-    
+
     if ((src = zip_source_file_create(fname, 0, 0, &error)) == NULL) {
         fprintf(stderr, "%s: can't open file %s: %s\n", prg, fname, zip_error_strerror(&error));
         zip_error_fini(&error);
         exit(1);
     }
-    
+
     return src;
 }
 
@@ -152,9 +152,9 @@ main(int argc, char **argv)
     int c, err;
     int compress = 1;
     int decompress = 0;
-    
+
     prg = argv[0];
-    
+
     while ((c=getopt(argc, argv, "du")) != -1) {
         switch (c) {
             case 'd':
@@ -172,11 +172,11 @@ main(int argc, char **argv)
                 break;
         }
     }
-    
+
     if (optind+2 != argc) {
         usage();
     }
-    
+
     if (decompress) {
         from = open_compressed(argv[optind], 0);
     }
@@ -190,12 +190,11 @@ main(int argc, char **argv)
     else {
         to = open_file(argv[optind+1]);
     }
-    
+
     err = copy_source(from, to);
-    
+
     zip_source_free(from);
     zip_source_free(to);
-    
+
     exit(err < 0 ? 1 : 0);
 }
-

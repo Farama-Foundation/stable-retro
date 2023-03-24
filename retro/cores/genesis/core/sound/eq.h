@@ -6,7 +6,7 @@
 //
 // (c) Neil C / Etanza Systems / 2K6
 //
-// Shouts / Loves / Moans = etanza at lycos dot co dot uk 
+// Shouts / Loves / Moans = etanza at lycos dot co dot uk
 //
 // This work is hereby placed in the public domain for all purposes, including
 // use in commercial applications.

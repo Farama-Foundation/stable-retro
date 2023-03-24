@@ -35,7 +35,7 @@ SOEXT  = .mingw_x86.dll
 
 STATIC_LINKING = 0
 platform       = win
-PLATDEFS       = 
+PLATDEFS       =
 PLATCFLAGS     = -m32 -fpic -fstrict-aliasing
 PLATCXXFLAGS   = -m32 -fpic -fstrict-aliasing
 PLATLDFLAGS    = -m32 -shared -lm
@@ -80,7 +80,7 @@ endif
 
 CORE_DIR  ?= ..
 BUILD_DIR ?= .
-INCLUDES   = 
+INCLUDES   =
 
 include $(BUILD_DIR)/Makefile.common
 

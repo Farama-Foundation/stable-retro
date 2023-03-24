@@ -262,7 +262,7 @@ int FONT_Init(void)
 	/* retrieve IPL font data */
   fontHeader = (sys_fontheader*)ipl_fontarea;
   fontImage = (u8*)((((u32)ipl_fontarea+fontHeader->sheet_image)+31)&~31);
-  
+
   /* expand to I4 format */
   expand_font((u8*)ipl_fontarea+fontHeader->sheet_image,fontImage);
 
@@ -327,7 +327,7 @@ int FONT_write(char *string, int size, int x, int y, int max_width, GXColor colo
     }
     string++;
   }
- 
+
   return 0;
 }
 

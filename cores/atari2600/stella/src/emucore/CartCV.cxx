@@ -136,18 +136,18 @@ uInt8 CartridgeCV::peek(uInt16 address)
       triggerReadFromWritePort(address);
       return myRAM[address & 0x03FF] = value;
     }
-  }  
+  }
   else
   {
     return myImage[address & 0x07FF];
-  }  
+  }
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool CartridgeCV::poke(uInt16, uInt8)
 {
-  // NOTE: This does not handle accessing RAM, however, this function 
-  // should never be called for RAM because of the way page accessing 
+  // NOTE: This does not handle accessing RAM, however, this function
+  // should never be called for RAM because of the way page accessing
   // has been setup
   return false;
 }
@@ -189,7 +189,7 @@ bool CartridgeCV::patch(uInt16 address, uInt8 value)
     myImage[address & 0x07FF] = value;
 
   return myBankChanged = true;
-} 
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const uInt8* CartridgeCV::getImage(int& size) const

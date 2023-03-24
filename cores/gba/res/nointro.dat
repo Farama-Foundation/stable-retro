@@ -35762,4 +35762,3 @@ game (
 	description "Zok Zok Heroes (Japan)"
 	rom ( name "Zok Zok Heroes (Japan).gbc" size 2097152 crc C09F9E1B md5 E4874674056451F1DF22C2CBF7A25F93 sha1 91AB908FDDEBD926E7DB8D61295A40955B2ADC39 flags verified )
 )
-

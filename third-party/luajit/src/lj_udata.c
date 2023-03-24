@@ -31,4 +31,3 @@ void LJ_FASTCALL lj_udata_free(global_State *g, GCudata *ud)
 {
   lj_mem_free(g, ud, sizeudata(ud));
 }
-

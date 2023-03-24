@@ -300,4 +300,3 @@ int lj_lib_checkopt(lua_State *L, int narg, int def, const char *lst)
   }
   return def;
 }
-

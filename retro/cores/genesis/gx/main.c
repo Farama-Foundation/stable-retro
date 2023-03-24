@@ -79,7 +79,7 @@ static void Reload_cb(void)
 #endif
 
 /****************************************************************************
- * Reset Button callback 
+ * Reset Button callback
  ***************************************************************************/
 static void Reset_cb(void)
 {
@@ -205,7 +205,7 @@ static void run_emulation(void)
     /* stop video & audio */
     gx_audio_Stop();
     gx_video_Stop();
-    
+
     /* show menu */
     ConfigRequested = 0;
     mainmenu();
@@ -244,7 +244,7 @@ double get_framerate(void)
 }
 
 /*******************************************
-  Restart emulation when loading a new game 
+  Restart emulation when loading a new game
 ********************************************/
 void reloadrom(void)
 {
@@ -272,7 +272,7 @@ void reloadrom(void)
     /* Initialize audio emulation */
     interlaced = 0;
     audio_init(48000, get_framerate());
-     
+
     /* System Power-On */
     system_init();
     system_reset();
@@ -283,7 +283,7 @@ void reloadrom(void)
 
   /* Auto-Load Backup RAM */
   slot_autoload(0,config.s_device);
-            
+
   /* Auto-Load State */
   slot_autoload(config.s_default,config.s_device);
 
@@ -333,14 +333,14 @@ int main (int argc, char *argv[])
  #ifdef HW_RVL
   /* enable 64-byte fetch mode for L2 cache */
   L2Enhance();
-  
+
   /* disable DVD cache */
   DI_UseCache(0);
 
   /* autodetect loader arguments */
   if ((argc >= 3) && (argv[1] != NULL))
   {
-    /* check if autoloading from USB is requested */ 
+    /* check if autoloading from USB is requested */
     if (!strncasecmp(argv[1], "usb:/", 5))
     {
       /* reload to IOS58 for USB2 support  */
@@ -380,7 +380,7 @@ int main (int argc, char *argv[])
     if (dir) closedir(dir);
     else mkdir(pathname,S_IRWXU);
 
-    /* default SRAM & Savestate files directories */ 
+    /* default SRAM & Savestate files directories */
     sprintf (pathname, "%s/saves",DEFAULT_PATH);
     dir = opendir(pathname);
     if (dir) closedir(dir);
@@ -406,7 +406,7 @@ int main (int argc, char *argv[])
     if (dir) closedir(dir);
     else mkdir(pathname,S_IRWXU);
 
-    /* default Snapshot files directories */ 
+    /* default Snapshot files directories */
     sprintf (pathname, "%s/snaps",DEFAULT_PATH);
     dir = opendir(pathname);
     if (dir) closedir(dir);
@@ -432,7 +432,7 @@ int main (int argc, char *argv[])
     if (dir) closedir(dir);
     else mkdir(pathname,S_IRWXU);
 
-    /* default Cheat files directories */ 
+    /* default Cheat files directories */
     sprintf (pathname, "%s/cheats",DEFAULT_PATH);
     dir = opendir(pathname);
     if (dir) closedir(dir);
@@ -458,13 +458,13 @@ int main (int argc, char *argv[])
     if (dir) closedir(dir);
     else mkdir(pathname,S_IRWXU);
 
-    /* default BIOS ROM files directories */ 
+    /* default BIOS ROM files directories */
     sprintf (pathname, "%s/bios",DEFAULT_PATH);
     dir = opendir(pathname);
     if (dir) closedir(dir);
     else mkdir(pathname,S_IRWXU);
 
-    /* default LOCK-ON ROM files directories */ 
+    /* default LOCK-ON ROM files directories */
     sprintf (pathname, "%s/lock-on",DEFAULT_PATH);
     dir = opendir(pathname);
     if (dir) closedir(dir);

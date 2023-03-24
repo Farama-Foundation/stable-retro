@@ -68,7 +68,7 @@ namespace gambatte
             return memchunk_ + 0x4000;
          }
 
-         unsigned char * romdata(unsigned area) const 
+         unsigned char * romdata(unsigned area) const
          {
             return romdata_[area];
          }
@@ -118,7 +118,7 @@ namespace gambatte
             return vrambankptr_;
          }
 
-         OamDmaSrc oamDmaSrc() const 
+         OamDmaSrc oamDmaSrc() const
          {
             return oamDmaSrc_;
          }

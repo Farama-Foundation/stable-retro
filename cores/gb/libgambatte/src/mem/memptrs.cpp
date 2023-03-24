@@ -47,13 +47,13 @@ namespace gambatte
    {
       delete []memchunk_;
       memchunk_     = new unsigned char[
-         0x4000 
+         0x4000
          + rombanks * 0x4000ul + 0x4000
-         + rambanks * 0x2000ul 
-         + wrambanks * 0x1000ul 
+         + rambanks * 0x2000ul
+         + wrambanks * 0x1000ul
          + 0x4000];
 
-      romdata_[0]   = romdata();   
+      romdata_[0]   = romdata();
       rambankdata_  = romdata_[0] + rombanks * 0x4000ul + 0x4000;
       wramdata_[0]  = rambankdata_ + rambanks * 0x2000ul;
       wramdataend_ = wramdata_[0] + wrambanks * 0x1000ul;

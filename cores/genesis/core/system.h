@@ -65,8 +65,8 @@
 #define MCYCLES_PER_LINE  3420
 
 /* Horizontal timing offsets when running in Z80 mode */
-#define SMS_CYCLE_OFFSET  530 
-#define PBC_CYCLE_OFFSET  560 
+#define SMS_CYCLE_OFFSET  530
+#define PBC_CYCLE_OFFSET  560
 
 typedef struct
 {
@@ -99,7 +99,7 @@ typedef struct
 extern t_bitmap bitmap;
 extern t_snd snd;
 extern uint32 mcycles_vdp;
-extern int16 SVP_cycles; 
+extern int16 SVP_cycles;
 extern uint8 system_hw;
 extern uint8 system_bios;
 extern uint32 system_clock;
@@ -118,4 +118,3 @@ extern void system_frame_scd(int do_skip);
 extern void system_frame_sms(int do_skip);
 
 #endif /* _SYSTEM_H_ */
-

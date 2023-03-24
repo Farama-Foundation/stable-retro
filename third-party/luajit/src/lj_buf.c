@@ -229,4 +229,3 @@ uint32_t LJ_FASTCALL lj_buf_ruleb128(const char **pp)
   *pp = (const char *)p;
   return v;
 }
-

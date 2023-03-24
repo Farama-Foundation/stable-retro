@@ -53,7 +53,7 @@ PropSet::save_prop_set($sys_file, \%sys_propset);
 print "\nRun create_props [yN]: ";
 chomp ($input = <STDIN>);
 if($input eq 'y')
-{ 
+{
   system("./src/tools/create_props.pl");
 }
 

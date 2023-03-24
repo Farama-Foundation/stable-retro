@@ -547,4 +547,3 @@ case 0x1a: {
   }
   break;
 }
-

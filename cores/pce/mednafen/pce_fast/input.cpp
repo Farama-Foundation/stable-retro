@@ -139,7 +139,7 @@ uint8 INPUT_Read(unsigned int A)
       if(!InputTypes[tmp_ri])
          ret ^= 0xF;
       else if(InputTypes[tmp_ri] == 2) // Mouse
-      {   
+      {
          if(sel & 1)
          {
             CheckLM(tmp_ri);

@@ -29,13 +29,13 @@ struct SaveState;
 
 class StateSaver {
 	StateSaver();
-	
+
 public:
 	enum { SS_SHIFT = 2 };
 	enum { SS_DIV = 1 << 2 };
 	enum { SS_WIDTH = 160 >> SS_SHIFT };
 	enum { SS_HEIGHT = 144 >> SS_SHIFT };
-	
+
    static void saveState(const SaveState &state, void *data);
    static bool loadState(SaveState &state, const void *data);
    static size_t stateSize(const SaveState &state);

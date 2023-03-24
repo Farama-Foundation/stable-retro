@@ -134,7 +134,7 @@ typedef struct
   void (*cb)(void);           /* specific draw callback */
 } gui_menu;
 
-typedef struct 
+typedef struct
 {
   u32 progress;           /* progress counter */
   bool refresh;           /* messagebox current state */

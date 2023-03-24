@@ -1,6 +1,6 @@
 Package: com.libretro.gambatte
 Name: gambatte
-Depends: 
+Depends:
 Version: 0.0.1
 Architecture: iphoneos-arm
 Description: Libretro iOS core of Gambatte

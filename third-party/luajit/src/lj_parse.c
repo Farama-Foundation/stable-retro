@@ -2724,4 +2724,3 @@ GCproto *lj_parse(LexState *ls)
   lua_assert(pt->sizeuv == 0);
   return pt;
 }
-

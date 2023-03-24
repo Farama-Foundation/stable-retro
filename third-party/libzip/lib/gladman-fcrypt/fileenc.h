@@ -31,7 +31,7 @@
  Issue Date: 24/01/2003
 
  This file contains the header file for fileenc.c, which implements password
- based file encryption and authentication using AES in CTR mode, HMAC-SHA1 
+ based file encryption and authentication using AES in CTR mode, HMAC-SHA1
  authentication and RFC2898 password based key derivation.
 */
 

@@ -207,7 +207,7 @@ _zip_open(zip_source_t *src, unsigned int flags, zip_error_t *error)
     free(cdir);
 
     _zip_hash_reserve_capacity(za->names, za->nentry, &za->error);
-    
+
     for (idx = 0; idx < za->nentry; idx++) {
 	const zip_uint8_t *name = _zip_string_get(za->entry[idx].orig->filename, NULL, 0, error);
 	if (name == NULL) {

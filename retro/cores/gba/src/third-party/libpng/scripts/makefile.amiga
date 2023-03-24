@@ -55,4 +55,3 @@ TO pngtest
 FROM LIB:c.o pngtest.o
 LIB $(LDLIBS)
 <
-

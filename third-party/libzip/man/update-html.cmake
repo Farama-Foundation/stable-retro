@@ -7,5 +7,3 @@ STRING(REGEX REPLACE "${LINKBASE}(libzip|zip)" "\\1" HTML "${HTML}")
 FILE(WRITE ${DIR}/${OUT}.new "${HTML}")
 CONFIGURE_FILE(${DIR}/${OUT}.new ${DIR}/${OUT} COPYONLY)
 FILE(REMOVE ${DIR}/${OUT}.new)
-
-

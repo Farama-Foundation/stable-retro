@@ -456,14 +456,14 @@ CFLAGS		= $(CXXFLAGS)
 
 ifeq (,$(findstring msvc,$(platform)))
 CXXFLAGS += -DHAVE_STRINGS_H
-CXXFLAGS += -fno-rtti -pedantic 
+CXXFLAGS += -fno-rtti -pedantic
 ifneq ($(HAVE_EXCEPTIONS), 1)
    CXXFLAGS += -fno-exceptions
 endif
 endif
 
 OBJOUT   = -o
-LINKOUT  = -o 
+LINKOUT  = -o
 
 ifneq (,$(findstring msvc,$(platform)))
 	OBJOUT = -Fo
@@ -496,7 +496,7 @@ else
 	$(LD) $(fpic) $(SHARED) $(LINKOUT)$@ $(OBJECTS) $(LDFLAGS) $(LIBS)
 endif
 
-%.o: %.cpp 
+%.o: %.cpp
 	$(CXX) $(INCFLAGS) $(CPPFLAGS) $(CXXFLAGS) -c $(OBJOUT)$@ $<
 
 %.o: %.c

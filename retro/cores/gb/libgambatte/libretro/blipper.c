@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2013 - Hans-Kristian Arntzen
  *
- * Permission is hereby granted, free of charge, 
+ * Permission is hereby granted, free of charge,
  * to any person obtaining a copy of this software and
  * associated documentation files (the "Software"),
  * to deal in the Software without restriction,
@@ -472,4 +472,3 @@ void blipper_read(blipper_t *blip, blipper_sample_t *output, unsigned samples,
    blip->integrator_time += get_time() - t0;
 #endif
 }
-

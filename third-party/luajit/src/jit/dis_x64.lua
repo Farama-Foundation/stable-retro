@@ -14,4 +14,3 @@ return {
   disass = dis_x86.disass64,
   regname = dis_x86.regname64
 }
-

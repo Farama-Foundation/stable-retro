@@ -325,7 +325,7 @@ void S9xMainLoop (void)
 
 		if (Settings.SA1)
 			S9xSA1MainLoop();
-			
+
 #ifdef LAGFIX
 		if (finishedFrame)
 		break;
@@ -337,7 +337,7 @@ void S9xMainLoop (void)
 #endif
 	{
 		S9xPackStatus();
-	
+
 		if (CPU.Flags & SCAN_KEYS_FLAG)
 		{
 			#ifdef DEBUGGER

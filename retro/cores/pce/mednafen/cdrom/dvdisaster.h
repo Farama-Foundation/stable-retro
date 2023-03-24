@@ -22,11 +22,11 @@
 #ifndef DVDISASTER_H
 #define DVDISASTER_H
 
-/* "Dare to be gorgeous and unique. 
+/* "Dare to be gorgeous and unique.
  *  But don't ever be cryptic or otherwise unfathomable.
  *  Make it unforgettably great."
  *
- *  From "A Final Note on Style", 
+ *  From "A Final Note on Style",
  *  Amiga Intuition Reference Manual, 1986, p. 231
  */
 
@@ -74,7 +74,7 @@ uint32_t EDCCrc32(const unsigned char*, int);
  *
  * Note that some performance critical stuff needs to
  * be #included from galois-inlines.h
- */  
+ */
 
 /* Galois field parameters for 8bit symbol Reed-Solomon code */
 
@@ -86,7 +86,7 @@ uint32_t EDCCrc32(const unsigned char*, int);
 /* Lookup tables for Galois field arithmetic */
 
 typedef struct _GaloisTables
-{  int32_t gfGenerator;  /* GF generator polynomial */ 
+{  int32_t gfGenerator;  /* GF generator polynomial */
    int32_t *indexOf;     /* log */
    int32_t *alphaTo;     /* inverse log */
    int32_t *encAlphaTo; /* inverse log optimized for encoder */
@@ -109,7 +109,7 @@ void FreeGaloisTables(GaloisTables*);
 ReedSolomonTables *CreateReedSolomonTables(GaloisTables*, int32_t, int32_t, int);
 void FreeReedSolomonTables(ReedSolomonTables*);
 
-/*** 
+/***
  *** l-ec.c
  ***/
 
@@ -144,7 +144,7 @@ int DecodePQ(ReedSolomonTables*, unsigned char*, int, int*, int);
 int CountC2Errors(unsigned char*);
 
 /***
- *** misc.c 
+ *** misc.c
  ***/
 
 char* sgettext(char*);
@@ -159,7 +159,7 @@ void CalcSectors(int64_t, int64_t*, int*);
  *** recover-raw.c
  ***/
 
-#define CD_RAW_SECTOR_SIZE 2352  
+#define CD_RAW_SECTOR_SIZE 2352
 #define CD_RAW_C2_SECTOR_SIZE (2352+294)  /* main channel plus C2 vector */
 
 int CheckEDC(const unsigned char*, bool);

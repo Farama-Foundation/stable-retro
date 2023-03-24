@@ -502,8 +502,8 @@ void sms_cart_init(void)
   sram.on = 1;
 
   /* default gun offset for Light Phaser */
-  input.x_offset = 20; 
-  input.y_offset = 0; 
+  input.x_offset = 20;
+  input.y_offset = 0;
 
   /* SpaceGun & Gangster Town use specific gun offset */
   if ((crc == 0x5359762D) || (crc == 0x5FC74D2A))
@@ -536,7 +536,7 @@ void sms_cart_init(void)
       cart_rom.pages = 0;
     }
   }
-  else 
+  else
   {
     /* mark Master System & Game Gear BIOS as unloaded */
     system_bios &= ~(SYSTEM_SMS | SYSTEM_GG);
@@ -930,7 +930,7 @@ static void mapper_8k_w(int offset, unsigned char data)
 
   /* cartridge ROM page (8k) */
   uint8 *page = &slot.rom[(data % slot.pages) << 13];
-  
+
   /* Save frame control register data */
   slot.fcr[offset] = data;
 
@@ -945,7 +945,7 @@ static void mapper_8k_w(int offset, unsigned char data)
       }
       break;
     }
-    
+
     case 1: /* cartridge ROM bank (8k) at $A000-$BFFF */
     {
       for (i = 0x28; i < 0x30; i++)
@@ -954,7 +954,7 @@ static void mapper_8k_w(int offset, unsigned char data)
       }
       break;
     }
-    
+
     case 2: /* cartridge ROM bank (8k) at $4000-$5FFF */
     {
       for (i = 0x10; i < 0x18; i++)
@@ -963,7 +963,7 @@ static void mapper_8k_w(int offset, unsigned char data)
       }
       break;
     }
-    
+
     case 3: /* cartridge ROM bank (8k) at $6000-$7FFF */
     {
       for (i = 0x18; i < 0x20; i++)
@@ -979,7 +979,7 @@ static void mapper_8k_w(int offset, unsigned char data)
   CHEATS_UPDATE();
 #endif
 }
-    
+
 static void mapper_16k_w(int offset, unsigned char data)
 {
   int i;
@@ -1012,7 +1012,7 @@ static void mapper_16k_w(int offset, unsigned char data)
       {
         /* cartridge ROM page (16k) */
         page = slot.fcr[3] % slot.pages;
-        
+
         /* page index increment (SEGA mapper) */
         if ((data & 0x03) && (slot.mapper == MAPPER_SEGA))
         {
@@ -1130,7 +1130,7 @@ static void mapper_32k_w(unsigned char data)
 
   /* cartridge ROM page (32k) */
   uint8 *page = &slot.rom[(data % slot.pages) << 15];
-  
+
   /* Save frame control register data */
   slot.fcr[0] = data;
 

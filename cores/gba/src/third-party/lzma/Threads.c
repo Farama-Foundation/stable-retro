@@ -32,9 +32,9 @@ WRes Handle_WaitObject(HANDLE h) { return (WRes)WaitForSingleObject(h, INFINITE)
 WRes Thread_Create(CThread *p, THREAD_FUNC_TYPE func, LPVOID param)
 {
   /* Windows Me/98/95: threadId parameter may not be NULL in _beginthreadex/CreateThread functions */
-  
+
   #ifdef UNDER_CE
-  
+
   DWORD threadId;
   *p = CreateThread(0, 0, func, param, 0, &threadId);
 
@@ -42,7 +42,7 @@ WRes Thread_Create(CThread *p, THREAD_FUNC_TYPE func, LPVOID param)
 
   unsigned threadId;
   *p = (HANDLE)_beginthreadex(NULL, 0, func, param, 0, &threadId);
-   
+
   #endif
 
   /* maybe we must use errno here, but probably GetLastError() is also OK. */

@@ -201,7 +201,7 @@ void m68k_update_irq(unsigned int mask)
 {
   /* Update IRQ level */
   CPU_INT_LEVEL |= (mask << 8);
-  
+
 #ifdef LOGVDP
   error("[%d(%d)][%d(%d)] IRQ Level = %d(0x%02x) (%x)\n", v_counter, m68k.cycles/3420, m68k.cycles, m68k.cycles%3420,CPU_INT_LEVEL>>8,FLAG_INT_MASK,m68k_get_reg(M68K_REG_PC));
 #endif
@@ -211,7 +211,7 @@ void m68k_set_irq(unsigned int int_level)
 {
   /* Set IRQ level */
   CPU_INT_LEVEL = int_level << 8;
-  
+
 #ifdef LOGVDP
   error("[%d(%d)][%d(%d)] IRQ Level = %d(0x%02x) (%x)\n", v_counter, m68k.cycles/3420, m68k.cycles, m68k.cycles%3420,CPU_INT_LEVEL>>8,FLAG_INT_MASK,m68k_get_reg(M68K_REG_PC));
 #endif
@@ -244,7 +244,7 @@ void m68k_set_irq_delay(unsigned int int_level)
     /* Set IRQ level */
     CPU_INT_LEVEL = int_level << 8;
   }
-  
+
 #ifdef LOGVDP
   error("[%d(%d)][%d(%d)] IRQ Level = %d(0x%02x) (%x)\n", v_counter, m68k.cycles/3420, m68k.cycles, m68k.cycles%3420,CPU_INT_LEVEL>>8,FLAG_INT_MASK,m68k_get_reg(M68K_REG_PC));
 #endif
@@ -253,7 +253,7 @@ void m68k_set_irq_delay(unsigned int int_level)
   m68ki_check_interrupts(); /* Level triggered (IRQ) */
 }
 
-void m68k_run(unsigned int cycles) 
+void m68k_run(unsigned int cycles)
 {
   /* Make sure CPU is not already ahead */
   if (m68k.cycles >= cycles)
@@ -280,7 +280,7 @@ void m68k_run(unsigned int cycles)
 #ifdef LOGVDP
   error("[%d][%d] m68k run to %d cycles (%x), irq mask = %x (%x)\n", v_counter, m68k.cycles, cycles, m68k.pc,FLAG_INT_MASK, CPU_INT_LEVEL);
 #endif
-   
+
   while (m68k.cycles < cycles)
   {
     /* Set tracing accodring to T1. */
@@ -291,7 +291,7 @@ void m68k_run(unsigned int cycles)
 
     /* Decode next instruction */
     REG_IR = m68ki_read_imm_16();
-	
+
     /* Execute instruction */
     m68ki_instruction_jump_table[REG_IR]();
     USE_CYCLES(CYC_INSTRUCTION[REG_IR]);

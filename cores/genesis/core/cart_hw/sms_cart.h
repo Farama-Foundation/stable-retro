@@ -52,5 +52,3 @@ extern int sms_cart_context_save(uint8 *state);
 extern int sms_cart_context_load(uint8 *state);
 
 #endif
-
-

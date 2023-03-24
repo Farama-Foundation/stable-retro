@@ -421,7 +421,7 @@ void io_z80_write(unsigned int offset, unsigned int data, unsigned int cycles)
   /* I/O Control register */
   if (offset)
   {
-    /* 
+    /*
         Bit  Function
         --------------
         D7 : Port B TH pin output level (1=high, 0=low)
@@ -437,7 +437,7 @@ void io_z80_write(unsigned int offset, unsigned int data, unsigned int cycles)
     /* Send TR/TH state to connected peripherals */
     port[0].data_w((data << 1) & 0x60, (~data << 5) & 0x60);
     port[1].data_w((data >> 1) & 0x60, (~data << 3) & 0x60);
-    
+
     /* Check for TH low-to-high transitions on both ports */
     if ((!(io_reg[0x0F] & 0x80) && (data & 0x80)) ||
         (!(io_reg[0x0F] & 0x20) && (data & 0x20)))
@@ -477,7 +477,7 @@ unsigned int io_z80_read(unsigned int offset)
   /* I/O ports */
   if (offset)
   {
-   /* 
+   /*
      Bit  Function
      --------------
      D7 : Port B TH pin input
@@ -517,7 +517,7 @@ unsigned int io_z80_read(unsigned int offset)
   }
   else
   {
-   /* 
+   /*
      Bit  Function
      --------------
      D7 : Port B Down pin input
@@ -604,4 +604,3 @@ unsigned int io_gg_read(unsigned int offset)
       return 0xFF;
   }
 }
-

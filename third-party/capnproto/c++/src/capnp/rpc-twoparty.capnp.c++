@@ -402,4 +402,3 @@ constexpr ::capnp::_::RawSchema const* JoinResult::_capnpPrivate::schema;
 }  // namespace
 }  // namespace
 }  // namespace
-

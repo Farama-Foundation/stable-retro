@@ -246,4 +246,3 @@ unsigned char eeprom_93c_read(void)
 {
   return ((eeprom_93c.cs << BIT_CS) | (eeprom_93c.data << BIT_DATA) | (1 << BIT_CLK));
 }
-

@@ -507,4 +507,3 @@ struct BooleanConstant {};
 }  // namespace testing
 
 #endif  // GMOCK_INCLUDE_GMOCK_INTERNAL_GMOCK_INTERNAL_UTILS_H_
-

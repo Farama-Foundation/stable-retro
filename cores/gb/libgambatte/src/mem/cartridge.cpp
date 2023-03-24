@@ -615,4 +615,3 @@ namespace gambatte
    }
 
 }
-

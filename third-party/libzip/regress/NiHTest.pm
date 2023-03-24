@@ -598,7 +598,7 @@ sub list_files {
 
 	while (scalar(@dirs) > 0) {
 		my $dir = shift @dirs;
-		
+
 		opendir($ls, $dir);
 		unless ($ls) {
 			# TODO: handle error
@@ -608,7 +608,7 @@ sub list_files {
 			if ($dir eq '.') {
 				$file = $entry;
 			}
-			
+
 			if (-f $file) {
 				push @files, "$file";
 			}

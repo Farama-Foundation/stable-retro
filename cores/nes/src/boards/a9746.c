@@ -72,4 +72,3 @@ void UNLA9746_Init(CartInfo *info) {
 	info->Power = UNLA9746Power;
 	AddExState(EXPREGS, 6, 0, "EXPR");
 }
-

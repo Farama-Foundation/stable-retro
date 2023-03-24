@@ -53,4 +53,3 @@ static const struct { const char *name; int ofs; } libbc_map[] = {
 {"table_move",355},
 {NULL,502}
 };
-

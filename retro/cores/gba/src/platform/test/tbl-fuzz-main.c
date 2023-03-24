@@ -25,4 +25,3 @@ int main(int argc, char** argv) {
 	TextCodecDeinit(&codec);
 	return 0;
 }
-

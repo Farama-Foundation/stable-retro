@@ -200,7 +200,7 @@ void GUI_DrawMenu(gui_menu *menu)
     {
       if (image->state & IMAGE_REPEAT)
         gxDrawTextureRepeat(image->texture,image->x,image->y,image->w,image->h,image->alpha);
-      else 
+      else
         gxDrawTexture(image->texture,image->x,image->y,image->w,image->h,image->alpha);
     }
   }
@@ -217,8 +217,8 @@ void GUI_DrawMenu(gui_menu *menu)
     {
       /* item select (text or image) */
       item = (menu->items) ? (&menu->items[menu->offset + i]) : NULL;
-      
-      /* draw button + items */ 
+
+      /* draw button + items */
       if ((i == menu->selected) || (button->state & BUTTON_SELECTED))
       {
         if (button->data)
@@ -460,7 +460,7 @@ void GUI_DrawMenuFX(gui_menu *menu, u8 speed, u8 out)
         /* item select (text or image) */
         item = (menu->items) ? (&menu->items[menu->offset + i]) : NULL;
 
-        /* draw button + items */ 
+        /* draw button + items */
         if ((i == menu->selected) || (button->state & BUTTON_SELECTED))
         {
           if (button->data)
@@ -560,7 +560,7 @@ void GUI_DrawMenuFX(gui_menu *menu, u8 speed, u8 out)
   }
 
   /* final position */
-  if (!out) 
+  if (!out)
   {
     GUI_DrawMenu(menu);
     gxSetScreen();
@@ -705,8 +705,8 @@ int GUI_UpdateMenu(gui_menu *menu)
     if (selected >= menu->max_buttons)
     {
       selected = 0;
-      while ((selected < (menu->max_buttons + 2)) && 
-             (!(menu->buttons[selected].state & BUTTON_ACTIVE) || 
+      while ((selected < (menu->max_buttons + 2)) &&
+             (!(menu->buttons[selected].state & BUTTON_ACTIVE) ||
               !(menu->buttons[selected].state & BUTTON_VISIBLE)))
         selected++;
     }
@@ -1930,7 +1930,7 @@ void GUI_MsgBoxClose(void)
         message_box.parent->helpers[0]->data = Key_B_png;
       if (message_box.parent->helpers[1])
         message_box.parent->helpers[1]->data = Key_A_png;
-    
+
       /* final position */
       GUI_DrawMenu(message_box.parent);
     }
@@ -1938,7 +1938,7 @@ void GUI_MsgBoxClose(void)
     {
       gxClearScreen(bg_color);
     }
-    
+
     gxSetScreen();
 
     /* clear all textures */

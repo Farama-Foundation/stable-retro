@@ -26,7 +26,7 @@ template<typename T>
 class Array : Uncopyable {
 	T *a;
 	std::size_t sz;
-	
+
 public:
 	explicit Array(const std::size_t size = 0) : a(size ? new T[size] : 0), sz(size) {}
 	~Array() { delete []a; }

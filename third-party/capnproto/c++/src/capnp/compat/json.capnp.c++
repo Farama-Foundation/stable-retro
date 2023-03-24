@@ -323,4 +323,3 @@ constexpr ::capnp::_::RawSchema const* JsonValue::Call::_capnpPrivate::schema;
 
 
 }  // namespace
-

@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -32,7 +32,7 @@ class System;
   Bankswitching method as defined/created by John Payson (aka Supercat),
   documented at http://www.casperkitty.com/stella/cartfmt.htm.
 
-  In this bankswitching scheme the 2600's 4K cartridge address space 
+  In this bankswitching scheme the 2600's 4K cartridge address space
   is broken into four segments.  The first 2K segment accesses any 2K
   region of RAM, or of the first 32K of ROM.  The second 1.5K segment
   accesses the first 1.5K of any 2K region of RAM, or of the last 32K
@@ -62,7 +62,7 @@ class Cartridge4A50 : public Cartridge
       @param settings  A reference to the various settings (read-only)
     */
     Cartridge4A50(const uInt8* image, uInt32 size, const Settings& settings);
- 
+
     /**
       Destructor
     */

@@ -106,21 +106,21 @@ enum { min_sample = -32768 };
 static void check_assumptions( void )
 {
 	int n;
-	
+
 	#if INT_MAX < 0x7FFFFFFF || UINT_MAX < 0xFFFFFFFF
 		#error "int must be at least 32 bits"
 	#endif
-	
+
 	assert( (-3 >> 1) == -2 ); /* right shift must preserve sign */
-	
+
 	n = max_sample * 2;
 	CLAMP( n );
 	assert( n == max_sample );
-	
+
 	n = min_sample * 2;
 	CLAMP( n );
 	assert( n == min_sample );
-	
+
 	assert( blip_max_ratio <= time_unit );
 	assert( blip_max_frame <= (fixed_t) -1 >> time_bits );
 }
@@ -132,7 +132,7 @@ blip_t* blip_new( int size )
 #ifdef BLIP_ASSERT
 	assert( size >= 0 );
 #endif
-  
+
 #ifdef BLIP_MONO
 	m = (blip_t*) malloc( sizeof *m + (size + buf_extra) * sizeof (buf_t) );
 #else
@@ -180,17 +180,17 @@ void blip_set_rates( blip_t* m, double clock_rate, double sample_rate )
 {
 	double factor = time_unit * sample_rate / clock_rate;
 	m->factor = (fixed_t) factor;
-	
+
 #ifdef BLIP_ASSERT
 	/* Fails if clock_rate exceeds maximum, relative to sample_rate */
 	assert( 0 <= factor - m->factor && factor - m->factor < 1 );
 #endif
-  
+
 /* Avoid requiring math.h. Equivalent to
 	m->factor = (int) ceil( factor ) */
 	if ( m->factor < factor )
 		m->factor++;
-	
+
 	/* At this point, factor is most likely rounded up, but could still
 	have been rounded down in the floating-point calculation. */
 }
@@ -633,15 +633,15 @@ void blip_add_delta( blip_t* m, unsigned time, int delta )
 {
 	unsigned fixed = (unsigned) ((time * m->factor + m->offset) >> pre_shift);
 	buf_t* out = SAMPLES( m ) + (fixed >> frac_bits);
-	
+
 	int phase = fixed >> phase_shift & (phase_count - 1);
 	short const* in  = bl_step [phase];
 	short const* rev = bl_step [phase_count - phase];
-	
+
 	int interp = fixed >> (phase_shift - delta_bits) & (delta_unit - 1);
 	int delta2 = (delta * interp) >> delta_bits;
 	delta -= delta2;
-	
+
 #ifdef BLIP_ASSERT
 	/* Fails if buffer size was exceeded */
 	assert( out <= &SAMPLES( m ) [m->size + end_frame_extra] );
@@ -655,7 +655,7 @@ void blip_add_delta( blip_t* m, unsigned time, int delta )
 	out [5] += in[5]*delta + in[half_width+5]*delta2;
 	out [6] += in[6]*delta + in[half_width+6]*delta2;
 	out [7] += in[7]*delta + in[half_width+7]*delta2;
-	
+
 	in = rev;
 	out [ 8] += in[7]*delta + in[7-half_width]*delta2;
 	out [ 9] += in[6]*delta + in[6-half_width]*delta2;
@@ -671,15 +671,15 @@ void blip_add_delta_fast( blip_t* m, unsigned time, int delta )
 {
 	unsigned fixed = (unsigned) ((time * m->factor + m->offset) >> pre_shift);
 	buf_t* out = SAMPLES( m ) + (fixed >> frac_bits);
-	
+
 	int interp = fixed >> (frac_bits - delta_bits) & (delta_unit - 1);
 	int delta2 = delta * interp;
-	
+
 #ifdef BLIP_ASSERT
   /* Fails if buffer size was exceeded */
 	assert( out <= &SAMPLES( m ) [m->size + end_frame_extra] );
 #endif
-  
+
 	out [7] += delta * delta_unit - delta2;
 	out [8] += delta2;
 }

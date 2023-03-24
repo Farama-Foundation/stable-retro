@@ -226,4 +226,3 @@ void emit_fold(BuildCtx *ctx)
 
   makehash(ctx);
 }
-

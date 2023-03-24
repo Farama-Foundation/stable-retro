@@ -865,7 +865,7 @@ described below (the latter being the two common names for associated alpha
 color channels). Note that PNG files always contain non-associated color
 channels; png_set_alpha_mode() with one of the modes causes the decoder to
 convert the pixels to an associated form before returning them to your
-application. 
+application.
 
 Since it is not necessary to perform arithmetic on opaque color values so
 long as they are not to be resampled and are in the final color space it is
@@ -5246,7 +5246,7 @@ Prior to libpng-1.6.0 we used a "png_sizeof()" macro, formatted as
 though it were a function.
 
 Control keywords if, for, while, and switch are always followed by a space
-to distinguish them from function calls, which have no trailing space. 
+to distinguish them from function calls, which have no trailing space.
 
 We put a space after each comma and after each semicolon
 in "for" statements, and we put spaces before and after each

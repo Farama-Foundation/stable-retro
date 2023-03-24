@@ -9,7 +9,7 @@ static int config_load(void)
     if ((homedir = getenv("HOME")) == NULL) {
         homedir = getpwuid(getuid())->pw_dir;
     }
-    
+
 	/* open configuration file */
 	char fname[MAXPATHLEN];
     sprintf (fname, "%s%s/config.ini", homedir, DEFAULT_PATH);
@@ -30,7 +30,7 @@ static int config_load(void)
 		fclose(fp);
 		return 1;
 	}
-				
+
 	return 0;
 }
 
@@ -91,7 +91,7 @@ void set_config_defaults(void)
         /* autodetected control pad type */
         config.input[i].padtype = DEVICE_PAD2B | DEVICE_PAD3B | DEVICE_PAD6B;
     }
-    
+
 	config.buttons[A] 		= SDLK_LSHIFT;//x
 	config.buttons[B] 		= SDLK_LALT;//b
 	config.buttons[C] 		= SDLK_LCTRL;//a
@@ -100,7 +100,7 @@ void set_config_defaults(void)
 	config.buttons[Z] 		= SDLK_BACKSPACE;//r
 	config.buttons[START]           = SDLK_RETURN;//start
 	config.buttons[MODE] 	        = SDLK_ESCAPE;//select
-    
+
     /* try to restore user config */
 	int loaded = config_load();
 	if (!loaded) {
@@ -129,4 +129,3 @@ void config_save(void)
         fclose(fp);
     }
 }
-

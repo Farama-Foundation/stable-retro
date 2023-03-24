@@ -356,7 +356,7 @@ void ecc_compute_bytes(const uint8_t *sector, const uint16_t *row, int rowlen, u
 int ecc_verify(const uint8_t *sector)
 {
    int byte;
-   
+
 	// first verify P bytes
 	for (byte = 0; byte < ECC_P_NUM_BYTES; byte++)
 	{

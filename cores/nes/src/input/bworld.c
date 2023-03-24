@@ -62,4 +62,3 @@ static INPUTCFC BarcodeWorld = { Read, Write, 0, Update, 0, 0 };
 INPUTCFC *FCEU_InitBarcodeWorld(void) {
 	return(&BarcodeWorld);
 }
-

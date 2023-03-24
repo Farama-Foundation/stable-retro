@@ -182,7 +182,7 @@ static WRes RemoveDirWithSubItems(WCHAR *path)
   path[len] = L'\0';
   if (handle == INVALID_HANDLE_VALUE)
     return GetLastError();
-  
+
   for (;;)
   {
     if (wcscmp(fd.cFileName, L".") != 0 &&
@@ -200,11 +200,11 @@ static WRes RemoveDirWithSubItems(WCHAR *path)
         if (DeleteFileW(path) == 0)
           res = GetLastError();
       }
-    
+
       if (res != 0)
         break;
     }
-  
+
     if (!FindNextFileW(handle, &fd))
     {
       res = GetLastError();
@@ -213,7 +213,7 @@ static WRes RemoveDirWithSubItems(WCHAR *path)
       break;
     }
   }
-  
+
   path[len] = L'\0';
   FindClose(handle);
   if (res == 0)
@@ -273,7 +273,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
   FileInStream_CreateVTable(&archiveStream);
   LookToRead_CreateVTable(&lookStream, False);
- 
+
   winRes = GetModuleFileNameW(NULL, sfxPath, MAX_PATH);
   if (winRes == 0 || winRes > MAX_PATH)
     return 1;
@@ -302,7 +302,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
       return 1;
     pathLen = wcslen(path);
     d = (GetTickCount() << 12) ^ (GetCurrentThreadId() << 14) ^ GetCurrentProcessId();
-    
+
     for (i = 0;; i++, d += GetTickCount())
     {
       if (i >= 100)
@@ -339,7 +339,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         break;
       }
     }
-    
+
     #ifndef UNDER_CE
     wcscpy(workCurDir, path);
     #endif
@@ -382,7 +382,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
   {
     res = SzArEx_Open(&db, &lookStream.s, &allocImp, &allocTempImp);
   }
-  
+
   if (res == SZ_OK)
   {
     UInt32 executeFileIndex = (UInt32)(Int32)-1;
@@ -391,7 +391,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     UInt32 blockIndex = 0xFFFFFFFF; /* it can have any value before first call (if outBuffer = 0) */
     Byte *outBuffer = 0; /* it must be 0 before first call for each new archive. */
     size_t outBufferSize = 0;  /* it can have any value before first call (if outBuffer = 0) */
-    
+
     for (i = 0; i < db.NumFiles; i++)
     {
       size_t offset = 0;
@@ -399,15 +399,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
       size_t len;
       WCHAR *temp;
       len = SzArEx_GetFileNameUtf16(&db, i, NULL);
-      
+
       if (len >= MAX_PATH)
       {
         res = SZ_ERROR_FAIL;
         break;
       }
-      
+
       temp = path + pathLen;
-      
+
       SzArEx_GetFileNameUtf16(&db, i, temp);
       {
         res = SzArEx_Extract(&db, &lookStream.s, i,
@@ -454,7 +454,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
             executeFileIndex = i;
             useShellExecute = (extPrice != k_EXE_ExtIndex);
           }
-         
+
           if (DoesFileOrDirExist(path))
           {
             errorMessage = "Duplicate file";
@@ -468,14 +468,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
             break;
           }
         }
-  
+
         processedSize = outSizeProcessed;
         if (File_Write(&outFile, outBuffer + offset, &processedSize) != 0 || processedSize != outSizeProcessed)
         {
           errorMessage = "Can't write output file";
           res = SZ_ERROR_FAIL;
         }
-        
+
         #ifdef USE_WINDOWS_FILE
         if (SzBitWithVals_Check(&db.MTime, i))
         {
@@ -486,7 +486,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
           SetFileTime(outFile.handle, NULL, NULL, &mTime);
         }
         #endif
-        
+
         {
           SRes res2 = File_Close(&outFile);
           if (res != SZ_OK)
@@ -530,7 +530,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
   if (res == SZ_OK)
   {
     HANDLE hProcess = 0;
-    
+
     #ifndef UNDER_CE
     WCHAR oldCurDir[MAX_PATH + 2];
     oldCurDir[0] = 0;
@@ -541,13 +541,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
       SetCurrentDirectory(workCurDir);
     }
     #endif
-    
+
     if (useShellExecute)
     {
       SHELLEXECUTEINFO ei;
       UINT32 executeRes;
       BOOL success;
-      
+
       memset(&ei, 0, sizeof(ei));
       ei.cbSize = sizeof(ei);
       ei.lpFile = path;
@@ -585,7 +585,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         hProcess = pi.hProcess;
       }
     }
-    
+
     if (hProcess != 0)
     {
       WaitForSingleObject(hProcess, INFINITE);
@@ -593,7 +593,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         exitCode = 1;
       CloseHandle(hProcess);
     }
-    
+
     #ifndef UNDER_CE
     SetCurrentDirectory(oldCurDir);
     #endif
@@ -604,7 +604,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
   if (res == SZ_OK)
     return (int)exitCode;
-  
+
   {
     if (res == SZ_ERROR_UNSUPPORTED)
       errorMessage = "Decoder doesn't support this archive";
@@ -617,7 +617,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
       if (!errorMessage)
         errorMessage = "ERROR";
     }
- 
+
     if (errorMessage)
       PrintErrorMessage(errorMessage);
   }

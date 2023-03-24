@@ -3,7 +3,7 @@
 #-----------------------------------------
 
 [ROM]
-# Filename = 
+# Filename =
 LoROM = FALSE
 HiROM = FALSE
 PAL = FALSE
@@ -37,7 +37,7 @@ MessageDisplayTime = 120
 
 [Settings]
 BSXBootup = FALSE
-# FrameTime = 
+# FrameTime =
 FrameSkip = Auto
 TurboMode = FALSE
 TurboFrameSkip = 15
@@ -80,9 +80,9 @@ Trace = FALSE
 
 [Unix]
 # BaseDir = ~/.snes9x
-# SnapshotFilename = 
-# PlayMovieFilename = 
-# RecordMovieFilename = 
+# SnapshotFilename =
+# PlayMovieFilename =
+# RecordMovieFilename =
 EnableGamePad = TRUE
 PadDevice1 = (null)
 PadDevice2 = (null)
@@ -95,7 +95,7 @@ PadDevice8 = (null)
 ThreadSound = FALSE
 SoundBufferSize = 100
 SoundFragmentSize = 2048
-# SoundDevice = 
+# SoundDevice =
 ClearAllControls = FALSE
 
 [Unix/X11]

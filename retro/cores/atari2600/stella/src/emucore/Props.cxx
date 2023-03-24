@@ -122,7 +122,7 @@ void Properties::load(istream& in)
     if(!in)
       return;
 
-    // Set the property 
+    // Set the property
     PropertyType type = getPropertyType(key);
     set(type, value);
   }

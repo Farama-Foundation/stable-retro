@@ -272,7 +272,7 @@ bool M6502::execute(uInt32 number)
     }
 
     // See if we need to handle an interrupt
-    if((myExecutionStatus & MaskableInterruptBit) || 
+    if((myExecutionStatus & MaskableInterruptBit) ||
         (myExecutionStatus & NonmaskableInterruptBit))
     {
       // Yes, so handle the interrupt

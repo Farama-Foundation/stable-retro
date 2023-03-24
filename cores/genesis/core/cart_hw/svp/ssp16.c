@@ -559,7 +559,7 @@ static u32 pm_io(int reg, int write, u32 d)
         ssp->pmac_read[reg] += 1<<16;*/
         if ((signed int)(ssp->pmac[0][reg] & 0xffff) == -1) ssp->pmac[0][reg] += 1<<16;
         ssp->pmac[0][reg] ++;
-        
+
         d = ((unsigned short *)cart.rom)[addr|((mode&0xf)<<16)];
       }
       else if ((mode & 0x47ff) == 0x0018) /* DRAM */
@@ -1282,7 +1282,7 @@ void ssp1601_run(int cycles)
 #endif
         break;
       case 0x3c:
-        OP_CMPA(op & 0xff); 
+        OP_CMPA(op & 0xff);
 #ifdef LOG_SVP
         if (op&0x100) elprintf(EL_SVP|EL_ANOMALY, "FIXME: simm with upper bit set");
 #endif
@@ -1307,7 +1307,7 @@ void ssp1601_run(int cycles)
 #endif
         break;
       case 0x7c:
-        OP_EORA(op & 0xff); 
+        OP_EORA(op & 0xff);
 #ifdef LOG_SVP
         if (op&0x100) elprintf(EL_SVP|EL_ANOMALY, "FIXME: simm with upper bit set");
 #endif
@@ -1330,4 +1330,3 @@ void ssp1601_run(int cycles)
     elprintf(EL_ANOMALY|EL_SVP, "ssp FIXME: REG 0 corruption! %08x", ssp->gr[SSP_GR0].v);
 #endif
 }
-

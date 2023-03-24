@@ -65,7 +65,7 @@ struct huffman_decoder
 
 	// array versions of the info we need
 	//node_t*			huffnode_array; //[_NumCodes];
-	//lookup_value*	lookup_array; //[1 << _MaxBits];	
+	//lookup_value*	lookup_array; //[1 << _MaxBits];
 };
 
 // ======================> huffman_decoder

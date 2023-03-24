@@ -79,5 +79,3 @@ void BMC64in1nr_Init(CartInfo *info) {
 	AddExState(&StateRegs, ~0, 0, 0);
 	GameStateRestore = StateRestore;
 }
-
-

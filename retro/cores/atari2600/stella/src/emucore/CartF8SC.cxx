@@ -1,8 +1,8 @@
 //============================================================================
 //
-//   SSSS    tt          lll  lll       
-//  SS  SS   tt           ll   ll        
-//  SS     tttttt  eeee   ll   ll   aaaa 
+//   SSSS    tt          lll  lll
+//  SS  SS   tt           ll   ll
+//  SS     tttttt  eeee   ll   ll   aaaa
 //   SSSS    tt   ee  ee  ll   ll      aa
 //      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
 //  SS  SS   tt   ee      ll   ll  aa  aa
@@ -105,12 +105,12 @@ uInt8 CartridgeF8SC::peek(uInt16 address)
       // Set the current bank to the lower 4k bank
       bank(0);
       break;
-  
+
     case 0x0FF9:
       // Set the current bank to the upper 4k bank
       bank(1);
       break;
-  
+
     default:
       break;
   }
@@ -127,7 +127,7 @@ uInt8 CartridgeF8SC::peek(uInt16 address)
       triggerReadFromWritePort(peekAddress);
       return myRAM[address] = value;
     }
-  }  
+  }
   else
     return myImage[(myCurrentBank << 12) + address];
 }
@@ -144,12 +144,12 @@ bool CartridgeF8SC::poke(uInt16 address, uInt8)
       // Set the current bank to the lower 4k bank
       bank(0);
       break;
-  
+
     case 0x0FF9:
       // Set the current bank to the upper 4k bank
       bank(1);
       break;
-  
+
     default:
       break;
   }
@@ -162,7 +162,7 @@ bool CartridgeF8SC::poke(uInt16 address, uInt8)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool CartridgeF8SC::bank(uInt16 bank)
-{ 
+{
   if(bankLocked()) return false;
 
   // Remember what bank we're in
@@ -219,7 +219,7 @@ bool CartridgeF8SC::patch(uInt16 address, uInt8 value)
     myImage[(myCurrentBank << 12) + address] = value;
 
   return myBankChanged = true;
-} 
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const uInt8* CartridgeF8SC::getImage(int& size) const

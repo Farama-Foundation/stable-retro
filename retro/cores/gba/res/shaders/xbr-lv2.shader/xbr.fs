@@ -1,6 +1,6 @@
 /*
    Hyllian's xBR-lv2 Shader
-   
+
    Copyright (C) 2011-2015 Hyllian - sergiogdb@gmail.com
 
    Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -211,4 +211,4 @@ void main()
     vec3 res = mix(res1, res2, step(c_df(E, res1), c_df(E, res2)));
 
     FragColor = vec4(res, 1.0);
-} 
+}

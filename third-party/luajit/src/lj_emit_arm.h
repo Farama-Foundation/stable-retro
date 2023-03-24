@@ -354,4 +354,3 @@ static void emit_addptr(ASMState *as, Reg r, int32_t ofs)
 }
 
 #define emit_spsub(as, ofs)	emit_addptr(as, RID_SP, -(ofs))
-

@@ -25,7 +25,7 @@
  * The UNIF names are UNROM-512-8K, UNROM-512-16K and UNROM-512-32K
  *
  * The battery flag in the NES header enables flash,  Mirrror mode 2 Enables MI_0 and MI_1 mode.
- * Known games to use this board are: 
+ * Known games to use this board are:
  *    Battle Kid 2: Mountain of Torment (512K PRG, 8K CHR RAM, Horizontal Mirroring, Flash disabled)
  *    Study Hall (128K PRG (in 512K flash chip), 8K CHR RAM, Horizontal Mirroring, Flash enabled)
  * Although Xmas 2013 uses a different board, where LEDs can be controlled (with writes to the $8000-BFFF space),
@@ -216,7 +216,7 @@ static void UNROM512LSync() {
 
 static void UNROM512HSync() {
 	flash_bank=latche&(ROM_size-1);
-	
+
 	setprg16(0x8000, flash_bank);
 	setprg16(0xc000, ~0);
 	setfprg16(0x8000, flash_bank);
@@ -236,7 +236,7 @@ void UNROM512_Init(CartInfo *info) {
 		chrram_mask = 0x20;
 	else
 		chrram_mask = 0x60;
-	
+
 	SetupCartMirroring(info->mirror, (info->mirror >= MI_0) ? 0 : 1, 0);
 	bus_conflict = !info->battery;
 	latcheinit = 0;

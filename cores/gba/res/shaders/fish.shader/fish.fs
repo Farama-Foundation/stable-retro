@@ -1,6 +1,6 @@
 /*
    fish shader
-   
+
    algorithm and original implementation by Miloslav "drummyfish" Ciz
    (tastyfish@seznam.cz)
 

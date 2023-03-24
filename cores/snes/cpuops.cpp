@@ -190,7 +190,7 @@
 #include "apu/apu.h"
 
 // for "Magic WDM" features
-#ifdef DEBUGGER	
+#ifdef DEBUGGER
 #include "snapshot.h"
 #include "display.h"
 #include "debug.h"

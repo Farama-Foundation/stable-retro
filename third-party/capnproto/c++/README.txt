@@ -24,4 +24,3 @@ You can increase this number if you have more cores.  Specifying "check"
 says to run tests in addition to building.  This can be omitted to make the
 build slightly faster, but running tests and reporting failures back to the
 developers helps us out!
-

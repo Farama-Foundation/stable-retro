@@ -1,10 +1,13 @@
-from mgba.image import Image
 from collections import namedtuple
+
+from mgba.image import Image
+
 from . import VideoFrame
 
-Output = namedtuple('Output', ['video'])
+Output = namedtuple("Output", ["video"])
 
-class Tracer(object):
+
+class Tracer:
     def __init__(self, core):
         self.core = core
         self.fb = Image(*core.desiredVideoDimensions())

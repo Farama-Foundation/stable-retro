@@ -3,10 +3,12 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-from ._pylib import ffi, lib
-from .core import IRunner, ICoreOwner, Core
 import io
 import sys
+
+from ._pylib import ffi, lib
+from .core import Core, ICoreOwner, IRunner
+
 
 class DebuggerCoreOwner(ICoreOwner):
     def __init__(self, debugger):
@@ -22,6 +24,7 @@ class DebuggerCoreOwner(ICoreOwner):
     def release(self):
         if self.wasPaused:
             self.debugger.unpause()
+
 
 class NativeDebugger(IRunner):
     WATCHPOINT_WRITE = lib.WATCHPOINT_WRITE
@@ -81,21 +84,25 @@ class NativeDebugger(IRunner):
     def addCallback(self, cb):
         self._cbs.append(cb)
 
-class CLIBackend(object):
+
+class CLIBackend:
     def __init__(self, backend):
         self.backend = backend
 
     def write(self, string):
         self.backend.printf(string)
 
+
 class CLIDebugger(NativeDebugger):
     def __init__(self, native):
-        super(CLIDebugger, self).__init__(native)
+        super().__init__(native)
         self._cli = ffi.cast("struct CLIDebugger*", native)
 
     def printf(self, message, *args, **kwargs):
         message = message.format(*args, **kwargs)
-        self._cli.backend.printf(ffi.new("char []", b"%s"), ffi.new("char []", message.encode('utf-8')))
+        self._cli.backend.printf(
+            ffi.new("char []", b"%s"), ffi.new("char []", message.encode("utf-8"))
+        )
 
     def installPrint(self):
         sys.stdout = CLIBackend(self)

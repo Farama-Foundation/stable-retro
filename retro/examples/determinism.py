@@ -2,11 +2,13 @@
 Example wrapper to improve determinism of Retro environments
 """
 
-import retro
-import numpy as np
 import argparse
-import gymnasium as gym
 import multiprocessing as mp
+
+import gymnasium as gym
+import numpy as np
+
+import retro
 
 CHUNK_LENGTH = 128
 
@@ -114,10 +116,10 @@ def check_env_helper(make_env, all_acts, verbose, out_success):
 
         for offset, acts in enumerate(in_acts[start_idx:]):
             if not np.array_equal(rollout(env, acts), out_rews[start_idx + offset]):
-                print('failed rew')
+                print("failed rew")
                 success = False
             if not np.array_equal(env.get_ram(), out_rams[start_idx + offset]):
-                print('failed ram')
+                print("failed ram")
                 success = False
 
     env.close()
@@ -125,12 +127,16 @@ def check_env_helper(make_env, all_acts, verbose, out_success):
 
 
 def check_env(make_env, acts, verbose=False, timeout=None):
-    out_success = mp.Value('b', False)
-    p = mp.Process(target=check_env_helper, args=(make_env, acts, verbose, out_success), daemon=True)
+    out_success = mp.Value("b", False)
+    p = mp.Process(
+        target=check_env_helper,
+        args=(make_env, acts, verbose, out_success),
+        daemon=True,
+    )
     p.start()
     p.join(timeout)
     if p.is_alive():
-        print('failed to finish in time')
+        print("failed to finish in time")
         p.terminate()
         p.join()
         return False
@@ -139,9 +145,16 @@ def check_env(make_env, acts, verbose=False, timeout=None):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--deterministic', action='store_true', help='use deterministic wrapper')
-    parser.add_argument('--suffix', default='', help='run against games matching this suffix')
-    parser.add_argument('--movie-file', help='load a bk2 and use states obtained from replaying actions from the bk2')
+    parser.add_argument(
+        "--deterministic", action="store_true", help="use deterministic wrapper"
+    )
+    parser.add_argument(
+        "--suffix", default="", help="run against games matching this suffix"
+    )
+    parser.add_argument(
+        "--movie-file",
+        help="load a bk2 and use states obtained from replaying actions from the bk2",
+    )
     args = parser.parse_args()
 
     if args.movie_file is None:
@@ -168,14 +181,18 @@ def main():
                 failed_games.append(game)
 
         for game in failed_games:
-            print('failed:', game)
+            print("failed:", game)
 
     elif args.movie_file is not None:
         movie = retro.Movie(args.movie_file)
         movie.step()
 
         def make_env():
-            env = retro.make(movie.get_game(), state=retro.State.DEFAULT, use_restricted_actions=retro.Actions.ALL)
+            env = retro.make(
+                movie.get_game(),
+                state=retro.State.DEFAULT,
+                use_restricted_actions=retro.Actions.ALL,
+            )
             env.initial_state = movie.get_state()
             if args.deterministic:
                 env = MoreDeterministicRetroState(env)
@@ -194,8 +211,8 @@ def main():
         env.close()
         check_env(make_env, acts, verbose=True)
     else:
-        raise Exception('must specify --suffix or --movie-file')
+        raise Exception("must specify --suffix or --movie-file")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -3,15 +3,18 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-from ._pylib import ffi, lib
-from . import tile, createCallback
 from cached_property import cached_property
 
+from . import createCallback, tile
+from ._pylib import ffi, lib
+
+
 def find(path):
-    core = lib.mCoreFind(path.encode('UTF-8'))
+    core = lib.mCoreFind(path.encode("UTF-8"))
     if core == ffi.NULL:
         return None
     return Core._init(core)
+
 
 def findVF(vf):
     core = lib.mCoreFindVF(vf.handle)
@@ -19,11 +22,13 @@ def findVF(vf):
         return None
     return Core._init(core)
 
+
 def loadPath(path):
     core = find(path)
     if not core or not core.loadFile(path):
         return None
     return core
+
 
 def loadVF(vf):
     core = findVF(vf)
@@ -31,41 +36,50 @@ def loadVF(vf):
         return None
     return core
 
+
 def needsReset(f):
     def wrapper(self, *args, **kwargs):
         if not self._wasReset:
             raise RuntimeError("Core must be reset first")
         return f(self, *args, **kwargs)
+
     return wrapper
+
 
 def protected(f):
     def wrapper(self, *args, **kwargs):
         if self._protected:
             raise RuntimeError("Core is protected")
         return f(self, *args, **kwargs)
+
     return wrapper
+
 
 @ffi.def_extern()
 def _mCorePythonCallbacksVideoFrameStarted(user):
     context = ffi.from_handle(user)
     context._videoFrameStarted()
 
+
 @ffi.def_extern()
 def _mCorePythonCallbacksVideoFrameEnded(user):
     context = ffi.from_handle(user)
     context._videoFrameEnded()
+
 
 @ffi.def_extern()
 def _mCorePythonCallbacksCoreCrashed(user):
     context = ffi.from_handle(user)
     context._coreCrashed()
 
+
 @ffi.def_extern()
 def _mCorePythonCallbacksSleep(user):
     context = ffi.from_handle(user)
     context._sleep()
 
-class CoreCallbacks(object):
+
+class CoreCallbacks:
     def __init__(self):
         self._handle = ffi.new_handle(self)
         self.videoFrameStarted = []
@@ -90,11 +104,12 @@ class CoreCallbacks(object):
         for cb in self.sleep:
             cb()
 
-class Core(object):
-    if hasattr(lib, 'PLATFORM_GBA'):
+
+class Core:
+    if hasattr(lib, "PLATFORM_GBA"):
         PLATFORM_GBA = lib.PLATFORM_GBA
 
-    if hasattr(lib, 'PLATFORM_GB'):
+    if hasattr(lib, "PLATFORM_GB"):
         PLATFORM_GB = lib.PLATFORM_GB
 
     def __init__(self, native):
@@ -141,11 +156,13 @@ class Core(object):
 
     @classmethod
     def _detect(cls, core):
-        if hasattr(cls, 'PLATFORM_GBA') and core.platform(core) == cls.PLATFORM_GBA:
+        if hasattr(cls, "PLATFORM_GBA") and core.platform(core) == cls.PLATFORM_GBA:
             from .gba import GBA
+
             return GBA(core)
-        if hasattr(cls, 'PLATFORM_GB') and core.platform(core) == cls.PLATFORM_GB:
+        if hasattr(cls, "PLATFORM_GB") and core.platform(core) == cls.PLATFORM_GB:
             from .gb import GB
+
             return GB(core)
         return Core(core)
 
@@ -153,7 +170,7 @@ class Core(object):
         self._wasReset = True
 
     def loadFile(self, path):
-        return bool(lib.mCoreLoadFile(self._core, path.encode('UTF-8')))
+        return bool(lib.mCoreLoadFile(self._core, path.encode("UTF-8")))
 
     def isROM(self, vf):
         return bool(self._core.isROM(vf.handle))
@@ -218,8 +235,8 @@ class Core(object):
     @staticmethod
     def _keysToInt(*args, **kwargs):
         keys = 0
-        if 'raw' in kwargs:
-            keys = kwargs['raw']
+        if "raw" in kwargs:
+            keys = kwargs["raw"]
         for key in args:
             keys |= 1 << key
         return keys
@@ -265,7 +282,8 @@ class Core(object):
     def crc32(self):
         return self._native.romCrc32
 
-class ICoreOwner(object):
+
+class ICoreOwner:
     def claim(self):
         raise NotImplementedError
 
@@ -281,7 +299,8 @@ class ICoreOwner(object):
         self.core._protected = False
         self.release()
 
-class IRunner(object):
+
+class IRunner:
     def pause(self):
         raise NotImplementedError
 
@@ -297,7 +316,8 @@ class IRunner(object):
     def isPaused(self):
         raise NotImplementedError
 
-class Config(object):
+
+class Config:
     def __init__(self, native=None, port=None, defaults={}):
         if not native:
             self._port = ffi.NULL
@@ -309,10 +329,16 @@ class Config(object):
         for key, value in defaults.items():
             if isinstance(value, bool):
                 value = int(value)
-            lib.mCoreConfigSetDefaultValue(self._native, ffi.new("char[]", key.encode("UTF-8")), ffi.new("char[]", str(value).encode("UTF-8")))
+            lib.mCoreConfigSetDefaultValue(
+                self._native,
+                ffi.new("char[]", key.encode("UTF-8")),
+                ffi.new("char[]", str(value).encode("UTF-8")),
+            )
 
     def __getitem__(self, key):
-        string = lib.mCoreConfigGetValue(self._native, ffi.new("char[]", key.encode("UTF-8")))
+        string = lib.mCoreConfigGetValue(
+            self._native, ffi.new("char[]", key.encode("UTF-8"))
+        )
         if not string:
             return None
         return ffi.string(string)
@@ -320,4 +346,8 @@ class Config(object):
     def __setitem__(self, key, value):
         if isinstance(value, bool):
             value = int(value)
-        lib.mCoreConfigSetValue(self._native, ffi.new("char[]", key.encode("UTF-8")), ffi.new("char[]", str(value).encode("UTF-8")))
+        lib.mCoreConfigSetValue(
+            self._native,
+            ffi.new("char[]", key.encode("UTF-8")),
+            ffi.new("char[]", str(value).encode("UTF-8")),
+        )

@@ -4,12 +4,16 @@ Train an agent using Proximal Policy Optimization from Stable Baselines 3
 
 import argparse
 
-import numpy as np
 import gymnasium as gym
+import numpy as np
 from gymnasium.wrappers.time_limit import TimeLimit
-from stable_baselines3.common.vec_env import SubprocVecEnv, VecFrameStack, VecTransposeImage
-from stable_baselines3.common.atari_wrappers import WarpFrame, ClipRewardEnv
 from stable_baselines3 import PPO
+from stable_baselines3.common.atari_wrappers import ClipRewardEnv, WarpFrame
+from stable_baselines3.common.vec_env import (
+    SubprocVecEnv,
+    VecFrameStack,
+    VecTransposeImage,
+)
 
 import retro
 
@@ -43,7 +47,9 @@ class StochasticFrameSkip(gym.Wrapper):
             elif i == 1:
                 self.curac = ac
             if self.supports_want_render and i < self.n - 1:
-                ob, rew, terminated, truncated, info = self.env.step(self.curac, want_render=False)
+                ob, rew, terminated, truncated, info = self.env.step(
+                    self.curac, want_render=False
+                )
             else:
                 ob, rew, terminated, truncated, info = self.env.step(self.curac)
             totrew += rew
@@ -73,9 +79,9 @@ def wrap_deepmind_retro(env):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--game', default='Airstriker-Genesis')
-    parser.add_argument('--state', default=retro.State.DEFAULT)
-    parser.add_argument('--scenario', default=None)
+    parser.add_argument("--game", default="Airstriker-Genesis")
+    parser.add_argument("--state", default=retro.State.DEFAULT)
+    parser.add_argument("--scenario", default=None)
     args = parser.parse_args()
 
     def make_env():
@@ -85,7 +91,7 @@ def main():
 
     venv = VecTransposeImage(VecFrameStack(SubprocVecEnv([make_env] * 8), n_stack=4))
     model = PPO(
-        policy='CnnPolicy',
+        policy="CnnPolicy",
         env=venv,
         learning_rate=lambda f: f * 2.5e-4,
         n_steps=128,
@@ -103,5 +109,5 @@ def main():
     )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

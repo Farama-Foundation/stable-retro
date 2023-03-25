@@ -2,7 +2,7 @@ import retro
 
 
 def main():
-    env = retro.make(game='Airstriker-Genesis')
+    env = retro.make(game="Airstriker-Genesis")
     obs = env.reset()
     while True:
         obs, rew, done, info = env.step(env.action_space.sample())

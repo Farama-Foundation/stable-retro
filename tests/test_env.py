@@ -1,19 +1,22 @@
-import retro
-from retro.testing import testenv, handle
 import os
+
 import pytest
+
+import retro
+from retro.testing import handle, testenv
 
 
 def test_env_create(testenv):
-    json_path = os.path.join(os.path.dirname(__file__), 'dummy.json')
+    json_path = os.path.join(os.path.dirname(__file__), "dummy.json")
     assert testenv(info=json_path, scenario=json_path)
 
 
-@pytest.mark.parametrize('obs_type', [retro.Observations.IMAGE, retro.Observations.RAM])
+@pytest.mark.parametrize("obs_type", [retro.Observations.IMAGE, retro.Observations.RAM])
 def test_env_basic(obs_type, testenv):
     import gymnasium as gym
     import numpy as np
-    json_path = os.path.join(os.path.dirname(__file__), 'dummy.json')
+
+    json_path = os.path.join(os.path.dirname(__file__), "dummy.json")
     env = testenv(info=json_path, scenario=json_path, obs_type=obs_type)
     obs, _info = env.reset()
     assert obs.shape == env.observation_space.shape
@@ -29,15 +32,15 @@ def test_env_basic(obs_type, testenv):
 
 
 def test_env_data(testenv):
-    json_path = os.path.join(os.path.dirname(__file__), 'dummy.json')
+    json_path = os.path.join(os.path.dirname(__file__), "dummy.json")
     env = testenv(info=json_path, scenario=json_path)
     assert isinstance(env.data[env.system], int)
 
-    env.data['foo'] = 1
-    assert env.data['foo'] == 1
+    env.data["foo"] = 1
+    assert env.data["foo"] == 1
     env.reset()
     try:
-        a = env.data['foo']
+        a = env.data["foo"]
         assert a != 1
     except KeyError:
         pass

@@ -1,8 +1,10 @@
-import cffi
-import os, os.path
+import os
+import os.path
 import shlex
 import subprocess
 import sys
+
+import cffi
 
 ffi = cffi.FFI()
 pydir = os.path.dirname(os.path.abspath(__file__))
@@ -16,7 +18,9 @@ if __name__ == "__main__":
     cppflags.extend(sys.argv[1:])
 cppflags.extend(["-I" + incdir, "-I" + srcdir, "-I" + bindir])
 
-ffi.set_source("mgba._pylib", """
+ffi.set_source(
+    "mgba._pylib",
+    """
 #define static
 #define inline
 #include "flags.h"
@@ -48,33 +52,43 @@ ffi.set_source("mgba._pylib", """
 #include "platform/python/sio.h"
 #include "platform/python/vfs-py.h"
 #undef PYEXPORT
-""", include_dirs=[incdir, srcdir],
-     extra_compile_args=cppflags,
-     libraries=["mgba"],
-     library_dirs=[bindir],
-     sources=[os.path.join(pydir, path) for path in ["vfs-py.c", "core.c", "log.c", "sio.c"]])
+""",
+    include_dirs=[incdir, srcdir],
+    extra_compile_args=cppflags,
+    libraries=["mgba"],
+    library_dirs=[bindir],
+    sources=[
+        os.path.join(pydir, path) for path in ["vfs-py.c", "core.c", "log.c", "sio.c"]
+    ],
+)
 
-preprocessed = subprocess.check_output(cpp + ["-fno-inline", "-P"] + cppflags + [os.path.join(pydir, "_builder.h")], universal_newlines=True)
-
-lines = []
-for line in preprocessed.splitlines():
-    line = line.strip()
-    if line.startswith('#'):
-        continue
-    lines.append(line)
-ffi.cdef('\n'.join(lines))
-
-preprocessed = subprocess.check_output(cpp + ["-fno-inline", "-P"] + cppflags + [os.path.join(pydir, "lib.h")], universal_newlines=True)
+preprocessed = subprocess.check_output(
+    cpp + ["-fno-inline", "-P"] + cppflags + [os.path.join(pydir, "_builder.h")],
+    text=True,
+)
 
 lines = []
 for line in preprocessed.splitlines():
     line = line.strip()
-    if line.startswith('#'):
+    if line.startswith("#"):
         continue
     lines.append(line)
-ffi.embedding_api('\n'.join(lines))
+ffi.cdef("\n".join(lines))
 
-ffi.embedding_init_code("""
+preprocessed = subprocess.check_output(
+    cpp + ["-fno-inline", "-P"] + cppflags + [os.path.join(pydir, "lib.h")], text=True
+)
+
+lines = []
+for line in preprocessed.splitlines():
+    line = line.strip()
+    if line.startswith("#"):
+        continue
+    lines.append(line)
+ffi.embedding_api("\n".join(lines))
+
+ffi.embedding_init_code(
+    """
     import os, os.path
     venv = os.getenv('VIRTUAL_ENV')
     if venv:
@@ -153,7 +167,8 @@ ffi.embedding_init_code("""
             return True
         except:
             return False
-""")
+"""
+)
 
 if __name__ == "__main__":
     ffi.emit_c_code("lib.c")

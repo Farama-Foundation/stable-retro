@@ -1,10 +1,11 @@
+from PIL.Image import open as PIOpen
 from PIL.ImageChops import difference
 from PIL.ImageOps import autocontrast
-from PIL.Image import open as PIOpen
 
-class VideoFrame(object):
+
+class VideoFrame:
     def __init__(self, pilImage):
-        self.image = pilImage.convert('RGB')
+        self.image = pilImage.convert("RGB")
 
     @staticmethod
     def diff(a, b):
@@ -14,7 +15,7 @@ class VideoFrame(object):
 
     @staticmethod
     def load(path):
-        with open(path, 'rb') as f:
+        with open(path, "rb") as f:
             image = PIOpen(f)
             image.load()
             return VideoFrame(image)

@@ -2,7 +2,7 @@ import retro
 
 
 def main():
-    env = retro.make(game='Pong-Atari2600', players=2)
+    env = retro.make(game="Pong-Atari2600", players=2)
     obs = env.reset()
     while True:
         # action_space will by MultiBinary(16) now instead of MultiBinary(8)

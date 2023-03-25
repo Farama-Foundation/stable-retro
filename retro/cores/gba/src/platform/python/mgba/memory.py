@@ -5,7 +5,8 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 from ._pylib import ffi, lib
 
-class MemoryView(object):
+
+class MemoryView:
     def __init__(self, core, width, size, base=0, sign="u"):
         self._core = core
         self._width = width
@@ -15,13 +16,15 @@ class MemoryView(object):
         self._busWrite = getattr(self._core, "busWrite" + str(width * 8))
         self._rawRead = getattr(self._core, "rawRead" + str(width * 8))
         self._rawWrite = getattr(self._core, "rawWrite" + str(width * 8))
-        self._mask = (1 << (width * 8)) - 1 # Used to force values to fit within range so that negative values work
+        self._mask = (
+            1 << (width * 8)
+        ) - 1  # Used to force values to fit within range so that negative values work
         if sign == "u" or sign == "unsigned":
-            self._type = "uint{}_t".format(width * 8)
+            self._type = f"uint{width * 8}_t"
         elif sign == "i" or sign == "s" or sign == "signed":
-            self._type = "int{}_t".format(width * 8)
+            self._type = f"int{width * 8}_t"
         else:
-            raise ValueError("Invalid sign type: '{}'".format(sign))
+            raise ValueError(f"Invalid sign type: '{sign}'")
 
     def _addrCheck(self, address):
         if isinstance(address, slice):
@@ -44,9 +47,14 @@ class MemoryView(object):
             start = address.start or 0
             stop = self._size - self._width if address.stop is None else address.stop
             step = address.step or self._width
-            return [int(ffi.cast(self._type, self._busRead(self._core, self._base + a))) for a in range(start, stop, step)]
+            return [
+                int(ffi.cast(self._type, self._busRead(self._core, self._base + a)))
+                for a in range(start, stop, step)
+            ]
         else:
-            return int(ffi.cast(self._type, self._busRead(self._core, self._base + address)))
+            return int(
+                ffi.cast(self._type, self._busRead(self._core, self._base + address))
+            )
 
     def __setitem__(self, address, value):
         self._addrCheck(address)
@@ -61,14 +69,18 @@ class MemoryView(object):
 
     def rawRead(self, address, segment=-1):
         self._addrCheck(address)
-        return int(ffi.cast(self._type, self._rawRead(self._core, self._base + address, segment)))
+        return int(
+            ffi.cast(
+                self._type, self._rawRead(self._core, self._base + address, segment)
+            )
+        )
 
     def rawWrite(self, address, value, segment=-1):
         self._addrCheck(address)
         self._rawWrite(self._core, self._base + address, segment, value & self._mask)
 
 
-class MemorySearchResult(object):
+class MemorySearchResult:
     def __init__(self, memory, result):
         self.address = result.address
         self.segment = result.segment
@@ -99,7 +111,7 @@ class MemorySearchResult(object):
         self._memory[self.address] = v // self.guessDivisor
 
 
-class Memory(object):
+class Memory:
     SEARCH_INT = lib.mCORE_MEMORY_SEARCH_INT
     SEARCH_STRING = lib.mCORE_MEMORY_SEARCH_STRING
     SEARCH_GUESS = lib.mCORE_MEMORY_SEARCH_GUESS
@@ -147,7 +159,10 @@ class Memory(object):
             lib.mCoreMemorySearchRepeat(self._core, params, results)
         else:
             lib.mCoreMemorySearch(self._core, params, results, limit)
-        new_results = [MemorySearchResult(self, lib.mCoreMemorySearchResultsGetPointer(results, i)) for i in range(lib.mCoreMemorySearchResultsSize(results))]
+        new_results = [
+            MemorySearchResult(self, lib.mCoreMemorySearchResultsGetPointer(results, i))
+            for i in range(lib.mCoreMemorySearchResultsSize(results))
+        ]
         lib.mCoreMemorySearchResultsDeinit(results)
         return new_results
 

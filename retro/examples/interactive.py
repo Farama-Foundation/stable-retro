@@ -4,17 +4,18 @@ Interact with Gym environments using the keyboard
 An adapter object is defined for each environment to map keyboard commands to actions and extract observations as pixels.
 """
 
-import sys
-import ctypes
-import argparse
 import abc
+import argparse
+import ctypes
+import sys
 import time
 
 import numpy as np
-import retro
 import pyglet
 from pyglet import gl
 from pyglet.window import key as keycodes
+
+import retro
 
 
 class Interactive(abc.ABC):
@@ -25,7 +26,9 @@ class Interactive(abc.ABC):
     def __init__(self, env, sync=True, tps=60, aspect_ratio=None):
         obs = env.reset()
         self._image = self.get_image(obs, env)
-        assert len(self._image.shape) == 3 and self._image.shape[2] == 3, 'must be an RGB image'
+        assert (
+            len(self._image.shape) == 3 and self._image.shape[2] == 3
+        ), "must be an RGB image"
         image_height, image_width = self._image.shape[:2]
 
         if aspect_ratio is None:
@@ -60,7 +63,17 @@ class Interactive(abc.ABC):
         gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_T, gl.GL_CLAMP)
         gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MAG_FILTER, gl.GL_NEAREST)
         gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MIN_FILTER, gl.GL_NEAREST)
-        gl.glTexImage2D(gl.GL_TEXTURE_2D, 0, gl.GL_RGBA8, image_width, image_height, 0, gl.GL_RGB, gl.GL_UNSIGNED_BYTE, None)
+        gl.glTexImage2D(
+            gl.GL_TEXTURE_2D,
+            0,
+            gl.GL_RGBA8,
+            image_width,
+            image_height,
+            0,
+            gl.GL_RGB,
+            gl.GL_UNSIGNED_BYTE,
+            None,
+        )
 
         self._env = env
         self._win = win
@@ -127,16 +140,14 @@ class Interactive(abc.ABC):
                 np.set_printoptions(precision=2)
                 if self._sync:
                     done_int = int(done)  # shorter than printing True/False
-                    mess = 'steps={self._steps} episode_steps={self._episode_steps} rew={rew} episode_returns={self._episode_returns} done={done_int}'.format(
-                        **locals()
-                    )
+                    mess = f"steps={self._steps} episode_steps={self._episode_steps} rew={rew} episode_returns={self._episode_returns} done={done_int}"
                     print(mess)
                 elif self._steps % self._tps == 0 or done:
-                    episode_returns_delta = self._episode_returns - self._prev_episode_returns
-                    self._prev_episode_returns = self._episode_returns
-                    mess = 'steps={self._steps} episode_steps={self._episode_steps} episode_returns_delta={episode_returns_delta} episode_returns={self._episode_returns}'.format(
-                        **locals()
+                    episode_returns_delta = (
+                        self._episode_returns - self._prev_episode_returns
                     )
+                    self._prev_episode_returns = self._episode_returns
+                    mess = f"steps={self._steps} episode_steps={self._episode_steps} episode_returns_delta={episode_returns_delta} episode_returns={self._episode_returns}"
                     print(mess)
 
                 if done:
@@ -147,8 +158,20 @@ class Interactive(abc.ABC):
 
     def _draw(self):
         gl.glBindTexture(gl.GL_TEXTURE_2D, self._texture_id)
-        video_buffer = ctypes.cast(self._image.tobytes(), ctypes.POINTER(ctypes.c_short))
-        gl.glTexSubImage2D(gl.GL_TEXTURE_2D, 0, 0, 0, self._image.shape[1], self._image.shape[0], gl.GL_RGB, gl.GL_UNSIGNED_BYTE, video_buffer)
+        video_buffer = ctypes.cast(
+            self._image.tobytes(), ctypes.POINTER(ctypes.c_short)
+        )
+        gl.glTexSubImage2D(
+            gl.GL_TEXTURE_2D,
+            0,
+            0,
+            0,
+            self._image.shape[1],
+            self._image.shape[0],
+            gl.GL_RGB,
+            gl.GL_UNSIGNED_BYTE,
+            video_buffer,
+        )
 
         x = 0
         y = 0
@@ -158,8 +181,8 @@ class Interactive(abc.ABC):
         pyglet.graphics.draw(
             4,
             pyglet.gl.GL_QUADS,
-            ('v2f', [x, y, x + w, y, x + w, y + h, x, y + h]),
-            ('t2f', [0, 1, 1, 1, 1, 0, 0, 0]),
+            ("v2f", [x, y, x + w, y, x + w, y + h, x, y + h]),
+            ("t2f", [0, 1, 1, 1, 1, 0, 0, 0]),
         )
 
     def _on_close(self):
@@ -207,7 +230,13 @@ class RetroInteractive(Interactive):
     """
 
     def __init__(self, game, state, scenario, record):
-        env = retro.make(game=game, state=state, scenario=scenario, record=record, render_mode='rgb_array')
+        env = retro.make(
+            game=game,
+            state=state,
+            scenario=scenario,
+            record=record,
+            render_mode="rgb_array",
+        )
         self._buttons = env.buttons
         super().__init__(env=env, sync=False, tps=60, aspect_ratio=4 / 3)
 
@@ -217,43 +246,40 @@ class RetroInteractive(Interactive):
     def keys_to_act(self, keys):
         inputs = {
             None: False,
-
-            'BUTTON': 'Z' in keys,
-            'A': 'Z' in keys,
-            'B': 'X' in keys,
-
-            'C': 'C' in keys,
-            'X': 'A' in keys,
-            'Y': 'S' in keys,
-            'Z': 'D' in keys,
-
-            'L': 'Q' in keys,
-            'R': 'W' in keys,
-
-            'UP': 'UP' in keys,
-            'DOWN': 'DOWN' in keys,
-            'LEFT': 'LEFT' in keys,
-            'RIGHT': 'RIGHT' in keys,
-
-            'MODE': 'TAB' in keys,
-            'SELECT': 'TAB' in keys,
-            'RESET': 'ENTER' in keys,
-            'START': 'ENTER' in keys,
+            "BUTTON": "Z" in keys,
+            "A": "Z" in keys,
+            "B": "X" in keys,
+            "C": "C" in keys,
+            "X": "A" in keys,
+            "Y": "S" in keys,
+            "Z": "D" in keys,
+            "L": "Q" in keys,
+            "R": "W" in keys,
+            "UP": "UP" in keys,
+            "DOWN": "DOWN" in keys,
+            "LEFT": "LEFT" in keys,
+            "RIGHT": "RIGHT" in keys,
+            "MODE": "TAB" in keys,
+            "SELECT": "TAB" in keys,
+            "RESET": "ENTER" in keys,
+            "START": "ENTER" in keys,
         }
         return [inputs[b] for b in self._buttons]
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--game', default='Airstriker-Genesis')
-    parser.add_argument('--state', default=retro.State.DEFAULT)
-    parser.add_argument('--scenario', default=None)
-    parser.add_argument('--record', default=None, nargs='?', const=True)
+    parser.add_argument("--game", default="Airstriker-Genesis")
+    parser.add_argument("--state", default=retro.State.DEFAULT)
+    parser.add_argument("--scenario", default=None)
+    parser.add_argument("--record", default=None, nargs="?", const=True)
     args = parser.parse_args()
 
-    ia = RetroInteractive(game=args.game, state=args.state, scenario=args.scenario, record=args.record)
+    ia = RetroInteractive(
+        game=args.game, state=args.state, scenario=args.scenario, record=args.record
+    )
     ia.run()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

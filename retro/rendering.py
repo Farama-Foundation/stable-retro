@@ -1,6 +1,5 @@
 import sys
 
-
 try:
     import pyglet
 except ImportError as e:
@@ -97,9 +96,7 @@ class SimpleImageViewer:
             def on_close():
                 self.isopen = False
 
-        assert (
-            len(arr.shape) == 3
-        ), "You passed in an image with the wrong number shape"
+        assert len(arr.shape) == 3, "You passed in an image with the wrong number shape"
         image = pyglet.image.ImageData(
             arr.shape[1],
             arr.shape[0],

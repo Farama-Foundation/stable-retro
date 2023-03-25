@@ -6,12 +6,14 @@ import sys
 def is_manylinux1_compatible():
     # Only Linux, and only x86-64 / i686
     from distutils.util import get_platform
+
     if get_platform() not in ["linux-x86_64", "linux-i686"]:
         return False
 
     # Check for presence of _manylinux module
     try:
         import _manylinux
+
         return bool(_manylinux.manylinux1_compatible)
     except (ImportError, AttributeError):
         # Fall through to heuristic check below
@@ -50,8 +52,8 @@ def have_compatible_glibc(major, minimum_minor):
 
 
 if is_manylinux1_compatible():
-    print("%s is manylinux1 compatible" % (sys.executable,))
+    print(f"{sys.executable} is manylinux1 compatible")
     sys.exit(0)
 else:
-    print("%s is NOT manylinux1 compatible" % (sys.executable,))
+    print(f"{sys.executable} is NOT manylinux1 compatible")
     sys.exit(1)

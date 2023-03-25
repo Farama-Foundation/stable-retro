@@ -3,12 +3,13 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+from . import createCallback
 from ._pylib import ffi, lib
 from .arm import ARMCore
 from .core import Core, needsReset
-from .tile import Sprite
 from .memory import Memory
-from . import createCallback
+from .tile import Sprite
+
 
 class GBA(Core):
     KEY_A = lib.GBA_KEY_A
@@ -30,7 +31,7 @@ class GBA(Core):
     SIO_GPIO = lib.SIO_GPIO
 
     def __init__(self, native):
-        super(GBA, self).__init__(native)
+        super().__init__(native)
         self._native = ffi.cast("struct GBA*", native.board)
         self.sprites = GBAObjs(self)
         self.cpu = ARMCore(self._core.cpu)
@@ -47,7 +48,7 @@ class GBA(Core):
             self._native.video.renderer.cache = ffi.NULL
 
     def _load(self):
-        super(GBA, self)._load()
+        super()._load()
         self.memory = GBAMemory(self._core, self._native.memory.romSize)
 
     def attachSIO(self, link, mode=lib.SIO_MULTI):
@@ -58,13 +59,15 @@ class GBA(Core):
         for mode in self._sio:
             lib.GBASIOSetDriver(ffi.addressof(self._native.sio), ffi.NULL, mode)
 
+
 createCallback("GBASIOPythonDriver", "init")
 createCallback("GBASIOPythonDriver", "deinit")
 createCallback("GBASIOPythonDriver", "load")
 createCallback("GBASIOPythonDriver", "unload")
 createCallback("GBASIOPythonDriver", "writeRegister")
 
-class GBASIODriver(object):
+
+class GBASIODriver:
     def __init__(self):
         self._handle = ffi.new_handle(self)
         self._native = ffi.gc(lib.GBASIOPythonDriverCreate(self._handle), lib.free)
@@ -84,6 +87,7 @@ class GBASIODriver(object):
     def writeRegister(self, address, value):
         return value
 
+
 class GBASIOJOYDriver(GBASIODriver):
     RESET = lib.JOY_RESET
     POLL = lib.JOY_POLL
@@ -95,7 +99,7 @@ class GBASIOJOYDriver(GBASIODriver):
         self._native = ffi.gc(lib.GBASIOJOYPythonDriverCreate(self._handle), lib.free)
 
     def sendCommand(self, cmd, data):
-        buffer = ffi.new('uint8_t[5]')
+        buffer = ffi.new("uint8_t[5]")
         try:
             buffer[0] = data[0]
             buffer[1] = data[1]
@@ -110,9 +114,10 @@ class GBASIOJOYDriver(GBASIODriver):
             return bytes(buffer[0:outlen])
         return None
 
+
 class GBAMemory(Memory):
     def __init__(self, core, romSize=lib.SIZE_CART0):
-        super(GBAMemory, self).__init__(core, 0x100000000)
+        super().__init__(core, 0x100000000)
 
         self.bios = Memory(core, lib.SIZE_BIOS, lib.BASE_BIOS)
         self.wram = Memory(core, lib.SIZE_WORKING_RAM, lib.BASE_WORKING_RAM)
@@ -127,6 +132,7 @@ class GBAMemory(Memory):
         self.cart = self.cart0
         self.rom = self.cart0
         self.sram = Memory(core, lib.SIZE_CART_SRAM, lib.BASE_CART_SRAM)
+
 
 class GBASprite(Sprite):
     TILE_BASE = 0x800, 0x400
@@ -148,6 +154,7 @@ class GBASprite(Sprite):
             self.tile >>= 1
         else:
             self.paletteId = self._c >> 12
+
 
 class GBAObjs:
     def __init__(self, core):

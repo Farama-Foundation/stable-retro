@@ -5,6 +5,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 from ._pylib import ffi, lib
 
+
 class LR35902Core:
     def __init__(self, native):
         self._native = ffi.cast("struct LR35902Core*", native)

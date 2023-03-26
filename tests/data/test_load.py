@@ -1,12 +1,14 @@
-import retro
-import pytest
 import gc
 import gzip
 import os
 import zlib
-from retro.testing import game, handle
 from concurrent.futures import ProcessPoolExecutor, TimeoutError
 from concurrent.futures.process import BrokenProcessPool
+
+import pytest
+
+import retro
+from retro.testing import game, handle
 
 pool = ProcessPoolExecutor(1)
 
@@ -20,9 +22,10 @@ def processpool():
             return future.result(2)
         except BrokenProcessPool:
             pool = ProcessPoolExecutor(1)
-            return [], [(args[0], 'subprocess crashed')]
+            return [], [(args[0], "subprocess crashed")]
         except TimeoutError:
-            return [], [(args[0], 'task timed out')]
+            return [], [(args[0], "task timed out")]
+
     yield run
     pool.shutdown()
 
@@ -50,10 +53,12 @@ def state(game, inttype):
     emu = retro.RetroEmulator(rom)
     for statefile in states:
         try:
-            with gzip.open(retro.data.get_file_path(game, statefile + '.state', inttype), 'rb') as fh:
+            with gzip.open(
+                retro.data.get_file_path(game, statefile + ".state", inttype), "rb"
+            ) as fh:
                 state = fh.read()
-        except (IOError, zlib.error):
-            errors.append((game, 'state failed to decode: %s' % statefile))
+        except (OSError, zlib.error):
+            errors.append((game, "state failed to decode: %s" % statefile))
             continue
 
         emu.set_state(state)

@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-import retro.data
 import os
 import sys
 import zipfile
+
+import retro.data
 
 
 def _check_zipfile(f, process_f):
@@ -17,7 +18,7 @@ def _check_zipfile(f, process_f):
 
 
 def main():
-    paths = sys.argv[1:] or ['.']
+    paths = sys.argv[1:] or ["."]
     known_hashes = retro.data.get_known_hashes()
 
     imported_games = 0
@@ -26,12 +27,12 @@ def main():
         nonlocal imported_games
         try:
             data, hash = retro.data.groom_rom(filename, f)
-        except (IOError, ValueError):
+        except (OSError, ValueError):
             return
         if hash in known_hashes:
             game, ext, curpath = known_hashes[hash]
-            print('Importing', game)
-            with open(os.path.join(curpath, game, 'rom%s' % ext), 'wb') as f:
+            print("Importing", game)
+            with open(os.path.join(curpath, game, "rom%s" % ext), "wb") as f:
                 f.write(data)
             imported_games += 1
 
@@ -49,8 +50,8 @@ def main():
                     else:
                         save_if_matches(filename, f)
 
-    print('Imported %i games' % imported_games)
+    print("Imported %i games" % imported_games)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -4,7 +4,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 from ._pylib import ffi, lib
-from .core import IRunner, ICoreOwner, Core
+from .core import Core, ICoreOwner, IRunner
+
 
 class ThreadCoreOwner(ICoreOwner):
     def __init__(self, thread):
@@ -18,6 +19,7 @@ class ThreadCoreOwner(ICoreOwner):
 
     def release(self):
         lib.mCoreThreadContinue(self.thread._native)
+
 
 class Thread(IRunner):
     def __init__(self, native=None):

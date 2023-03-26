@@ -3,13 +3,14 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-from ._pylib import ffi, lib
 from . import png
+from ._pylib import ffi, lib
 
 try:
     import PIL.Image as PImage
 except ImportError:
     pass
+
 
 class Image:
     def __init__(self, width, height, stride=0, alpha=False):
@@ -22,7 +23,7 @@ class Image:
     def constitute(self):
         if self.stride <= 0:
             self.stride = self.width
-        self.buffer = ffi.new("color_t[{}]".format(self.stride * self.height))
+        self.buffer = ffi.new(f"color_t[{self.stride * self.height}]")
 
     def savePNG(self, f):
         p = png.PNG(f, mode=png.MODE_RGBA if self.alpha else png.MODE_RGB)
@@ -31,11 +32,19 @@ class Image:
         p.writeClose()
         return success
 
-    if 'PImage' in globals():
+    if "PImage" in globals():
+
         def toPIL(self):
             type = "RGBA" if self.alpha else "RGBX"
-            return PImage.frombytes(type, (self.width, self.height), ffi.buffer(self.buffer), "raw",
-                                    type, self.stride * 4)
+            return PImage.frombytes(
+                type,
+                (self.width, self.height),
+                ffi.buffer(self.buffer),
+                "raw",
+                type,
+                self.stride * 4,
+            )
+
 
 def u16ToU32(c):
     r = c & 0x1F
@@ -48,6 +57,7 @@ def u16ToU32(c):
     abgr |= (a * 0xFF) << 24
     return abgr
 
+
 def u32ToU16(c):
     r = (c >> 3) & 0x1F
     g = (c >> 11) & 0x1F
@@ -59,7 +69,9 @@ def u32ToU16(c):
     abgr |= a << 15
     return abgr
 
+
 if ffi.sizeof("color_t") == 2:
+
     def colorToU16(c):
         return c
 
@@ -70,6 +82,7 @@ if ffi.sizeof("color_t") == 2:
 
     u32ToColor = u32ToU16
 else:
+
     def colorToU32(c):
         return c
 

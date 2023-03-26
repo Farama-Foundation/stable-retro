@@ -9,14 +9,14 @@ does rely on the same sequence of actions producing the same result when played
 back.
 """
 
-import random
 import argparse
+import random
 
-import numpy as np
-import retro
 import gymnasium as gym
+import numpy as np
 from gymnasium.wrappers.time_limit import TimeLimit
 
+import retro
 
 EXPLORATION_PARAM = 0.005
 
@@ -159,7 +159,9 @@ class Brute:
         self._max_episode_steps = max_episode_steps
 
     def run(self):
-        acts = select_actions(self._root, self._env.action_space, self._max_episode_steps)
+        acts = select_actions(
+            self._root, self._env.action_space, self._max_episode_steps
+        )
         steps, total_rew = rollout(self._env, acts)
         executed_acts = acts[:steps]
         self.node_count += update_tree(self._root, executed_acts, total_rew)
@@ -173,19 +175,21 @@ def brute_retro(
     state=retro.State.DEFAULT,
     scenario=None,
 ):
-    env = retro.make(game, state, use_restricted_actions=retro.Actions.DISCRETE, scenario=scenario)
+    env = retro.make(
+        game, state, use_restricted_actions=retro.Actions.DISCRETE, scenario=scenario
+    )
     env = Frameskip(env)
     env = TimeLimit(env, max_episode_steps=max_episode_steps)
 
     brute = Brute(env, max_episode_steps=max_episode_steps)
     timesteps = 0
-    best_rew = float('-inf')
+    best_rew = float("-inf")
     while True:
         acts, rew = brute.run()
         timesteps += len(acts)
 
         if rew > best_rew:
-            print("new best reward {} => {}".format(best_rew, rew))
+            print(f"new best reward {best_rew} => {rew}")
             best_rew = rew
             env.unwrapped.record_movie("best.bk2")
             env.reset()
@@ -200,9 +204,9 @@ def brute_retro(
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--game', default='Airstriker-Genesis')
-    parser.add_argument('--state', default=retro.State.DEFAULT)
-    parser.add_argument('--scenario', default=None)
+    parser.add_argument("--game", default="Airstriker-Genesis")
+    parser.add_argument("--state", default=retro.State.DEFAULT)
+    parser.add_argument("--scenario", default=None)
     args = parser.parse_args()
 
     brute_retro(game=args.game, state=args.state, scenario=args.scenario)

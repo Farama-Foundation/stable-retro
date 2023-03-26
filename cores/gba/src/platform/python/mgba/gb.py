@@ -3,12 +3,13 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+from . import createCallback
 from ._pylib import ffi, lib
-from .lr35902 import LR35902Core
 from .core import Core, needsReset
+from .lr35902 import LR35902Core
 from .memory import Memory
 from .tile import Sprite
-from . import createCallback
+
 
 class GB(Core):
     KEY_A = lib.GBA_KEY_A
@@ -21,7 +22,7 @@ class GB(Core):
     KEY_RIGHT = lib.GBA_KEY_RIGHT
 
     def __init__(self, native):
-        super(GB, self).__init__(native)
+        super().__init__(native)
         self._native = ffi.cast("struct GB*", native.board)
         self.sprites = GBObjs(self)
         self.cpu = LR35902Core(self._core.cpu)
@@ -37,7 +38,7 @@ class GB(Core):
             self._native.video.renderer.cache = ffi.NULL
 
     def _load(self):
-        super(GB, self)._load()
+        super()._load()
         self.memory = GBMemory(self._core)
 
     def attachSIO(self, link):
@@ -46,12 +47,14 @@ class GB(Core):
     def __del__(self):
         lib.GBSIOSetDriver(ffi.addressof(self._native.sio), ffi.NULL)
 
+
 createCallback("GBSIOPythonDriver", "init")
 createCallback("GBSIOPythonDriver", "deinit")
 createCallback("GBSIOPythonDriver", "writeSB")
 createCallback("GBSIOPythonDriver", "writeSC")
 
-class GBSIODriver(object):
+
+class GBSIODriver:
     def __init__(self):
         self._handle = ffi.new_handle(self)
         self._native = ffi.gc(lib.GBSIOPythonDriverCreate(self._handle), lib.free)
@@ -68,9 +71,10 @@ class GBSIODriver(object):
     def writeSC(self, value):
         return value
 
+
 class GBSIOSimpleDriver(GBSIODriver):
     def __init__(self, period=0x100):
-        super(GBSIOSimpleDriver, self).__init__()
+        super().__init__()
         self.rx = 0x00
         self._period = period
 
@@ -84,8 +88,15 @@ class GBSIOSimpleDriver(GBSIODriver):
     def writeSC(self, value):
         self._native.p.period = self._period
         if value & 0x80:
-            lib.mTimingDeschedule(ffi.addressof(self._native.p.p.timing), ffi.addressof(self._native.p.event))
-            lib.mTimingSchedule(ffi.addressof(self._native.p.p.timing), ffi.addressof(self._native.p.event), self._native.p.period)
+            lib.mTimingDeschedule(
+                ffi.addressof(self._native.p.p.timing),
+                ffi.addressof(self._native.p.event),
+            )
+            lib.mTimingSchedule(
+                ffi.addressof(self._native.p.p.timing),
+                ffi.addressof(self._native.p.event),
+                self._native.p.period,
+            )
         return value
 
     def isReady(self):
@@ -110,20 +121,24 @@ class GBSIOSimpleDriver(GBSIODriver):
         if self._native.p:
             self._native.p.period = newPeriod
 
+
 class GBMemory(Memory):
     def __init__(self, core):
-        super(GBMemory, self).__init__(core, 0x10000)
+        super().__init__(core, 0x10000)
 
         self.cart = Memory(core, lib.GB_SIZE_CART_BANK0 * 2, lib.GB_BASE_CART_BANK0)
         self.vram = Memory(core, lib.GB_SIZE_VRAM, lib.GB_BASE_VRAM)
         self.sram = Memory(core, lib.GB_SIZE_EXTERNAL_RAM, lib.GB_REGION_EXTERNAL_RAM)
-        self.iwram = Memory(core, lib.GB_SIZE_WORKING_RAM_BANK0, lib.GB_BASE_WORKING_RAM_BANK0)
+        self.iwram = Memory(
+            core, lib.GB_SIZE_WORKING_RAM_BANK0, lib.GB_BASE_WORKING_RAM_BANK0
+        )
         self.oam = Memory(core, lib.GB_SIZE_OAM, lib.GB_BASE_OAM)
         self.io = Memory(core, lib.GB_SIZE_IO, lib.GB_BASE_IO)
         self.hram = Memory(core, lib.GB_SIZE_HRAM, lib.GB_BASE_HRAM)
 
+
 class GBSprite(Sprite):
-    PALETTE_BASE = 8,
+    PALETTE_BASE = (8,)
 
     def __init__(self, obj, core):
         self.x = obj.x

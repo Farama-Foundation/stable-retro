@@ -3,19 +3,21 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-from ._pylib import ffi, lib
 from . import createCallback
+from ._pylib import ffi, lib
 
 createCallback("mLoggerPy", "log", "_pyLog")
 
 defaultLogger = None
+
 
 def installDefault(logger):
     global defaultLogger
     defaultLogger = logger
     lib.mLogSetDefaultLogger(logger._native)
 
-class Logger(object):
+
+class Logger:
     FATAL = lib.mLOG_FATAL
     DEBUG = lib.mLOG_DEBUG
     INFO = lib.mLOG_INFO
@@ -30,10 +32,11 @@ class Logger(object):
 
     @staticmethod
     def categoryName(category):
-        return ffi.string(lib.mLogCategoryName(category)).decode('UTF-8')
+        return ffi.string(lib.mLogCategoryName(category)).decode("UTF-8")
 
     def log(self, category, level, message):
-        print("{}: {}".format(self.categoryName(category), message))
+        print(f"{self.categoryName(category)}: {message}")
+
 
 class NullLogger(Logger):
     def log(self, category, level, message):

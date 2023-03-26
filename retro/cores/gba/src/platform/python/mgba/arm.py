@@ -5,6 +5,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 from ._pylib import ffi, lib
 
+
 class _ARMRegisters:
     def __init__(self, cpu):
         self._cpu = cpu
@@ -18,6 +19,7 @@ class _ARMRegisters:
         if r >= lib.ARM_PC:
             raise IndexError("Register out of range")
         self._cpu._native.gprs[r] = value
+
 
 class ARMCore:
     def __init__(self, native):

@@ -4,6 +4,7 @@ Define discrete action spaces for Gym Retro environments with a limited set of b
 
 import gymnasium as gym
 import numpy as np
+
 import retro
 
 
@@ -39,19 +40,32 @@ class SonicDiscretizer(Discretizer):
     """
 
     def __init__(self, env):
-        super().__init__(env=env, combos=[['LEFT'], ['RIGHT'], ['LEFT', 'DOWN'], ['RIGHT', 'DOWN'], ['DOWN'], ['DOWN', 'B'], ['B']])
+        super().__init__(
+            env=env,
+            combos=[
+                ["LEFT"],
+                ["RIGHT"],
+                ["LEFT", "DOWN"],
+                ["RIGHT", "DOWN"],
+                ["DOWN"],
+                ["DOWN", "B"],
+                ["B"],
+            ],
+        )
 
 
 def main():
-    env = retro.make(game='SonicTheHedgehog-Genesis', use_restricted_actions=retro.Actions.DISCRETE)
-    print('retro.Actions.DISCRETE action_space', env.action_space)
+    env = retro.make(
+        game="SonicTheHedgehog-Genesis", use_restricted_actions=retro.Actions.DISCRETE
+    )
+    print("retro.Actions.DISCRETE action_space", env.action_space)
     env.close()
 
-    env = retro.make(game='SonicTheHedgehog-Genesis')
+    env = retro.make(game="SonicTheHedgehog-Genesis")
     env = SonicDiscretizer(env)
-    print('SonicDiscretizer action_space', env.action_space)
+    print("SonicDiscretizer action_space", env.action_space)
     env.close()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

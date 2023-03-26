@@ -41,7 +41,7 @@ class PerfTest:
         try:
             self.wait(proc)
             proc.wait()
-        except:
+        except Exception:
             proc.kill()
             raise
         if proc.returncode:
@@ -155,7 +155,6 @@ class Suite:
 
     def run(self):
         results = []
-        sock = None
         for test in self.tests:
             print(f"Running test {test.name}", file=sys.stderr)
             if self.server:

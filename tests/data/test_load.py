@@ -1,6 +1,5 @@
 import gc
 import gzip
-import os
 import zlib
 from concurrent.futures import ProcessPoolExecutor, TimeoutError
 from concurrent.futures.process import BrokenProcessPool
@@ -8,7 +7,7 @@ from concurrent.futures.process import BrokenProcessPool
 import pytest
 
 import retro
-from retro.testing import game, handle
+from retro.testing import handle
 
 pool = ProcessPoolExecutor(1)
 

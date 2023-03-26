@@ -3,7 +3,6 @@ import os
 import pytest
 
 import retro
-from retro.testing import handle, testenv
 
 
 def test_env_create(testenv):
@@ -13,9 +12,6 @@ def test_env_create(testenv):
 
 @pytest.mark.parametrize("obs_type", [retro.Observations.IMAGE, retro.Observations.RAM])
 def test_env_basic(obs_type, testenv):
-    import gymnasium as gym
-    import numpy as np
-
     json_path = os.path.join(os.path.dirname(__file__), "dummy.json")
     env = testenv(info=json_path, scenario=json_path, obs_type=obs_type)
     obs, _info = env.reset()

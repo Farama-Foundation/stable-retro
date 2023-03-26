@@ -39,7 +39,7 @@ class LR35902Core:
         return self._native.h
 
     @property
-    def l(self):
+    def l(self):  # noqa: 743
         return self._native.l
 
     @property
@@ -96,7 +96,7 @@ class LR35902Core:
         self._native.h = value
 
     @l.setter
-    def l(self, value):
+    def l(self, value):  # noqa: 743
         self._native.l = value
 
     @sp.setter

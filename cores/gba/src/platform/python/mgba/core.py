@@ -5,7 +5,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 from cached_property import cached_property
 
-from . import createCallback, tile
+from . import tile
 from ._pylib import ffi, lib
 
 

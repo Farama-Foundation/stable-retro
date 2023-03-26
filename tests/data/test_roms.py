@@ -1,6 +1,6 @@
 import retro.data
 import retro.testing.tools
-from retro.testing import game, handle
+from retro.testing import handle
 
 
 def test_hash(game):

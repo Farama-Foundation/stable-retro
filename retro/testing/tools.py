@@ -1,3 +1,5 @@
+import glob
+import hashlib
 import json
 import os
 import re
@@ -11,8 +13,8 @@ def load_whitelist(game, inttype):
             retro.data.get_file_path(
                 game, "metadata.json", inttype | retro.data.Integrations.STABLE
             )
-        ) as metadata_file:
-            whitelist = json.load(metadata_file).get("whitelist", {})
+        ) as f:
+            whitelist = json.load(f).get("whitelist", {})
     except json.JSONDecodeError:
         return None, [(metadata_file, "fail decode")]
     except OSError:
@@ -324,7 +326,7 @@ def verify_extension(game, inttype):
 
 def verify_rom(game, inttype):
     try:
-        retro.data.get_romfile_path(game, inttype=inttype)
+        rom = retro.data.get_romfile_path(game, inttype=inttype)
     except FileNotFoundError:
         return [], [(game, "ROM file missing")]
 

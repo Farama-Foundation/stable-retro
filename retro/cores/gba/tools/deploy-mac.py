@@ -5,7 +5,6 @@ import os
 import re
 import shutil
 import subprocess
-from functools import reduce
 
 qtPath = None
 verbose = False

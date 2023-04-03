@@ -1,6 +1,7 @@
 import os
 
 import mgba.vfs as vfs
+import pytest
 from mgba._pylib import ffi
 
 

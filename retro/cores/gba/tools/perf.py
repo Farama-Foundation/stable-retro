@@ -41,9 +41,9 @@ class PerfTest:
         try:
             self.wait(proc)
             proc.wait()
-        except Exception as e:
+        except:
             proc.kill()
-            raise e
+            raise
         if proc.returncode:
             print("Game crashed!", file=sys.stderr)
             return
@@ -155,6 +155,7 @@ class Suite:
 
     def run(self):
         results = []
+        sock = None
         for test in self.tests:
             print(f"Running test {test.name}", file=sys.stderr)
             if self.server:

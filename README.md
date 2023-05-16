@@ -28,7 +28,7 @@ As well as additional states on already integrated games.
 ## Installation
 
 ```
-pip3 install git+https://github.com/MatPoliquin/stable-retro.git
+pip3 install git+https://github.com/Farama-Foundation/stable-retro.git
 ```
 
 Video on how to setup on Ubuntu and Windows:

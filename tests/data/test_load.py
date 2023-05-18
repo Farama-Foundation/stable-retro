@@ -7,7 +7,7 @@ from concurrent.futures.process import BrokenProcessPool
 import pytest
 
 import retro
-from retro.testing import handle
+from retro.testing import handle, game
 
 pool = ProcessPoolExecutor(1)
 

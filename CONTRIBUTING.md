@@ -25,10 +25,18 @@ Please include the following information in your issue reports:
 ## Code contributions
 
 Please try to adhere to the existing code style. There is a linter script included at `scripts/lint.sh`.
+Before creating a pull request, make sure that your new code does not cause any tests to fail. To run the tests, see the instructions below.
+
+#### Testing on Linux
+```bash
+sudo apt-get install -y python3-opengl
+python3 -m pip install pytest
+pytest
+```
 
 ### Python
 
-Gym Retro is written in a [PEP 8-compliant code style](https://www.python.org/dev/peps/pep-0008/) (minus the line length restriction). Please make sure to maintain this style in any contributions.
+Stable Retro is written in a [PEP 8-compliant code style](https://www.python.org/dev/peps/pep-0008/) (minus the line length restriction). Please make sure to maintain this style in any contributions.
 
 ### C++
 

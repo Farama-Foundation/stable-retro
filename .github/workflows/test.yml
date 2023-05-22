@@ -3,7 +3,7 @@ name: Test python
 on:
   push:
     branches:
-      - add-ci-testing
+      - master
 
 jobs:
   build:

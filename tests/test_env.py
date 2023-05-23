@@ -4,6 +4,7 @@ import pytest
 
 import retro
 
+from retro.testing import testenv
 
 def test_env_create(testenv):
     json_path = os.path.join(os.path.dirname(__file__), "dummy.json")

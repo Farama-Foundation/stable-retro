@@ -1,5 +1,5 @@
 import retro.testing.tools
-from retro.testing import handle
+from retro.testing import handle, game
 
 
 def test_data(game):

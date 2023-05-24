@@ -30,4 +30,4 @@ jobs:
           pip install .
 
       - name: Run tests
-        run: xvfb-run -s '-screen 0 1024x768x24' pytest tests/*
+        run: xvfb-run -s '-screen 0 1024x768x24' pytest

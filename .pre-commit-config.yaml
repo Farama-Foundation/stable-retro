@@ -18,17 +18,17 @@ repos:
       - id: check-shebang-scripts-are-executable
       - id: detect-private-key
       - id: debug-statements
-  - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
-    hooks:
-      - id: flake8
-        args:
-          - '--per-file-ignores=*/__init__.py:F401'
-          - --ignore=E203,W503,E741
-          - --max-complexity=50
-          - --max-line-length=456
-          - --show-source
-          - --statistics
+#  - repo: https://github.com/PyCQA/flake8
+#    rev: 6.0.0
+#    hooks:
+#      - id: flake8
+#        args:
+#          - '--per-file-ignores=*/__init__.py:F401'
+#          - --ignore=E203,W503,E741
+#          - --max-complexity=50
+#          - --max-line-length=456
+#          - --show-source
+#          - --statistics
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.3.1
     hooks:

@@ -1,22 +1,23 @@
-name: Test python
+name: Test Stable-Retro
 
-on:
-  push:
-    branches:
-      - master
+on: [pull_request, push]
+
+permissions:
+  contents: read # to fetch code (actions/checkout)
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # todo, add more OS systems to see if they work as well
+    strategy:
+      matrix:
+        python-version: ['3.7', '3.8', '3.9', '3.10']  # '3.11'
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v2
+      - uses: actions/setup-python@v2
         with:
-          python-version: '3.10'
+          python-version: ${{ matrix.python-version }}
 
       - name: Install system packages
         run: |
@@ -26,8 +27,7 @@ jobs:
       - name: Install pip packages
         run: |
           python -m pip install --upgrade pip cmake wheel setuptools pytest
-
-      - name: Run python tests
-        run: |
           pip install -e .
-          xvfb-run -s '-screen 0 1024x768x24' pytest
+
+      - name: Run tests
+        run: xvfb-run -s '-screen 0 1024x768x24' pytest

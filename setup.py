@@ -1,12 +1,9 @@
 import os
-import shutil
 import subprocess
 import sys
 from distutils.spawn import find_executable
 
-from setuptools import Extension
-from setuptools import __version__ as setuptools_version
-from setuptools import setup
+from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext
 
 VERSION_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "VERSION")
@@ -14,43 +11,19 @@ VERSION_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "VERSION
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 README = open(os.path.join(SCRIPT_DIR, "README.md")).read()
 
-if not os.path.exists(os.path.join(os.path.dirname(__file__), ".git")):
-    use_scm_version = False
-    shutil.copy("VERSION", "retro/VERSION.txt")
-else:
-
-    def version_scheme(version):
-        with open(VERSION_PATH) as v:
-            version_file = v.read().strip()
-        if version.distance:
-            version_file += ".dev%d" % version.distance
-        return version_file
-
-    def local_scheme(version):
-        v = ""
-        if version.distance:
-            v = "+" + version.node
-        return v
-
-    use_scm_version = {
-        "write_to": "retro/VERSION.txt",
-        "version_scheme": version_scheme,
-        "local_scheme": local_scheme,
-    }
-
 
 class CMakeBuild(build_ext):
     def run(self):
         suffix = super().get_ext_filename("")
-        pyext_suffix = "-DPYEXT_SUFFIX:STRING=%s" % suffix
+        pyext_suffix = f"-DPYEXT_SUFFIX:STRING={suffix}"
         pylib_dir = ""
         if not self.inplace:
-            pylib_dir = "-DPYLIB_DIRECTORY:PATH=%s" % self.build_lib
+            pylib_dir = f"-DPYLIB_DIRECTORY:PATH={self.build_lib}"
         if self.debug:
             build_type = "-DCMAKE_BUILD_TYPE=Debug"
         else:
             build_type = ""
-        python_executable = "-DPYTHON_EXECUTABLE:STRING=%s" % sys.executable
+        python_executable = f"-DPYTHON_EXECUTABLE:STRING={sys.executable}"
         cmake_exe = find_executable("cmake")
         if not cmake_exe:
             try:
@@ -72,11 +45,11 @@ class CMakeBuild(build_ext):
             ]
         )
         if self.parallel:
-            jobs = "-j%d" % self.parallel
+            jobs = f"-j{self.parallel:d}"
         else:
             import multiprocessing
 
-            jobs = "-j%d" % multiprocessing.cpu_count()
+            jobs = f"-j{multiprocessing.cpu_count():d}"
         make_exe = find_executable("make")
         if not make_exe:
             raise RuntimeError("Could not find Make executable. Is it installed?")
@@ -99,21 +72,18 @@ platform_globs = [
     ]
 ]
 
-kwargs = {}
-if tuple(int(v) for v in setuptools_version.split(".")[:3]) >= (24, 2, 0):
-    kwargs["python_requires"] = ">=3.6.0"
-
 
 setup(
-    name="gym-retro",
+    name="stable-retro",
     long_description=README,
     long_description_content_type="text/markdown",
-    author="OpenAI",
-    author_email="csh@openai.com",
-    url="https://github.com/openai/retro",
+    author="Farama Foundation",
+    author_email="contact@farama.org",
+    url="https://github.com/farama-foundation/stable-retro",
     version=open(VERSION_PATH).read().strip(),
     license="MIT",
     install_requires=["gymnasium>=0.27.1", "pyglet>=1.3.2,==1.*"],
+    python_requires=">=3.6.0",
     ext_modules=[Extension("retro._retro", ["CMakeLists.txt", "src/*.cpp"])],
     cmdclass={"build_ext": CMakeBuild},
     packages=[
@@ -138,8 +108,4 @@ setup(
         "retro.data.experimental": platform_globs,
         "retro.data.contrib": platform_globs,
     },
-    extras_require={"docs": ["sphinx", "sphinx_rtd_theme", "sphinx-autobuild", "m2r"]},
-    setup_requires=["setuptools_scm"],
-    use_scm_version=use_scm_version,
-    **kwargs
 )

@@ -267,7 +267,7 @@ endif()
 if(BUILD_TESTS)
     enable_testing()
     add_subdirectory(third-party/gtest/googlemock)
-    add_subdirectory(tests)
+    add_subdirectory(tests/test_cpp)
 endif()
 
 if(BUILD_UI)

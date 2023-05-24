@@ -1,4 +1,4 @@
-# Gym Retro Contribution Guidelines
+# Stable Retro Contribution Guidelines
 
 At this time we are currently accepting the current forms of contributions:
 
@@ -19,17 +19,25 @@ Please include the following information in your issue reports:
 
 - Operating system
 - Python version
-- Gym Retro version or git commit
+- Stable Retro version or git commit
 - A detailed description of the issue
 
 ## Code contributions
 
 Please try to adhere to the existing code style. There is a linter script included at `scripts/lint.sh`.
+Before creating a pull request, make sure that your new code does not cause any tests to fail. To run the tests, see the instructions below.
+
+#### Testing on Linux
+```bash
+sudo apt-get install -y python3-opengl
+python3 -m pip install pytest
+pytest
+```
 
 ### Python
 
-Gym Retro is written in a [PEP 8-compliant code style](https://www.python.org/dev/peps/pep-0008/) (minus the line length restriction). Please make sure to maintain this style in any contributions.
+Stable Retro is written in a [PEP 8-compliant code style](https://www.python.org/dev/peps/pep-0008/) (minus the line length restriction). Please make sure to maintain this style in any contributions.
 
 ### C++
 
-There is a `.clang-format` file that documents as best as possible the code style for Gym Retro. Please make sure to follow it.
+There is a `.clang-format` file that documents as best as possible the code style for Stable Retro. Please make sure to follow it.

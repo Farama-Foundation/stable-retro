@@ -63,7 +63,7 @@ def test_custom_path_absolute(custom_cleanup):
         "", "Dekadence-Dekadrive.md", inttype=retro.data.Integrations.CUSTOM_ONLY
     )
 
-    test_rom_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "roms")
+    test_rom_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../roms")
     retro.data.Integrations.add_custom_path(test_rom_dir)
     assert retro.data.get_file_path(
         "", "Dekadence-Dekadrive.md", inttype=retro.data.Integrations.CUSTOM_ONLY

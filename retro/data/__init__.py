@@ -3,30 +3,10 @@ import hashlib
 import json
 import os
 import sys
+from enum import Flag
 
 from retro._retro import GameDataGlue, RetroEmulator
 from retro._retro import data_path as _data_path
-
-try:
-    import enum
-    from enum import Flag
-except ImportError:
-    # Python < 3.6 doesn't support Flag, so we polyfill it ourself
-    class Flag(enum.Enum):
-        def __and__(self, b):
-            value = self.value & b.value
-            try:
-                return Integrations(value)
-            except ValueError:
-                return value
-
-        def __or__(self, b):
-            value = self.value | b.value
-            try:
-                return Integrations(value)
-            except ValueError:
-                return value
-
 
 __all__ = [
     "GameData",
@@ -301,7 +281,7 @@ def get_romfile_path(game, inttype=Integrations.DEFAULT):
         if possible_path:
             return possible_path
 
-    raise FileNotFoundError("No romfiles found for game: %s" % game)
+    raise FileNotFoundError(f"No romfiles found for game: {game}")
 
 
 def list_games(inttype=Integrations.DEFAULT):
@@ -449,4 +429,4 @@ def merge(*args, quiet=True):
                 f.write(data)
             imported_games += 1
     if not quiet:
-        print("Imported %i games" % imported_games)
+        print(f"Imported {imported_games:d} games")

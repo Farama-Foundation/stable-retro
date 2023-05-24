@@ -43,8 +43,3 @@ class Tracer:
                     next(generator)
         except StopIteration:
             return
-
-    def output(self, **kwargs):
-        generator = self.yieldFrames(**kwargs)
-
-        return mCoreOutput(video=self.video(generator=generator, **kwargs))

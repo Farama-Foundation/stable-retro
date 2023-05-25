@@ -25,8 +25,7 @@ RUN apt-get update -y && apt-get install -y \
     unzip zip \
     ccache curl dos2unix nano
 
-#RUN git clone https://github.com/zbeucler2018/stable-retro stable-retro
-RUN git clone https://github.com/onaclov2000/stable-retro-1 stable-retro
+RUN git clone https://github.com/farama-foundation/stable-retro stable-retro
 
 COPY docker/cmake cmake
 COPY docker/scripts scripts
@@ -53,8 +52,6 @@ RUN CROSS=win${BITS} ROOT=/usr/${ARCH}-w64-mingw32 ./scripts/build_libzip.sh && 
 WORKDIR /root/stable-retro
 
 RUN python3 -m pip install --upgrade pip wheel setuptools
-
-#RUN python3 -m pip install -e .
 
 RUN cmake . -DBUILD_TESTS=ON -DBUILD_MANYLINUX=ON -DPYTHON_INCLUDE_DIR=/usr/include/python3.10 -DCMAKE_TOOLCHAIN_FILE=../cmake/win64.cmake
 

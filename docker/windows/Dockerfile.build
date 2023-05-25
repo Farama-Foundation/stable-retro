@@ -26,7 +26,7 @@ RUN apt-get update -y && apt-get install -y \
     ccache curl dos2unix nano
 
 #RUN git clone https://github.com/zbeucler2018/stable-retro stable-retro
-RUN git clone https://github.com/TwitchAIRacingLeague/retro stable-retro
+RUN git clone https://github.com/onaclov2000/stable-retro-1 stable-retro
 
 COPY docker/cmake cmake
 COPY docker/scripts scripts

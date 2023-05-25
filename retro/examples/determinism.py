@@ -197,7 +197,7 @@ def main():
             if args.deterministic:
                 env = MoreDeterministicRetroState(env)
             else:
-                env = RetroState(env)
+                env = MoreDeterministicRetroState(env, reset_on_step=False)
             return env
 
         env = make_env()

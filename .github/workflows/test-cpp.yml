@@ -1,9 +1,11 @@
 name: Test C++ Stable-Retro code
 
 #on: [pull_request, push]
-push:
+on:
+  push:
     branches:
       - add-cpp-testing
+
 
 permissions:
   contents: read # to fetch code (actions/checkout)

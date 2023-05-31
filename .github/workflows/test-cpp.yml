@@ -1,0 +1,29 @@
+name: Test C++ Stable-Retro code
+
+#on: [pull_request, push]
+push:
+    branches:
+      - add-cpp-testing
+
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # todo, add more OS systems to see if they work as well
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install system packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install git cmake capnproto zlib1g-dev g++ build-essential python3-dev python3-pip pkg-config libzip-dev software-properties-common libbz2-dev python3-opengl
+
+      - name: Build test files
+        run: |
+          python3 -m pip install -e .
+          make -f tests/Makefile
+
+      - name: Run tests
+        run: ctest --progress --verbose

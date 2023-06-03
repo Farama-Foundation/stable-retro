@@ -1,8 +1,8 @@
 FROM ubuntu:22.04
 
- 
 
-ARG DEBIAN_FRONTEND=noninteractive 
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 
 WORKDIR /root

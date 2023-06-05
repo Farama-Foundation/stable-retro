@@ -54,7 +54,7 @@ https://github.com/arvganesh/stable-retro-docker
 ## Tutorials
 
 Game Integration tool:
-https://youtube.com/playlist?list=PLmwlWbdWpZVtH6NXqWbrnWOf6SWv9nJBY
+https://www.youtube.com/playlist?list=PLmwlWbdWpZVvWqzOxu0jVBy-CaRpYha0t
 
 ## Discord channel
 

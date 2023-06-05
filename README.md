@@ -37,6 +37,26 @@ https://youtu.be/LRgGSQGNZeE
 Docker image for M1 Macs:
 https://github.com/arvganesh/stable-retro-docker
 
+## Example
+
+'Nature CNN' model trained using PPO on Airstriker-Genesis env (rom already included in the repo)
+
+Tested on Ubuntu 20.04 and Windows 11 WSL2 (Ubuntu 20.04 VM)
+```
+sudo apt-get update
+sudo apt-get install python3 python3-pip git zlib1g-dev libopenmpi-dev ffmpeg
+```
+You need to install a stable baselines 3 version that supports gymnasium
+```
+pip3 install git+https://github.com/Farama-Foundation/stable-retro.git
+pip3 install "stable_baselines3[extra]>=2.0.0a9"
+```
+
+Start training:
+```
+cd retro/examples
+python3 ppo.py --game='Airstriker-Genesis'
+```
 
 ## Citation
 

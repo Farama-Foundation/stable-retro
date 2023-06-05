@@ -29,3 +29,12 @@ for game in retro.data.list_games(Integrations.ALL):
 
     if num_types > 1:
         all_games.append((game, Integrations.ALL))
+
+
+all_games_with_roms: list[tuple[str, Integrations]] = []
+for game, inttype in all_games:
+    try:
+        retro.data.get_romfile_path(game, inttype)
+        all_games_with_roms.append((game, inttype))
+    except FileNotFoundError:
+        pass

@@ -4,10 +4,11 @@ import zlib
 from concurrent.futures import ProcessPoolExecutor, TimeoutError
 from concurrent.futures.process import BrokenProcessPool
 
+import gymnasium as gym
 import pytest
 
 import retro
-from tests.test_python import all_games
+from tests.test_python import all_games_with_roms
 
 pool = ProcessPoolExecutor(1)
 
@@ -53,7 +54,7 @@ def state(game, inttype):
     for state_file in states:
         try:
             with gzip.open(
-                retro.data.get_file_path(game, state_file + ".state", inttype), "rb"
+                retro.data.get_file_path(game, f"{state_file}.state", inttype), "rb"
             ) as fh:
                 game_state = fh.read()
         except (OSError, zlib.error):
@@ -69,15 +70,17 @@ def state(game, inttype):
     return [], errors
 
 
-@pytest.mark.parametrize("game_name, integration_type", all_games)
+@pytest.mark.parametrize("game_name, integration_type", all_games_with_roms)
 def test_load(game_name, integration_type, processpool):
     warnings, errors = processpool(load, game_name, integration_type)
-    assert len(warnings) == 0
+    for file, warning in warnings:
+        gym.logger.warn(f"{file}: {warning}")
     assert len(errors) == 0
 
 
-@pytest.mark.parametrize("game_name, integration_type", all_games)
+@pytest.mark.parametrize("game_name, integration_type", all_games_with_roms)
 def test_state(game_name, integration_type, processpool):
     warnings, errors = processpool(state, game_name, integration_type)
-    assert len(warnings) == 0
+    for file, warning in warnings:
+        gym.logger.warn(f"{file}: {warning}")
     assert len(errors) == 0

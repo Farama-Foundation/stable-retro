@@ -1,5 +1,21 @@
 {
   "info": {
+    "ball_x": {
+      "address": 177,
+      "type": "|u1"
+    },
+    "ball_y": {
+      "address": 182,
+      "type": "|u1"
+    },
+    "p1_pos": {
+      "address": 188,
+      "type": "|u1"
+    },
+    "p2_pos": {
+      "address": 178,
+      "type": "|u1"
+    },
     "score1": {
       "address": 141,
       "type": "|u1"

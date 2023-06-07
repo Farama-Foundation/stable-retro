@@ -53,7 +53,7 @@ Run the following
 
 .. code-block:: shell
 
-    build_windows.bat
+    docker/build_windows.bat
 
 Once complete use docker cp to copy the whl file out of the container.
 

@@ -19,7 +19,7 @@ lastpage:
 [//]: # (   :width: 500)
 [//]: # (```)
 
-**Stable-Retro is a maintained fork of OpenAI’s Retro library.** 
+**Stable-Retro is a maintained fork of OpenAI’s Retro library.**
 
 TODO - Add summary of things that retro can do
 

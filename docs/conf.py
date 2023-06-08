@@ -22,7 +22,6 @@ import sphinx_gallery.gen_rst
 
 import retro
 
-
 project = "Stable-Retro"
 copyright = "2023 Farama Foundation"
 author = "Farama Foundation"

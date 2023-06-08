@@ -3,17 +3,17 @@
 Development
 =====================================
 
-Adding new games can be done without recompiling Gym Retro, but if you need to work on the C++ code or make changes to the UI, you will want to compile Gym Retro from source.
+Adding new games can be done without recompiling Stable Retro, but if you need to work on the C++ code or make changes to the UI, you will want to compile Stable Retro from source.
 
 Install Retro from source
 --------------------------------------
 
-Building Gym Retro requires at least either gcc 5 or clang 3.4.
+Building Stable Retro requires at least either gcc 5 or clang 3.4.
 
 Prerequisites
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To build Gym Retro you must first install CMake.
+To build Stable Retro you must first install CMake.
 You can do this either through your package manager, download from the `official site <https://cmake.org/download/>`_ or ``pip3 install cmake``.
 If you're using the official installer on Windows, make sure to tell CMake to add itself to the system PATH.
 
@@ -63,8 +63,8 @@ Building
 
 .. code-block:: shell
 
-    git clone https://github.com/openai/retro.git gym-retro
-    cd gym-retro
+    git clone https://github.com/farama-foundation/stable-retro.git stable-retro
+    cd stable-retro
     pip3 install -e .
 
 Install Retro UI from source
@@ -99,4 +99,4 @@ Linux
 Windows
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Building from source on Windows is currently difficult to configure. Docker containers for cross-compiling are available at `openai/travis-build <https://hub.docker.com/r/openai/travis-build/>`_.
+Building from source on Windows is currently difficult to configure. Docker containers for cross-compiling are available at `TODO`_.

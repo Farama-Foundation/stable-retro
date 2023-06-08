@@ -1,4 +1,7 @@
 sphinx
-sphinx_rtd_theme
-m2r
-gym-retro
+sphinx-autobuild
+myst-parser
+git+https://github.com/sphinx-gallery/sphinx-gallery.git@4006662c8c1984453a247dc6d3df6260e5b00f4b#egg=sphinx_gallery
+git+https://github.com/Farama-Foundation/Celshast#egg=furo
+moviepy
+sphinx_github_changelog

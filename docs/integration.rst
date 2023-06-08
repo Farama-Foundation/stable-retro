@@ -9,14 +9,14 @@ Integrating a game means taking a video game ROM file and setting it up as a rei
 * A reward function
 * A done condition
 
-Once integrated, you will be able to use the game through the Gym Retro Python API as a `Gym <https://gym.openai.com/>`_ environment.
+Once integrated, you will be able to use the game through the Python API as a `Gymnasium <https://gymnasium.farama.org/>`_ environment.
 
 If you are going to integrate a new game, you'll need a ROM for the correct system, see :ref:`supported-roms` for a list.
 
 Example Integration
 --------------------------------------
 
-This is a list of the integration files for the game `Airstriker-Genesis <https://github.com/openai/retro/blob/master/retro/data/stable/Airstriker-Genesis>`_.
+This is a list of the integration files for the game `Airstriker-Genesis <https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/Airstriker-Genesis>`_.
 
 ``Level1.state``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -47,7 +47,7 @@ This file defines the default starting state if no state is specified by the use
 ``rom.md``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is the ROM file used for this game, with a few exceptions, ROM files are not included in Gym Retro, but will be in your local copy of Gym Retro after you import them.
+This is the ROM file used for this game, with a few exceptions, ROM files are not included in Stable Retro, but will be in your local copy of Stable Retro after you import them.
 
 ``rom.sha``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -135,16 +135,16 @@ The integration UI helps you easily find variables and see what is going on with
 
 You can normally download the compiled UI package for your platform here:
 
-* `Windows Integration UI <https:///storage.googleapis.com/gym-retro/builds/Gym%20Retro-latest-win64.zip>`_
-* `Mac Integration UI <https:///storage.googleapis.com/gym-retro/builds/Gym%20Retro-latest-Darwin.dmg>`_
+* `Windows Integration UI <TODO>`_
+* `Mac Integration UI <TODO>`_
 
-However, if those URLs no longer work, you can also download these packages from `GitHub's Releases <https://github.com/openai/retro/releases/tag/f347d7e>`_
+However, if those URLs no longer work, you can also download these packages from `GitHub's Releases <https://github.com/farama-foundation/stable-retro/releases/>`_
 
 
 Integrating a new ROM
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Open the Gym Retro Integration UI
+1. Open the Stable Retro Integration UI
 2. Load a new game — ``Command-Shift-O`` on Mac
 3. Select the ROM of the game you'd like to integrate in the menu
 4. Name the game
@@ -153,11 +153,11 @@ Integrating a new ROM
 7. When you are finally at the first playable moment of the game, pause the game (in the integrator, not within the actual game) (``Command-P``), and save the state (``Command-S``). This moment can be hard to find, and you might have to go back through and restart the game (``Command-R``) to find and save that exact state.
 8. Save the state — include the options you chose in the previous menus — e.g. ``SailorMoon.QueenBerylsCastle.Easy.Level1.state``
 
-For Gym Retro integrations, a few notes about ROMs:
+For Stable Retro integrations, a few notes about ROMs:
 
 - We have preferred the USA version of ROMs, denoted by one of ``(USA)``, ``(USA, Europe)``, ``(Japan, USA)``, etc
 - If the ROM has a ``.bin`` extension, rename it to have the correct extension for that system listed in :ref:`supported-roms`
-- Use the Gym Retro Integration application and select the Integrate option from the File menu to begin working on integrating it
+- Use the Stable Retro Integration application and select the Integrate option from the File menu to begin working on integrating it
 
 .. _supported-roms:
 
@@ -182,11 +182,11 @@ Sometimes ROMs from these systems use different extensions, e.g. ``.gen`` for Ge
 Integrating a Game
 --------------------------------------
 
-To integrate a game you need to define a done condition and a reward function.  The done condition lets Gym Retro know when to end a game session, while the reward function provides a simple numeric goal for machine learning agents to maximize.
+To integrate a game you need to define a done condition and a reward function.  The done condition lets Stable Retro know when to end a game session, while the reward function provides a simple numeric goal for machine learning agents to maximize.
 
 To define these, you find variables from the game's memory, such as the player's current score and lives remaining, and use those to create the done condition and reward function.  An example done condition is when the ``lives`` variable is equal to ``0``, an example reward function is the change in the ``score`` variable.
 
-Note: if the game requires that you hit the ``Start`` button to play, for instance after dying, then you need to modify the scenario file to allow this as ``Start`` is disallowed by default.  See the ``actions`` key in `KidChameleon-Genesis <https://github.com/openai/retro/blob/master/retro/data/stable/KidChameleon-Genesis/scenario.json>`_ for an example of this.
+Note: if the game requires that you hit the ``Start`` button to play, for instance after dying, then you need to modify the scenario file to allow this as ``Start`` is disallowed by default.  See the ``actions`` key in `KidChameleon-Genesis <https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/KidChameleon-Genesis/scenario.json>`_ for an example of this.
 
 Done Condition
 ~~~~~~~~~~~~~~~~~~~~~~

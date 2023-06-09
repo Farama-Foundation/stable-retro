@@ -14,7 +14,7 @@ jobs:
           url: "https://github.com/${{github.repository}}"
           # optional:
           honorRobotExclusions: false
-          ignorePatterns: "github,google"
+          ignorePatterns: ""
           recursiveLinks: true # Check all URLs on all reachable pages (could take a while)
       - name: Get the result
         run: echo "${{steps.link-report.outputs.result}}"

@@ -20,7 +20,7 @@ jobs:
       - name: Build test files
         run: |
           python3 -m pip install -e .
-          make -f tests/Makefile
+          make -f tests/test_cpp/Makefile
 
       - name: Run tests
         run: ctest --progress --verbose

@@ -11,7 +11,7 @@ jobs:
         uses: celinekurpershoek/link-checker@v1.0.2
         with:
           # Required:
-          url: "https://github.com/faramafoundation/stable-retro"
+          url: "https://github.com/farama-foundation/stable-retro"
           # optional:
           honorRobotExclusions: false
           ignorePatterns: "github,google"

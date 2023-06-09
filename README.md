@@ -1,6 +1,6 @@
 # Stable-Retro
 
-A fork of gym-retro ('lets you turn classic video games into Gym environments for reinforcement learning with additional games'). Since gym-retro is in maintenance now and doesn't accept new games, plateforms or bug fixes, you can instead submit PRs with new games or features here in stable-retro.
+A fork of gym-retro ('lets you turn classic video games into Gymnasium environments for reinforcement learning with additional games'). Since gym-retro is in maintenance now and doesn't accept new games, plateforms or bug fixes, you can instead submit PRs with new games or features here in stable-retro.
 
 Currently added games on top of gym-retro:
 *	Super Mario Bros 2 Japan (Lost Levels) - NES
@@ -81,9 +81,9 @@ https://www.youtube.com/playlist?list=PLmwlWbdWpZVvWqzOxu0jVBy-CaRpYha0t
 Join here:
 https://discord.gg/dXuBSg3B4D
 
-# Gym Retro
+# Stable Retro
 
-Gym Retro lets you turn classic video games into [Gym](https://gym.openai.com/) environments for reinforcement learning and comes with integrations for ~1000 games.  It uses various emulators that support the [Libretro API](https://www.libretro.com/index.php/api/), making it fairly easy to add new emulators.
+Stable Retro lets you turn classic video games into [Gymnasium](https://github.com/Farama-Foundation/Gymnasium/) environments for reinforcement learning and comes with integrations for ~1000 games.  It uses various emulators that support the [Libretro API](https://www.libretro.com/index.php/api/), making it fairly easy to add new emulators.
 
 Supported platforms:
 
@@ -139,7 +139,7 @@ See [LICENSES.md](https://github.com/openai/retro/blob/master/LICENSES.md) for i
 
 # Included ROMs
 
-The following non-commercial ROMs are included with Gym Retro for testing purposes:
+The following non-commercial ROMs are included with Stable Retro for testing purposes:
 
 - [the 128 sine-dot](http://www.pouet.net/prod.php?which=2762) by Anthrox
 - [Sega Tween](https://pdroms.de/files/gamegear/sega-tween) by Ben Ryves

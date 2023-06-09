@@ -1,18 +1,18 @@
 Getting Started
 =====================================
 
-Gym Retro requires one of the supported versions of Python (3.5, 3.6, or 3.7). Please make sure to install the appropriate distribution for your OS beforehand. Please note that due to compatibility issues with some of the cores, 32-bit operating systems are not supported.
+Stable Retro requires one of the supported versions of Python (3.5, 3.6, or 3.7). Please make sure to install the appropriate distribution for your OS beforehand. Please note that due to compatibility issues with some of the cores, 32-bit operating systems are not supported.
 
 .. code-block:: shell
 
-    pip3 install gym-retro
+    pip3 install stable-retro
 
-See the section :ref:`development` if you want to build Gym Retro yourself (this is only useful if you want to change the C++ code, not required to integrate new games).
+See the section :ref:`development` if you want to build Stable Retro yourself (this is only useful if you want to change the C++ code, not required to integrate new games).
 
-Create a Gym Environment
+Create a Gymnasium Environment
 --------------------------------------
 
-After installing you can now create a `Gym <https://gym.openai.com/>`_ environment in Python:
+After installing you can now create a `Gymnasium <https://github.com/Farama-Foundation/Gymnasium/>`_ environment in Python:
 
 .. code-block:: python
 
@@ -21,30 +21,30 @@ After installing you can now create a `Gym <https://gym.openai.com/>`_ environme
 
 ``Airstriker-Genesis`` has a non-commercial ROM that is included by default.
 
-Please note that other ROMs are not included and you must obtain them yourself.  Most ROM hashes are sourced from their respective No-Intro SHA-1 sums.  See :ref:`importing-roms` for information about importing ROMs into Gym Retro.
+Please note that other ROMs are not included and you must obtain them yourself.  Most ROM hashes are sourced from their respective No-Intro SHA-1 sums.  See :ref:`importing-roms` for information about importing ROMs into Stable Retro.
 
 Example Usage
 --------------------------------------
 
-Gym Retro is useful primarily as a means to train RL on classic video games, though it can also be used to control those video games from Python.
+Stable Retro is useful primarily as a means to train RL on classic video games, though it can also be used to control those video games from Python.
 
-Here are some example ways to use Gym Retro:
+Here are some example ways to use Stable Retro:
 
 Interactive Script
 ~~~~~~~~~~~~~~~~~~~~~~
 
-There is a Python script that lets you interact with the game using the Gym interface.  Run it like this:
+There is a Python script that lets you interact with the game using the Gymnasium interface.  Run it like this:
 
 .. code-block:: shell
 
     python3 -m retro.examples.interactive --game Airstriker-Genesis
 
-You can use the arrow keys and the ``X`` key to control your ship and fire.  This Python script lets you try out an environment using only the Gym Retro Python API and is quite basic.  For a more advanced tool, check out the :ref:`integration-ui`.
+You can use the arrow keys and the ``X`` key to control your ship and fire.  This Python script lets you try out an environment using only the Stable Retro Python API and is quite basic.  For a more advanced tool, check out the :ref:`integration-ui`.
 
 Random Agent
 ~~~~~~~~~~~~~~~~~~~~~~
 
-A random agent that chooses a random action on each timestep looks much like the example random agent for `Gym <https://gym.openai.com/>`_:
+A random agent that chooses a random action on each timestep looks much like the example random agent for `Gymnasium <https://github.com/Farama-Foundation/Gymnasium/>`_:
 
 .. literalinclude:: ../retro/examples/trivial_random_agent.py
 
@@ -59,7 +59,7 @@ It will print the current reward and will exit when the scenario is done. Note t
 Brute
 ~~~~~~~~~~~~~~~~~~~~~~
 
-There is a simple but effective reinforcement learning algorithm called "the Brute" from `"Revisiting the Arcade Learning Environment" <https://arxiv.org/abs/1709.06009>`_  by Machado et al. which works on deterministic environments like Gym Retro games and is easy to implement.  To run the example:
+There is a simple but effective reinforcement learning algorithm called "the Brute" from `"Revisiting the Arcade Learning Environment" <https://arxiv.org/abs/1709.06009>`_  by Machado et al. which works on deterministic environments like Stable Retro games and is easy to implement.  To run the example:
 
 .. code-block:: shell
 
@@ -92,7 +92,7 @@ What games have already been integrated?  Note that this will display all define
     import retro
     retro.data.list_games()
 
-The actual integration data can be see in the `Gym Retro Github repo <https://github.com/openai/retro/tree/master/retro/data/stable>`_.
+The actual integration data can be see in the `Stable Retro Github repo <https://github.com/farama-foundation/stable-retro/tree/master/retro/data/stable>`_.
 
 .. _importing-roms:
 
@@ -105,7 +105,7 @@ If you have the correct ROMs on your computer (identified by the `rom.sha` file 
 
     python3 -m retro.import /path/to/your/ROMs/directory/
 
-This will copy all matching ROMs to their corresponding Gym Retro game integration directories.
+This will copy all matching ROMs to their corresponding Stable Retro game integration directories.
 
 Your ROMs must be in the :ref:`supported-roms` list and must already have an integration.  To add a ROM yourself, check out :ref:`game-integration`.
 

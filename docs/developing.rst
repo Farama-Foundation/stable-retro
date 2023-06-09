@@ -29,27 +29,7 @@ Since LuaJIT does not work properly on macOS you must first install Lua 5.1 from
 Windows prerequisites
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you are not on Windows, please skip to the next section.
-Otherwise, you will also need to download and install `Git <https://git-scm.com/downloads>`_ and `MSYS2 x86_64 <http://www.msys2.org>`_.
-When you install git, choose to use Git from the Windows Command Prompt.
-
-After you have installed msys2 open an MSYS2 MinGW 64-bit prompt (under Start > MSYS2 64bit)  and run this command:
-
-.. code-block:: shell
-
-    pacman -Sy make mingw-w64-x86_64-gcc
-
-
-Once that's done, close the prompt and open a Git CMD prompt (under Start > Git) and run these commands.
-If you installed MSYS2 into an alternate directory please use that instead of C:\msys64 in the command.
-
-.. code-block:: bat
-
-    path %PATH%;C:\msys64\mingw64\bin;C:\msys64\usr\bin
-    set MSYSTEM=MINGW64
-
-Then in the same prompt, without closing it first, continue with the steps in the next section.
-If you close the prompt you will need to rerun the last commands before you can rebuild.
+Install docker
 
 Linux prerequisites
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,8 +38,26 @@ Linux prerequisites
 
     sudo apt-get install zlib1g-dev
 
-Building
+Building Linux and Mac
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: shell
+
+    git clone https://github.com/openai/retro.git gym-retro
+    cd gym-retro
+    pip3 install -e .
+
+Building Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Run the following
+
+.. code-block:: shell
+
+    docker/build_windows.bat
+
+Once complete use docker cp to copy the whl file out of the container.
+
+Then you may pip install
 
 .. code-block:: shell
 
@@ -99,4 +97,4 @@ Linux
 Windows
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Building from source on Windows is currently difficult to configure. Docker containers for cross-compiling are available at `TODO`_.
+The Retro UI is not currently supported in Windows.

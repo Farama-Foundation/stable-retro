@@ -1,6 +1,6 @@
 # Stable-Retro
 
-A fork of gym-retro ('lets you turn classic video games into Gym environments for reinforcement learning with additional games'). Since gym-retro is in maintenance now and doesn't accept new games, plateforms or bug fixes, you can instead submit PRs with new games or features here in stable-retro.
+A fork of gym-retro ('lets you turn classic video games into Gymnasium environments for reinforcement learning with additional games'). Since gym-retro is in maintenance now and doesn't accept new games, plateforms or bug fixes, you can instead submit PRs with new games or features here in stable-retro.
 
 Currently added games on top of gym-retro:
 *	Super Mario Bros 2 Japan (Lost Levels) - NES
@@ -37,6 +37,26 @@ https://youtu.be/LRgGSQGNZeE
 Docker image for M1 Macs:
 https://github.com/arvganesh/stable-retro-docker
 
+## Example
+
+'Nature CNN' model trained using PPO on Airstriker-Genesis env (rom already included in the repo)
+
+Tested on Ubuntu 20.04 and Windows 11 WSL2 (Ubuntu 20.04 VM)
+```
+sudo apt-get update
+sudo apt-get install python3 python3-pip git zlib1g-dev libopenmpi-dev ffmpeg
+```
+You need to install a stable baselines 3 version that supports gymnasium
+```
+pip3 install git+https://github.com/Farama-Foundation/stable-retro.git
+pip3 install "stable_baselines3[extra]>=2.0.0a9"
+```
+
+Start training:
+```
+cd retro/examples
+python3 ppo.py --game='Airstriker-Genesis'
+```
 
 ## Citation
 
@@ -61,9 +81,9 @@ https://www.youtube.com/playlist?list=PLmwlWbdWpZVvWqzOxu0jVBy-CaRpYha0t
 Join here:
 https://discord.gg/dXuBSg3B4D
 
-# Gym Retro
+# Stable Retro
 
-Gym Retro lets you turn classic video games into [Gym](https://gym.openai.com/) environments for reinforcement learning and comes with integrations for ~1000 games.  It uses various emulators that support the [Libretro API](https://www.libretro.com/index.php/api/), making it fairly easy to add new emulators.
+Stable Retro lets you turn classic video games into [Gymnasium](https://github.com/Farama-Foundation/Gymnasium/) environments for reinforcement learning and comes with integrations for ~1000 games.  It uses various emulators that support the [Libretro API](https://www.libretro.com/index.php/api/), making it fairly easy to add new emulators.
 
 Supported platforms:
 
@@ -119,7 +139,7 @@ See [LICENSES.md](https://github.com/openai/retro/blob/master/LICENSES.md) for i
 
 # Included ROMs
 
-The following non-commercial ROMs are included with Gym Retro for testing purposes:
+The following non-commercial ROMs are included with Stable Retro for testing purposes:
 
 - [the 128 sine-dot](http://www.pouet.net/prod.php?which=2762) by Anthrox
 - [Sega Tween](https://pdroms.de/files/gamegear/sega-tween) by Ben Ryves

@@ -5,7 +5,7 @@ Stable Retro requires one of the supported versions of Python (3,6 to 3.10). Ple
 
 .. code-block:: shell
 
-    pip3 install gym-retro
+    pip3 install stable-retro
 
 See the section :ref:`development` if you want to build Stable Retro yourself (this is only useful if you want to change the C++ code, not required to integrate new games).
 
@@ -21,14 +21,14 @@ After installing you can now create a `Gymnasium <https://gymnasium.farama.org/>
 
 ``Airstriker-Genesis`` has a non-commercial ROM that is included by default.
 
-Please note that other ROMs are not included and you must obtain them yourself.  Most ROM hashes are sourced from their respective No-Intro SHA-1 sums.  See :ref:`importing-roms` for information about importing ROMs into Gym Retro.
+Please note that other ROMs are not included and you must obtain them yourself.  Most ROM hashes are sourced from their respective No-Intro SHA-1 sums.  See :ref:`importing-roms` for information about importing ROMs into Stable Retro.
 
 Example Usage
 --------------------------------------
 
 Stable Retro is useful primarily as a means to train RL on classic video games, though it can also be used to control those video games from Python.
 
-Here are some example ways to use Gym Retro:
+Here are some example ways to use Stable Retro:
 
 Interactive Script
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -105,7 +105,7 @@ If you have the correct ROMs on your computer (identified by the `rom.sha` file 
 
     python3 -m retro.import /path/to/your/ROMs/directory/
 
-This will copy all matching ROMs to their corresponding Gym Retro game integration directories.
+This will copy all matching ROMs to their corresponding Stable Retro game integration directories.
 
 Your ROMs must be in the :ref:`supported-roms` list and must already have an integration.  To add a ROM yourself, check out :ref:`game-integration`.
 

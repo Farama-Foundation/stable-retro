@@ -132,10 +132,10 @@ def verify_scenario(game, inttype, scenario="scenario", raw=None, dataraw=None):
     if "rewards" in scen:
         for i, r in enumerate(scen["rewards"]):
             if "variables" not in r and "script" not in r:
-                warnings.append((file, "missing reward in rewards[%d]" % i))
+                warnings.append((file, f"missing reward in rewards[{i:d}]"))
             elif "variables" in r and "script" in r:
                 warnings.append(
-                    (file, "both variables and script present in rewards[%d]" % i)
+                    (file, f"both variables and script present in rewards[{i:d}]")
                 )
         if "reward" in scen:
             warnings.append((file, "reward and rewards both present"))
@@ -168,12 +168,12 @@ def verify_scenario(game, inttype, scenario="scenario", raw=None, dataraw=None):
         if reward and "variables" in reward:
             for variable, definition in reward["variables"].items():
                 if variable not in data:
-                    errors.append((file, "invalid variable %s" % variable))
+                    errors.append((file, f"invalid variable {variable}"))
                 if not definition:
-                    errors.append((file, "invalid definition %s" % variable))
+                    errors.append((file, f"invalid definition {variable}"))
                     continue
                 if "reward" not in definition and "penalty" not in definition:
-                    errors.append((file, "blank reward %s" % variable))
+                    errors.append((file, f"blank reward {variable}"))
         if done and "variables" in done:
             if "score" in done["variables"]:
                 warnings.append((file, "suspicious variable in done condition: score"))
@@ -197,25 +197,23 @@ def verify_scenario(game, inttype, scenario="scenario", raw=None, dataraw=None):
                 )
             for variable, definition in done["variables"].items():
                 if "op" not in definition:
-                    errors.append((file, "invalid done condition %s" % variable))
+                    errors.append((file, f"invalid done condition {variable}"))
                 elif definition.get("reference", 0) == 0:
                     if "op" in ("equal", "negative-equal"):
-                        warnings.append((file, "incorrect op: zero for %s" % variable))
+                        warnings.append((file, f"incorrect op: zero for {variable}"))
                     elif "op" == "not-equal":
-                        warnings.append(
-                            (file, "incorrect op: nonzero for %s" % variable)
-                        )
+                        warnings.append((file, f"incorrect op: nonzero for {variable}"))
                     elif "op" == "less-than":
                         warnings.append(
-                            (file, "incorrect op: negative for %s" % variable)
+                            (file, f"incorrect op: negative for {variable}")
                         )
                     elif "op" == "greater-than":
                         warnings.append(
-                            (file, "incorrect op: positive for %s" % variable)
+                            (file, f"incorrect op: positive for {variable}")
                         )
                 if data:
                     if variable not in data:
-                        errors.append((file, "invalid variable %s" % variable))
+                        errors.append((file, f"invalid variable {variable}"))
                     else:
                         if (
                             "i" not in data[variable].get("type", "")
@@ -223,7 +221,7 @@ def verify_scenario(game, inttype, scenario="scenario", raw=None, dataraw=None):
                             and definition.get("measurement") != "delta"
                         ):
                             errors.append(
-                                (file, "op: negative on unsigned %s" % variable)
+                                (file, f"op: negative on unsigned {variable}")
                             )
     except (json.JSONDecodeError, OSError):
         pass
@@ -261,7 +259,7 @@ def verify_default_state(game, inttype, raw=None):
     if state not in retro.data.list_states(
         game, inttype | retro.data.Integrations.STABLE
     ):
-        errors.append((file, "invalid default state %s" % state))
+        errors.append((file, f"invalid default state {state}"))
 
     return [], errors
 
@@ -296,7 +294,7 @@ def verify_genesis(game, inttype):
 
     rom = retro.data.get_romfile_path(game, inttype=inttype)
     if not rom.endswith(".md"):
-        errors.append((game, "invalid extension for %s" % rom))
+        errors.append((game, f"invalid extension for {rom}"))
     if "rom.md" in whitelist:
         return [], []
     with open(rom, "rb") as f:
@@ -315,8 +313,8 @@ def verify_extension(game, inttype):
     rom = os.path.split(retro.data.get_romfile_path(game, inttype=inttype))[-1]
     platform = retro.data.EMU_EXTENSIONS.get(os.path.splitext(rom)[-1])
 
-    if not platform or not game.endswith("-%s" % platform):
-        errors.append((game, "invalid extension for %s" % rom))
+    if not platform or not game.endswith(f"-{platform}"):
+        errors.append((game, f"invalid extension for {rom}"))
     if rom in whitelist:
         return [], []
     return warnings, errors

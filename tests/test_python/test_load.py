@@ -4,10 +4,11 @@ import zlib
 from concurrent.futures import ProcessPoolExecutor, TimeoutError
 from concurrent.futures.process import BrokenProcessPool
 
+import gymnasium as gym
 import pytest
 
 import retro
-from retro.testing import game, handle
+from tests.test_python import all_games_with_roms
 
 pool = ProcessPoolExecutor(1)
 
@@ -50,17 +51,17 @@ def state(game, inttype):
 
     rom = retro.data.get_romfile_path(game, inttype | retro.data.Integrations.STABLE)
     emu = retro.RetroEmulator(rom)
-    for statefile in states:
+    for state_file in states:
         try:
             with gzip.open(
-                retro.data.get_file_path(game, statefile + ".state", inttype), "rb"
+                retro.data.get_file_path(game, f"{state_file}.state", inttype), "rb"
             ) as fh:
-                state = fh.read()
+                game_state = fh.read()
         except (OSError, zlib.error):
-            errors.append((game, "state failed to decode: %s" % statefile))
+            errors.append((game, f"state failed to decode: {state_file}"))
             continue
 
-        emu.set_state(state)
+        emu.set_state(game_state)
         emu.step()
 
     del emu
@@ -69,11 +70,17 @@ def state(game, inttype):
     return [], errors
 
 
-def test_load(game, processpool):
-    warnings, errors = processpool(load, *game)
-    handle(warnings, errors)
+@pytest.mark.parametrize("game_name, integration_type", all_games_with_roms)
+def test_load(game_name, integration_type, processpool):
+    warnings, errors = processpool(load, game_name, integration_type)
+    for file, warning in warnings:
+        gym.logger.warn(f"{file}: {warning}")
+    assert len(errors) == 0
 
 
-def test_state(game, processpool):
-    warnings, errors = processpool(state, *game)
-    handle(warnings, errors)
+@pytest.mark.parametrize("game_name, integration_type", all_games_with_roms)
+def test_state(game_name, integration_type, processpool):
+    warnings, errors = processpool(state, game_name, integration_type)
+    for file, warning in warnings:
+        gym.logger.warn(f"{file}: {warning}")
+    assert len(errors) == 0

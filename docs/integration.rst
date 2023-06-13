@@ -9,14 +9,14 @@ Integrating a game means taking a video game ROM file and setting it up as a rei
 * A reward function
 * A done condition
 
-Once integrated, you will be able to use the game through the Stable Retro Python API as a `Gymnasium <https://github.com/Farama-Foundation/Gymnasium/>`_ environment.
+Once integrated, you will be able to use the game through the Python API as a `Gymnasium <https://gymnasium.farama.org/>`_ environment.
 
 If you are going to integrate a new game, you'll need a ROM for the correct system, see :ref:`supported-roms` for a list.
 
 Example Integration
 --------------------------------------
 
-This is a list of the integration files for the game `Airstriker-Genesis <https://github.com/openai/retro/blob/master/retro/data/stable/Airstriker-Genesis>`_.
+This is a list of the integration files for the game `Airstriker-Genesis <https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/Airstriker-Genesis>`_.
 
 ``Level1.state``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -135,10 +135,10 @@ The integration UI helps you easily find variables and see what is going on with
 
 You can normally download the compiled UI package for your platform here:
 
-* `Windows Integration UI <https:///storage.googleapis.com/gym-retro/builds/Gym%20Retro-latest-win64.zip>`_
-* `Mac Integration UI <https:///storage.googleapis.com/gym-retro/builds/Gym%20Retro-latest-Darwin.dmg>`_
+* `Windows Integration UI <TODO>`_
+* `Mac Integration UI <TODO>`_
 
-However, if those URLs no longer work, you can also download these packages from `GitHub's Releases <https://github.com/openai/retro/releases/tag/f347d7e>`_
+However, if those URLs no longer work, you can also download these packages from `GitHub's Releases <https://github.com/farama-foundation/stable-retro/releases/>`_
 
 
 Integrating a new ROM
@@ -186,7 +186,7 @@ To integrate a game you need to define a done condition and a reward function.  
 
 To define these, you find variables from the game's memory, such as the player's current score and lives remaining, and use those to create the done condition and reward function.  An example done condition is when the ``lives`` variable is equal to ``0``, an example reward function is the change in the ``score`` variable.
 
-Note: if the game requires that you hit the ``Start`` button to play, for instance after dying, then you need to modify the scenario file to allow this as ``Start`` is disallowed by default.  See the ``actions`` key in `KidChameleon-Genesis <https://github.com/openai/retro/blob/master/retro/data/stable/KidChameleon-Genesis/scenario.json>`_ for an example of this.
+Note: if the game requires that you hit the ``Start`` button to play, for instance after dying, then you need to modify the scenario file to allow this as ``Start`` is disallowed by default.  See the ``actions`` key in `KidChameleon-Genesis <https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/KidChameleon-Genesis/scenario.json>`_ for an example of this.
 
 Done Condition
 ~~~~~~~~~~~~~~~~~~~~~~

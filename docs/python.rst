@@ -23,12 +23,12 @@ There are a few possible action spaces included with :class:`retro.RetroEnv`:
 .. autoclass:: retro.Actions
    :members:
 
-You can also create your own action spaces derived from these.  For an example, see `discretizer.py <https://github.com/openai/retro/blob/master/retro/examples/discretizer.py>`_.  This file shows how to use ``retro.Actions.Discrete`` as well as how to make a custom wrapper that reduces the action space from ``126`` actions to ``7``
+You can also create your own action spaces derived from these.  For an example, see `discretizer.py <https://github.com/farama-foundation/stable-retro/blob/master/retro/examples/discretizer.py>`_.  This file shows how to use ``retro.Actions.Discrete`` as well as how to make a custom wrapper that reduces the action space from ``126`` actions to ``7``
 
 Observations
 --------------------------------------
 
-The default observations are RGB images of the game, but you can view RAM values instead (often much smaller than the RGB images and also your agent can observate the game state more directly).  If you want variable values, any variables defined in ``data.json`` will appear in the ``info`` dict after each step.
+The default observations are RGB images of the game, but you can view RAM values instead (often much smaller than the RGB images and also your agent can observe the game state more directly).  If you want variable values, any variables defined in ``data.json`` will appear in the ``info`` dict after each step.
 
 .. autoclass:: retro.Observations
    :members:
@@ -44,10 +44,10 @@ A small number of games support multiplayer.  To use this feature, pass ``player
 Replay files
 --------------------------------------
 
-Gym Retro can create  `.bk2
+Stable Retro can create  `.bk2
 <http://tasvideos.org/Bizhawk/BK2Format.html>`_ files which are recordings of an initial game state and a series of button presses.  Because the emulators are deterministic, you will see the same output each time you play back this file.  Because it only stores button presses, the file can be about 1000 times smaller than storing the full video.
 
-In addition, if you wish to use the stored button presses for training, they may be useful.  For example, there are `replay files for each Sonic The Hedgehog level <https://github.com/openai/retro-movies>`_ that were made available for the `Gym Retro Contest <https://openai.com/blog/retro-contest/>`_.
+In addition, if you wish to use the stored button presses for training, they may be useful.  For example, there are `replay files for each Sonic The Hedgehog level <https://github.com/openai/retro-movies>`_ that were made available for the `Stable Retro Contest <https://openai.com/blog/retro-contest/>`_.
 
 You can create and view replay files using the :ref:`integration-ui` (Game > Play Movie...).  If you want to use replay files from Python, see the following sections.
 
@@ -63,8 +63,8 @@ If you have an agent playing a game, you can record the gameplay to a ``.bk2`` f
     env = retro.make(game='Airstriker-Genesis', record='.')
     env.reset()
     while True:
-        _obs, _rew, done, _info = env.step(env.action_space.sample())
-        if done:
+        _, _, terminate, truncate, _ = env.step(env.action_space.sample())
+        if terminate or truncate:
             break
 
 Playback

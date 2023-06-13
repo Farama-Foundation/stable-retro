@@ -1,7 +1,7 @@
 Getting Started
 =====================================
 
-Stable Retro requires one of the supported versions of Python (3.5, 3.6, or 3.7). Please make sure to install the appropriate distribution for your OS beforehand. Please note that due to compatibility issues with some of the cores, 32-bit operating systems are not supported.
+Stable Retro requires one of the supported versions of Python (3,6 to 3.10). Please make sure to install the appropriate distribution for your OS beforehand. Please note that due to compatibility issues with some of the cores, 32-bit operating systems are not supported.
 
 .. code-block:: shell
 
@@ -9,10 +9,10 @@ Stable Retro requires one of the supported versions of Python (3.5, 3.6, or 3.7)
 
 See the section :ref:`development` if you want to build Stable Retro yourself (this is only useful if you want to change the C++ code, not required to integrate new games).
 
-Create a Gymnasium Environment
+Create a Retro Environment
 --------------------------------------
 
-After installing you can now create a `Gymnasium <https://github.com/Farama-Foundation/Gymnasium/>`_ environment in Python:
+After installing you can now create a `Gymnasium <https://gymnasium.farama.org/>`_ environment in Python:
 
 .. code-block:: python
 
@@ -44,7 +44,7 @@ You can use the arrow keys and the ``X`` key to control your ship and fire.  Thi
 Random Agent
 ~~~~~~~~~~~~~~~~~~~~~~
 
-A random agent that chooses a random action on each timestep looks much like the example random agent for `Gymnasium <https://github.com/Farama-Foundation/Gymnasium/>`_:
+A random agent that chooses a random action on each timestep looks much like the example random agent for `Gymnasium <https://gymnasium.farama.org/>`_:
 
 .. literalinclude:: ../retro/examples/trivial_random_agent.py
 

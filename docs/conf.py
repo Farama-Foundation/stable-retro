@@ -16,9 +16,6 @@
 
 # -- Project information -----------------------------------------------------
 import os
-import re
-
-import sphinx_gallery.gen_rst
 
 import retro
 

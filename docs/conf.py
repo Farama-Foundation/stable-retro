@@ -17,8 +17,6 @@
 # -- Project information -----------------------------------------------------
 import os
 
-import retro
-
 project = "Stable-Retro"
 copyright = "2023 Farama Foundation"
 author = "Farama Foundation"

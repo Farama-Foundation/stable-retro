@@ -17,14 +17,13 @@
 # -- Project information -----------------------------------------------------
 import os
 
-import retro
-
 project = "Stable-Retro"
 copyright = "2023 Farama Foundation"
 author = "Farama Foundation"
 
 # The full version, including alpha/beta/rc tags
-release = retro.__version__
+with open(os.path.join(os.path.dirname(__file__), "../VERSION")) as f:
+    release = f.read()
 
 
 # -- General configuration ---------------------------------------------------

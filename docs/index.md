@@ -4,66 +4,35 @@ firstpage:
 lastpage:
 ---
 
-<center>
-    <div class="logo">
-        <img src="_static/img/stable-retro-text.png" width="65%" alt="Stable Retro Logo">
-    </div>
-</center>
+```{project-logo} _static/img/stable-retro-text.png
+:alt: Stable-Retro Logo
+```
 
-<div class="header-text">
-    <h2>TODO - Add Tag Line</h2>
-</div>
+```{project-heading}
+Retro games for Reinforcement Learning
+```
 
-[//]: # (```{figure} _static/videos/homescreen.gif)
-[//]: # (   :alt: Lunar Lander)
-[//]: # (   :width: 500)
-[//]: # (```)
+```{figure} _static/videos/todo.gif
+   :alt: Stable-retro gif
+   :width: 500
+```
 
 **Stable-Retro is a maintained fork of OpenAI’s Retro library.**
 
-TODO - Add summary of things that retro can do
+TODO - Add a summary of things that retro can do
 
 ```{code-block} python
 TODO add example code
 ```
 
-<style>
-h2 {
-    padding-top: 0;
-    padding-bottom: 20px;
-    font-size: 28px;
-    margin: 0;
-    overflow: auto;
-}
-img{
-    vertical-align:bottom;
-    padding-bottom: 0;
-    padding-top: 0
- }
-.logo{
-    padding-left: 8%;
-    padding-top: 10px
-}
-@media (min-width: 455px) {
-    .header-text{
-        text-align: center;
-    }
-}
-@media (max-width: 455px) {
-    .header-text{
-        text-align: left;
-    }
-}
-</style>
-
 ```{toctree}
 :hidden:
 :caption: Introduction
 
-getting_started.rst
-developing.rst
-integration.rst
-python.rst
+getting_started.md
+developing.md
+integration.md
+python.md
 ```
 
 [//]: # (```{toctree})
@@ -76,6 +45,7 @@ python.rst
 :hidden:
 :caption: Development
 
+release_notes.md
 Github <https://github.com/Farama-Foundation/StableRetro>
 Contribute to the Docs <https://github.com/Farama-Foundation/StableRetro/blob/main/docs/README.md>
 ```

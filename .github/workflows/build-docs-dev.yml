@@ -1,13 +1,12 @@
-name: Docs Versioning
+name: Build main branch documentation website
 on:
   push:
-    tags:
-      - 'v?*.*.*'
+    branches: [master]
 permissions:
   contents: write
 jobs:
   docs:
-    name: Generate Website for new version
+    name: Generate Website
     runs-on: ubuntu-latest
     env:
       SPHINX_GITHUB_CHANGELOG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -18,18 +17,14 @@ jobs:
         with:
             python-version: '3.9'
 
-      - name: Get tag
-        id: tag
-        uses: dawidd6/action-get-tag@v1
-
       - name: Install dependencies
         run: pip install -r docs/requirements.txt
 
-      - name: Install Stable-Retro
+      - name: Install Stable Retro
         run: pip install .
 
 #      - name: Build Envs Docs
-#        run: python docs/scripts/gen_mds.py && python docs/scripts/gen_envs_display.py
+#        run: python docs/_scripts/gen_mds.py && python docs/_scripts/gen_envs_display.py
 
       - name: Build
         run: sphinx-build -b dirhtml -v docs _build
@@ -38,7 +33,7 @@ jobs:
         run: mv _build/404/index.html _build/404.html
 
       - name: Update 404 links
-        run: python docs/scripts/move_404.py _build/404.html
+        run: python docs/_scripts/move_404.py _build/404.html
 
       - name: Remove .doctrees
         run: rm -r _build/.doctrees
@@ -47,13 +42,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _build
-          target-folder: ${{steps.tag.outputs.tag}}
+          target-folder: main
           clean: false
-
-      - name: Upload to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: _build
-          clean-exclude: |
-            *.*.*/
-            main

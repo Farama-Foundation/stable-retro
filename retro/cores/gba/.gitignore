@@ -1,7 +1,0 @@
-/build
-*.user*
-*~
-*.swp
-*.pyc
-*.a
-*.o

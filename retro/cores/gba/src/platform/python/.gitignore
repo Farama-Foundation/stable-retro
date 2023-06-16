@@ -1,5 +1,0 @@
-/build
-/dist
-.eggs
-.cache
-*.egg-info*

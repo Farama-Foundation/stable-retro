@@ -1,0 +1,8 @@
+*.bc
+*.js
+*.o
+*.exe
+*.dll
+*.so
+package.json
+.npmignore

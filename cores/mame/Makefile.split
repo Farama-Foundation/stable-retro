@@ -1,0 +1,2712 @@
+LIBRETRO_COMM_DIR := $(CORE_DIR)/libretro-common
+
+INCFLAGS := \
+	-I. \
+	-I$(CORE_DIR) \
+	-I$(CORE_DIR)/includes \
+	-I$(CORE_DIR)/cpu/m68000 \
+	-I$(CORE_DIR)/mame2003 \
+	-I$(LIBRETRO_COMM_DIR)/include \
+ 	-I$(CORE_DIR)/libretro-deps/libFLAC/include \
+ 	-I$(CORE_DIR)/lib/mame-chd \
+	-I$(CORE_DIR)/lib/zlib
+
+ifneq (,$(findstring msvc200,$(platform)))
+INCFLAGS += -I$(LIBRETRO_COMM_DIR)/include/compat/msvc
+endif
+
+ifeq ($(system_platform), win)
+INCFLAGS += -DHAVE_FSEEKO
+endif
+
+ifneq (,$(findstring msvc200,$(platform)))
+INCFLAGS += -I$(LIBRETRO_COMM_DIR)/include/compat/msvc
+endif
+
+COREDEFINES += -D__LIBRETRO__ -DPI=3.1415927 -DM_PI=3.1415927
+
+SOURCES_C := \
+	$(CORE_DIR)/mame2003/mame2003.c \
+	$(CORE_DIR)/mame2003/core_options.c \
+	$(CORE_DIR)/mame2003/video.c
+
+SOURCES_C += \
+	$(CORE_DIR)/artwork.c \
+	$(CORE_DIR)/bootstrap.c \
+	$(CORE_DIR)/cheat.c \
+	$(CORE_DIR)/common.c \
+	$(CORE_DIR)/config.c \
+	$(CORE_DIR)/controls.c \
+	$(CORE_DIR)/cpuexec.c \
+	$(CORE_DIR)/cpuint.c \
+	$(CORE_DIR)/cpuintrf.c \
+	$(CORE_DIR)/datafile.c \
+	$(CORE_DIR)/drawgfx.c \
+	$(CORE_DIR)/driver_split.c \
+	$(CORE_DIR)/fileio.c \
+	$(CORE_DIR)/harddisk.c \
+	$(CORE_DIR)/hash.c \
+	$(CORE_DIR)/hiscore.c \
+	$(CORE_DIR)/info.c \
+	$(CORE_DIR)/inptport.c \
+	$(CORE_DIR)/input.c \
+	$(CORE_DIR)/mame-memory.c \
+	$(CORE_DIR)/mame.c \
+	$(CORE_DIR)/mamedbg.c \
+	$(CORE_DIR)/mame_unzip.c \
+	$(CORE_DIR)/ost_samples.c \
+	$(CORE_DIR)/palette.c \
+	$(CORE_DIR)/png.c \
+	$(CORE_DIR)/profiler.c \
+	$(CORE_DIR)/sndintrf.c \
+	$(CORE_DIR)/state.c \
+	$(CORE_DIR)/tilemap.c \
+	$(CORE_DIR)/timer.c \
+	$(CORE_DIR)/ui_text.c \
+	$(CORE_DIR)/usrintrf.c \
+	$(CORE_DIR)/window.c \
+	$(CORE_DIR)/x86drc.c
+
+SOURCES_C += \
+	$(CORE_DIR)/machine/fd1089.c \
+	$(CORE_DIR)/machine/6522via.c \
+	$(CORE_DIR)/machine/6532riot.c \
+	$(CORE_DIR)/machine/6821pia.c \
+	$(CORE_DIR)/machine/74123.c \
+	$(CORE_DIR)/machine/74148.c \
+	$(CORE_DIR)/machine/74153.c \
+	$(CORE_DIR)/machine/7474.c \
+	$(CORE_DIR)/machine/8255ppi.c \
+	$(CORE_DIR)/machine/eeprom.c \
+	$(CORE_DIR)/machine/idectrl.c \
+	$(CORE_DIR)/machine/mathbox.c \
+	$(CORE_DIR)/machine/mb87078.c \
+	$(CORE_DIR)/machine/random.c \
+	$(CORE_DIR)/machine/ticket.c \
+	$(CORE_DIR)/machine/tmp68301.c \
+	$(CORE_DIR)/machine/z80fmly.c \
+	$(CORE_DIR)/machine/neogeo_machine.c \
+	$(CORE_DIR)/machine/psx_machine.c \
+	$(CORE_DIR)/sound/filter.c \
+	$(CORE_DIR)/sound/mixer.c \
+	$(CORE_DIR)/sound/streams.c \
+	$(CORE_DIR)/sound/votrax.c \
+	$(CORE_DIR)/sound/wavwrite.c \
+	$(CORE_DIR)/vidhrdw/avgdvg_vidhrdw.c \
+	$(CORE_DIR)/vidhrdw/generic.c \
+	$(CORE_DIR)/vidhrdw/matrix3d.c \
+	$(CORE_DIR)/vidhrdw/poly.c \
+	$(CORE_DIR)/vidhrdw/tlc34076.c \
+	$(CORE_DIR)/vidhrdw/vector.c \
+	$(CORE_DIR)/vidhrdw/resnet.c
+
+# include base sound
+SOUNDS+=CUSTOM@
+SOUNDS+=SAMPLES@
+SOUNDS+=DAC@
+SOUNDS+=DISCRETE@
+SOUNDS+=YM2610@
+SOUNDS+=AY8910@
+
+# drivers
+ifneq (,$(filter $(INCLUDE_DRV),drv_1942 core_none))
+	CPUS+=Z80@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/1942_vidhrdw.c \
+		$(CORE_DIR)/drivers/1942.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_1943 core_none))
+	CPUS+=Z80@
+	SOUNDS+=YM2203@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/1943_vidhrdw.c \
+		$(CORE_DIR)/drivers/1943.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_1945kiii core_none))
+	CPUS+=M68000@
+	SOUNDS+=OKIM6295@
+	SOURCES_C += \
+		$(CORE_DIR)/drivers/1945kiii.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_40love core_none))
+	CPUS+=Z80@
+	CPUS+=M68705@
+	SOUNDS+=AY8910@
+	SOUNDS+=MSM5232@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/buggychl_machine.c \
+		$(CORE_DIR)/vidhrdw/40love_vidhrdw.c \
+		$(CORE_DIR)/drivers/40love.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_4enraya core_none))
+	CPUS+=Z80@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/4enraya_vidhrdw.c \
+		$(CORE_DIR)/drivers/4enraya.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_8080bw_drivers core_none))
+	CPUS+=8080@
+	CPUS+=M6800@
+	SOUNDS+=SN76477@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/8080bw.c \
+		$(CORE_DIR)/vidhrdw/8080bw_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/circus_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/8080bw_sndhrdw.c \
+		$(CORE_DIR)/drivers/8080bw_drivers.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_88games core_none))
+	CPUS+=KONAMI@
+	CPUS+=Z80@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOUNDS+=UPD7759@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/88games_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/konamiic.c \
+		$(CORE_DIR)/drivers/88games.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_aburner core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	CPUS+=N7751@
+	CPUS+=I8039@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOUNDS+=SEGAPCM@
+	SOUNDS+=YM2203@
+	SOUNDS+=UPD7759@
+	SOUNDS+=YM2413@
+	SOUNDS+=RF5C68@
+	SOUNDS+=YM2612@
+	SOUNDS+=YM3438@
+	SOUNDS+=MSM5205@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/system16_machine.c \
+		$(CORE_DIR)/vidhrdw/system16_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/sys16spr.c \
+		$(CORE_DIR)/drivers/system16.c \
+		$(CORE_DIR)/drivers/aburner.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_ace core_none))
+	CPUS+=8080@
+	SOURCES_C += \
+		$(CORE_DIR)/drivers/ace.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_actfancr core_none))
+	CPUS+=H6280@
+	CPUS+=M6502@
+	SOUNDS+=YM2203@
+	SOUNDS+=YM3812@
+	SOUNDS+=OKIM6295@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/actfancr_vidhrdw.c \
+		$(CORE_DIR)/drivers/actfancr.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_aeroboto core_none))
+	CPUS+=M6809@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/aeroboto_vidhrdw.c \
+		$(CORE_DIR)/drivers/aeroboto.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_aerofgt core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	SOUNDS+=YM2610@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/aerofgt_vidhrdw.c \
+		$(CORE_DIR)/drivers/aerofgt.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_afega core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOUNDS+=OKIM6295@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/afega_vidhrdw.c \
+		$(CORE_DIR)/drivers/afega.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_airbustr core_none))
+	CPUS+=Z80@
+	SOUNDS+=YM2203@
+	SOUNDS+=OKIM6295@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/airbustr_vidhrdw.c \
+		$(CORE_DIR)/drivers/airbustr.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_ajax core_none))
+	CPUS+=KONAMI@
+	CPUS+=M6809@
+	CPUS+=Z80@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOUNDS+=K007232@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/ajax_machine.c \
+		$(CORE_DIR)/vidhrdw/konamiic.c \
+		$(CORE_DIR)/vidhrdw/ajax_vidhrdw.c \
+		$(CORE_DIR)/drivers/ajax.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_aliens core_none))
+	CPUS+=KONAMI@
+	CPUS+=Z80@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOUNDS+=K007232@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/konamiic.c \
+		$(CORE_DIR)/vidhrdw/aliens_vidhrdw.c \
+		$(CORE_DIR)/drivers/aliens.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_alpha68k core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	SOUNDS+=YM2203@
+	SOUNDS+=YM3812@
+	SOUNDS+=YM2413@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/alpha68k_vidhrdw.c \
+		$(CORE_DIR)/drivers/alpha68k.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_ambush core_none))
+	CPUS+=Z80@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/ambush_vidhrdw.c \
+		$(CORE_DIR)/drivers/ambush.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_amidar core_none))
+	CPUS+=Z80@
+	CPUS+=S2650@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/scramble_machine.c \
+		$(CORE_DIR)/sndhrdw/scramble_sndhrdw.c \
+		$(CORE_DIR)/sndhrdw/galaxian_sndhrdw.c \
+		$(CORE_DIR)/vidhrdw/galaxian_vidhrdw.c \
+		$(CORE_DIR)/drivers/galaxian.c \
+		$(CORE_DIR)/drivers/scobra.c \
+		$(CORE_DIR)/drivers/amidar.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_amspdwy core_none))
+	CPUS+=Z80@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/amspdwy_vidhrdw.c \
+		$(CORE_DIR)/drivers/amspdwy.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_angelkds core_none))
+	CPUS+=Z80@
+	SOUNDS+=YM2203@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/segacrpt.c \
+		$(CORE_DIR)/vidhrdw/angelkds_vidhrdw.c \
+		$(CORE_DIR)/drivers/angelkds.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_appoooh core_none))
+	CPUS+=Z80@
+	SOUNDS+=SN76496@
+	SOUNDS+=MSM5205@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/appoooh_vidhrdw.c \
+		$(CORE_DIR)/drivers/appoooh.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_aquarium core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOUNDS+=OKIM6295@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/aquarium_vidhrdw.c \
+		$(CORE_DIR)/drivers/aquarium.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_arabian core_none))
+	CPUS+=Z80@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/arabian_vidhrdw.c \
+		$(CORE_DIR)/drivers/arabian.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_arcadecl core_none))
+	CPUS+=M68000@
+	SOUNDS+=OKIM6295@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/atarigen.c \
+		$(CORE_DIR)/vidhrdw/rampart_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/atarimo_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/arcadecl_vidhrdw.c \
+		$(CORE_DIR)/drivers/arcadecl.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_argus core_none))
+	CPUS+=Z80@
+	SOUNDS+=YM2203@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/argus_vidhrdw.c \
+		$(CORE_DIR)/drivers/argus.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_arkanoid core_none))
+	CPUS+=Z80@
+	CPUS+=M68705@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/arkanoid_machine.c \
+		$(CORE_DIR)/vidhrdw/arkanoid_vidhrdw.c \
+		$(CORE_DIR)/drivers/arkanoid.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_armedf core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	SOUNDS+=YM3812@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/armedf_vidhrdw.c \
+		$(CORE_DIR)/drivers/armedf.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_artmagic core_none))
+	CPUS+=M68000@
+	CPUS+=TMS34010@
+	SOUNDS+=OKIM6295@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/artmagic_vidhrdw.c \
+		$(CORE_DIR)/drivers/artmagic.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_ashnojoe core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	SOUNDS+=YM2203@
+	SOUNDS+=MSM5205@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/ashnojoe_vidhrdw.c \
+		$(CORE_DIR)/drivers/ashnojoe.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_asterix core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOUNDS+=K053260@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/konamiic.c \
+		$(CORE_DIR)/vidhrdw/asterix_vidhrdw.c \
+		$(CORE_DIR)/drivers/asterix.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_asteroid core_none))
+	CPUS+=M6502@
+	SOUNDS+=POKEY@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/asteroid_machine.c \
+		$(CORE_DIR)/machine/atari_vg.c \
+		$(CORE_DIR)/sndhrdw/llander.c \
+		$(CORE_DIR)/sndhrdw/asteroid_sndhrdw.c \
+		$(CORE_DIR)/drivers/asteroid.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_astinvad core_none))
+	CPUS+=Z80@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/astinvad_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/astinvad_sndhrdw.c \
+		$(CORE_DIR)/drivers/astinvad.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_astrocde core_none))
+	CPUS+=Z80@
+	SOUNDS+=ASTROCADE@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/astrocde_machine.c \
+		$(CORE_DIR)/vidhrdw/astrocde_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/astrocde_sndhrdw.c \
+		$(CORE_DIR)/sndhrdw/gorf.c \
+		$(CORE_DIR)/drivers/astrocde.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_astrof core_none))
+	CPUS+=M6502@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/astrof_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/astrof_sndhrdw.c \
+		$(CORE_DIR)/drivers/astrof.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_asuka core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	SOUNDS+=YM2610@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOUNDS+=ADPCM@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/bonzeadv.c \
+		$(CORE_DIR)/vidhrdw/taitoic.c \
+		$(CORE_DIR)/vidhrdw/asuka_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/taitosnd.c \
+		$(CORE_DIR)/sndhrdw/rastan_sndhrdw.c \
+		$(CORE_DIR)/drivers/asuka.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_atarifb core_none))
+	CPUS+=M6502@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/atarifb_machine.c \
+		$(CORE_DIR)/vidhrdw/atarifb_vidhrdw.c \
+		$(CORE_DIR)/drivers/atarifb.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_atarig1 core_none))
+	CPUS+=M68000@
+	CPUS+=M6502@
+	CPUS+=M6809@
+	SOUNDS+=TMS5220@
+	SOUNDS+=OKIM6295@
+	SOUNDS+=POKEY@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/atarigen.c \
+		$(CORE_DIR)/machine/slapstic.c \
+		$(CORE_DIR)/vidhrdw/atarig1_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/atarirle_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/atarijsa.c \
+		$(CORE_DIR)/drivers/atarig1.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_atarig42 core_none))
+	CPUS+=M68000@
+	CPUS+=M6502@
+	SOUNDS+=TMS5220@
+	SOUNDS+=OKIM6295@
+	SOUNDS+=POKEY@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/atarigen.c \
+		$(CORE_DIR)/machine/asic65.c \
+		$(CORE_DIR)/vidhrdw/atarig42_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/atarirle_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/atarijsa.c \
+		$(CORE_DIR)/drivers/atarig42.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_atarigt core_none))
+	CPUS+=M68EC020@
+	CPUS+=TMS32031@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/atarigen.c \
+		$(CORE_DIR)/vidhrdw/atarigt_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/atarirle_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/cage_sndhrdw.c \
+		$(CORE_DIR)/drivers/atarigt.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_atarigx2 core_none))
+	CPUS+=M68EC020@
+	CPUS+=M6502@
+	SOUNDS+=TMS5220@
+	SOUNDS+=OKIM6295@
+	SOUNDS+=POKEY@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/atarigen.c \
+		$(CORE_DIR)/vidhrdw/atarirle_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/atarigx2_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/atarijsa.c \
+		$(CORE_DIR)/drivers/atarigx2.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_atarisy1 core_none))
+	CPUS+=M68010@
+	CPUS+=M6502@
+	CPUS+=M6809@
+	SOUNDS+=TMS5220@
+	SOUNDS+=POKEY@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/atarigen.c \
+		$(CORE_DIR)/machine/slapstic.c \
+		$(CORE_DIR)/vidhrdw/atarimo_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/atarisy1_vidhrdw.c \
+		$(CORE_DIR)/drivers/atarisy1.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_atarisy2 core_none))
+	CPUS+=T11@
+	CPUS+=M6502@
+	CPUS+=M6809@
+	SOUNDS+=TMS5220@
+	SOUNDS+=POKEY@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/atarigen.c \
+		$(CORE_DIR)/machine/slapstic.c \
+		$(CORE_DIR)/vidhrdw/atarimo_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/atarisy2_vidhrdw.c \
+		$(CORE_DIR)/drivers/atarisy2.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_ataxx core_none))
+	CPUS+=Z80@
+	CPUS+=I186@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/leland_machine.c \
+		$(CORE_DIR)/vidhrdw/leland_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/leland_sndhrdw.c \
+		$(CORE_DIR)/drivers/ataxx.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_atetris core_none))
+	CPUS+=M6502@
+	CPUS+=M6809@
+	SOUNDS+=POKEY@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/slapstic.c \
+		$(CORE_DIR)/vidhrdw/atetris_vidhrdw.c \
+		$(CORE_DIR)/drivers/atetris.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_avalnche core_none))
+	CPUS+=M6502@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/avalnche_machine.c \
+		$(CORE_DIR)/vidhrdw/avalnche_vidhrdw.c \
+		$(CORE_DIR)/drivers/avalnche.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_aztarac core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/aztarac_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/aztarac_sndhrdw.c \
+		$(CORE_DIR)/drivers/aztarac.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_backfire core_none))
+	CPUS+=ARM@
+	SOUNDS+=YMZ280B@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/decocrpt.c \
+		$(CORE_DIR)/vidhrdw/deco16ic.c \
+		$(CORE_DIR)/drivers/backfire.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_badlands core_none))
+	CPUS+=M68000@
+	CPUS+=M6502@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/atarigen.c \
+		$(CORE_DIR)/vidhrdw/atarimo_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/badlands_vidhrdw.c \
+		$(CORE_DIR)/drivers/badlands.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bagman core_none))
+	CPUS+=Z80@
+	SOUNDS+=AY8910@
+	SOUNDS+=TMS5110@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/bagman_machine.c \
+		$(CORE_DIR)/vidhrdw/bagman_vidhrdw.c \
+		$(CORE_DIR)/drivers/bagman.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_balsente core_none))
+	CPUS+=M6809@
+	CPUS+=Z80@
+	CPUS+=M68000@
+	SOUNDS+=CEM3394@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/balsente_machine.c \
+		$(CORE_DIR)/vidhrdw/balsente_vidhrdw.c \
+		$(CORE_DIR)/drivers/balsente.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bankp core_none))
+	CPUS+=Z80@
+	SOUNDS+=SN76496@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/bankp_vidhrdw.c \
+		$(CORE_DIR)/drivers/bankp.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_baraduke core_none))
+	CPUS+=M6809@
+	CPUS+=HD63701@
+	SOUNDS+=NAMCO_15XX@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/baraduke_vidhrdw.c \
+		$(CORE_DIR)/drivers/baraduke.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_batman core_none))
+	CPUS+=M68000@
+	CPUS+=M6502@
+	SOUNDS+=TMS5220@
+	SOUNDS+=OKIM6295@
+	SOUNDS+=POKEY@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/atarigen.c \
+		$(CORE_DIR)/vidhrdw/batman_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/atarimo_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/thunderj_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/atarijsa.c \
+		$(CORE_DIR)/drivers/batman.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_battlane core_none))
+	CPUS+=M6809@
+	SOUNDS+=YM3526@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/battlane_vidhrdw.c \
+		$(CORE_DIR)/drivers/battlane.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_battlera core_none))
+	CPUS+=H6280@
+	SOUNDS+=YM2203@
+	SOUNDS+=MSM5205@
+	SOUNDS+=C6280@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/battlera_vidhrdw.c \
+		$(CORE_DIR)/drivers/battlera.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_battlex core_none))
+	CPUS+=Z80@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/battlex_vidhrdw.c \
+		$(CORE_DIR)/drivers/battlex.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_battlnts core_none))
+	CPUS+=HD6309@
+	CPUS+=Z80@
+	SOUNDS+=YM3812@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/konamiic.c \
+		$(CORE_DIR)/vidhrdw/battlnts_vidhrdw.c \
+		$(CORE_DIR)/drivers/battlnts.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bbusters core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	SOUNDS+=YM2608@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/bbusters_vidhrdw.c \
+		$(CORE_DIR)/drivers/bbusters.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_beaminv core_none))
+	CPUS+=Z80@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/beaminv_vidhrdw.c \
+		$(CORE_DIR)/drivers/beaminv.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_beathead core_none))
+	CPUS+=ASAP@
+	CPUS+=M6502@
+	SOUNDS+=TMS5220@
+	SOUNDS+=OKIM6295@
+	SOUNDS+=POKEY@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/atarigen.c \
+		$(CORE_DIR)/sndhrdw/atarijsa.c \
+		$(CORE_DIR)/vidhrdw/beathead_vidhrdw.c \
+		$(CORE_DIR)/drivers/beathead.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_beezer core_none))
+	CPUS+=M6809@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/beezer_machine.c \
+		$(CORE_DIR)/vidhrdw/beezer_vidhrdw.c \
+		$(CORE_DIR)/drivers/beezer.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_berzerk core_none))
+	CPUS+=Z80@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/berzerk_machine.c \
+		$(CORE_DIR)/vidhrdw/berzerk_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/berzerk_sndhrdw.c \
+		$(CORE_DIR)/drivers/berzerk.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bigevglf core_none))
+	CPUS+=Z80@
+	CPUS+=M68705@
+	SOUNDS+=AY8910@
+	SOUNDS+=MSM5232@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/bigevglf_machine.c \
+		$(CORE_DIR)/vidhrdw/bigevglf_vidhrdw.c \
+		$(CORE_DIR)/drivers/bigevglf.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bigstrkb core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOUNDS+=OKIM6295@
+	SOUNDS+=YM2203@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/bigstrkb_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/megasys1_vidhrdw.c \
+		$(CORE_DIR)/drivers/megasys1.c \
+		$(CORE_DIR)/drivers/bigstrkb.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bionicc core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/bionicc_vidhrdw.c \
+		$(CORE_DIR)/drivers/bionicc.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bishi core_none))
+	CPUS+=M68000@
+	SOUNDS+=YMZ280B@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/konamiic.c \
+		$(CORE_DIR)/vidhrdw/bishi_vidhrdw.c \
+		$(CORE_DIR)/drivers/bishi.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bking2 core_none))
+	CPUS+=Z80@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/bking2_vidhrdw.c \
+		$(CORE_DIR)/drivers/bking2.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bladestl core_none))
+	CPUS+=HD6309@
+	CPUS+=M6809@
+	SOUNDS+=UPD7759@
+	SOUNDS+=YM2203@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/konamiic.c \
+		$(CORE_DIR)/vidhrdw/bladestl_vidhrdw.c \
+		$(CORE_DIR)/drivers/bladestl.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_blktiger core_none))
+	CPUS+=Z80@
+	SOUNDS+=YM2203@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/blktiger_vidhrdw.c \
+		$(CORE_DIR)/drivers/blktiger.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_blmbycar core_none))
+	CPUS+=M68000@
+	SOUNDS+=OKIM6295@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/blmbycar_vidhrdw.c \
+		$(CORE_DIR)/drivers/blmbycar.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_blockade core_none))
+	CPUS+=8080@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/blockade_vidhrdw.c \
+		$(CORE_DIR)/drivers/blockade.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_blockhl core_none))
+	CPUS+=KONAMI@
+	CPUS+=Z80@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/konamiic.c \
+		$(CORE_DIR)/vidhrdw/blockhl_vidhrdw.c \
+		$(CORE_DIR)/drivers/blockhl.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_blockout core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOUNDS+=OKIM6295@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/blockout_vidhrdw.c \
+		$(CORE_DIR)/drivers/blockout.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bloodbro core_none))
+	CPUS+=M68000@
+	CPUS+=Z80@
+	SOUNDS+=YM3812@
+	SOUNDS+=OKIM6295@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOUNDS+=YM2203@
+	SOURCES_C += \
+		$(CORE_DIR)/sndhrdw/seibu.c \
+		$(CORE_DIR)/vidhrdw/bloodbro_vidhrdw.c \
+		$(CORE_DIR)/drivers/bloodbro.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_blstroid core_none))
+	CPUS+=M68000@
+	CPUS+=M6502@
+	SOUNDS+=TMS5220@
+	SOUNDS+=OKIM6295@
+	SOUNDS+=POKEY@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/atarigen.c \
+		$(CORE_DIR)/sndhrdw/atarijsa.c \
+		$(CORE_DIR)/vidhrdw/atarimo_vidhrdw.c \
+		$(CORE_DIR)/vidhrdw/blstroid_vidhrdw.c \
+		$(CORE_DIR)/drivers/blstroid.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_blueprnt core_none))
+	CPUS+=Z80@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/blueprnt_vidhrdw.c \
+		$(CORE_DIR)/drivers/blueprnt.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bogeyman core_none))
+	CPUS+=M6502@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/bogeyman_vidhrdw.c \
+		$(CORE_DIR)/drivers/bogeyman.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bombjack core_none))
+	CPUS+=Z80@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/bombjack_vidhrdw.c \
+		$(CORE_DIR)/drivers/bombjack.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_boogwing core_none))
+	CPUS+=M68000@
+	CPUS+=H6280@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOUNDS+=OKIM6295@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/decocrpt.c \
+		$(CORE_DIR)/machine/decoprot.c \
+		$(CORE_DIR)/vidhrdw/deco16ic.c \
+		$(CORE_DIR)/drivers/boogwing.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_bottom9 core_none))
+	CPUS+=M6809@
+	CPUS+=Z80@
+	SOUNDS+=K007232@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/konamiic.c \
+		$(CORE_DIR)/vidhrdw/bottom9_vidhrdw.c \
+		$(CORE_DIR)/drivers/bottom9.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_boxer core_none))
+	CPUS+=M6502@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/boxer_vidhrdw.c \
+		$(CORE_DIR)/drivers/boxer.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_brkthru core_none))
+	CPUS+=M6809@
+	SOUNDS+=YM2203@
+	SOUNDS+=YM3526@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/brkthru_vidhrdw.c \
+		$(CORE_DIR)/drivers/brkthru.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_cclimber core_none))
+	CPUS+=Z80@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/cclimber_vidhrdw.c \
+		$(CORE_DIR)/sndhrdw/cclimber_sndhrdw.c \
+		$(CORE_DIR)/drivers/cclimber.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_namcos2 core_none))
+	CPUS+=M68000@
+	CPUS+=M6809@
+	CPUS+=HD63705@
+	SOUNDS+=C140@
+	#SOUNDS+=YM2151@
+	SOUNDS+=YM2151_ALT@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/namcos2_machine.c \
+		$(CORE_DIR)/drivers/namcoic.c \
+		$(CORE_DIR)/vidhrdw/namcos2_vidhrdw.c \
+		$(CORE_DIR)/drivers/namcos2.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_system32 core_none))
+	CPUS+=V60@
+	CPUS+=Z80@
+	SOUNDS+=YM3438@
+	SOUNDS+=RF5C68@
+	SOUNDS+=YM2612@
+	SOUNDS+=MULTIPCM@
+	SOURCES_C += \
+		$(CORE_DIR)/vidhrdw/system32_vidhrdw.c \
+		$(CORE_DIR)/drivers/multi32.c \
+		$(CORE_DIR)/drivers/system32.c
+endif
+
+ifneq (,$(filter $(INCLUDE_DRV),drv_yamato core_none))
+	CPUS+=Z80@
+	SOUNDS+=AY8910@
+	SOURCES_C += \
+		$(CORE_DIR)/machine/segacrpt.c \
+		$(CORE_DIR)/vidhrdw/cclimber_vidhrdw.c \
+		$(CORE_DIR)/drivers/yamato.c
+endif
+
+
+# List of CPU core (and, for a debug build, disassembler) object files
+#
+CPU=$(strip $(findstring ADSP2100@,$(CPUS)))
+ifneq ($(CPU),)
+HAS_ADSP2100 = 1
+CPUDEFS += -DHAS_ADSP2100=1
+else
+CPUDEFS += -DHAS_ADSP2100=0
+endif
+
+CPU=$(strip $(findstring ADSP2101@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_ADSP2101=1
+HAS_ADSP2100 = 1
+else
+CPUDEFS += -DHAS_ADSP2101=0
+endif
+
+
+CPU=$(strip $(findstring ADSP2104@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_ADSP2104=1
+HAS_ADSP2100 = 1
+else
+CPUDEFS += -DHAS_ADSP2104=0
+endif
+
+CPU=$(strip $(findstring ADSP2105@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_ADSP2105=1
+HAS_ADSP2100 = 1
+else
+CPUDEFS += -DHAS_ADSP2105=0
+endif
+
+CPU=$(strip $(findstring ADSP2115@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_ADSP2115=1
+HAS_ADSP2100 = 1
+else
+CPUDEFS += -DHAS_ADSP2115=0
+endif
+
+CPU=$(strip $(findstring Z80@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_Z80=1
+HAS_Z80 = 1
+else
+CPUDEFS += -DHAS_Z80=0
+endif
+
+ifeq ($(HAS_Z80),1)
+SOURCES_C += $(CORE_DIR)/cpu/z80/z80.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/z80/z80dasm.c
+endif
+endif
+
+ifeq ($(HAS_ADSP2100),1)
+SOURCES_C += $(CORE_DIR)/cpu/adsp2100/adsp2100.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/adsp2100/2100dasm.c
+endif
+endif
+
+CPU=$(strip $(findstring Z180@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_Z180=1
+SOURCES_C += $(CORE_DIR)/cpu/z180/z180.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/z180/z180dasm.c
+endif
+else
+CPUDEFS += -DHAS_Z180=0
+endif
+
+CPU=$(strip $(findstring 8080@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_8080=1
+HAS_8085=1
+else
+CPUDEFS += -DHAS_8080=0
+endif
+
+CPU=$(strip $(findstring 8085A@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_8085A=1
+HAS_8085=1
+else
+CPUDEFS += -DHAS_8085A=0
+endif
+
+ifeq ($(HAS_8085),1)
+SOURCES_C += $(CORE_DIR)/cpu/i8085/i8085.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/i8085/8085dasm.c
+endif
+endif
+
+CPU=$(strip $(findstring M6502@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_M6502=1
+HAS_M6502_COMMON=1
+else
+CPUDEFS += -DHAS_M6502=0
+endif
+
+CPU=$(strip $(findstring M65C02@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_M65C02=1
+HAS_M6502_COMMON=1
+else
+CPUDEFS += -DHAS_M65C02=0
+endif
+
+CPU=$(strip $(findstring M65SC02@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_M65SC02=1
+HAS_M6502_COMMON=1
+else
+CPUDEFS += -DHAS_M65SC02=0
+endif
+
+CPU=$(strip $(findstring M65CE02@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_M65CE02=1
+SOURCES_C += $(CORE_DIR)/cpu/m6502/m65ce02.c
+HAS_M6502_COMMON=1
+else
+CPUDEFS += -DHAS_M65CE02=0
+endif
+
+CPU=$(strip $(findstring M6509@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_M6509=1
+SOURCES_C += $(CORE_DIR)/cpu/m6502/m6509.c
+HAS_M6502_COMMON=1
+else
+CPUDEFS += -DHAS_M6509=0
+endif
+
+CPU=$(strip $(findstring M6510@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_M6510=1
+HAS_M6502_COMMON=1
+else
+CPUDEFS += -DHAS_M6510=0
+endif
+
+CPU=$(strip $(findstring M6510T@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_M6510=1 -DHAS_M6510T=1
+HAS_M6502_COMMON=1
+else
+CPUDEFS += -DHAS_M6510T=0
+endif
+
+CPU=$(strip $(findstring M7501@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_M6510=1 -DHAS_M7501=1
+HAS_M6502_COMMON=1
+else
+CPUDEFS += -DHAS_M7501=0
+endif
+
+CPU=$(strip $(findstring M8502@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_M6510=1 -DHAS_M8502=1
+HAS_M6502_COMMON=1
+else
+CPUDEFS += -DHAS_M8502=0
+endif
+
+CPU=$(strip $(findstring N2A03@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_N2A03=1
+HAS_M6502_COMMON=1
+else
+CPUDEFS += -DHAS_N2A03=0
+endif
+
+CPU=$(strip $(findstring DECO16@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6502
+CPUDEFS += -DHAS_DECO16=1
+HAS_M6502_COMMON=1
+else
+CPUDEFS += -DHAS_DECO16=0
+endif
+
+CPU=$(strip $(findstring M4510@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6502
+CPUDEFS += -DHAS_M4510=1
+SOURCES_C += $(CORE_DIR)/cpu/m6502/m4510.c
+HAS_M6502_COMMON=1
+else
+CPUDEFS += -DHAS_M4510=0
+endif
+
+ifeq ($(HAS_M6502_COMMON),1)
+SOURCES_C += $(CORE_DIR)/cpu/m6502/m6502.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/m6502/6502dasm.c
+endif
+endif
+
+CPU=$(strip $(findstring H6280@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/h6280
+CPUDEFS += -DHAS_H6280=1
+SOURCES_C += $(CORE_DIR)/cpu/h6280/h6280.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/h6280/6280dasm.c
+endif
+else
+CPUDEFS += -DHAS_H6280=0
+endif
+
+CPU=$(strip $(findstring I86@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/i86
+CPUDEFS += -DHAS_I86=1
+HAS_I86=1
+else
+CPUDEFS += -DHAS_I86=0
+endif
+
+CPU=$(strip $(findstring I88@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/i86
+CPUDEFS += -DHAS_I88=1
+HAS_I86=1
+else
+CPUDEFS += -DHAS_I88=0
+endif
+
+CPU=$(strip $(findstring I186@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/i86
+CPUDEFS += -DHAS_I186=1
+HAS_I86=1
+else
+CPUDEFS += -DHAS_I186=0
+endif
+
+CPU=$(strip $(findstring I188@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/i86
+CPUDEFS += -DHAS_I188=1
+HAS_I86=1
+else
+CPUDEFS += -DHAS_I188=0
+endif
+
+CPU=$(strip $(findstring I286@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/i86
+CPUDEFS += -DHAS_I286=1
+HAS_I86=1
+SOURCES_C += $(CORE_DIR)/cpu/i86/i286.c
+else
+CPUDEFS += -DHAS_I286=0
+endif
+
+ifeq ($(HAS_I86),1)
+SOURCES_C += $(CORE_DIR)/cpu/i86/i86.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/i86/i86dasm.c
+endif
+endif
+
+CPU=$(strip $(findstring V20@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/nec
+CPUDEFS += -DHAS_V20=1
+HAS_V30=1
+else
+CPUDEFS += -DHAS_V20=0
+endif
+
+CPU=$(strip $(findstring V30@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/nec
+CPUDEFS += -DHAS_V30=1
+HAS_V30=1
+else
+CPUDEFS += -DHAS_V30=0
+endif
+
+CPU=$(strip $(findstring V33@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/nec
+CPUDEFS += -DHAS_V33=1
+HAS_V30=1
+else
+CPUDEFS += -DHAS_V33=0
+endif
+
+ifeq ($(HAS_V30),1)
+SOURCES_C += $(CORE_DIR)/cpu/nec/nec.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/nec/necdasm.c
+endif
+endif
+
+CPU=$(strip $(findstring V60@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/v60
+CPUDEFS += -DHAS_V60=1
+HAS_V60=1
+else
+CPUDEFS += -DHAS_V60=0
+endif
+
+CPU=$(strip $(findstring V70@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/v60
+CPUDEFS += -DHAS_V70=1
+HAS_V60=1
+else
+CPUDEFS += -DHAS_V70=0
+endif
+
+ifeq ($(HAS_V60),1)
+SOURCES_C += $(CORE_DIR)/cpu/v60/v60.c
+SOURCES_C += $(CORE_DIR)/cpu/v60/v60d.c
+endif
+
+CPU=$(strip $(findstring I8035@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/i8039
+CPUDEFS += -DHAS_I8035=1
+HAS_I8039=1
+else
+CPUDEFS += -DHAS_I8035=0
+endif
+
+CPU=$(strip $(findstring I8039@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/i8039
+CPUDEFS += -DHAS_I8039=1
+HAS_I8039=1
+else
+CPUDEFS += -DHAS_I8039=0
+endif
+
+CPU=$(strip $(findstring I8048@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/i8039
+CPUDEFS += -DHAS_I8048=1
+HAS_I8039=1
+else
+CPUDEFS += -DHAS_I8048=0
+endif
+
+CPU=$(strip $(findstring N7751@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/i8039
+CPUDEFS += -DHAS_N7751=1
+else
+CPUDEFS += -DHAS_N7751=0
+endif
+
+ifeq ($(HAS_I8039),1)
+SOURCES_C += $(CORE_DIR)/cpu/i8039/i8039.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/i8039/8039dasm.c
+endif
+endif
+
+CPU=$(strip $(findstring I8X41@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/i8x41
+CPUDEFS += -DHAS_I8X41=1
+SOURCES_C += $(CORE_DIR)/cpu/i8x41/i8x41.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/i8x41/8x41dasm.c
+endif
+else
+CPUDEFS += -DHAS_I8X41=0
+endif
+
+CPU=$(strip $(findstring M6800@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6800
+CPUDEFS += -DHAS_M6800=1
+HAS_M6800COMMON=1
+else
+CPUDEFS += -DHAS_M6800=0
+endif
+
+CPU=$(strip $(findstring M6801@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6800
+CPUDEFS += -DHAS_M6801=1
+HAS_M6800COMMON=1
+else
+CPUDEFS += -DHAS_M6801=0
+endif
+
+CPU=$(strip $(findstring M6802@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6800
+CPUDEFS += -DHAS_M6802=1
+HAS_M6800COMMON=1
+else
+CPUDEFS += -DHAS_M6802=0
+endif
+
+CPU=$(strip $(findstring M6803@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6800
+CPUDEFS += -DHAS_M6803=1
+HAS_M6800COMMON=1
+else
+CPUDEFS += -DHAS_M6803=0
+endif
+
+
+CPU=$(strip $(findstring M6808@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6800
+CPUDEFS += -DHAS_M6808=1
+HAS_M6800COMMON=1
+else
+CPUDEFS += -DHAS_M6808=0
+endif
+
+CPU=$(strip $(findstring HD63701@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6800
+CPUDEFS += -DHAS_HD63701=1
+HAS_M6800COMMON=1
+else
+CPUDEFS += -DHAS_HD63701=0
+endif
+
+CPU=$(strip $(findstring NSC8105@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6800
+CPUDEFS += -DHAS_NSC8105=1
+HAS_M6800COMMON=1
+else
+CPUDEFS += -DHAS_NSC8105=0
+endif
+
+ifeq ($(HAS_M6800COMMON),1)
+SOURCES_C += $(CORE_DIR)/cpu/m6800/m6800.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/m6800/6800dasm.c
+endif
+endif
+
+CPU=$(strip $(findstring M6805@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6805
+CPUDEFS += -DHAS_M6805=1
+HAS_M6805=1
+else
+CPUDEFS += -DHAS_M6805=0
+endif
+
+CPU=$(strip $(findstring M68705@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6805
+CPUDEFS += -DHAS_M68705=1
+HAS_M6805=1
+else
+CPUDEFS += -DHAS_M68705=0
+endif
+
+CPU=$(strip $(findstring HD63705@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6805
+CPUDEFS += -DHAS_HD63705=1
+HAS_M6805=1
+else
+CPUDEFS += -DHAS_HD63705=0
+endif
+
+ifeq ($(HAS_M6805),1)
+SOURCES_C += $(CORE_DIR)/cpu/m6805/m6805.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/m6805/6805dasm.c
+endif
+endif
+
+CPU=$(strip $(findstring HD6309@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/hd6309
+CPUDEFS += -DHAS_HD6309=1
+SOURCES_C += $(CORE_DIR)/cpu/hd6309/hd6309.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/hd6309/6309dasm.c
+endif
+else
+CPUDEFS += -DHAS_HD6309=0
+endif
+
+CPU=$(strip $(findstring M6809@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m6809
+CPUDEFS += -DHAS_M6809=1
+SOURCES_C += $(CORE_DIR)/cpu/m6809/m6809.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/m6809/6809dasm.c
+endif
+else
+CPUDEFS += -DHAS_M6809=0
+endif
+
+CPU=$(strip $(findstring KONAMI@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/konami
+CPUDEFS += -DHAS_KONAMI=1
+SOURCES_C += $(CORE_DIR)/cpu/konami/konami.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/konami/knmidasm.c
+endif
+else
+CPUDEFS += -DHAS_KONAMI=0
+endif
+
+CPU=$(strip $(findstring M68000@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m68000
+CPUDEFS += -DHAS_M68000=1
+ifdef X86_ASM_68000
+SOURCES_C += $(CORE_DIR)/cpu/m68000/asmintf.c $(CORE_DIR)/cpu/m68000/68000.c
+ASMDEFS += -DA68K0
+else
+HAS_M68KCOMMON=1
+endif
+else
+CPUDEFS += -DHAS_M68000=0
+endif
+
+CPU=$(strip $(findstring M68010@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m68000
+CPUDEFS += -DHAS_M68010=1
+ifdef X86_ASM_68000
+SOURCES_C += $(CORE_DIR)/cpu/m68000/asmintf.c $(CORE_DIR)/cpu/m68000/68000.c
+ASMDEFS += -DA68K0
+$(CORE_DIR)/cpu/m68000/68kem.c: $(CORE_DIR)/cpu/m68000/68kem.asm make68k.c
+else
+HAS_M68KCOMMON=1
+endif
+else
+CPUDEFS += -DHAS_M68010=0
+endif
+
+CPU=$(strip $(findstring M68EC020@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m68000
+CPUDEFS += -DHAS_M68EC020=1
+ifdef X86_ASM_68020
+ASMDEFS += -DA68K2
+SOURCES_C += $(CORE_DIR)/cpu/m68000/asmintf.c $(CORE_DIR)/cpu/m68000/68020.c
+ASMDEFS += -DA68KEM
+$(CORE_DIR)/cpu/m68000/68kem.c: $(CORE_DIR)/cpu/m68000/68kem.asm make68k.c
+else
+HAS_M68KCOMMON=1
+endif
+else
+CPUDEFS += -DHAS_M68EC020=0
+endif
+
+
+CPU=$(strip $(findstring M68020@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/m68000
+CPUDEFS += -DHAS_M68020=1
+ifdef X86_ASM_68020
+ASMDEFS += -DA68K2
+SOURCES_C += $(CORE_DIR)/cpu/m68000/asmintf.c $(CORE_DIR)/cpu/m68000/68020.c
+ASMDEFS += -DA68KEM
+$(CORE_DIR)/cpu/m68000/68kem.c: $(CORE_DIR)/cpu/m68000/68kem.asm make68k.c
+else
+HAS_M68KCOMMON=1
+endif
+else
+CPUDEFS += -DHAS_M68020=0
+endif
+
+ifeq ($(HAS_M68KCOMMON),1)
+SOURCES_C += $(CORE_DIR)/cpu/m68000/m68kops.c $(CORE_DIR)/cpu/m68000/m68kopac.c \
+				 $(CORE_DIR)/cpu/m68000/m68kopdm.c $(CORE_DIR)/cpu/m68000/m68kopnz.c \
+				 $(CORE_DIR)/cpu/m68000/m68kcpu.c $(CORE_DIR)/cpu/m68000/m68kmame.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/m68000/m68kdasm.c
+endif
+endif
+
+CPU=$(strip $(findstring T11@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/t11
+CPUDEFS += -DHAS_T11=1
+SOURCES_C += $(CORE_DIR)/cpu/t11/t11.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/t11/t11dasm.c
+endif
+else
+CPUDEFS += -DHAS_T11=0
+endif
+
+CPU=$(strip $(findstring S2650@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/s2650
+CPUDEFS += -DHAS_S2650=1
+SOURCES_C += $(CORE_DIR)/cpu/s2650/s2650.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/s2650/2650dasm.c
+endif
+else
+CPUDEFS += -DHAS_S2650=0
+endif
+
+CPU=$(strip $(findstring TMS34010@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms34010
+CPUDEFS += -DHAS_TMS34010=1
+HAS_TMS=1
+else
+CPUDEFS += -DHAS_TMS34010=0
+endif
+
+CPU=$(strip $(findstring TMS34020@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms34020
+CPUDEFS += -DHAS_TMS34020=1
+HAS_TMS=1
+else
+CPUDEFS += -DHAS_TMS34020=0
+endif
+
+ifeq ($(HAS_TMS),1)
+SOURCES_C += $(CORE_DIR)/cpu/tms34010/tms34010.c $(CORE_DIR)/cpu/tms34010/34010fld.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/tms34010/34010dsm.c
+endif
+endif
+
+CPU=$(strip $(findstring TMS9900@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms9900
+CPUDEFS += -DHAS_TMS9900=1
+HAS_TMS9900=1
+else
+CPUDEFS += -DHAS_TMS9900=0
+endif
+
+CPU=$(strip $(findstring TMS9940@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms9900
+HAS_TMS9900=1
+CPUDEFS += -DHAS_TMS9940=1
+else
+CPUDEFS += -DHAS_TMS9940=0
+endif
+
+
+CPU=$(strip $(findstring TMS9980@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms9900
+CPUDEFS += -DHAS_TMS9980=1
+SOURCES_C += $(CORE_DIR)/cpu/tms9900/tms9980a.c
+HAS_TMS9900=1
+else
+CPUDEFS += -DHAS_TMS9980=0
+endif
+
+CPU=$(strip $(findstring TMS9985@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms9900
+CPUDEFS += -DHAS_TMS9985=1
+SOURCES_C += $(CORE_DIR)/cpu/tms9900/tms9980a.c
+HAS_TMS9900=1
+else
+CPUDEFS += -DHAS_TMS9985=0
+endif
+
+CPU=$(strip $(findstring TMS9989@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms9900
+CPUDEFS += -DHAS_TMS9989=1
+SOURCES_C += $(CORE_DIR)/cpu/tms9900/tms9980a.c
+HAS_TMS9900=1
+else
+CPUDEFS += -DHAS_TMS9989=0
+endif
+
+CPU=$(strip $(findstring TMS9995@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms9900
+CPUDEFS += -DHAS_TMS9995=1
+SOURCES_C += $(CORE_DIR)/cpu/tms9900/tms9995.c
+HAS_TMS9900=1
+else
+CPUDEFS += -DHAS_TMS9995=0
+endif
+
+CPU=$(strip $(findstring TMS99010@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms9900
+CPUDEFS += -DHAS_TI990_10=1
+SOURCES_C += $(CORE_DIR)/cpu/tms9900/ti990_10.c
+HAS_TMS9900=1
+else
+CPUDEFS += -DHAS_TI990_10=0
+endif
+
+CPU=$(strip $(findstring TMS99105A@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms9900
+CPUDEFS += -DHAS_TMS99105A=1
+SOURCES_C += $(CORE_DIR)/cpu/tms9900/tms9995.c
+HAS_TMS9900=1
+else
+CPUDEFS += -DHAS_TMS99105A=0
+endif
+
+CPU=$(strip $(findstring TMS99110A@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms9900
+CPUDEFS += -DHAS_TMS99110A=1
+SOURCES_C += $(CORE_DIR)/cpu/tms9900/tms9995.c
+HAS_TMS9900=1
+else
+CPUDEFS += -DHAS_TMS99110A=0
+endif
+
+ifeq ($(HAS_TMS9900),1)
+SOURCES_C += $(CORE_DIR)/cpu/tms9900/tms9900.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/tms9900/9900dasm.c
+endif
+endif
+
+CPU=$(strip $(findstring Z8000@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/z8000
+CPUDEFS += -DHAS_Z8000=1
+SOURCES_C += $(CORE_DIR)/cpu/z8000/z8000.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/z8000/8000dasm.c
+endif
+else
+CPUDEFS += -DHAS_Z8000=0
+endif
+
+CPU=$(strip $(findstring TMS32010@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms32010
+CPUDEFS += -DHAS_TMS32010=1
+SOURCES_C += $(CORE_DIR)/cpu/tms32010/tms32010.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/tms32010/32010dsm.c
+endif
+else
+CPUDEFS += -DHAS_TMS32010=0
+endif
+
+CPU=$(strip $(findstring TMS32025@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms32025
+CPUDEFS += -DHAS_TMS32025=1
+SOURCES_C += $(CORE_DIR)/cpu/tms32025/tms32025.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/tms32025/32025dsm.c
+endif
+else
+CPUDEFS += -DHAS_TMS32025=0
+endif
+
+CPU=$(strip $(findstring TMS32031@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/tms32031
+CPUDEFS += -DHAS_TMS32031=1
+SOURCES_C += $(CORE_DIR)/cpu/tms32031/tms32031.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/tms32031/dis32031.c
+endif
+else
+CPUDEFS += -DHAS_TMS32031=0
+endif
+
+CPU=$(strip $(findstring CCPU@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/ccpu
+CPUDEFS += -DHAS_CCPU=1
+SOURCES_C += $(CORE_DIR)/cpu/ccpu/ccpu.c $(CORE_DIR)/vidhrdw/cinemat_vidhrdw.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/ccpu/ccpudasm.c
+endif
+else
+CPUDEFS += -DHAS_CCPU=0
+endif
+
+
+CPU=$(strip $(findstring PSXCPU@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/mips
+CPUDEFS += -DHAS_PSXCPU=1
+SOURCES_C += $(CORE_DIR)/cpu/mips/psx_cpu.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/mips/mipsdasm.c
+endif
+else
+CPUDEFS += -DHAS_PSXCPU=0
+endif
+
+CPU=$(strip $(findstring ASAP@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/asap
+CPUDEFS += -DHAS_ASAP=1
+SOURCES_C += $(CORE_DIR)/cpu/asap/asap.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/asap/asapdasm.c
+endif
+else
+CPUDEFS += -DHAS_ASAP=0
+endif
+
+CPU=$(strip $(findstring UPD7810@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/upd7810
+CPUDEFS += -DHAS_UPD7810=1
+HAS_UPD7810=1
+else
+CPUDEFS += -DHAS_UPD7810=0
+endif
+
+CPU=$(strip $(findstring UPD7807@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/upd7810
+CPUDEFS += -DHAS_UPD7807=1
+HAS_UPD7810=1
+else
+CPUDEFS += -DHAS_UPD7807=0
+endif
+
+ifeq ($(HAS_UPD7810),1)
+SOURCES_C += $(CORE_DIR)/cpu/upd7810/upd7810.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/upd7810/7810dasm.c
+endif
+endif
+
+CPU=$(strip $(findstring ARM@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/arm
+CPUDEFS += -DHAS_ARM=1
+SOURCES_C += $(CORE_DIR)/cpu/arm/arm.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/arm/armdasm.c
+endif
+else
+CPUDEFS += -DHAS_ARM=0
+endif
+
+CPU=$(strip $(findstring JAGUAR@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/jaguar
+CPUDEFS += -DHAS_JAGUAR=1
+SOURCES_C += $(CORE_DIR)/cpu/jaguar/jaguar.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/jaguar/jagdasm.c
+endif
+else
+CPUDEFS += -DHAS_JAGUAR=0
+endif
+
+CPU=$(strip $(findstring R3000@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/r3000
+CPUDEFS += -DHAS_R3000=1
+SOURCES_C += $(CORE_DIR)/cpu/mips/r3000.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/mips/r3kdasm.c
+endif
+else
+CPUDEFS += -DHAS_R3000=0
+endif
+
+CPU=$(strip $(findstring R4600@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/mips
+CPUDEFS += -DHAS_R4600=1
+HAS_MIPS3=1
+else
+CPUDEFS += -DHAS_R4600=0
+endif
+
+CPU=$(strip $(findstring R5000@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/mips
+CPUDEFS += -DHAS_R5000=1
+else
+CPUDEFS += -DHAS_R5000=0
+endif
+
+ifeq ($(HAS_MIPS3),1)
+ifdef X86_MIPS3_DRC
+SOURCES_C += $(CORE_DIR)/cpu/mips/mips3drc.c
+else
+SOURCES_C += $(CORE_DIR)/cpu/mips/mips3.c
+endif
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/mips/mips3dsm.c
+endif
+endif
+
+CPU=$(strip $(findstring SH2@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/sh2
+CPUDEFS += -DHAS_SH2=1
+SOURCES_C += $(CORE_DIR)/cpu/sh2/sh2.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/sh2/sh2dasm.c
+endif
+else
+CPUDEFS += -DHAS_SH2=0
+endif
+
+CPU=$(strip $(findstring DSP32C@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/dsp32
+CPUDEFS += -DHAS_DSP32C=1
+SOURCES_C += $(CORE_DIR)/cpu/dsp32/dsp32.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/dsp32/dsp32dis.c
+endif
+else
+CPUDEFS += -DHAS_DSP32C=0
+endif
+
+CPU=$(strip $(findstring PIC16C54@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/pic16c5x
+CPUDEFS += -DHAS_PIC16C54=1
+HAS_PIC16C58=1
+else
+CPUDEFS += -DHAS_PIC16C54=0
+endif
+
+CPU=$(strip $(findstring PIC16C55@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/pic16c5x
+CPUDEFS += -DHAS_PIC16C55=1
+HAS_PIC16C58=1
+else
+CPUDEFS += -DHAS_PIC16C55=0
+endif
+
+CPU=$(strip $(findstring PIC16C56@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/pic16c5x
+CPUDEFS += -DHAS_PIC16C56=1
+HAS_PIC16C58=1
+else
+CPUDEFS += -DHAS_PIC16C56=0
+endif
+
+CPU=$(strip $(findstring PIC16C57@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/pic16c5x
+CPUDEFS += -DHAS_PIC16C57=1
+HAS_PIC16C58=1
+else
+CPUDEFS += -DHAS_PIC16C57=0
+endif
+
+CPU=$(strip $(findstring PIC16C58@,$(CPUS)))
+ifneq ($(CPU),)
+OBJDIRS += $(CORE_DIR)/cpu/pic16c5x
+CPUDEFS += -DHAS_PIC16C58=1
+HAS_PIC16C58=1
+else
+CPUDEFS += -DHAS_PIC16C58=0
+endif
+
+ifeq ($(HAS_PIC16C58),1)
+SOURCES_C += $(CORE_DIR)/cpu/pic16c5x/pic16c5x.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/pic16c5x/16c5xdsm.c
+endif
+endif
+
+CPU=$(strip $(findstring G65816@,$(CPUS)))
+ifneq ($(CPU),)
+G6D = cpu/g65816
+OBJDIRS += $(CORE_DIR)/$(G6D)
+CPUDEFS += -DHAS_G65816=1
+SOURCES_C += $(CORE_DIR)/$(G6D)/g65816.c
+SOURCES_C += $(CORE_DIR)/$(G6D)/g65816o0.c
+SOURCES_C += $(CORE_DIR)/$(G6D)/g65816o1.c
+SOURCES_C += $(CORE_DIR)/$(G6D)/g65816o2.c
+SOURCES_C += $(CORE_DIR)/$(G6D)/g65816o3.c
+SOURCES_C += $(CORE_DIR)/$(G6D)/g65816o4.c
+SOURCES_C += $(CORE_DIR)/$(G6D)/g65816ds.c
+else
+CPUDEFS += -DHAS_G65816=0
+endif
+
+CPU=$(strip $(findstring SPC700@,$(CPUS)))
+ifneq ($(CPU),)
+SPCD = cpu/spc700
+CPUDEFS += -DHAS_SPC700=1
+SOURCES_C += $(CORE_DIR)/$(SPCD)/spc700.c
+SOURCES_C += $(CORE_DIR)/$(SPCD)/spc700ds.c
+else
+CPUDEFS += -DHAS_SPC700=0
+endif
+
+CPU=$(strip $(findstring E132XS@,$(CPUS)))
+ifneq ($(CPU),)
+CPUDEFS += -DHAS_E132XS=1
+SOURCES_C += $(CORE_DIR)/cpu/e132xs/e132xs.c
+ifeq ($(DEBUGGER),1)
+SOURCES_C += $(CORE_DIR)/cpu/e132xs/32xsdasm.c
+endif
+else
+CPUDEFS += -DHAS_E132XS=0
+endif
+
+SOUND=$(strip $(findstring CUSTOM@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_CUSTOM=1
+else
+SOUNDDEFS += -DHAS_CUSTOM=0
+endif
+
+SOUND=$(strip $(findstring SAMPLES@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_SAMPLES=1
+SOURCES_C += $(CORE_DIR)/sound/samples.c
+else
+SOUNDDEFS += -DHAS_SAMPLES=0
+endif
+
+SOUND=$(strip $(findstring DAC@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_DAC=1
+SOURCES_C += $(CORE_DIR)/sound/dac.c
+else
+SOUNDDEFS += -DHAS_DAC=0
+endif
+
+SOUND=$(strip $(findstring DISCRETE@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_DISCRETE=1
+SOURCES_C += $(CORE_DIR)/sound/discrete.c
+else
+SOUNDDEFS += -DHAS_DISCRETE=0
+endif
+
+SOUND=$(strip $(findstring AY8910@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_AY8910=1
+HAS_YMCOMMON = 1
+else
+SOUNDDEFS += -DHAS_AY8910=0
+endif
+
+SOUND=$(strip $(findstring YM2203@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YM2203=1
+SOURCES_C += $(CORE_DIR)/sound/2203intf.c
+HAS_YMCOMMON=1
+else
+SOUNDDEFS += -DHAS_YM2203=0
+endif
+
+SOUND=$(strip $(findstring YM2151@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YM2151=1
+SOURCES_C += $(CORE_DIR)/sound/2151intf.c $(CORE_DIR)/sound/ym2151.c $(CORE_DIR)/sound/fm.c
+else
+SOUNDDEFS += -DHAS_YM2151=0
+endif
+
+SOUND=$(strip $(findstring YM2151_ALT@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YM2151_ALT=1
+SOURCES_C += $(CORE_DIR)/sound/2151intf.c $(CORE_DIR)/sound/ym2151.c
+else
+SOUNDDEFS += -DHAS_YM2151_ALT=0
+endif
+
+SOUND=$(strip $(findstring YM2608@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YM2608=1
+HAS_YMDELTAT=1
+SOURCES_C += $(CORE_DIR)/sound/2608intf.c
+HAS_YMCOMMON = 1
+else
+SOUNDDEFS += -DHAS_YM2608=0
+endif
+
+SOUND=$(strip $(findstring YM2610@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YM2610=1
+HAS_YMDELTAT=1
+HAS_YM2610INTF=1
+HAS_YMCOMMON=1
+else
+SOUNDDEFS += -DHAS_YM2610=0
+endif
+
+SOUND=$(strip $(findstring YM2610B@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YM2610B=1
+HAS_YMDELTAT=1
+HAS_YM2610INTF=1
+HAS_YMCOMMON=1
+else
+SOUNDDEFS += -DHAS_YM2610B=0
+endif
+
+
+SOUND=$(strip $(findstring YM2612@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YM2612=1
+HAS_YM2612INTF=1
+HAS_YMCOMMON=1
+else
+SOUNDDEFS += -DHAS_YM2612=0
+endif
+
+
+SOUND=$(strip $(findstring YM3438@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YM3438=1
+HAS_YM2612INTF=1
+HAS_YMCOMMON=1
+else
+SOUNDDEFS += -DHAS_YM3438=0
+endif
+
+ifeq ($(HAS_YM2610INTF),1)
+SOURCES_C += $(CORE_DIR)/sound/2610intf.c
+endif
+
+ifeq ($(HAS_YM2612INTF),1)
+SOURCES_C += $(CORE_DIR)/sound/2612intf.c
+endif
+
+ifeq ($(HAS_YMCOMMON),1)
+SOURCES_C += $(CORE_DIR)/sound/ay8910.c $(CORE_DIR)/sound/fm.c
+endif
+
+SOUND=$(strip $(findstring YM2413@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YM2413=1
+SOURCES_C += $(CORE_DIR)/sound/2413intf.c $(CORE_DIR)/sound/ym2413.c
+else
+SOUNDDEFS += -DHAS_YM2413=0
+endif
+
+SOUND=$(strip $(findstring YM3812@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YM3812=1
+HAS_FMOPL=1
+HAS_YM3812INTF=1
+else
+SOUNDDEFS += -DHAS_YM3812=0
+endif
+
+SOUND=$(strip $(findstring YM3526@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YM3526=1
+HAS_FMOPL=1
+HAS_YM3812INTF=1
+else
+SOUNDDEFS += -DHAS_YM3526=0
+endif
+
+SOUND=$(strip $(findstring YMZ280B@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YMZ280B=1
+SOURCES_C += $(CORE_DIR)/sound/ymz280b.c
+else
+SOUNDDEFS += -DHAS_YMZ280B=0
+endif
+
+SOUND=$(strip $(findstring Y8950@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_Y8950=1
+HAS_YMDELTAT=1
+HAS_FMOPL=1
+HAS_YM3812INTF=1
+else
+SOUNDDEFS += -DHAS_Y8950=0
+endif
+
+ifeq ($(HAS_YM3812INTF),1)
+SOURCES_C += $(CORE_DIR)/sound/3812intf.c
+endif
+
+ifeq ($(HAS_FMOPL),1)
+SOURCES_C += $(CORE_DIR)/sound/fmopl.c
+endif
+
+ifeq ($(HAS_YMDELTAT),1)
+SOURCES_C += $(CORE_DIR)/sound/ymdeltat.c
+endif
+
+SOUND=$(strip $(findstring SN76477@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_SN76477=1
+SOURCES_C += $(CORE_DIR)/sound/sn76477.c
+else
+SOUNDDEFS += -DHAS_SN76477=0
+endif
+
+SOUND=$(strip $(findstring SN76496@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_SN76496=1
+SOURCES_C += $(CORE_DIR)/sound/sn76496.c
+else
+SOUNDDEFS += -DHAS_SN76496=0
+endif
+
+SOUND=$(strip $(findstring POKEY@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_POKEY=1
+SOURCES_C += $(CORE_DIR)/sound/pokey.c
+else
+SOUNDDEFS += -DHAS_POKEY=0
+endif
+
+SOUND=$(strip $(findstring TIA@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_TIA=1
+SOURCES_C += $(CORE_DIR)/sound/tiasound.c $(CORE_DIR)/sound/tiaintf.c
+else
+SOUNDDEFS += -DHAS_TIA=0
+endif
+
+SOUND=$(strip $(findstring NES@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_NES=1
+ifndef MESS
+SOURCES_C += $(CORE_DIR)/sound/nes_apu.c
+else
+SOURCES_C += $(CORE_DIR)/mess/sound/nes_apu2.c $(CORE_DIR)/mess/sound/nesintf.c
+endif
+else
+SOUNDDEFS += -DHAS_NES=0
+endif
+
+SOUND=$(strip $(findstring ASTROCADE@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_ASTROCADE=1
+SOURCES_C += $(CORE_DIR)/sound/astrocde_snd.c
+else
+SOUNDDEFS += -DHAS_ASTROCADE=0
+endif
+
+SOUND=$(strip $(findstring NAMCO@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_NAMCO=1
+SOURCES_C += $(CORE_DIR)/sound/namco.c
+else
+SOUNDDEFS += -DHAS_NAMCO=0
+endif
+
+SOUND=$(strip $(findstring NAMCO_15XX@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_NAMCO_15XX=1
+SOURCES_C += $(CORE_DIR)/sound/namco.c
+else
+SOUNDDEFS += -DHAS_NAMCO_15XX=0
+endif
+
+SOUND=$(strip $(findstring NAMCO_52XX@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_NAMCO_52XX=1
+SOURCES_C += $(CORE_DIR)/sound/namco52.c
+else
+SOUNDDEFS += -DHAS_NAMCO_52XX=0
+endif
+
+SOUND=$(strip $(findstring NAMCO_54XX@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_NAMCO_54XX=1
+SOURCES_C += $(CORE_DIR)/sound/namco54.c
+else
+SOUNDDEFS += -DHAS_NAMCO_54XX=0
+endif
+
+
+SOUND=$(strip $(findstring NAMCONA@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_NAMCONA=1
+SOURCES_C += $(CORE_DIR)/sound/namcona.c
+else
+SOUNDDEFS += -DHAS_NAMCONA=0
+endif
+
+SOUND=$(strip $(findstring TMS36XX@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_TMS36XX=1
+SOURCES_C += $(CORE_DIR)/sound/tms36xx.c
+else
+SOUNDDEFS += -DHAS_TMS36XX=0
+endif
+
+SOUND=$(strip $(findstring TMS5110@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_TMS5110=1
+SOURCES_C += $(CORE_DIR)/sound/tms5110.c $(CORE_DIR)/sound/5110intf.c
+else
+SOUNDDEFS += -DHAS_TMS5110=0
+endif
+
+SOUND=$(strip $(findstring TMS5220@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_TMS5220=1
+SOURCES_C += $(CORE_DIR)/sound/tms5220.c $(CORE_DIR)/sound/5220intf.c
+else
+SOUNDDEFS += -DHAS_TMS5220=0
+endif
+
+SOUND=$(strip $(findstring VLM5030@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_VLM5030=1
+SOURCES_C += $(CORE_DIR)/sound/vlm5030.c
+else
+SOUNDDEFS += -DHAS_VLM5030=0
+endif
+
+SOUND=$(strip $(findstring ADPCM@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_ADPCM=1
+HAS_ADPCM=1
+else
+SOUNDDEFS += -DHAS_ADPCM=0
+endif
+
+SOUND=$(strip $(findstring OKIM6295@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_OKIM6295=1
+HAS_ADPCM=1
+else
+SOUNDDEFS += -DHAS_OKIM6295=0
+endif
+
+ifeq ($(HAS_ADPCM),1)
+SOURCES_C += $(CORE_DIR)/sound/adpcm.c
+endif
+
+SOUND=$(strip $(findstring MSM5205@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_MSM5205=1
+SOURCES_C += $(CORE_DIR)/sound/msm5205.c
+else
+SOUNDDEFS += -DHAS_MSM5205=0
+endif
+
+SOUND=$(strip $(findstring MSM5232@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_MSM5232=1
+SOURCES_C += $(CORE_DIR)/sound/msm5232.c
+else
+SOUNDDEFS += -DHAS_MSM5232=0
+endif
+
+SOUND=$(strip $(findstring UPD7759@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_UPD7759=1
+SOURCES_C += $(CORE_DIR)/sound/upd7759.c
+else
+SOUNDDEFS += -DHAS_UPD7759=0
+endif
+
+SOUND=$(strip $(findstring HC55516@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_HC55516=1
+SOURCES_C += $(CORE_DIR)/sound/hc55516.c
+else
+SOUNDDEFS += -DHAS_HC55516=0
+endif
+
+SOUND=$(strip $(findstring K005289@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_K005289=1
+SOURCES_C += $(CORE_DIR)/sound/k005289.c
+else
+SOUNDDEFS += -DHAS_K005289=0
+endif
+
+SOUND=$(strip $(findstring K007232@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_K007232=1
+SOURCES_C += $(CORE_DIR)/sound/k007232.c
+else
+SOUNDDEFS += -DHAS_K007232=0
+endif
+
+SOUND=$(strip $(findstring K051649@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_K051649=1
+SOURCES_C += $(CORE_DIR)/sound/k051649.c
+else
+SOUNDDEFS += -DHAS_K051649=0
+endif
+
+SOUND=$(strip $(findstring K053260@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_K053260=1
+SOURCES_C += $(CORE_DIR)/sound/k053260.c
+else
+SOUNDDEFS += -DHAS_K053260=0
+endif
+
+SOUND=$(strip $(findstring K054539@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_K054539=1
+SOURCES_C += $(CORE_DIR)/sound/k054539.c
+else
+SOUNDDEFS += -DHAS_K054539=0
+endif
+
+SOUND=$(strip $(findstring SEGAPCM@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_SEGAPCM=1
+SOURCES_C += $(CORE_DIR)/sound/segapcm.c
+else
+SOUNDDEFS += -DHAS_SEGAPCM=0
+endif
+
+SOUND=$(strip $(findstring RF5C68@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_RF5C68=1
+SOURCES_C += $(CORE_DIR)/sound/rf5c68.c
+else
+SOUNDDEFS += -DHAS_RF5C68=0
+endif
+
+SOUND=$(strip $(findstring CEM3394@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_CEM3394=1
+SOURCES_C += $(CORE_DIR)/sound/cem3394.c
+else
+SOUNDDEFS += -DHAS_CEM3394=0
+endif
+
+SOUND=$(strip $(findstring C140@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_C140=1
+SOURCES_C += $(CORE_DIR)/sound/c140.c
+else
+SOUNDDEFS += -DHAS_C140=0
+endif
+
+SOUND=$(strip $(findstring QSOUND@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_QSOUND=1
+SOURCES_C += $(CORE_DIR)/sound/qsound.c
+else
+SOUNDDEFS += -DHAS_QSOUND=0
+endif
+
+SOUND=$(strip $(findstring SAA1099@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_SAA1099=1
+SOURCES_C += $(CORE_DIR)/sound/saa1099.c
+else
+SOUNDDEFS += -DHAS_SAA1099=0
+endif
+
+SOUND=$(strip $(findstring IREMGA20@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_IREMGA20=1
+SOURCES_C += $(CORE_DIR)/sound/iremga20.c
+else
+SOUNDDEFS += -DHAS_IREMGA20=0
+endif
+
+SOUND=$(strip $(findstring ES5505@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_ES5505=1
+HAS_ES5505=1
+else
+SOUNDDEFS += -DHAS_ES5505=0
+endif
+
+SOUND=$(strip $(findstring ES5506@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_ES5506=1
+HAS_ES5505=1
+else
+SOUNDDEFS += -DHAS_ES5506=0
+endif
+
+ifeq ($(HAS_ES5505),1)
+SOURCES_C += $(CORE_DIR)/sound/es5506.c
+endif
+
+SOUND=$(strip $(findstring BSMT2000@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_BSMT2000=1
+SOURCES_C += $(CORE_DIR)/sound/bsmt2000.c
+else
+SOUNDDEFS += -DHAS_BSMT2000=0
+endif
+
+SOUND=$(strip $(findstring YMF262@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YMF262=1
+SOURCES_C += $(CORE_DIR)/sound/ymf262.c $(CORE_DIR)/sound/262intf.c
+else
+SOUNDDEFS += -DHAS_YMF262=0
+endif
+
+SOUND=$(strip $(findstring YMF278B@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YMF278B=1
+SOURCES_C += $(CORE_DIR)/sound/ymf278b.c
+else
+SOUNDDEFS += -DHAS_YMF278B=0
+endif
+
+SOUND=$(strip $(findstring GAELCO_CG1V@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_GAELCO_CG1V=1
+HAS_GAELCO_GAE1=1
+else
+SOUNDDEFS += -DHAS_GAELCO_CG1V=0
+endif
+
+SOUND=$(strip $(findstring GAELCO_GAE1@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_GAELCO_GAE1=1
+HAS_GAELCO_GAE1=1
+else
+SOUNDDEFS += -DHAS_GAELCO_GAE1=0
+endif
+
+ifeq ($(HAS_GAELCO_GAE1),1)
+SOURCES_C += $(CORE_DIR)/sound/gaelco_snd.c
+endif
+
+SOUND=$(strip $(findstring X1_010@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_X1_010=1
+SOURCES_C += $(CORE_DIR)/sound/x1_010.c
+else
+SOUNDDEFS += -DHAS_X1_010=0
+endif
+
+SOUND=$(strip $(findstring MULTIPCM@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_MULTIPCM=1
+SOURCES_C += $(CORE_DIR)/sound/multipcm.c
+else
+SOUNDDEFS += -DHAS_MULTIPCM=0
+endif
+
+SOUND=$(strip $(findstring C6280@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_C6280=1
+SOURCES_C += $(CORE_DIR)/sound/c6280.c
+else
+SOUNDDEFS += -DHAS_C6280=0
+endif
+
+SOUND=$(strip $(findstring SP0250@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_SP0250=1
+SOURCES_C += $(CORE_DIR)/sound/sp0250.c
+else
+SOUNDDEFS += -DHAS_SP0250=0
+endif
+
+SOUND=$(strip $(findstring SCSP@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_SCSP=1
+SOURCES_C += $(CORE_DIR)/sound/scsp.c
+else
+SOUNDDEFS += -DHAS_SCSP=0
+endif
+
+SOUND=$(strip $(findstring PSXSPU@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_PSXSPU=1
+SOURCES_C += $(CORE_DIR)/sound/psx.c
+else
+SOUNDDEFS += -DHAS_PSXSPU=0
+endif
+
+SOUND=$(strip $(findstring YMF271@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_YMF271=1
+SOURCES_C += $(CORE_DIR)/sound/ymf271.c
+else
+SOUNDDEFS += -DHAS_YMF271=0
+endif
+
+SOUND=$(strip $(findstring ICS2115@,$(SOUNDS)))
+ifneq ($(SOUND),)
+SOUNDDEFS += -DHAS_ICS2115=1
+SOURCES_C += $(CORE_DIR)/sound/ics2115.c
+else
+SOUNDDEFS += -DHAS_ICS2115=0
+endif
+
+SOURCES_C += \
+	$(CORE_DIR)/lib/mame-chd/chd.c \
+	$(CORE_DIR)/lib/mame-chd/mame_sha1.c
+
+SOURCES_C += \
+	$(CORE_DIR)/libretro-deps/libFLAC/bitreader.c \
+	$(CORE_DIR)/libretro-deps/libFLAC/cpu.c \
+	$(CORE_DIR)/libretro-deps/libFLAC/crc.c \
+	$(CORE_DIR)/libretro-deps/libFLAC/fixed.c \
+	$(CORE_DIR)/libretro-deps/libFLAC/float.c \
+	$(CORE_DIR)/libretro-deps/libFLAC/format.c \
+	$(CORE_DIR)/libretro-deps/libFLAC/lpc.c \
+	$(CORE_DIR)/libretro-deps/libFLAC/md5.c \
+	$(CORE_DIR)/libretro-deps/libFLAC/memory.c \
+	$(CORE_DIR)/libretro-deps/libFLAC/stream_decoder.c \
+	$(CORE_DIR)/libretro-deps/libFLAC/window.c
+
+ifeq ($(STATIC_LINKING),1)
+else
+SOURCES_C += \
+	$(LIBRETRO_COMM_DIR)/compat/compat_posix_string.c \
+	$(LIBRETRO_COMM_DIR)/compat/compat_snprintf.c \
+	$(LIBRETRO_COMM_DIR)/compat/compat_strcasestr.c \
+	$(LIBRETRO_COMM_DIR)/compat/compat_strl.c \
+	$(LIBRETRO_COMM_DIR)/compat/fopen_utf8.c \
+	$(LIBRETRO_COMM_DIR)/encodings/encoding_crc32.c \
+	$(LIBRETRO_COMM_DIR)/encodings/encoding_utf.c \
+	$(LIBRETRO_COMM_DIR)/file/file_path.c \
+	$(LIBRETRO_COMM_DIR)/file/file_path_io.c \
+	$(LIBRETRO_COMM_DIR)/streams/file_stream.c \
+	$(LIBRETRO_COMM_DIR)/streams/file_stream_transforms.c \
+	$(LIBRETRO_COMM_DIR)/streams/interface_stream.c \
+	$(LIBRETRO_COMM_DIR)/streams/memory_stream.c \
+	$(LIBRETRO_COMM_DIR)/streams/rzip_stream.c \
+	$(LIBRETRO_COMM_DIR)/streams/stdin_stream.c \
+	$(LIBRETRO_COMM_DIR)/streams/trans_stream.c \
+	$(LIBRETRO_COMM_DIR)/streams/trans_stream_pipe.c \
+	$(LIBRETRO_COMM_DIR)/streams/trans_stream_zlib.c \
+	$(LIBRETRO_COMM_DIR)/string/stdstring.c \
+	$(LIBRETRO_COMM_DIR)/utils/md5.c \
+	$(LIBRETRO_COMM_DIR)/vfs/vfs_implementation.c \
+	$(LIBRETRO_COMM_DIR)/time/rtime.c \
+	$(CORE_DIR)/lib/zlib/adler32.c \
+	$(CORE_DIR)/lib/zlib/crc32.c \
+	$(CORE_DIR)/lib/zlib/deflate.c \
+	$(CORE_DIR)/lib/zlib/inffast.c \
+	$(CORE_DIR)/lib/zlib/inflate.c \
+	$(CORE_DIR)/lib/zlib/inftrees.c \
+	$(CORE_DIR)/lib/zlib/ioapi.c \
+	$(CORE_DIR)/lib/zlib/trees.c \
+	$(CORE_DIR)/lib/zlib/uncompr.c \
+	$(CORE_DIR)/lib/zlib/unzip.c \
+	$(CORE_DIR)/lib/zlib/zutil.c
+endif
+
+ifeq ($(ZLIB_UNCOMPRESS), 1)
+SOURCES_C += \
+	     $(CORE_DIR)/lib/zlib/uncompr.c
+endif
+
+ifeq ($(USE_CYCLONE), 1)
+	CPUDEFS += -DHAS_CYCLONE=1
+	SOURCES_ASM += $(CORE_DIR)/cpu/m68000_cyclone/cyclone.s
+	SOURCES_C += $(CORE_DIR)/cpu/m68000_cyclone/c68000.c
+endif
+
+ifeq ($(USE_DRZ80), 1)
+	CPUDEFS += -DHAS_DRZ80=1
+	SOURCES_ASM += $(CORE_DIR)/cpu/z80_drz80/drz80.s
+	SOURCES_C += $(CORE_DIR)/cpu/z80_drz80/drz80_z80.c
+endif

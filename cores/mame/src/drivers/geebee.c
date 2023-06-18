@@ -1,0 +1,963 @@
+/****************************************************************************
+ *
+ * geebee.c
+ *
+ * system driver
+ * juergen buchmueller <pullmoll@t-online.de>, jan 2000
+ *
+ * memory map (preliminary)
+ * 0000-0fff ROM1 / ROM0
+ * 1000-1fff ROM2
+ * 2000-2fff VRAM
+ * 3000-3fff CGROM
+ * 4000-4fff RAM
+ * 5000-5fff IN
+ *			 A1 A0
+ *			  0  0	  SW0
+ *					  D0 COIN1
+ *					  D1 COIN2
+ *					  D2 START1
+ *					  D3 START2
+ *					  D4 BUTTON1
+ *					  D5 TEST MODE
+ *			  0  1	  SW1
+ *					  - not used in Gee Bee
+ *					  - digital joystick left/right and button in
+ *						Kaitei Tagara Sagashi (two in Cocktail mode)
+ *			  1  0	  DSW2
+ *					  D0	cabinet: 0= upright  1= table
+ *					  D1	balls:	 0= 3		 1= 5
+ *					  D2-D3 coinage: 0=1c/1c 1=1c/2c 2=2c/1c 3=free play
+ *					  D4-D5 bonus:	 0=none, 1=40k	 2=70k	 3=100k
+ *			  1  1	  VOLIN
+ *					  D0-D7 vcount where paddle starts (note: rotated 90 deg!)
+ *					  - not used(?) in Kaitei Tagara Sagashi
+ * 6000-6fff OUT6
+ *			 A1 A0
+ *			  0  0	  BALL H
+ *			  0  1	  BALL V
+ *			  1  0	  n/c
+ *			  1  1	  SOUND
+ *					  D3 D2 D1 D0	   sound
+ *					   x  0  0	0  PURE TONE 4V (2000Hz)
+ *					   x  0  0	1  PURE TONE 8V (1000Hz)
+ *					   x  0  1	0  PURE TONE 16V (500Hz)
+ *					   x  0  1	1  PURE TONE 32V (250Hz)
+ *					   x  1  0	0  TONE1 (!1V && !16V)
+ *					   x  1  0	1  TONE2 (!2V && !32V)
+ *					   x  1  1	0  TONE3 (!4V && !64V)
+ *					   x  1  1	1  NOISE
+ *					   0  x  x	x  DECAY
+ *					   1  x  x	x  FULL VOLUME
+ * 7000-7fff OUT7
+ *			 A2 A1 A0
+ *			  0  0	0 LAMP 1
+ *			  0  0	1 LAMP 2
+ *			  0  1	0 LAMP 3
+ *			  0  1	1 COUNTER
+ *			  1  0	0 LOCK OUT COIL
+ *			  1  0	1 BGW
+ *			  1  1	0 BALL ON
+ *			  1  1	1 INV
+ * 8000-ffff INTA (read FF)
+ *
+ * TODO:
+ * add second controller for cocktail mode and two players?
+ *
+ ****************************************************************************/
+
+#include "driver.h"
+#include "artwork.h"
+#include "vidhrdw/generic.h"
+
+/* from machine/geebee.c */
+READ_HANDLER( geebee_in_r );
+READ_HANDLER( navalone_in_r );
+WRITE_HANDLER( geebee_out6_w );
+WRITE_HANDLER( geebee_out7_w );
+
+/* from vidhrdw/geebee.c */
+extern PALETTE_INIT( geebee );
+extern PALETTE_INIT( navalone );
+
+extern VIDEO_START( geebee );
+extern VIDEO_START( navalone );
+extern VIDEO_START( kaitei );
+extern VIDEO_START( kaitein );
+extern VIDEO_START( sos );
+extern VIDEO_UPDATE( geebee );
+
+/* from sndhrdw/geebee.c */
+WRITE_HANDLER( geebee_sound_w );
+extern int geebee_sh_start(const struct MachineSound *msound);
+extern void geebee_sh_stop(void);
+extern void geebee_sh_update(void);
+
+
+/*******************************************************
+ *
+ * Gee Bee overlay
+ *
+ *******************************************************/
+
+/* Colors used in overlays. Smoothed out where possible */
+/* so that overlays are not so contrasted */
+#define OVERLAY_RED		MAKE_ARGB(0x04,0xff,0x20,0x20)
+#define OVERLAY_GREEN		MAKE_ARGB(0x04,0x20,0xff,0x20)
+#define OVERLAY_BLUE		MAKE_ARGB(0x04,0x1f,0x75,0xfe)
+#define OVERLAY_DK_BLUE		MAKE_ARGB(0x04,0x00,0x00,0x8b)
+#define OVERLAY_YELLOW		MAKE_ARGB(0x04,0xff,0xff,0x20)
+#define OVERLAY_CYAN		MAKE_ARGB(0x04,0x20,0xff,0xff)
+#define OVERLAY_LT_BLUE		MAKE_ARGB(0x04,0xad,0xd8,0xe6)
+#define OVERLAY_ORANGE		MAKE_ARGB(0x04,0xff,0xa5,0x00)
+#define OVERLAY_PURPLE		MAKE_ARGB(0x04,0xff,0x00,0xff)
+#define OVERLAY_BROWN		MAKE_ARGB(0x04,0x65,0x43,0x21)
+
+#define COCKTAIL_ONLY		"cocktail"
+#define UPRIGHT_ONLY		"upright"
+
+/* Overlay based on videos and images from: */
+/* https://i.pinimg.com/originals/9b/83/96/9b8396594c729f6f943ab052be1699d3.jpg */
+/* https://www.youtube.com/watch?v=dGPQ3-0W5v8 */
+/* https://flyers.arcade-museum.com/?page=flyer&db=videodb&id=3098&image=3 */
+/* The cocktail version has more colour around the edges, but no */
+/* colour in the centre. The upright version has more colour in the top */
+/* centre, but is white at the bottom. */
+/* We handle both overlays, depending on dip switch (restart required). */
+OVERLAY_START( geebee_overlay )
+    /* Common to both upright and cocktail */
+	OVERLAY_RECT( 4*8,  4*8, 5*8, 24*8, OVERLAY_ORANGE )
+	OVERLAY_TRI(  4*8, 25*8, 5*8, 24*8, OVERLAY_GREEN )
+	OVERLAY_TRI(  5*8, 24*8, 4*8, 25*8, OVERLAY_ORANGE )
+	OVERLAY_TRI(  5*8,  4*8, 4*8,  3*8, OVERLAY_GREEN )
+	OVERLAY_TRI(  4*8,  3*8, 5*8,  4*8, OVERLAY_ORANGE )
+
+    /* Upright overlay */
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 1*8, 3*8, 2*8, 25*8, OVERLAY_PURPLE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 2*8, 3*8, 4*8, 25*8, OVERLAY_RED )
+
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,    5*8,  3*8, 21*8+1,  4*8, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 21*8+1,  3*8, 22*8+1,  4*8, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,    5*8, 24*8, 21*8+1, 25*8, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 22*8+1, 24*8, 21*8+1, 25*8, OVERLAY_GREEN )
+
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 4*8,  1*8, 21*8,  3*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 4*8, 25*8, 21*8, 27*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 4*8,  0*8, 23*8,  1*8, OVERLAY_PURPLE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 4*8, 27*8, 23*8, 28*8, OVERLAY_PURPLE )
+
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 24*8, 27*8+1, 23*8, 28*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 23*8, 27*8-1, 24*8, 27*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 23*8, 27*8-1, 24*8, 26*8-1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 25*8, 26*8+1, 24*8, 27*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 24*8, 26*8-1, 25*8, 26*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 24*8, 26*8-1, 25*8, 25*8-1, OVERLAY_GREEN )
+
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 24*8, 2*8+1, 23*8, 1*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 23*8, 1*8-1, 24*8, 1*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 23*8, 0*8-1, 24*8, 1*8-1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 25*8, 3*8+1, 24*8, 2*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 24*8, 2*8-1, 25*8, 2*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 24*8, 1*8-1, 25*8, 2*8-1, OVERLAY_GREEN )
+
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 28*8, 27*8+1, 27*8, 26*8+1, OVERLAY_PURPLE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 27*8, 26*8-1, 28*8, 26*8+1, OVERLAY_PURPLE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 27*8, 25*8-1, 28*8, 26*8-1, OVERLAY_PURPLE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 29*8, 28*8+1, 28*8, 27*8+1, OVERLAY_PURPLE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 28*8, 27*8-1, 29*8, 27*8+1, OVERLAY_PURPLE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 28*8, 26*8-1, 29*8, 27*8-1, OVERLAY_PURPLE )
+
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 28*8,  2*8+1, 27*8, 3*8+1, OVERLAY_PURPLE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 27*8,  2*8-1, 28*8, 2*8+1, OVERLAY_PURPLE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 27*8,  2*8-1, 28*8, 1*8-1, OVERLAY_PURPLE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 29*8,  1*8+1, 28*8, 2*8+1, OVERLAY_PURPLE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 28*8,  1*8-1, 29*8, 1*8+1, OVERLAY_PURPLE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 28*8,  1*8-1, 29*8, 0*8-1, OVERLAY_PURPLE )
+
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 25*8,  2*8, 27*8,  3*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 25*8, 25*8, 27*8, 26*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 29*8, 27*8, 30*8, 28*8, OVERLAY_RED )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 29*8,  0*8, 30*8,  1*8, OVERLAY_RED )
+
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   12*8, 13*8,   13*8, 15*8, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 12*8-1, 16*8, 13*8-5, 15*8, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 12*8+3, 15*8, 13*8-3, 16*8, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 13*8-3, 15*8, 13*8+1, 16*8, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 13*8-5, 13*8, 12*8-1, 12*8, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 12*8+3, 12*8, 13*8-3, 13*8, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 13*8+1, 12*8, 13*8-3, 13*8, OVERLAY_GREEN )
+
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY,    9*8, 12*8-3,  7*8+3,   10*8, OVERLAY_YELLOW )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY,  7*8+3,    9*8,    9*8,  7*8+3, OVERLAY_YELLOW )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 12*8-3,   10*8,   10*8, 12*8-3, OVERLAY_YELLOW )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY,   10*8,  7*8+3, 12*8-3,    9*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,    9*8,  7*8+4,   10*8, 12*8-4, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,  7*8+4,    9*8,    9*8,   10*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   10*8,    9*8, 11*8+4,   10*8, OVERLAY_YELLOW )
+
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY,    9*8, 21*8-3,  7*8+3,   19*8, OVERLAY_YELLOW )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY,  7*8+3,   18*8,    9*8, 16*8+3, OVERLAY_YELLOW )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 12*8-3,   19*8,   10*8, 21*8-3, OVERLAY_YELLOW )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY,   10*8, 16*8+3, 12*8-3,   18*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,    9*8, 16*8+4,   10*8, 21*8-4, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,  7*8+4,   18*8,    9*8,   19*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   10*8,   18*8, 11*8+4,   19*8, OVERLAY_YELLOW )
+
+    /* Cocktail overlay */
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 1*8, 0*8, 2*8, 28*8, OVERLAY_PURPLE )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 2*8, 0*8, 4*8, 28*8, OVERLAY_RED )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 30*8, 0*8, 32*8, 28*8, OVERLAY_RED )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 32*8, 0*8, 33*8, 28*8, OVERLAY_PURPLE )
+
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 29*8,  4*8, 30*8, 24*8, OVERLAY_ORANGE )
+	OVERLAY_TRI_TAG(  COCKTAIL_ONLY, 29*8, 24*8, 30*8, 25*8, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  COCKTAIL_ONLY, 30*8, 25*8, 29*8, 24*8, OVERLAY_ORANGE )
+	OVERLAY_TRI_TAG(  COCKTAIL_ONLY, 30*8,  3*8, 29*8,  4*8, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  COCKTAIL_ONLY, 29*8,  4*8, 30*8,  3*8, OVERLAY_ORANGE )
+
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,    5*8,  3*8, 29*8,  4*8, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,    5*8, 24*8, 29*8, 25*8, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,    4*8,  1*8, 30*8,  3*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,    4*8, 25*8, 30*8, 27*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,    4*8,  0*8, 30*8,  1*8, OVERLAY_PURPLE )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,    4*8, 27*8, 30*8, 28*8, OVERLAY_PURPLE )
+OVERLAY_END
+
+/* I can find no evidence of there ever being an overlay for this game */
+/* though there is a common look and feel used on many implementations */
+/* of an overlay, so a similar look and feel has been added here in */
+/* that spirit. There is also an overlay for cocktail mode that is */
+/* less impressive and less complex due to the screen reversal process */
+/* limiting what an overlay can do on such setups. */
+/* We handle both overlays, depending on dip switch (restart required). */
+OVERLAY_START( navalone_overlay )
+    /* Common to both upright and cocktail */
+	OVERLAY_RECT(  0*8,    0*8,  1*8,   28*8, OVERLAY_CYAN )
+	OVERLAY_RECT(  3*8,  3*8-1,  4*8,    3*8, OVERLAY_GREEN )
+	OVERLAY_RECT(  3*8,   25*8,  4*8, 25*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT(  4*8,  3*8-1,  5*8, 25*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI(   5*8,  3*8-1,  6*8,  4*8-1, OVERLAY_GREEN )
+	OVERLAY_TRI(   6*8,  4*8-1,  5*8,  3*8-1, OVERLAY_BLUE )
+	OVERLAY_TRI(   6*8, 24*8+1,  5*8, 25*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI(   5*8, 25*8+1,  6*8, 24*8+1, OVERLAY_BLUE )
+	OVERLAY_RECT(  3*8,    0*8,  6*8,  3*8-1, OVERLAY_BLUE )
+	OVERLAY_RECT(  3*8, 25*8+1,  6*8,   28*8, OVERLAY_BLUE )
+	OVERLAY_RECT( 33*8,    0*8, 36*8,   28*8, OVERLAY_CYAN )
+
+    /* Upright overlay */
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 1*8, 0*8, 3*8, 28*8, OVERLAY_CYAN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 3*8, 3*8, 4*8, 25*8, OVERLAY_YELLOW )
+
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,  5*8,  4*8-1, 10*8, 24*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 10*8,  5*8-1, 12*8, 23*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 12*8,  5*8-1, 14*8,   12*8, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 12*8,   16*8, 14*8, 23*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 10*8,  4*8-1, 11*8,  5*8-1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 11*8,  5*8-1, 10*8,  4*8-1, OVERLAY_BLUE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 11*8, 23*8+1, 10*8, 24*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 10*8, 24*8+1, 11*8, 23*8+1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 14*8,  4*8-1, 16*8,   12*8, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 14*8,   16*8, 16*8, 24*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 16*8,  4*8-1, 17*8, 24*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 17*8,  5*8-1, 21*8, 23*8+1, OVERLAY_GREEN )
+
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 14*8,  4*8-1, 13*8,  5*8-1, OVERLAY_BLUE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 13*8,  5*8-1, 14*8,  4*8-1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 13*8, 23*8+1, 14*8, 24*8+1, OVERLAY_BLUE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 14*8, 24*8+1, 13*8, 23*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 21*8,  4*8-1, 23*8, 24*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 17*8,  4*8-1, 18*8,  5*8-1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 18*8,  5*8-1, 17*8,  4*8-1, OVERLAY_BLUE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 18*8, 23*8+1, 17*8, 24*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 17*8, 24*8+1, 18*8, 23*8+1, OVERLAY_BLUE )
+
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 23*8,  5*8-1, 25*8+1, 23*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 21*8,  4*8-1,   20*8,  5*8-1, OVERLAY_BLUE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 20*8,  5*8-1,   21*8,  4*8-1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 20*8, 23*8+1,   21*8, 24*8+1, OVERLAY_BLUE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 21*8, 24*8+1,   20*8, 23*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 23*8,  4*8-1,   24*8,  5*8-1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 24*8,  5*8-1,   23*8,  4*8-1, OVERLAY_BLUE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 24*8, 23*8+1,   23*8, 24*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 23*8, 24*8+1,   24*8, 23*8+1, OVERLAY_BLUE )
+
+	OVERLAY_TRI_TAG( UPRIGHT_ONLY, 25*8+1,  6*8-1, 27*8+1,  8*8-1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG( UPRIGHT_ONLY, 27*8+1,  8*8-1, 25*8+1,  6*8-1, OVERLAY_BLUE )
+	OVERLAY_TRI_TAG( UPRIGHT_ONLY, 27*8+1, 20*8+1, 25*8+1, 22*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG( UPRIGHT_ONLY, 25*8+1, 22*8+1, 27*8+1, 20*8+1, OVERLAY_BLUE )
+
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 25*8+1,  8*8-1, 28*8+1, 20*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 28*8+1, 11*8-1, 29*8+1, 12*8-1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 29*8+1, 12*8-1, 28*8+1, 11*8-1, OVERLAY_BLUE )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 29*8+1, 16*8+1, 28*8+1, 17*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  UPRIGHT_ONLY, 28*8+1, 17*8+1, 29*8+1, 16*8+1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 28*8+1, 12*8-1, 29*8+1, 16*8+1, OVERLAY_GREEN )
+
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,  6*8,    0*8, 11*8, 4*8-1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,  6*8, 24*8+1, 11*8,  28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 11*8,    0*8, 13*8, 5*8-1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 11*8, 23*8+1, 13*8,  28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 13*8,    0*8, 18*8, 4*8-1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 13*8, 24*8+1, 18*8,  28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 18*8,    0*8, 20*8, 5*8-1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 18*8, 23*8+1, 20*8,  28*8, OVERLAY_BLUE )
+
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   20*8,    0*8,   24*8,  4*8-1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   20*8, 24*8+1,   24*8,   28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   24*8,    0*8, 25*8+1,  5*8-1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   24*8, 23*8+1, 25*8+1,   28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 25*8+1,    0*8, 27*8+1,  6*8-1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 25*8+1, 22*8+1, 27*8+1,   28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 27*8+1,    0*8, 28*8+1,  8*8-1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 27*8+1, 20*8+1, 28*8+1,   28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 28*8+1,    0*8, 29*8+1, 11*8-1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 28*8+1, 17*8+1, 29*8+1,   28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 29*8+1,    0*8,   33*8,   28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   12*8,   12*8,   16*8,   16*8, OVERLAY_YELLOW )
+
+    /* Cocktail overlay */
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  1*8,    0*8,  3*8,   28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  3*8,    3*8,  4*8,   25*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  5*8,  4*8-1, 12*8, 24*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 22*8,  4*8-1, 29*8, 24*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 12*8,  4*8-1, 22*8,    5*8, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 12*8,   23*8, 22*8, 24*8+1, OVERLAY_GREEN )
+
+        /* A larger area of yellow is used to cover both upside down and upright */
+        /* and also the name and logo on game start */
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 12*8,    5*8, 22*8,   23*8, OVERLAY_YELLOW )
+
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 31*8,    0*8, 33*8,   28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  6*8,    0*8, 28*8,  4*8-1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  6*8, 24*8+1, 28*8,   28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 29*8,  3*8-1, 30*8, 25*8+1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  COCKTAIL_ONLY, 29*8,  3*8-1, 28*8,  4*8-1, OVERLAY_BLUE )
+	OVERLAY_TRI_TAG(  COCKTAIL_ONLY, 28*8,  4*8-1, 29*8,  3*8-1, OVERLAY_GREEN )
+	OVERLAY_TRI_TAG(  COCKTAIL_ONLY, 28*8, 24*8+1, 29*8, 25*8+1, OVERLAY_BLUE )
+	OVERLAY_TRI_TAG(  COCKTAIL_ONLY, 29*8, 25*8+1, 28*8, 24*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 30*8,  3*8-1, 31*8,    3*8, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 30*8,   25*8, 31*8, 25*8+1, OVERLAY_GREEN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 28*8,    0*8, 31*8,  3*8-1, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 28*8, 25*8+1, 31*8,   28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 30*8,    3*8, 31*8,   25*8, OVERLAY_BLUE )
+OVERLAY_END
+
+/* I can find no evidence of there ever being an overlay for this game. */
+/* I have created one for it as this game deserves a good overlay as  */
+/* it is a gem that few people know about. */
+/* There is also an overlay for cocktail mode that is */
+/* less impressive and less complex due to the screen reversal process */
+/* limiting what an overlay can do on such setups. */
+/* We handle both overlays, depending on dip switch (restart required). */
+OVERLAY_START( kaitei_overlay )
+    /* Common to both upright and cocktail */
+	OVERLAY_RECT(  0*8,  0*8,    1*8, 28*8, OVERLAY_GREEN )
+	OVERLAY_RECT( 33*8,  0*8,   34*8, 28*8, OVERLAY_GREEN )
+	OVERLAY_RECT( 30*8,  0*8, 31*8-5,  5*8, OVERLAY_BROWN )
+	OVERLAY_RECT( 30*8,  7*8, 31*8-5,  9*8, OVERLAY_BROWN )
+	OVERLAY_RECT( 30*8, 11*8, 31*8-5, 14*8, OVERLAY_BROWN )
+	OVERLAY_RECT( 30*8, 16*8, 31*8-5, 17*8, OVERLAY_BROWN )
+	OVERLAY_RECT( 30*8, 19*8, 31*8-5, 21*8, OVERLAY_BROWN )
+	OVERLAY_RECT( 30*8, 23*8, 31*8-5, 28*8, OVERLAY_BROWN )
+
+    /* Cocktail overlay */
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  4*8-3,   0*8,    4*8,  5*8, OVERLAY_BROWN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  4*8-3,   7*8,    4*8,  9*8, OVERLAY_BROWN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  4*8-3,  11*8,    4*8, 12*8, OVERLAY_BROWN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  4*8-3,  14*8,    4*8, 17*8, OVERLAY_BROWN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  4*8-3,  19*8,    4*8, 21*8, OVERLAY_BROWN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  4*8-3,  23*8,    4*8, 28*8, OVERLAY_BROWN )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  4*8-3,   5*8,    4*8,  7*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  4*8-3,   9*8,    4*8, 11*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  4*8-3,  12*8,    4*8, 14*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  4*8-3,  17*8,    4*8, 19*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,  4*8-3,  21*8,    4*8, 23*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,    2*8,   0*8,  3*8+5, 28*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY, 31*8-5,   0*8,   32*8, 28*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,    4*8,   0*8,   30*8, 28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,   30*8,   5*8, 30*8+3,  7*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,   30*8,   9*8, 30*8+3, 11*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,   30*8,  14*8, 30*8+3, 16*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,   30*8,  17*8, 30*8+3, 19*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( COCKTAIL_ONLY,   30*8,  21*8, 30*8+3, 23*8, OVERLAY_YELLOW )
+
+    /* Upright overlay */
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,    2*8,   0*8,    3*8, 28*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,    9*8,   0*8, 10*8-2, 28*8, OVERLAY_BROWN )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY, 10*8-2,   0*8,   30*8, 28*8, OVERLAY_BLUE )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   30*8,   5*8,   32*8,  7*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   30*8,   9*8,   32*8, 11*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   30*8,  14*8,   32*8, 16*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   30*8,  17*8,   32*8, 19*8, OVERLAY_YELLOW )
+	OVERLAY_RECT_TAG( UPRIGHT_ONLY,   30*8,  21*8,   32*8, 23*8, OVERLAY_YELLOW )
+OVERLAY_END
+
+/* I can find no evidence of there ever being an overlay for this game. */
+/* I have created a simple one for it here. It works in both upright */
+/* and cocktail mode. */
+OVERLAY_START( sos_overlay )
+    /* Common to both upright and cocktail */
+	OVERLAY_RECT(  0*8, 0*8,  1*8, 28*8, OVERLAY_GREEN )
+	OVERLAY_RECT( 33*8, 0*8, 34*8, 28*8, OVERLAY_GREEN )
+	OVERLAY_RECT(  1*8, 0*8, 33*8, 28*8, OVERLAY_LT_BLUE )
+OVERLAY_END
+
+
+/*******************************************************
+ *
+ * memory regions
+ *
+ *******************************************************/
+
+static MEMORY_READ_START( readmem )
+	{ 0x0000, 0x1fff, MRA_ROM },	/* GeeBee uses only the first 4K */
+	{ 0x2000, 0x23ff, MRA_RAM },
+	{ 0x3000, 0x37ff, MRA_ROM },	/* GeeBee uses only the first 1K */
+	{ 0x4000, 0x40ff, MRA_RAM },
+	{ 0x5000, 0x5fff, geebee_in_r },
+MEMORY_END
+
+static MEMORY_READ_START( readmem_navalone )
+	{ 0x0000, 0x1fff, MRA_ROM },
+	{ 0x2000, 0x23ff, MRA_RAM },
+	{ 0x3000, 0x37ff, MRA_ROM },
+	{ 0x4000, 0x40ff, MRA_RAM },
+	{ 0x5000, 0x5fff, navalone_in_r },
+MEMORY_END
+
+static MEMORY_WRITE_START( writemem )
+	{ 0x0000, 0x1fff, MWA_ROM },
+	{ 0x2000, 0x23ff, videoram_w, &videoram, &videoram_size },
+	{ 0x2400, 0x27ff, videoram_w }, /* mirror used in kaitei */
+	{ 0x3000, 0x37ff, MWA_ROM },
+    { 0x4000, 0x40ff, MWA_RAM },
+	{ 0x6000, 0x6fff, geebee_out6_w },
+	{ 0x7000, 0x7fff, geebee_out7_w },
+MEMORY_END
+
+static PORT_READ_START( readport )
+	{ 0x50, 0x5f, geebee_in_r },
+PORT_END
+
+static PORT_READ_START( readport_navalone )
+	{ 0x50, 0x5f, navalone_in_r },
+PORT_END
+
+static PORT_WRITE_START( writeport )
+	{ 0x60, 0x6f, geebee_out6_w },
+	{ 0x70, 0x7f, geebee_out7_w },
+PORT_END
+
+INPUT_PORTS_START( geebee )
+	PORT_START		/* IN0 SW0 */
+	PORT_BIT	( 0x01, IP_ACTIVE_LOW, IPT_COIN1   )
+	PORT_BIT	( 0x02, IP_ACTIVE_LOW, IPT_COIN2   )
+	PORT_BIT	( 0x04, IP_ACTIVE_LOW, IPT_START1  )
+	PORT_BIT	( 0x08, IP_ACTIVE_LOW, IPT_START2  )
+	PORT_BIT	( 0x10, IP_ACTIVE_LOW, IPT_BUTTON1 )
+	PORT_SERVICE( 0x20, IP_ACTIVE_LOW )
+	PORT_BIT	( 0xc0, 0x00, IPT_UNUSED )
+
+	PORT_START      /* IN1 SW1 */
+	PORT_BIT	( 0x01, IP_ACTIVE_LOW, IPT_UNUSED )
+	PORT_BIT	( 0x02, IP_ACTIVE_LOW, IPT_UNUSED )
+	PORT_BIT	( 0x04, IP_ACTIVE_LOW, IPT_UNUSED )
+	PORT_BIT	( 0x08, IP_ACTIVE_LOW, IPT_UNUSED )
+	PORT_BIT	( 0x10, IP_ACTIVE_LOW, IPT_UNUSED )
+	PORT_BIT	( 0x20, IP_ACTIVE_LOW, IPT_UNUSED )
+	PORT_BIT	( 0xc0, 0x00, IPT_UNUSED )
+
+	PORT_START      /* IN2 DSW2 */
+	PORT_DIPNAME( 0x01, 0x00, DEF_STR( Cabinet ) )
+	PORT_DIPSETTING(    0x00, DEF_STR( Upright ) )
+	PORT_DIPSETTING(    0x01, DEF_STR( Cocktail) )
+	PORT_DIPNAME( 0x02, 0x00, DEF_STR( Lives ) )
+	PORT_DIPSETTING(    0x00, "3" )
+	PORT_DIPSETTING(    0x02, "5" )
+	PORT_DIPNAME( 0x0c, 0x00, DEF_STR( Coinage ) )
+	PORT_DIPSETTING(    0x08, DEF_STR( 2C_1C ) )
+	PORT_DIPSETTING(    0x00, DEF_STR( 1C_1C ) )
+	PORT_DIPSETTING(    0x04, DEF_STR( 1C_2C ) )
+	PORT_DIPSETTING(    0x0c, DEF_STR( Free_Play ) )
+	/* Bonus Life moved to two inputs to allow changing 3/5 lives mode separately */
+	PORT_BIT	( 0x30, 0x00, IPT_UNUSED )
+	PORT_BIT	( 0xc0, 0x00, IPT_UNUSED )
+
+	PORT_START		/* IN3 VOLIN */
+	PORT_ANALOG( 0xff, 0x58, IPT_PADDLE | IPF_REVERSE, 30, 15, 0x10, 0xa0 )
+
+	PORT_START		/* IN4 FAKE for 3 lives */
+	PORT_BIT	( 0x0f, 0x00, IPT_UNUSED )
+	PORT_DIPNAME( 0x30, 0x00, "Bonus Life (3 lives)" )
+	PORT_DIPSETTING(    0x10, "40k 80k" )
+	PORT_DIPSETTING(    0x20, "70k 140k" )
+	PORT_DIPSETTING(    0x30, "100k 200k" )
+	PORT_DIPSETTING(    0x00, "None" )
+	PORT_BIT	( 0xc0, 0x00, IPT_UNUSED )
+
+	PORT_START		/* IN5 FAKE for 5 lives */
+	PORT_BIT	( 0x0f, 0x00, IPT_UNUSED )
+	PORT_DIPNAME( 0x30, 0x00, "Bonus Life (5 lives)" )
+	PORT_DIPSETTING(    0x10, "60k 120k" )
+	PORT_DIPSETTING(    0x20, "100k 200k" )
+	PORT_DIPSETTING(    0x30, "150k 300k" )
+	PORT_DIPSETTING(    0x00, "None" )
+	PORT_BIT	( 0xc0, 0x00, IPT_UNUSED )
+
+INPUT_PORTS_END
+
+INPUT_PORTS_START( navalone )
+	PORT_START		/* IN0 SW0 */
+	PORT_BIT	( 0x01, IP_ACTIVE_LOW, IPT_COIN1   )
+	PORT_BIT	( 0x02, IP_ACTIVE_LOW, IPT_UNKNOWN )
+	PORT_BIT	( 0x04, IP_ACTIVE_LOW, IPT_START1  )
+	PORT_BIT	( 0x08, IP_ACTIVE_LOW, IPT_START2  )
+	PORT_BIT	( 0x10, IP_ACTIVE_LOW, IPT_BUTTON1 )
+	PORT_BIT	( 0x20, IP_ACTIVE_LOW, IPT_COIN2   )
+	PORT_BIT	( 0xc0, 0x00, IPT_UNUSED )
+
+	PORT_START      /* IN1 SW1 */
+	PORT_BIT	( 0x01, IP_ACTIVE_LOW, IPT_UNUSED )
+	PORT_BIT	( 0x02, IP_ACTIVE_LOW, IPT_UNUSED )
+	PORT_BIT	( 0x04, IP_ACTIVE_LOW, IPT_UNUSED )
+	PORT_BIT	( 0x08, IP_ACTIVE_LOW, IPT_UNUSED )
+	PORT_BIT	( 0x10, IP_ACTIVE_LOW, IPT_UNUSED )
+	PORT_BIT	( 0x20, IP_ACTIVE_LOW, IPT_UNUSED )
+	PORT_BIT	( 0xc0, 0x00, IPT_UNUSED )
+
+	PORT_START      /* IN2 DSW2 */
+	PORT_DIPNAME( 0x01, 0x00, DEF_STR( Cabinet ) )
+	PORT_DIPSETTING(    0x00, DEF_STR( Upright ) )
+	PORT_DIPSETTING(    0x01, DEF_STR( Cocktail) )
+	PORT_DIPNAME( 0x02, 0x00, DEF_STR( Lives ) )
+	PORT_DIPSETTING(	0x00, "2" )
+	PORT_DIPSETTING(	0x02, "3" )
+	PORT_DIPNAME( 0x04, 0x00, DEF_STR( Unknown ) )
+    PORT_DIPSETTING(    0x00, DEF_STR( Off ) )
+    PORT_DIPSETTING(    0x04, DEF_STR( On ) )
+	PORT_DIPNAME( 0x08, 0x00, DEF_STR( Unknown ) )
+    PORT_DIPSETTING(    0x00, DEF_STR( Off ) )
+	PORT_DIPSETTING(	0x08, DEF_STR( On ) )
+    PORT_DIPNAME( 0x38, 0x10, DEF_STR( Coinage ) )
+	PORT_DIPSETTING(	0x30, DEF_STR( 2C_1C ) )
+    PORT_DIPSETTING(    0x10, DEF_STR( 1C_1C ) )
+	PORT_DIPSETTING(	0x20, DEF_STR( 1C_2C ) )
+	PORT_DIPSETTING(	0x00, DEF_STR( Free_Play ) )
+    PORT_BIT    ( 0xc0, 0x00, IPT_UNUSED )
+
+	PORT_START		/* IN3 VOLIN */
+	PORT_BIT	( 0xff, 0x58, IPT_UNUSED )
+
+	PORT_START		/* IN4 two-way digital joystick */
+	PORT_BIT	( 0x01, 0x00, IPT_JOYSTICK_LEFT )
+	PORT_BIT	( 0x02, 0x00, IPT_JOYSTICK_RIGHT )
+
+INPUT_PORTS_END
+
+INPUT_PORTS_START( kaitei )
+	PORT_START		/* IN0 SW0 */
+	PORT_BIT	( 0x01, IP_ACTIVE_LOW,	IPT_COIN1 )
+	PORT_BIT	( 0x02, IP_ACTIVE_HIGH, IPT_COIN2 )
+	PORT_BIT	( 0x04, IP_ACTIVE_LOW,	IPT_START1 )
+	PORT_BIT	( 0x08, IP_ACTIVE_LOW,	IPT_START2 )
+	PORT_BIT	( 0x10, IP_ACTIVE_HIGH, IPT_UNKNOWN )
+    PORT_BIT    ( 0x20, IP_ACTIVE_LOW,  IPT_UNKNOWN )
+	PORT_BIT	( 0x40, IP_ACTIVE_HIGH, IPT_UNKNOWN )
+	PORT_BIT	( 0x80, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+
+	PORT_START      /* IN1 SW1 */
+	PORT_BIT	( 0x01, IP_ACTIVE_LOW,	IPT_JOYSTICK_RIGHT )
+	PORT_BIT	( 0x02, IP_ACTIVE_LOW,	IPT_JOYSTICK_LEFT )
+	PORT_BIT	( 0x04, IP_ACTIVE_LOW,	IPT_BUTTON1 )
+	PORT_BIT	( 0x08, IP_ACTIVE_LOW,	IPT_JOYSTICK_RIGHT | IPF_COCKTAIL )
+	PORT_BIT	( 0x10, IP_ACTIVE_LOW,	IPT_JOYSTICK_LEFT | IPF_COCKTAIL )
+	PORT_BIT	( 0x20, IP_ACTIVE_LOW,	IPT_BUTTON1 | IPF_COCKTAIL )
+    PORT_BIT    ( 0x40, IP_ACTIVE_HIGH, IPT_UNKNOWN )
+	PORT_BIT	( 0x80, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+
+	PORT_START      /* IN2 DSW2 */
+	PORT_DIPNAME( 0x01, 0x01, DEF_STR( Cabinet ) )
+	PORT_DIPSETTING(	0x01, DEF_STR( Upright ) )
+	PORT_DIPSETTING(	0x00, DEF_STR( Cocktail) )
+	PORT_DIPNAME( 0x02, 0x00, DEF_STR( Unknown ) )
+    PORT_DIPSETTING(    0x00, DEF_STR( Off ) )
+	PORT_DIPSETTING(	0x02, DEF_STR( On ) )
+	PORT_DIPNAME( 0x04, 0x04, DEF_STR( Lives ) )
+	PORT_DIPSETTING(	0x04, "5" )
+    PORT_DIPSETTING(    0x00, "7" )
+    PORT_DIPNAME( 0x08, 0x00, DEF_STR( Unknown ) )
+    PORT_DIPSETTING(    0x00, DEF_STR( Off ) )
+	PORT_DIPSETTING(	0x08, DEF_STR( On ) )
+	PORT_DIPNAME( 0x10, 0x10, DEF_STR( Unknown ) )
+    PORT_DIPSETTING(    0x00, DEF_STR( Off ) )
+	PORT_DIPSETTING(	0x10, DEF_STR( On ) )
+	PORT_DIPNAME( 0x20, 0x00, DEF_STR( Unknown ) )
+    PORT_DIPSETTING(    0x00, DEF_STR( Off ) )
+	PORT_DIPSETTING(	0x20, DEF_STR( On ) )
+    PORT_BIT    ( 0x40, IP_ACTIVE_HIGH, IPT_UNKNOWN )
+	PORT_BIT	( 0x80, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+
+	PORT_START		/* IN3 VOLIN */
+	PORT_BIT	( 0x01, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+	PORT_BIT	( 0x02, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+	PORT_BIT	( 0x04, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+    PORT_BIT    ( 0x08, IP_ACTIVE_LOW,  IPT_UNKNOWN )
+    PORT_BIT    ( 0x10, IP_ACTIVE_HIGH, IPT_UNKNOWN )
+    PORT_BIT    ( 0x20, IP_ACTIVE_LOW,  IPT_UNKNOWN )
+    PORT_BIT    ( 0x40, IP_ACTIVE_HIGH, IPT_UNKNOWN )
+	PORT_BIT	( 0x80, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+
+INPUT_PORTS_END
+
+INPUT_PORTS_START( kaitein )
+	PORT_START		/* IN0 SW0 */
+	PORT_BIT	( 0x01, IP_ACTIVE_LOW,	IPT_COIN1 )
+	PORT_BIT	( 0x02, IP_ACTIVE_LOW,	IPT_COIN2 )
+	PORT_BIT	( 0x04, IP_ACTIVE_LOW,	IPT_START1 )
+	PORT_BIT	( 0x08, IP_ACTIVE_LOW,	IPT_START2 )
+	PORT_BIT	( 0x10, IP_ACTIVE_LOW,	IPT_BUTTON1 )
+	PORT_BIT	( 0x20, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+	PORT_BIT	( 0x40, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+	PORT_BIT	( 0x80, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+
+	PORT_START      /* IN1 SW1 */
+	PORT_BIT	( 0x01, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+	PORT_BIT	( 0x02, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+	PORT_BIT	( 0x04, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+    PORT_BIT    ( 0x08, IP_ACTIVE_LOW,  IPT_UNKNOWN )
+	PORT_BIT	( 0x10, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+    PORT_BIT    ( 0x20, IP_ACTIVE_LOW,  IPT_UNKNOWN )
+	PORT_BIT	( 0x40, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+    PORT_BIT    ( 0x80, IP_ACTIVE_LOW,  IPT_UNKNOWN )
+
+    PORT_START      /* IN2 DSW2 */
+	PORT_DIPNAME( 0x03, 0x00, DEF_STR( Lives ) )
+	PORT_DIPSETTING(	0x00, "2" )
+	PORT_DIPSETTING(	0x01, "3" )
+	PORT_DIPSETTING(	0x02, "4" )
+	PORT_DIPSETTING(	0x03, "5" )
+	PORT_DIPNAME( 0x04, 0x00, DEF_STR( Unknown ) )
+    PORT_DIPSETTING(    0x00, DEF_STR( Off ) )
+	PORT_DIPSETTING(	0x04, DEF_STR( On ) )
+    PORT_DIPNAME( 0x08, 0x00, DEF_STR( Unknown ) )
+    PORT_DIPSETTING(    0x00, DEF_STR( Off ) )
+	PORT_DIPSETTING(	0x08, DEF_STR( On ) )
+	PORT_DIPNAME( 0x30, 0x10, DEF_STR( Coinage ) )
+	PORT_DIPSETTING(	0x30, DEF_STR( 2C_1C ) )
+    PORT_DIPSETTING(    0x10, DEF_STR( 1C_1C ) )
+	PORT_DIPSETTING(	0x20, DEF_STR( 1C_2C ) )
+    PORT_DIPSETTING(    0x00, DEF_STR( Free_Play ) )
+	PORT_BIT	( 0x40, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+	PORT_BIT	( 0x80, IP_ACTIVE_LOW,	IPT_UNKNOWN )
+
+	PORT_START		/* IN3 VOLIN */
+	PORT_BIT	( 0xff, 0x58, IPT_UNUSED )
+
+	PORT_START		/* IN4 two-way digital joystick */
+	PORT_BIT	( 0x01, 0x00, IPT_JOYSTICK_LEFT )
+	PORT_BIT	( 0x02, 0x00, IPT_JOYSTICK_RIGHT )
+
+INPUT_PORTS_END
+
+INPUT_PORTS_START( sos )
+    PORT_START      /* IN0 SW0 */
+    PORT_BIT    ( 0x01, IP_ACTIVE_LOW, IPT_COIN1   )
+    PORT_BIT    ( 0x02, IP_ACTIVE_LOW, IPT_UNKNOWN )
+    PORT_BIT    ( 0x04, IP_ACTIVE_LOW, IPT_START1  )
+    PORT_BIT    ( 0x08, IP_ACTIVE_LOW, IPT_START2  )
+    PORT_BIT    ( 0x10, IP_ACTIVE_LOW, IPT_BUTTON1 )
+    PORT_BIT    ( 0x20, IP_ACTIVE_LOW, IPT_COIN2   )
+    PORT_BIT    ( 0xc0, 0x00, IPT_UNUSED )
+
+    PORT_START      /* IN1 SW1 */
+    PORT_BIT    ( 0x01, IP_ACTIVE_LOW, IPT_UNUSED )
+    PORT_BIT    ( 0x02, IP_ACTIVE_LOW, IPT_UNUSED )
+    PORT_BIT    ( 0x04, IP_ACTIVE_LOW, IPT_UNUSED )
+    PORT_BIT    ( 0x08, IP_ACTIVE_LOW, IPT_UNUSED )
+    PORT_BIT    ( 0x10, IP_ACTIVE_LOW, IPT_UNUSED )
+    PORT_BIT    ( 0x20, IP_ACTIVE_LOW, IPT_UNUSED )
+    PORT_BIT    ( 0xc0, 0x00, IPT_UNUSED )
+
+    PORT_START      /* IN2 DSW2 */
+    PORT_DIPNAME( 0x01, 0x00, DEF_STR( Cabinet ) )
+    PORT_DIPSETTING(    0x00, DEF_STR( Upright ) )
+    PORT_DIPSETTING(    0x01, DEF_STR( Cocktail) )
+    PORT_DIPNAME( 0x02, 0x00, DEF_STR( Lives ) )
+    PORT_DIPSETTING(    0x00, "2" )
+    PORT_DIPSETTING(    0x02, "3" )
+    PORT_DIPNAME( 0x04, 0x00, DEF_STR( Unknown ) )
+    PORT_DIPSETTING(    0x00, DEF_STR( Off ) )
+    PORT_DIPSETTING(    0x04, DEF_STR( On ) )
+	PORT_DIPNAME( 0x38, 0x08, DEF_STR( Coinage ) )
+	PORT_DIPSETTING(	0x18, DEF_STR( 2C_1C ) )
+    PORT_DIPSETTING(    0x08, DEF_STR( 1C_1C ) )
+	PORT_DIPSETTING(	0x30, DEF_STR( 1C_2C ) )
+    PORT_DIPSETTING(    0x00, DEF_STR( Free_Play ) )
+    PORT_BIT    ( 0xc0, 0x00, IPT_UNUSED )
+
+    PORT_START      /* IN3 VOLIN */
+	PORT_ANALOG( 0xff, 0x58, IPT_PADDLE | IPF_REVERSE, 30, 15, 0x10, 0xa0 )
+
+INPUT_PORTS_END
+
+static struct GfxLayout charlayout_1k =
+{
+	8, 8,							   /* 8x8 pixels */
+	128,							   /* 128 codes */
+	1,								   /* 1 bit per pixel */
+	{0},							   /* no bitplanes */
+	/* x offsets */
+	{0,1,2,3,4,5,6,7},
+	/* y offsets */
+    {0*8,1*8,2*8,3*8,4*8,5*8,6*8,7*8},
+	8 * 8							   /* eight bytes per code */
+};
+
+static struct GfxDecodeInfo gfxdecodeinfo_1k[] =
+{
+	{ REGION_CPU1, 0x3000, &charlayout_1k, 0, 4 },
+	{-1}							   /* end of array */
+};
+
+static struct GfxLayout charlayout_2k =
+{
+    8, 8,                              /* 8x8 pixels */
+	256,							   /* 256 codes */
+    1,                                 /* 1 bit per pixel */
+    {0},                               /* no bitplanes */
+    /* x offsets */
+    {0,1,2,3,4,5,6,7},
+    /* y offsets */
+    {0*8,1*8,2*8,3*8,4*8,5*8,6*8,7*8},
+    8 * 8                              /* eight bytes per code */
+};
+
+static struct GfxDecodeInfo gfxdecodeinfo_2k[] =
+{
+	{ REGION_CPU1, 0x3000, &charlayout_2k, 0, 4 },
+	{-1}							   /* end of array */
+};
+
+static struct CustomSound_interface custom_interface =
+{
+	geebee_sh_start,
+	geebee_sh_stop,
+	geebee_sh_update
+};
+
+static MACHINE_DRIVER_START( geebee )
+
+	/* basic machine hardware */
+	MDRV_CPU_ADD(8080,18432000/9) 		/* 18.432 MHz / 9 */
+	MDRV_CPU_MEMORY(readmem,writemem)
+	MDRV_CPU_PORTS(readport,writeport)
+	MDRV_CPU_VBLANK_INT(irq0_line_pulse,1)	/* one interrupt per frame */
+
+	MDRV_FRAMES_PER_SECOND(60)
+	MDRV_VBLANK_DURATION(DEFAULT_REAL_60HZ_VBLANK_DURATION)
+
+	/* video hardware */
+	MDRV_VIDEO_ATTRIBUTES(VIDEO_TYPE_RASTER)
+	MDRV_SCREEN_SIZE(34*8, 32*8)
+	MDRV_VISIBLE_AREA(0*8, 34*8-1, 2*8, 30*8-1)
+	MDRV_GFXDECODE(gfxdecodeinfo_1k)
+	MDRV_PALETTE_LENGTH(3)
+	MDRV_COLORTABLE_LENGTH(4*2)
+
+	MDRV_PALETTE_INIT(geebee)
+	MDRV_VIDEO_START(geebee)
+	MDRV_VIDEO_UPDATE(geebee)
+
+	/* sound hardware */
+	MDRV_SOUND_ADD(CUSTOM, custom_interface)
+MACHINE_DRIVER_END
+
+
+static MACHINE_DRIVER_START( navalone )
+
+	/* basic machine hardware */
+	MDRV_CPU_ADD(8080,18432000/9) 		/* 18.432 MHz / 9 */
+	MDRV_CPU_MEMORY(readmem_navalone,writemem)
+	MDRV_CPU_PORTS(readport_navalone,writeport)
+	MDRV_CPU_VBLANK_INT(irq0_line_pulse,1)	/* one interrupt per frame */
+
+	MDRV_FRAMES_PER_SECOND(60)
+	MDRV_VBLANK_DURATION(DEFAULT_REAL_60HZ_VBLANK_DURATION)
+
+	/* video hardware */
+	MDRV_VIDEO_ATTRIBUTES(VIDEO_TYPE_RASTER)
+	MDRV_SCREEN_SIZE(34*8, 32*8)
+	MDRV_VISIBLE_AREA(0*8, 34*8-1, 2*8, 30*8-1)
+	MDRV_GFXDECODE(gfxdecodeinfo_2k)
+	MDRV_PALETTE_LENGTH(3)
+	MDRV_COLORTABLE_LENGTH(4*2)
+
+	MDRV_PALETTE_INIT(navalone)
+	MDRV_VIDEO_START(navalone)
+	MDRV_VIDEO_UPDATE(geebee)
+
+	/* sound hardware */
+	MDRV_SOUND_ADD(CUSTOM, custom_interface)
+MACHINE_DRIVER_END
+
+
+static MACHINE_DRIVER_START( kaitei )
+
+	/* basic machine hardware */
+	MDRV_CPU_ADD(8080,18432000/9) 		/* 18.432 MHz / 9 */
+	MDRV_CPU_MEMORY(readmem_navalone,writemem)
+	MDRV_CPU_PORTS(readport_navalone,writeport)
+	MDRV_CPU_VBLANK_INT(irq0_line_hold,1)	/* one interrupt per frame */
+
+	MDRV_FRAMES_PER_SECOND(60)
+	MDRV_VBLANK_DURATION(DEFAULT_REAL_60HZ_VBLANK_DURATION)
+
+	/* video hardware */
+	MDRV_VIDEO_ATTRIBUTES(VIDEO_TYPE_RASTER)
+	MDRV_SCREEN_SIZE(34*8, 32*8)
+	MDRV_VISIBLE_AREA(0*8, 34*8-1, 2*8, 30*8-1)
+	MDRV_GFXDECODE(gfxdecodeinfo_2k)
+	MDRV_PALETTE_LENGTH(3)
+	MDRV_COLORTABLE_LENGTH(4*2)
+
+	MDRV_PALETTE_INIT(navalone)
+	MDRV_VIDEO_START(kaitei)
+	MDRV_VIDEO_UPDATE(geebee)
+
+	/* sound hardware */
+	MDRV_SOUND_ADD(CUSTOM, custom_interface)
+MACHINE_DRIVER_END
+
+
+static MACHINE_DRIVER_START( kaitein )
+
+	/* basic machine hardware */
+	MDRV_CPU_ADD(8080,18432000/9) 		/* 18.432 MHz / 9 */
+	MDRV_CPU_MEMORY(readmem_navalone,writemem)
+	MDRV_CPU_PORTS(readport_navalone,writeport)
+	MDRV_CPU_VBLANK_INT(irq0_line_hold,1)	/* one interrupt per frame */
+
+	MDRV_FRAMES_PER_SECOND(60)
+	MDRV_VBLANK_DURATION(DEFAULT_REAL_60HZ_VBLANK_DURATION)
+
+	/* video hardware */
+	MDRV_VIDEO_ATTRIBUTES(VIDEO_TYPE_RASTER)
+	MDRV_SCREEN_SIZE(34*8, 32*8)
+	MDRV_VISIBLE_AREA(0*8, 34*8-1, 2*8, 30*8-1)
+	MDRV_GFXDECODE(gfxdecodeinfo_2k)
+	MDRV_PALETTE_LENGTH(3)
+	MDRV_COLORTABLE_LENGTH(4*2)
+
+	MDRV_PALETTE_INIT(navalone)
+	MDRV_VIDEO_START(kaitein)
+	MDRV_VIDEO_UPDATE(geebee)
+
+	/* sound hardware */
+	MDRV_SOUND_ADD(CUSTOM, custom_interface)
+MACHINE_DRIVER_END
+
+
+static MACHINE_DRIVER_START( sos )
+
+	/* basic machine hardware */
+	MDRV_CPU_ADD(8080,18432000/9) 		/* 18.432 MHz / 9 */
+	MDRV_CPU_MEMORY(readmem_navalone,writemem)
+	MDRV_CPU_PORTS(readport_navalone,writeport)
+	MDRV_CPU_VBLANK_INT(irq0_line_pulse,1)	/* one interrupt per frame */
+
+	MDRV_FRAMES_PER_SECOND(60)
+	MDRV_VBLANK_DURATION(DEFAULT_REAL_60HZ_VBLANK_DURATION)
+
+	/* video hardware */
+	MDRV_VIDEO_ATTRIBUTES(VIDEO_TYPE_RASTER)
+	MDRV_SCREEN_SIZE(34*8, 32*8)
+	MDRV_VISIBLE_AREA(0*8, 34*8-1, 2*8, 30*8-1)
+	MDRV_GFXDECODE(gfxdecodeinfo_2k)
+	MDRV_PALETTE_LENGTH(3)
+	MDRV_COLORTABLE_LENGTH(4*2)
+
+	MDRV_PALETTE_INIT(navalone)
+	MDRV_VIDEO_START(sos)
+	MDRV_VIDEO_UPDATE(geebee)
+
+	/* sound hardware */
+	MDRV_SOUND_ADD(CUSTOM, custom_interface)
+MACHINE_DRIVER_END
+
+
+
+ROM_START( geebee )
+	ROM_REGION( 0x10000, REGION_CPU1, 0 )
+	ROM_LOAD( "geebee.1k",      0x0000, 0x1000, CRC(8a5577e0) SHA1(356d33e19c6b4f519816ee4b65ff9b59d6c1b565) )
+	ROM_LOAD( "geebee.3a",      0x3000, 0x0400, CRC(f257b21b) SHA1(c788fd923438f1bffbff9ff3cd4c5c8b547c0c14) )
+ROM_END
+
+ROM_START( geebeeg )
+	ROM_REGION( 0x10000, REGION_CPU1, 0 )
+	ROM_LOAD( "geebee.1k",      0x0000, 0x1000, CRC(8a5577e0) SHA1(356d33e19c6b4f519816ee4b65ff9b59d6c1b565) )
+	ROM_LOAD( "geebeeg.3a",     0x3000, 0x0400, CRC(a45932ba) SHA1(48f70742c42a9377f31fac3a1e43123751e57656) )
+ROM_END
+
+ROM_START( navalone )
+	ROM_REGION( 0x10000, REGION_CPU1, 0 )
+	ROM_LOAD( "navalone.p1",    0x0000, 0x0800, CRC(5a32016b) SHA1(d856d069eba470a81341de0bf47eca2a629a69a6) )
+	ROM_LOAD( "navalone.p2",    0x0800, 0x0800, CRC(b1c86fe3) SHA1(0293b742806c1517cb126443701115a3427fc60a) )
+	ROM_LOAD( "navalone.chr",   0x3000, 0x0800, CRC(b26c6170) SHA1(ae0aec2b60e1fd3b212e311afb1c588b2b286433) )
+ROM_END
+
+ROM_START( kaitei )
+	ROM_REGION( 0x10000, REGION_CPU1, 0 )
+	ROM_LOAD( "kaitei_7.1k",    0x0000, 0x0800, CRC(32f70d48) SHA1(c5ae606df1d0e513daea909f5474309a176096c1) )
+	ROM_RELOAD( 				0x0800, 0x0800 )
+    ROM_LOAD( "kaitei_1.1m",    0x1000, 0x0400, CRC(9a7ab3b9) SHA1(94a82ba66e51c8203ec61c9320edbddbb6462d33) )
+	ROM_LOAD( "kaitei_2.1p",    0x1400, 0x0400, CRC(5eeb0fff) SHA1(91cb84a9af8e4df4e6c896e7655199328b7da30b) )
+	ROM_LOAD( "kaitei_3.1s",    0x1800, 0x0400, CRC(5dff4df7) SHA1(c179c93a559a0d18db3092c842634de02f3f03ea) )
+	ROM_LOAD( "kaitei_4.1t",    0x1c00, 0x0400, CRC(e5f303d6) SHA1(6dd57e0b17f51d101c6c5dbfeadb7418098cc440) )
+	ROM_LOAD( "kaitei_5.bin",   0x3000, 0x0400, CRC(60fdb795) SHA1(723e635eed9937a28bee0b7978413984651ee87f) )
+	ROM_LOAD( "kaitei_6.bin",   0x3400, 0x0400, CRC(21399ace) SHA1(0ad49be2c9bdab2f9dc41c7348d1d4b4b769e3c4) )
+ROM_END
+
+ROM_START( kaitein )
+	ROM_REGION( 0x10000, REGION_CPU1, 0 )
+	ROM_LOAD( "kaitein.p1",     0x0000, 0x0800, CRC(d88e10ae) SHA1(76d6cd46b6e59e528e7a8fff9965375a1446a91d) )
+	ROM_LOAD( "kaitein.p2",     0x0800, 0x0800, CRC(aa9b5763) SHA1(64a6c8f25b0510841dcce0b57505731aa0deeda7) )
+	ROM_LOAD( "kaitein.chr",    0x3000, 0x0800, CRC(3125af4d) SHA1(9e6b161636665ee48d6bde2d5fc412fde382c687) )
+ROM_END
+
+ROM_START( sos )
+	ROM_REGION( 0x10000, REGION_CPU1, 0 )
+	ROM_LOAD( "sos.p1",         0x0000, 0x0800, CRC(f70bdafb) SHA1(e71d552ccc9adad48225bdb4d62c31c5741a3e95) )
+	ROM_LOAD( "sos.p2",         0x0800, 0x0800, CRC(58e9c480) SHA1(0eeb5982183d0e9f9dbae04839b604a0c22b420e) )
+	ROM_LOAD( "sos.chr",        0x3000, 0x0800, CRC(66f983e4) SHA1(b3cf8bff4ac6b554d3fc06eeb8227b3b2a0dd554) )
+ROM_END
+
+
+
+static DRIVER_INIT( geebee )
+{
+	artwork_set_overlay(geebee_overlay);
+}
+
+static DRIVER_INIT ( navalone )
+{
+	artwork_set_overlay(navalone_overlay);
+}
+
+static DRIVER_INIT ( kaitei )
+{
+	artwork_set_overlay(kaitei_overlay);
+}
+
+static DRIVER_INIT ( sos )
+{
+	artwork_set_overlay(sos_overlay);
+}
+
+
+GAME ( 1978, geebee,   0,        geebee,   geebee,   geebee,  ROT90, "Namco",                      "Gee Bee" )
+GAME ( 1978, geebeeg,  geebee,	 geebee,   geebee,   geebee,  ROT90, "[Namco] (Gremlin license)",  "Gee Bee (Gremlin)" )
+GAMEX( 1980, navalone, 0,        navalone, navalone, navalone,ROT90, "Namco",                      "Navarone", GAME_IMPERFECT_SOUND )
+GAME ( 1980, kaitei,   0,        kaitei,   kaitei,   kaitei,  ROT90, "K.K. Tokki",                 "Kaitei Takara Sagashi" )
+GAME ( 1980, kaitein,  0,	 kaitein,  kaitein,  kaitei,  ROT90, "Namco",                      "Kaitei Takara Sagashi (Namco)" )
+GAMEX( 1980, sos,      0,        sos,      sos,      sos,     ROT90, "Namco",                      "SOS", GAME_IMPERFECT_SOUND )
+

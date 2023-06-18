@@ -19,6 +19,7 @@ downloads/
 eggs/
 .eggs/
 lib/
+!cores/mame/src/lib/
 lib64/
 parts/
 sdist/

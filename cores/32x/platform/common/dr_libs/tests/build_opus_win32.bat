@@ -1,0 +1,1 @@
+gcc ./opus/dr_opus_decoding.c -o ./bin/dr_opus_decoding.exe -std=c89 -ansi -pedantic -Wall -Wextra

@@ -707,7 +707,7 @@ endif
 
 PLATFORM_ZLIB ?= 1
 
-include Makefile
+include Makefile.main
 
 ifeq ($(platform), osx)
 pico/cd/libchdr/src/libchdr_chd.o: CFLAGS += -D__MACTYPES__=1

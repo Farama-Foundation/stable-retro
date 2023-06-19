@@ -2,7 +2,7 @@ name: Build and publish linux wheel
 
 on:
   push:
-    branches: master
+    branches: publish-linux
 
 permissions:
   contents: read # to fetch code (actions/checkout)

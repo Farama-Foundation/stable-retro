@@ -139,6 +139,7 @@ vector<EmulatorTestParam> s_systems{
 	{ "PCEngine", "chrisc-512_Colours.pce" },
 	{ "GameGear", "benryves-SegaTween.gg" },
 	{ "Sms", "blind-happy10.sms" },
+	{ "32x", "Palette-Tech-1-Demo.32x" }	
 };
 
 INSTANTIATE_TEST_CASE_P(EmulatorCore, EmulatorTest, ValuesIn(s_systems), EmulatorTestParamName());

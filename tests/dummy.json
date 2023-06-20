@@ -41,7 +41,7 @@
 			"type": "|u1"
 		},
 		"32x": {
-			"address": 16711680,
+			"address": 0,
 			"type": "|u1"
 		}
 	}

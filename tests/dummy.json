@@ -39,6 +39,10 @@
 		"Snes": {
 			"address": 8257536,
 			"type": "|u1"
+		},
+		"32x": {
+			"address": 0,
+			"type": "|u1"
 		}
 	}
 }

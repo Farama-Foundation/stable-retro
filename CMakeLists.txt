@@ -155,6 +155,7 @@ add_core(atari2600 stella)
 add_core(gb gambatte)
 add_core(gba mgba)
 add_core(pce mednafen_pce_fast)
+add_core(32x picodrive)
 
 set(CLEAN_CORES)
 foreach(CORE IN LISTS CORE_TARGETS)

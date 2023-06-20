@@ -69,7 +69,7 @@ platform_globs = [
         "PCEngine",
         "GbColor",
         "GbAdvance",
-        "32x"
+        "32x",
     ]
 ]
 

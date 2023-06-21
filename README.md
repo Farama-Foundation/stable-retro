@@ -31,6 +31,7 @@ As well as additional states on already integrated games.
 pip3 install git+https://github.com/Farama-Foundation/stable-retro.git
 ```
 #### Apple Silicon Installation (Tested on python3.10)
+- NOTE: The Game Boy (gambatte) emulator is not supported on Apple Silicon
 **Build from source**
 1. `pip install cmake wheel`
 2. `brew install pkg-config lua@5.1 libzip qt5 capnp`

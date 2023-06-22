@@ -749,6 +749,7 @@ ifeq ($(SPLIT_UP_LINK), 1)
 else
 	$(LD) $(LINKOUT)$@ $(SHARED) $^ $(LDFLAGS) $(LIBS)
 endif
+	cp $(TARGET) ../../../
 endif
 
 clean-objs:

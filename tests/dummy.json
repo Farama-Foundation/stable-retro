@@ -43,6 +43,10 @@
 		"32x": {
 			"address": 0,
 			"type": "|u1"
+		},
+		"Fbneo": {
+			"address": 0,
+			"type": "|u1"
 		}
 	}
 }

@@ -156,6 +156,7 @@ add_core(gb gambatte)
 add_core(gba mgba)
 add_core(pce mednafen_pce_fast)
 add_core(32x picodrive)
+add_core(zip fbneo)
 
 set(CLEAN_CORES)
 foreach(CORE IN LISTS CORE_TARGETS)

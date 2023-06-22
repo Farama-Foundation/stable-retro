@@ -27,7 +27,7 @@ struct EmulatorTestParamName {
 };
 
 void EmulatorTest::SetUp() {
-	for (const string& core : { "fceumm", "gambatte", "genesis_plus_gx", "mednafen_pce_fast", "mgba", "snes9x", "stella", "picodrive" }) {
+	for (const string& core : { "fceumm", "gambatte", "genesis_plus_gx", "mednafen_pce_fast", "mgba", "snes9x", "stella", "picodrive", "fbneo" }) {
 		ifstream in("../retro/cores/" + core + ".json");
 		ostringstream out;
 		Retro::corePath("../retro/cores");
@@ -140,6 +140,7 @@ vector<EmulatorTestParam> s_systems{
 	{ "GameGear", "benryves-SegaTween.gg" },
 	{ "Sms", "blind-happy10.sms" },
 	{ "32x", "Palette-Tech-1-Demo.32x" },
+	{ "zip", "rom.zip" },
 };
 
 INSTANTIATE_TEST_CASE_P(EmulatorCore, EmulatorTest, ValuesIn(s_systems), EmulatorTestParamName());

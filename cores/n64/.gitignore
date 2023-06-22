@@ -1,0 +1,29 @@
+*.a
+*.o
+*.dll
+*.lib
+*.pdb
+*.exp
+*.manifest
+*.dylib
+*.so
+*.d
+*.js
+*.bc
+**/*.elf
+**/*.velf
+**/*.bin
+**/*.sfo
+**/*.vpk
+mupen64plus-rsp-paraLLEl/win32/mman/sys/mman.o
+mupen64plus-rsp-paraLLEl/win32/mman/sys/mman.c
+mupen64plus-rsp-paraLLEl/win32/mman/sys/mman.h
+
+# ==========================
+# Visual Studio files
+# ==========================
+Debug/
+Release/
+**/*.sln
+**/*.vcxproj
+**/*.vcxproj.filters

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerCommand>F:\emulation\retroarch\retroarch_debug.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments>retroarch.exe -L "C:\msys64\home\mudlord\mupen64plus-libretro\libretro\msvc\x64\Debug\libretro.dll" "F:\emulation\n64\Super Mario 64 (USA).n64"</LocalDebuggerCommandArguments>
+    <LocalDebuggerWorkingDirectory>F:\emulation\retroarch</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GlideN64debug|x64'">
+    <LocalDebuggerCommand>F:\emulation\retroarch\retroarch_debug.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments>retroarch.exe -L "C:\msys64\home\mudlord\mupen64plus-libretro\libretro\msvc\x64\GlideN64debug\libretro.dll" "F:\emulation\n64\Super Mario 64 (USA).n64"</LocalDebuggerCommandArguments>
+    <LocalDebuggerWorkingDirectory>F:\emulation\retroarch</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GlideN64release|x64'">
+    <LocalDebuggerCommand>F:\emulation\retroarch\retroarch_debug.exe</LocalDebuggerCommand>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>retroarch.exe -L "C:\msys64\home\mudlord\mupen64plus-libretro\libretro\msvc\x64\GlideN64release\libretro.dll" "F:\emulation\n64\Super Mario 64 (USA).n64"</LocalDebuggerCommandArguments>
+    <LocalDebuggerWorkingDirectory>F:\emulation\retroarch</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+</Project>

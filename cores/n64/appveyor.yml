@@ -1,0 +1,33 @@
+version: 0.1.{build}
+
+shallow_clone: true
+
+image: Visual Studio 2017
+
+environment:
+  makefile_location: "."
+  makefile_name: Makefile
+  target_name: parallel_n64_libretro
+
+configuration:
+  - release
+
+platform:
+  - windows_msvc2017_uwp_x64
+  - windows_msvc2017_uwp_x86
+  - windows_msvc2017_uwp_arm
+  - windows_msvc2017_desktop_x64
+  - windows_msvc2017_desktop_x86
+
+init:
+  - set Path=C:\msys64\usr\bin;%Path%
+
+build_script:
+  - cd %makefile_location%
+  - make -f %makefile_name% platform=%platform%
+
+artifacts:
+  - path: '**\%target_name%*.dll'
+  - path: '**\%target_name%*.lib'
+  - path: '**\%target_name%*.pdb'
+  - path: '**\libretro.h'

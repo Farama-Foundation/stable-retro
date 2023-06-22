@@ -1,0 +1,8 @@
+ToDo!
+
+Glide64
+-	Add tlut support for 16bit textures. Remove hacks.
+-	Add trapezoid support to le_triangle. Remove hacks.
+
+GlideHQ
+-	Add OpenGL texture format support.

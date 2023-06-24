@@ -1,5 +1,5 @@
 {
-    "32x": {
+    "fbneo": {
         "lib": "fbneo",
         "ext": ["zip"],
         "keybinds": ["X", "Z", "TAB", "ENTER", "UP", "DOWN", "LEFT", "RIGHT", "C", "A", "S", "D"],

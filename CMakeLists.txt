@@ -108,7 +108,7 @@ function(add_core PLATFORM CORE_NAME)
         set(MAKEFILE Makefile)
         set(SUBDIR libretro)
     else()
-        message(FATAL_ERROR "Could not find Makefile.")
+        message(FATAL_ERROR "Could not find Makefile: cores/${PLATFORM}/Makefile")
     endif()
 
     add_custom_command(OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${CORE_NAME}-version"
@@ -156,7 +156,7 @@ add_core(gb gambatte)
 add_core(gba mgba)
 add_core(pce mednafen_pce_fast)
 add_core(32x picodrive)
-add_core(zip fbneo)
+add_core(fbneo fbneo)
 
 set(CLEAN_CORES)
 foreach(CORE IN LISTS CORE_TARGETS)

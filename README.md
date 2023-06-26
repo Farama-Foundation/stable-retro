@@ -1,6 +1,6 @@
 # Stable-Retro
 
-A fork of gym-retro ('lets you turn classic video games into Gymnasium environments for reinforcement learning with additional games'). Since gym-retro is in maintenance now and doesn't accept new games, plateforms or bug fixes, you can instead submit PRs with new games or features here in stable-retro.
+A fork of gym-retro ('lets you turn classic video games into Gymnasium environments for reinforcement learning') with additional games, emulators and supported plateforms. Since gym-retro is in maintenance now and doesn't accept new games, plateforms or bug fixes, you can instead submit PRs with new games or features here in stable-retro.
 
 Currently added games on top of gym-retro:
 *	Super Mario Bros 2 Japan (Lost Levels) - NES
@@ -12,6 +12,7 @@ Currently added games on top of gym-retro:
 *	Super Hang On - Genesis
 *	Tetris - GameBoy
 *	Virtua Fighter 2 - Genesis
+*	Virtua Fighter - 32x
 
 PvP games that support two models fighting each other:
 *	Samurai Showdown - Genesis
@@ -30,6 +31,21 @@ As well as additional states on already integrated games.
 ```
 pip3 install git+https://github.com/Farama-Foundation/stable-retro.git
 ```
+#### Apple Silicon Installation (Tested on python3.10)
+- NOTE: The Game Boy (gambatte) emulator is not supported on Apple Silicon
+**Build from source**
+1. `pip install cmake wheel`
+2. `brew install pkg-config lua@5.1 libzip qt5 capnp`
+3. `echo 'export PATH="/opt/homebrew/opt/qt@5/bin:$PATH"' >> ~/.zshrc`
+4. `export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)`
+5. `pip install -e .`
+
+**Build Integration UI**
+1. build package from source
+2. `cmake . -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DBUILD_UI=ON -UPYLIB_DIRECTORY`
+3. `make -j$(sysctl hw.ncpu | cut -d: -f2)`
+4. `open "Gym Retro Integration.app"`
+
 
 Video on how to setup on Ubuntu and Windows:
 https://youtu.be/LRgGSQGNZeE

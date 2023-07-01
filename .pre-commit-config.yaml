@@ -51,10 +51,6 @@ repos:
     rev: v3.0.0
     hooks:
       - id: add-trailing-comma
-  - repo: https://github.com/PyCQA/pydocstyle
-    rev: 6.3.0
-    hooks:
-      - id: pydocstyle
   - repo: https://github.com/MarcoGorelli/absolufy-imports
     rev: v0.3.1
     hooks:

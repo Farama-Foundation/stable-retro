@@ -4,10 +4,13 @@ import retro
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    "--game", default="Airstriker-Genesis", help="the name or path for the game to run"
+    "--game",
+    default="Airstriker-Genesis",
+    help="the name or path for the game to run",
 )
 parser.add_argument(
-    "--state", help="the initial state file to load, minus the extension"
+    "--state",
+    help="the initial state file to load, minus the extension",
 )
 parser.add_argument(
     "--scenario",
@@ -38,7 +41,11 @@ parser.add_argument(
     help="the observation type, either `image` (default) or `ram`",
 )
 parser.add_argument(
-    "--players", "-p", type=int, default=1, help="number of players/agents (default: 1)"
+    "--players",
+    "-p",
+    type=int,
+    default=1,
+    help="number of players/agents (default: 1)",
 )
 args = parser.parse_args()
 
@@ -68,7 +75,7 @@ try:
                     infostr = ""
                     if info:
                         infostr = ", info: " + ", ".join(
-                            ["%s=%i" % (k, v) for k, v in info.items()]
+                            ["%s=%i" % (k, v) for k, v in info.items()],
                         )
                     print(("t=%i" % t) + infostr)
                 env.render()
@@ -80,12 +87,12 @@ try:
                     if r > 0:
                         print(
                             "t=%i p=%i got reward: %g, current reward: %g"
-                            % (t, i, r, totrew[i])
+                            % (t, i, r, totrew[i]),
                         )
                     if r < 0:
                         print(
                             "t=%i p=%i got penalty: %g, current reward: %g"
-                            % (t, i, r, totrew[i])
+                            % (t, i, r, totrew[i]),
                         )
             if terminated or truncated:
                 env.render()
@@ -93,12 +100,12 @@ try:
                     if verbosity >= 0:
                         if args.players > 1:
                             print(
-                                "done! total reward: time=%i, reward=%r" % (t, totrew)
+                                "done! total reward: time=%i, reward=%r" % (t, totrew),
                             )
                         else:
                             print(
                                 "done! total reward: time=%i, reward=%d"
-                                % (t, totrew[0])
+                                % (t, totrew[0]),
                             )
                         input("press enter to continue")
                         print()

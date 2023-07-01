@@ -258,7 +258,11 @@ def playback_movie(
         if done and not wasDone:
             if monitor_csv:
                 monitor_csv.writerow(
-                    {**dict(zip(reward_fields, score)), "l": frames, "t": frames / 60.0}
+                    {
+                        **dict(zip(reward_fields, score)),
+                        "l": frames,
+                        "t": frames / 60.0,
+                    },
                 )
             frames = 0
             score = [0] * movie.players
@@ -267,7 +271,7 @@ def playback_movie(
         signal.signal(signal.SIGCHLD, signal.SIG_DFL)
     if monitor_csv and frames:
         monitor_csv.writerow(
-            {**dict(zip(reward_fields, score)), "l": frames, "t": frames / 60.0}
+            {**dict(zip(reward_fields, score)), "l": frames, "t": frames / 60.0},
         )
     if npy_file:
         kwargs = {"actions": actions}
@@ -368,7 +372,10 @@ def main(argv=sys.argv[1:]):
     parser.add_argument("--info-dict", "-i", action="store_true")
     parser.add_argument("--npy-actions", "-a", action="store_true")
     parser.add_argument(
-        "--lossless", "-L", type=str, choices=["mp4", "mp4rgb", "png", "ffv1"]
+        "--lossless",
+        "-L",
+        type=str,
+        choices=["mp4", "mp4rgb", "png", "ffv1"],
     )
     args = parser.parse_args(argv)
     monitor_csv = None
@@ -384,18 +391,20 @@ def main(argv=sys.argv[1:]):
         )
         monitor_file = open(args.csv_out, "w")
         monitor_file.write(
-            '#{"t_start": 0.0, "gym_version": "gym_retro", "env_id": "%s"}\n' % game
+            '#{"t_start": 0.0, "gym_version": "gym_retro", "env_id": "%s"}\n' % game,
         )
         monitor_csv = csv.DictWriter(
-            monitor_file, fieldnames=reward_fields + ["l", "t"]
+            monitor_file,
+            fieldnames=reward_fields + ["l", "t"],
         )
         monitor_csv.writeheader()
 
     with Executor(args.jobs or None) as pool:
         list(
             pool.map(
-                _play, *zip(*[(movie, args, monitor_csv) for movie in args.movies])
-            )
+                _play,
+                *zip(*[(movie, args, monitor_csv) for movie in args.movies]),
+            ),
         )
     if monitor_file:
         monitor_file.close()

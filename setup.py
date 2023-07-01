@@ -42,7 +42,7 @@ class CMakeBuild(build_ext):
                 pyext_suffix,
                 pylib_dir,
                 python_executable,
-            ]
+            ],
         )
         if self.parallel:
             jobs = f"-j{self.parallel:d}"

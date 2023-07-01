@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Python API](#python-api)
+  - [RetroEnv](#retroenv)
+  - [Actions](#actions)
+  - [Observations](#observations)
+  - [Multiplayer Environments](#multiplayer-environments)
+  - [Replay files](#replay-files)
+    - [Record](#record)
+    - [Playback](#playback)
+    - [Render to Video](#render-to-video)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Python API
 
 ## RetroEnv

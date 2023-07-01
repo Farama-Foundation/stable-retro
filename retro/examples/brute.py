@@ -160,7 +160,9 @@ class Brute:
 
     def run(self):
         acts = select_actions(
-            self._root, self._env.action_space, self._max_episode_steps
+            self._root,
+            self._env.action_space,
+            self._max_episode_steps,
         )
         steps, total_rew = rollout(self._env, acts)
         executed_acts = acts[:steps]
@@ -176,7 +178,10 @@ def brute_retro(
     scenario=None,
 ):
     env = retro.make(
-        game, state, use_restricted_actions=retro.Actions.DISCRETE, scenario=scenario
+        game,
+        state,
+        use_restricted_actions=retro.Actions.DISCRETE,
+        scenario=scenario,
     )
     env = Frameskip(env)
     env = TimeLimit(env, max_episode_steps=max_episode_steps)

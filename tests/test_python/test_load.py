@@ -54,7 +54,8 @@ def state(game, inttype):
     for state_file in states:
         try:
             with gzip.open(
-                retro.data.get_file_path(game, f"{state_file}.state", inttype), "rb"
+                retro.data.get_file_path(game, f"{state_file}.state", inttype),
+                "rb",
             ) as fh:
                 game_state = fh.read()
         except (OSError, zlib.error):

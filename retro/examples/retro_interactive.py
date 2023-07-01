@@ -3,8 +3,7 @@ import argparse
 from baselines.common.vec_env.subproc_vec_env import SubprocVecEnv
 
 import retro
-
-from .interactive import Interactive
+from retro.examples.interactive import Interactive
 
 
 class RetroInteractive(Interactive):

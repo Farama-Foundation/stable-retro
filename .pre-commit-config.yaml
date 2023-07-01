@@ -64,17 +64,6 @@ repos:
     hooks:
     - id: cmake-format
     - id: cmake-lint
-  - repo: https://github.com/pocc/pre-commit-hooks
-    rev: v1.3.5
-    hooks:
-      - id: clang-format
-        args: [--style=Google]
-      - id: clang-tidy
-      - id: oclint
-      - id: uncrustify
-      - id: cppcheck
-      - id: cpplint
-      - id: include-what-you-use
   - repo: https://github.com/thlorenz/doctoc
     rev: v2.2.0
     hooks:

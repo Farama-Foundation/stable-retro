@@ -1,3 +1,28 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Gym Retro](#gym-retro)
+- [Libraries used](#libraries-used)
+  - [JSON](#json)
+  - [pybind11](#pybind11)
+  - [LuaJIT](#luajit)
+  - [libzip](#libzip)
+- [Cores](#cores)
+  - [Stella](#stella)
+  - [gambatte](#gambatte)
+  - [mGBA](#mgba)
+  - [Genesis Plus GX](#genesis-plus-gx)
+    - [MAME CHD interface](#mame-chd-interface)
+    - [FLAC - Free Lossless Audio Codec](#flac---free-lossless-audio-codec)
+    - [ZLIB DATA COMPRESSION LIBRARY](#zlib-data-compression-library)
+  - [FCEUmm](#fceumm)
+  - [Mednafen/Beetle PCE Fast](#mednafenbeetle-pce-fast)
+  - [Snes9x](#snes9x)
+- [GPLv2 full text](#gplv2-full-text)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Gym Retro
 
 The MIT License

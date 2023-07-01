@@ -1,3 +1,33 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Game Integration](#game-integration)
+  - [Example Integration](#example-integration)
+    - [`Level1.state`](#level1state)
+    - [`data.json`](#datajson)
+    - [`scenario.json`](#scenariojson)
+    - [`metadata.json`](#metadatajson)
+    - [`rom.md`](#rommd)
+    - [`rom.sha`](#romsha)
+  - [Integration Files](#integration-files)
+    - [States](#states)
+    - [Variable Locations `data.json`](#variable-locations-datajson)
+    - [Scenario `scenario.json`](#scenario-scenariojson)
+  - [The Integration UI](#the-integration-ui)
+    - [Integrating a new ROM](#integrating-a-new-rom)
+  - [Supported ROM Types](#supported-rom-types)
+  - [Integrating a Game](#integrating-a-game)
+    - [Done Condition](#done-condition)
+    - [Reward Function](#reward-function)
+    - [Finding Variables](#finding-variables)
+    - [Common Errors](#common-errors)
+  - [Using a Custom Integration from Python](#using-a-custom-integration-from-python)
+  - [Appendix: Types](#appendix-types)
+  - [Appendix: Operations](#appendix-operations)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Game Integration
 
 Integrating a game means taking a video game ROM file and setting it up as a reinforcement learning environment by defining 3 things:

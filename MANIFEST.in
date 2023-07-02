@@ -1,5 +1,5 @@
+include VERSION
 recursive-include third-party **
 recursive-include cores **
 global-exclude .git* .*.yml *.o *.a *.dylib *.so *.dll
 recursive-exclude retro/cores *-version
-include VERSION

@@ -103,6 +103,7 @@ setup(
             "cores/*.json",
             "cores/*_libretro*",
             "VERSION.txt",
+            "VERSION",
             "README.md",
             "LICENSES.md",
         ],

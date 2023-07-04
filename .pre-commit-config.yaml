@@ -43,10 +43,6 @@ repos:
     rev: 23.1.0
     hooks:
       - id: black
-  - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.10.0
-    hooks:
-      - id: python-use-type-annotations
   - repo: https://github.com/asottile/add-trailing-comma
     rev: v3.0.0
     hooks:
@@ -60,7 +56,3 @@ repos:
     hooks:
     - id: cmake-format
     - id: cmake-lint
-  - repo: https://github.com/thlorenz/doctoc
-    rev: v2.2.0
-    hooks:
-      - id: doctoc

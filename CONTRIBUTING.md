@@ -1,16 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Stable Retro Contribution Guidelines](#stable-retro-contribution-guidelines)
-  - [Issue reports](#issue-reports)
-  - [Code contributions](#code-contributions)
-      - [Testing on Linux](#testing-on-linux)
-    - [Python](#python)
-    - [C++](#c)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Stable Retro Contribution Guidelines
 
 At this time we are currently accepting the current forms of contributions:

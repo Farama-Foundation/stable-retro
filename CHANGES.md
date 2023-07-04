@@ -1,21 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Changelog](#changelog)
-  - [0.8.0](#080)
-  - [0.7.1](#071)
-- [python 3.5 compatibility fix (thanks @kieran-lemayai!)](#python-35-compatibility-fix-thanks-kieran-lemayai)
-  - [0.7.0](#070)
-  - [0.6.0](#060)
-  - [0.5.6](#056)
-  - [0.5.5](#055)
-  - [0.5.4](#054)
-  - [0.5.3](#053)
-  - [0.5.2](#052)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Changelog
 
 ## 0.8.0

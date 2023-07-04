@@ -1,25 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Stable-Retro](#stable-retro)
-  - [Bug Fixes](#bug-fixes)
-  - [Installation](#installation)
-      - [Apple Silicon Installation (Tested on python3.10)](#apple-silicon-installation-tested-on-python310)
-  - [Example](#example)
-  - [Citation](#citation)
-  - [Tutorials](#tutorials)
-  - [Discord channel](#discord-channel)
-- [Stable Retro](#stable-retro)
-- [Documentation](#documentation)
-- [Contributing](#contributing)
-- [Changelog](#changelog)
-- [Emulated Systems](#emulated-systems)
-- [Included ROMs](#included-roms)
-- [Citation](#citation-1)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Stable-Retro
 
 A fork of gym-retro ('lets you turn classic video games into Gymnasium environments for reinforcement learning') with additional games, emulators and supported plateforms. Since gym-retro is in maintenance now and doesn't accept new games, plateforms or bug fixes, you can instead submit PRs with new games or features here in stable-retro.

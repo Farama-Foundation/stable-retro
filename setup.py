@@ -102,7 +102,7 @@ setup(
         "retro": [
             "cores/*.json",
             "cores/*_libretro*",
-            "VERSION",
+            "VERSION.txt",
             "README.md",
             "LICENSES.md",
         ],

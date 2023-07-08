@@ -1,22 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Development](#development)
-  - [Install Retro from source](#install-retro-from-source)
-    - [Prerequisites](#prerequisites)
-    - [Mac prerequisites](#mac-prerequisites)
-    - [Windows prerequisites](#windows-prerequisites)
-    - [Linux prerequisites](#linux-prerequisites)
-    - [Building Linux and Mac](#building-linux-and-mac)
-    - [Building Windows](#building-windows)
-  - [Install Retro UI from source](#install-retro-ui-from-source)
-    - [macOS](#macos)
-    - [Linux](#linux)
-    - [Windows](#windows)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Development
 
 Adding new games can be done without recompiling Stable Retro, but if you need to work on the C++ code or make changes to the UI, you will want to compile Stable Retro from source.

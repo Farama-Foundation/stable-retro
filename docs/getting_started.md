@@ -1,19 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Getting Started](#getting-started)
-  - [Create a Retro Environment](#create-a-retro-environment)
-  - [Example Usage](#example-usage)
-    - [Interactive Script](#interactive-script)
-    - [Random Agent](#random-agent)
-    - [Brute](#brute)
-    - [PPO](#ppo)
-  - [Integrations](#integrations)
-  - [Importing ROMs](#importing-roms)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Getting Started
 
 Stable Retro requires one of the supported versions of Python (3,6 to 3.10). Please make sure to install the appropriate distribution for your OS beforehand. Please note that due to compatibility issues with some of the cores, 32-bit operating systems are not supported.

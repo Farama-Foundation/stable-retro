@@ -9,8 +9,10 @@ def load_whitelist(game, inttype):
     try:
         with open(
             retro.data.get_file_path(
-                game, "metadata.json", inttype | retro.data.Integrations.STABLE
-            )
+                game,
+                "metadata.json",
+                inttype | retro.data.Integrations.STABLE,
+            ),
         ) as metadata_file:
             whitelist = json.load(metadata_file).get("whitelist", {})
     except json.JSONDecodeError:
@@ -26,11 +28,15 @@ def scan_missing():
         if not retro.data.get_file_path(game, "data.json", retro.data.Integrations.ALL):
             missing.append((game, "data.json"))
         if not retro.data.get_file_path(
-            game, "scenario.json", retro.data.Integrations.ALL
+            game,
+            "scenario.json",
+            retro.data.Integrations.ALL,
         ):
             missing.append((game, "scenario.json"))
         if not retro.data.get_file_path(
-            game, "metadata.json", retro.data.Integrations.ALL
+            game,
+            "metadata.json",
+            retro.data.Integrations.ALL,
         ):
             missing.append((game, "metadata.json"))
         if not retro.data.list_states(game, retro.data.Integrations.ALL):
@@ -71,13 +77,14 @@ def verify_data(game, inttype, raw=None):
             errors.append((file, "missing type for %s" % variable))
         else:
             if not re.match(
-                r"\|[dinu]1|(>[<=]?|<[>=]?|=[><]?)[dinu][2-8]", definition["type"]
+                r"\|[dinu]1|(>[<=]?|<[>=]?|=[><]?)[dinu][2-8]",
+                definition["type"],
             ):
                 errors.append(
                     (
                         file,
                         "invalid type {} for {}".format(definition["type"], variable),
-                    )
+                    ),
                 )
             elif re.match(
                 r"([><=]{2}|=[><]|<[>=]|>[<=])[dinu][2-8]|[><=]{1,2}d[5-8]",
@@ -87,9 +94,10 @@ def verify_data(game, inttype, raw=None):
                     (
                         file,
                         "suspicious type {} for {}".format(
-                            definition["type"], variable
+                            definition["type"],
+                            variable,
                         ),
-                    )
+                    ),
                 )
     if "lives" in data and data["lives"].get("type", "") not in ("|u1", "|i1", "|d1"):
         warnings.append((file, "suspicious type %s for lives" % data["lives"]["type"]))
@@ -135,7 +143,7 @@ def verify_scenario(game, inttype, scenario="scenario", raw=None, dataraw=None):
                 warnings.append((file, f"missing reward in rewards[{i:d}]"))
             elif "variables" in r and "script" in r:
                 warnings.append(
-                    (file, f"both variables and script present in rewards[{i:d}]")
+                    (file, f"both variables and script present in rewards[{i:d}]"),
                 )
         if "reward" in scen:
             warnings.append((file, "reward and rewards both present"))
@@ -156,7 +164,9 @@ def verify_scenario(game, inttype, scenario="scenario", raw=None, dataraw=None):
     try:
         if not dataraw:
             datafile = retro.data.get_file_path(
-                game, "data.json", inttype=inttype | retro.data.Integrations.STABLE
+                game,
+                "data.json",
+                inttype=inttype | retro.data.Integrations.STABLE,
             )
             with open(datafile) as f:
                 data = json.load(f)
@@ -193,7 +203,7 @@ def verify_scenario(game, inttype, scenario="scenario", raw=None, dataraw=None):
                 and (len(done["variables"]) + len(done.get("nodes", {}))) > 2
             ):
                 warnings.append(
-                    (file, "suspicious done condition any with more than 2 checks")
+                    (file, "suspicious done condition any with more than 2 checks"),
                 )
             for variable, definition in done["variables"].items():
                 if "op" not in definition:
@@ -205,11 +215,11 @@ def verify_scenario(game, inttype, scenario="scenario", raw=None, dataraw=None):
                         warnings.append((file, f"incorrect op: nonzero for {variable}"))
                     elif "op" == "less-than":
                         warnings.append(
-                            (file, f"incorrect op: negative for {variable}")
+                            (file, f"incorrect op: negative for {variable}"),
                         )
                     elif "op" == "greater-than":
                         warnings.append(
-                            (file, f"incorrect op: positive for {variable}")
+                            (file, f"incorrect op: positive for {variable}"),
                         )
                 if data:
                     if variable not in data:
@@ -221,7 +231,7 @@ def verify_scenario(game, inttype, scenario="scenario", raw=None, dataraw=None):
                             and definition.get("measurement") != "delta"
                         ):
                             errors.append(
-                                (file, f"op: negative on unsigned {variable}")
+                                (file, f"op: negative on unsigned {variable}"),
                             )
     except (json.JSONDecodeError, OSError):
         pass
@@ -257,7 +267,8 @@ def verify_default_state(game, inttype, raw=None):
     if not state:
         return [], [(file, "default state missing")]
     if state not in retro.data.list_states(
-        game, inttype | retro.data.Integrations.STABLE
+        game,
+        inttype | retro.data.Integrations.STABLE,
     ):
         errors.append((file, f"invalid default state {state}"))
 

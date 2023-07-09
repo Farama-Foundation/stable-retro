@@ -57,7 +57,7 @@ class RetroEnv(gym.Env):
                 with open(metadata_path) as f:
                     metadata = json.load(f)
                 if "default_player_state" in metadata and self.players <= len(
-                    metadata["default_player_state"]
+                    metadata["default_player_state"],
                 ):
                     self.statename = metadata["default_player_state"][self.players - 1]
                 elif "default_state" in metadata:
@@ -105,9 +105,11 @@ class RetroEnv(gym.Env):
 
         try:
             assert self.data.load(
-                info_path, scenario_path
+                info_path,
+                scenario_path,
             ), "Failed to load info ({}) or scenario ({})".format(
-                info_path, scenario_path
+                info_path,
+                scenario_path,
             )
         except Exception:
             del self.em
@@ -121,7 +123,7 @@ class RetroEnv(gym.Env):
             self.action_space = gym.spaces.Discrete(combos**players)
         elif use_restricted_actions == retro.Actions.MULTI_DISCRETE:
             self.action_space = gym.spaces.MultiDiscrete(
-                [len(combos) for combos in self.button_combos] * players
+                [len(combos) for combos in self.button_combos] * players,
             )
         else:
             self.action_space = gym.spaces.MultiBinary(self.num_buttons * players)
@@ -132,7 +134,10 @@ class RetroEnv(gym.Env):
             img = [self.get_screen(p) for p in range(players)]
             shape = img[0].shape
         self.observation_space = gym.spaces.Box(
-            low=0, high=255, shape=shape, dtype=np.uint8
+            low=0,
+            high=255,
+            shape=shape,
+            dtype=np.uint8,
         )
 
         self.use_restricted_actions = use_restricted_actions
@@ -218,7 +223,7 @@ class RetroEnv(gym.Env):
                 os.path.join(
                     self.movie_path,
                     "%s-%s-%06d.bk2" % (self.gamename, rel_statename, self.movie_id),
-                )
+                ),
             )
             self.movie_id += 1
         if self.movie:
@@ -255,7 +260,7 @@ class RetroEnv(gym.Env):
         actions = []
         for p, action in enumerate(self.action_to_array(act)):
             actions.append(
-                [self.buttons[i] for i in np.extract(action, np.arange(len(action)))]
+                [self.buttons[i] for i in np.extract(action, np.arange(len(action)))],
             )
         if self.players == 1:
             return actions[0]
@@ -288,7 +293,8 @@ class RetroEnv(gym.Env):
             statename += ".state"
 
         with gzip.open(
-            retro.data.get_file_path(self.gamename, statename, inttype), "rb"
+            retro.data.get_file_path(self.gamename, statename, inttype),
+            "rb",
         ) as fh:
             self.initial_state = fh.read()
 

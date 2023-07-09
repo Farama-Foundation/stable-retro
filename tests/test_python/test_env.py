@@ -9,7 +9,7 @@ import retro
     params=[
         os.path.splitext(rom)[0]
         for rom in os.listdir(os.path.join(os.path.dirname(__file__), "../roms"))
-    ]
+    ],
 )
 def generate_test_env(request):
     import retro.data
@@ -20,7 +20,8 @@ def generate_test_env(request):
     get_romfile_path_fn = retro.data.get_romfile_path
 
     retro.data.get_file_path = lambda game, file, *args, **kwargs: os.path.join(
-        path, file
+        path,
+        file,
     )
     retro.data.get_romfile_path = lambda game, *args, **kwargs: [
         os.path.join(path, rom) for rom in os.listdir(path) if rom.startswith(game)

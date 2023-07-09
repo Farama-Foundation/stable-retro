@@ -48,7 +48,8 @@ class StochasticFrameSkip(gym.Wrapper):
                 self.curac = ac
             if self.supports_want_render and i < self.n - 1:
                 ob, rew, terminated, truncated, info = self.env.step(
-                    self.curac, want_render=False
+                    self.curac,
+                    want_render=False,
                 )
             else:
                 ob, rew, terminated, truncated, info = self.env.step(self.curac)

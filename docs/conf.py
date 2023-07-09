@@ -67,7 +67,8 @@ def remove_lines_before_parameters(app, what, name, obj, options, lines):
     if what == "class":
         # ":param" represents args values
         first_idx_to_keep = next(
-            (i for i, line in enumerate(lines) if line.startswith(":param")), 0
+            (i for i, line in enumerate(lines) if line.startswith(":param")),
+            0,
         )
         lines[:] = lines[first_idx_to_keep:]
 

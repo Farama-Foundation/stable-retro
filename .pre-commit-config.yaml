@@ -43,3 +43,12 @@ repos:
     rev: 23.1.0
     hooks:
       - id: black
+  - repo: https://github.com/asottile/add-trailing-comma
+    rev: v3.0.0
+    hooks:
+      - id: add-trailing-comma
+  - repo: https://github.com/cheshirekow/cmake-format-precommit
+    rev: v0.6.13
+    hooks:
+    - id: cmake-format
+    - id: cmake-lint

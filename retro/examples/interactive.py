@@ -159,7 +159,8 @@ class Interactive(abc.ABC):
     def _draw(self):
         gl.glBindTexture(gl.GL_TEXTURE_2D, self._texture_id)
         video_buffer = ctypes.cast(
-            self._image.tobytes(), ctypes.POINTER(ctypes.c_short)
+            self._image.tobytes(),
+            ctypes.POINTER(ctypes.c_short),
         )
         gl.glTexSubImage2D(
             gl.GL_TEXTURE_2D,
@@ -276,7 +277,10 @@ def main():
     args = parser.parse_args()
 
     ia = RetroInteractive(
-        game=args.game, state=args.state, scenario=args.scenario, record=args.record
+        game=args.game,
+        state=args.state,
+        scenario=args.scenario,
+        record=args.record,
     )
     ia.run()
 

@@ -146,10 +146,14 @@ def check_env(make_env, acts, verbose=False, timeout=None):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--deterministic", action="store_true", help="use deterministic wrapper"
+        "--deterministic",
+        action="store_true",
+        help="use deterministic wrapper",
     )
     parser.add_argument(
-        "--suffix", default="", help="run against games matching this suffix"
+        "--suffix",
+        default="",
+        help="run against games matching this suffix",
     )
     parser.add_argument(
         "--movie-file",

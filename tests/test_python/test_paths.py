@@ -60,24 +60,34 @@ def test_custom_path_default(custom_cleanup):
 
 def test_custom_path_absolute(custom_cleanup):
     assert not retro.data.get_file_path(
-        "", "Dekadence-Dekadrive.md", inttype=retro.data.Integrations.CUSTOM_ONLY
+        "",
+        "Dekadence-Dekadrive.md",
+        inttype=retro.data.Integrations.CUSTOM_ONLY,
     )
 
     test_rom_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../roms")
     retro.data.Integrations.add_custom_path(test_rom_dir)
     assert retro.data.get_file_path(
-        "", "Dekadence-Dekadrive.md", inttype=retro.data.Integrations.CUSTOM_ONLY
+        "",
+        "Dekadence-Dekadrive.md",
+        inttype=retro.data.Integrations.CUSTOM_ONLY,
     ) == os.path.join(test_rom_dir, "Dekadence-Dekadrive.md")
 
 
 def test_custom_path_relative(custom_cleanup):
     assert not retro.data.get_file_path(
-        "Airstriker-Genesis", "rom.md", inttype=retro.data.Integrations.CUSTOM_ONLY
+        "Airstriker-Genesis",
+        "rom.md",
+        inttype=retro.data.Integrations.CUSTOM_ONLY,
     )
 
     retro.data.Integrations.add_custom_path(retro.data.Integrations.STABLE.paths[0])
     assert retro.data.get_file_path(
-        "Airstriker-Genesis", "rom.md", inttype=retro.data.Integrations.CUSTOM_ONLY
+        "Airstriker-Genesis",
+        "rom.md",
+        inttype=retro.data.Integrations.CUSTOM_ONLY,
     ) == retro.data.get_file_path(
-        "Airstriker-Genesis", "rom.md", inttype=retro.data.Integrations.STABLE
+        "Airstriker-Genesis",
+        "rom.md",
+        inttype=retro.data.Integrations.STABLE,
     )

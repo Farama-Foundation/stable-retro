@@ -58,6 +58,6 @@ def make(game, state=State.DEFAULT, inttype=retro.data.Integrations.DEFAULT, **k
             raise
         else:
             raise FileNotFoundError(
-                f"Game not found: {game}. Did you make sure to import the ROM?"
+                f"Game not found: {game}. Did you make sure to import the ROM?",
             )
     return RetroEnv(game, state, inttype=inttype, **kwargs)

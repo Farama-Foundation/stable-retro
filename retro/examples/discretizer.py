@@ -56,7 +56,8 @@ class SonicDiscretizer(Discretizer):
 
 def main():
     env = retro.make(
-        game="SonicTheHedgehog-Genesis", use_restricted_actions=retro.Actions.DISCRETE
+        game="SonicTheHedgehog-Genesis",
+        use_restricted_actions=retro.Actions.DISCRETE,
     )
     print("retro.Actions.DISCRETE action_space", env.action_space)
     env.close()

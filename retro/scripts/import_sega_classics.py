@@ -31,17 +31,17 @@ def main():
     with tempfile.TemporaryDirectory() as dir:
         if sys.platform.startswith("linux"):
             r = requests.get(
-                "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz"
+                "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz",
             )
             steamcmd = "steamcmd.sh"
         elif sys.platform.startswith("darwin"):
             r = requests.get(
-                "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_osx.tar.gz"
+                "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_osx.tar.gz",
             )
             steamcmd = "steamcmd.sh"
         elif sys.platform.startswith("win"):
             r = requests.get(
-                "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip"
+                "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip",
             )
             steamcmd = "steamcmd.exe"
         else:
@@ -73,7 +73,9 @@ def main():
 
             print("Downloading games...")
             output = subprocess.run(
-                command, input=password.encode("utf-8"), stdout=subprocess.PIPE
+                command,
+                input=password.encode("utf-8"),
+                stdout=subprocess.PIPE,
             )
             if output.returncode not in (0, 7):
                 stdout = output.stdout.decode("utf-8").split("\n")

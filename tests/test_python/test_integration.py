@@ -29,7 +29,8 @@ def test_missing():
 @pytest.mark.parametrize("game_name, integration_type", all_games)
 def test_default_states(game_name, integration_type):
     warnings, errors = retro.testing.tools.verify_default_state(
-        game_name, integration_type
+        game_name,
+        integration_type,
     )
     for file, warning in warnings:
         gym.logger.warn(f"{file}: {warning}")

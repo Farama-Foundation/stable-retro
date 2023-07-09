@@ -10,19 +10,19 @@ for game in retro.data.list_games(Integrations.ALL):
     num_types = 0
 
     if os.path.exists(
-        os.path.join(retro.data.path(), *Integrations.STABLE.paths, game)
+        os.path.join(retro.data.path(), *Integrations.STABLE.paths, game),
     ):
         all_games.append((game, Integrations.STABLE))
         num_types += 1
 
     if os.path.exists(
-        os.path.join(retro.data.path(), *Integrations.EXPERIMENTAL_ONLY.paths, game)
+        os.path.join(retro.data.path(), *Integrations.EXPERIMENTAL_ONLY.paths, game),
     ):
         all_games.append((game, Integrations.EXPERIMENTAL_ONLY))
         num_types += 1
 
     if os.path.exists(
-        os.path.join(retro.data.path(), *Integrations.CONTRIB_ONLY.paths, game)
+        os.path.join(retro.data.path(), *Integrations.CONTRIB_ONLY.paths, game),
     ):
         all_games.append((game, Integrations.CONTRIB_ONLY))
         num_types += 1

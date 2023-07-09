@@ -126,7 +126,11 @@ class Integrations(Flag):
 
 class GameData(GameDataGlue):
     def __init__(
-        self, game=None, data=None, scenario=None, inttype=Integrations.DEFAULT
+        self,
+        game=None,
+        data=None,
+        scenario=None,
+        inttype=Integrations.DEFAULT,
     ):
         super().__init__()
         if game:
@@ -252,7 +256,7 @@ def init_core_info(path):
 
 def path(hint=DATA_PATH):
     if hint == DATA_PATH and not os.path.exists(
-        os.path.join(DATA_PATH, "data", "stable", "Airstriker-Genesis")
+        os.path.join(DATA_PATH, "data", "stable", "Airstriker-Genesis"),
     ):
         # Development installation
         hint = os.path.join(hint, "..")
@@ -378,8 +382,10 @@ def verify_hash(game, inttype=Integrations.DEFAULT):
     system = retro.get_romfile_system(rom)
     with open(
         retro.data.get_file_path(
-            game, "rom.sha", inttype=inttype | retro.data.Integrations.STABLE
-        )
+            game,
+            "rom.sha",
+            inttype=inttype | retro.data.Integrations.STABLE,
+        ),
     ) as f:
         expected_shas = f.read().strip().split("\n")
     with open(rom, "rb") as f:

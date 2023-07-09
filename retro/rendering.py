@@ -9,7 +9,7 @@ except ImportError as e:
     HINT: you can install pyglet directly via 'pip install pyglet'.
     But if you really just want to install all Gym dependencies and not have to think about it,
     'pip install -e .[all]' or 'pip install gym[all]' will do it.
-    """
+    """,
     ) from e
 
 try:
@@ -21,7 +21,7 @@ except ImportError as e:
     HINT: make sure you have OpenGL installed. On Ubuntu, you can run 'apt-get install python-opengl'.
     If you're running on a server, you may need a virtual frame buffer; something like this should work:
     'xvfb-run -s \"-screen 0 1400x900x24\" python <your_script.py>'
-    """
+    """,
     ) from e
 
 
@@ -57,8 +57,8 @@ def get_display(spec):
     else:
         raise ValueError(
             "Invalid display specification: {}. (Must be a string like :0 or None.)".format(
-                spec
-            )
+                spec,
+            ),
         )
 
 

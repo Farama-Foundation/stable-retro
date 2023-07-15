@@ -78,7 +78,6 @@ setup(
     name="stable-retro",
     long_description=README,
     long_description_content_type="text/markdown",
-    include_package_data=True,
     author="Farama Foundation",
     author_email="contact@farama.org",
     url="https://github.com/farama-foundation/stable-retro",
@@ -102,7 +101,6 @@ setup(
         "retro": [
             "cores/*.json",
             "cores/*_libretro*",
-            "VERSION.txt",
             "VERSION",
             "README.md",
             "LICENSES.md",

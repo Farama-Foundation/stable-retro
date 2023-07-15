@@ -131,7 +131,6 @@ lib*.a
 *.capnp.*
 retro/cores/*-version
 retro/cores/*.json
-#retro/VERSION.txt
 
 # Test stuff
 Temporary

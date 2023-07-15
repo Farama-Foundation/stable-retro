@@ -8,13 +8,8 @@ from retro.retro_env import RetroEnv
 ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 core_path(os.path.join(os.path.dirname(__file__), "cores"))
 
-for path in ('VERSION.txt', '../VERSION'):
-    try:
-        with open(os.path.join(os.path.dirname(__file__), path)) as f:
-            __version__ = f.read()
-            break
-    except IOError:
-        pass
+with open(os.path.join(os.path.dirname(__file__), "VERSION")) as f:
+    __version__ = f.read()
 
 
 __all__ = [

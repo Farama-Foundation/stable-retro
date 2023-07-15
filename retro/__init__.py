@@ -8,7 +8,7 @@ from retro.retro_env import RetroEnv
 ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 core_path(os.path.join(os.path.dirname(__file__), "cores"))
 
-with open(os.path.join(os.path.dirname(__file__), "../VERSION")) as f:
+with open(os.path.join(os.path.dirname(__file__), "VERSION")) as f:
     __version__ = f.read()
 
 

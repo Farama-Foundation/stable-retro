@@ -82,4 +82,5 @@ make -j$(grep -c ^processor /proc/cpuinfo)
 
 ### Windows
 
-The Retro UI is not currently supported in Windows.
+The Retro UI is not currently supported in native Windows but you can use it easily via WSL2 (Windows Subsystem for Linux) by following the instructions above for Linux.
+From within WSL2 just launch gym-retro-integration binary like you would on linux.

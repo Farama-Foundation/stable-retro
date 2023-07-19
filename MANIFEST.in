@@ -1,4 +1,4 @@
 recursive-include third-party **
-recursive-include cores **
+recursive-include retro/cores **
 global-exclude .git* .*.yml *.o *.a *.dylib *.so *.dll
 recursive-exclude retro/cores *-version

@@ -126,7 +126,7 @@ There is an effort to get this project to the [Farama Foundation Project Standar
 ## Supported specs:
 
 Plateforms:
-- Windows 10, 11
+- Windows 10, 11 (via WSL2)
 - macOS 10.13 (High Sierra), 10.14 (Mojave)
 - Linux (manylinux1)
 
@@ -163,5 +163,3 @@ The following non-commercial ROMs are included with Stable Retro for testing pur
 - [FamiCON intro](http://www.pouet.net/prod.php?which=53497) by dr88
 - [Airstriker](https://pdroms.de/genesis/airstriker-v1-50-genesis-game) by Electrokinesis
 - [Lost Marbles](https://pdroms.de/files/gameboyadvance/lost-marbles) by Vantage
-
-

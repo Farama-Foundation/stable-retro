@@ -189,17 +189,17 @@ function(add_core platform core_name)
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version")
   unset(core_ldflags)
   add_custom_command(
-    OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}.json"
+    OUTPUT "${PYLIB_DIRECTORY}/retro/cores/${core_name}.json"
     COMMAND
       ${CMAKE_COMMAND} -E copy
       "${CMAKE_CURRENT_SOURCE_DIR}/cores/${platform}.json"
-      "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}.json"
+      "${PYLIB_DIRECTORY}/retro/cores/${core_name}.json"
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version")
 
   add_custom_target(
     ${platform} ALL
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version"
-            "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}.json"
+            "${PYLIB_DIRECTORY}/retro/cores/${core_name}.json"
             "${TARGET_PATH}")
   list(APPEND CORE_TARGETS "${platform}")
   set(CORE_TARGETS

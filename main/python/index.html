@@ -294,21 +294,95 @@
 <h1>Python API<a class="headerlink" href="#python-api" title="Permalink to this heading">#</a></h1>
 <section id="retroenv">
 <h2>RetroEnv<a class="headerlink" href="#retroenv" title="Permalink to this heading">#</a></h2>
-<p>The Python API consists primarily of <code class="xref py py-func docutils literal notranslate"><span class="pre">retro.make()</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code>, and a few enums.  The main function most users will want is <code class="xref py py-func docutils literal notranslate"><span class="pre">retro.make()</span></code>.</p>
-<p>If you want to specify either the default state named in the game integration’s <code class="docutils literal notranslate"><span class="pre">metadata.json</span></code> or specify that you want to start from the initial power on state of the console, you can use the <code class="xref py py-class docutils literal notranslate"><span class="pre">retro.State</span></code> enum:</p>
+<p>The Python API consists primarily of <a class="reference internal" href="#retro.make" title="retro.make"><code class="xref py py-func docutils literal notranslate"><span class="pre">retro.make()</span></code></a>, <a class="reference internal" href="#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a>, and a few enums.  The main function most users will want is <a class="reference internal" href="#retro.make" title="retro.make"><code class="xref py py-func docutils literal notranslate"><span class="pre">retro.make()</span></code></a>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="retro.make">
+<span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">make</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">State.DEFAULT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inttype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.data.Integrations.DEFAULT</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/#make"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.make" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a Gym environment for the specified game</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="retro.RetroEnv">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">RetroEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.State.DEFAULT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_restricted_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.Actions.FILTERED</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inttype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.data.Integrations.STABLE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.Observations.IMAGE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'human'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/retro_env/#RetroEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.RetroEnv" title="Permalink to this definition">#</a></dt>
+<dd><p>Gym Retro environment class</p>
+<p>Provides a Gym interface to classic video games</p>
+</dd></dl>
+
+<p>If you want to specify either the default state named in the game integration’s <code class="docutils literal notranslate"><span class="pre">metadata.json</span></code> or specify that you want to start from the initial power on state of the console, you can use the <a class="reference internal" href="#retro.State" title="retro.State"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.State</span></code></a> enum:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="retro.State">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">State</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/enums/#State"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.State" title="Permalink to this definition">#</a></dt>
+<dd><p>Special values for setting the restart state of the environment.  You can
+also specify a string that is the name of the <code class="docutils literal notranslate"><span class="pre">.state</span></code> file</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.State.DEFAULT">
+<span class="sig-name descname"><span class="pre">DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#retro.State.DEFAULT" title="Permalink to this definition">#</a></dt>
+<dd><p>Start the game at the default savestate from <code class="docutils literal notranslate"><span class="pre">metadata.json</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.State.NONE">
+<span class="sig-name descname"><span class="pre">NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#retro.State.NONE" title="Permalink to this definition">#</a></dt>
+<dd><p>Start the game at the power on screen for the emulator</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="actions">
 <h2>Actions<a class="headerlink" href="#actions" title="Permalink to this heading">#</a></h2>
-<p>There are a few possible action spaces included with <code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code>:</p>
+<p>There are a few possible action spaces included with <a class="reference internal" href="#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a>:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="retro.Actions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">Actions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/enums/#Actions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.Actions" title="Permalink to this definition">#</a></dt>
+<dd><p>Different settings for the action space of the environment</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Actions.ALL">
+<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#retro.Actions.ALL" title="Permalink to this definition">#</a></dt>
+<dd><p>MultiBinary action space with no filtered actions</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Actions.DISCRETE">
+<span class="sig-name descname"><span class="pre">DISCRETE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#retro.Actions.DISCRETE" title="Permalink to this definition">#</a></dt>
+<dd><p>Discrete action space for filtered actions</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Actions.MULTI_DISCRETE">
+<span class="sig-name descname"><span class="pre">MULTI_DISCRETE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#retro.Actions.MULTI_DISCRETE" title="Permalink to this definition">#</a></dt>
+<dd><p>MultiDiscete action space for filtered actions</p>
+</dd></dl>
+
+</dd></dl>
+
 <p>You can also create your own action spaces derived from these.  For an example, see <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/master/retro/examples/discretizer.py">discretizer.py</a>.  This file shows how to use <code class="docutils literal notranslate"><span class="pre">retro.Actions.Discrete</span></code> as well as how to make a custom wrapper that reduces the action space from <code class="docutils literal notranslate"><span class="pre">126</span></code> actions to <code class="docutils literal notranslate"><span class="pre">7</span></code></p>
 </section>
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this heading">#</a></h2>
 <p>The default observations are RGB images of the game, but you can view RAM values instead (often much smaller than the RGB images and also your agent can observe the game state more directly).  If you want variable values, any variables defined in <code class="docutils literal notranslate"><span class="pre">data.json</span></code> will appear in the <code class="docutils literal notranslate"><span class="pre">info</span></code> dict after each step.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="retro.Observations">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">Observations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/enums/#Observations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.Observations" title="Permalink to this definition">#</a></dt>
+<dd><p>Different settings for the observation space of the environment</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Observations.IMAGE">
+<span class="sig-name descname"><span class="pre">IMAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#retro.Observations.IMAGE" title="Permalink to this definition">#</a></dt>
+<dd><p>Use RGB image observations</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Observations.RAM">
+<span class="sig-name descname"><span class="pre">RAM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#retro.Observations.RAM" title="Permalink to this definition">#</a></dt>
+<dd><p>Use RAM observations where you can see the memory of the game instead of the screen</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="multiplayer-environments">
 <h2>Multiplayer Environments<a class="headerlink" href="#multiplayer-environments" title="Permalink to this heading">#</a></h2>
-<p>A small number of games support multiplayer.  To use this feature, pass <code class="docutils literal notranslate"><span class="pre">players=&lt;n&gt;</span></code> to <code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code>.  Here is an example random agent that controls both paddles in <code class="docutils literal notranslate"><span class="pre">Pong-Atari2600</span></code>:</p>
+<p>A small number of games support multiplayer.  To use this feature, pass <code class="docutils literal notranslate"><span class="pre">players=&lt;n&gt;</span></code> to <a class="reference internal" href="#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a>.  Here is an example random agent that controls both paddles in <code class="docutils literal notranslate"><span class="pre">Pong-Atari2600</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
 
 
@@ -458,9 +532,33 @@
             <div class="toc-tree">
               <ul>
 <li><a class="reference internal" href="#">Python API</a><ul>
-<li><a class="reference internal" href="#retroenv">RetroEnv</a></li>
-<li><a class="reference internal" href="#actions">Actions</a></li>
-<li><a class="reference internal" href="#observations">Observations</a></li>
+<li><a class="reference internal" href="#retroenv">RetroEnv</a><ul>
+<li><a class="reference internal" href="#retro.make"><code class="docutils literal notranslate"><span class="pre">make()</span></code></a></li>
+<li><a class="reference internal" href="#retro.RetroEnv"><code class="docutils literal notranslate"><span class="pre">RetroEnv</span></code></a></li>
+<li><a class="reference internal" href="#retro.State"><code class="docutils literal notranslate"><span class="pre">State</span></code></a><ul>
+<li><a class="reference internal" href="#retro.State.DEFAULT"><code class="docutils literal notranslate"><span class="pre">State.DEFAULT</span></code></a></li>
+<li><a class="reference internal" href="#retro.State.NONE"><code class="docutils literal notranslate"><span class="pre">State.NONE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#actions">Actions</a><ul>
+<li><a class="reference internal" href="#retro.Actions"><code class="docutils literal notranslate"><span class="pre">Actions</span></code></a><ul>
+<li><a class="reference internal" href="#retro.Actions.ALL"><code class="docutils literal notranslate"><span class="pre">Actions.ALL</span></code></a></li>
+<li><a class="reference internal" href="#retro.Actions.DISCRETE"><code class="docutils literal notranslate"><span class="pre">Actions.DISCRETE</span></code></a></li>
+<li><a class="reference internal" href="#retro.Actions.MULTI_DISCRETE"><code class="docutils literal notranslate"><span class="pre">Actions.MULTI_DISCRETE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#observations">Observations</a><ul>
+<li><a class="reference internal" href="#retro.Observations"><code class="docutils literal notranslate"><span class="pre">Observations</span></code></a><ul>
+<li><a class="reference internal" href="#retro.Observations.IMAGE"><code class="docutils literal notranslate"><span class="pre">Observations.IMAGE</span></code></a></li>
+<li><a class="reference internal" href="#retro.Observations.RAM"><code class="docutils literal notranslate"><span class="pre">Observations.RAM</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#multiplayer-environments">Multiplayer Environments</a></li>
 <li><a class="reference internal" href="#replay-files">Replay files</a><ul>
 <li><a class="reference internal" href="#record">Record</a></li>

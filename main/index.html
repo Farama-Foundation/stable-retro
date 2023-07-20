@@ -302,8 +302,121 @@ Retro games for Reinforcement Learning
 <a class="reference internal image-reference" href="_static/videos/todo.gif"><img alt="Stable-retro gif" src="_static/videos/todo.gif" style="width: 500px;" /></a>
 </figure>
 <p><strong>Stable-Retro is a maintained fork of OpenAI’s Retro library.</strong></p>
-<p>TODO - Add a summary of things that retro can do</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">TODO</span> <span class="n">add</span> <span class="n">example</span> <span class="n">code</span>
+<p>stable-retro lets you turn classic video games into Gymnasium environments for reinforcement learning. Supported plateforms includes Sega Genesis, Sega 32X, Super Nintendo, Atari 2600 and more (<a class="reference external" href="https://github.com/Farama-Foundation/stable-retro#emulated-systems">full list here</a>)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Train an agent using Proximal Policy Optimization from Stable Baselines 3</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">gymnasium.wrappers.time_limit</span> <span class="kn">import</span> <span class="n">TimeLimit</span>
+<span class="kn">from</span> <span class="nn">stable_baselines3</span> <span class="kn">import</span> <span class="n">PPO</span>
+<span class="kn">from</span> <span class="nn">stable_baselines3.common.atari_wrappers</span> <span class="kn">import</span> <span class="n">ClipRewardEnv</span><span class="p">,</span> <span class="n">WarpFrame</span>
+<span class="kn">from</span> <span class="nn">stable_baselines3.common.vec_env</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SubprocVecEnv</span><span class="p">,</span>
+    <span class="n">VecFrameStack</span><span class="p">,</span>
+    <span class="n">VecTransposeImage</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">retro</span>
+
+
+<span class="k">class</span> <span class="nc">StochasticFrameSkip</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Wrapper</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">stickprob</span><span class="p">):</span>
+        <span class="n">gym</span><span class="o">.</span><span class="n">Wrapper</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stickprob</span> <span class="o">=</span> <span class="n">stickprob</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">supports_want_render</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&quot;supports_want_render&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ac</span><span class="p">):</span>
+        <span class="n">terminated</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">truncated</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">totrew</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+            <span class="c1"># First step after reset, use action</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="o">=</span> <span class="n">ac</span>
+            <span class="c1"># First substep, delay with probability=stickprob</span>
+            <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">stickprob</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="o">=</span> <span class="n">ac</span>
+            <span class="c1"># Second substep, new action definitely kicks in</span>
+            <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="o">=</span> <span class="n">ac</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">supports_want_render</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">ob</span><span class="p">,</span> <span class="n">rew</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">curac</span><span class="p">,</span>
+                    <span class="n">want_render</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ob</span><span class="p">,</span> <span class="n">rew</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">curac</span><span class="p">)</span>
+            <span class="n">totrew</span> <span class="o">+=</span> <span class="n">rew</span>
+            <span class="k">if</span> <span class="n">terminated</span> <span class="ow">or</span> <span class="n">truncated</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="n">ob</span><span class="p">,</span> <span class="n">totrew</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span>
+
+
+<span class="k">def</span> <span class="nf">make_retro</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">4500</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">DEFAULT</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">StochasticFrameSkip</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">stickprob</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">max_episode_steps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">TimeLimit</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">max_episode_steps</span><span class="o">=</span><span class="n">max_episode_steps</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">env</span>
+
+
+<span class="k">def</span> <span class="nf">wrap_deepmind_retro</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Configure environment for retro games, using config similar to DeepMind-style Atari in openai/baseline&#39;s wrap_deepmind</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">WarpFrame</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">ClipRewardEnv</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">env</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--game&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;Airstriker-Genesis&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--state&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--scenario&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">make_env</span><span class="p">():</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">make_retro</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">scenario</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">scenario</span><span class="p">)</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">wrap_deepmind_retro</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">env</span>
+
+    <span class="n">venv</span> <span class="o">=</span> <span class="n">VecTransposeImage</span><span class="p">(</span><span class="n">VecFrameStack</span><span class="p">(</span><span class="n">SubprocVecEnv</span><span class="p">([</span><span class="n">make_env</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8</span><span class="p">),</span> <span class="n">n_stack</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">PPO</span><span class="p">(</span>
+        <span class="n">policy</span><span class="o">=</span><span class="s2">&quot;CnnPolicy&quot;</span><span class="p">,</span>
+        <span class="n">env</span><span class="o">=</span><span class="n">venv</span><span class="p">,</span>
+        <span class="n">learning_rate</span><span class="o">=</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span> <span class="o">*</span> <span class="mf">2.5e-4</span><span class="p">,</span>
+        <span class="n">n_steps</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+        <span class="n">n_epochs</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span>
+        <span class="n">gae_lambda</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+        <span class="n">clip_range</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">ent_coef</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span>
+        <span class="n">total_timesteps</span><span class="o">=</span><span class="mi">100_000_000</span><span class="p">,</span>
+        <span class="n">log_interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="toctree-wrapper compound">

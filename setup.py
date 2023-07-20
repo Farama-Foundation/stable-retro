@@ -98,7 +98,9 @@ setup(
         "retro.examples",
     ],
     package_data={
-    	"retro": [
+        "retro": [
+            "cores/*.json",
+            "cores/*_libretro*",
             "VERSION",
             "README.md",
             "LICENSES.md",
@@ -107,5 +109,4 @@ setup(
         "retro.data.experimental": platform_globs,
         "retro.data.contrib": platform_globs,
     },
-    include_package_data=True
 )

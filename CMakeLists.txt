@@ -126,15 +126,13 @@ set(CORES)
 set(COREINFO)
 set(CORE_TARGETS)
 
-set(RETRO_CORES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores")
-
 function(add_core platform core_name)
   set(target_name ${core_name}_libretro${CMAKE_SHARED_LIBRARY_SUFFIX})
   get_filename_component(
     TARGET_PATH "${PYLIB_DIRECTORY}/retro/cores/${target_name}" ABSOLUTE)
   list(APPEND CORES "${TARGET_PATH}")
   list(APPEND COREINFO
-       "${RETRO_CORES_DIR}/${core_name}.json")
+       "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}.json")
   set(CORES
       "${CORES}"
       PARENT_SCOPE)
@@ -143,11 +141,11 @@ function(add_core platform core_name)
       PARENT_SCOPE)
   set(subdir)
 
-  if(EXISTS "${RETRO_CORES_DIR}/${platform}/Makefile.libretro")
+  if(EXISTS "cores/${platform}/Makefile.libretro")
     set(makefile Makefile.libretro)
-  elseif(EXISTS "${RETRO_CORES_DIR}/${platform}/Makefile")
+  elseif(EXISTS "cores/${platform}/Makefile")
     set(makefile Makefile)
-  elseif(EXISTS "${RETRO_CORES_DIR}/${platform}/libretro/Makefile")
+  elseif(EXISTS "cores/${platform}/libretro/Makefile")
     set(makefile Makefile)
     set(subdir libretro)
   else()
@@ -155,9 +153,9 @@ function(add_core platform core_name)
   endif()
 
   add_custom_command(
-    OUTPUT "${RETRO_CORES_DIR}/${core_name}-version"
+    OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version"
     COMMAND ${CMAKE_COMMAND} -E touch
-            "${RETRO_CORES_DIR}/${core_name}-version")
+            "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version")
 
   if(WIN32)
     set(libretro_platform platform=win)
@@ -186,9 +184,9 @@ function(add_core platform core_name)
       ${CMAKE_COMMAND} -E env CFLAGS=${core_cflags} CXXFLAGS=${core_cxxflags}
       LDFLAGS=${core_ldflags} $(MAKE) -f ${makefile} CC="${CMAKE_C_COMPILER}"
       CXX="${CMAKE_CXX_COMPILER}" fpic=${core_fpic_flags} ${libretro_platform}
-    COMMAND ${CMAKE_COMMAND} -E copy "${core_name}_libretro*" "${TARGET_PATH}"
-    WORKING_DIRECTORY "${RETRO_CORES_DIR}/${platform}/${subdir}"
-    DEPENDS "${RETRO_CORES_DIR}/${core_name}-version")
+    COMMAND ${CMAKE_COMMAND} -E copy ${target_name} ${TARGET_PATH}
+    WORKING_DIRECTORY "cores/${platform}/${subdir}"
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version")
   unset(core_ldflags)
   add_custom_command(
     OUTPUT "${PYLIB_DIRECTORY}/retro/cores/${core_name}.json"
@@ -196,11 +194,11 @@ function(add_core platform core_name)
       ${CMAKE_COMMAND} -E copy
       "${CMAKE_CURRENT_SOURCE_DIR}/cores/${platform}.json"
       "${PYLIB_DIRECTORY}/retro/cores/${core_name}.json"
-    DEPENDS "${RETRO_CORES_DIR}/${core_name}-version")
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version")
 
   add_custom_target(
     ${platform} ALL
-    DEPENDS "${RETRO_CORES_DIR}/${core_name}-version"
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version"
             "${PYLIB_DIRECTORY}/retro/cores/${core_name}.json"
             "${TARGET_PATH}")
   list(APPEND CORE_TARGETS "${platform}")
@@ -212,7 +210,7 @@ function(add_core platform core_name)
     clean-${platform}
     COMMAND $(MAKE) -f ${makefile} clean
     COMMAND ${CMAKE_COMMAND} -E remove "${TARGET_PATH}"
-    WORKING_DIRECTORY "${RETRO_CORES_DIR}/${platform}/${subdir}")
+    WORKING_DIRECTORY "cores/${platform}/${subdir}")
 endfunction()
 
 add_core(snes snes9x)

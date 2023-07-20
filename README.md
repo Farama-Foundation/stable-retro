@@ -39,7 +39,7 @@ As well as additional states on already integrated games.
 	- GameGear (via Genesis Plus GX)
 	- Genesis/Mega Drive (via Genesis Plus GX)
 	- Master System (via Genesis Plus GX)
-        - 32x (via Picodrive)	
+        - 32x (via Picodrive)
 
 ## Bug Fixes
 *	Fixed UI flickering issue in OpenAI integration tool

@@ -199,8 +199,7 @@ function(add_core platform core_name)
   add_custom_target(
     ${platform} ALL
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version"
-            "${PYLIB_DIRECTORY}/retro/cores/${core_name}.json"
-            "${TARGET_PATH}")
+            "${PYLIB_DIRECTORY}/retro/cores/${core_name}.json" "${TARGET_PATH}")
   list(APPEND CORE_TARGETS "${platform}")
   set(CORE_TARGETS
       "${CORE_TARGETS}"

@@ -12,7 +12,7 @@ lastpage:
 Retro games for Reinforcement Learning
 ```
 
-```{figure} _static/videos/todo.gif
+```{figure} _static/img/retro_games.png
    :alt: Stable-retro gif
    :width: 500
 ```

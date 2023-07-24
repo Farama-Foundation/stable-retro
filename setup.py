@@ -70,6 +70,7 @@ platform_globs = [
         "GbColor",
         "GbAdvance",
         "32x",
+        "Saturn",
     ]
 ]
 

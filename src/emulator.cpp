@@ -335,6 +335,25 @@ void Emulator::reconfigureAddressSpace() {
 	}
 }
 
+// callback for logging from emulator
+// turned off by default to avoid spamming the log, only used for debugging issues within cores
+static void cbLog(enum retro_log_level level, const char *fmt, ...) {
+#if 0
+	char buffer[4096] = {0};
+	static const char * levelName[] = { "DEBUG", "INFO", "WARNING", "ERROR" };
+	va_list va;
+
+	va_start(va, fmt);
+	std::vsnprintf(buffer, sizeof(buffer), fmt, va);
+	va_end(va);
+
+	if (level == 0)
+		return;
+
+	std::cerr << "[" << levelName[level] << "] " << buffer << std::flush;
+#endif
+}
+
 bool Emulator::cbEnvironment(unsigned cmd, void* data) {
 	assert(s_loadedEmulator);
 	switch (cmd) {
@@ -378,6 +397,13 @@ bool Emulator::cbEnvironment(unsigned cmd, void* data) {
 		}
 		s_loadedEmulator->reconfigureAddressSpace();
 		return true;
+	// Logs needs to be handled even when not used, otherwise some cores (ex: mame2003_plus) will crash
+	// Also very useful when integrating new emulators to debug issues within the core itself
+	case RETRO_ENVIRONMENT_GET_LOG_INTERFACE: {
+		struct retro_log_callback *cb = (struct retro_log_callback *)data;
+		cb->log = cbLog;
+		return true;
+	}
 	default:
 		return false;
 	}

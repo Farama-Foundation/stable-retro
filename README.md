@@ -39,14 +39,9 @@ As well as additional states on already integrated games.
 	- GameGear (via Genesis Plus GX)
 	- Genesis/Mega Drive (via Genesis Plus GX)
 	- Master System (via Genesis Plus GX)
-        - 32x (via Picodrive)
-
-## Bug Fixes
-*	Fixed UI flickering issue in OpenAI integration tool
-*	fix compile with c++ >=17
+ 	- 32x (via Picodrive)
 
 ## Installation
-
 ```
 pip3 install git+https://github.com/Farama-Foundation/stable-retro.git
 ```
@@ -100,7 +95,7 @@ python3 ppo.py --game='Airstriker-Genesis'
 @misc{stable-retro,
   author = {Mathieu and Poliquin},
   title = {Stable Retro, a fork of OpenAI's gym-retro},
-  year = {2021},
+  year = {2023},
   publisher = {GitHub},
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/Farama-Foundation/stable-retro}},
@@ -132,12 +127,7 @@ Plateforms:
 
 CPU with `SSSE3` or better
 
-Supported Pythons:
-
-- 3.7
-- 3.8
-- 3.9
-- 3.10
+Supported Pythons: 3.7 to 3.10
 
 ## Documentation
 

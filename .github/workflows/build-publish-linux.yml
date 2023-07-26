@@ -19,10 +19,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        include:
-        - os: ubuntu-latest
-          python: 310
-          platform: manylinux_x86_64
+        python-version: ['3.7', '3.8', '3.9', '3.10'] 
 
     steps:
     - uses: actions/checkout@v3

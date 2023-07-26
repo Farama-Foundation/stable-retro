@@ -13,8 +13,10 @@ Currently added games on top of gym-retro:
 *	NHL 94 (1 on 1 rom hack) - Genesis
 *	Super Hang On - Genesis
 *	Tetris - GameBoy
-*	Virtua Fighter 2 - Genesis
 *	Virtua Fighter - 32x
+*	Virtua Fighter 2 - Genesis
+*	Virtua Fighter 2 - Saturn
+
 
 PvP games that support two models fighting each other:
 *	Samurai Showdown - Genesis
@@ -40,6 +42,7 @@ As well as additional states on already integrated games.
 	- Genesis/Mega Drive (via Genesis Plus GX)
 	- Master System (via Genesis Plus GX)
  	- 32x (via Picodrive)
+  	- Saturn (via Beetle Saturn)  
 
 ## Installation
 ```

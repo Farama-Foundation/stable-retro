@@ -44,12 +44,7 @@ jobs:
     - name: Install dependencies
       run: python3 -m pip install --upgrade setuptools wheel
     - name: Build wheels
-      run:
-          python_header_path=$(python3-config --cflags | awk -F '-I' '{print $2}' | awk '{print $1}')
-          cmake . -DBUILD_TESTS=ON -DBUILD_MANYLINUX=ON -DPYTHON_INCLUDE_DIR=$python_header_path
-          python setup.py -q build_ext -i -j3
-          make -j3
-          python setup.py bdist_wheel
+      run: python3 setup.py bdist_wheel
     - name: Store wheels
       uses: actions/upload-artifact@v2
       with:

@@ -17,7 +17,6 @@ Currently added games on top of gym-retro:
 *	Virtua Fighter 2 - Genesis
 *	Virtua Fighter 2 - Saturn
 
-
 PvP games that support two models fighting each other:
 *	Samurai Showdown - Genesis
 *	WWF Wrestlemania the Arcade Game - Genesis
@@ -42,7 +41,7 @@ As well as additional states on already integrated games.
 	- Genesis/Mega Drive (via Genesis Plus GX)
 	- Master System (via Genesis Plus GX)
  	- 32x (via Picodrive)
-  	- Saturn (via Beetle Saturn)  
+  	- Saturn (via Beetle Saturn)
 
 ## Installation
 ```

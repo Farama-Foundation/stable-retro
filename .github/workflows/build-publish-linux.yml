@@ -26,7 +26,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x'
+        python-version: ${{ matrix.python-version }}
     - name: Install system packages
       run: sudo apt-get update && sudo apt-get install git cmake capnproto zlib1g-dev g++ build-essential python3-dev python3-pip pkg-config libzip-dev software-properties-common libbz2-dev
     - name: Install dependencies

@@ -1,0 +1,16 @@
+{
+  "info": {
+    "p1_health": {
+      "address": 513732,
+      "type": ">u2"
+    },
+    "p2_health": {
+      "address": 513994,
+      "type": ">u2"
+    },
+    "time": {
+      "address": 506733,
+      "type": ">d6"
+    }
+  }
+}

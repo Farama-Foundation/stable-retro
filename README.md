@@ -16,6 +16,7 @@ Currently added games on top of gym-retro:
 *	Virtua Fighter - 32x
 *	Virtua Fighter 2 - Genesis
 *	Virtua Fighter 2 - Saturn
+*	Mortal Kombat 1 - Sega CD
 
 PvP games that support two models fighting each other:
 *	Samurai Showdown - Genesis
@@ -42,6 +43,7 @@ As well as additional states on already integrated games.
 	- Master System (via Genesis Plus GX)
  	- 32x (via Picodrive)
   	- Saturn (via Beetle Saturn)
+  	- Sega CD (via Genesis Plus GX)
 
 ## Installation
 ```

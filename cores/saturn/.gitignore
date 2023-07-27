@@ -1,0 +1,7 @@
+*.o
+*.so
+*.dll
+*.pdb
+*.lib
+*.exp
+*.manifest

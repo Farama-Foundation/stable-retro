@@ -13,8 +13,9 @@ Currently added games on top of gym-retro:
 *	NHL 94 (1 on 1 rom hack) - Genesis
 *	Super Hang On - Genesis
 *	Tetris - GameBoy
-*	Virtua Fighter 2 - Genesis
 *	Virtua Fighter - 32x
+*	Virtua Fighter 2 - Genesis
+*	Virtua Fighter 2 - Saturn
 
 PvP games that support two models fighting each other:
 *	Samurai Showdown - Genesis
@@ -39,14 +40,10 @@ As well as additional states on already integrated games.
 	- GameGear (via Genesis Plus GX)
 	- Genesis/Mega Drive (via Genesis Plus GX)
 	- Master System (via Genesis Plus GX)
-        - 32x (via Picodrive)
-
-## Bug Fixes
-*	Fixed UI flickering issue in OpenAI integration tool
-*	fix compile with c++ >=17
+ 	- 32x (via Picodrive)
+  	- Saturn (via Beetle Saturn)
 
 ## Installation
-
 ```
 pip3 install git+https://github.com/Farama-Foundation/stable-retro.git
 ```
@@ -100,7 +97,7 @@ python3 ppo.py --game='Airstriker-Genesis'
 @misc{stable-retro,
   author = {Mathieu and Poliquin},
   title = {Stable Retro, a fork of OpenAI's gym-retro},
-  year = {2021},
+  year = {2023},
   publisher = {GitHub},
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/Farama-Foundation/stable-retro}},
@@ -132,12 +129,7 @@ Plateforms:
 
 CPU with `SSSE3` or better
 
-Supported Pythons:
-
-- 3.7
-- 3.8
-- 3.9
-- 3.10
+Supported Pythons: 3.7 to 3.10
 
 ## Documentation
 

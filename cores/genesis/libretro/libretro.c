@@ -2194,7 +2194,14 @@ void *retro_get_memory_data(unsigned id)
       case RETRO_MEMORY_SAVE_RAM:
          return sram.on ? sram.sram : NULL;
       case RETRO_MEMORY_SYSTEM_RAM:
-         return work_ram;
+        if (system_hw == SYSTEM_MCD) {
+          log_cb(RETRO_LOG_INFO, "return scd.prg_ram\n", GG_ROM);
+          return scd.prg_ram;
+        }
+        else {
+          log_cb(RETRO_LOG_INFO, "return work_ram\n", GG_ROM);
+          return work_ram;
+        }
       default:
          return NULL;
    }
@@ -2231,7 +2238,10 @@ size_t retro_get_memory_size(unsigned id)
         }
       }
       case RETRO_MEMORY_SYSTEM_RAM:
-         return 0x10000;
+        if (system_hw == SYSTEM_MCD)
+          return 0x80000;
+        else
+          return 0x10000;
       default:
          return 0;
    }

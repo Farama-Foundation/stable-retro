@@ -325,7 +325,7 @@ int cdd_load(char *filename, char *header)
     return (-1);
 
 #if defined(USE_LIBCHDR)
-  if (!memcmp(".chd", &filename[strlen(filename) - 4], 4) || !memcmp(".CHD", &filename[strlen(filename) - 4], 4))
+  if (!memcmp(".scd", &filename[strlen(filename) - 4], 4) || !memcmp(".scd", &filename[strlen(filename) - 4], 4))
   {
     int sectors = 0;
     char metadata[256];

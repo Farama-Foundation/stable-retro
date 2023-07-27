@@ -225,7 +225,7 @@ def playback_movie(
             keys = [0] * emulator.num_buttons
         else:
             break
-        display, reward, done, info = emulator.step(keys)
+        display, reward, terminated, truncated, info = emulator.step(keys)
         if info_file:
             info_steps.append(info)
         if movie.players > 1:
@@ -255,7 +255,7 @@ def playback_movie(
         finally:
             if hasattr(signal, "SIGCHLD"):
                 signal.signal(signal.SIGCHLD, signal.SIG_DFL)
-        if done and not wasDone:
+        if (terminated or truncated) and not wasDone:
             if monitor_csv:
                 monitor_csv.writerow(
                     {
@@ -266,7 +266,7 @@ def playback_movie(
                 )
             frames = 0
             score = [0] * movie.players
-        wasDone = done
+        wasDone = terminated or truncated
     if hasattr(signal, "SIGCHLD"):
         signal.signal(signal.SIGCHLD, signal.SIG_DFL)
     if monitor_csv and frames:

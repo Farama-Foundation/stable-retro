@@ -11,11 +11,11 @@
 <link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Release Notes" href="../release_notes/" /><link rel="prev" title="Game Integration" href="../integration/" />
         <link rel="canonical" href="https://stable-retro.farama.org/python.html" />
 
-    <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20.dev1 -->
+    <!-- Generated with Sphinx 7.1.2 and Furo 2023.05.20.dev1 -->
         <title>Python API - Stable-Retro Documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=a022fd11c0d7e10ac71ac296890386cea7a2fa24" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=093e2efd5a2c7b46ab7c7157e45f5f05a1e0a463" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=362ab14a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=2b6f8eb5452c44539a42dd9ada0a48f56e5f404d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=5d0deb98f4b2e6cecaee64745957f1068f205919" />
     
     
 
@@ -53,18 +53,6 @@
               <line x1="0.232" y1="12" x2="23.5" y2="12"></line>
               <line x1="0.232" y1="20" x2="23.5" y2="20"></line>
             </svg>
-            <!-- <svg viewBox="0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0.5" y1="4.5" x2="23.5" y2="4.5" style="fill: none; "></line>
-              <line x1="0.5" y1="12" x2="14" y2="12" ></line>
-              <line x1="0.5" y1="19.5" x2="23.5" y2="19.5"></line>
-              <polyline style="stroke-width: 0px;" points="17 7 22 12 17 17"></polyline>
-            </svg> -->
-            <!-- <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px">
-              <defs></defs>
-              <rect y="1" width="22" height="22" rx="2" ry="2" style="fill: none;" x="1"></rect>
-              <line x1="8" y1="1" x2="8" y2="23"></line>
-              <polyline style="stroke-linecap: round; fill: none; stroke-linejoin: round;" points="13 7 17 12 13 17"></polyline>
-            </svg> -->
           </label>
         </div>
         <div class="farama-header__left farama-header__center--mobile">
@@ -294,21 +282,95 @@
 <h1>Python API<a class="headerlink" href="#python-api" title="Permalink to this heading">#</a></h1>
 <section id="retroenv">
 <h2>RetroEnv<a class="headerlink" href="#retroenv" title="Permalink to this heading">#</a></h2>
-<p>The Python API consists primarily of <code class="xref py py-func docutils literal notranslate"><span class="pre">retro.make()</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code>, and a few enums.  The main function most users will want is <code class="xref py py-func docutils literal notranslate"><span class="pre">retro.make()</span></code>.</p>
-<p>If you want to specify either the default state named in the game integration’s <code class="docutils literal notranslate"><span class="pre">metadata.json</span></code> or specify that you want to start from the initial power on state of the console, you can use the <code class="xref py py-class docutils literal notranslate"><span class="pre">retro.State</span></code> enum:</p>
+<p>The Python API consists primarily of <a class="reference internal" href="#retro.make" title="retro.make"><code class="xref py py-func docutils literal notranslate"><span class="pre">retro.make()</span></code></a>, <a class="reference internal" href="#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a>, and a few enums.  The main function most users will want is <a class="reference internal" href="#retro.make" title="retro.make"><code class="xref py py-func docutils literal notranslate"><span class="pre">retro.make()</span></code></a>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="retro.make">
+<span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">make</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">State.DEFAULT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inttype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.data.Integrations.DEFAULT</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/#make"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.make" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a Gym environment for the specified game</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="retro.RetroEnv">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">RetroEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.State.DEFAULT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_restricted_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.Actions.FILTERED</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inttype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.data.Integrations.STABLE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.Observations.IMAGE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'human'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/retro_env/#RetroEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.RetroEnv" title="Permalink to this definition">#</a></dt>
+<dd><p>Gym Retro environment class</p>
+<p>Provides a Gym interface to classic video games</p>
+</dd></dl>
+
+<p>If you want to specify either the default state named in the game integration’s <code class="docutils literal notranslate"><span class="pre">metadata.json</span></code> or specify that you want to start from the initial power on state of the console, you can use the <a class="reference internal" href="#retro.State" title="retro.State"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.State</span></code></a> enum:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="retro.State">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">State</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/enums/#State"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.State" title="Permalink to this definition">#</a></dt>
+<dd><p>Special values for setting the restart state of the environment.  You can
+also specify a string that is the name of the <code class="docutils literal notranslate"><span class="pre">.state</span></code> file</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.State.DEFAULT">
+<span class="sig-name descname"><span class="pre">DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#retro.State.DEFAULT" title="Permalink to this definition">#</a></dt>
+<dd><p>Start the game at the default savestate from <code class="docutils literal notranslate"><span class="pre">metadata.json</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.State.NONE">
+<span class="sig-name descname"><span class="pre">NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#retro.State.NONE" title="Permalink to this definition">#</a></dt>
+<dd><p>Start the game at the power on screen for the emulator</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="actions">
 <h2>Actions<a class="headerlink" href="#actions" title="Permalink to this heading">#</a></h2>
-<p>There are a few possible action spaces included with <code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code>:</p>
+<p>There are a few possible action spaces included with <a class="reference internal" href="#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a>:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="retro.Actions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">Actions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/enums/#Actions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.Actions" title="Permalink to this definition">#</a></dt>
+<dd><p>Different settings for the action space of the environment</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Actions.ALL">
+<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#retro.Actions.ALL" title="Permalink to this definition">#</a></dt>
+<dd><p>MultiBinary action space with no filtered actions</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Actions.DISCRETE">
+<span class="sig-name descname"><span class="pre">DISCRETE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#retro.Actions.DISCRETE" title="Permalink to this definition">#</a></dt>
+<dd><p>Discrete action space for filtered actions</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Actions.MULTI_DISCRETE">
+<span class="sig-name descname"><span class="pre">MULTI_DISCRETE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#retro.Actions.MULTI_DISCRETE" title="Permalink to this definition">#</a></dt>
+<dd><p>MultiDiscete action space for filtered actions</p>
+</dd></dl>
+
+</dd></dl>
+
 <p>You can also create your own action spaces derived from these.  For an example, see <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/master/retro/examples/discretizer.py">discretizer.py</a>.  This file shows how to use <code class="docutils literal notranslate"><span class="pre">retro.Actions.Discrete</span></code> as well as how to make a custom wrapper that reduces the action space from <code class="docutils literal notranslate"><span class="pre">126</span></code> actions to <code class="docutils literal notranslate"><span class="pre">7</span></code></p>
 </section>
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Permalink to this heading">#</a></h2>
 <p>The default observations are RGB images of the game, but you can view RAM values instead (often much smaller than the RGB images and also your agent can observe the game state more directly).  If you want variable values, any variables defined in <code class="docutils literal notranslate"><span class="pre">data.json</span></code> will appear in the <code class="docutils literal notranslate"><span class="pre">info</span></code> dict after each step.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="retro.Observations">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">Observations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/enums/#Observations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.Observations" title="Permalink to this definition">#</a></dt>
+<dd><p>Different settings for the observation space of the environment</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Observations.IMAGE">
+<span class="sig-name descname"><span class="pre">IMAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#retro.Observations.IMAGE" title="Permalink to this definition">#</a></dt>
+<dd><p>Use RGB image observations</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Observations.RAM">
+<span class="sig-name descname"><span class="pre">RAM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#retro.Observations.RAM" title="Permalink to this definition">#</a></dt>
+<dd><p>Use RAM observations where you can see the memory of the game instead of the screen</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="multiplayer-environments">
 <h2>Multiplayer Environments<a class="headerlink" href="#multiplayer-environments" title="Permalink to this heading">#</a></h2>
-<p>A small number of games support multiplayer.  To use this feature, pass <code class="docutils literal notranslate"><span class="pre">players=&lt;n&gt;</span></code> to <code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code>.  Here is an example random agent that controls both paddles in <code class="docutils literal notranslate"><span class="pre">Pong-Atari2600</span></code>:</p>
+<p>A small number of games support multiplayer.  To use this feature, pass <code class="docutils literal notranslate"><span class="pre">players=&lt;n&gt;</span></code> to <a class="reference internal" href="#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a>.  Here is an example random agent that controls both paddles in <code class="docutils literal notranslate"><span class="pre">Pong-Atari2600</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
 
 
@@ -458,9 +520,33 @@
             <div class="toc-tree">
               <ul>
 <li><a class="reference internal" href="#">Python API</a><ul>
-<li><a class="reference internal" href="#retroenv">RetroEnv</a></li>
-<li><a class="reference internal" href="#actions">Actions</a></li>
-<li><a class="reference internal" href="#observations">Observations</a></li>
+<li><a class="reference internal" href="#retroenv">RetroEnv</a><ul>
+<li><a class="reference internal" href="#retro.make"><code class="docutils literal notranslate"><span class="pre">make()</span></code></a></li>
+<li><a class="reference internal" href="#retro.RetroEnv"><code class="docutils literal notranslate"><span class="pre">RetroEnv</span></code></a></li>
+<li><a class="reference internal" href="#retro.State"><code class="docutils literal notranslate"><span class="pre">State</span></code></a><ul>
+<li><a class="reference internal" href="#retro.State.DEFAULT"><code class="docutils literal notranslate"><span class="pre">State.DEFAULT</span></code></a></li>
+<li><a class="reference internal" href="#retro.State.NONE"><code class="docutils literal notranslate"><span class="pre">State.NONE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#actions">Actions</a><ul>
+<li><a class="reference internal" href="#retro.Actions"><code class="docutils literal notranslate"><span class="pre">Actions</span></code></a><ul>
+<li><a class="reference internal" href="#retro.Actions.ALL"><code class="docutils literal notranslate"><span class="pre">Actions.ALL</span></code></a></li>
+<li><a class="reference internal" href="#retro.Actions.DISCRETE"><code class="docutils literal notranslate"><span class="pre">Actions.DISCRETE</span></code></a></li>
+<li><a class="reference internal" href="#retro.Actions.MULTI_DISCRETE"><code class="docutils literal notranslate"><span class="pre">Actions.MULTI_DISCRETE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#observations">Observations</a><ul>
+<li><a class="reference internal" href="#retro.Observations"><code class="docutils literal notranslate"><span class="pre">Observations</span></code></a><ul>
+<li><a class="reference internal" href="#retro.Observations.IMAGE"><code class="docutils literal notranslate"><span class="pre">Observations.IMAGE</span></code></a></li>
+<li><a class="reference internal" href="#retro.Observations.RAM"><code class="docutils literal notranslate"><span class="pre">Observations.RAM</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#multiplayer-environments">Multiplayer Environments</a></li>
 <li><a class="reference internal" href="#replay-files">Replay files</a><ul>
 <li><a class="reference internal" href="#record">Record</a></li>
@@ -502,12 +588,43 @@
     
     
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/scripts/furo.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f0e5df8a"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/scripts/furo.js?v=7660844c"></script>
     
     <script>
+
+      const createProjectsList = (projects, displayImages) => {
+        const ulElem = Object.assign(document.createElement('ul'),
+          {
+            className:'farama-header-menu-list',
+          }
+        )
+        for (let project of projects) {
+          const liElem = document.createElement("li");
+          const aElem = Object.assign(document.createElement("a"),
+            {
+              href: project.link
+            }
+          );
+          liElem.appendChild(aElem);
+          if (displayImages) {
+            const imgElem = Object.assign(document.createElement("img"),
+              {
+                src: project.image ? imagesBasepath + project.image : imagesBasepath + "/farama_black.svg",
+                alt: `${project.name} logo`,
+                className: "farama-black-logo-invert"
+              }
+            );
+            aElem.appendChild(imgElem);
+          }
+          aElem.appendChild(document.createTextNode(project.name));
+          ulElem.appendChild(liElem);
+        }
+        return ulElem;
+      }
+
       // Create menu with Farama projects by using the API at farama.org/api/projects.json
       const createCORSRequest = (method, url) => {
         let xhr = new XMLHttpRequest();
@@ -534,9 +651,15 @@
       xhr.onload = () => {
         const jsonResponse = xhr.response;
         const sections = {
-          "Documentation": [],
-          "Mature Projects": [],
-          "Incubating Projects": [],
+          "Core Projects": [],
+          "Mature Projects": {
+            "Documentation": [],
+            "Repositories": [],
+          },
+          "Incubating Projects": {
+            "Documentation": [],
+            "Repositories": [],
+          },
           "Foundation": [
             {
               name: "About",
@@ -552,28 +675,38 @@
             }
           ]
         }
+
+        // Categorize projects
         Object.keys(jsonResponse).forEach(key => {
           projectJson = jsonResponse[key];
           if (projectJson.website !== null) {
             projectJson.link = projectJson.website;
-            sections["Documentation"].push(projectJson)
-          } else if (projectJson.type == "mature") {
-            projectJson.link = projectJson.github;
-            sections["Mature Projects"].push(projectJson)
           } else {
             projectJson.link = projectJson.github;
-            sections["Incubating Projects"].push(projectJson)
+          }
+          if (projectJson.type === "core") {
+            sections["Core Projects"].push(projectJson)
+          } else if (projectJson.type == "mature") {
+            if (projectJson.website !== null) {
+              sections["Mature Projects"]["Documentation"].push(projectJson)
+            } else {
+              sections["Mature Projects"]["Repositories"].push(projectJson)
+            }
+          } else {
+            if (projectJson.website !== null) {
+              sections["Incubating Projects"]["Documentation"].push(projectJson)
+            } else {
+              sections["Incubating Projects"]["Repositories"].push(projectJson)
+            }
           }
         })
 
         const menuContainer = document.querySelector(".farama-header-menu__body");
 
         Object.keys(sections).forEach((key, i) => {
-          projects = sections[key];
           const sectionElem = Object.assign(
             document.createElement('div'), {
               className:'farama-header-menu__section',
-              style: "padding-left: 24px"
             }
           )
           sectionElem.appendChild(Object.assign(document.createElement('span'),
@@ -582,33 +715,37 @@
               innerText: key
             }
           ))
-          const ulElem = Object.assign(document.createElement('ul'),
-            {
-              className:'farama-header-menu-list',
-            }
-          )
-          for (let project of projects) {
-            const liElem = document.createElement("li");
-            const aElem = Object.assign(document.createElement("a"),
-              {
-                href: project.link
-              }
-            );
-            liElem.appendChild(aElem);
-            if (key !== "Foundation") {
-              const imgElem = Object.assign(document.createElement("img"),
-                {
-                  src: project.image ? imagesBasepath + project.image : imagesBasepath + "/farama_black.svg",
-                  alt: `${project.name} logo`,
-                  className: "farama-black-logo-invert"
+          // is not a list
+          if (sections[key].constructor !== Array) {
+            const subSections = sections[key];
+            const subSectionContainerElem = Object.assign(
+                document.createElement('div'), {
+                  className:'farama-header-menu__subsections-container',
+                  style: 'display: flex'
                 }
-              );
-              aElem.appendChild(imgElem);
-            }
-            aElem.appendChild(document.createTextNode(project.name));
-            ulElem.appendChild(liElem);
+            )
+            Object.keys(subSections).forEach((subKey, i) => {
+              const subSectionElem = Object.assign(
+                document.createElement('div'), {
+                  className:'farama-header-menu__subsection',
+                }
+              )
+              subSectionElem.appendChild(Object.assign(document.createElement('span'),
+                {
+                  className:'farama-header-menu__subsection-title' ,
+                  innerText: subKey
+                }
+              ))
+              const ulElem = createProjectsList(subSections[subKey], key !== 'Foundation');
+              subSectionElem.appendChild(ulElem);
+              subSectionContainerElem.appendChild(subSectionElem);
+            })
+            sectionElem.appendChild(subSectionContainerElem);
+          } else {
+            const projects = sections[key];
+            const ulElem = createProjectsList(projects, true);
+            sectionElem.appendChild(ulElem);
           }
-          sectionElem.appendChild(ulElem);
           menuContainer.appendChild(sectionElem)
         });
       }

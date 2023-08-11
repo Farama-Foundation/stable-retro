@@ -29,7 +29,6 @@ As well as additional states on already integrated games.
 
 ## Emulated Systems
 
-Home Consoles:
 - Atari
 	- Atari2600 (via Stella)
 - NEC

@@ -16,7 +16,8 @@ Currently added games on top of gym-retro:
 *	Virtua Fighter - 32x
 *	Virtua Fighter 2 - Genesis
 *	Virtua Fighter 2 - Saturn
-*	Mortal Kombat 1 - Sega CD
+*	Mortal Kombat I - Sega CD
+*	Mortal Kombat II - Arcade
 
 PvP games that support two models fighting each other:
 *	Samurai Showdown - Genesis
@@ -28,6 +29,7 @@ As well as additional states on already integrated games.
 
 ## Emulated Systems
 
+Home Consoles:
 - Atari
 	- Atari2600 (via Stella)
 - NEC
@@ -44,6 +46,18 @@ As well as additional states on already integrated games.
  	- 32x (via Picodrive)
   	- Saturn (via Beetle Saturn)
   	- Sega CD (via Genesis Plus GX)
+
+Arcade Machines:
+	Neo Geo (MVS hardware: 1990–2004)
+	Sega System 1 (1983–1987)
+	System 16 (And similar. 1985–1994)
+	System 18 (1989–1992)
+	System 24 (1988–1994)
+	Capcom CPS1 (1988–1995)
+	Capcom CPS2 (1993–2003)
+	Capcom CPS3 (1996–1999)
+
+[Full list of supported Arcade machines here](https://emulation.gametechwiki.com/index.php/FinalBurn_Neo)
 
 ## Installation
 ```

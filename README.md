@@ -48,6 +48,7 @@ Home Consoles:
   	- Sega CD (via Genesis Plus GX)
 
 Arcade Machines:
+
 	- Neo Geo (MVS hardware: 1990–2004)
 	- Sega System 1 (1983–1987)
 	- System 16 (And similar. 1985–1994)

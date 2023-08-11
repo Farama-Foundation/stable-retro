@@ -1,0 +1,16 @@
+{
+  "info": {
+    "p1_health": {
+      "address": 48288,
+      "type": ">u2"
+    },
+    "p2_health": {
+      "address": 48264,
+      "type": ">u2"
+    },
+    "round": {
+      "address": 50062,
+      "type": ">i2"
+    }
+  }
+}

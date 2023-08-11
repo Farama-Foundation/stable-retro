@@ -1,0 +1,33 @@
+{
+  "crop": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "done": {
+    "variables": {
+      "p1_health": {
+        "op": "equal"
+      },
+      "p2_health": {
+        "op": "equal"
+      },
+      "round": {
+        "measurement": "delta",
+        "op": "equal",
+        "reference": 1
+      }
+    }
+  },
+  "reward": {
+    "variables": {
+      "p1_health": {
+        "penalty": 1.0
+      },
+      "p2_health": {
+        "penalty": -1.0
+      }
+    }
+  }
+}

@@ -282,7 +282,7 @@ def get_romfile_path(game, inttype=Integrations.DEFAULT):
     """
     for extension in EMU_EXTENSIONS.keys():
         possible_path = get_file_path(game, "rom" + extension, inttype)
-        if possible_path:
+        if possible_path and extension != 'zip':
             return possible_path
 
     raise FileNotFoundError(f"No romfiles found for game: {game}")

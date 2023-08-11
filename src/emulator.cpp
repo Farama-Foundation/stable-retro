@@ -78,7 +78,29 @@ bool Emulator::loadRom(const string& romPath) {
 		unloadRom();
 	}
 
-	auto core = coreForRom(romPath);
+	std::string fixedRomPath = romPath;
+
+	//fix rom path for FBNeo roms since it uses the rom file name to know which game it is
+	//std::cout << romPath.substr(romPath.find_last_of("."));
+	std::string ext(".zip");	
+	if (romPath.substr(romPath.find_last_of(".")) == ext) {
+		
+		std::string romNamePath = romPath.substr(0, romPath.find_last_of("/"));
+		romNamePath += "/rom.zip";
+
+		ifstream romNameFile(romNamePath);
+		if (romNameFile.fail()) {
+			return false;
+		}
+
+		string line;
+		getline(romNameFile, line);
+		romNameFile.close();
+
+		fixedRomPath = romPath.substr(0, romPath.find_last_of("/")) + "/" + line;
+	}
+
+	auto core = coreForRom(fixedRomPath);
 	if (core.size() == 0) {
 		return false;
 	}
@@ -102,7 +124,7 @@ bool Emulator::loadRom(const string& romPath) {
 	}
 
 	retro_game_info gameInfo;
-	ifstream in(romPath, ios::binary | ios::ate);
+	ifstream in(fixedRomPath, ios::binary | ios::ate);
 	if (in.fail()) {
 		return false;
 	}
@@ -112,7 +134,7 @@ bool Emulator::loadRom(const string& romPath) {
 		return false;
 	}
 	char* romData = new char[gameInfo.size];
-	gameInfo.path = romPath.c_str();
+	gameInfo.path = fixedRomPath.c_str();
 	gameInfo.data = romData;
 	in.seekg(0, ios::beg);
 	in.read(romData, gameInfo.size);
@@ -128,10 +150,10 @@ bool Emulator::loadRom(const string& romPath) {
 		return false;
 	}
 	retro_get_system_av_info(&m_avInfo);
-	fixScreenSize(romPath);
+	fixScreenSize(fixedRomPath);
 
 	m_romLoaded = true;
-	m_romPath = romPath;
+	m_romPath = fixedRomPath;
 	return true;
 }
 

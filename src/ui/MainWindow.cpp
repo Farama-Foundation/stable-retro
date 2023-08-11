@@ -602,7 +602,27 @@ void MainWindow::integrate(const QString& before, const QString& after, const QS
 	newDir.cd("contrib");
 	newDir.mkpath(after);
 	newDir.cd(after);
-	QString newPath = newDir.filePath("rom." + extension);
+
+	QString newPath;
+	// special case for the FBNeo emulator (zip files) because the name of the zip is used by Fbneo to determine which game it needs to emulate
+	// so it cannot be renamed to "rom" like for other emulators.
+	// rom.zip file is instead use to hold the name. We need to name it rom.zip because requires every game to have a "rom" file
+	if (extension == "zip") {
+		QString file = before.mid(before.lastIndexOf("/")).mid(1);
+		file = file.left(file.lastIndexOf("."));
+		
+		newPath = newDir.filePath(file + "." + extension);
+
+		QFile romNameFile(newDir.filePath("rom.zip"));
+		romNameFile.open(QIODevice::WriteOnly | QIODevice::Truncate);
+		QByteArray romName = (file + "." + extension).toStdString().c_str();
+		romNameFile.write(romName);
+		romNameFile.close();
+	}
+	else {
+		newPath = newDir.filePath("rom." + extension);
+	}
+	
 	QFile::copy(before, newPath);
 	if (m_controller->loadGame(newPath)) {
 		QCryptographicHash sha1(QCryptographicHash::Sha1);

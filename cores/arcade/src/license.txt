@@ -1,0 +1,132 @@
+You may freely use, modify, and distribute both the FB Neo source code and binary, however the following restrictions apply to the FB Neo original material (see below for a list of libraries with differing licenses, please consult their respective documentation for more information):
+
+ - You may not sell, lease, rent or otherwise seek to gain monetary profit from FB Neo;
+ - You must make public any changes you make to the source code;
+ - You must include, verbatim, the full text of this license;
+ - You may not distribute FB Neo with ROM images unless you have the legal right to distribute them;
+ - You may not ask for donations to support your work on any project that uses the FB Neo source code.
+
+FB Neo can currently be obtained from https://neo-source.com.
+
+FB Neo would not exist without a lot of code from the MAME project. The MAME project is subject to its own license, which can be found at https://raw.githubusercontent.com/mamedev/mame/5cef4e1f91010f0d573bbd662208979fa39e73ec/docs/mamelicense.txt. Due to the use of MAME code in FB Neo, FB Neo is also subject to the terms of the MAME license.
+
+FB Neo is based on Final Burn (formally at http://www.finalburn.com), see additional text below.
+Musashi MC68000/MC68010/MC68EC020 CPU core by Karl Stenerud (http://www.mamedev.org).
+A68K MC68000 CPU core by Mike Coates & Darren Olafson (http://www.mamedev.org).
+Z80 CPU core by Juergen Buchmueller (http://www.mamedev.org).
+ARM CPU core by Bryan McPhail, Phil Stroffolino (http://www.mamedev.org).
+ARM7 CPU core by Steve Ellenoff (http://www.mamedev.org).
+H6280 CPU core by Brian McPhail (http://www.mamedev.org).
+HD6309 CPU core by John Butler, Tim Lindner (http://www.mamedev.org).
+I8039 CPU core by Mirko Buffoni (http://www.mamedev.org).
+Konami CPU core by MAMEdev (http://www.mamedev.org).
+M6502 CPU core by Juergen Buchmueller (http://www.mamedev.org).
+M6800/M6801/M6802/M6803/M6808/HD63701/NSC8105 CPU core by MAMEdev (http://www.mamedev.org).
+M6805 CPU core by MAMEdev (http://www.mamedev.org).
+M6809 CPU core by John Bulter (http://www.mamedev.org).
+NEC V20/V30/V33 CPU core by MAMEdev (http://www.mamedev.org).
+PIC16C5X CPU core by Tony La Porta (http://www.mamedev.org).
+S2650 CPU core by Juergen Buchmueller (http://www.mamedev.org).
+SH-2 CPU core by Juergen Buchmueller (http://www.mamedev.org).
+TLCS90 CPU core by Luca Elia (http://www.mamedev.org).
+ADSP21XX CPU core by Aaron Giles (http://www.mamedev.org).
+AY8910/YM2149 sound core by various authors (http://www.mamedev.org).
+C6280 sound core by Charles MacDonald (http://cgfm2.emuviews.com).
+DAC sound core by MAMEdev (http://www.mamedev.org).
+ES8712 sound core by MAMEdev (http://www.mamedev.org).
+ICS2115 sound core by O.Galibert, El-Semi (http://www.mamedev.org).
+IREM GA20 sound core by MAMEdev (http://www.mamedev.org).
+K005289 sound core by Brian McPhail (http://www.mamedev.org).
+K007232 sound core by MAMEdev (http://www.mamedev.org).
+K051649 sound core by Brian McPhail (http://www.mamedev.org).
+K053260 sound core by MAMEdev (http://www.mamedev.org).
+K054539 sound core by MAMEdev (http://www.mamedev.org).
+MSM5205 sound core by Aaron Giles (http://www.mamedev.org).
+MSM5232 sound core by MAMEdev (http://www.mamedev.org).
+RF5C68 sound core by MAMEdev (http://www.mamedev.org).
+SAA1099 sound core by Juergen Buchmueller, Manuel Abadia (http://www.mamedev.org).
+Sega PCM sound core by MAMEdev (http://www.mamedev.org).
+SN76496 sound core by Nicola Salmoria (http://www.mamedev.org).
+UPD7759 sound core by Juergen Buchmueller, Mike Balfour, Howie Cohen, Olivier Galibert, Aaron Giles (http://www.mamedev.org).
+VLM5030 sound core by Tatsuyuki Satoh (http://www.mamedev.org).
+X1010 sound core by Luca Elia, Manbow-J (http://www.mamedev.org).
+Y8950/YM3526/YM3812 sound core by Jarek Burczynski & Tatsuyuki Satoh (http://www.mamedev.org).
+YM2151 sound core by Jarek Burczynski (http://www.mamedev.org).
+YM2203/YM2608/YM2610/YM2612 sound cores by Jarek Burczynski & Tatsuyuki Satoh (http://www.mamedev.org).
+YM2413 sound core by Jarek Burczynski (http://www.mamedev.org).
+YMF278B sound core by R. Belmont & O.Galibert (http://www.mamedev.org).
+
+Uses SMS Plus by Charles MacDonald (http://www.techno-junk.org).
+
+7Z functionality provided by LZMA SDK (http://www.7-zip.org/sdk.html)
+PNG functionality provided by libpng (http://www.libpng.org)
+Zip functionality provided by zlib (http://www.zlib.net).
+
+Uses Xbyak (JIT assembler for x86/x64) by Herumi (https://github.com/herumi/xbyak)
+
+Some graphics effects provided by the Scale2x, 2xPM, Eagle Graphics, 2xSaI, hq2x/hq3x/hq4x, hq2xS/hq3xS/SuperEagle/2xSaI (VBA), hq2xS/hq3xS/hq2xBold/hq3xBold/EPXB/EPXC (SNES9X ReRecording) and SuperScale libraries (http://scale2x.sourceforge.net, http://2xpm.freeservers.com, http://retrofx.com, http://elektron.its.tudelft.nl/~dalikifa, http://www.hiend3d.com, http://code.google.com/p/vba-rerecording, http://code.google.com/p/snes9x151-rerecording, http://nebula.emulatronia.com).
+
+Miscellaneous other components from various sources. Copyright and license information are contained in the relevant parts of the source code.
+
+All material not covered above Â© 2004-2019 Team FB Neo.
+
+DISCLAIMER: The authors of FB Neo don't guarantee its fitness for any purpose, implied or otherwise, and do not accept responsibility for any damages whatsoever that might occur when using FB Neo. All games emulated by FB Neo, including any images and sounds therein, are copyrighted by their respective copyright holders. FB Neo DOES NOT INCLUDE any ROM images of emulated games.
+
+The following information and license conditions accompanied the original Final Burn emulator. They also apply to FB Neo:
+
+"Copyright (c)2001 Dave (formally of www.finalburn.com), all rights reserved. This refers to all code except where stated otherwise (e.g. unzip and zlib code)."
+
+"You can use, modify and redistribute this code freely as long as you don't do so commercially. This copyright notice must remain with the code. If your program uses this code, you must either distribute or link to the source code. If you modify or improve this code, you must distribute the source code improvements."
+
+"Dave"
+"Former Homepage: www.finalburn.com"
+"E-mail: dave@finalburn.com"
+
+
+Portions Copyright © 1997-2022 MAMEdev and contributors
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Portions Copyright © 1997-2015 Nicola Salmoria and the MAME team
+Unless otherwise explicitly stated, all code in MAME is released under the
+following license:
+
+Copyright Nicola Salmoria and the MAME team
+All rights reserved.
+
+Redistribution and use of this code or any derivative works are permitted
+provided that the following conditions are met:
+
+* Redistributions may not be sold, nor may they be used in a commercial
+product or activity.
+
+* Redistributions that are modified from the original source must include the
+complete source code, including the source code for all components used by a
+binary built from the modified sources. However, as a special exception, the
+source code distributed need not include anything that is normally distributed
+(in either source or binary form) with the major components (compiler, kernel,
+and so on) of the operating system on which the executable runs, unless that
+component itself accompanies the executable.
+
+* Redistributions must reproduce the above copyright notice, this list of
+conditions and the following disclaimer in the documentation and/or other
+materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.

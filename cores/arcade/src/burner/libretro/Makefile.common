@@ -1,0 +1,576 @@
+FBNEO_BURN_DIR			:= $(MAIN_FBNEO_DIR)/burn
+FBNEO_BURN_DRIVERS_DIR	:= $(MAIN_FBNEO_DIR)/burn/drv
+FBNEO_BURN_DEVICES_DIR	:= $(MAIN_FBNEO_DIR)/burn/devices
+FBNEO_BURN_SND_DIR		:= $(MAIN_FBNEO_DIR)/burn/snd
+FBNEO_BURNER_DIR		:= $(MAIN_FBNEO_DIR)/burner
+FBNEO_CPU_DIR			:= $(MAIN_FBNEO_DIR)/cpu
+FBNEO_GENERATED_DIR		:= $(MAIN_FBNEO_DIR)/dep/generated
+FBNEO_INTERFACE_DIR		:= $(MAIN_FBNEO_DIR)/intf
+FBNEO_LIB_DIR			:= $(MAIN_FBNEO_DIR)/dep/libs
+FBNEO_SCRIPTS_DIR		:= $(MAIN_FBNEO_DIR)/dep/scripts
+LIBRETRO_DIR			:= $(FBNEO_BURNER_DIR)/libretro
+LIBRETRO_COMM_DIR		:= $(LIBRETRO_DIR)/libretro-common
+UGUI_DIR				:= $(LIBRETRO_DIR)/deps/ugui
+
+ATARI_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/atari
+CAPCOM_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/capcom
+CAVE_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/cave
+CHANNELF_DIR			:= $(FBNEO_BURN_DRIVERS_DIR)/channelf
+COLECO_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/coleco
+CPS3_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/cps3
+DATAEAST_DIR			:= $(FBNEO_BURN_DRIVERS_DIR)/dataeast
+GALAXIAN_DIR			:= $(FBNEO_BURN_DRIVERS_DIR)/galaxian
+IREM_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/irem
+KONAMI_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/konami
+MD_DIR					:= $(FBNEO_BURN_DRIVERS_DIR)/megadrive
+MIDWAY_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/midway
+MSX_DIR					:= $(FBNEO_BURN_DRIVERS_DIR)/msx
+NEOGEO_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/neogeo
+NES_DIR					:= $(FBNEO_BURN_DRIVERS_DIR)/nes
+PCE_DIR					:= $(FBNEO_BURN_DRIVERS_DIR)/pce
+PGM_DIR					:= $(FBNEO_BURN_DRIVERS_DIR)/pgm
+PRE90S_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/pre90s
+PSIKYO_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/psikyo
+PST90S_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/pst90s
+SEGA_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/sega
+SG1000_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/sg1000
+SMS_DIR					:= $(FBNEO_BURN_DRIVERS_DIR)/sms
+SPECTRUM_DIR			:= $(FBNEO_BURN_DRIVERS_DIR)/spectrum
+TAITO_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/taito
+TOAPLAN_DIR				:= $(FBNEO_BURN_DRIVERS_DIR)/toaplan
+ADSP2100_CPU_DIR		:= $(FBNEO_CPU_DIR)/adsp2100
+ARM_CPU_DIR				:= $(FBNEO_CPU_DIR)/arm
+ARM7_CPU_DIR			:= $(FBNEO_CPU_DIR)/arm7
+E132XS_CPU_DIR			:= $(FBNEO_CPU_DIR)/e132xs
+F8_CPU_DIR				:= $(FBNEO_CPU_DIR)/f8
+H6280_CPU_DIR			:= $(FBNEO_CPU_DIR)/h6280
+HD6309_CPU_DIR			:= $(FBNEO_CPU_DIR)/hd6309
+I386_CPU_DIR			:= $(FBNEO_CPU_DIR)/i386
+I8039_CPU_DIR			:= $(FBNEO_CPU_DIR)/i8039
+I8051_CPU_DIR			:= $(FBNEO_CPU_DIR)/i8051
+I8X41_CPU_DIR			:= $(FBNEO_CPU_DIR)/i8x41
+KONAMI_CPU_DIR			:= $(FBNEO_CPU_DIR)/konami
+M377_CPU_DIR			:= $(FBNEO_CPU_DIR)/m377
+M6502_CPU_DIR			:= $(FBNEO_CPU_DIR)/m6502
+M6800_CPU_DIR			:= $(FBNEO_CPU_DIR)/m6800
+M6805_CPU_DIR			:= $(FBNEO_CPU_DIR)/m6805
+M6809_CPU_DIR			:= $(FBNEO_CPU_DIR)/m6809
+M68K_CPU_DIR			:= $(FBNEO_CPU_DIR)/m68k
+MIPS3_CPU_DIR			:= $(FBNEO_CPU_DIR)/mips3
+MIPS3_X64_DRC_CPU_DIR	:= $(MIPS3_CPU_DIR)/x64
+NEC_CPU_DIR				:= $(FBNEO_CPU_DIR)/nec
+PIC16C5X_CPU_DIR		:= $(FBNEO_CPU_DIR)/pic16c5x
+SH2_CPU_DIR				:= $(FBNEO_CPU_DIR)/sh2
+SH4_CPU_DIR				:= $(FBNEO_CPU_DIR)/sh4
+TLCS900_CPU_DIR			:= $(FBNEO_CPU_DIR)/tlcs900
+TMS34010_CPU_DIR		:= $(FBNEO_CPU_DIR)/tms34
+UPD7725_CPU_DIR			:= $(FBNEO_CPU_DIR)/upd7725
+UPD7810_CPU_DIR			:= $(FBNEO_CPU_DIR)/upd7810
+V60_CPU_DIR				:= $(FBNEO_CPU_DIR)/v60
+Z180_CPU_DIR			:= $(FBNEO_CPU_DIR)/z180
+Z80_CPU_DIR				:= $(FBNEO_CPU_DIR)/z80
+
+BURN_BLACKLIST := $(ADSP2100_CPU_DIR)/2100ops.c \
+	$(ADSP2100_CPU_DIR)/2100dasm.cpp \
+	$(ARM7_CPU_DIR)/arm7exec.c \
+	$(ARM7_CPU_DIR)/arm7core.c \
+	$(H6280_CPU_DIR)/tblh6280.c \
+	$(HD6309_CPU_DIR)/6309tbl.c \
+	$(HD6309_CPU_DIR)/6309ops.c \
+	$(I386_CPU_DIR)/i386dasm.c \
+	$(I386_CPU_DIR)/i386op16.c \
+	$(I386_CPU_DIR)/i386op32.c \
+	$(I386_CPU_DIR)/i386ops.c \
+	$(I386_CPU_DIR)/i486ops.c \
+	$(I386_CPU_DIR)/pentops.c \
+	$(I386_CPU_DIR)/x87ops.c \
+	$(M6502_CPU_DIR)/t65sc02.c \
+	$(M6502_CPU_DIR)/t65c02.c \
+	$(M6502_CPU_DIR)/tdeco16.c \
+	$(M6502_CPU_DIR)/tn2a03.c \
+	$(M6502_CPU_DIR)/t6502.c \
+	$(M68K_CPU_DIR)/m68k_in.c \
+	$(M68K_CPU_DIR)/m68kmake.c \
+	$(M68K_CPU_DIR)/m68kfpu.c \
+	$(M68K_CPU_DIR)/m68kdasm.c \
+	$(MIPS3_CPU_DIR)/mips3_dasm.cpp \
+	$(NEC_CPU_DIR)/v25sfr.c \
+	$(NEC_CPU_DIR)/v25instr.c \
+	$(NEC_CPU_DIR)/necinstr.c \
+	$(TMS34010_CPU_DIR)/34010fld.c \
+	$(TMS34010_CPU_DIR)/34010gfx.c \
+	$(TMS34010_CPU_DIR)/34010ops.c \
+	$(TMS34010_CPU_DIR)/34010tbl.c \
+	$(V60_CPU_DIR)/am.c \
+	$(V60_CPU_DIR)/am1.c \
+	$(V60_CPU_DIR)/am2.c \
+	$(V60_CPU_DIR)/am3.c \
+	$(V60_CPU_DIR)/op2.c \
+	$(V60_CPU_DIR)/op3.c \
+	$(V60_CPU_DIR)/op4.c \
+	$(V60_CPU_DIR)/op5.c \
+	$(V60_CPU_DIR)/op6.c \
+	$(V60_CPU_DIR)/op7a.c \
+	$(V60_CPU_DIR)/op12.c \
+	$(V60_CPU_DIR)/optable.c \
+	$(V60_CPU_DIR)/v60d.c \
+	$(V60_CPU_DIR)/v60mem.c \
+	$(KONAMI_CPU_DIR)/konamtbl.c \
+	$(KONAMI_CPU_DIR)/konamops.c \
+	$(M6800_CPU_DIR)/6800ops.c \
+	$(M6800_CPU_DIR)/6800tbl.c \
+	$(M6805_CPU_DIR)/6805ops.c \
+	$(M6809_CPU_DIR)/6809ops.c \
+	$(M6809_CPU_DIR)/6809tbl.c \
+	$(FBNEO_CPU_DIR)/tms34010_intf.cpp \
+	$(I8051_CPU_DIR)/mcs51ops.c \
+	$(UPD7810_CPU_DIR)/7810ops.c \
+	$(UPD7810_CPU_DIR)/7810tbl.c \
+	$(I8X41_CPU_DIR)/8x41dasm.c \
+	$(Z180_CPU_DIR)/z180xy.c \
+	$(Z180_CPU_DIR)/z180fd.c \
+	$(Z180_CPU_DIR)/z180op.c \
+	$(Z180_CPU_DIR)/z180ed.c \
+	$(Z180_CPU_DIR)/z180dd.c \
+	$(Z180_CPU_DIR)/z180cb.c \
+	$(TLCS900_CPU_DIR)/900tbl.c \
+	$(FBNEO_BURNER_DIR)/wave_writer.cpp \
+	$(FBNEO_BURNER_DIR)/sshot.cpp \
+	$(FBNEO_BURNER_DIR)/cong.cpp \
+	$(FBNEO_BURNER_DIR)/image.cpp \
+	$(FBNEO_BURNER_DIR)/misc.cpp \
+	$(FBNEO_BURNER_DIR)/state.cpp \
+	$(FBNEO_BURNER_DIR)/gami.cpp \
+	$(FBNEO_BURNER_DIR)/gamc.cpp \
+	$(FBNEO_BURNER_DIR)/dynhuff.cpp \
+	$(FBNEO_BURNER_DIR)/luaengine.cpp \
+	$(FBNEO_BURNER_DIR)/luasav.cpp \
+	$(CAPCOM_DIR)/ctv_make.cpp \
+	$(PGM_DIR)/pgm_sprite_create.cpp \
+	$(FBNEO_INTERFACE_DIR)/audio/aud_interface.cpp \
+	$(ATARI_DIR)/WHATSNEW.txt.cpp
+
+ifeq ($(LIGHT), 1)
+	# those drivers won't run well on those memory-constrained systems (3ds/wii/gc),
+	# so don't bother keeping them, we'll save memory
+	BURN_BLACKLIST += $(FBNEO_BURN_DEVICES_DIR)/tlc34076.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/epic12.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/serflash.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/bsmt2000.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/mb87078.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/poly.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/sknsspr.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/qs1000.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/v3021.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/decobsmt.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/intelfsh.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/st0020.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/vdc.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/ds2404.cpp \
+		$(FBNEO_BURN_DEVICES_DIR)/rtc9701.cpp \
+		$(FBNEO_BURN_SND_DIR)/burn_ymf271.cpp \
+		$(FBNEO_BURN_SND_DIR)/c352.cpp \
+		$(FBNEO_BURN_SND_DIR)/c6280.cpp \
+		$(FBNEO_BURN_SND_DIR)/es5506.cpp \
+		$(FBNEO_BURN_SND_DIR)/i5000.cpp \
+		$(FBNEO_BURN_SND_DIR)/ics2115.cpp \
+		$(FBNEO_BURN_SND_DIR)/iremga20.cpp \
+		$(FBNEO_BURN_SND_DIR)/mpeg_audio.cpp \
+		$(FBNEO_BURN_SND_DIR)/multipcm.cpp \
+		$(FBNEO_BURN_SND_DIR)/ymf271.cpp \
+		$(FBNEO_BURN_SND_DIR)/ymz770.cpp \
+		$(FBNEO_CPU_DIR)/adsp2100_intf.cpp \
+		$(FBNEO_CPU_DIR)/arm_intf.cpp \
+		$(FBNEO_CPU_DIR)/arm7_intf.cpp \
+		$(FBNEO_CPU_DIR)/h6280_intf.cpp \
+		$(FBNEO_CPU_DIR)/mips3_intf.cpp \
+		$(FBNEO_CPU_DIR)/pic16c5x_intf.cpp \
+		$(FBNEO_CPU_DIR)/tms34_intf.cpp \
+		$(ARM_CPU_DIR)/arm.cpp \
+		$(E132XS_CPU_DIR)/e132xs.cpp \
+		$(H6280_CPU_DIR)/h6280.cpp \
+		$(M377_CPU_DIR)/m37710.cpp \
+		$(MIPS3_CPU_DIR)/cop0.cpp \
+		$(MIPS3_CPU_DIR)/cop1.cpp \
+		$(MIPS3_CPU_DIR)/mips3.cpp \
+		$(PIC16C5X_CPU_DIR)/pic16c5x.cpp \
+		$(SH2_CPU_DIR)/sh2.cpp \
+		$(SH4_CPU_DIR)/sh4.cpp \
+		$(TMS34010_CPU_DIR)/tms34010.cpp \
+		$(UPD7725_CPU_DIR)/upd7725.cpp \
+		$(V60_CPU_DIR)/v60.cpp \
+		$(ARM7_CPU_DIR)/arm7.cpp \
+		$(ADSP2100_CPU_DIR)/adsp2100.cpp \
+		$(I386_CPU_DIR)/i386.cpp \
+		$(CAVE_DIR)/d_cv1k.cpp \
+		$(CPS3_DIR)/cps3run.cpp \
+		$(CPS3_DIR)/cps3snd.cpp \
+		$(CPS3_DIR)/d_cps3.cpp \
+		$(DATAEAST_DIR)/d_decomlc.cpp \
+		$(DATAEAST_DIR)/d_deco156.cpp \
+		$(DATAEAST_DIR)/d_simpl156.cpp \
+		$(DATAEAST_DIR)/d_deco32.cpp \
+		$(DATAEAST_DIR)/d_backfire.cpp \
+		$(DATAEAST_DIR)/d_vaportra.cpp \
+		$(DATAEAST_DIR)/d_tumblep.cpp \
+		$(DATAEAST_DIR)/d_supbtime.cpp \
+		$(DATAEAST_DIR)/d_funkyjet.cpp \
+		$(DATAEAST_DIR)/deco16ic.cpp \
+		$(DATAEAST_DIR)/d_dietgogo.cpp \
+		$(DATAEAST_DIR)/d_dec0.cpp \
+		$(DATAEAST_DIR)/d_dassault.cpp \
+		$(DATAEAST_DIR)/d_darkseal.cpp \
+		$(DATAEAST_DIR)/d_cninja.cpp \
+		$(DATAEAST_DIR)/d_boogwing.cpp \
+		$(DATAEAST_DIR)/d_cbuster.cpp \
+		$(DATAEAST_DIR)/d_actfancr.cpp \
+		$(DATAEAST_DIR)/d_boogwing.cpp \
+		$(DATAEAST_DIR)/d_dblewing.cpp \
+		$(DATAEAST_DIR)/d_dreambal.cpp \
+		$(DATAEAST_DIR)/d_rohga.cpp \
+		$(DATAEAST_DIR)/d_sshangha.cpp \
+		$(DATAEAST_DIR)/d_pktgaldx.cpp \
+		$(IREM_DIR)/d_m92.cpp \
+		$(IREM_DIR)/d_m107.cpp \
+		$(KONAMI_DIR)/d_gijoe.cpp \
+		$(KONAMI_DIR)/d_moo.cpp \
+		$(KONAMI_DIR)/d_mystwarr.cpp \
+		$(KONAMI_DIR)/d_xexex.cpp \
+		$(KONAMI_DIR)/d_xmen.cpp \
+		$(MIDWAY_DIR)/dcs2k.cpp \
+		$(MIDWAY_DIR)/d_kinst.cpp \
+		$(MIDWAY_DIR)/d_tunit.cpp \
+		$(MIDWAY_DIR)/d_wunit.cpp \
+		$(MIDWAY_DIR)/d_xunit.cpp \
+		$(MIDWAY_DIR)/d_yunit.cpp \
+		$(MIDWAY_DIR)/ide.cpp \
+		$(MIDWAY_DIR)/midtunit.cpp \
+		$(MIDWAY_DIR)/midwayic.cpp \
+		$(MIDWAY_DIR)/midwunit.cpp \
+		$(MIDWAY_DIR)/narc_sound.cpp \
+		$(MIDWAY_DIR)/williams_adpcm.cpp \
+		$(MIDWAY_DIR)/williams_cvsd.cpp \
+		$(MIDWAY_DIR)/yawdim_sound.cpp \
+		$(MSX_DIR)/d_msx.cpp \
+		$(NES_DIR)/d_nes.cpp \
+		$(PCE_DIR)/d_pce.cpp \
+		$(PCE_DIR)/pce.cpp \
+		$(PGM_DIR)/d_pgm.cpp \
+		$(PGM_DIR)/pgm_asic25.cpp \
+		$(PGM_DIR)/pgm_asic27a_type1.cpp \
+		$(PGM_DIR)/pgm_asic27a_type2.cpp \
+		$(PGM_DIR)/pgm_asic27a_type3.cpp \
+		$(PGM_DIR)/pgm_asic3.cpp \
+		$(PGM_DIR)/pgm_crypt.cpp \
+		$(PGM_DIR)/pgm_draw.cpp \
+		$(PGM_DIR)/pgm_run.cpp \
+		$(PRE90S_DIR)/d_exterm.cpp \
+		$(PRE90S_DIR)/d_madmotor.cpp \
+		$(PSIKYO_DIR)/d_psikyo4.cpp \
+		$(PSIKYO_DIR)/d_psikyosh.cpp \
+		$(PSIKYO_DIR)/psikyosh_render.cpp \
+		$(PST90S_DIR)/d_ms32.cpp \
+		$(PST90S_DIR)/d_ssv.cpp \
+		$(PST90S_DIR)/d_namcona1.cpp \
+		$(PST90S_DIR)/d_namconb1.cpp \
+		$(PST90S_DIR)/d_btoads.cpp \
+		$(PST90S_DIR)/d_artmagic.cpp \
+		$(PST90S_DIR)/d_eolith16.cpp \
+		$(PST90S_DIR)/d_gstream.cpp \
+		$(PST90S_DIR)/d_vegaeo.cpp \
+		$(PST90S_DIR)/d_limenko.cpp \
+		$(PST90S_DIR)/d_pasha2.cpp \
+		$(PST90S_DIR)/d_eolith.cpp \
+		$(PST90S_DIR)/d_x2222.cpp \
+		$(PST90S_DIR)/d_f-32.cpp \
+		$(PST90S_DIR)/d_vamphalf.cpp \
+		$(PST90S_DIR)/d_suprnova.cpp \
+		$(PST90S_DIR)/d_drgnmst.cpp \
+		$(PST90S_DIR)/d_blackt96.cpp \
+		$(PST90S_DIR)/d_seibuspi.cpp \
+		$(PST90S_DIR)/d_kickgoal.cpp \
+		$(PST90S_DIR)/d_playmark.cpp \
+		$(PST90S_DIR)/d_fuukifg3.cpp \
+		$(PST90S_DIR)/d_rabbit.cpp \
+		$(PST90S_DIR)/d_itech32.cpp \
+		$(PST90S_DIR)/d_dreamwld.cpp \
+		$(PST90S_DIR)/d_macrossp.cpp \
+		$(PST90S_DIR)/d_jchan.cpp \
+		$(PST90S_DIR)/d_galpani3.cpp \
+		$(PST90S_DIR)/d_mirage.cpp \
+		$(PST90S_DIR)/d_seta2.cpp \
+		$(SEGA_DIR)/d_segas32.cpp \
+		$(SEGA_DIR)/d_sys24.cpp \
+		$(SPECTRUM_DIR)/d_spectrum.cpp \
+		$(TAITO_DIR)/d_slapshot.cpp \
+		$(TAITO_DIR)/d_superchs.cpp \
+		$(TAITO_DIR)/d_taitof3.cpp \
+		$(TAITO_DIR)/d_taitof2.cpp \
+		$(TAITO_DIR)/d_taitoz.cpp \
+		$(TAITO_DIR)/taitof3_snd.cpp \
+		$(TAITO_DIR)/taitof3_video.cpp \
+		$(TAITO_DIR)/d_groundfx.cpp \
+		$(TAITO_DIR)/d_gunbuster.cpp \
+		$(TAITO_DIR)/d_undrfire.cpp \
+		$(TAITO_DIR)/d_galastrm.cpp
+	FBNEO_DEFINES += -DLIGHT -DNO_NES
+endif
+
+ifeq ($(AUTOGEN_DATS), 0)
+	BURN_BLACKLIST += $(FBNEO_BURNER_DIR)/dat.cpp
+else
+	FBNEO_DEFINES += -DAUTOGEN_DATS
+endif
+
+FBNEO_BURN_DRIVERS_DIRS := $(ATARI_DIR) \
+	$(CAPCOM_DIR) \
+	$(CAVE_DIR) \
+	$(CHANNELF_DIR) \
+	$(COLECO_DIR) \
+	$(CPS3_DIR) \
+	$(DATAEAST_DIR) \
+	$(GALAXIAN_DIR) \
+	$(IREM_DIR) \
+	$(KONAMI_DIR) \
+	$(MD_DIR) \
+	$(MIDWAY_DIR) \
+	$(MSX_DIR) \
+	$(NEOGEO_DIR) \
+	$(NES_DIR) \
+	$(PCE_DIR) \
+	$(PGM_DIR) \
+	$(PRE90S_DIR) \
+	$(PSIKYO_DIR) \
+	$(PST90S_DIR) \
+	$(SEGA_DIR) \
+	$(SG1000_DIR) \
+	$(SMS_DIR) \
+	$(SPECTRUM_DIR) \
+	$(TAITO_DIR) \
+	$(TOAPLAN_DIR) \
+	$(FBNEO_BURN_DRIVERS_DIR)
+
+FBNEO_BURN_DIRS := $(FBNEO_BURN_DIR) \
+	$(FBNEO_BURN_DEVICES_DIR) \
+	$(FBNEO_BURN_SND_DIR) \
+	$(FBNEO_BURN_DRIVERS_DIRS)
+
+FBNEO_CPU_DIRS := $(FBNEO_CPU_DIR) \
+	$(ADSP2100_CPU_DIR) \
+	$(ARM_CPU_DIR) \
+	$(ARM7_CPU_DIR) \
+	$(E132XS_CPU_DIR) \
+	$(F8_CPU_DIR) \
+	$(H6280_CPU_DIR) \
+	$(HD6309_CPU_DIR) \
+	$(I386_CPU_DIR) \
+	$(M377_CPU_DIR) \
+	$(M6502_CPU_DIR) \
+	$(M68K_CPU_DIR) \
+	$(MIPS3_CPU_DIR) \
+	$(NEC_CPU_DIR) \
+	$(PIC16C5X_CPU_DIR) \
+	$(SH2_CPU_DIR) \
+	$(SH4_CPU_DIR) \
+	$(TMS34010_CPU_DIR) \
+	$(UPD7725_CPU_DIR) \
+	$(V60_CPU_DIR) \
+	$(I8X41_CPU_DIR) \
+	$(I8039_CPU_DIR) \
+	$(I8051_CPU_DIR) \
+	$(KONAMI_CPU_DIR) \
+	$(M6800_CPU_DIR) \
+	$(M6805_CPU_DIR) \
+	$(M6809_CPU_DIR) \
+	$(FBNEO_CPU_DIR)/s2650 \
+	$(FBNEO_CPU_DIR)/tlcs90 \
+	$(TLCS900_CPU_DIR) \
+	$(FBNEO_CPU_DIR)/tms32010 \
+	$(UPD7810_CPU_DIR) \
+	$(Z80_CPU_DIR) \
+	$(Z180_CPU_DIR)
+
+FBNEO_INTERFACE_DIRS := $(FBNEO_INTERFACE_DIR)/audio
+
+FBNEO_SRC_DIRS := $(FBNEO_BURNER_DIR) $(FBNEO_BURN_DIRS) $(FBNEO_CPU_DIRS) $(FBNEO_BURNER_DIRS) $(FBNEO_INTERFACE_DIRS)
+
+ifneq ($(STATIC_LINKING), 1)
+	SOURCES_C += $(LIBRETRO_COMM_DIR)/file/file_path.c \
+		$(LIBRETRO_COMM_DIR)/file/file_path_io.c \
+		$(LIBRETRO_COMM_DIR)/encodings/encoding_utf.c \
+		$(LIBRETRO_COMM_DIR)/compat/compat_posix_string.c \
+		$(LIBRETRO_COMM_DIR)/compat/compat_strcasestr.c \
+		$(LIBRETRO_COMM_DIR)/compat/compat_strl.c \
+		$(LIBRETRO_COMM_DIR)/compat/compat_strldup.c \
+		$(LIBRETRO_COMM_DIR)/compat/fopen_utf8.c \
+		$(LIBRETRO_COMM_DIR)/string/stdstring.c \
+		$(LIBRETRO_COMM_DIR)/streams/file_stream.c \
+		$(LIBRETRO_COMM_DIR)/streams/file_stream_transforms.c \
+		$(LIBRETRO_COMM_DIR)/features/features_cpu.c \
+		$(LIBRETRO_COMM_DIR)/file/config_file.c \
+		$(LIBRETRO_COMM_DIR)/file/config_file_userdata.c \
+		$(LIBRETRO_COMM_DIR)/lists/string_list.c \
+		$(LIBRETRO_COMM_DIR)/memmap/memalign.c \
+		$(LIBRETRO_COMM_DIR)/time/rtime.c
+	ifeq ($(HAVE_UWP), 1)
+		SOURCES_CXX += $(LIBRETRO_COMM_DIR)/vfs/vfs_implementation_uwp.cpp
+	else
+		SOURCES_C += $(LIBRETRO_COMM_DIR)/vfs/vfs_implementation.c
+	endif
+endif
+
+INCLUDE_DIRS := $(FBNEO_BURNER_DIR)/win32 \
+	$(LIBRETRO_COMM_DIR)/include \
+	$(LIBRETRO_DIR) \
+	$(FBNEO_BURN_DIR) \
+	$(FBNEO_CPU_DIR) \
+	$(FBNEO_BURN_SND_DIR) \
+	$(FBNEO_BURN_DEVICES_DIR) \
+	$(FBNEO_INTERFACE_DIR) \
+	$(FBNEO_INTERFACE_DIR)/input \
+	$(FBNEO_INTERFACE_DIR)/cd \
+	$(FBNEO_INTERFACE_DIR)/audio \
+	$(FBNEO_BURNER_DIR) \
+	$(FBNEO_CPU_DIR) \
+	$(F8_CPU_DIR) \
+	$(I8039_CPU_DIR) \
+	$(I8051_CPU_DIR) \
+	$(I8X41_CPU_DIR) \
+	$(M377_CPU_DIR) \
+	$(M6805_CPU_DIR) \
+	$(TLCS900_CPU_DIR) \
+	$(FBNEO_CPU_DIR)/tms32010 \
+	$(UPD7725_CPU_DIR) \
+	$(UPD7810_CPU_DIR) \
+	$(V60_CPU_DIR) \
+	$(Z80_CPU_DIR) \
+	$(Z180_CPU_DIR) \
+	$(SH4_CPU_DIR) \
+	$(FBNEO_LIB_DIR)/zlib \
+	$(FBNEO_LIB_DIR)/lib7z \
+	$(CAPCOM_DIR) \
+	$(KONAMI_DIR) \
+	$(DATAEAST_DIR) \
+	$(CAVE_DIR) \
+	$(NEOGEO_DIR) \
+	$(PSIKYO_DIR) \
+	$(SEGA_DIR) \
+	$(TOAPLAN_DIR) \
+	$(TAITO_DIR) \
+	$(IREM_DIR) \
+	$(PCE_DIR) \
+	$(FBNEO_GENERATED_DIR) \
+	$(FBNEO_LIB_DIR) \
+	$(UGUI_DIR)
+
+ARM_FLAGS =
+
+ifeq (,$(findstring msvc,$(platform)))
+	CFLAGS += -std=gnu99
+endif
+
+ifeq (,$(findstring msvc,$(platform)))
+	CXXFLAGS += -std=gnu++98
+endif
+
+#ifeq ($(USE_X64_DRC), 1)
+#	FBNEO_DEFINES  += -DXBYAK_NO_OP_NAMES -DMIPS3_X64_DRC
+#	FBNEO_SRC_DIRS += $(MIPS3_X64_DRC_CPU_DIR)
+#	ifeq (,$(findstring msvc,$(platform)))
+#		CXXFLAGS += -std=gnu++11
+#	endif
+#else
+#	ifeq (,$(findstring msvc,$(platform)))
+#		CXXFLAGS += -std=gnu++98
+#	endif
+#endif
+
+# removing everything related to kinst as it's not worth keeping and only causing issues :
+# - the driver is tagged as not working and for debug builds only
+# - the related mips3 cpu core won't even build with recentish version of gcc (11+ ?)
+BURN_BLACKLIST += $(FBNEO_CPU_DIR)/mips3_intf.cpp \
+	$(MIPS3_CPU_DIR)/cop0.cpp \
+	$(MIPS3_CPU_DIR)/cop1.cpp \
+	$(MIPS3_CPU_DIR)/mips3.cpp \
+	$(MIDWAY_DIR)/d_kinst.cpp \
+	$(MIDWAY_DIR)/ide.cpp
+
+ifeq ($(USE_CYCLONE), 1)
+	FBNEO_DEFINES		+= -DUSE_CYCLONE
+	INCLUDE_DIRS	+= $(FBNEO_CPU_DIR)/cyclone
+	SOURCES_S		+= $(FBNEO_CPU_DIR)/cyclone/Cyclone.S
+	BURN_BLACKLIST	+= $(FBNEO_CPU_DIR)/m68000_intf.cpp
+	ARM_FLAGS		= -mword-relocations -mlittle-endian -munaligned-access
+	# ios and android don't support this
+	ifneq (,$(findstring ios,$(platform)))
+		ARM_FLAGS =
+	endif
+	ifneq (,$(findstring android,$(platform)))
+		ARM_FLAGS =
+	endif
+	CFLAGS			+= -fno-optimize-sibling-calls -funsafe-math-optimizations -fsingle-precision-constant
+	CXXFLAGS		+= -fno-optimize-sibling-calls -funsafe-math-optimizations -fsingle-precision-constant
+else
+	BURN_BLACKLIST	+= $(FBNEO_CPU_DIR)/c68000_intf.cpp
+endif
+
+NEON_FLAGS=
+
+ifeq ($(HAVE_NEON), 1)
+	NEON_FLAGS = -mvectorize-with-neon-quad
+	# ios and android don't support this
+	ifneq (,$(findstring ios,$(platform)))
+		NEON_FLAGS =
+	endif
+	ifneq (,$(findstring android,$(platform)))
+		NEON_FLAGS =
+	endif
+endif
+
+ifeq ($(EXTERNAL_ZLIB), 1)
+	FBNEO_DEFINES += -DEXTERNAL_ZLIB
+	LDFLAGS += -lz
+else
+	FBNEO_SRC_DIRS += $(FBNEO_LIB_DIR)/zlib
+endif
+
+ifeq ($(INCLUDE_7Z_SUPPORT), 1)
+	FBNEO_DEFINES += -DINCLUDE_7Z_SUPPORT -D_7ZIP_PPMD_SUPPPORT -D_7ZIP_ST
+	ifneq ($(STATIC_LINKING), 1)
+		SOURCES_C += $(FBNEO_LIB_DIR)/lib7z/7zArcIn.c \
+			$(FBNEO_LIB_DIR)/lib7z/7zBuf.c \
+			$(FBNEO_LIB_DIR)/lib7z/7zCrc.c \
+			$(FBNEO_LIB_DIR)/lib7z/7zCrcOpt.c \
+			$(FBNEO_LIB_DIR)/lib7z/7zDec.c \
+			$(FBNEO_LIB_DIR)/lib7z/7zStream.c \
+			$(FBNEO_LIB_DIR)/lib7z/Bcj2.c \
+			$(FBNEO_LIB_DIR)/lib7z/Bra.c \
+			$(FBNEO_LIB_DIR)/lib7z/Bra86.c \
+			$(FBNEO_LIB_DIR)/lib7z/BraIA64.c \
+			$(FBNEO_LIB_DIR)/lib7z/CpuArch.c \
+			$(FBNEO_LIB_DIR)/lib7z/Delta.c \
+			$(FBNEO_LIB_DIR)/lib7z/Lzma2Dec.c \
+			$(FBNEO_LIB_DIR)/lib7z/LzmaDec.c \
+			$(FBNEO_LIB_DIR)/lib7z/Ppmd7.c \
+			$(FBNEO_LIB_DIR)/lib7z/Ppmd7Dec.c
+	endif
+else
+	BURN_BLACKLIST += $(FBNEO_BURNER_DIR)/un7z.cpp
+endif
+
+SOURCES_C   += $(filter-out $(BURN_BLACKLIST),$(foreach dir,$(FBNEO_SRC_DIRS),$(wildcard $(dir)/*.c)))
+SOURCES_CXX += $(filter-out $(BURN_BLACKLIST),$(foreach dir,$(FBNEO_SRC_DIRS),$(wildcard $(dir)/*.cpp)))
+SOURCES_CXX += $(LIBRETRO_DIR)/libretro.cpp \
+	$(LIBRETRO_DIR)/retro_cdemu.cpp \
+	$(LIBRETRO_DIR)/retro_common.cpp \
+	$(LIBRETRO_DIR)/retro_input.cpp \
+	$(LIBRETRO_DIR)/retro_memory.cpp
+
+SOURCES_C += $(UGUI_DIR)/ugui.c \
+	$(LIBRETRO_DIR)/ugui_tools.c
+
+# GIT HASH
+GIT_VERSION := " $(shell git rev-parse --short HEAD || echo unknown)"
+ifneq ($(GIT_VERSION)," unknown")
+	CXXFLAGS += -DGIT_VERSION=\"$(GIT_VERSION)\"
+endif

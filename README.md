@@ -46,16 +46,15 @@ Home Consoles:
  	- 32x (via Picodrive)
   	- Saturn (via Beetle Saturn)
   	- Sega CD (via Genesis Plus GX)
-
-Arcade Machines:
-	- Neo Geo (MVS hardware: 1990–2004)
-	- Sega System 1 (1983–1987)
-	- System 16 (And similar. 1985–1994)
-	- System 18 (1989–1992)
-	- System 24 (1988–1994)
-	- Capcom CPS1 (1988–1995)
-	- Capcom CPS2 (1993–2003)
-	- Capcom CPS3 (1996–1999)
+- Arcade Machines:
+  	- Neo Geo (MVS hardware: 1990–2004)
+ 	- Sega System 1 (1983–1987)
+ 	- System 16 (And similar. 1985–1994)
+ 	- System 18 (1989–1992)
+ 	- System 24 (1988–1994)
+ 	- Capcom CPS1 (1988–1995)
+ 	- Capcom CPS2 (1993–2003)
+ 	- Capcom CPS3 (1996–1999)
 
 [Full list of supported Arcade machines here](https://emulation.gametechwiki.com/index.php/FinalBurn_Neo)
 

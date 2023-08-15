@@ -28,11 +28,11 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install system packages
-      run: sudo apt-get update && sudo apt-get install git cmake capnproto zlib1g-dev g++ build-essential python3-dev python3-pip pkg-config libzip-dev software-properties-common libbz2-dev
+      run: sudo apt-get update && sudo apt-get install git cmake capnproto zlib1g-dev libzip-dev python3-dev python3-pip pkg-config libzip-dev software-properties-common libbz2-dev
     - name: Install dependencies
-      run: python3 -m pip install --upgrade setuptools wheel build
+      run: python3 -m pip install --upgrade setuptools wheel build auditwheel
     - name: Build wheels
-      run: python3 -m build --wheel --sdist
+      run: python3 -m build --wheel --sdist && auditwheel repair -w . --plat manylinux_2_34_x86_64 dist/*linux_x86_64.whl && rm -f *linux_x86_64.whl
     - name: Store wheels
       uses: actions/upload-artifact@v2
       with:

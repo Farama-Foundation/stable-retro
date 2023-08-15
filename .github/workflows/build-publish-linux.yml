@@ -32,7 +32,7 @@ jobs:
     - name: Install dependencies
       run: python3 -m pip install --upgrade setuptools wheel
     - name: Build wheels
-      run: python3 setup.py bdist_wheel
+      run: python3 -m build —wheel —sdist
     - name: Store wheels
       uses: actions/upload-artifact@v2
       with:

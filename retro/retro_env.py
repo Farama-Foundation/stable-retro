@@ -45,6 +45,10 @@ class RetroEnv(gym.Env):
         self.initial_state = None
         self.players = players
 
+        # Don't return multiple rewards in multiplayer mode by default
+        # as stable-baselines3 vectorized environments doesn't support it
+        self.multi_rewards = False
+
         metadata = {}
         rom_path = retro.data.get_romfile_path(game, inttype)
         metadata_path = retro.data.get_file_path(game, "metadata.json", inttype)
@@ -301,7 +305,7 @@ class RetroEnv(gym.Env):
         self.statename = statename
 
     def compute_step(self):
-        if self.players > 1:
+        if self.players > 1 and self.multi_rewards:
             reward = [self.data.current_reward(p) for p in range(self.players)]
         else:
             reward = self.data.current_reward()

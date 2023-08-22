@@ -45,7 +45,7 @@ class RetroEnv(gym.Env):
         self.initial_state = None
         self.players = players
 
-        # Don't return multiple rewards in mutliplayer mode by default
+        # Don't return multiple rewards in multiplayer mode by default
         # as stable-baselines3 vectorized environments doesn't support it
         self.multi_rewards = False
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark">
@@ -11,11 +11,11 @@
 <link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Development" href="../developing/" /><link rel="prev" title="&lt;no title&gt;" href="../" />
         <link rel="canonical" href="https://stable-retro.farama.org/getting_started.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.05.20.dev1 -->
+    <!-- Generated with Sphinx 7.2.2 and Furo 2023.08.19.dev1 -->
         <title>Getting Started - Stable-Retro Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=2b6f8eb5452c44539a42dd9ada0a48f56e5f404d" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=5d0deb98f4b2e6cecaee64745957f1068f205919" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=49cbaffd" />
     
     
 
@@ -279,14 +279,14 @@
           <article role="main">
             
             <section id="getting-started">
-<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">#</a></h1>
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
 <p>Stable Retro requires one of the supported versions of Python (3,6 to 3.10). Please make sure to install the appropriate distribution for your OS beforehand. Please note that due to compatibility issues with some of the cores, 32-bit operating systems are not supported.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>stable-retro
 </pre></div>
 </div>
 <p>See the section <span class="xref std std-ref">development</span> if you want to build Stable Retro yourself (this is only useful if you want to change the C++ code, not required to integrate new games).</p>
 <section id="create-a-retro-environment">
-<h2>Create a Retro Environment<a class="headerlink" href="#create-a-retro-environment" title="Permalink to this heading">#</a></h2>
+<h2>Create a Retro Environment<a class="headerlink" href="#create-a-retro-environment" title="Link to this heading">#</a></h2>
 <p>After installing you can now create a <a class="reference external" href="https://gymnasium.farama.org/">Gymnasium</a> environment in Python:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
 <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">&#39;Airstriker-Genesis&#39;</span><span class="p">)</span>
@@ -296,11 +296,11 @@
 <p>Please note that other ROMs are not included and you must obtain them yourself.  Most ROM hashes are sourced from their respective No-Intro SHA-1 sums.  See <a class="reference internal" href="#importing-roms"><span class="std std-ref">Importing ROMs</span></a> for information about importing ROMs into Stable Retro.</p>
 </section>
 <section id="example-usage">
-<h2>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this heading">#</a></h2>
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading">#</a></h2>
 <p>Stable Retro is useful primarily as a means to train RL on classic video games, though it can also be used to control those video games from Python.</p>
 <p>Here are some example ways to use Stable Retro:</p>
 <section id="interactive-script">
-<h3>Interactive Script<a class="headerlink" href="#interactive-script" title="Permalink to this heading">#</a></h3>
+<h3>Interactive Script<a class="headerlink" href="#interactive-script" title="Link to this heading">#</a></h3>
 <p>There is a Python script that lets you interact with the game using the Gymnasium interface.  Run it like this:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>retro.examples.interactive<span class="w"> </span>--game<span class="w"> </span>Airstriker-Genesis
 </pre></div>
@@ -308,7 +308,7 @@
 <p>You can use the arrow keys and the <code class="docutils literal notranslate"><span class="pre">X</span></code> key to control your ship and fire.  This Python script lets you try out an environment using only the Stable Retro Python API and is quite basic.  For a more advanced tool, check out the <a class="reference internal" href="../integration/#integration-ui"><span class="std std-ref">The Integration UI</span></a>.</p>
 </section>
 <section id="random-agent">
-<h3>Random Agent<a class="headerlink" href="#random-agent" title="Permalink to this heading">#</a></h3>
+<h3>Random Agent<a class="headerlink" href="#random-agent" title="Link to this heading">#</a></h3>
 <p>A random agent that chooses a random action on each timestep looks much like the example random agent for <a class="reference external" href="https://gymnasium.farama.org/">Gymnasium</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
 
@@ -335,7 +335,7 @@
 <p>It will print the current reward and will exit when the scenario is done. Note that it will throw an exception if no reward or scenario data is defined for that game. This script is useful to see if a scenario is properly set up and that the reward function isn’t too generous.</p>
 </section>
 <section id="brute">
-<h3>Brute<a class="headerlink" href="#brute" title="Permalink to this heading">#</a></h3>
+<h3>Brute<a class="headerlink" href="#brute" title="Link to this heading">#</a></h3>
 <p>There is a simple but effective reinforcement learning algorithm called “the Brute” from <a class="reference external" href="https://arxiv.org/abs/1709.06009">“Revisiting the Arcade Learning Environment”</a>  by Machado et al. which works on deterministic environments like Stable Retro games and is easy to implement.  To run the example:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>retro.examples.brute<span class="w"> </span>--game<span class="w"> </span>Airstriker-Genesis
 </pre></div>
@@ -343,7 +343,7 @@
 <p>This algorithm works by building up a sequence of button presses that do well in the game, it doesn’t look at the screen at all.  It will print out the best reward seen so far while training.</p>
 </section>
 <section id="ppo">
-<h3>PPO<a class="headerlink" href="#ppo" title="Permalink to this heading">#</a></h3>
+<h3>PPO<a class="headerlink" href="#ppo" title="Link to this heading">#</a></h3>
 <p>Using <a class="reference external" href="https://arxiv.org/abs/1707.06347">“Proximal Policy Optimization”</a> by Schulman et al., you can train an agent to play many of the games, though it takes awhile and is much faster with a GPU.</p>
 <p>This example requires installing <a class="reference external" href="https://github.com/openai/baselines">OpenAI Baselines</a>.  Once installed, you can run it:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>retro.examples.ppo<span class="w"> </span>--game<span class="w"> </span>Airstriker-Genesis
@@ -353,7 +353,7 @@
 </section>
 </section>
 <section id="integrations">
-<h2>Integrations<a class="headerlink" href="#integrations" title="Permalink to this heading">#</a></h2>
+<h2>Integrations<a class="headerlink" href="#integrations" title="Link to this heading">#</a></h2>
 <p>What games have already been integrated?  Note that this will display all defined environments, even ones for which ROMs are missing.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
 <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">list_games</span><span class="p">()</span>
@@ -362,7 +362,7 @@
 <p>The actual integration data can be see in the <a class="reference external" href="https://github.com/farama-foundation/stable-retro/tree/master/retro/data/stable">Stable Retro Github repo</a>.</p>
 </section>
 <section id="importing-roms">
-<span id="id1"></span><h2>Importing ROMs<a class="headerlink" href="#importing-roms" title="Permalink to this heading">#</a></h2>
+<span id="id1"></span><h2>Importing ROMs<a class="headerlink" href="#importing-roms" title="Link to this heading">#</a></h2>
 <p>If you have the correct ROMs on your computer (identified by the <code class="docutils literal notranslate"><span class="pre">rom.sha</span></code> file for each game integration), you can import them using the import script:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>retro.import<span class="w"> </span>/path/to/your/ROMs/directory/
 </pre></div>
@@ -487,9 +487,9 @@
     
     
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f0e5df8a"></script>
+    <script src="../_static/documentation_options.js?v=27f13642"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=7660844c"></script>
     
     <script>

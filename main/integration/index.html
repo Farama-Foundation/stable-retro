@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark">
@@ -11,11 +11,11 @@
 <link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Python API" href="../python/" /><link rel="prev" title="Development" href="../developing/" />
         <link rel="canonical" href="https://stable-retro.farama.org/integration.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.05.20.dev1 -->
+    <!-- Generated with Sphinx 7.2.2 and Furo 2023.08.19.dev1 -->
         <title>Game Integration - Stable-Retro Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=2b6f8eb5452c44539a42dd9ada0a48f56e5f404d" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=5d0deb98f4b2e6cecaee64745957f1068f205919" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=49cbaffd" />
     
     
 
@@ -279,7 +279,7 @@
           <article role="main">
             
             <section id="game-integration">
-<h1>Game Integration<a class="headerlink" href="#game-integration" title="Permalink to this heading">#</a></h1>
+<h1>Game Integration<a class="headerlink" href="#game-integration" title="Link to this heading">#</a></h1>
 <p>Integrating a game means taking a video game ROM file and setting it up as a reinforcement learning environment by defining 3 things:</p>
 <ul class="simple">
 <li><p>A starting state</p></li>
@@ -289,14 +289,14 @@
 <p>Once integrated, you will be able to use the game through the Python API as a <a class="reference external" href="https://gymnasium.farama.org/">Gymnasium</a> environment.</p>
 <p>If you are going to integrate a new game, you’ll need a ROM for the correct system, see <a class="reference internal" href="#supported-roms"><span class="std std-ref">Supported ROM Types</span></a> for a list.</p>
 <section id="example-integration">
-<h2>Example Integration<a class="headerlink" href="#example-integration" title="Permalink to this heading">#</a></h2>
+<h2>Example Integration<a class="headerlink" href="#example-integration" title="Link to this heading">#</a></h2>
 <p>This is a list of the integration files for the game <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/Airstriker-Genesis">Airstriker-Genesis</a>.</p>
 <section id="level1-state">
-<h3><code class="docutils literal notranslate"><span class="pre">Level1.state</span></code><a class="headerlink" href="#level1-state" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">Level1.state</span></code><a class="headerlink" href="#level1-state" title="Link to this heading">#</a></h3>
 <p>This is a savestate from the beginning of the game, restarting the environment will put the agent at this point in the game.</p>
 </section>
 <section id="data-json">
-<h3><code class="docutils literal notranslate"><span class="pre">data.json</span></code><a class="headerlink" href="#data-json" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">data.json</span></code><a class="headerlink" href="#data-json" title="Link to this heading">#</a></h3>
 <p>This file defines the list of game-related variables that python can see based on their memory addresses in the games</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -318,7 +318,7 @@
 </div>
 </section>
 <section id="scenario-json">
-<h3><code class="docutils literal notranslate"><span class="pre">scenario.json</span></code><a class="headerlink" href="#scenario-json" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">scenario.json</span></code><a class="headerlink" href="#scenario-json" title="Link to this heading">#</a></h3>
 <p>This file defines the reward function and done condition using the variables defined in <code class="docutils literal notranslate"><span class="pre">data.json</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -345,7 +345,7 @@
 </div>
 </section>
 <section id="metadata-json">
-<h3><code class="docutils literal notranslate"><span class="pre">metadata.json</span></code><a class="headerlink" href="#metadata-json" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">metadata.json</span></code><a class="headerlink" href="#metadata-json" title="Link to this heading">#</a></h3>
 <p>This file defines the default starting state if no state is specified by the user as well as some miscellaneous debugging information.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;default_state&quot;</span><span class="p">:</span> <span class="s2">&quot;Level1&quot;</span><span class="p">,</span>
@@ -359,11 +359,11 @@
 </div>
 </section>
 <section id="rom-md">
-<h3><code class="docutils literal notranslate"><span class="pre">rom.md</span></code><a class="headerlink" href="#rom-md" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">rom.md</span></code><a class="headerlink" href="#rom-md" title="Link to this heading">#</a></h3>
 <p>This is the ROM file used for this game, with a few exceptions, ROM files are not included in Stable Retro, but will be in your local copy of Stable Retro after you import them.</p>
 </section>
 <section id="rom-sha">
-<h3><code class="docutils literal notranslate"><span class="pre">rom.sha</span></code><a class="headerlink" href="#rom-sha" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">rom.sha</span></code><a class="headerlink" href="#rom-sha" title="Link to this heading">#</a></h3>
 <p>This is the SHA1 hash of the <code class="docutils literal notranslate"><span class="pre">rom.md</span></code> file, used for importing ROMs.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c67af162391fff4a63432be5a156eb9ca7b4da5a</span>
 </pre></div>
@@ -372,13 +372,13 @@
 </section>
 </section>
 <section id="integration-files">
-<h2>Integration Files<a class="headerlink" href="#integration-files" title="Permalink to this heading">#</a></h2>
+<h2>Integration Files<a class="headerlink" href="#integration-files" title="Link to this heading">#</a></h2>
 <section id="states">
-<h3>States<a class="headerlink" href="#states" title="Permalink to this heading">#</a></h3>
+<h3>States<a class="headerlink" href="#states" title="Link to this heading">#</a></h3>
 <p>Emulation allows the entire state of a video game system to be stored to disk and restored. These files are specific to the emulator, but always end with <code class="docutils literal notranslate"><span class="pre">.state</span></code>. These are identical to the versions used in the standalone versions of the emulators but gzipped.</p>
 </section>
 <section id="variable-locations-data-json">
-<h3>Variable Locations <code class="docutils literal notranslate"><span class="pre">data.json</span></code><a class="headerlink" href="#variable-locations-data-json" title="Permalink to this heading">#</a></h3>
+<h3>Variable Locations <code class="docutils literal notranslate"><span class="pre">data.json</span></code><a class="headerlink" href="#variable-locations-data-json" title="Link to this heading">#</a></h3>
 <p>Information about the inner workings of games are stored alongside the ROM in a file named <code class="docutils literal notranslate"><span class="pre">data.json</span></code>. This JSON file documents “ground truth” information about a game, including the locations and formats of variables in memory. These manifests are separated into sections, although only one section currently is defined:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">info</span></code> section of the manifest lists game variables’ memory addresses. Each entry in the <code class="docutils literal notranslate"><span class="pre">info</span></code> section consists of a key naming the memory address and the following values:</p>
 <ul class="simple">
@@ -399,9 +399,9 @@
 <p>For more information on the possible variable types, see <a class="reference internal" href="#appendix-types"><span class="std std-ref">Appendix: Types</span></a>.</p>
 </section>
 <section id="scenario-scenario-json">
-<h3>Scenario <code class="docutils literal notranslate"><span class="pre">scenario.json</span></code><a class="headerlink" href="#scenario-scenario-json" title="Permalink to this heading">#</a></h3>
-<p>Information pertaining to reward functions and done conditions can either be specified by manually overriding functions in <a class="reference internal" href="../python/#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a> or can be done by writing a scenario file.</p>
-<p>Scenario files contain information that is used to compute the reward function and done condition from variables defined in the information manifest. Each variable specified in the scenario file is multiplied by a <code class="docutils literal notranslate"><span class="pre">reward</span></code> value if positive and a <code class="docutils literal notranslate"><span class="pre">penalty</span></code> value if negative and then summed up to create the reward for that step. Similarly, states of these variables can be checked to see if the game is over. By default the scenario file will be loaded from <code class="docutils literal notranslate"><span class="pre">scenario.json</span></code>, but alternative scenario files can be specified in the <a class="reference internal" href="../python/#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a> constructor.</p>
+<h3>Scenario <code class="docutils literal notranslate"><span class="pre">scenario.json</span></code><a class="headerlink" href="#scenario-scenario-json" title="Link to this heading">#</a></h3>
+<p>Information pertaining to reward functions and done conditions can either be specified by manually overriding functions in <code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code> or can be done by writing a scenario file.</p>
+<p>Scenario files contain information that is used to compute the reward function and done condition from variables defined in the information manifest. Each variable specified in the scenario file is multiplied by a <code class="docutils literal notranslate"><span class="pre">reward</span></code> value if positive and a <code class="docutils literal notranslate"><span class="pre">penalty</span></code> value if negative and then summed up to create the reward for that step. Similarly, states of these variables can be checked to see if the game is over. By default the scenario file will be loaded from <code class="docutils literal notranslate"><span class="pre">scenario.json</span></code>, but alternative scenario files can be specified in the <code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code> constructor.</p>
 <p>Scenario files are again JSON and specified with the following sections:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">reward</span></code> section used to calculate the reward function, and it split into the following subsections:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">variables</span></code> subsection is used for defining how to calculate the reward function from the current state of memory. For each variable in the <code class="docutils literal notranslate"><span class="pre">variables</span></code> section, a value is calculated, multiplied by a coefficient, then added to the reward function for this step. How a value is extracted is specified by the <code class="docutils literal notranslate"><span class="pre">op</span></code>/<code class="docutils literal notranslate"><span class="pre">measurement</span></code>/<code class="docutils literal notranslate"><span class="pre">reference</span></code> values (see the addendum below on operations for the meanings of these). The default <code class="docutils literal notranslate"><span class="pre">measurement</span></code> is <code class="docutils literal notranslate"><span class="pre">delta</span></code>. There is no default <code class="docutils literal notranslate"><span class="pre">op</span></code>, and by default the value is passed through raw.</p>
@@ -427,7 +427,7 @@
 </section>
 </section>
 <section id="the-integration-ui">
-<span id="integration-ui"></span><h2>The Integration UI<a class="headerlink" href="#the-integration-ui" title="Permalink to this heading">#</a></h2>
+<span id="integration-ui"></span><h2>The Integration UI<a class="headerlink" href="#the-integration-ui" title="Link to this heading">#</a></h2>
 <p>The integration UI helps you easily find variables and see what is going on with the reward function.</p>
 <p>You can normally download the compiled UI package for your platform here:</p>
 <ul class="simple">
@@ -436,7 +436,7 @@
 </ul>
 <p>However, if those URLs no longer work, you can also download these packages from <a class="reference external" href="https://github.com/farama-foundation/stable-retro/releases/">GitHub’s Releases</a></p>
 <section id="integrating-a-new-rom">
-<h3>Integrating a new ROM<a class="headerlink" href="#integrating-a-new-rom" title="Permalink to this heading">#</a></h3>
+<h3>Integrating a new ROM<a class="headerlink" href="#integrating-a-new-rom" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Open the Stable Retro Integration UI</p></li>
 <li><p>Load a new game — <code class="docutils literal notranslate"><span class="pre">Command-Shift-O</span></code> on Mac</p></li>
@@ -456,7 +456,7 @@
 </section>
 </section>
 <section id="supported-rom-types">
-<span id="supported-roms"></span><h2>Supported ROM Types<a class="headerlink" href="#supported-rom-types" title="Permalink to this heading">#</a></h2>
+<span id="supported-roms"></span><h2>Supported ROM Types<a class="headerlink" href="#supported-rom-types" title="Link to this heading">#</a></h2>
 <p>ROM files contain the game itself. Each system has a unique file extension to denote which system a given ROM runs on:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">.md</span></code>: Sega Genesis (also known as Mega Drive)</p></li>
@@ -473,18 +473,18 @@
 <p>Sometimes ROMs from these systems use different extensions, e.g. <code class="docutils literal notranslate"><span class="pre">.gen</span></code> for Genesis, <code class="docutils literal notranslate"><span class="pre">.bin</span></code> for Atari, etc. Please rename the ROMs to use the aforementioned extensions in these cases.</p>
 </section>
 <section id="integrating-a-game">
-<h2>Integrating a Game<a class="headerlink" href="#integrating-a-game" title="Permalink to this heading">#</a></h2>
+<h2>Integrating a Game<a class="headerlink" href="#integrating-a-game" title="Link to this heading">#</a></h2>
 <p>To integrate a game you need to define a done condition and a reward function.  The done condition lets Stable Retro know when to end a game session, while the reward function provides a simple numeric goal for machine learning agents to maximize.</p>
 <p>To define these, you find variables from the game’s memory, such as the player’s current score and lives remaining, and use those to create the done condition and reward function.  An example done condition is when the <code class="docutils literal notranslate"><span class="pre">lives</span></code> variable is equal to <code class="docutils literal notranslate"><span class="pre">0</span></code>, an example reward function is the change in the <code class="docutils literal notranslate"><span class="pre">score</span></code> variable.</p>
 <p>Note: if the game requires that you hit the <code class="docutils literal notranslate"><span class="pre">Start</span></code> button to play, for instance after dying, then you need to modify the scenario file to allow this as <code class="docutils literal notranslate"><span class="pre">Start</span></code> is disallowed by default.  See the <code class="docutils literal notranslate"><span class="pre">actions</span></code> key in <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/KidChameleon-Genesis/scenario.json">KidChameleon-Genesis</a> for an example of this.</p>
 <section id="done-condition">
-<h3>Done Condition<a class="headerlink" href="#done-condition" title="Permalink to this heading">#</a></h3>
+<h3>Done Condition<a class="headerlink" href="#done-condition" title="Link to this heading">#</a></h3>
 <p>This is usually the easier of the two.  The best done condition to use is the Game Over or Continue screen after you run out of lives.  For some games this is when you have zero lives left, for some <code class="docutils literal notranslate"><span class="pre">-1</span></code> lives, for others, it can be pretty hard.</p>
 <p>It’s better to have a simple and reliable but slightly incorrect done condition (e.g. ending the game when you still have 1 life left because it’s hard to detect the 0 life case) than to have a done condition that is unreliable, such as a <code class="docutils literal notranslate"><span class="pre">gameover</span></code> variable that detects when the gameover screen is present most of the time but also incorrectly fires when switching levels.</p>
 <p>If you create a <code class="docutils literal notranslate"><span class="pre">gameover</span></code> variable, make sure to test it with a replay that plays multiple levels in a row to make sure it doesn’t fire accidentally.</p>
 </section>
 <section id="reward-function">
-<h3>Reward Function<a class="headerlink" href="#reward-function" title="Permalink to this heading">#</a></h3>
+<h3>Reward Function<a class="headerlink" href="#reward-function" title="Link to this heading">#</a></h3>
 <p>Reinforcement learning agents try to maximize the reward function.  The ideal reward function would be that you get 1 point for beating the game.  There’s no way to maximize that besides beating the game.</p>
 <p>That reward is impractical though, because existing reinforcement learning algorithms are unable to make progress with a reward that is so hard to get.  Instead we can specify some easier to get reward that, if you maximize it, should result in beating the game.</p>
 <p>If the game has a score, this is often a good choice.  In some games however, you can get as much score as you want by standing in one place and attacking the same enemy over and over as it respawns.  Because that is so different from beating the game, it’s best to have an alternative reward, though these are often very game specific.</p>
@@ -492,7 +492,7 @@
 <p>Provided you use the score, define a <code class="docutils literal notranslate"><span class="pre">score</span></code> variable and set the reward such that the reward the agent receives matches the score displayed on the screen, make sure to check that you’re not off by a factor of 10 or 100 by comparing to the <code class="docutils literal notranslate"><span class="pre">Cumulative</span></code> value displayed in the <code class="docutils literal notranslate"><span class="pre">Scenario</span> <span class="pre">Information</span></code> pane of the UI.</p>
 </section>
 <section id="finding-variables">
-<h3>Finding Variables<a class="headerlink" href="#finding-variables" title="Permalink to this heading">#</a></h3>
+<h3>Finding Variables<a class="headerlink" href="#finding-variables" title="Link to this heading">#</a></h3>
 <p>It’s best to keep a consistent pattern for the different types of variables you might add to a game’s <code class="docutils literal notranslate"><span class="pre">data.json</span></code> file.  Here are some tips:</p>
 <ol class="arabic simple">
 <li><p>It’s pretty common for multiple different variables to group themselves together. When narrowing down the search for a particular variable, look at nearby memory addresses if you suspect you have a similar but incorrect variable (for instance you found the high score variable but are looking for the score variable).</p></li>
@@ -512,7 +512,7 @@
 <p>Ideally you can find the original since it’s more likely to be correct, so if you can, find a variable that when updated, updates the corresponding value in the game.  The most common source of this is a high score variable which will have the same value as the normal score variable, but updating it will have no effect on your score.</p>
 </section>
 <section id="common-errors">
-<h3>Common Errors<a class="headerlink" href="#common-errors" title="Permalink to this heading">#</a></h3>
+<h3>Common Errors<a class="headerlink" href="#common-errors" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Wrong type for variable: if your score variable is actually <code class="docutils literal notranslate"><span class="pre">&gt;d2</span></code> and you put <code class="docutils literal notranslate"><span class="pre">&gt;d4</span></code>, you may not notice until you get to some later level and the memory address next to the score is used for something, suddenly giving you a very large score.</p></li>
 <li><p>Incorrect done condition: it might be that if you run out of time or die in some unusual way that the done condition is not detected correctly.  Make sure to test unusual ways of ending the game, and make sure that your done condition doesn’t fire upon completing a level (unless it’s the final level of the game).  If you’re able to hit continue after dying, make sure that the game ends before the agent can hit continue.</p></li>
@@ -521,7 +521,7 @@
 </section>
 </section>
 <section id="using-a-custom-integration-from-python">
-<h2>Using a Custom Integration from Python<a class="headerlink" href="#using-a-custom-integration-from-python" title="Permalink to this heading">#</a></h2>
+<h2>Using a Custom Integration from Python<a class="headerlink" href="#using-a-custom-integration-from-python" title="Link to this heading">#</a></h2>
 <p>Once you have created an integration, you can put it in a folder called <code class="docutils literal notranslate"><span class="pre">custom_integrations</span></code>. In particular, your integration directory name should follow the following structure (depending on the rom type):</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">.md</span></code>: <code class="docutils literal notranslate"><span class="pre">*-Genesis</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">AddamsFamily-Genesis</span></code>)</p></li>
@@ -558,7 +558,7 @@
 <p>This lets you use your integration without having to add it to <code class="docutils literal notranslate"><span class="pre">retro</span></code> directly.</p>
 </section>
 <section id="appendix-types">
-<span id="id1"></span><h2>Appendix: Types<a class="headerlink" href="#appendix-types" title="Permalink to this heading">#</a></h2>
+<span id="id1"></span><h2>Appendix: Types<a class="headerlink" href="#appendix-types" title="Link to this heading">#</a></h2>
 <p>The types consist of three parts, in order:</p>
 <ul class="simple">
 <li><p>Endianness</p></li>
@@ -646,7 +646,7 @@ Ideally, this should be a power of two, e.g. 1, 2, 4, 8, etc., however non-power
 </div></blockquote>
 </section>
 <section id="appendix-operations">
-<span id="id2"></span><h2>Appendix: Operations<a class="headerlink" href="#appendix-operations" title="Permalink to this heading">#</a></h2>
+<span id="id2"></span><h2>Appendix: Operations<a class="headerlink" href="#appendix-operations" title="Link to this heading">#</a></h2>
 <p>Games can store information in memory in many various ways, and as such the specific information needed can vary in form too. The basic premise is that once a raw value is extracted from memory an operation may be defined to transform it to a useful form. Furthermore, we may want raw values in a given step or the deltas between two steps. Thus three properties are defined:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">measurement</span></code>: The method used for extracting the raw value. May be <code class="docutils literal notranslate"><span class="pre">absolute</span></code> for the current value and <code class="docutils literal notranslate"><span class="pre">delta</span></code> for the difference between the current and previous value. The default varies based on context.</p></li>
@@ -804,9 +804,9 @@ Ideally, this should be a power of two, e.g. 1, 2, 4, 8, etc., however non-power
     
     
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f0e5df8a"></script>
+    <script src="../_static/documentation_options.js?v=27f13642"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=7660844c"></script>
     
     <script>

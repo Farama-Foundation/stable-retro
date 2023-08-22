@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark">
@@ -11,11 +11,11 @@
 <link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Game Integration" href="../integration/" /><link rel="prev" title="Getting Started" href="../getting_started/" />
         <link rel="canonical" href="https://stable-retro.farama.org/developing.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.05.20.dev1 -->
+    <!-- Generated with Sphinx 7.2.2 and Furo 2023.08.19.dev1 -->
         <title>Development - Stable-Retro Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=2b6f8eb5452c44539a42dd9ada0a48f56e5f404d" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=5d0deb98f4b2e6cecaee64745957f1068f205919" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=49cbaffd" />
     
     
 
@@ -279,36 +279,36 @@
           <article role="main">
             
             <section id="development">
-<h1>Development<a class="headerlink" href="#development" title="Permalink to this heading">#</a></h1>
+<h1>Development<a class="headerlink" href="#development" title="Link to this heading">#</a></h1>
 <p>Adding new games can be done without recompiling Stable Retro, but if you need to work on the C++ code or make changes to the UI, you will want to compile Stable Retro from source.</p>
 <section id="install-retro-from-source">
-<h2>Install Retro from source<a class="headerlink" href="#install-retro-from-source" title="Permalink to this heading">#</a></h2>
+<h2>Install Retro from source<a class="headerlink" href="#install-retro-from-source" title="Link to this heading">#</a></h2>
 <p>Building Stable Retro requires at least either gcc 5 or clang 3.4.</p>
 <section id="prerequisites">
-<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h3>
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
 <p>To build Stable Retro you must first install CMake.
 You can do this either through your package manager, download from the <a class="reference external" href="https://cmake.org/download/">official site</a> or <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">cmake</span></code>.
 If you’re using the official installer on Windows, make sure to tell CMake to add itself to the system PATH.</p>
 </section>
 <section id="mac-prerequisites">
-<h3>Mac prerequisites<a class="headerlink" href="#mac-prerequisites" title="Permalink to this heading">#</a></h3>
+<h3>Mac prerequisites<a class="headerlink" href="#mac-prerequisites" title="Link to this heading">#</a></h3>
 <p>Since LuaJIT does not work properly on macOS you must first install Lua 5.1 from homebrew:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>pkg-config<span class="w"> </span>lua@5.1
 </pre></div>
 </div>
 </section>
 <section id="windows-prerequisites">
-<h3>Windows prerequisites<a class="headerlink" href="#windows-prerequisites" title="Permalink to this heading">#</a></h3>
+<h3>Windows prerequisites<a class="headerlink" href="#windows-prerequisites" title="Link to this heading">#</a></h3>
 <p>Install docker</p>
 </section>
 <section id="linux-prerequisites">
-<h3>Linux prerequisites<a class="headerlink" href="#linux-prerequisites" title="Permalink to this heading">#</a></h3>
+<h3>Linux prerequisites<a class="headerlink" href="#linux-prerequisites" title="Link to this heading">#</a></h3>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>zlib1g-dev
 </pre></div>
 </div>
 </section>
 <section id="building-linux-and-mac">
-<h3>Building Linux and Mac<a class="headerlink" href="#building-linux-and-mac" title="Permalink to this heading">#</a></h3>
+<h3>Building Linux and Mac<a class="headerlink" href="#building-linux-and-mac" title="Link to this heading">#</a></h3>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openai/retro.git<span class="w"> </span>gym-retro
 <span class="nb">cd</span><span class="w"> </span>gym-retro
 pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
@@ -316,7 +316,7 @@ pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </
 </div>
 </section>
 <section id="building-windows">
-<h3>Building Windows<a class="headerlink" href="#building-windows" title="Permalink to this heading">#</a></h3>
+<h3>Building Windows<a class="headerlink" href="#building-windows" title="Link to this heading">#</a></h3>
 <p>Run the following</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker/build_windows.bat
 </pre></div>
@@ -331,10 +331,10 @@ pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </
 </section>
 </section>
 <section id="install-retro-ui-from-source">
-<h2>Install Retro UI from source<a class="headerlink" href="#install-retro-ui-from-source" title="Permalink to this heading">#</a></h2>
+<h2>Install Retro UI from source<a class="headerlink" href="#install-retro-ui-from-source" title="Link to this heading">#</a></h2>
 <p>First make sure you can install Retro from source, after that follow the instructions for your platform:</p>
 <section id="macos">
-<h3>macOS<a class="headerlink" href="#macos" title="Permalink to this heading">#</a></h3>
+<h3>macOS<a class="headerlink" href="#macos" title="Link to this heading">#</a></h3>
 <p>Note that for Mojave (10.14) you may need to install <code class="docutils literal notranslate"><span class="pre">/Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg</span></code></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>pkg-config<span class="w"> </span>capnp<span class="w"> </span>lua@5.1<span class="w"> </span>qt5
 cmake<span class="w"> </span>.<span class="w"> </span>-DCMAKE_PREFIX_PATH<span class="o">=</span>/usr/local/opt/qt<span class="w"> </span>-DBUILD_UI<span class="o">=</span>ON<span class="w"> </span>-UPYLIB_DIRECTORY
@@ -344,7 +344,7 @@ open<span class="w"> </span><span class="s2">&quot;Gym Retro Integration.app&quo
 </div>
 </section>
 <section id="linux">
-<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this heading">#</a></h3>
+<h3>Linux<a class="headerlink" href="#linux" title="Link to this heading">#</a></h3>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>capnproto<span class="w"> </span>libcapnp-dev<span class="w"> </span>libqt5opengl5-dev<span class="w"> </span>qtbase5-dev<span class="w"> </span>zlib1g-dev
 cmake<span class="w"> </span>.<span class="w"> </span>-DBUILD_UI<span class="o">=</span>ON<span class="w"> </span>-UPYLIB_DIRECTORY
 make<span class="w"> </span>-j<span class="k">$(</span>grep<span class="w"> </span>-c<span class="w"> </span>^processor<span class="w"> </span>/proc/cpuinfo<span class="k">)</span>
@@ -353,7 +353,7 @@ make<span class="w"> </span>-j<span class="k">$(</span>grep<span class="w"> </sp
 </div>
 </section>
 <section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">#</a></h3>
+<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">#</a></h3>
 <p>The Retro UI is not currently supported in native Windows but you can use it easily via WSL2 (Windows Subsystem for Linux) by following the instructions above for Linux.
 From within WSL2 just launch gym-retro-integration binary like you would on linux.</p>
 </section>
@@ -479,9 +479,9 @@ From within WSL2 just launch gym-retro-integration binary like you would on linu
     
     
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f0e5df8a"></script>
+    <script src="../_static/documentation_options.js?v=27f13642"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=7660844c"></script>
     
     <script>

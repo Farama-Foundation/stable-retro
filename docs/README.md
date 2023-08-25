@@ -1,6 +1,6 @@
 # Stable-retro docs
 
-This folder contains the documentation for [StableRetro](https://github.com/Farama-Foundation/stableretro).
+This folder contains the documentation for [StableRetro](https://github.com/Farama-Foundation/stable-retro).
 
 If you are modifying an atari environment page, please follow the instructions below. For more information about how to contribute to the documentation go to our [CONTRIBUTING.md](https://github.com/Farama-Foundation/Celshast/blob/main/CONTRIBUTING.md)
 

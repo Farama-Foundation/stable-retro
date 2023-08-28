@@ -33,8 +33,8 @@ sudo apt-get install zlib1g-dev
 ### Building Linux and Mac
 
 ```shell
-git clone https://github.com/openai/retro.git gym-retro
-cd gym-retro
+git clone https://github.com/farama-foundation/stable-retro.git stable-retro
+cd stable-retro
 pip3 install -e .
 ```
 

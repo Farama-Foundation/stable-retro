@@ -1,5 +1,13 @@
 {
   "info": {
+    "fullstar_x": {
+      "address": 16760700,
+      "type": ">i2"
+    },
+    "fullstar_y": {
+      "address": 16760292,
+      "type": ">i2"
+    },
     "g1_x": {
       "address": 16756938,
       "type": ">i2"

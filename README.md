@@ -45,7 +45,7 @@ As well as additional states on already integrated games.
   	- Saturn (via Beetle Saturn)
   	- Sega CD (via Genesis Plus GX)
 
-Experimental (acessible in the fbneo branch)
+**Experimental** (accessible in the fbneo branch)
 - Arcade Machines:
   	- Neo Geo (MVS hardware: 1990–2004)
  	- Sega System 1 (1983–1987)

@@ -16,6 +16,14 @@
       "address": 16756958,
       "type": ">i2"
     },
+    "g2_x": {
+      "address": 16757706,
+      "type": ">i2"
+    },
+    "g2_y": {
+      "address": 16757726,
+      "type": ">i2"
+    },
     "p1_attackzone": {
       "address": 16762582,
       "type": ">u4"

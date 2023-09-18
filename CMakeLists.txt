@@ -259,8 +259,6 @@ if(NOT CAPN_PROTO_FOUND AND NOT BUILD_MANYLINUX)
   endif()
 endif()
 
-# Temporarily force disable CAPNPROTO since it currently causes random seg faults when building the project
-# https://github.com/Farama-Foundation/stable-retro/issues/65
 set(CAPN_PROTO_FOUND OFF)
 
 if(CAPN_PROTO_FOUND)

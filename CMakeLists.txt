@@ -259,6 +259,8 @@ if(NOT CAPN_PROTO_FOUND AND NOT BUILD_MANYLINUX)
   endif()
 endif()
 
+set(CAPN_PROTO_FOUND OFF)
+
 if(CAPN_PROTO_FOUND)
   add_definitions(-DUSE_CAPNP)
 

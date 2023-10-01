@@ -6,7 +6,7 @@ from distutils.spawn import find_executable
 from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext
 
-VERSION_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "retro/VERSION")
+VERSION_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "retro/VERSION.txt")
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 README = open(os.path.join(SCRIPT_DIR, "README.md")).read()

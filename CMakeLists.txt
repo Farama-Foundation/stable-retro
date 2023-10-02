@@ -6,8 +6,6 @@ endif()
 
 find_package(Git QUIET)
 
-find_package(PythonInterp REQUIRED)
-
 file(READ "${CMAKE_SOURCE_DIR}/retro/VERSION" PROJECT_VERSION)
 string(REGEX REPLACE "\n$" "" PROJECT_VERSION "${PROJECT_VERSION}")
 set_property(
@@ -45,7 +43,9 @@ set(BUILD_PYTHON
 mark_as_advanced(BUILD_PYTHON)
 
 if(BUILD_PYTHON)
-  find_package(PythonLibs REQUIRED)
+  find_package(Python 3 COMPONENTS Interpreter Development.Module REQUIRED)
+else()
+  find_package(Python 3 COMPONENTS Interpreter REQUIRED)
 endif()
 
 if(WIN32 OR BUILD_MANYLINUX)
@@ -339,7 +339,7 @@ if(CAPN_PROTO_FOUND)
 endif()
 
 include_directories(src retro third-party/pybind11/include third-party
-                    third-party/gtest/googletest/include ${PYTHON_INCLUDE_DIRS})
+                    third-party/gtest/googletest/include ${Python_INCLUDE_DIRS})
 
 if(BUILD_PYTHON)
   add_library(retro SHARED src/retro.cpp)
@@ -359,7 +359,7 @@ if(BUILD_PYTHON)
       add_definitions(-DMS_WIN64)
     endif()
 
-    set(PYBIND_LIBS "${PYTHON_LIBRARY}")
+    set(PYBIND_LIBS "${Python_LIBRARY}")
   endif()
 
   target_link_libraries(retro retro-base ${PYBIND_LIBS} ${STATIC_LDFLAGS})

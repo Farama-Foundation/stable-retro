@@ -20,7 +20,7 @@ jobs:
       - name: Build test files
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install -e .
+          python3 -m pip install .
           make -f tests/Makefile
 
       - name: Run tests

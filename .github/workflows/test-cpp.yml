@@ -19,7 +19,7 @@ jobs:
 
       - name: Build test files
         run: |
-          python3 -m pip install --upgrade pip cmake wheel setuptools
+          python3 -m pip install --upgrade pip
           python3 -m pip install -e .
           make -f tests/Makefile
 

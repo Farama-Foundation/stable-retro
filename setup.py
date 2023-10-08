@@ -2,7 +2,6 @@ import os
 import subprocess
 import sys
 import sysconfig
-from distutils.spawn import find_executable
 
 from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext
@@ -34,17 +33,9 @@ class CMakeBuild(build_ext):
         python_include_dir = f"-DPython_INCLUDE_DIR={sysconfig.get_path('include')}"
         python_library = f"-DPython_LIBRARY={sysconfig.get_path('platlib')}"
 
-        cmake_exe = find_executable("cmake")
-        if not cmake_exe:
-            try:
-                import cmake
-            except ImportError:
-                subprocess.check_call([sys.executable, "-m", "pip", "install", "cmake"])
-                import cmake
-            cmake_exe = os.path.join(cmake.CMAKE_BIN_DIR, "cmake")
         subprocess.check_call(
             [
-                cmake_exe,
+                "cmake",
                 ".",
                 "-G",
                 "Unix Makefiles",
@@ -64,10 +55,7 @@ class CMakeBuild(build_ext):
             import multiprocessing
 
             jobs = f"-j{multiprocessing.cpu_count():d}"
-        make_exe = find_executable("make")
-        if not make_exe:
-            raise RuntimeError("Could not find Make executable. Is it installed?")
-        subprocess.check_call([make_exe, jobs, "retro"])
+        subprocess.check_call(["make", jobs, "retro"])
 
 
 platform_globs = [

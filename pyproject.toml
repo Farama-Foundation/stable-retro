@@ -12,12 +12,16 @@ repair-wheel-command = "auditwheel -v show {wheel} && auditwheel repair -w {dest
 build-verbosity = 3
 
 # For manylinux_2_28 we need to install the following dependencies using yum:
-#before-all = "yum install -y cmake git pkgconf-pkg-config zlib-devel libzip-devel bzip2-devel"
+before-all = "yum install -y cmake git pkgconf-pkg-config zlib-devel libzip-devel bzip2-devel"
+#before-all = "yum install -y cmake git zlib-devel libzip-devel bzip2-devel"
+#before-all = "yum install -y cmake git zlib-devel libzip-devel"
 
 # Only build for x86_64 and aarch64 are officially supported
 archs = "x86_64 aarch64"
 manylinux-x86_64-image = "manylinux_2_28"
 manylinux-aarch64-image = "manylinux_2_28"
+#manylinux-x86_64-image = "manylinux2014"
+#manylinux-aarch64-image = "manylinux2014"
 
 [tool.cibuildwheel.macos]
 before-all = "brew install pkg-config capnp lua@5.1 qt5"

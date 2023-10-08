@@ -1,8 +1,8 @@
 import os
 import subprocess
 import sys
-from distutils.spawn import find_executable
 import sysconfig
+from distutils.spawn import find_executable
 
 from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext
@@ -24,7 +24,7 @@ class CMakeBuild(build_ext):
             build_type = "-DCMAKE_BUILD_TYPE=Debug"
         else:
             build_type = ""
-        
+
         # Provide hints to CMake about where to find Python (this should be enough for most cases)
         python_root_dir = f"-DPython_ROOT_DIR={os.path.dirname(sys.executable)}"
         python_find_strategy = "-DPython_FIND_STRATEGY=LOCATION"
@@ -33,7 +33,7 @@ class CMakeBuild(build_ext):
         python_executable = f"-DPython_EXECUTABLE={sys.executable}"
         python_include_dir = f"-DPython_INCLUDE_DIR={sysconfig.get_path('include')}"
         python_library = f"-DPython_LIBRARY={sysconfig.get_path('platlib')}"
-        
+
         cmake_exe = find_executable("cmake")
         if not cmake_exe:
             try:
@@ -55,7 +55,7 @@ class CMakeBuild(build_ext):
                 python_find_strategy,
                 python_executable,
                 python_include_dir,
-                python_library
+                python_library,
             ],
         )
         if self.parallel:
@@ -111,7 +111,7 @@ setup(
         "retro.scripts",
         "retro.import",
         "retro.examples",
-        "retro.testing"
+        "retro.testing",
     ],
     package_data={
         "retro": [

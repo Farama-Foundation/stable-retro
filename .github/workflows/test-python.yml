@@ -2,15 +2,12 @@ name: Test Stable-Retro
 
 on: [pull_request, push]
 
-permissions:
-  contents: read # to fetch code (actions/checkout)
-
 jobs:
   build:
     runs-on: ubuntu-latest  # todo, add more OS systems to see if they work as well
     strategy:
       matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10']  # '3.11'
+        python-version: ['3.8', '3.9', '3.10']  # '3.11'
 
     steps:
       - uses: actions/checkout@v3

@@ -2,9 +2,6 @@ name: Test C++ Stable-Retro code
 
 on: [pull_request, push]
 
-permissions:
-  contents: read # to fetch code (actions/checkout)
-
 jobs:
   build:
     runs-on: ubuntu-latest  # todo, add more OS systems to see if they work as well

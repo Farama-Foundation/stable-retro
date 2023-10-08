@@ -26,4 +26,4 @@ python3 -m pip install ${PYTHON_WHEEL}
 python3 -c "import retro"
 
 # Run tests
-pytest tests/test_python
+pytest

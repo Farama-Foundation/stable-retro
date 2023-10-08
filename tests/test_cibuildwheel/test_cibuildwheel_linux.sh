@@ -27,10 +27,8 @@ DOCKERFILES_TO_BUILD_AND_RUN=(
 cd $REPO_ROOT
 rm -f CMakeCache.txt
 rm -rf CMakeFiles
-rm -f retro/cores/*.so
-rm -f retro/*.so
-rm -f cores/*.so
-rm -rf retro/**__pycache__
+rm -f retro/*.so retro/cores/*.so retro/cores/*.json retro/cores/*-version
+rm -f cores/*/*.so cores/snes/libretro/*.so
 rm -rf build
 
 # Build wheels using cibuildwheel

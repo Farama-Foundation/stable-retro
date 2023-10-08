@@ -43,9 +43,9 @@ set(BUILD_PYTHON
 mark_as_advanced(BUILD_PYTHON)
 
 if(BUILD_PYTHON)
-  find_package(Python 3 COMPONENTS Interpreter Development.Module REQUIRED)
+  find_package(Python 3 COMPONENTS Interpreter Development.Module)
 else()
-  find_package(Python 3 COMPONENTS Interpreter REQUIRED)
+  find_package(Python 3 COMPONENTS Interpreter)
 endif()
 
 if(WIN32 OR BUILD_MANYLINUX)

@@ -23,13 +23,19 @@ DOCKERFILES_TO_BUILD_AND_RUN=(
     "continuumio/miniconda3:latest conda-based.Dockerfile"  # Python 3.10
 )
 
-# Clean local directory to avoid any problem
+# Clean local directory to avoid problems
 cd $REPO_ROOT
+rm -f CMakeCache.txt
+rm -rf CMakeFiles
 rm -f retro/cores/*.so
+rm -f retro/*.so
 rm -f cores/*.so
+rm -rf retro/**__pycache__
+rm -rf build
 
 # Build wheels using cibuildwheel
-#cibuildwheel --platform linux --arch $(uname -m)
+#export CIBW_BUILD_VERBOSITY=3  # Uncomment to see full build logs
+cibuildwheel --platform linux --arch $(uname -m)
 
 function create_dockerfile ( ) {
     local all_args=("$@")

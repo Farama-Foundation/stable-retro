@@ -16,10 +16,10 @@ README = open(os.path.join(SCRIPT_DIR, "README.md")).read()
 class CMakeBuild(build_ext):
     def run(self):
         suffix = super().get_ext_filename("")
-        pyext_suffix = f"-DPYEXT_SUFFIX:STRING={suffix}"
+        pyext_suffix = f"-DPYEXT_SUFFIX={suffix}"
         pylib_dir = ""
         if not self.inplace:
-            pylib_dir = f"-DPYLIB_DIRECTORY:PATH={self.build_lib}"
+            pylib_dir = f"-DPYLIB_DIRECTORY={self.build_lib}"
         if self.debug:
             build_type = "-DCMAKE_BUILD_TYPE=Debug"
         else:
@@ -111,6 +111,7 @@ setup(
         "retro.scripts",
         "retro.import",
         "retro.examples",
+        "retro.testing"
     ],
     package_data={
         "retro": [

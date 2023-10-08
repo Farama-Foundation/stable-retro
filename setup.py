@@ -55,6 +55,7 @@ class CMakeBuild(build_ext):
             import multiprocessing
 
             jobs = f"-j{multiprocessing.cpu_count():d}"
+
         subprocess.check_call(["make", jobs, "retro"])
 
 

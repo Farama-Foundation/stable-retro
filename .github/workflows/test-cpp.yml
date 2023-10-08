@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
@@ -21,10 +21,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install git cmake capnproto zlib1g-dev build-essential pkg-config libzip-dev software-properties-common libbz2-dev python3-opengl
 
-      - name: Build test files
+      - name: Install pip package and build tests
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install -e .
+          cmake .
+          make -j
           make -f tests/Makefile
 
       - name: Run tests

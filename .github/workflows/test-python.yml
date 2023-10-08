@@ -2,6 +2,9 @@ name: Test Stable-Retro
 
 on: [pull_request, push]
 
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
 jobs:
   build:
     runs-on: ubuntu-latest  # todo, add more OS systems to see if they work as well
@@ -23,8 +26,8 @@ jobs:
 
       - name: Install pip packages
         run: |
-          python -m pip install --upgrade pip cmake wheel setuptools pytest
-          pip install -e .
+          python3 -m pip install --upgrade pip cmake wheel setuptools pytest
+          python3 -m pip install -e .
 
       - name: Run tests
         run: xvfb-run -s '-screen 0 1024x768x24' pytest

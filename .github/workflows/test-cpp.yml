@@ -2,6 +2,9 @@ name: Test C++ Stable-Retro code
 
 on: [pull_request, push]
 
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
 jobs:
   build:
     runs-on: ubuntu-latest  # todo, add more OS systems to see if they work as well
@@ -16,6 +19,7 @@ jobs:
 
       - name: Build test files
         run: |
+          python3 -m pip install --upgrade pip cmake wheel setuptools
           python3 -m pip install -e .
           make -f tests/Makefile
 

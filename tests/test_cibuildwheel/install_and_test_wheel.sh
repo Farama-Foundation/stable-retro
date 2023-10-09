@@ -25,5 +25,5 @@ python3 -m pip install ${PYTHON_WHEEL}
 # Test import
 python3 -c "import retro"
 
-# Run tests
-pytest
+# Run tests with xvfb and pytest
+xvfb-run -s '-screen 0 1024x768x24' pytest

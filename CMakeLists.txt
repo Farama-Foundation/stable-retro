@@ -4,6 +4,31 @@ if(POLICY CMP0048)
   cmake_policy(SET CMP0048 NEW)
 endif()
 
+if(LINUX)
+  set(PYEXT_SUFFIX
+      ".so"
+      CACHE STRING "Suffix for Python extension modules")
+  set(DYNLIB_SUFFIX
+      ".so"
+      CACHE STRING "Suffix for dynamic libraries")
+elseif(APPLE)
+  set(PYEXT_SUFFIX
+      ".so"
+      CACHE STRING "Suffix for Python extension modules")
+  set(DYNLIB_SUFFIX
+      ".dylib"
+      CACHE STRING "Suffix for dynamic libraries")
+elseif(WIN32)
+  set(PYEXT_SUFFIX
+      ".pyd"
+      CACHE STRING "Suffix for Python extension modules" FORCE)
+  set(DYNLIB_SUFFIX
+      ".dll"
+      CACHE STRING "Suffix for dynamic libraries")
+else()
+  message(FATAL_ERROR "Unsupported platform")
+endif()
+
 find_package(Git QUIET)
 
 file(READ "${CMAKE_SOURCE_DIR}/retro/VERSION" PROJECT_VERSION)
@@ -103,16 +128,6 @@ else()
     WORKING_DIRECTORY "${LUA_INCLUDE_DIRS}")
 endif()
 
-if(NOT WIN32)
-  set(PYEXT_SUFFIX
-      ".so"
-      CACHE STRING "Suffix for Python extension modules")
-else()
-  set(PYEXT_SUFFIX
-      ".pyd"
-      CACHE STRING "Suffix for Python extension modules" FORCE)
-endif()
-
 if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
   set(STATIC_LDFLAGS "-static-libstdc++ -Wl,--exclude-libs,ALL")
 endif()
@@ -184,7 +199,8 @@ function(add_core platform core_name)
       ${CMAKE_COMMAND} -E env CFLAGS=${core_cflags} CXXFLAGS=${core_cxxflags}
       LDFLAGS=${core_ldflags} $(MAKE) -f ${makefile} CC="${CMAKE_C_COMPILER}"
       CXX="${CMAKE_CXX_COMPILER}" fpic=${core_fpic_flags} ${libretro_platform}
-    COMMAND ${CMAKE_COMMAND} -E copy "${core_name}_libretro*" "${TARGET_PATH}"
+    COMMAND ${CMAKE_COMMAND} -E copy "${core_name}_libretro${DYNLIB_SUFFIX}"
+            "${TARGET_PATH}"
     WORKING_DIRECTORY "cores/${platform}/${subdir}"
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version")
   unset(core_ldflags)

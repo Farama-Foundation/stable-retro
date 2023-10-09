@@ -2,8 +2,8 @@ FROM fedora:latest
 
 WORKDIR /stable-retro
 
-# Install Python and pip
-RUN dnf update -y && dnf clean all && dnf install -y python3-devel python3-pip
+# Install Python and pip, OpenGL, and Xvfb
+RUN dnf update -y && dnf clean all && dnf install -y python3-devel python3-pip freeglut-devel xorg-x11-server-Xvfb
 
 COPY tests tests
 COPY wheelhouse wheelhouse

@@ -59,9 +59,22 @@ As well as additional states on already integrated games.
 [Full list of supported Arcade machines here](https://emulation.gametechwiki.com/index.php/FinalBurn_Neo)
 
 ## Installation
+
+```
+pip3 install stable-retro
+```
+or if the above doesn't work for your plateform:
 ```
 pip3 install git+https://github.com/Farama-Foundation/stable-retro.git
 ```
+
+If you plan to integrate new ROMs, states or emulator cores or plan to edit an existing env:
+```
+git clone https://github.com/Farama-Foundation/stable-retro.git
+cd stable-retro
+pip3 install -e .
+```
+
 #### Apple Silicon Installation (Tested on python3.10)
 - NOTE: The Game Boy (gambatte) emulator is not supported on Apple Silicon
 

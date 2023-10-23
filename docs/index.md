@@ -159,7 +159,7 @@ python.md
 :caption: Development
 
 release_notes.md
-Github <https://github.com/Farama-Foundation/StableRetro>
-Contribute to the Docs <https://github.com/Farama-Foundation/StableRetro/blob/main/docs/README.md>
+Github <https://github.com/Farama-Foundation/stable-retro>
+Contribute to the Docs <https://github.com/Farama-Foundation/stable-retro/blob/master/docs/README.md>
 ```
 [//]: # (release_notes/index)

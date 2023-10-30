@@ -36,6 +36,14 @@
       "address": 16762588,
       "type": ">u2"
     },
+    "p2_fullstar_x": {
+      "address": 16760244,
+      "type": ">i2"
+    },
+    "p2_fullstar_y": {
+      "address": 16760702,
+      "type": ">i2"
+    },
     "p1_onetimer": {
       "address": 16763432,
       "type": ">u4"

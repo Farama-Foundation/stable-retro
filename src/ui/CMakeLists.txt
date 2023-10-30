@@ -10,9 +10,9 @@ file(GLOB SRC *.cpp)
 
 set(RETRO_EXTRA)
 
-#if(CapnProto_FOUND)
-#  list(APPEND RETRO_EXTRA retro-capnp)
-#endif()
+# if(CapnProto_FOUND)
+#   list(APPEND RETRO_EXTRA retro-capnp)
+# endif()
 
 get_target_property(QT_TYPE Qt5::Core TYPE)
 

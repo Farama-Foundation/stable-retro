@@ -143,11 +143,7 @@ def verify_scenario(game, inttype, scenario="scenario", raw=None, dataraw=None):
                 warnings.append((file, f"missing reward in rewards[{i:d}]"))
             elif "variables" in r and "script" in r:
                 warnings.append(
-                    (
-                        file,
-                        f"both variables and script present in rewards[{i:d},
-                    ]",
-                ),
+                    (file, "both variables and script present in rewards[{i:d}]"),
                 )
         if "reward" in scen:
             warnings.append((file, "reward and rewards both present"))

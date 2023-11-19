@@ -19,7 +19,7 @@ repos:
       - id: detect-private-key
       - id: debug-statements
   - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
+    rev: 6.1.0
     hooks:
       - id: flake8
         args:
@@ -40,7 +40,7 @@ repos:
       - id: isort
         args: ["--profile", "black"]
   - repo: https://github.com/python/black
-    rev: 23.1.0
+    rev: 23.11.0
     hooks:
       - id: black
   - repo: https://github.com/asottile/add-trailing-comma

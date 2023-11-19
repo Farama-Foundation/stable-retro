@@ -50,6 +50,13 @@ class DefaultIntegrations:
             return False
         return DefaultIntegrations.DEFAULT.value | b
 
+    def __ror__(self, b):
+        try:
+            self._init()
+        except NameError:
+            return False
+        return DefaultIntegrations.DEFAULT.value | b
+
     def __and__(self, b):
         try:
             self._init()
@@ -57,10 +64,31 @@ class DefaultIntegrations:
             return False
         return DefaultIntegrations.DEFAULT.value & b
 
+    def __rand__(self, b):
+        try:
+            self._init()
+        except NameError:
+            return False
+        return DefaultIntegrations.DEFAULT.value & b
+
+    def __lt__(self, b):
+        try:
+            self._init()
+        except NameError:
+            return False
+        return DefaultIntegrations.DEFAULT.value < b
+
+    def __sub__(self, b):
+        try:
+            self._init()
+        except NameError:
+            return False
+        return DefaultIntegrations.DEFAULT.value - b
+
     @classmethod
     def add(cls, extra):
         cls._init()
-        cls.DEFAULT |= extra
+        cls.DEFAULT = cls.DEFAULT | extra
 
     @classmethod
     def reset(cls):

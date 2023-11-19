@@ -4,7 +4,7 @@ if(POLICY CMP0048)
   cmake_policy(SET CMP0048 NEW)
 endif()
 
-if(LINUX)
+if(UNIX)
   set(PYEXT_SUFFIX
       ".so"
       CACHE STRING "Suffix for Python extension modules")

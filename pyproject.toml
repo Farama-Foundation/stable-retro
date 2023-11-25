@@ -3,11 +3,11 @@ requires = ["cmake>=3.2.0", "setuptools", "wheel", "build"]
 
 [tool.cibuildwheel]
 # We need to build for the following Python versions:
-build = "cp{38,39,310,311}-*"
+build = "cp{38,39,310,311,312}-*"
 
 [tool.cibuildwheel.linux]
 # Only manylinux is supported (no musl)
-build = "cp{38,39,310,311}-manylinux*"
+build = "cp{38,39,310,311,312}-manylinux*"
 
 # For manylinux_2_28 we need to install the following dependencies using yum:
 before-all = "yum install -y cmake git pkgconf-pkg-config zlib-devel libzip-devel bzip2-devel"

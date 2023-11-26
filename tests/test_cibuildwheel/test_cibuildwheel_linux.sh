@@ -13,14 +13,17 @@ IMAGE_PREFIX="stable-retro_wheels"
 
 # Array in format "<base docker image> <base dockerfile to use> <additional commands to add to the dockerfile after FROM statement>"
 DOCKERFILES_TO_BUILD_AND_RUN=(
-    "debian:11.6 apt-based.Dockerfile ENV LANG C.UTF-8"  # Python 3.9
+    "debian:11 apt-based.Dockerfile ENV LANG C.UTF-8"  # Python 3.9
+    "debian:latest apt-based.Dockerfile ENV LANG C.UTF-8"  # Python 3.11
     "ubuntu:20.04 apt-based.Dockerfile"  # Python 3.8
     "ubuntu:22.04 apt-based.Dockerfile"  # Python 3.10
-    #"continuumio/miniconda3:latest conda-based.Dockerfile"  # Python 3.11 - not supported at the moment
+    "ubuntu:23.04 apt-based.Dockerfile"  # Python 3.11
+    "ubuntu:latest apt-based.Dockerfile"  # Python 3.11
+    "continuumio/miniconda3:latest conda-based.Dockerfile"  # Python 3.11
     #"almalinux:9 dnf-based.Dockerfile"  # Python 3.9  - test doesn't work becouse of pyglet requirement for X server
     #"rockylinux:9 dnf-based.Dockerfile"  # Python 3.9 - as above
     #"fedora:36 dnf-based.Dockerfile"  # Python 3.10 - as above
-    #"fedora:37 dnf-based.Dockerfile"  # Python 3.11 - not supported at the moment
+    #"fedora:37 dnf-based.Dockerfile"  # Python 3.11 - as above
 )
 
 # Clean local directory to avoid problems

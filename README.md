@@ -157,7 +157,7 @@ Plateforms:
 
 CPU with `SSSE3` or better
 
-Supported Pythons: 3.7 to 3.10
+Supported Pythons: 3.7 to 3.12
 
 ## Documentation
 

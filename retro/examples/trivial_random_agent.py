@@ -8,7 +8,7 @@ def main():
         action = env.action_space.sample()
         observation, reward, terminated, truncated, info = env.step(action)
         env.render()
-        if terminated:
+        if terminated or truncated:
             env.reset()
     env.close()
 

@@ -317,9 +317,10 @@
     <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s2">&quot;Airstriker-Genesis&quot;</span><span class="p">)</span>
     <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">obs</span><span class="p">,</span> <span class="n">rew</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">())</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+        <span class="n">observation</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
         <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">done</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">terminated</span> <span class="ow">or</span> <span class="n">truncated</span><span class="p">:</span>
             <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
     <span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
@@ -345,7 +346,7 @@
 <section id="ppo">
 <h3>PPO<a class="headerlink" href="#ppo" title="Link to this heading">#</a></h3>
 <p>Using <a class="reference external" href="https://arxiv.org/abs/1707.06347">“Proximal Policy Optimization”</a> by Schulman et al., you can train an agent to play many of the games, though it takes awhile and is much faster with a GPU.</p>
-<p>This example requires installing <a class="reference external" href="https://github.com/openai/baselines">OpenAI Baselines</a>.  Once installed, you can run it:</p>
+<p>This example requires installing <a class="reference external" href="https://github.com/DLR-RM/stable-baselines3">Stable Baselines</a>.  Once installed, you can run it:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>retro.examples.ppo<span class="w"> </span>--game<span class="w"> </span>Airstriker-Genesis
 </pre></div>
 </div>

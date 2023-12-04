@@ -270,6 +270,9 @@ class RetroEnv(gym.Env):
             return actions[0]
         return actions
 
+    def set_value(self, name, val):
+        self.data.set_value(name, val)
+
     def get_ram(self):
         blocks = []
         for offset in sorted(self.data.memory.blocks):

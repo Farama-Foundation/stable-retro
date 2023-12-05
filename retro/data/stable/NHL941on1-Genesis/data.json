@@ -53,8 +53,8 @@
       "type": ">u4"
     },
     "p1_x": {
-      "address": 16756811,
-      "type": "|i1"
+      "address": 16756810,
+      "type": ">i2"
     },
     "p1_y": {
       "address": 16760292,

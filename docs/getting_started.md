@@ -66,7 +66,7 @@ This algorithm works by building up a sequence of button presses that do well in
 
 Using ["Proximal Policy Optimization"](https://arxiv.org/abs/1707.06347) by Schulman et al., you can train an agent to play many of the games, though it takes awhile and is much faster with a GPU.
 
-This example requires installing [OpenAI Baselines](https://github.com/openai/baselines).  Once installed, you can run it:
+This example requires installing [Stable Baselines](https://github.com/DLR-RM/stable-baselines3).  Once installed, you can run it:
 
 ```shell
 python3 -m retro.examples.ppo --game Airstriker-Genesis

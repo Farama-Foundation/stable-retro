@@ -139,3 +139,7 @@ Temporary
 
 # VSCode config
 /.vscode/
+
+# cibuildwheel
+wheelhouse
+tests/test_cibuildwheel/tmp_dockerfiles

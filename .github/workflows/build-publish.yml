@@ -1,0 +1,90 @@
+# This workflow will build and (if release) publish Python distributions to PyPI
+# For more information see:
+#   - https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+#   - https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/
+#   - Adapted from https://github.com/Farama-Foundation/PettingZoo/blob/e230f4d80a5df3baf9bd905149f6d4e8ce22be31/.github/workflows/build-publish.yml
+
+name: build-publish
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  release:
+    types: [published]
+
+jobs:
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-22.04] #, macos-11] - disable macos, as it's not working for a moment
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        if: runner.os == 'Linux'
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: all
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.15.0
+        env:
+          # Configure cibuildwheel to build native archs, and some emulated ones
+          CIBW_ARCHS_LINUX: x86_64 # aarch64 - disable ARM, as it's not working for a moment
+          #CIBW_ARCHS_MACOS: x86_64 arm64 - macos is disabled for a moment
+          CIBW_BUILD_VERBOSITY: 3  # Increase verbosity to see what's going on
+          CIBW_REPAIR_WHEEL_COMMAND_LINUX: >  # Print additional info from auditwheel
+            auditwheel show {wheel} && auditwheel repair -w {dest_dir} {wheel}
+
+      - name: Report built wheels
+        run: |
+          ls -l ./wheelhouse/*.whl
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          path: ./wheelhouse/*.whl
+
+  build_sdist:
+    name: Build source distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build sdist
+        run: pipx run build --sdist
+
+      - name: Upload sdist
+        uses: actions/upload-artifact@v3
+        with:
+          path: dist/*.tar.gz
+
+  upload_pypi:
+    needs: [build_wheels, build_sdist]
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    if: github.event_name == 'release' && github.event.action == 'published'
+    steps:
+      - name: Download all dists
+        uses: actions/download-artifact@v3
+        with:
+          # Unpacks default artifact into dist/
+          # If `name: artifact` is omitted, the action will create extra parent dir
+          name: artifact
+          path: dist
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+        # To test:
+        # with:
+        #   repository_url: https://test.pypi.org/legacy/

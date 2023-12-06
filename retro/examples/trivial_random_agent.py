@@ -5,9 +5,10 @@ def main():
     env = retro.make(game="Airstriker-Genesis")
     env.reset()
     while True:
-        obs, rew, done, info = env.step(env.action_space.sample())
+        action = env.action_space.sample()
+        observation, reward, terminated, truncated, info = env.step(action)
         env.render()
-        if done:
+        if terminated or truncated:
             env.reset()
     env.close()
 

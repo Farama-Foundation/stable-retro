@@ -2,7 +2,7 @@
 
 # Stable-Retro
 
-A fork of [gym-retro](https://github.com/openai/retro) ('lets you turn classic video games into Gymnasium environments for reinforcement learning') with additional games, emulators and supported plateforms. Since gym-retro is in maintenance now and doesn't accept new games, plateforms or bug fixes, you can instead submit PRs with new games or features here in stable-retro.
+A fork of [gym-retro](https://github.com/openai/retro) ('lets you turn classic video games into Gymnasium environments for reinforcement learning') with additional games, emulators and supported platforms. Since gym-retro is in maintenance now and doesn't accept new games, platforms or bug fixes, you can instead submit PRs with new games or features here in stable-retro.
 
 Currently added games on top of gym-retro:
 *	Super Mario Bros 2 Japan (Lost Levels) - NES
@@ -57,10 +57,36 @@ As well as additional states on already integrated games.
 
 [Full list of supported Arcade machines here](https://emulation.gametechwiki.com/index.php/FinalBurn_Neo)
 
+**Experimental** (accessible in the fbneo branch)
+- Arcade Machines:
+  	- Neo Geo (MVS hardware: 1990–2004)
+ 	- Sega System 1 (1983–1987)
+ 	- Sega System 16 (And similar. 1985–1994)
+ 	- Sega System 18 (1989–1992)
+ 	- Sega System 24 (1988–1994)
+ 	- Capcom CPS1 (1988–1995)
+ 	- Capcom CPS2 (1993–2003)
+ 	- Capcom CPS3 (1996–1999)
+
+[Full list of supported Arcade machines here](https://emulation.gametechwiki.com/index.php/FinalBurn_Neo)
+
 ## Installation
+
+```
+pip3 install stable-retro
+```
+or if the above doesn't work for your plateform:
 ```
 pip3 install git+https://github.com/Farama-Foundation/stable-retro.git
 ```
+
+If you plan to integrate new ROMs, states or emulator cores or plan to edit an existing env:
+```
+git clone https://github.com/Farama-Foundation/stable-retro.git
+cd stable-retro
+pip3 install -e .
+```
+
 #### Apple Silicon Installation (Tested on python3.10)
 - NOTE: The Game Boy (gambatte) emulator is not supported on Apple Silicon
 
@@ -105,6 +131,9 @@ cd retro/examples
 python3 ppo.py --game='Airstriker-Genesis'
 ```
 
+Additional examples:
+[https://github.com/MatPoliquin/stable-retro-scripts](https://github.com/MatPoliquin/stable-retro-scripts)
+
 ## Citation
 
 ```
@@ -143,7 +172,7 @@ Plateforms:
 
 CPU with `SSSE3` or better
 
-Supported Pythons: 3.7 to 3.10
+Supported Pythons: 3.7 to 3.12
 
 ## Documentation
 

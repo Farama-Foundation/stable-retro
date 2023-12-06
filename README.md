@@ -119,6 +119,9 @@ cd retro/examples
 python3 ppo.py --game='Airstriker-Genesis'
 ```
 
+Additional examples:
+[https://github.com/MatPoliquin/stable-retro-scripts](https://github.com/MatPoliquin/stable-retro-scripts)
+
 ## Citation
 
 ```

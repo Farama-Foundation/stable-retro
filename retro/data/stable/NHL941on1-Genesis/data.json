@@ -1,11 +1,11 @@
 {
   "info": {
     "fullstar_x": {
-      "address": 16760244,
+      "address": 16760700,
       "type": ">i2"
     },
     "fullstar_y": {
-      "address": 16760264,
+      "address": 16760702,
       "type": ">i2"
     },
     "g1_x": {
@@ -57,7 +57,7 @@
       "type": ">i2"
     },
     "p1_y": {
-      "address": 16760292,
+      "address": 16756830,
       "type": ">i2"
     },
     "p2_attackzone": {
@@ -97,11 +97,11 @@
       "type": ">u4"
     },
     "p2_x": {
-      "address": 16757606,
+      "address": 16757578,
       "type": ">i2"
     },
     "p2_y": {
-      "address": 16758870,
+      "address": 16757598,
       "type": ">i2"
     },
     "period": {
@@ -122,18 +122,6 @@
     },
     "puck_y": {
       "address": 16758634,
-      "type": ">i2"
-    },
-    "rp1_y": {
-      "address": 16756830,
-      "type": ">i2"
-    },
-    "rp2_x": {
-      "address": 16757578,
-      "type": ">i2"
-    },
-    "rp2_y": {
-      "address": 16757598,
       "type": ">i2"
     },
     "rpuck_x": {

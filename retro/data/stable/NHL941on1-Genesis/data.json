@@ -1,11 +1,11 @@
 {
   "info": {
     "fullstar_x": {
-      "address": 16760700,
+      "address": 16760244,
       "type": ">i2"
     },
     "fullstar_y": {
-      "address": 16760292,
+      "address": 16760264,
       "type": ">i2"
     },
     "g1_x": {

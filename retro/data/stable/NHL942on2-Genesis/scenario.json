@@ -1,0 +1,22 @@
+{
+  "crop": [
+    0,
+    0,
+    256,
+    224
+  ],
+  "actions": [
+    [[], ["UP"], ["DOWN"]],
+    [[], ["LEFT"], ["RIGHT"]],
+    [[], ["B"], ["C"]]
+  ],
+  "done": {
+    "script": "lua:nhl94_done"
+  },
+  "reward": {
+    "script": "lua:nhl94_reward"
+  },
+  "scripts": [
+    "script.lua"
+  ]
+}

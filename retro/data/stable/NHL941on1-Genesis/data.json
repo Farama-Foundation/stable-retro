@@ -52,6 +52,14 @@
       "address": 16762572,
       "type": ">u4"
     },
+    "p1_vel_x": {
+      "address": 16756850,
+      "type": "|i1"
+    },
+    "p1_vel_y": {
+      "address": 16756852,
+      "type": "|i1"
+    },
     "p1_x": {
       "address": 16756810,
       "type": ">i2"
@@ -96,6 +104,14 @@
       "address": 16763440,
       "type": ">u4"
     },
+    "p2_vel_x": {
+      "address": 16757618,
+      "type": "|i1"
+    },
+    "p2_vel_y": {
+      "address": 16757620,
+      "type": "|i1"
+    },
     "p2_x": {
       "address": 16757578,
       "type": ">i2"
@@ -117,18 +133,10 @@
       "type": "|i1"
     },
     "puck_x": {
-      "address": 16758630,
-      "type": ">i2"
-    },
-    "puck_y": {
-      "address": 16758634,
-      "type": ">i2"
-    },
-    "rpuck_x": {
       "address": 16758602,
       "type": ">i2"
     },
-    "rpuck_y": {
+    "puck_y": {
       "address": 16758622,
       "type": ">i2"
     },

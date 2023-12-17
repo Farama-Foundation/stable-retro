@@ -1,4 +1,5 @@
 import os
+import sys
 
 import retro.data
 from retro._retro import Movie, RetroEmulator, core_path
@@ -61,3 +62,13 @@ def make(game, state=State.DEFAULT, inttype=retro.data.Integrations.DEFAULT, **k
                 f"Game not found: {game}. Did you make sure to import the ROM?",
             )
     return RetroEnv(game, state, inttype=inttype, **kwargs)
+
+
+try:
+    from farama_notifications import notifications
+
+    if "stable-retro" in notifications and __version__ in notifications["stable-retro"]:
+        print(notifications["stable-retro"][__version__], file=sys.stderr)
+
+except Exception:  # nosec
+    pass

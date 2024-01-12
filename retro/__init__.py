@@ -69,6 +69,5 @@ try:
 
     if "stable-retro" in notifications and __version__ in notifications["stable-retro"]:
         print(notifications["stable-retro"][__version__], file=sys.stderr)
-
 except Exception:  # nosec
     pass

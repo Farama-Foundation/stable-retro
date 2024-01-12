@@ -1,0 +1,787 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="">
+    <meta property="og:title" content="Stable-Retro Documentation" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="" />
+    <meta property="og:url" content="https://stable-retro.farama.org/python.html" /><meta property="og:image" content="https://stable-retro.farama.org/_static/img/stable-retro-github.png" /><meta name="twitter:card" content="summary_large_image"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Release Notes" href="../release_notes/" /><link rel="prev" title="Game Integration" href="../integration/" />
+        <link rel="canonical" href="https://stable-retro.farama.org/python.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.08.19.dev1 -->
+        <title>Python API - Stable-Retro Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=49cbaffd" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <header class="farama-header" aria-label="Farama header">
+      <div class="farama-header__container">
+        <div class="farama-header__left--mobile">
+          <label class="nav-overlay-icon" for="__navigation">
+            <div class="visually-hidden">Toggle site navigation sidebar</div>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <defs></defs>
+              <line x1="0.5" y1="4" x2="23.5" y2="4"></line>
+              <line x1="0.232" y1="12" x2="23.5" y2="12"></line>
+              <line x1="0.232" y1="20" x2="23.5" y2="20"></line>
+            </svg>
+          </label>
+        </div>
+        <div class="farama-header__left farama-header__center--mobile">
+          <a href="../">
+              <img class="farama-header__logo only-light" src="../_static/img/stable_retro_black.svg" alt="Light Logo"/>
+              <img class="farama-header__logo only-dark" src="../_static/img/stable_retro_white.svg" alt="Dark Logo"/>
+            <span class="farama-header__title">Stable-Retro Documentation</span>
+          </a>
+        </div>
+        <div class="farama-header__right">
+          <div class="farama-header-menu">
+            <button class="farama-header-menu__btn" aria-label="Open Farama Menu" aria-expanded="false" aria-haspopup="true" aria-controls="farama-menu">
+              <img class="farama-black-logo-invert" src="../_static/img/farama-logo-header.svg">
+              <svg viewBox="0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <polyline style="stroke-linecap: round; stroke-linejoin: round; fill: none; stroke-width: 2px;" points="1 7 12 18 23 7"></polyline>
+              </svg>
+            </button>
+            <div class="farama-header-menu-container farama-hidden" aria-hidden="true" id="farama-menu">
+              <div class="farama-header-menu__header">
+                <a href="https://farama.org">
+                  <img class="farama-header-menu__logo farama-white-logo-invert" src="../_static/img/farama_solid_white.svg" alt="Farama Foundation logo">
+                  <span>Farama Foundation</span>
+                </a>
+                <div class="farama-header-menu-header__right">
+                  <button id="farama-close-menu">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-close">
+                      <line x1="3" y1="21" x2="21" y2="3"></line>
+                      <line x1="3" y1="3" x2="21" y2="21"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="farama-header-menu__body">
+                <!-- Response from farama.org/api/projects.json -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<div class="page">
+  <!--<header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../"><div class="brand">Stable-Retro Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>-->
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="farama-sidebar__title" href="../">
+      <img class="farama-header__logo only-light" src="../_static/img/stable_retro_black.svg" alt="Light Logo"/>
+      <img class="farama-header__logo only-dark" src="../_static/img/stable_retro_white.svg" alt="Dark Logo"/>
+    <span class="farama-header__title">Stable-Retro Documentation</span>
+  </a><form class="sidebar-search-container" method="get" action="../search/" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing/">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/">Game Integration</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/master/docs/README.md">Contribute to the Docs</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main-container">
+
+    
+
+    
+
+    <div class="main">
+      <div class="content">
+        <div class="article-container">
+          <a href="#" class="back-to-top muted-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+            </svg>
+            <span>Back to top</span>
+          </a>
+          <div class="content-icon-container"><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Farama-Foundation/stable-retro/edit/master/docs/python.md" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+              <button class="theme-toggle" title="Toggle color theme">
+                <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+                <svg class="theme-icon-when-auto">
+                  <use href="#svg-sun-half"></use>
+                </svg>
+                <svg class="theme-icon-when-dark">
+                  <use href="#svg-moon"></use>
+                </svg>
+                <svg class="theme-icon-when-light">
+                  <use href="#svg-sun"></use>
+                </svg>
+              </button>
+            </div>
+            <label class="toc-overlay-icon toc-content-icon" for="__toc">
+              <div class="visually-hidden">Toggle table of contents sidebar</div>
+              <i class="icon"><svg>
+                  <use href="#svg-toc"></use>
+                </svg></i>
+            </label>
+          </div>
+          <article role="main">
+            
+            <section class="tex2jax_ignore mathjax_ignore" id="python-api">
+<h1>Python API<a class="headerlink" href="#python-api" title="Link to this heading">#</a></h1>
+<section id="retroenv">
+<h2>RetroEnv<a class="headerlink" href="#retroenv" title="Link to this heading">#</a></h2>
+<p>The Python API consists primarily of <a class="reference internal" href="#retro.make" title="retro.make"><code class="xref py py-func docutils literal notranslate"><span class="pre">retro.make()</span></code></a>, <a class="reference internal" href="#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a>, and a few enums.  The main function most users will want is <a class="reference internal" href="#retro.make" title="retro.make"><code class="xref py py-func docutils literal notranslate"><span class="pre">retro.make()</span></code></a>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="retro.make">
+<span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">make</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">State.DEFAULT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inttype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.data.Integrations.DEFAULT</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/#make"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.make" title="Link to this definition">#</a></dt>
+<dd><p>Create a Gym environment for the specified game</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="retro.RetroEnv">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">RetroEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.State.DEFAULT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_restricted_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.Actions.FILTERED</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inttype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.data.Integrations.STABLE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.Observations.IMAGE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'human'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/retro_env/#RetroEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.RetroEnv" title="Link to this definition">#</a></dt>
+<dd><p>Gym Retro environment class</p>
+<p>Provides a Gym interface to classic video games</p>
+</dd></dl>
+
+<p>If you want to specify either the default state named in the game integration’s <code class="docutils literal notranslate"><span class="pre">metadata.json</span></code> or specify that you want to start from the initial power on state of the console, you can use the <a class="reference internal" href="#retro.State" title="retro.State"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.State</span></code></a> enum:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="retro.State">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">State</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/enums/#State"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.State" title="Link to this definition">#</a></dt>
+<dd><p>Special values for setting the restart state of the environment.  You can
+also specify a string that is the name of the <code class="docutils literal notranslate"><span class="pre">.state</span></code> file</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.State.DEFAULT">
+<span class="sig-name descname"><span class="pre">DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#retro.State.DEFAULT" title="Link to this definition">#</a></dt>
+<dd><p>Start the game at the default savestate from <code class="docutils literal notranslate"><span class="pre">metadata.json</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.State.NONE">
+<span class="sig-name descname"><span class="pre">NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#retro.State.NONE" title="Link to this definition">#</a></dt>
+<dd><p>Start the game at the power on screen for the emulator</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="actions">
+<h2>Actions<a class="headerlink" href="#actions" title="Link to this heading">#</a></h2>
+<p>There are a few possible action spaces included with <a class="reference internal" href="#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a>:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="retro.Actions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">Actions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/enums/#Actions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.Actions" title="Link to this definition">#</a></dt>
+<dd><p>Different settings for the action space of the environment</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Actions.ALL">
+<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#retro.Actions.ALL" title="Link to this definition">#</a></dt>
+<dd><p>MultiBinary action space with no filtered actions</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Actions.DISCRETE">
+<span class="sig-name descname"><span class="pre">DISCRETE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#retro.Actions.DISCRETE" title="Link to this definition">#</a></dt>
+<dd><p>Discrete action space for filtered actions</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Actions.MULTI_DISCRETE">
+<span class="sig-name descname"><span class="pre">MULTI_DISCRETE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#retro.Actions.MULTI_DISCRETE" title="Link to this definition">#</a></dt>
+<dd><p>MultiDiscete action space for filtered actions</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>You can also create your own action spaces derived from these.  For an example, see <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/master/retro/examples/discretizer.py">discretizer.py</a>.  This file shows how to use <code class="docutils literal notranslate"><span class="pre">retro.Actions.Discrete</span></code> as well as how to make a custom wrapper that reduces the action space from <code class="docutils literal notranslate"><span class="pre">126</span></code> actions to <code class="docutils literal notranslate"><span class="pre">7</span></code></p>
+</section>
+<section id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Link to this heading">#</a></h2>
+<p>The default observations are RGB images of the game, but you can view RAM values instead (often much smaller than the RGB images and also your agent can observe the game state more directly).  If you want variable values, any variables defined in <code class="docutils literal notranslate"><span class="pre">data.json</span></code> will appear in the <code class="docutils literal notranslate"><span class="pre">info</span></code> dict after each step.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="retro.Observations">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">retro.</span></span><span class="sig-name descname"><span class="pre">Observations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/retro/enums/#Observations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#retro.Observations" title="Link to this definition">#</a></dt>
+<dd><p>Different settings for the observation space of the environment</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Observations.IMAGE">
+<span class="sig-name descname"><span class="pre">IMAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#retro.Observations.IMAGE" title="Link to this definition">#</a></dt>
+<dd><p>Use RGB image observations</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="retro.Observations.RAM">
+<span class="sig-name descname"><span class="pre">RAM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#retro.Observations.RAM" title="Link to this definition">#</a></dt>
+<dd><p>Use RAM observations where you can see the memory of the game instead of the screen</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="multiplayer-environments">
+<h2>Multiplayer Environments<a class="headerlink" href="#multiplayer-environments" title="Link to this heading">#</a></h2>
+<p>A small number of games support multiplayer.  To use this feature, pass <code class="docutils literal notranslate"><span class="pre">players=&lt;n&gt;</span></code> to <a class="reference internal" href="#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a>.  Here is an example random agent that controls both paddles in <code class="docutils literal notranslate"><span class="pre">Pong-Atari2600</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s2">&quot;Pong-Atari2600&quot;</span><span class="p">,</span> <span class="n">players</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># action_space will by MultiBinary(16) now instead of MultiBinary(8)</span>
+        <span class="c1"># the bottom half of the actions will be for player 1 and the top half for player 2</span>
+        <span class="n">obs</span><span class="p">,</span> <span class="n">rew</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">())</span>
+        <span class="c1"># rew will be a list of [player_1_rew, player_2_rew]</span>
+        <span class="c1"># done and info will remain the same</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">done</span><span class="p">:</span>
+            <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="replay-files">
+<h2>Replay files<a class="headerlink" href="#replay-files" title="Link to this heading">#</a></h2>
+<p>Stable Retro can create  <a class="reference external" href="http://tasvideos.org/Bizhawk/BK2Format.html">.bk2</a> files which are recordings of an initial game state and a series of button presses.  Because the emulators are deterministic, you will see the same output each time you play back this file.  Because it only stores button presses, the file can be about 1000 times smaller than storing the full video.</p>
+<p>In addition, if you wish to use the stored button presses for training, they may be useful.  For example, there are <a class="reference external" href="https://github.com/openai/retro-movies">replay files for each Sonic The Hedgehog level</a> that were made available for the <a class="reference external" href="https://openai.com/blog/retro-contest/">Stable Retro Contest</a>.</p>
+<p>You can create and view replay files using the <a class="reference internal" href="../integration/#integration-ui"><span class="std std-ref">The Integration UI</span></a> (Game &gt; Play Movie…).  If you want to use replay files from Python, see the following sections.</p>
+<section id="record">
+<h3>Record<a class="headerlink" href="#record" title="Link to this heading">#</a></h3>
+<p>If you have an agent playing a game, you can record the gameplay to a <code class="docutils literal notranslate"><span class="pre">.bk2</span></code> file for later processing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">&#39;Airstriker-Genesis&#39;</span><span class="p">,</span> <span class="n">record</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">terminate</span><span class="p">,</span> <span class="n">truncate</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">terminate</span> <span class="ow">or</span> <span class="n">truncate</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</section>
+<section id="playback">
+<h3>Playback<a class="headerlink" href="#playback" title="Link to this heading">#</a></h3>
+<p>Given a <code class="docutils literal notranslate"><span class="pre">.bk2</span></code> file you can load it in python and either play it back or use the actions for training.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
+
+<span class="n">movie</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">Movie</span><span class="p">(</span><span class="s1">&#39;Airstriker-Genesis-Level1-000000.bk2&#39;</span><span class="p">)</span>
+<span class="n">movie</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span>
+    <span class="n">game</span><span class="o">=</span><span class="n">movie</span><span class="o">.</span><span class="n">get_game</span><span class="p">(),</span>
+    <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="c1"># bk2s can contain any button presses, so allow everything</span>
+    <span class="n">use_restricted_actions</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">Actions</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span>
+    <span class="n">players</span><span class="o">=</span><span class="n">movie</span><span class="o">.</span><span class="n">players</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">initial_state</span> <span class="o">=</span> <span class="n">movie</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="k">while</span> <span class="n">movie</span><span class="o">.</span><span class="n">step</span><span class="p">():</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">movie</span><span class="o">.</span><span class="n">players</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">num_buttons</span><span class="p">):</span>
+            <span class="n">keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">movie</span><span class="o">.</span><span class="n">get_key</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="render-to-video">
+<h3>Render to Video<a class="headerlink" href="#render-to-video" title="Link to this heading">#</a></h3>
+<p>This requires <a class="reference external" href="https://www.ffmpeg.org/">ffmpeg</a> to be installed and writes the output to the directory that the input file is located in.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>retro.scripts.playback_movie<span class="w"> </span>Airstriker-Genesis-Level1-000000.bk2
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+          </article>
+        </div>
+        <footer>
+          
+          <div class="related-pages">
+            <a class="next-page" href="../release_notes/">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Release Notes</div>
+              </div>
+              <svg class="furo-related-icon">
+                <use href="#svg-arrow-right"></use>
+              </svg>
+            </a>
+            <a class="prev-page" href="../integration/">
+              <svg class="furo-related-icon">
+                <use href="#svg-arrow-right"></use>
+              </svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Game Integration</div>
+                
+              </div>
+            </a>
+          </div>
+          <div class="bottom-of-page">
+            <div class="left-details">
+              <div class="copyright">
+                Copyright &#169; 2023 Farama Foundation
+              </div>
+              <!--
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            -->
+            </div>
+            <div class="right-details">
+              <div class="icons">
+                <a class="muted-link" href="https://github.com/Farama-Foundation/stable-retro/"
+                  aria-label="On GitHub">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+        </footer>
+      </div>
+      <aside class="toc-drawer">
+        
+        
+        <div class="toc-sticky toc-scroll">
+          <div class="toc-title-container">
+            <span class="toc-title">
+              On this page
+            </span>
+          </div>
+          <div class="toc-tree-container">
+            <div class="toc-tree">
+              <ul>
+<li><a class="reference internal" href="#">Python API</a><ul>
+<li><a class="reference internal" href="#retroenv">RetroEnv</a><ul>
+<li><a class="reference internal" href="#retro.make"><code class="docutils literal notranslate"><span class="pre">make()</span></code></a></li>
+<li><a class="reference internal" href="#retro.RetroEnv"><code class="docutils literal notranslate"><span class="pre">RetroEnv</span></code></a></li>
+<li><a class="reference internal" href="#retro.State"><code class="docutils literal notranslate"><span class="pre">State</span></code></a><ul>
+<li><a class="reference internal" href="#retro.State.DEFAULT"><code class="docutils literal notranslate"><span class="pre">State.DEFAULT</span></code></a></li>
+<li><a class="reference internal" href="#retro.State.NONE"><code class="docutils literal notranslate"><span class="pre">State.NONE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#actions">Actions</a><ul>
+<li><a class="reference internal" href="#retro.Actions"><code class="docutils literal notranslate"><span class="pre">Actions</span></code></a><ul>
+<li><a class="reference internal" href="#retro.Actions.ALL"><code class="docutils literal notranslate"><span class="pre">Actions.ALL</span></code></a></li>
+<li><a class="reference internal" href="#retro.Actions.DISCRETE"><code class="docutils literal notranslate"><span class="pre">Actions.DISCRETE</span></code></a></li>
+<li><a class="reference internal" href="#retro.Actions.MULTI_DISCRETE"><code class="docutils literal notranslate"><span class="pre">Actions.MULTI_DISCRETE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#observations">Observations</a><ul>
+<li><a class="reference internal" href="#retro.Observations"><code class="docutils literal notranslate"><span class="pre">Observations</span></code></a><ul>
+<li><a class="reference internal" href="#retro.Observations.IMAGE"><code class="docutils literal notranslate"><span class="pre">Observations.IMAGE</span></code></a></li>
+<li><a class="reference internal" href="#retro.Observations.RAM"><code class="docutils literal notranslate"><span class="pre">Observations.RAM</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multiplayer-environments">Multiplayer Environments</a></li>
+<li><a class="reference internal" href="#replay-files">Replay files</a><ul>
+<li><a class="reference internal" href="#record">Record</a></li>
+<li><a class="reference internal" href="#playback">Playback</a></li>
+<li><a class="reference internal" href="#render-to-video">Render to Video</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+        
+        
+      </aside>
+    </div>
+  </div>
+</div>
+    <script>
+      const toggleMenu = () => {
+        const menuBtn = document.querySelector(".farama-header-menu__btn");
+        const menuContainer = document.querySelector(".farama-header-menu-container");
+        if (document.querySelector(".farama-header-menu").classList.contains("active")) {
+          menuBtn.setAttribute("aria-expanded", "false");
+          menuContainer.setAttribute("aria-hidden", "true");
+        } else {
+          menuBtn.setAttribute("aria-expanded", "true");
+          menuContainer.setAttribute("aria-hidden", "false");
+        }
+        document.querySelector(".farama-header-menu").classList.toggle("active");
+      }
+
+      document.querySelector(".farama-header-menu__btn").addEventListener("click", toggleMenu);
+      document.getElementById("farama-close-menu").addEventListener("click", toggleMenu);
+    </script>
+
+    
+    
+
+    <script src="../_static/documentation_options.js?v=fb1071c9"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=7660844c"></script>
+    
+    <script>
+
+      const createProjectsList = (projects, displayImages) => {
+        const ulElem = Object.assign(document.createElement('ul'),
+          {
+            className:'farama-header-menu-list',
+          }
+        )
+        for (let project of projects) {
+          const liElem = document.createElement("li");
+          const aElem = Object.assign(document.createElement("a"),
+            {
+              href: project.link
+            }
+          );
+          liElem.appendChild(aElem);
+          if (displayImages) {
+            const imgElem = Object.assign(document.createElement("img"),
+              {
+                src: project.image ? imagesBasepath + project.image : imagesBasepath + "/farama_black.svg",
+                alt: `${project.name} logo`,
+                className: "farama-black-logo-invert"
+              }
+            );
+            aElem.appendChild(imgElem);
+          }
+          aElem.appendChild(document.createTextNode(project.name));
+          ulElem.appendChild(liElem);
+        }
+        return ulElem;
+      }
+
+      // Create menu with Farama projects by using the API at farama.org/api/projects.json
+      const createCORSRequest = (method, url) => {
+        let xhr = new XMLHttpRequest();
+        xhr.responseType = 'json';
+
+        if ("withCredentials" in xhr) {
+          xhr.open(method, url, true);
+        } else if (typeof XDomainRequest != "undefined") {
+          // IE8 & IE9
+          xhr = new XDomainRequest();
+          xhr.open(method, url);
+        } else {
+          // CORS not supported.
+          xhr = null;
+        }
+        return xhr;
+      };
+
+      const url = 'https://farama.org/api/projects.json';
+      const imagesBasepath = "https://farama.org/assets/images"
+      const method = 'GET';
+      let xhr = createCORSRequest(method, url);
+
+      xhr.onload = () => {
+        const jsonResponse = xhr.response;
+        const sections = {
+          "Core Projects": [],
+          "Mature Projects": {
+            "Documentation": [],
+            "Repositories": [],
+          },
+          "Incubating Projects": {
+            "Documentation": [],
+            "Repositories": [],
+          },
+          "Foundation": [
+            {
+              name: "About",
+              link: "https://farama.org/about"
+            },
+            {
+              name: "Standards",
+              link: "https://farama.org/project_standards",
+            },
+            {
+              name: "Donate",
+              link: "https://farama.org/donations"
+            }
+          ]
+        }
+
+        // Categorize projects
+        Object.keys(jsonResponse).forEach(key => {
+          projectJson = jsonResponse[key];
+          if (projectJson.website !== null) {
+            projectJson.link = projectJson.website;
+          } else {
+            projectJson.link = projectJson.github;
+          }
+          if (projectJson.type === "core") {
+            sections["Core Projects"].push(projectJson)
+          } else if (projectJson.type == "mature") {
+            if (projectJson.website !== null) {
+              sections["Mature Projects"]["Documentation"].push(projectJson)
+            } else {
+              sections["Mature Projects"]["Repositories"].push(projectJson)
+            }
+          } else {
+            if (projectJson.website !== null) {
+              sections["Incubating Projects"]["Documentation"].push(projectJson)
+            } else {
+              sections["Incubating Projects"]["Repositories"].push(projectJson)
+            }
+          }
+        })
+
+        const menuContainer = document.querySelector(".farama-header-menu__body");
+
+        Object.keys(sections).forEach((key, i) => {
+          const sectionElem = Object.assign(
+            document.createElement('div'), {
+              className:'farama-header-menu__section',
+            }
+          )
+          sectionElem.appendChild(Object.assign(document.createElement('span'),
+            {
+              className:'farama-header-menu__section-title' ,
+              innerText: key
+            }
+          ))
+          // is not a list
+          if (sections[key].constructor !== Array) {
+            const subSections = sections[key];
+            const subSectionContainerElem = Object.assign(
+                document.createElement('div'), {
+                  className:'farama-header-menu__subsections-container',
+                  style: 'display: flex'
+                }
+            )
+            Object.keys(subSections).forEach((subKey, i) => {
+              const subSectionElem = Object.assign(
+                document.createElement('div'), {
+                  className:'farama-header-menu__subsection',
+                }
+              )
+              subSectionElem.appendChild(Object.assign(document.createElement('span'),
+                {
+                  className:'farama-header-menu__subsection-title' ,
+                  innerText: subKey
+                }
+              ))
+              const ulElem = createProjectsList(subSections[subKey], key !== 'Foundation');
+              subSectionElem.appendChild(ulElem);
+              subSectionContainerElem.appendChild(subSectionElem);
+            })
+            sectionElem.appendChild(subSectionContainerElem);
+          } else {
+            const projects = sections[key];
+            const ulElem = createProjectsList(projects, true);
+            sectionElem.appendChild(ulElem);
+          }
+          menuContainer.appendChild(sectionElem)
+        });
+      }
+
+      xhr.onerror = function() {
+        console.error("Unable to load projects");
+      };
+
+      xhr.send();
+    </script>
+
+    
+    <script>
+      const versioningConfig = {
+        githubUser: 'Farama-Foundation',
+        githubRepo: 'stable-retro',
+      };
+      fetch('/main/_static/versioning/versioning_menu.html').then(response => {
+        if (response.status === 200) {
+            response.text().then(text => {
+                const container = document.createElement("div");
+                container.innerHTML = text;
+                document.querySelector("body").appendChild(container);
+                // innerHtml doenst evaluate scripts, we need to add them dynamically
+                Array.from(container.querySelectorAll("script")).forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+            });
+        } else {
+            console.warn("Unable to load versioning menu", response);
+        }
+      });
+    </script>
+
+    </body>
+</html>

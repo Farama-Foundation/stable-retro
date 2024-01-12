@@ -48,6 +48,14 @@
       "address": 16762590,
       "type": ">u2"
     },
+    "p1_emptystar_x": {
+      "address": 16760272,
+      "type": ">i2"
+    },
+    "p1_emptystar_y": {
+      "address": 16760292,
+      "type": ">i2"
+    },
     "p1_faceoffwon": {
       "address": 16762588,
       "type": ">u2"

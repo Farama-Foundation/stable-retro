@@ -24,6 +24,14 @@
       "address": 16757726,
       "type": ">i2"
     },
+    "p1_2_vel_x": {
+      "address": 16756978,
+      "type": "|i1"
+    },
+    "p1_2_vel_y": {
+      "address": 16756980,
+      "type": "|i1"
+    },
     "p1_2_x": {
       "address": 16756938,
       "type": ">i2"
@@ -75,6 +83,14 @@
     "p1_y": {
       "address": 16756830,
       "type": ">i2"
+    },
+    "p2_2_vel_x": {
+      "address": 16757746,
+      "type": "|i1"
+    },
+    "p2_2_vel_y": {
+      "address": 16757748,
+      "type": "|i1"
     },
     "p2_2_x": {
       "address": 16757706,

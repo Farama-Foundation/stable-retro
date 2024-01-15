@@ -91,10 +91,6 @@ pip3 install -e .
 3. `make -j$(sysctl hw.ncpu | cut -d: -f2)`
 4. `open "Gym Retro Integration.app"`
 
-
-Video on how to setup on Ubuntu and Windows:
-https://youtu.be/LRgGSQGNZeE
-
 Docker image for M1 Macs:
 https://github.com/arvganesh/stable-retro-docker
 
@@ -159,7 +155,7 @@ There is an effort to get this project to the [Farama Foundation Project Standar
 Plateforms:
 - Windows 10, 11 (via WSL2)
 - macOS 10.13 (High Sierra), 10.14 (Mojave)
-- Linux (manylinux1)
+- Linux (manylinux1). Ubuntu 22.04 is recommended
 
 CPU with `SSE3` or better
 

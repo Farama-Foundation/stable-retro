@@ -119,16 +119,16 @@ cd retro/examples
 python3 ppo.py --game='Airstriker-Genesis'
 ```
 
-Additional examples:
+More advanced examples:
 [https://github.com/MatPoliquin/stable-retro-scripts](https://github.com/MatPoliquin/stable-retro-scripts)
 
 ## Citation
 
 ```
 @misc{stable-retro,
-  author = {Mathieu and Poliquin},
-  title = {Stable Retro, a fork of OpenAI's gym-retro},
-  year = {2023},
+  author = {Poliquin, Mathieu},
+  title = {Stable Retro, a maintained fork of OpenAI's gym-retro},
+  year = {2024},
   publisher = {GitHub},
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/Farama-Foundation/stable-retro}},
@@ -136,6 +136,9 @@ Additional examples:
 ```
 
 ## Tutorials
+
+Windows WSL2 + Ubuntu 22.04 setup guide:
+https://www.youtube.com/watch?v=vPnJiUR21Og
 
 Game Integration tool:
 https://www.youtube.com/playlist?list=PLmwlWbdWpZVvWqzOxu0jVBy-CaRpYha0t
@@ -158,7 +161,7 @@ Plateforms:
 - macOS 10.13 (High Sierra), 10.14 (Mojave)
 - Linux (manylinux1)
 
-CPU with `SSSE3` or better
+CPU with `SSE3` or better
 
 Supported Pythons: 3.7 to 3.12
 
@@ -173,6 +176,11 @@ See [LICENSES.md](https://github.com/Farama-Foundation/stable-retro/blob/master/
 Each game integration has files listing memory locations for in-game variables, reward functions based on those variables, episode end conditions, savestates at the beginning of levels and a file containing hashes of ROMs that work with these files.
 
 Please note that ROMs are not included and you must obtain them yourself.  Most ROM hashes are sourced from their respective No-Intro SHA-1 sums.
+
+Run this script in the roms folder you want to import. If the checksum matches it will import them in the related game folder in stable-retro.
+```bash
+python3 -m retro.import .
+```
 
 The following non-commercial ROMs are included with Stable Retro for testing purposes:
 

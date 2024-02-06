@@ -4,19 +4,19 @@ if(POLICY CMP0048)
   cmake_policy(SET CMP0048 NEW)
 endif()
 
-if(UNIX)
-  set(PYEXT_SUFFIX
-      ".so"
-      CACHE STRING "Suffix for Python extension modules")
-  set(DYNLIB_SUFFIX
-      ".so"
-      CACHE STRING "Suffix for dynamic libraries")
-elseif(APPLE)
+if(APPLE)
   set(PYEXT_SUFFIX
       ".so"
       CACHE STRING "Suffix for Python extension modules")
   set(DYNLIB_SUFFIX
       ".dylib"
+      CACHE STRING "Suffix for dynamic libraries")
+elseif(UNIX)
+  set(PYEXT_SUFFIX
+      ".so"
+      CACHE STRING "Suffix for Python extension modules")
+  set(DYNLIB_SUFFIX
+      ".so"
       CACHE STRING "Suffix for dynamic libraries")
 elseif(WIN32)
   set(PYEXT_SUFFIX
@@ -234,7 +234,7 @@ add_core(nes fceumm)
 add_core(atari2600 stella)
 
 if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
-  message(warning "Detected Apple Silicon, skipping gambatte (gb)")
+  message(WARNING "Detected Apple Silicon, skipping gambatte (gb)")
 else()
   add_core(gb gambatte)
 endif()

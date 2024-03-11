@@ -90,7 +90,7 @@ html_favicon = "_static/img/favicon.png"
 html_theme_options = {
     "light_logo": "img/stable_retro_black.svg",
     "dark_logo": "img/stable_retro_white.svg",
-    # "gtag": "",
+    "gtag": "G-0VNK81VVGP",
     "description": "",
     "image": "img/stable-retro-github.png",
     "versioning": True,

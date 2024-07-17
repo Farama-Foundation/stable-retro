@@ -51,13 +51,11 @@
   ],
   "done": {
     "variables": {
-      "enemy_rounds_won": {
-        "op": "equal",
-        "reference": 2
+      "enemy_health": {
+        "op": "equal"
       },
-      "rounds_won": {
-        "op": "equal",
-        "reference": 2
+      "health": {
+        "op": "equal"
       }
     }
   },
@@ -68,9 +66,6 @@
       },
       "health": {
         "penalty": 1.0
-      },
-      "wins": {
-        "reward": 10.0
       }
     }
   }

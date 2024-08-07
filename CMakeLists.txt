@@ -6,7 +6,7 @@ endif()
 
 if(APPLE)
   set(PYEXT_SUFFIX
-      ".so"
+      ".dylib"
       CACHE STRING "Suffix for Python extension modules")
   set(DYNLIB_SUFFIX
       ".dylib"
@@ -243,6 +243,7 @@ add_core(gba mgba)
 add_core(pce mednafen_pce_fast)
 add_core(32x picodrive)
 add_core(saturn mednafen_saturn)
+
 
 set(CLEAN_CORES)
 

@@ -32,3 +32,41 @@ jobs:
       - name: Run tests
         run: |
           xvfb-run -s '-screen 0 1024x768x24' pytest
+    
+    build_macos:
+      runs-on: macos-14
+        strategy:
+          matrix:
+            python-version: ['3.10', '3.11', '3.12']
+        steps:
+          - uses: actions/checkout@v4
+
+          - name: Set up Python
+            uses: actions/setup-python@v4
+            with:
+              python-version: ${{ matrix.python-version }}
+
+          - name: Install system packages
+            run: brew install pkg-config lua@5.1 libzip capnp cmake
+
+          - name: Install python packages
+            run: python3 -m pip install --upgrade pip pytest
+
+          - name: Build project
+            run: |
+              export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
+              python3 -m pip install -e .
+
+          - name: Run tests
+            run: |
+              xvfb-run -s '-screen 0 1024x768x24' pytest
+
+          # - name: Build wheel
+          #   run: python3 -m build --wheel --sdist
+
+          # - name: Smoke Test
+          #   run: |
+          #     python3 -m pip uninstall stable-retro -y
+          #     python3 -m pip install --no-cache dist/*.whl
+          #     python3 -c 'import retro; env = retro.make("Airstriker-Genesis", render_mode="rgb_array"); env.reset(); print(env.step(env.action_space.sample())); env.close();'
+

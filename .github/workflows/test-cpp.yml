@@ -9,6 +9,7 @@ jobs:
   build:
     name: ${{ matrix.runs_on }}
     strategy:
+      fail-fast: false
       matrix:
         include:
           - runs-on: ubuntu-latest

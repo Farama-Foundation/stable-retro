@@ -18,7 +18,7 @@ jobs:
             python: '3.8'
 
     runs-on: ${{ matrix.runs-on }}
-    name: ${{ matrix.runs_on }} • py${{ matrix.python }}
+    name: ${{ matrix.runs-on }} • py${{ matrix.python }}
     steps:
       - uses: actions/checkout@v3
 
@@ -34,7 +34,7 @@ jobs:
       - name: Install pip packages
         run: |
           python3 -m pip install --upgrade pip pytest
-          python3 -m pip install .
+          python3 -m pip install -e .
 
       - name: Run tests
         run: |

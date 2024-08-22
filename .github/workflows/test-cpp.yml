@@ -1,4 +1,4 @@
-name: Test C++ Stable-Retro code
+name: Run CTest
 
 on: [pull_request, push]
 
@@ -7,14 +7,20 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # todo, add more OS systems to see if they work as well
+    name: ${{ matrix.runs_on }}
+    strategy:
+      matrix:
+        include:
+          - runs-on: ubuntu-latest
+          - runs-on: mac-12
+          - runs-on: mac-14
 
+    runs-on: ${{ matrix.runs-on }}
     steps:
       - uses: actions/checkout@v3
-
       - uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: 3.12
 
       - name: Install system packages
         run: |

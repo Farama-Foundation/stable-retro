@@ -33,7 +33,7 @@ jobs:
           platforms: all
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.20.0
+        uses: pypa/cibuildwheel@v2.21.0
         env:
           # Configure cibuildwheel to build native archs, and some emulated ones
           CIBW_ARCHS_LINUX: x86_64 # aarch64 - disable ARM, as it's not working for a moment

@@ -80,7 +80,7 @@ pip3 install -e .
 
 **Build from source**
 1. `pip install cmake wheel`
-2. `brew install pkg-config lua@5.1 libzip qt5 capnp`
+2. `brew install pkg-config lua@5.3 libzip qt@5 capnp`
 3. `echo 'export PATH="/opt/homebrew/opt/qt@5/bin:$PATH"' >> ~/.zshrc`
 4. `export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)`
 5. `pip install -e .`

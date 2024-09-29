@@ -40,9 +40,9 @@ uint8 *HuCPUFastMap[0x100];
 
 
 #ifdef HUC6280_CRAZY_VERSION
-#define LOAD_LOCALS_PC()        register uint8 *PC_local = HuCPU.PC;
+#define LOAD_LOCALS_PC()        uint8 *PC_local = HuCPU.PC;
 #else
-#define LOAD_LOCALS_PC()        register uint32 PC_local /*asm ("edi")*/ = HuCPU.PC; // asm ("edi") = HuCPU.PC;
+#define LOAD_LOCALS_PC()        uint32 PC_local /*asm ("edi")*/ = HuCPU.PC; // asm ("edi") = HuCPU.PC;
 #endif
 
 #define LOAD_LOCALS()				\

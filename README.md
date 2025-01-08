@@ -124,7 +124,7 @@ More advanced examples:
 @misc{stable-retro,
   author = {Poliquin, Mathieu},
   title = {Stable Retro, a maintained fork of OpenAI's gym-retro},
-  year = {2024},
+  year = {2025},
   publisher = {GitHub},
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/Farama-Foundation/stable-retro}},
@@ -138,6 +138,9 @@ https://www.youtube.com/watch?v=vPnJiUR21Og
 
 Game Integration tool:
 https://www.youtube.com/playlist?list=PLmwlWbdWpZVvWqzOxu0jVBy-CaRpYha0t
+
+How to run a custom version of RetroArch that supports overriding player input with models trained with stable-retro/stable-baselines:
+https://www.youtube.com/watch?v=hkOcxJvJVjk
 
 ## Discord channel
 

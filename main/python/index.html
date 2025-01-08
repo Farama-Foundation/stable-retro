@@ -13,9 +13,9 @@
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 -->
         <title>Python API - Stable-Retro Documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=49cbaffd" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=82c8b628" />
     
     
 
@@ -371,10 +371,10 @@ also specify a string that is the name of the <code class="docutils literal notr
 <section id="multiplayer-environments">
 <h2>Multiplayer Environments<a class="headerlink" href="#multiplayer-environments" title="Link to this heading">¶</a></h2>
 <p>A small number of games support multiplayer.  To use this feature, pass <code class="docutils literal notranslate"><span class="pre">players=&lt;n&gt;</span></code> to <a class="reference internal" href="#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a>.  Here is an example random agent that controls both paddles in <code class="docutils literal notranslate"><span class="pre">Pong-Atari2600</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">retro</span>
 
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s2">&quot;Pong-Atari2600&quot;</span><span class="p">,</span> <span class="n">players</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -402,7 +402,7 @@ also specify a string that is the name of the <code class="docutils literal notr
 <section id="record">
 <h3>Record<a class="headerlink" href="#record" title="Link to this heading">¶</a></h3>
 <p>If you have an agent playing a game, you can record the gameplay to a <code class="docutils literal notranslate"><span class="pre">.bk2</span></code> file for later processing:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">retro</span>
 
 <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">&#39;Airstriker-Genesis&#39;</span><span class="p">,</span> <span class="n">record</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
 <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
@@ -416,7 +416,7 @@ also specify a string that is the name of the <code class="docutils literal notr
 <section id="playback">
 <h3>Playback<a class="headerlink" href="#playback" title="Link to this heading">¶</a></h3>
 <p>Given a <code class="docutils literal notranslate"><span class="pre">.bk2</span></code> file you can load it in python and either play it back or use the actions for training.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">retro</span>
 
 <span class="n">movie</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">Movie</span><span class="p">(</span><span class="s1">&#39;Airstriker-Genesis-Level1-000000.bk2&#39;</span><span class="p">)</span>
 <span class="n">movie</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>

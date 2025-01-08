@@ -13,9 +13,9 @@
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 -->
         <title>Getting Started - Stable-Retro Documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=49cbaffd" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=82c8b628" />
     
     
 
@@ -288,7 +288,7 @@
 <section id="create-a-retro-environment">
 <h2>Create a Retro Environment<a class="headerlink" href="#create-a-retro-environment" title="Link to this heading">¶</a></h2>
 <p>After installing you can now create a <a class="reference external" href="https://gymnasium.farama.org/">Gymnasium</a> environment in Python:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">retro</span>
 <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">&#39;Airstriker-Genesis&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -310,10 +310,10 @@
 <section id="random-agent">
 <h3>Random Agent<a class="headerlink" href="#random-agent" title="Link to this heading">¶</a></h3>
 <p>A random agent that chooses a random action on each timestep looks much like the example random agent for <a class="reference external" href="https://gymnasium.farama.org/">Gymnasium</a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">retro</span>
 
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s2">&quot;Airstriker-Genesis&quot;</span><span class="p">)</span>
     <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -356,7 +356,7 @@
 <section id="integrations">
 <h2>Integrations<a class="headerlink" href="#integrations" title="Link to this heading">¶</a></h2>
 <p>What games have already been integrated?  Note that this will display all defined environments, even ones for which ROMs are missing.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">retro</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">retro</span>
 <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">list_games</span><span class="p">()</span>
 </pre></div>
 </div>

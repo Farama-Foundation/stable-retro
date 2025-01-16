@@ -4,7 +4,7 @@ if(POLICY CMP0048)
   cmake_policy(SET CMP0048 NEW)
 endif()
 
-if(APPLE) # APPLE counts as a UNIX, so APPLE must come first 
+if(APPLE) # APPLE counts as a UNIX, so APPLE must come first
   set(PYEXT_SUFFIX
       ".so"
       CACHE STRING "Suffix for Python extension modules")

@@ -228,15 +228,16 @@ function(add_core platform core_name)
     WORKING_DIRECTORY "cores/${platform}/${subdir}")
 endfunction()
 
-add_core(snes snes9x)
+
 add_core(genesis genesis_plus_gx)
 add_core(nes fceumm)
 add_core(atari2600 stella)
 
 if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
-  message(warning "Detected Apple Silicon, skipping gambatte (gb)")
+  message(warning "Detected Apple Silicon, skipping gambatte (gb) and snes9x")
 else()
   add_core(gb gambatte)
+  add_core(snes snes9x)
 endif()
 
 add_core(gba mgba)

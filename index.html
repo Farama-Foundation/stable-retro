@@ -11,11 +11,11 @@
 <link rel="index" title="Index" href="genindex/" /><link rel="search" title="Search" href="search/" /><link rel="next" title="Getting Started" href="getting_started/" />
         <link rel="canonical" href="https://stable-retro.farama.org/index.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2023.08.19.dev1 -->
+    <!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 -->
         <title>Stable-Retro Documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=3e7f4c72" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=49cbaffd" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=82c8b628" />
     
     
 
@@ -287,7 +287,8 @@ Retro games for Reinforcement Learning
 </h2>
 </div>
 <figure class="align-default">
-<a class="reference internal image-reference" href="_images/retro_games.png"><img alt="Stable-retro gif" src="_images/retro_games.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/retro_games.png"><img alt="Stable-retro gif" src="_images/retro_games.png" style="width: 500px;" />
+</a>
 </figure>
 <p><strong>Stable-Retro is a maintained fork of OpenAI’s Retro library.</strong></p>
 <p>stable-retro lets you turn classic video games into Gymnasium environments for reinforcement learning. Supported plateforms includes Sega Genesis, Sega 32X, Super Nintendo, Atari 2600 and more (<a class="reference external" href="https://github.com/Farama-Foundation/stable-retro#emulated-systems">full list here</a>)</p>
@@ -295,24 +296,24 @@ Retro games for Reinforcement Learning
 <span class="sd">Train an agent using Proximal Policy Optimization from Stable Baselines 3</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
 
-<span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">gymnasium.wrappers.time_limit</span> <span class="kn">import</span> <span class="n">TimeLimit</span>
-<span class="kn">from</span> <span class="nn">stable_baselines3</span> <span class="kn">import</span> <span class="n">PPO</span>
-<span class="kn">from</span> <span class="nn">stable_baselines3.common.atari_wrappers</span> <span class="kn">import</span> <span class="n">ClipRewardEnv</span><span class="p">,</span> <span class="n">WarpFrame</span>
-<span class="kn">from</span> <span class="nn">stable_baselines3.common.vec_env</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gymnasium</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gymnasium.wrappers.time_limit</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeLimit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">stable_baselines3</span><span class="w"> </span><span class="kn">import</span> <span class="n">PPO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">stable_baselines3.common.atari_wrappers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClipRewardEnv</span><span class="p">,</span> <span class="n">WarpFrame</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">stable_baselines3.common.vec_env</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SubprocVecEnv</span><span class="p">,</span>
     <span class="n">VecFrameStack</span><span class="p">,</span>
     <span class="n">VecTransposeImage</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">retro</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">retro</span>
 
 
-<span class="k">class</span> <span class="nc">StochasticFrameSkip</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Wrapper</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">stickprob</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StochasticFrameSkip</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Wrapper</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">stickprob</span><span class="p">):</span>
         <span class="n">gym</span><span class="o">.</span><span class="n">Wrapper</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stickprob</span> <span class="o">=</span> <span class="n">stickprob</span>
@@ -320,11 +321,11 @@ Retro games for Reinforcement Learning
         <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">supports_want_render</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&quot;supports_want_render&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ac</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ac</span><span class="p">):</span>
         <span class="n">terminated</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">truncated</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">totrew</span> <span class="o">=</span> <span class="mi">0</span>
@@ -352,7 +353,7 @@ Retro games for Reinforcement Learning
         <span class="k">return</span> <span class="n">ob</span><span class="p">,</span> <span class="n">totrew</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span>
 
 
-<span class="k">def</span> <span class="nf">make_retro</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">4500</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_retro</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">4500</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">DEFAULT</span>
     <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -362,7 +363,7 @@ Retro games for Reinforcement Learning
     <span class="k">return</span> <span class="n">env</span>
 
 
-<span class="k">def</span> <span class="nf">wrap_deepmind_retro</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">wrap_deepmind_retro</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Configure environment for retro games, using config similar to DeepMind-style Atari in openai/baseline&#39;s wrap_deepmind</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -371,14 +372,14 @@ Retro games for Reinforcement Learning
     <span class="k">return</span> <span class="n">env</span>
 
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--game&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;Airstriker-Genesis&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--state&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--scenario&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">make_env</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_env</span><span class="p">():</span>
         <span class="n">env</span> <span class="o">=</span> <span class="n">make_retro</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">scenario</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">scenario</span><span class="p">)</span>
         <span class="n">env</span> <span class="o">=</span> <span class="n">wrap_deepmind_retro</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">env</span>
@@ -474,10 +475,62 @@ Retro games for Reinforcement Learning
     </script>
 
     
-    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0VNK81VVGP"></script>
+      <script>
+        const enableGtag = () => {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-0VNK81VVGP');
+        }
+        (() => {
+            if (!localStorage.getItem("acceptedCookieAlert")) {
+                const boxElem = document.createElement("div");
+                boxElem.classList.add("cookie-alert");
+                const containerElem = document.createElement("div");
+                containerElem.classList.add("cookie-alert__container");
+                const textElem = document.createElement("p");
+                textElem.innerHTML = `This page uses <a href="https://analytics.google.com/">
+                                    Google Analytics</a> to collect statistics.`;
+                                    containerElem.appendChild(textElem);
 
-    <script src="_static/documentation_options.js?v=fb1071c9"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+                const declineBtn = Object.assign(document.createElement("button"),
+                  {
+                    innerText: "Deny",
+                    className: "farama-btn cookie-alert__button",
+                    id: "cookie-alert__decline",
+                  }
+                );
+                declineBtn.addEventListener("click", () => {
+                  localStorage.setItem("acceptedCookieAlert", false);
+                  boxElem.remove();
+                });
+
+                const acceptBtn = Object.assign(document.createElement("button"),
+                  {
+                    innerText: "Allow",
+                    className: "farama-btn cookie-alert__button",
+                    id: "cookie-alert__accept",
+                  }
+                );
+                acceptBtn.addEventListener("click", () => {
+                  localStorage.setItem("acceptedCookieAlert", true);
+                  boxElem.remove();
+                  enableGtag();
+                });
+
+                containerElem.appendChild(declineBtn);
+                containerElem.appendChild(acceptBtn);
+                boxElem.appendChild(containerElem);
+                document.body.appendChild(boxElem);
+            } else if (localStorage.getItem("acceptedCookieAlert") === "true") {
+              enableGtag();
+            }
+        })()
+      </script>
+
+    <script src="_static/documentation_options.js?v=06604e8f"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=7660844c"></script>
     

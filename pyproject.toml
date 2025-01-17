@@ -18,4 +18,4 @@ manylinux-x86_64-image = "manylinux_2_28"
 manylinux-aarch64-image = "manylinux_2_28"
 
 [tool.cibuildwheel.macos]
-before-all = "brew install pkg-config capnp lua@5.1 qt5"
+before-all = "brew install pkg-config capnp lua@5.3 qt5"

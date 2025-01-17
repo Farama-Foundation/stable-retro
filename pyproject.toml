@@ -10,7 +10,7 @@ build = "cp{38,39,310,311,312}-*"
 build = "cp{38,39,310,311,312}-manylinux*"
 
 # For manylinux_2_28 we need to install the following dependencies using yum:
-before-all = "yum install -y cmake git pkgconf-pkg-config zlib-devel libzip-devel bzip2-devel gcc-c++"
+before-all = "yum install -y cmake git pkgconf-pkg-config zlib-devel libzip-devel bzip2-devel"
 
 # Only build for x86_64 and aarch64 are officially supported
 archs = "x86_64 aarch64"
@@ -18,4 +18,4 @@ manylinux-x86_64-image = "manylinux_2_28"
 manylinux-aarch64-image = "manylinux_2_28"
 
 [tool.cibuildwheel.macos]
-before-all = "brew install pkg-config capnp lua@5.4 qt5"
+before-all = "brew install pkg-config capnp lua@5.4 qt5 gcc"

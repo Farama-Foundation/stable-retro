@@ -230,20 +230,22 @@ endfunction()
 
 
 add_core(genesis genesis_plus_gx)
-add_core(nes fceumm)
-add_core(atari2600 stella)
+
 
 if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
   message(warning "Detected Apple Silicon, skipping gambatte (gb) and snes9x")
 else()
   add_core(gb gambatte)
   add_core(snes snes9x)
+  add_core(nes fceumm)
+  add_core(atari2600 stella)
+  add_core(gba mgba)
+  add_core(pce mednafen_pce_fast)
+  add_core(32x picodrive)
+  add_core(saturn mednafen_saturn)
 endif()
 
-add_core(gba mgba)
-add_core(pce mednafen_pce_fast)
-add_core(32x picodrive)
-add_core(saturn mednafen_saturn)
+
 
 set(CLEAN_CORES)
 

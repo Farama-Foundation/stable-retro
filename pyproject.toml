@@ -20,5 +20,7 @@ manylinux-aarch64-image = "manylinux_2_28"
 [tool.cibuildwheel.macos]
 before-all = [
 "brew install pkg-config capnp lua@5.4 qt5",
-"sudo xcode-select -s /Library/Developer/CommandLineTools"
+"sudo xcode-select -s /Library/Developer/CommandLineTools",
+"echo 'export PATH="/opt/homebrew/opt/qt@5/bin:$PATH"' >> ~/.zshrc",
+"export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)"
 ]

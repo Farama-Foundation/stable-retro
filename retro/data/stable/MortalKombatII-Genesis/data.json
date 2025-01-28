@@ -19,6 +19,22 @@
     "wins": {
       "address": 16772772,
       "type": "|d1"
+    },
+    "x_position": {
+      "address": 16758472,
+      "type": ">u2"
+    },
+    "enemy_x_position": {
+      "address": 16758712,
+      "type": ">u2"
+    },
+    "y_position": {
+    "address": 16758500,  
+    "type": ">i2"
+    },
+    "enemy_y_position": {
+      "address": 16758740, 
+      "type": ">i2"
     }
   }
 }

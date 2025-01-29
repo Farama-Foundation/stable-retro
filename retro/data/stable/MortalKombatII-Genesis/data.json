@@ -29,11 +29,11 @@
       "type": ">u2"
     },
     "y_position": {
-    "address": 16758500,  
+    "address": 16758500,
     "type": ">i2"
     },
     "enemy_y_position": {
-      "address": 16758740, 
+      "address": 16758740,
       "type": ">i2"
     }
   }

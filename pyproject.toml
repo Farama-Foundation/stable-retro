@@ -14,8 +14,8 @@ before-all = "yum install -y cmake git pkgconf-pkg-config zlib-devel libzip-deve
 
 # Only build for x86_64 and aarch64 are officially supported
 archs = "x86_64 aarch64"
-manylinux-x86_64-image = "manylinux_2_28"
-manylinux-aarch64-image = "manylinux_2_28"
+manylinux-x86_64-image = "manylinux_2_34"
+manylinux-aarch64-image = "manylinux_2_34"
 
 [tool.cibuildwheel.macos]
 before-all = "brew install pkg-config capnp lua@5.4 qt5"

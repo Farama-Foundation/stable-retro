@@ -49,7 +49,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: wheels-${{ github.run_id }}
+          name: wheels-${{ matrix.os }}
           path: ./wheelhouse/*.whl
 
   build_sdist:
@@ -64,7 +64,7 @@ jobs:
       - name: Upload sdist
         uses: actions/upload-artifact@v4
         with:
-          name: sdist-${{ github.run_id }}
+          name: sdist-${{ matrix.os }}
           path: dist/*.tar.gz
 
   upload_pypi:

@@ -1,0 +1,1067 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="">
+    <meta property="og:title" content="Stable-Retro Documentation" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="" />
+    <meta property="og:url" content="https://stable-retro.farama.org/index.html" /><meta property="og:image" content="https://stable-retro.farama.org/_static/img/stable-retro-github.png" /><meta name="twitter:card" content="summary_large_image"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex/" /><link rel="search" title="Search" href="search/" /><link rel="next" title="Getting Started" href="getting_started/" />
+        <link rel="canonical" href="https://stable-retro.farama.org/index.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 -->
+        <title>Stable-Retro Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=3e7f4c72" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=82c8b628" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <header class="farama-header" aria-label="Farama header">
+      <div class="farama-header__container">
+        <div class="farama-header__left--mobile">
+          <label class="nav-overlay-icon" for="__navigation">
+            <div class="visually-hidden">Toggle site navigation sidebar</div>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <defs></defs>
+              <line x1="0.5" y1="4" x2="23.5" y2="4"></line>
+              <line x1="0.232" y1="12" x2="23.5" y2="12"></line>
+              <line x1="0.232" y1="20" x2="23.5" y2="20"></line>
+            </svg>
+          </label>
+        </div>
+        <div class="farama-header__left farama-header__center--mobile">
+          <a href="#">
+              <img class="farama-header__logo only-light" src="_static/img/stable_retro_black.svg" alt="Light Logo"/>
+              <img class="farama-header__logo only-dark" src="_static/img/stable_retro_white.svg" alt="Dark Logo"/>
+            <span class="farama-header__title">Stable-Retro Documentation</span>
+          </a>
+        </div>
+        <div class="farama-header__right">
+          <div class="farama-header-menu">
+            <button class="farama-header-menu__btn" aria-label="Open Farama Menu" aria-expanded="false" aria-haspopup="true" aria-controls="farama-menu">
+              <img class="farama-black-logo-invert" src="_static/img/farama-logo-header.svg">
+              <svg viewBox="0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <polyline style="stroke-linecap: round; stroke-linejoin: round; fill: none; stroke-width: 2px;" points="1 7 12 18 23 7"></polyline>
+              </svg>
+            </button>
+            <div class="farama-header-menu-container farama-hidden" aria-hidden="true" id="farama-menu">
+              <div class="farama-header-menu__header">
+                <a href="https://farama.org">
+                  <img class="farama-header-menu__logo farama-white-logo-invert" src="_static/img/farama_solid_white.svg" alt="Farama Foundation logo">
+                  <span>Farama Foundation</span>
+                </a>
+                <div class="farama-header-menu-header__right">
+                  <button id="farama-close-menu">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-close">
+                      <line x1="3" y1="21" x2="21" y2="3"></line>
+                      <line x1="3" y1="3" x2="21" y2="21"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="farama-header-menu__body">
+                <!-- Response from farama.org/api/projects.json -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<div class="page">
+  <!--<header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">Stable-Retro Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>-->
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="farama-sidebar__title" href="#">
+      <img class="farama-header__logo only-light" src="_static/img/stable_retro_black.svg" alt="Light Logo"/>
+      <img class="farama-header__logo only-dark" src="_static/img/stable_retro_white.svg" alt="Dark Logo"/>
+    <span class="farama-header__title">Stable-Retro Documentation</span>
+  </a><form class="sidebar-search-container" method="get" action="search/" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing/">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration/">Game Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/">Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="release_notes/">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/master/docs/README.md">Contribute to the Docs</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main-container">
+
+    
+
+    
+
+    <div class="main">
+      <div class="content">
+        <div class="article-container">
+          <a href="#" class="back-to-top muted-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+            </svg>
+            <span>Back to top</span>
+          </a>
+          <div class="content-icon-container"><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Farama-Foundation/stable-retro/edit/master/docs/index.md" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+              <button class="theme-toggle" title="Toggle color theme">
+                <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+                <svg class="theme-icon-when-auto">
+                  <use href="#svg-sun-half"></use>
+                </svg>
+                <svg class="theme-icon-when-dark">
+                  <use href="#svg-moon"></use>
+                </svg>
+                <svg class="theme-icon-when-light">
+                  <use href="#svg-sun"></use>
+                </svg>
+              </button>
+            </div>
+            <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+              <div class="visually-hidden">Toggle table of contents sidebar</div>
+              <i class="icon"><svg>
+                  <use href="#svg-toc"></use>
+                </svg></i>
+            </label>
+          </div>
+          <article role="main">
+            
+            <figure class="farama-project-logo align-default">
+<img alt="Stable-Retro Logo" src="_images/stable-retro-text.png" />
+</figure>
+<div class="docutils container">
+<h2 class='farama-project-heading'>
+Retro games for Reinforcement Learning
+</h2>
+</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/retro_games.png"><img alt="Stable-retro gif" src="_images/retro_games.png" style="width: 500px;" />
+</a>
+</figure>
+<p><strong>Stable-Retro is a maintained fork of OpenAI’s Retro library.</strong></p>
+<p>stable-retro lets you turn classic video games into Gymnasium environments for reinforcement learning. Supported plateforms includes Sega Genesis, Sega 32X, Super Nintendo, Atari 2600, Arcade Machines and more (<a class="reference external" href="https://github.com/Farama-Foundation/stable-retro#emulated-systems">full list here</a>)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Train an agent using Proximal Policy Optimization from Stable Baselines 3</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">gymnasium</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gymnasium.wrappers.time_limit</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeLimit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">stable_baselines3</span><span class="w"> </span><span class="kn">import</span> <span class="n">PPO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">stable_baselines3.common.atari_wrappers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClipRewardEnv</span><span class="p">,</span> <span class="n">WarpFrame</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">stable_baselines3.common.vec_env</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SubprocVecEnv</span><span class="p">,</span>
+    <span class="n">VecFrameStack</span><span class="p">,</span>
+    <span class="n">VecTransposeImage</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">retro</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">StochasticFrameSkip</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Wrapper</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">stickprob</span><span class="p">):</span>
+        <span class="n">gym</span><span class="o">.</span><span class="n">Wrapper</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stickprob</span> <span class="o">=</span> <span class="n">stickprob</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">supports_want_render</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&quot;supports_want_render&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ac</span><span class="p">):</span>
+        <span class="n">terminated</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">truncated</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">totrew</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+            <span class="c1"># First step after reset, use action</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="o">=</span> <span class="n">ac</span>
+            <span class="c1"># First substep, delay with probability=stickprob</span>
+            <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">stickprob</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="o">=</span> <span class="n">ac</span>
+            <span class="c1"># Second substep, new action definitely kicks in</span>
+            <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">curac</span> <span class="o">=</span> <span class="n">ac</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">supports_want_render</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">ob</span><span class="p">,</span> <span class="n">rew</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">curac</span><span class="p">,</span>
+                    <span class="n">want_render</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ob</span><span class="p">,</span> <span class="n">rew</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">curac</span><span class="p">)</span>
+            <span class="n">totrew</span> <span class="o">+=</span> <span class="n">rew</span>
+            <span class="k">if</span> <span class="n">terminated</span> <span class="ow">or</span> <span class="n">truncated</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="n">ob</span><span class="p">,</span> <span class="n">totrew</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_retro</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">4500</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">DEFAULT</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">StochasticFrameSkip</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">stickprob</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">max_episode_steps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">TimeLimit</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">max_episode_steps</span><span class="o">=</span><span class="n">max_episode_steps</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">env</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">wrap_deepmind_retro</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Configure environment for retro games, using config similar to DeepMind-style Atari in openai/baseline&#39;s wrap_deepmind</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">WarpFrame</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">ClipRewardEnv</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">env</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--game&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;Airstriker-Genesis&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--state&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--scenario&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_env</span><span class="p">():</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">make_retro</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">scenario</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">scenario</span><span class="p">)</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">wrap_deepmind_retro</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">env</span>
+
+    <span class="n">venv</span> <span class="o">=</span> <span class="n">VecTransposeImage</span><span class="p">(</span><span class="n">VecFrameStack</span><span class="p">(</span><span class="n">SubprocVecEnv</span><span class="p">([</span><span class="n">make_env</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8</span><span class="p">),</span> <span class="n">n_stack</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">PPO</span><span class="p">(</span>
+        <span class="n">policy</span><span class="o">=</span><span class="s2">&quot;CnnPolicy&quot;</span><span class="p">,</span>
+        <span class="n">env</span><span class="o">=</span><span class="n">venv</span><span class="p">,</span>
+        <span class="n">learning_rate</span><span class="o">=</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span> <span class="o">*</span> <span class="mf">2.5e-4</span><span class="p">,</span>
+        <span class="n">n_steps</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+        <span class="n">n_epochs</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span>
+        <span class="n">gae_lambda</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+        <span class="n">clip_range</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">ent_coef</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span>
+        <span class="n">total_timesteps</span><span class="o">=</span><span class="mi">100_000_000</span><span class="p">,</span>
+        <span class="n">log_interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Currently supported games:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1942</span><span class="o">-</span><span class="n">Nes</span>                                          <span class="n">DragonTheBruceLeeStory</span><span class="o">-</span><span class="n">Genesis</span>                        <span class="n">PorkyPigsHauntedHoliday</span><span class="o">-</span><span class="n">Snes</span>
+<span class="mi">1943</span><span class="o">-</span><span class="n">Nes</span>                                          <span class="n">DragonTheBruceLeeStory</span><span class="o">-</span><span class="n">Snes</span>                           <span class="n">PoseidonWars3D</span><span class="o">-</span><span class="n">Sms</span>
+<span class="mi">3</span><span class="n">NinjasKickBack</span><span class="o">-</span><span class="n">Genesis</span>                           <span class="n">DragonsLair</span><span class="o">-</span><span class="n">Snes</span>                                      <span class="n">PowerAthlete</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="mi">8</span><span class="n">Eyes</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">DragonsRevenge</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">PowerPiggsOfTheDarkAge</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">AaahhRealMonsters</span><span class="o">-</span><span class="n">Genesis</span>                         <span class="n">DreamTeamUSA</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">PowerStrike</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">AbadoxTheDeadlyInnerWar</span><span class="o">-</span><span class="n">Nes</span>                       <span class="n">DynamiteDuke</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">PowerStrikeII</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">AcceleBrid</span><span class="o">-</span><span class="n">Snes</span>                                   <span class="n">DynamiteDuke</span><span class="o">-</span><span class="n">Sms</span>                                      <span class="n">Predator2</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">ActRaiser2</span><span class="o">-</span><span class="n">Snes</span>                                   <span class="n">DynamiteHeaddy</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">Predator2</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">ActionPachio</span><span class="o">-</span><span class="n">Snes</span>                                 <span class="n">ESPNBaseballTonight</span><span class="o">-</span><span class="n">Genesis</span>                           <span class="n">PrehistorikMan</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">AddamsFamily</span><span class="o">-</span><span class="n">GameBoy</span>                              <span class="n">EarnestEvans</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">PrivateEye</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">AddamsFamily</span><span class="o">-</span><span class="n">Genesis</span>                              <span class="n">EarthDefenseForce</span><span class="o">-</span><span class="n">Snes</span>                                <span class="n">PsychicWorld</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">AddamsFamily</span><span class="o">-</span><span class="n">Nes</span>                                  <span class="n">ElViento</span><span class="o">-</span><span class="n">Genesis</span>                                      <span class="n">Pulseman</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AddamsFamily</span><span class="o">-</span><span class="n">Sms</span>                                  <span class="n">ElementalMaster</span><span class="o">-</span><span class="n">Genesis</span>                               <span class="n">PunchOut</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AddamsFamily</span><span class="o">-</span><span class="n">Snes</span>                                 <span class="n">ElevatorAction</span><span class="o">-</span><span class="n">Atari2600</span>                              <span class="n">Punisher</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AddamsFamilyPugsleysScavengerHunt</span><span class="o">-</span><span class="n">Nes</span>             <span class="n">ElevatorAction</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">Punisher</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AddamsFamilyPugsleysScavengerHunt</span><span class="o">-</span><span class="n">Snes</span>            <span class="n">EliminateDown</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">PussNBootsPerosGreatAdventure</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AdvancedBusterhawkGleylancer</span><span class="o">-</span><span class="n">Genesis</span>              <span class="n">Enduro</span><span class="o">-</span><span class="n">Atari2600</span>                                      <span class="n">PuttySquad</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">Adventure</span><span class="o">-</span><span class="n">Atari2600</span>                               <span class="n">EuropeanClubSoccer</span><span class="o">-</span><span class="n">Genesis</span>                            <span class="n">QBert</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AdventureIsland</span><span class="o">-</span><span class="n">GameBoy</span>                           <span class="n">ExMutants</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">Qbert</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">AdventureIsland3</span><span class="o">-</span><span class="n">Nes</span>                              <span class="n">Exerion</span><span class="o">-</span><span class="n">Nes</span>                                           <span class="n">QuackShot</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AdventureIslandII</span><span class="o">-</span><span class="n">Nes</span>                             <span class="n">F1</span><span class="o">-</span><span class="n">Genesis</span>                                            <span class="n">Quartet</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">AdventuresOfBatmanAndRobin</span><span class="o">-</span><span class="n">Genesis</span>                <span class="n">FZSenkiAxisFinalZone</span><span class="o">-</span><span class="n">Genesis</span>                          <span class="n">Quarth</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AdventuresOfBayouBilly</span><span class="o">-</span><span class="n">Nes</span>                        <span class="n">FaeryTaleAdventure</span><span class="o">-</span><span class="n">Genesis</span>                            <span class="n">RType</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">AdventuresOfDinoRiki</span><span class="o">-</span><span class="n">Nes</span>                          <span class="n">FamilyDog</span><span class="o">-</span><span class="n">Snes</span>                                        <span class="n">RTypeIII</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">AdventuresOfDrFranken</span><span class="o">-</span><span class="n">Snes</span>                        <span class="n">Fantasia</span><span class="o">-</span><span class="n">Genesis</span>                                      <span class="n">RadicalRex</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AdventuresOfKidKleets</span><span class="o">-</span><span class="n">Snes</span>                        <span class="n">FantasticDizzy</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">RadicalRex</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">AdventuresOfMightyMax</span><span class="o">-</span><span class="n">Genesis</span>                     <span class="n">FantasyZone</span><span class="o">-</span><span class="n">Sms</span>                                       <span class="n">RaidenDensetsu</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">AdventuresOfMightyMax</span><span class="o">-</span><span class="n">Snes</span>                        <span class="n">FantasyZoneIIOpaOpaNoNamida</span><span class="o">-</span><span class="n">Nes</span>                       <span class="n">RaidenDensetsuRaidenTrad</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AdventuresOfRockyAndBullwinkleAndFriends</span><span class="o">-</span><span class="n">Genesis</span>  <span class="n">FantasyZoneIITheTearsOfOpaOpa</span><span class="o">-</span><span class="n">Sms</span>                     <span class="n">RainbowIslands</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AdventuresOfRockyAndBullwinkleAndFriends</span><span class="o">-</span><span class="n">Nes</span>      <span class="n">FantasyZoneTheMaze</span><span class="o">-</span><span class="n">Sms</span>                                <span class="n">RainbowIslandsStoryOfTheBubbleBobble2</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">AdventuresOfRockyAndBullwinkleAndFriends</span><span class="o">-</span><span class="n">Snes</span>     <span class="n">FatalFury</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">RamboFirstBloodPartII</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">AdventuresOfStarSaver</span><span class="o">-</span><span class="n">GameBoy</span>                     <span class="n">FatalFury2</span><span class="o">-</span><span class="n">Genesis</span>                                    <span class="n">RamboIII</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AdventuresOfYogiBear</span><span class="o">-</span><span class="n">Snes</span>                         <span class="n">FatalLabyrinth</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">Rampage</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AeroFighters</span><span class="o">-</span><span class="n">Snes</span>                                 <span class="n">FatalRewind</span><span class="o">-</span><span class="n">Genesis</span>                                   <span class="n">RangerX</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AeroStar</span><span class="o">-</span><span class="n">GameBoy</span>                                  <span class="n">FelixTheCat</span><span class="o">-</span><span class="n">Nes</span>                                       <span class="n">RastanSagaII</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AeroTheAcroBat</span><span class="o">-</span><span class="n">Snes</span>                               <span class="n">FerrariGrandPrixChallenge</span><span class="o">-</span><span class="n">Genesis</span>                     <span class="n">Realm</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">AeroTheAcroBat2</span><span class="o">-</span><span class="n">Genesis</span>                           <span class="n">FightingMasters</span><span class="o">-</span><span class="n">Genesis</span>                               <span class="n">RenAndStimpyShowPresentsStimpysInvention</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AeroTheAcroBat2</span><span class="o">-</span><span class="n">Snes</span>                              <span class="n">FinalBubbleBobble</span><span class="o">-</span><span class="n">Sms</span>                                 <span class="n">RenAndStimpyShowVeediots</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">AfterBurnerII</span><span class="o">-</span><span class="n">Genesis</span>                             <span class="n">FinalFight</span><span class="o">-</span><span class="n">Snes</span>                                       <span class="n">RenderingRangerR2</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">AfterBurst</span><span class="o">-</span><span class="n">GameBoy</span>                                <span class="n">FinalFight2</span><span class="o">-</span><span class="n">Snes</span>                                      <span class="n">Renegade</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AirBuster</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">FinalFight3</span><span class="o">-</span><span class="n">Snes</span>                                      <span class="n">Renegade</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">AirCavalry</span><span class="o">-</span><span class="n">Snes</span>                                   <span class="n">FinalFightGuy</span><span class="o">-</span><span class="n">Snes</span>                                    <span class="n">RevengeOfShinobi</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AirDiver</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">FireAndIce</span><span class="o">-</span><span class="n">Sms</span>                                        <span class="n">RiseOfTheRobots</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AirRaid</span><span class="o">-</span><span class="n">Atari2600</span>                                 <span class="n">FirstSamurai</span><span class="o">-</span><span class="n">Snes</span>                                     <span class="n">RiskyWoods</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Airstriker</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">FishingDerby</span><span class="o">-</span><span class="n">Atari2600</span>                                <span class="n">Ristar</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Airwolf</span><span class="o">-</span><span class="n">Nes</span>                                       <span class="n">FistOfTheNorthStar</span><span class="o">-</span><span class="n">Nes</span>                                <span class="n">RivalTurf</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">AlfredChicken</span><span class="o">-</span><span class="n">GameBoy</span>                             <span class="n">Flicky</span><span class="o">-</span><span class="n">Genesis</span>                                        <span class="n">Riverraid</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">AlfredChicken</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">Flintstones</span><span class="o">-</span><span class="n">Genesis</span>                                   <span class="n">RoadRunner</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">AlfredChicken</span><span class="o">-</span><span class="n">Snes</span>                                <span class="n">Flintstones</span><span class="o">-</span><span class="n">Snes</span>                                      <span class="n">RoadRunnersDeathValleyRally</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">Alien</span><span class="o">-</span><span class="n">Atari2600</span>                                   <span class="n">FlintstonesTheRescueOfDinoAndHoppy</span><span class="o">-</span><span class="n">Nes</span>                <span class="n">RoboCop2</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Alien3</span><span class="o">-</span><span class="n">Nes</span>                                        <span class="n">FlyingDragonTheSecretScroll</span><span class="o">-</span><span class="n">Nes</span>                       <span class="n">RoboCop3</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Alien3</span><span class="o">-</span><span class="n">Sms</span>                                        <span class="n">FlyingHero</span><span class="o">-</span><span class="n">Nes</span>                                        <span class="n">RoboCop3</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AlienSoldier</span><span class="o">-</span><span class="n">Genesis</span>                              <span class="n">FlyingHeroBugyuruNoDaibouken</span><span class="o">-</span><span class="n">Snes</span>                     <span class="n">RoboCop3</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">AlienSyndrome</span><span class="o">-</span><span class="n">Sms</span>                                 <span class="n">ForemanForReal</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">RoboCop3</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">AlienVsPredator</span><span class="o">-</span><span class="n">Snes</span>                              <span class="n">ForgottenWorlds</span><span class="o">-</span><span class="n">Genesis</span>                               <span class="n">RoboCopVersusTheTerminator</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">Alleyway</span><span class="o">-</span><span class="n">GameBoy</span>                                  <span class="n">FormationZ</span><span class="o">-</span><span class="n">Nes</span>                                        <span class="n">RoboCopVersusTheTerminator</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">AlphaMission</span><span class="o">-</span><span class="n">Nes</span>                                  <span class="n">FoxsPeterPanAndThePiratesTheRevengeOfCaptainHook</span><span class="o">-</span><span class="n">Nes</span>  <span class="n">RoboWarrior</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AlteredBeast</span><span class="o">-</span><span class="n">Genesis</span>                              <span class="n">FrankThomasBigHurtBaseball</span><span class="o">-</span><span class="n">Genesis</span>                    <span class="n">RoboccoWars</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Amagon</span><span class="o">-</span><span class="n">Nes</span>                                        <span class="n">Freeway</span><span class="o">-</span><span class="n">Atari2600</span>                                     <span class="n">Robotank</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">AmazingPenguin</span><span class="o">-</span><span class="n">GameBoy</span>                            <span class="n">Frogger</span><span class="o">-</span><span class="n">Genesis</span>                                       <span class="n">RocketKnightAdventures</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AmericanGladiators</span><span class="o">-</span><span class="n">Genesis</span>                        <span class="n">FrontLine</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">RockinKats</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Amidar</span><span class="o">-</span><span class="n">Atari2600</span>                                  <span class="n">Frostbite</span><span class="o">-</span><span class="n">Atari2600</span>                                   <span class="n">Rollerball</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ArchRivalsTheArcadeGame</span><span class="o">-</span><span class="n">Genesis</span>                   <span class="n">FushigiNoOshiroPitPot</span><span class="o">-</span><span class="n">Sms</span>                             <span class="n">Rollergames</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ArcherMacleansSuperDropzone</span><span class="o">-</span><span class="n">Snes</span>                  <span class="n">GIJoeARealAmericanHero</span><span class="o">-</span><span class="n">Nes</span>                            <span class="n">RollingThunder2</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">ArdyLightfoot</span><span class="o">-</span><span class="n">Snes</span>                                <span class="n">GIJoeTheAtlantisFactor</span><span class="o">-</span><span class="n">Nes</span>                            <span class="n">RunSaber</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">Argus</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">GadgetTwins</span><span class="o">-</span><span class="n">Genesis</span>                                   <span class="n">RunningBattle</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">ArielTheLittleMermaid</span><span class="o">-</span><span class="n">Genesis</span>                     <span class="n">Gaiares</span><span class="o">-</span><span class="n">Genesis</span>                                       <span class="n">RushnAttack</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Arkanoid</span><span class="o">-</span><span class="n">Nes</span>                                      <span class="n">GainGround</span><span class="o">-</span><span class="n">Genesis</span>                                    <span class="n">SCATSpecialCyberneticAttackTeam</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ArkistasRing</span><span class="o">-</span><span class="n">Nes</span>                                  <span class="n">GalagaDemonsOfDeath</span><span class="o">-</span><span class="n">Nes</span>                               <span class="n">SDHeroSoukessenTaoseAkuNoGundan</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Armadillo</span><span class="o">-</span><span class="n">Nes</span>                                     <span class="n">GalaxyForce</span><span class="o">-</span><span class="n">Sms</span>                                       <span class="n">Sagaia</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">ArrowFlash</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">GalaxyForceII</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">Sagaia</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">ArtOfFighting</span><span class="o">-</span><span class="n">Genesis</span>                             <span class="n">Gauntlet</span><span class="o">-</span><span class="n">Genesis</span>                                      <span class="n">SaintSword</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">ArtOfFighting</span><span class="o">-</span><span class="n">Snes</span>                                <span class="n">Gauntlet</span><span class="o">-</span><span class="n">Sms</span>                                          <span class="n">SameSameSame</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Assault</span><span class="o">-</span><span class="n">Atari2600</span>                                 <span class="n">Geimos</span><span class="o">-</span><span class="n">Nes</span>                                            <span class="n">SamuraiShodown</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Asterix</span><span class="o">-</span><span class="n">Atari2600</span>                                 <span class="n">GeneralChaos</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">Sansuu5And6NenKeisanGame</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Asterix</span><span class="o">-</span><span class="n">Sms</span>                                       <span class="n">GhostsnGoblins</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">Satellite7</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">Asterix</span><span class="o">-</span><span class="n">Snes</span>                                      <span class="n">GhoulSchool</span><span class="o">-</span><span class="n">Nes</span>                                       <span class="n">Seaquest</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">AsterixAndObelix</span><span class="o">-</span><span class="n">GameBoy</span>                          <span class="n">GhoulsnGhosts</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">SecondSamurai</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AsterixAndTheGreatRescue</span><span class="o">-</span><span class="n">Genesis</span>                  <span class="n">Gimmick</span><span class="o">-</span><span class="n">Nes</span>                                           <span class="n">SectionZ</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AsterixAndTheGreatRescue</span><span class="o">-</span><span class="n">Sms</span>                      <span class="n">GlobalDefense</span><span class="o">-</span><span class="n">Sms</span>                                     <span class="n">Seicross</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AsterixAndThePowerOfTheGods</span><span class="o">-</span><span class="n">Genesis</span>               <span class="n">GlobalGladiators</span><span class="o">-</span><span class="n">Genesis</span>                              <span class="n">SeikimaIIAkumaNoGyakushuu</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AsterixAndTheSecretMission</span><span class="o">-</span><span class="n">Sms</span>                    <span class="n">Gods</span><span class="o">-</span><span class="n">Genesis</span>                                          <span class="n">SenjouNoOokamiIIMercs</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Asteroids</span><span class="o">-</span><span class="n">Atari2600</span>                               <span class="n">Gods</span><span class="o">-</span><span class="n">Snes</span>                                             <span class="n">ShadowDancerTheSecretOfShinobi</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Asteroids</span><span class="o">-</span><span class="n">GameBoy</span>                                 <span class="n">GokujouParodius</span><span class="o">-</span><span class="n">Snes</span>                                  <span class="n">ShadowOfTheBeast</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AstroRabby</span><span class="o">-</span><span class="n">GameBoy</span>                                <span class="n">GoldenAxe</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">ShaqFu</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AstroRoboSasa</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">GoldenAxeIII</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">Shatterhand</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AstroWarrior</span><span class="o">-</span><span class="n">Sms</span>                                  <span class="n">Gopher</span><span class="o">-</span><span class="n">Atari2600</span>                                      <span class="n">Shinobi</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">Astyanax</span><span class="o">-</span><span class="n">Nes</span>                                      <span class="n">Gradius</span><span class="o">-</span><span class="n">Nes</span>                                           <span class="n">ShinobiIIIReturnOfTheNinjaMaster</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Athena</span><span class="o">-</span><span class="n">Nes</span>                                        <span class="n">GradiusII</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">SilverSurfer</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Atlantis</span><span class="o">-</span><span class="n">Atari2600</span>                                <span class="n">GradiusIII</span><span class="o">-</span><span class="n">Snes</span>                                       <span class="n">SimpsonsBartVsTheSpaceMutants</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AtlantisNoNazo</span><span class="o">-</span><span class="n">Nes</span>                                <span class="n">GradiusTheInterstellarAssault</span><span class="o">-</span><span class="n">GameBoy</span>                 <span class="n">SimpsonsBartVsTheSpaceMutants</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AtomicRoboKid</span><span class="o">-</span><span class="n">Genesis</span>                             <span class="n">Granada</span><span class="o">-</span><span class="n">Genesis</span>                                       <span class="n">SimpsonsBartVsTheWorld</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AtomicRunner</span><span class="o">-</span><span class="n">Genesis</span>                              <span class="n">Gravitar</span><span class="o">-</span><span class="n">Atari2600</span>                                    <span class="n">SimpsonsBartmanMeetsRadioactiveMan</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AttackAnimalGakuen</span><span class="o">-</span><span class="n">Nes</span>                            <span class="n">GreatCircusMysteryStarringMickeyAndMinnie</span><span class="o">-</span><span class="n">Genesis</span>     <span class="n">SkeletonKrew</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">AttackOfTheKillerTomatoes</span><span class="o">-</span><span class="n">GameBoy</span>                 <span class="n">GreatCircusMysteryStarringMickeyAndMinnie</span><span class="o">-</span><span class="n">Snes</span>        <span class="n">Skiing</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">AttackOfTheKillerTomatoes</span><span class="o">-</span><span class="n">Nes</span>                     <span class="n">GreatTank</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">SkuljaggerRevoltOfTheWesticans</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">AwesomePossumKicksDrMachinosButt</span><span class="o">-</span><span class="n">Genesis</span>          <span class="n">GreatWaldoSearch</span><span class="o">-</span><span class="n">Genesis</span>                              <span class="n">SkyDestroyer</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Axelay</span><span class="o">-</span><span class="n">Snes</span>                                       <span class="n">GreendogTheBeachedSurferDude</span><span class="o">-</span><span class="n">Genesis</span>                  <span class="n">SkyKid</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">AyrtonSennasSuperMonacoGPII</span><span class="o">-</span><span class="n">Genesis</span>               <span class="n">Gremlins2TheNewBatch</span><span class="o">-</span><span class="n">Nes</span>                              <span class="n">SkyShark</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BOB</span><span class="o">-</span><span class="n">Genesis</span>                                       <span class="n">GrindStormer</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">SmartBall</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BOB</span><span class="o">-</span><span class="n">Snes</span>                                          <span class="n">Growl</span><span class="o">-</span><span class="n">Genesis</span>                                         <span class="n">SmashTV</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BWings</span><span class="o">-</span><span class="n">Nes</span>                                        <span class="n">GuardianLegend</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">Smurfs</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BackToTheFuturePartIII</span><span class="o">-</span><span class="n">Genesis</span>                    <span class="n">GuerrillaWar</span><span class="o">-</span><span class="n">Nes</span>                                      <span class="n">Smurfs</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BadDudes</span><span class="o">-</span><span class="n">Nes</span>                                      <span class="n">GunNac</span><span class="o">-</span><span class="n">Nes</span>                                            <span class="n">Smurfs</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BadStreetBrawler</span><span class="o">-</span><span class="n">Nes</span>                              <span class="n">Gunship</span><span class="o">-</span><span class="n">Genesis</span>                                       <span class="n">SnakeRattleNRoll</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BakuretsuSenshiWarrior</span><span class="o">-</span><span class="n">GameBoy</span>                    <span class="n">Gynoug</span><span class="o">-</span><span class="n">Genesis</span>                                        <span class="n">SnowBrothers</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BalloonFight</span><span class="o">-</span><span class="n">Nes</span>                                  <span class="n">Gyrodine</span><span class="o">-</span><span class="n">Nes</span>                                          <span class="n">Socket</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BalloonKid</span><span class="o">-</span><span class="n">GameBoy</span>                                <span class="n">Gyruss</span><span class="o">-</span><span class="n">Nes</span>                                            <span class="n">SolDeace</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Baltron</span><span class="o">-</span><span class="n">Nes</span>                                       <span class="n">HammerinHarry</span><span class="o">-</span><span class="n">Nes</span>                                     <span class="n">Solaris</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">BananaPrince</span><span class="o">-</span><span class="n">Nes</span>                                  <span class="n">HangOn</span><span class="o">-</span><span class="n">Sms</span>                                            <span class="n">SoldiersOfFortune</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BanishingRacer</span><span class="o">-</span><span class="n">GameBoy</span>                            <span class="n">HardDrivin</span><span class="o">-</span><span class="n">Genesis</span>                                    <span class="n">SonSon</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BankHeist</span><span class="o">-</span><span class="n">Atari2600</span>                               <span class="n">HarleysHumongousAdventure</span><span class="o">-</span><span class="n">Snes</span>                        <span class="n">SonicAndKnuckles</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Barbie</span><span class="o">-</span><span class="n">Nes</span>                                        <span class="n">Havoc</span><span class="o">-</span><span class="n">Genesis</span>                                         <span class="n">SonicAndKnuckles3</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BarkleyShutUpAndJam</span><span class="o">-</span><span class="n">Genesis</span>                       <span class="n">HeavyBarrel</span><span class="o">-</span><span class="n">Nes</span>                                       <span class="n">SonicBlast</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">BarkleyShutUpAndJam2</span><span class="o">-</span><span class="n">Genesis</span>                      <span class="n">HeavyNova</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">SonicBlastMan</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BarneysHideAndSeekGame</span><span class="o">-</span><span class="n">Genesis</span>                    <span class="n">HeavyUnitMegaDriveSpecial</span><span class="o">-</span><span class="n">Genesis</span>                     <span class="n">SonicBlastManII</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BartSimpsonsEscapeFromCampDeadly</span><span class="o">-</span><span class="n">GameBoy</span>          <span class="n">Hellfire</span><span class="o">-</span><span class="n">Genesis</span>                                      <span class="n">SonicTheHedgehog</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Batman</span><span class="o">-</span><span class="n">Genesis</span>                                    <span class="n">HelloKittyWorld</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">SonicTheHedgehog</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">BatmanReturns</span><span class="o">-</span><span class="n">Genesis</span>                             <span class="n">Hero</span><span class="o">-</span><span class="n">Atari2600</span>                                        <span class="n">SonicTheHedgehog2</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BatmanReturns</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">HighStakesGambling</span><span class="o">-</span><span class="n">GameBoy</span>                            <span class="n">SonicTheHedgehog2</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">BatmanReturns</span><span class="o">-</span><span class="n">Snes</span>                                <span class="n">HomeAlone</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">SonicTheHedgehog3</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BattleArenaToshinden</span><span class="o">-</span><span class="n">GameBoy</span>                      <span class="n">HomeAlone2LostInNewYork</span><span class="o">-</span><span class="n">Genesis</span>                       <span class="n">SonicTheHedgehogRandomLevels</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BattleBull</span><span class="o">-</span><span class="n">GameBoy</span>                                <span class="n">HomeAlone2LostInNewYork</span><span class="o">-</span><span class="n">Nes</span>                           <span class="n">SonicWings</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BattleCity</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">Hook</span><span class="o">-</span><span class="n">Genesis</span>                                          <span class="n">SpaceHarrier</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BattleMasterKyuukyokuNoSenshiTachi</span><span class="o">-</span><span class="n">Snes</span>           <span class="n">Hook</span><span class="o">-</span><span class="n">Snes</span>                                             <span class="n">SpaceHarrier</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">BattleSquadron</span><span class="o">-</span><span class="n">Genesis</span>                            <span class="n">HuntForRedOctober</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">SpaceHarrier3D</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">BattleTechAGameOfArmoredCombat</span><span class="o">-</span><span class="n">Genesis</span>            <span class="n">HuntForRedOctober</span><span class="o">-</span><span class="n">Snes</span>                                <span class="n">SpaceHarrierII</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BattleUnitZeoth</span><span class="o">-</span><span class="n">GameBoy</span>                           <span class="n">Hurricanes</span><span class="o">-</span><span class="n">Genesis</span>                                    <span class="n">SpaceInvaders</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">BattleZequeDen</span><span class="o">-</span><span class="n">Snes</span>                               <span class="n">Hurricanes</span><span class="o">-</span><span class="n">Snes</span>                                       <span class="n">SpaceInvaders</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BattleZone</span><span class="o">-</span><span class="n">Atari2600</span>                              <span class="n">IMGInternationalTourTennis</span><span class="o">-</span><span class="n">Genesis</span>                    <span class="n">SpaceInvaders</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">Battletoads</span><span class="o">-</span><span class="n">Genesis</span>                               <span class="n">IceClimber</span><span class="o">-</span><span class="n">Nes</span>                                        <span class="n">SpaceInvaders91</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Battletoads</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">IceHockey</span><span class="o">-</span><span class="n">Atari2600</span>                                   <span class="n">SpaceMegaforce</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BattletoadsDoubleDragon</span><span class="o">-</span><span class="n">Genesis</span>                   <span class="n">Ikari</span><span class="o">-</span><span class="n">Nes</span>                                             <span class="n">SpankysQuest</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BattletoadsDoubleDragon</span><span class="o">-</span><span class="n">Snes</span>                      <span class="n">IkariIIITheRescue</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">Sparkster</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BattletoadsInBattlemaniacs</span><span class="o">-</span><span class="n">Snes</span>                   <span class="n">Ikki</span><span class="o">-</span><span class="n">Nes</span>                                              <span class="n">Sparkster</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BattletoadsInRagnaroksWorld</span><span class="o">-</span><span class="n">GameBoy</span>               <span class="n">Imperium</span><span class="o">-</span><span class="n">Snes</span>                                         <span class="n">SpartanX2</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BeamRider</span><span class="o">-</span><span class="n">Atari2600</span>                               <span class="n">Incantation</span><span class="o">-</span><span class="n">Snes</span>                                      <span class="n">SpeedyGonzalesLosGatosBandidos</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BeautyAndTheBeastBellesQuest</span><span class="o">-</span><span class="n">Genesis</span>              <span class="n">IncredibleCrashDummies</span><span class="o">-</span><span class="n">Genesis</span>                        <span class="n">Spelunker</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BeautyAndTheBeastRoarOfTheBeast</span><span class="o">-</span><span class="n">Genesis</span>           <span class="n">IncredibleHulk</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">SpiderManReturnOfTheSinisterSix</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">BebesKids</span><span class="o">-</span><span class="n">Snes</span>                                    <span class="n">IncredibleHulk</span><span class="o">-</span><span class="n">Sms</span>                                    <span class="n">Splatterhouse2</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Berzerk</span><span class="o">-</span><span class="n">Atari2600</span>                                 <span class="n">IncredibleHulk</span><span class="o">-</span><span class="n">Snes</span>                                   <span class="n">SpotGoesToHollywood</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BillAndTedsExcellentGameBoyAdventure</span><span class="o">-</span><span class="n">GameBoy</span>      <span class="n">IndianaJonesAndTheLastCrusade</span><span class="o">-</span><span class="n">Genesis</span>                 <span class="n">SprigganPowered</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BiminiRun</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">IndianaJonesAndTheTempleOfDoom</span><span class="o">-</span><span class="n">Nes</span>                    <span class="n">SpyHunter</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BinaryLand</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">InsectorX</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">Sqoon</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BioHazardBattle</span><span class="o">-</span><span class="n">Genesis</span>                           <span class="n">InsectorX</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">StarForce</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BioMetal</span><span class="o">-</span><span class="n">Snes</span>                                     <span class="n">InspectorGadget</span><span class="o">-</span><span class="n">Snes</span>                                  <span class="n">StarGunner</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">BioMiracleBokutteUpa</span><span class="o">-</span><span class="n">Nes</span>                          <span class="n">IronSwordWizardsAndWarriorsII</span><span class="o">-</span><span class="n">Nes</span>                     <span class="n">StarSoldier</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BioSenshiDanIncreaserTonoTatakai</span><span class="o">-</span><span class="n">Nes</span>              <span class="n">IshidoTheWayOfStones</span><span class="o">-</span><span class="n">Genesis</span>                          <span class="n">StarWars</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BirdWeek</span><span class="o">-</span><span class="n">Nes</span>                                      <span class="n">IsolatedWarrior</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">StarshipHector</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BishoujoSenshiSailorMoon</span><span class="o">-</span><span class="n">Genesis</span>                  <span class="n">ItchyAndScratchyGame</span><span class="o">-</span><span class="n">Snes</span>                             <span class="n">SteelEmpire</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BishoujoSenshiSailorMoonR</span><span class="o">-</span><span class="n">Snes</span>                    <span class="n">IzzysQuestForTheOlympicRings</span><span class="o">-</span><span class="n">Genesis</span>                  <span class="n">SteelTalons</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BlaZeonTheBioCyborgChallenge</span><span class="o">-</span><span class="n">Snes</span>                 <span class="n">IzzysQuestForTheOlympicRings</span><span class="o">-</span><span class="n">Snes</span>                     <span class="n">Stinger</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BladeEagle</span><span class="o">-</span><span class="n">Sms</span>                                    <span class="n">Jackal</span><span class="o">-</span><span class="n">Nes</span>                                            <span class="n">StoneProtectors</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BladesOfVengeance</span><span class="o">-</span><span class="n">Genesis</span>                         <span class="n">JackieChansActionKungFu</span><span class="o">-</span><span class="n">Nes</span>                           <span class="n">Stormlord</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BlockKuzushi</span><span class="o">-</span><span class="n">Snes</span>                                 <span class="n">JajamaruNoDaibouken</span><span class="o">-</span><span class="n">Nes</span>                               <span class="n">StreetFighterIISpecialChampionEdition</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BlockKuzushiGB</span><span class="o">-</span><span class="n">GameBoy</span>                            <span class="n">JamesBond007TheDuel</span><span class="o">-</span><span class="n">Genesis</span>                           <span class="n">StreetSmart</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Blockout</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">JamesBond007TheDuel</span><span class="o">-</span><span class="n">Sms</span>                               <span class="n">StreetsOfRage</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BodyCount</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">JamesBondJr</span><span class="o">-</span><span class="n">Nes</span>                                       <span class="n">StreetsOfRage2</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BombJack</span><span class="o">-</span><span class="n">GameBoy</span>                                  <span class="n">JamesPond2CodenameRoboCod</span><span class="o">-</span><span class="n">Sms</span>                         <span class="n">StreetsOfRage3</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BomberRaid</span><span class="o">-</span><span class="n">Sms</span>                                    <span class="n">JamesPond3</span><span class="o">-</span><span class="n">Genesis</span>                                    <span class="n">StreetsOfRageII</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">BonkersWaxUp</span><span class="o">-</span><span class="n">Sms</span>                                  <span class="n">JamesPondIICodenameRobocod</span><span class="o">-</span><span class="n">Genesis</span>                    <span class="n">Strider</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BoobyBoys</span><span class="o">-</span><span class="n">GameBoy</span>                                 <span class="n">JamesPondUnderwaterAgent</span><span class="o">-</span><span class="n">Genesis</span>                      <span class="n">SubTerrania</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BoobyKids</span><span class="o">-</span><span class="n">Nes</span>                                     <span class="n">Jamesbond</span><span class="o">-</span><span class="n">Atari2600</span>                                   <span class="n">SubmarineAttack</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">BoogermanAPickAndFlickAdventure</span><span class="o">-</span><span class="n">Genesis</span>           <span class="n">Jaws</span><span class="o">-</span><span class="n">Nes</span>                                              <span class="n">SunsetRiders</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BoogermanAPickAndFlickAdventure</span><span class="o">-</span><span class="n">Snes</span>              <span class="n">JellyBoy</span><span class="o">-</span><span class="n">Snes</span>                                         <span class="n">SuperAdventureIsland</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BoogieWoogieBowling</span><span class="o">-</span><span class="n">Genesis</span>                       <span class="n">JetsonsCogswellsCaper</span><span class="o">-</span><span class="n">Nes</span>                             <span class="n">SuperAlfredChicken</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BoulderDash</span><span class="o">-</span><span class="n">GameBoy</span>                               <span class="n">JetsonsInvasionOfThePlanetPirates</span><span class="o">-</span><span class="n">Snes</span>                <span class="n">SuperArabian</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BoulderDash</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">JewelMaster</span><span class="o">-</span><span class="n">Genesis</span>                                   <span class="n">SuperBCKid</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">Bowling</span><span class="o">-</span><span class="n">Atari2600</span>                                 <span class="n">JoeAndMac</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">SuperC</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Boxing</span><span class="o">-</span><span class="n">Atari2600</span>                                  <span class="n">JoeAndMac</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">SuperCastlevaniaIV</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BoxingLegendsOfTheRing</span><span class="o">-</span><span class="n">Genesis</span>                    <span class="n">JoeAndMac</span><span class="o">-</span><span class="n">Snes</span>                                        <span class="n">SuperDoubleDragon</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BramStokersDracula</span><span class="o">-</span><span class="n">Genesis</span>                        <span class="n">JoeAndMac2LostInTheTropics</span><span class="o">-</span><span class="n">Snes</span>                       <span class="n">SuperFantasyZone</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BramStokersDracula</span><span class="o">-</span><span class="n">Nes</span>                            <span class="n">JourneyEscape</span><span class="o">-</span><span class="n">Atari2600</span>                               <span class="n">SuperGhoulsnGhosts</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BramStokersDracula</span><span class="o">-</span><span class="n">Snes</span>                           <span class="n">JourneyToSilius</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">SuperHangOn</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BrawlBrothers</span><span class="o">-</span><span class="n">Snes</span>                                <span class="n">Joust</span><span class="o">-</span><span class="n">Nes</span>                                             <span class="n">SuperJamesPond</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BreakThru</span><span class="o">-</span><span class="n">Nes</span>                                     <span class="n">JuJuDensetsuTokiGoingApeSpit</span><span class="o">-</span><span class="n">Genesis</span>                  <span class="n">SuperMarioBros</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Breakout</span><span class="o">-</span><span class="n">Atari2600</span>                                <span class="n">JudgeDredd</span><span class="o">-</span><span class="n">Genesis</span>                                    <span class="n">SuperMarioBros2Japan</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BronkieTheBronchiasaurus</span><span class="o">-</span><span class="n">Snes</span>                     <span class="n">JudgeDredd</span><span class="o">-</span><span class="n">Snes</span>                                       <span class="n">SuperMarioBros3</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BubbaNStix</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">JungleBook</span><span class="o">-</span><span class="n">Genesis</span>                                    <span class="n">SuperMarioWorld</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BubbleAndSqueak</span><span class="o">-</span><span class="n">Genesis</span>                           <span class="n">JungleBook</span><span class="o">-</span><span class="n">Nes</span>                                        <span class="n">SuperMarioWorld2</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BubbleBobble</span><span class="o">-</span><span class="n">Nes</span>                                  <span class="n">JungleBook</span><span class="o">-</span><span class="n">Snes</span>                                       <span class="n">SuperPitfall</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BubbleBobble</span><span class="o">-</span><span class="n">Sms</span>                                  <span class="n">JusticeLeagueTaskForce</span><span class="o">-</span><span class="n">Genesis</span>                        <span class="n">SuperRType</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BubbleBobblePart2</span><span class="o">-</span><span class="n">Nes</span>                             <span class="n">KaGeKiFistsOfSteel</span><span class="o">-</span><span class="n">Genesis</span>                            <span class="n">SuperSWIV</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BubbleGhost</span><span class="o">-</span><span class="n">GameBoy</span>                               <span class="n">Kaboom</span><span class="o">-</span><span class="n">Atari2600</span>                                      <span class="n">SuperSmashTV</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BubsyII</span><span class="o">-</span><span class="n">Genesis</span>                                   <span class="n">KabukiQuantumFighter</span><span class="o">-</span><span class="n">Nes</span>                              <span class="n">SuperSmashTV</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BubsyII</span><span class="o">-</span><span class="n">Snes</span>                                      <span class="n">KaiketsuYanchaMaru2KarakuriLand</span><span class="o">-</span><span class="n">Nes</span>                   <span class="n">SuperSpaceInvaders</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">BubsyInClawsEncountersOfTheFurredKind</span><span class="o">-</span><span class="n">Genesis</span>     <span class="n">KaiketsuYanchaMaru3TaiketsuZouringen</span><span class="o">-</span><span class="n">Nes</span>              <span class="n">SuperStarForce</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">BubsyInClawsEncountersOfTheFurredKind</span><span class="o">-</span><span class="n">Snes</span>        <span class="n">KaiteTsukutteAsoberuDezaemon</span><span class="o">-</span><span class="n">Snes</span>                     <span class="n">SuperStarWars</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BuckyOHare</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">KamenNoNinjaAkakage</span><span class="o">-</span><span class="n">Nes</span>                               <span class="n">SuperStarWarsReturnOfTheJedi</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BugsBunnyBirthdayBlowout</span><span class="o">-</span><span class="n">Nes</span>                      <span class="n">Kangaroo</span><span class="o">-</span><span class="n">Atari2600</span>                                    <span class="n">SuperStarWarsTheEmpireStrikesBack</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BullsVersusBlazersAndTheNBAPlayoffs</span><span class="o">-</span><span class="n">Genesis</span>       <span class="n">KanshakudamaNageKantarouNoToukaidouGojuusanTsugi</span><span class="o">-</span><span class="n">Nes</span>  <span class="n">SuperStrikeGunner</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BullsVsLakersAndTheNBAPlayoffs</span><span class="o">-</span><span class="n">Genesis</span>            <span class="n">KeroppiToKeroriinuNoSplashBomb</span><span class="o">-</span><span class="n">Nes</span>                    <span class="n">SuperThunderBlade</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">BuraiFighter</span><span class="o">-</span><span class="n">Nes</span>                                  <span class="n">KidChameleon</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">SuperTrollIslands</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">BurningForce</span><span class="o">-</span><span class="n">Genesis</span>                              <span class="n">KidIcarus</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">SuperTurrican</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">CacomaKnightInBizyland</span><span class="o">-</span><span class="n">Snes</span>                       <span class="n">KidKlownInCrazyChase</span><span class="o">-</span><span class="n">Snes</span>                             <span class="n">SuperTurrican2</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">Cadash</span><span class="o">-</span><span class="n">Genesis</span>                                    <span class="n">KidKlownInNightMayorWorld</span><span class="o">-</span><span class="n">Nes</span>                         <span class="n">SuperValisIV</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">CalRipkenJrBaseball</span><span class="o">-</span><span class="n">Genesis</span>                       <span class="n">KidNikiRadicalNinja</span><span class="o">-</span><span class="n">Nes</span>                               <span class="n">SuperWidget</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">Caliber50</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">KingOfDragons</span><span class="o">-</span><span class="n">Snes</span>                                    <span class="n">SuperWonderBoy</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">CaliforniaGames</span><span class="o">-</span><span class="n">Genesis</span>                           <span class="n">KingOfTheMonsters2</span><span class="o">-</span><span class="n">Genesis</span>                            <span class="n">SuperXeviousGumpNoNazo</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Cameltry</span><span class="o">-</span><span class="n">Snes</span>                                     <span class="n">KingOfTheMonsters2</span><span class="o">-</span><span class="n">Snes</span>                               <span class="n">Superman</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CannonFodder</span><span class="o">-</span><span class="n">Genesis</span>                              <span class="n">KirbysAdventure</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">SupermanTheManOfSteel</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">CannonFodder</span><span class="o">-</span><span class="n">Snes</span>                                 <span class="n">KnightsOfTheRound</span><span class="o">-</span><span class="n">Snes</span>                                <span class="n">SwampThing</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CaptainAmericaAndTheAvengers</span><span class="o">-</span><span class="n">Genesis</span>              <span class="n">Krull</span><span class="o">-</span><span class="n">Atari2600</span>                                       <span class="n">SwordOfSodan</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CaptainAmericaAndTheAvengers</span><span class="o">-</span><span class="n">Nes</span>                  <span class="n">KungFu</span><span class="o">-</span><span class="n">Nes</span>                                            <span class="n">SydOfValis</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CaptainAmericaAndTheAvengers</span><span class="o">-</span><span class="n">Snes</span>                 <span class="n">KungFuHeroes</span><span class="o">-</span><span class="n">Nes</span>                                      <span class="n">SylvesterAndTweetyInCageyCapers</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CaptainCommando</span><span class="o">-</span><span class="n">Snes</span>                              <span class="n">KungFuKid</span><span class="o">-</span><span class="n">Sms</span>                                         <span class="n">T2TheArcadeGame</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CaptainPlanetAndThePlaneteers</span><span class="o">-</span><span class="n">Genesis</span>             <span class="n">KungFuMaster</span><span class="o">-</span><span class="n">Atari2600</span>                                <span class="n">T2TheArcadeGame</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">CaptainPlanetAndThePlaneteers</span><span class="o">-</span><span class="n">Nes</span>                 <span class="n">LandOfIllusionStarringMickeyMouse</span><span class="o">-</span><span class="n">Sms</span>                 <span class="n">TaiyouNoYuushaFighbird</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CaptainSilver</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">LastActionHero</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">TakahashiMeijinNoBugutteHoney</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Carnival</span><span class="o">-</span><span class="n">Atari2600</span>                                <span class="n">LastActionHero</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">TargetEarth</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Castelian</span><span class="o">-</span><span class="n">Nes</span>                                     <span class="n">LastActionHero</span><span class="o">-</span><span class="n">Snes</span>                                   <span class="n">TargetRenegade</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CastleOfIllusion</span><span class="o">-</span><span class="n">Genesis</span>                          <span class="n">LastBattle</span><span class="o">-</span><span class="n">Genesis</span>                                    <span class="n">TaskForceHarrierEX</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Castlevania</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">LastStarfighter</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">TazMania</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CastlevaniaBloodlines</span><span class="o">-</span><span class="n">Genesis</span>                     <span class="n">LawnmowerMan</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">TazMania</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">CastlevaniaDraculaX</span><span class="o">-</span><span class="n">Snes</span>                          <span class="n">Legend</span><span class="o">-</span><span class="n">Snes</span>                                           <span class="n">TazMania</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">CastlevaniaIIIDraculasCurse</span><span class="o">-</span><span class="n">Nes</span>                   <span class="n">LegendOfGalahad</span><span class="o">-</span><span class="n">Genesis</span>                               <span class="n">TeenageMutantNinjaTurtles</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CastlevaniaTheNewGeneration</span><span class="o">-</span><span class="n">Genesis</span>               <span class="n">LegendOfKage</span><span class="o">-</span><span class="n">Nes</span>                                      <span class="n">TeenageMutantNinjaTurtlesIIITheManhattanProject</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CatNindenTeyandee</span><span class="o">-</span><span class="n">Nes</span>                             <span class="n">LegendOfPrinceValiant</span><span class="o">-</span><span class="n">Nes</span>                             <span class="n">TeenageMutantNinjaTurtlesIITheArcadeGame</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Centipede</span><span class="o">-</span><span class="n">Atari2600</span>                               <span class="n">LegendaryWings</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">TeenageMutantNinjaTurtlesIVTurtlesInTime</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">ChacknPop</span><span class="o">-</span><span class="n">Nes</span>                                     <span class="n">LethalEnforcers</span><span class="o">-</span><span class="n">Genesis</span>                               <span class="n">TeenageMutantNinjaTurtlesTheHyperstoneHeist</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Challenger</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">LethalEnforcersIIGunFighters</span><span class="o">-</span><span class="n">Genesis</span>                  <span class="n">TeenageMutantNinjaTurtlesTournamentFighters</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">ChampionsWorldClassSoccer</span><span class="o">-</span><span class="n">Genesis</span>                 <span class="n">LethalWeapon</span><span class="o">-</span><span class="n">Snes</span>                                     <span class="n">TeenageMutantNinjaTurtlesTournamentFighters</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ChampionshipProAm</span><span class="o">-</span><span class="n">Genesis</span>                         <span class="n">LifeForce</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">Tennis</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">ChaosEngine</span><span class="o">-</span><span class="n">Genesis</span>                               <span class="n">LineOfFire</span><span class="o">-</span><span class="n">Sms</span>                                        <span class="n">Terminator</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">ChaseHQII</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">LittleMermaid</span><span class="o">-</span><span class="n">Nes</span>                                     <span class="n">Terminator</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">CheeseCatAstropheStarringSpeedyGonzales</span><span class="o">-</span><span class="n">Genesis</span>   <span class="n">LowGManTheLowGravityMan</span><span class="o">-</span><span class="n">Nes</span>                           <span class="n">Terminator2JudgmentDay</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CheeseCatAstropheStarringSpeedyGonzales</span><span class="o">-</span><span class="n">Sms</span>       <span class="n">LuckyDimeCaperStarringDonaldDuck</span><span class="o">-</span><span class="n">Sms</span>                  <span class="n">TerraCresta</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ChesterCheetahTooCoolToFool</span><span class="o">-</span><span class="n">Genesis</span>               <span class="n">MCKids</span><span class="o">-</span><span class="n">Nes</span>                                            <span class="n">TetrastarTheFighter</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ChesterCheetahTooCoolToFool</span><span class="o">-</span><span class="n">Snes</span>                  <span class="n">MUSHA</span><span class="o">-</span><span class="n">Genesis</span>                                         <span class="n">Tetris</span><span class="o">-</span><span class="n">GameBoy</span>
+<span class="n">ChesterCheetahWildWildQuest</span><span class="o">-</span><span class="n">Genesis</span>               <span class="n">MagicBoy</span><span class="o">-</span><span class="n">Snes</span>                                         <span class="n">TetrisAttack</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">ChesterCheetahWildWildQuest</span><span class="o">-</span><span class="n">Snes</span>                  <span class="n">MagicSword</span><span class="o">-</span><span class="n">Snes</span>                                       <span class="n">TetsuwanAtom</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ChiChisProChallengeGolf</span><span class="o">-</span><span class="n">Genesis</span>                   <span class="n">MagicalQuestStarringMickeyMouse</span><span class="o">-</span><span class="n">Snes</span>                  <span class="n">Thexder</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ChikiChikiBoys</span><span class="o">-</span><span class="n">Genesis</span>                            <span class="n">MagicalTaruruutoKun</span><span class="o">-</span><span class="n">Genesis</span>                           <span class="n">ThunderAndLightning</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Choplifter</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">Magmax</span><span class="o">-</span><span class="n">Nes</span>                                            <span class="n">ThunderBlade</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">ChoplifterIIIRescueSurvive</span><span class="o">-</span><span class="n">Snes</span>                   <span class="n">MaouRenjishi</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">ThunderForceII</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">ChopperCommand</span><span class="o">-</span><span class="n">Atari2600</span>                          <span class="n">MappyLand</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">ThunderForceIII</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">ChouFuyuuYousaiExedExes</span><span class="o">-</span><span class="n">Nes</span>                       <span class="n">MarbleMadness</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">ThunderForceIV</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">ChoujikuuYousaiMacross</span><span class="o">-</span><span class="n">Nes</span>                        <span class="n">MarbleMadness</span><span class="o">-</span><span class="n">Sms</span>                                     <span class="n">ThunderFox</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">ChoujikuuYousaiMacrossScrambledValkyrie</span><span class="o">-</span><span class="n">Snes</span>      <span class="n">MarioBros</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">ThunderSpirits</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">ChubbyCherub</span><span class="o">-</span><span class="n">Nes</span>                                  <span class="n">Marko</span><span class="o">-</span><span class="n">Genesis</span>                                         <span class="n">Thundercade</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ChuckRock</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">Marsupilami</span><span class="o">-</span><span class="n">Genesis</span>                                   <span class="n">Tick</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">ChuckRock</span><span class="o">-</span><span class="n">Sms</span>                                     <span class="n">MarvelLand</span><span class="o">-</span><span class="n">Genesis</span>                                    <span class="n">Tick</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">ChuckRock</span><span class="o">-</span><span class="n">Snes</span>                                    <span class="n">Mask</span><span class="o">-</span><span class="n">Snes</span>                                             <span class="n">TigerHeli</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ChuckRockIISonOfChuck</span><span class="o">-</span><span class="n">Genesis</span>                     <span class="n">MasterOfDarkness</span><span class="o">-</span><span class="n">Sms</span>                                  <span class="n">TimePilot</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">ChuckRockIISonOfChuck</span><span class="o">-</span><span class="n">Sms</span>                         <span class="n">McDonaldsTreasureLandAdventure</span><span class="o">-</span><span class="n">Genesis</span>                <span class="n">TimeZone</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CircusCaper</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">MechanizedAttack</span><span class="o">-</span><span class="n">Nes</span>                                  <span class="n">TinHead</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CircusCharlie</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">MegaMan</span><span class="o">-</span><span class="n">Nes</span>                                           <span class="n">TinyToonAdventures</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CityConnection</span><span class="o">-</span><span class="n">Nes</span>                                <span class="n">MegaMan2</span><span class="o">-</span><span class="n">Nes</span>                                          <span class="n">TinyToonAdventuresBusterBustsLoose</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">ClayFighter</span><span class="o">-</span><span class="n">Genesis</span>                               <span class="n">MegaManTheWilyWars</span><span class="o">-</span><span class="n">Genesis</span>                            <span class="n">TinyToonAdventuresBustersHiddenTreasure</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Claymates</span><span class="o">-</span><span class="n">Snes</span>                                    <span class="n">MegaSWIV</span><span class="o">-</span><span class="n">Genesis</span>                                      <span class="n">Toki</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Cliffhanger</span><span class="o">-</span><span class="n">Genesis</span>                               <span class="n">MegaTurrican</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">TomAndJerry</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">Cliffhanger</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">MendelPalace</span><span class="o">-</span><span class="n">Nes</span>                                      <span class="n">TotalRecall</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Cliffhanger</span><span class="o">-</span><span class="n">Snes</span>                                  <span class="n">MetalStorm</span><span class="o">-</span><span class="n">Nes</span>                                        <span class="n">TotallyRad</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CloudMaster</span><span class="o">-</span><span class="n">Sms</span>                                   <span class="n">MichaelJacksonsMoonwalker</span><span class="o">-</span><span class="n">Genesis</span>                     <span class="n">ToxicCrusaders</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CluCluLand</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">MichaelJacksonsMoonwalker</span><span class="o">-</span><span class="n">Sms</span>                         <span class="n">ToxicCrusaders</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CobraTriangle</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">MickeyMousecapade</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">TrampolineTerror</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CodeNameViper</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">MidnightResistance</span><span class="o">-</span><span class="n">Genesis</span>                            <span class="n">TransBot</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">CollegeSlam</span><span class="o">-</span><span class="n">Genesis</span>                               <span class="n">MightyBombJack</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">TreasureMaster</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Columns</span><span class="o">-</span><span class="n">Genesis</span>                                   <span class="n">MightyFinalFight</span><span class="o">-</span><span class="n">Nes</span>                                  <span class="n">Trog</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ColumnsIII</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">MightyMorphinPowerRangers</span><span class="o">-</span><span class="n">Genesis</span>                     <span class="n">Trojan</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CombatCars</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">MightyMorphinPowerRangersTheMovie</span><span class="o">-</span><span class="n">Genesis</span>             <span class="n">TrollsInCrazyland</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ComicalMachineGunJoe</span><span class="o">-</span><span class="n">Sms</span>                          <span class="n">MightyMorphinPowerRangersTheMovie</span><span class="o">-</span><span class="n">Snes</span>                <span class="n">TroubleShooter</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">ComixZone</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">Millipede</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">Truxton</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Conan</span><span class="o">-</span><span class="n">Nes</span>                                         <span class="n">MitsumeGaTooru</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">Turrican</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CongosCaper</span><span class="o">-</span><span class="n">Snes</span>                                  <span class="n">MoeroTwinBeeCinnamonHakaseOSukue</span><span class="o">-</span><span class="n">Nes</span>                  <span class="n">Tutankham</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">ConquestOfTheCrystalPalace</span><span class="o">-</span><span class="n">Nes</span>                    <span class="n">MonsterInMyPocket</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">TwinBee</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">ContraForce</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">MonsterLair</span><span class="o">-</span><span class="n">Genesis</span>                                   <span class="n">TwinBee3PokoPokoDaimaou</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CoolSpot</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">MonsterParty</span><span class="o">-</span><span class="n">Nes</span>                                      <span class="n">TwinCobra</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CoolSpot</span><span class="o">-</span><span class="n">Sms</span>                                      <span class="n">MontezumaRevenge</span><span class="o">-</span><span class="n">Atari2600</span>                            <span class="n">TwinCobraDesertAttackHelicopter</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CoolSpot</span><span class="o">-</span><span class="n">Snes</span>                                     <span class="n">MoonPatrol</span><span class="o">-</span><span class="n">Atari2600</span>                                  <span class="n">TwinEagle</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CosmicEpsilon</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">MortalKombat</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">TwinkleTale</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CosmoGangTheVideo</span><span class="o">-</span><span class="n">Snes</span>                            <span class="n">MortalKombat</span><span class="o">-</span><span class="n">SCD</span>                                      <span class="n">TwoCrudeDudes</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CrackDown</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">MortalKombat3</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">UNSquadron</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">CrazyClimber</span><span class="o">-</span><span class="n">Atari2600</span>                            <span class="n">MortalKombatII</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">UchuuNoKishiTekkamanBlade</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">CrossFire</span><span class="o">-</span><span class="n">Nes</span>                                     <span class="n">MrNutz</span><span class="o">-</span><span class="n">Genesis</span>                                        <span class="n">UndeadLine</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CrueBallHeavyMetalPinball</span><span class="o">-</span><span class="n">Genesis</span>                 <span class="n">MrNutz</span><span class="o">-</span><span class="n">Snes</span>                                           <span class="n">UniversalSoldier</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Curse</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">MsPacMan</span><span class="o">-</span><span class="n">Genesis</span>                                      <span class="n">Untouchables</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CutieSuzukiNoRingsideAngel</span><span class="o">-</span><span class="n">Genesis</span>                <span class="n">MsPacMan</span><span class="o">-</span><span class="n">Nes</span>                                          <span class="n">UpNDown</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">CutthroatIsland</span><span class="o">-</span><span class="n">Genesis</span>                           <span class="n">MsPacMan</span><span class="o">-</span><span class="n">Sms</span>                                          <span class="n">UrbanChampion</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">CyberShinobi</span><span class="o">-</span><span class="n">Sms</span>                                  <span class="n">MsPacman</span><span class="o">-</span><span class="n">Atari2600</span>                                    <span class="n">UruseiYatsuraLumNoWeddingBell</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Cyberball</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">MutantVirusCrisisInAComputerWorld</span><span class="o">-</span><span class="n">Nes</span>                 <span class="n">UzuKeobukseon</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">Cybernator</span><span class="o">-</span><span class="n">Snes</span>                                   <span class="n">MyHero</span><span class="o">-</span><span class="n">Sms</span>                                            <span class="n">VRTroopers</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">CyborgJustice</span><span class="o">-</span><span class="n">Genesis</span>                             <span class="n">MysteryQuest</span><span class="o">-</span><span class="n">Nes</span>                                      <span class="n">VaporTrail</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DJBoy</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">NARC</span><span class="o">-</span><span class="n">Nes</span>                                              <span class="n">Vectorman</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DaffyDuckInHollywood</span><span class="o">-</span><span class="n">Sms</span>                          <span class="n">NHL94</span><span class="o">-</span><span class="n">Genesis</span>                                         <span class="n">Vectorman2</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DaffyDuckTheMarvinMissions</span><span class="o">-</span><span class="n">Snes</span>                   <span class="n">NHL941on1</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">Venture</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">DaisenpuuTwinHawk</span><span class="o">-</span><span class="n">Genesis</span>                         <span class="n">NHL942on2</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">ViceProjectDoom</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DananTheJungleFighter</span><span class="o">-</span><span class="n">Sms</span>                         <span class="n">NameThisGame</span><span class="o">-</span><span class="n">Atari2600</span>                                <span class="n">VideoPinball</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">DangerousSeed</span><span class="o">-</span><span class="n">Genesis</span>                             <span class="n">NewZealandStory</span><span class="o">-</span><span class="n">Genesis</span>                               <span class="n">Viewpoint</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DariusForce</span><span class="o">-</span><span class="n">Snes</span>                                  <span class="n">NewZealandStory</span><span class="o">-</span><span class="n">Sms</span>                                   <span class="n">Vigilante</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">DariusII</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">Ninja</span><span class="o">-</span><span class="n">Sms</span>                                             <span class="n">VirtuaFighter</span><span class="o">-</span><span class="mi">32</span><span class="n">x</span>
+<span class="n">DariusTwin</span><span class="o">-</span><span class="n">Snes</span>                                   <span class="n">NinjaCrusaders</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">VirtuaFighter2</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DarkCastle</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">NinjaGaiden</span><span class="o">-</span><span class="n">Nes</span>                                       <span class="n">VirtuaFighter2</span><span class="o">-</span><span class="n">Saturn</span>
+<span class="n">Darkman</span><span class="o">-</span><span class="n">Nes</span>                                       <span class="n">NinjaGaiden</span><span class="o">-</span><span class="n">Sms</span>                                       <span class="n">VolguardII</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">Darwin4081</span><span class="o">-</span><span class="n">Genesis</span>                                <span class="n">NinjaGaidenIIITheAncientShipOfDoom</span><span class="o">-</span><span class="n">Nes</span>                <span class="n">WWFArcade</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DashGalaxyInTheAlienAsylum</span><span class="o">-</span><span class="n">Nes</span>                    <span class="n">NinjaGaidenIITheDarkSwordOfChaos</span><span class="o">-</span><span class="n">Nes</span>                  <span class="n">WaniWaniWorld</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DashinDesperadoes</span><span class="o">-</span><span class="n">Genesis</span>                         <span class="n">NinjaKid</span><span class="o">-</span><span class="n">Nes</span>                                          <span class="n">Wardner</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DavidRobinsonsSupremeCourt</span><span class="o">-</span><span class="n">Genesis</span>                <span class="n">NoahsArk</span><span class="o">-</span><span class="n">Nes</span>                                          <span class="n">Warpman</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DazeBeforeChristmas</span><span class="o">-</span><span class="n">Genesis</span>                       <span class="n">NormysBeachBabeORama</span><span class="o">-</span><span class="n">Genesis</span>                          <span class="n">WaynesWorld</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DazeBeforeChristmas</span><span class="o">-</span><span class="n">Snes</span>                          <span class="n">OperationWolf</span><span class="o">-</span><span class="n">Nes</span>                                     <span class="n">WereBackADinosaursStory</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">DeadlyMoves</span><span class="o">-</span><span class="n">Genesis</span>                               <span class="n">Ottifants</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">WhipRush</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DeathDuel</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">Ottifants</span><span class="o">-</span><span class="n">Sms</span>                                         <span class="n">Widget</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DeepDuckTroubleStarringDonaldDuck</span><span class="o">-</span><span class="n">Sms</span>             <span class="n">OutToLunch</span><span class="o">-</span><span class="n">Snes</span>                                       <span class="n">WizardOfWor</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">Defender</span><span class="o">-</span><span class="n">Atari2600</span>                                <span class="n">OverHorizon</span><span class="o">-</span><span class="n">Nes</span>                                       <span class="n">WizardsAndWarriors</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DefenderII</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">POWPrisonersOfWar</span><span class="o">-</span><span class="n">Nes</span>                                 <span class="n">WiznLiz</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DemonAttack</span><span class="o">-</span><span class="n">Atari2600</span>                             <span class="n">PacInTime</span><span class="o">-</span><span class="n">Snes</span>                                        <span class="n">Wolfchild</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DennisTheMenace</span><span class="o">-</span><span class="n">Snes</span>                              <span class="n">PacManNamco</span><span class="o">-</span><span class="n">Nes</span>                                       <span class="n">Wolfchild</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">DesertStrikeReturnToTheGulf</span><span class="o">-</span><span class="n">Genesis</span>               <span class="n">PacMania</span><span class="o">-</span><span class="n">Genesis</span>                                      <span class="n">Wolfchild</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">DevilCrashMD</span><span class="o">-</span><span class="n">Genesis</span>                              <span class="n">PacMania</span><span class="o">-</span><span class="n">Sms</span>                                          <span class="n">WolverineAdamantiumRage</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DevilishTheNextPossession</span><span class="o">-</span><span class="n">Genesis</span>                 <span class="n">PanicRestaurant</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">WonderBoyInMonsterWorld</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">DickTracy</span><span class="o">-</span><span class="n">Genesis</span>                                 <span class="n">Paperboy</span><span class="o">-</span><span class="n">Genesis</span>                                      <span class="n">WorldHeroes</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DickTracy</span><span class="o">-</span><span class="n">Sms</span>                                     <span class="n">Paperboy</span><span class="o">-</span><span class="n">Nes</span>                                          <span class="n">WrathOfTheBlackManta</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DickVitalesAwesomeBabyCollegeHoops</span><span class="o">-</span><span class="n">Genesis</span>        <span class="n">Paperboy</span><span class="o">-</span><span class="n">Sms</span>                                          <span class="n">WreckingCrew</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DigDugIITroubleInParadise</span><span class="o">-</span><span class="n">Nes</span>                     <span class="n">Paperboy2</span><span class="o">-</span><span class="n">Genesis</span>                                     <span class="n">XDRXDazedlyRay</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DiggerTheLegendOfTheLostCity</span><span class="o">-</span><span class="n">Nes</span>                  <span class="n">Parodius</span><span class="o">-</span><span class="n">Nes</span>                                          <span class="n">XKaliber2097</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">DimensionForce</span><span class="o">-</span><span class="n">Snes</span>                               <span class="n">Parodius</span><span class="o">-</span><span class="n">Snes</span>                                         <span class="n">XMenMojoWorld</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">DinoCity</span><span class="o">-</span><span class="n">Snes</span>                                     <span class="n">PeaceKeepers</span><span class="o">-</span><span class="n">Snes</span>                                     <span class="n">Xenon2Megablast</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DinoLand</span><span class="o">-</span><span class="n">Genesis</span>                                  <span class="n">PenguinKunWars</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">Xenophobe</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DirtyHarry</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">Phalanx</span><span class="o">-</span><span class="n">Snes</span>                                          <span class="n">XeviousTheAvenger</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DonDokoDon</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">Phelios</span><span class="o">-</span><span class="n">Genesis</span>                                       <span class="n">Xexyz</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DonkeyKong</span><span class="o">-</span><span class="n">Nes</span>                                    <span class="n">Phoenix</span><span class="o">-</span><span class="n">Atari2600</span>                                     <span class="n">YarsRevenge</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">DonkeyKong3</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">PinkGoesToHollywood</span><span class="o">-</span><span class="n">Genesis</span>                           <span class="n">YoukaiClub</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DonkeyKongCountry</span><span class="o">-</span><span class="n">Snes</span>                            <span class="n">PiratesOfDarkWater</span><span class="o">-</span><span class="n">Snes</span>                               <span class="n">YoukaiDouchuuki</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DonkeyKongCountry2</span><span class="o">-</span><span class="n">Snes</span>                           <span class="n">PitFighter</span><span class="o">-</span><span class="n">Genesis</span>                                    <span class="n">YoungIndianaJonesChronicles</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DonkeyKongCountry3DixieKongsDoubleTrouble</span><span class="o">-</span><span class="n">Snes</span>    <span class="n">PitFighter</span><span class="o">-</span><span class="n">Sms</span>                                        <span class="n">Zanac</span><span class="o">-</span><span class="n">Nes</span>
+<span class="n">DonkeyKongJr</span><span class="o">-</span><span class="n">Nes</span>                                  <span class="n">Pitfall</span><span class="o">-</span><span class="n">Atari2600</span>                                     <span class="n">Zaxxon</span><span class="o">-</span><span class="n">Atari2600</span>
+<span class="n">DoubleDragon</span><span class="o">-</span><span class="n">Genesis</span>                              <span class="n">PitfallTheMayanAdventure</span><span class="o">-</span><span class="n">Genesis</span>                      <span class="n">ZeroTheKamikazeSquirrel</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DoubleDragon</span><span class="o">-</span><span class="n">Nes</span>                                  <span class="n">PitfallTheMayanAdventure</span><span class="o">-</span><span class="n">Snes</span>                         <span class="n">ZeroTheKamikazeSquirrel</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">DoubleDragonIITheRevenge</span><span class="o">-</span><span class="n">Genesis</span>                  <span class="n">PizzaPop</span><span class="o">-</span><span class="n">Nes</span>                                          <span class="n">ZeroWing</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DoubleDragonIITheRevenge</span><span class="o">-</span><span class="n">Nes</span>                      <span class="n">Plok</span><span class="o">-</span><span class="n">Snes</span>                                             <span class="n">ZombiesAteMyNeighbors</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">DoubleDragonVTheShadowFalls</span><span class="o">-</span><span class="n">Genesis</span>               <span class="n">Pong</span><span class="o">-</span><span class="n">Atari2600</span>                                        <span class="n">ZoolNinjaOfTheNthDimension</span><span class="o">-</span><span class="n">Genesis</span>
+<span class="n">DoubleDribbleThePlayoffEdition</span><span class="o">-</span><span class="n">Genesis</span>            <span class="n">Pooyan</span><span class="o">-</span><span class="n">Atari2600</span>                                      <span class="n">ZoolNinjaOfTheNthDimension</span><span class="o">-</span><span class="n">Sms</span>
+<span class="n">DoubleDunk</span><span class="o">-</span><span class="n">Atari2600</span>                              <span class="n">Pooyan</span><span class="o">-</span><span class="n">Nes</span>                                            <span class="n">ZoolNinjaOfTheNthDimension</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">DrRobotniksMeanBeanMachine</span><span class="o">-</span><span class="n">Genesis</span>                <span class="n">Popeye</span><span class="o">-</span><span class="n">Nes</span>                                            
+<span class="n">DragonPower</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">PopnTwinBee</span><span class="o">-</span><span class="n">Snes</span>
+<span class="n">DragonSpiritTheNewLegend</span><span class="o">-</span><span class="n">Nes</span>                      <span class="n">PopnTwinBeeRainbowBellAdventures</span><span class="o">-</span><span class="n">Snes</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+
+          </article>
+        </div>
+        <footer>
+          
+          <div class="related-pages">
+            
+            
+          </div>
+          <div class="bottom-of-page">
+            <div class="left-details">
+              <div class="copyright">
+                Copyright &#169; 2023 Farama Foundation
+              </div>
+              <!--
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            -->
+            </div>
+            <div class="right-details">
+              <div class="icons">
+                <a class="muted-link" href="https://github.com/Farama-Foundation/stable-retro/"
+                  aria-label="On GitHub">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+        </footer>
+      </div>
+      <aside class="toc-drawer no-toc">
+        
+        
+        
+      </aside>
+    </div>
+  </div>
+</div>
+    <script>
+      const toggleMenu = () => {
+        const menuBtn = document.querySelector(".farama-header-menu__btn");
+        const menuContainer = document.querySelector(".farama-header-menu-container");
+        if (document.querySelector(".farama-header-menu").classList.contains("active")) {
+          menuBtn.setAttribute("aria-expanded", "false");
+          menuContainer.setAttribute("aria-hidden", "true");
+        } else {
+          menuBtn.setAttribute("aria-expanded", "true");
+          menuContainer.setAttribute("aria-hidden", "false");
+        }
+        document.querySelector(".farama-header-menu").classList.toggle("active");
+      }
+
+      document.querySelector(".farama-header-menu__btn").addEventListener("click", toggleMenu);
+      document.getElementById("farama-close-menu").addEventListener("click", toggleMenu);
+    </script>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0VNK81VVGP"></script>
+      <script>
+        const enableGtag = () => {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-0VNK81VVGP');
+        }
+        (() => {
+            if (!localStorage.getItem("acceptedCookieAlert")) {
+                const boxElem = document.createElement("div");
+                boxElem.classList.add("cookie-alert");
+                const containerElem = document.createElement("div");
+                containerElem.classList.add("cookie-alert__container");
+                const textElem = document.createElement("p");
+                textElem.innerHTML = `This page uses <a href="https://analytics.google.com/">
+                                    Google Analytics</a> to collect statistics.`;
+                                    containerElem.appendChild(textElem);
+
+                const declineBtn = Object.assign(document.createElement("button"),
+                  {
+                    innerText: "Deny",
+                    className: "farama-btn cookie-alert__button",
+                    id: "cookie-alert__decline",
+                  }
+                );
+                declineBtn.addEventListener("click", () => {
+                  localStorage.setItem("acceptedCookieAlert", false);
+                  boxElem.remove();
+                });
+
+                const acceptBtn = Object.assign(document.createElement("button"),
+                  {
+                    innerText: "Allow",
+                    className: "farama-btn cookie-alert__button",
+                    id: "cookie-alert__accept",
+                  }
+                );
+                acceptBtn.addEventListener("click", () => {
+                  localStorage.setItem("acceptedCookieAlert", true);
+                  boxElem.remove();
+                  enableGtag();
+                });
+
+                containerElem.appendChild(declineBtn);
+                containerElem.appendChild(acceptBtn);
+                boxElem.appendChild(containerElem);
+                document.body.appendChild(boxElem);
+            } else if (localStorage.getItem("acceptedCookieAlert") === "true") {
+              enableGtag();
+            }
+        })()
+      </script>
+
+    <script src="_static/documentation_options.js?v=64d3c7d8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=7660844c"></script>
+    
+    <script>
+
+      const createProjectsList = (projects, displayImages) => {
+        const ulElem = Object.assign(document.createElement('ul'),
+          {
+            className:'farama-header-menu-list',
+          }
+        )
+        for (let project of projects) {
+          const liElem = document.createElement("li");
+          const aElem = Object.assign(document.createElement("a"),
+            {
+              href: project.link
+            }
+          );
+          liElem.appendChild(aElem);
+          if (displayImages) {
+            const imgElem = Object.assign(document.createElement("img"),
+              {
+                src: project.image ? imagesBasepath + project.image : imagesBasepath + "/farama_black.svg",
+                alt: `${project.name} logo`,
+                className: "farama-black-logo-invert"
+              }
+            );
+            aElem.appendChild(imgElem);
+          }
+          aElem.appendChild(document.createTextNode(project.name));
+          ulElem.appendChild(liElem);
+        }
+        return ulElem;
+      }
+
+      // Create menu with Farama projects by using the API at farama.org/api/projects.json
+      const createCORSRequest = (method, url) => {
+        let xhr = new XMLHttpRequest();
+        xhr.responseType = 'json';
+
+        if ("withCredentials" in xhr) {
+          xhr.open(method, url, true);
+        } else if (typeof XDomainRequest != "undefined") {
+          // IE8 & IE9
+          xhr = new XDomainRequest();
+          xhr.open(method, url);
+        } else {
+          // CORS not supported.
+          xhr = null;
+        }
+        return xhr;
+      };
+
+      const url = 'https://farama.org/api/projects.json';
+      const imagesBasepath = "https://farama.org/assets/images"
+      const method = 'GET';
+      let xhr = createCORSRequest(method, url);
+
+      xhr.onload = () => {
+        const jsonResponse = xhr.response;
+        const sections = {
+          "Core Projects": [],
+          "Mature Projects": {
+            "Documentation": [],
+            "Repositories": [],
+          },
+          "Incubating Projects": {
+            "Documentation": [],
+            "Repositories": [],
+          },
+          "Foundation": [
+            {
+              name: "About",
+              link: "https://farama.org/about"
+            },
+            {
+              name: "Standards",
+              link: "https://farama.org/project_standards",
+            },
+            {
+              name: "Donate",
+              link: "https://farama.org/donations"
+            }
+          ]
+        }
+
+        // Categorize projects
+        Object.keys(jsonResponse).forEach(key => {
+          projectJson = jsonResponse[key];
+          if (projectJson.website !== null) {
+            projectJson.link = projectJson.website;
+          } else {
+            projectJson.link = projectJson.github;
+          }
+          if (projectJson.type === "core") {
+            sections["Core Projects"].push(projectJson)
+          } else if (projectJson.type == "mature") {
+            if (projectJson.website !== null) {
+              sections["Mature Projects"]["Documentation"].push(projectJson)
+            } else {
+              sections["Mature Projects"]["Repositories"].push(projectJson)
+            }
+          } else {
+            if (projectJson.website !== null) {
+              sections["Incubating Projects"]["Documentation"].push(projectJson)
+            } else {
+              sections["Incubating Projects"]["Repositories"].push(projectJson)
+            }
+          }
+        })
+
+        const menuContainer = document.querySelector(".farama-header-menu__body");
+
+        Object.keys(sections).forEach((key, i) => {
+          const sectionElem = Object.assign(
+            document.createElement('div'), {
+              className:'farama-header-menu__section',
+            }
+          )
+          sectionElem.appendChild(Object.assign(document.createElement('span'),
+            {
+              className:'farama-header-menu__section-title' ,
+              innerText: key
+            }
+          ))
+          // is not a list
+          if (sections[key].constructor !== Array) {
+            const subSections = sections[key];
+            const subSectionContainerElem = Object.assign(
+                document.createElement('div'), {
+                  className:'farama-header-menu__subsections-container',
+                  style: 'display: flex'
+                }
+            )
+            Object.keys(subSections).forEach((subKey, i) => {
+              const subSectionElem = Object.assign(
+                document.createElement('div'), {
+                  className:'farama-header-menu__subsection',
+                }
+              )
+              subSectionElem.appendChild(Object.assign(document.createElement('span'),
+                {
+                  className:'farama-header-menu__subsection-title' ,
+                  innerText: subKey
+                }
+              ))
+              const ulElem = createProjectsList(subSections[subKey], key !== 'Foundation');
+              subSectionElem.appendChild(ulElem);
+              subSectionContainerElem.appendChild(subSectionElem);
+            })
+            sectionElem.appendChild(subSectionContainerElem);
+          } else {
+            const projects = sections[key];
+            const ulElem = createProjectsList(projects, true);
+            sectionElem.appendChild(ulElem);
+          }
+          menuContainer.appendChild(sectionElem)
+        });
+      }
+
+      xhr.onerror = function() {
+        console.error("Unable to load projects");
+      };
+
+      xhr.send();
+    </script>
+
+    
+    <script>
+      const versioningConfig = {
+        githubUser: 'Farama-Foundation',
+        githubRepo: 'stable-retro',
+      };
+      fetch('/main/_static/versioning/versioning_menu.html').then(response => {
+        if (response.status === 200) {
+            response.text().then(text => {
+                const container = document.createElement("div");
+                container.innerHTML = text;
+                document.querySelector("body").appendChild(container);
+                // innerHtml doenst evaluate scripts, we need to add them dynamically
+                Array.from(container.querySelectorAll("script")).forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+            });
+        } else {
+            console.warn("Unable to load versioning menu", response);
+        }
+      });
+    </script>
+
+    </body>
+</html>

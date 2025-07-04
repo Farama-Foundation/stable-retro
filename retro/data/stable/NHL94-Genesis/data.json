@@ -1,5 +1,45 @@
 {
   "info": {
+    "fullstar_x": {
+      "address": 16760700,
+      "type": ">i2"
+    },
+    "fullstar_y": {
+      "address": 16760702,
+      "type": ">i2"
+    },
+    "g1_x": {
+      "address": 16756938,
+      "type": ">i2"
+    },
+    "g1_y": {
+      "address": 16756958,
+      "type": ">i2"
+    },
+    "g2_x": {
+      "address": 16757706,
+      "type": ">i2"
+    },
+    "g2_y": {
+      "address": 16757726,
+      "type": ">i2"
+    },
+    "p1_2_vel_x": {
+      "address": 16756978,
+      "type": "|i1"
+    },
+    "p1_2_vel_y": {
+      "address": 16756980,
+      "type": "|i1"
+    },
+    "p1_2_x": {
+      "address": 16756938,
+      "type": ">i2"
+    },
+    "p1_2_y": {
+      "address": 16756958,
+      "type": ">i2"
+    },
     "p1_attackzone": {
       "address": 16762582,
       "type": ">u4"
@@ -7,6 +47,14 @@
     "p1_bodychecks": {
       "address": 16762590,
       "type": ">u2"
+    },
+    "p1_emptystar_x": {
+      "address": 16760272,
+      "type": ">i2"
+    },
+    "p1_emptystar_y": {
+      "address": 16760292,
+      "type": ">i2"
     },
     "p1_faceoffwon": {
       "address": 16762588,
@@ -28,6 +76,38 @@
       "address": 16762572,
       "type": ">u4"
     },
+    "p1_vel_x": {
+      "address": 16756850,
+      "type": "|i1"
+    },
+    "p1_vel_y": {
+      "address": 16756852,
+      "type": "|i1"
+    },
+    "p1_x": {
+      "address": 16756810,
+      "type": ">i2"
+    },
+    "p1_y": {
+      "address": 16756830,
+      "type": ">i2"
+    },
+    "p2_2_vel_x": {
+      "address": 16757746,
+      "type": "|i1"
+    },
+    "p2_2_vel_y": {
+      "address": 16757748,
+      "type": "|i1"
+    },
+    "p2_2_x": {
+      "address": 16757706,
+      "type": ">i2"
+    },
+    "p2_2_y": {
+      "address": 16757726,
+      "type": ">i2"
+    },
     "p2_attackzone": {
       "address": 16763450,
       "type": ">u4"
@@ -39,6 +119,14 @@
     "p2_faceoffwon": {
       "address": 16763454,
       "type": ">u2"
+    },
+    "p2_fullstar_x": {
+      "address": 16760244,
+      "type": ">i2"
+    },
+    "p2_fullstar_y": {
+      "address": 16760702,
+      "type": ">i2"
     },
     "p2_onetimer": {
       "address": 16764300,
@@ -56,9 +144,141 @@
       "address": 16763440,
       "type": ">u4"
     },
+    "p2_vel_x": {
+      "address": 16757618,
+      "type": "|i1"
+    },
+    "p2_vel_y": {
+      "address": 16757620,
+      "type": "|i1"
+    },
+    "p2_x": {
+      "address": 16757578,
+      "type": ">i2"
+    },
+    "p2_y": {
+      "address": 16757598,
+      "type": ">i2"
+    },
     "period": {
       "address": 16761958,
       "type": ">u2"
+    },
+    "puck_vel_x": {
+      "address": 16758642,
+      "type": "|i1"
+    },
+    "puck_vel_y": {
+      "address": 16758644,
+      "type": "|i1"
+    },
+    "puck_x": {
+      "address": 16758602,
+      "type": ">i2"
+    },
+    "puck_y": {
+      "address": 16758622,
+      "type": ">i2"
+    },
+    "time": {
+      "address": 16761958,
+      "type": ">u4"
+    },
+    "p1_3_x": {
+      "address": 16757066,
+      "type": ">i2"
+    },
+    "p1_3_y": {
+      "address": 16757086,
+      "type": ">i2"
+    },
+    "p1_3_vel_x": {
+      "address": 16757106,
+      "type": "|i1"
+    },
+    "p1_3_vel_y": {
+      "address": 16757108,
+      "type": "|i1"
+    },
+    "p1_4_x": {
+      "address": 16757194,
+      "type": ">i2"
+    },
+    "p1_4_y": {
+      "address": 16757214,
+      "type": ">i2"
+    },
+    "p1_4_vel_x": {
+      "address": 16757234,
+      "type": "|i1"
+    },
+    "p1_4_vel_y": {
+      "address": 16757236,
+      "type": "|i1"
+    },
+    "p1_5_x": {
+      "address": 16757322,
+      "type": ">i2"
+    },
+    "p1_5_y": {
+      "address": 16757342,
+      "type": ">i2"
+    },
+    "p1_5_vel_x": {
+      "address": 16757362,
+      "type": "|i1"
+    },
+    "p1_5_vel_y": {
+      "address": 16757364,
+      "type": "|i1"
+    },
+    "p2_3_x": {
+      "address": 16757834,
+      "type": ">i2"
+    },
+    "p2_3_y": {
+      "address": 16757854,
+      "type": ">i2"
+    },
+    "p2_3_vel_x": {
+      "address": 16757874,
+      "type": "|i1"
+    },
+    "p2_3_vel_y": {
+      "address": 16757876,
+      "type": "|i1"
+    },
+    "p2_4_x": {
+      "address": 16757962,
+      "type": ">i2"
+    },
+    "p2_4_y": {
+      "address": 16757982,
+      "type": ">i2"
+    },
+    "p2_4_vel_x": {
+      "address": 16758002,
+      "type": "|i1"
+    },
+    "p2_4_vel_y": {
+      "address": 16758004,
+      "type": "|i1"
+    },
+    "p2_5_x": {
+      "address": 16758090,
+      "type": ">i2"
+    },
+    "p2_5_y": {
+      "address": 16758110,
+      "type": ">i2"
+    },
+    "p2_5_vel_x": {
+      "address": 16758130,
+      "type": "|i1"
+    },
+    "p2_5_vel_y": {
+      "address": 16758132,
+      "type": "|i1"
     }
   }
 }

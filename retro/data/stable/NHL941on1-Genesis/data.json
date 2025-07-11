@@ -159,6 +159,30 @@
     "p2_ori": {
       "address": 16757663,
       "type": ">u1"
+    },
+    "g1_ori": {
+      "address": 16757023,
+      "type": ">u1"
+    },
+    "g1_vel_x": {
+      "address": 16756978,
+      "type": "|i1"
+    },
+    "g1_vel_y": {
+      "address": 16756980,
+      "type": "|i1"
+    },
+    "g2_ori": {
+      "address": 16757791,
+      "type": ">u1"
+    },
+    "g2_vel_x": {
+      "address": 16757746,
+      "type": "|i1"
+    },
+    "g2_vel_y": {
+      "address": 16757748,
+      "type": "|i1"
     }
   }
 }

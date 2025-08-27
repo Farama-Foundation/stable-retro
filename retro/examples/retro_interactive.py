@@ -1,6 +1,5 @@
 import argparse
 
-from baselines.common.vec_env.subproc_vec_env import SubprocVecEnv
 
 import retro
 from retro.examples.interactive import Interactive
@@ -12,17 +11,17 @@ class RetroInteractive(Interactive):
     """
 
     def __init__(self, game, state, scenario):
-        def make_env():
-            return retro.make(game=game, state=state, scenario=scenario)
-
-        env = make_env()
+        env = retro.make(
+            game=game,
+            state=state,
+            scenario=scenario,
+            render_mode="rgb_array",
+        )
         self._buttons = env.buttons
-        env.close()
-        venv = SubprocVecEnv([make_env])
-        super().__init__(venv=venv, sync=False, tps=60, aspect_ratio=4 / 3)
+        super().__init__(env=env, sync=False, tps=60, aspect_ratio=4 / 3)
 
-    def get_screen(self, _obs, venv):
-        return venv.render(mode="rgb_array")
+    def get_image(self, _obs, env):
+        return env.render()
 
     def keys_to_act(self, keys):
         inputs = {

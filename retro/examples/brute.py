@@ -14,7 +14,7 @@ import random
 
 import gymnasium as gym
 import numpy as np
-from gymnasium.wrappers.time_limit import TimeLimit
+from gymnasium.wrappers import TimeLimit
 
 import retro
 
@@ -26,8 +26,8 @@ class Frameskip(gym.Wrapper):
         super().__init__(env)
         self._skip = skip
 
-    def reset(self):
-        return self.env.reset()
+    def reset(self, *, seed=None, options=None):
+        return self.env.reset(seed=seed, options=options)
 
     def step(self, act):
         total_rew = 0.0

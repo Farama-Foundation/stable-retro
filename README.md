@@ -193,3 +193,11 @@ The following non-commercial ROMs are included with Stable Retro for testing pur
 - [FamiCON intro](http://www.pouet.net/prod.php?which=53497) by dr88
 - [Airstriker](https://pdroms.de/genesis/airstriker-v1-50-genesis-game) by Electrokinesis
 - [Lost Marbles](https://pdroms.de/files/gameboyadvance/lost-marbles) by Vantage
+
+## Papers
+List of papers mentioning stable-retro. If you want your paper to be added here please open a github issue.
+
+*	[Exploration-Driven Generative Interactive Environments](https://arxiv.org/pdf/2504.02515)
+*	[Gymnasium: A Standardized Interface for Reinforcement Learning Environments](https://openreview.net/pdf?id=qPMLvJxtPK)
+*	[IPR-1: Interactive Physical Reasoner](https://arxiv.org/html/2511.15407v1)
+*	[SAFE-SMART: Safety Analysis and Formal Evaluation using STL Metrics for Autonomous RoboTs](https://arxiv.org/html/2511.17781v1)

@@ -132,8 +132,7 @@ lib*.a
 retro/cores/*-version
 retro/cores/*.json
 
-# FBNeo build artifacts
-cores/fbneo/src/dep/
+# FBNeo build artifacts (only ignore actual build outputs, not source dependencies)
 cores/fbneo/src/obj/
 cores/fbneo/*.so
 cores/fbneo/*.dylib
@@ -153,5 +152,5 @@ tests/test_cibuildwheel/tmp_dockerfiles
 
 # build artifacts
 *.cmake
-Makefile
+# Makefile - removed to allow FBNeo and other core Makefiles to be tracked
 *.tmp

@@ -132,6 +132,13 @@ lib*.a
 retro/cores/*-version
 retro/cores/*.json
 
+# FBNeo build artifacts
+cores/fbneo/src/dep/
+cores/fbneo/src/obj/
+cores/fbneo/*.so
+cores/fbneo/*.dylib
+cores/fbneo/*.dll
+
 # Test stuff
 Temporary
 *.mkv

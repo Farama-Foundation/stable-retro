@@ -22,6 +22,8 @@ __all__ = [
     "get_core_path",
     "get_romfile_system",
     "get_system_info",
+    "get_fbneo_rom_name",
+    "is_fbneo_game",
     "make",
     "RetroEnv",
 ]
@@ -62,6 +64,55 @@ def make(game, state=State.DEFAULT, inttype=retro.data.Integrations.DEFAULT, **k
                 f"Game not found: {game}. Did you make sure to import the ROM?",
             )
     return RetroEnv(game, state, inttype=inttype, **kwargs)
+
+
+def get_fbneo_rom_name(game, inttype=retro.data.Integrations.DEFAULT):
+    """
+    Get the original FBNeo ROM name for a game.
+    Returns None if the game doesn't have an original_rom_name in metadata.
+
+    Args:
+        game: Game name
+        inttype: Integration type (default: DEFAULT)
+
+    Returns:
+        str: Original ROM name (e.g., "mk2.zip") or None
+    """
+    import json
+
+    metadata_path = retro.data.get_file_path(game, "metadata.json", inttype)
+    if metadata_path and os.path.exists(metadata_path):
+        try:
+            with open(metadata_path) as f:
+                metadata = json.load(f)
+                return metadata.get("original_rom_name")
+        except (json.JSONDecodeError, IOError):
+            pass
+    return None
+
+
+def is_fbneo_game(game, inttype=retro.data.Integrations.DEFAULT):
+    """
+    Check if a game is an FBNeo game.
+
+    Args:
+        game: Game name
+        inttype: Integration type (default: DEFAULT)
+
+    Returns:
+        bool: True if the game is an FBNeo game
+    """
+    import json
+
+    metadata_path = retro.data.get_file_path(game, "metadata.json", inttype)
+    if metadata_path and os.path.exists(metadata_path):
+        try:
+            with open(metadata_path) as f:
+                metadata = json.load(f)
+                return metadata.get("system") == "FBNeo"
+        except (json.JSONDecodeError, IOError):
+            pass
+    return False
 
 
 try:

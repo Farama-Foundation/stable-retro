@@ -16,6 +16,7 @@ __all__ = [
     "path",
     "get_file_path",
     "get_romfile_path",
+    "get_original_romfile_path",
     "list_games",
     "list_states",
     "merge",
@@ -316,6 +317,32 @@ def get_romfile_path(game, inttype=Integrations.DEFAULT):
     raise FileNotFoundError(f"No romfiles found for game: {game}")
 
 
+def get_original_romfile_path(game, inttype=Integrations.DEFAULT):
+    """
+    Return the path to a game's ROM using original name if specified in metadata.
+    Falls back to standard rom.[ext] naming if metadata is not present.
+    This is primarily used for FBNeo games that require specific ROM names.
+    """
+    import json
+
+    # Check for metadata with original_rom_name
+    metadata_path = get_file_path(game, "metadata.json", inttype)
+    if metadata_path and os.path.exists(metadata_path):
+        try:
+            with open(metadata_path) as f:
+                metadata = json.load(f)
+                if "original_rom_name" in metadata:
+                    original_rom_path = get_file_path(game, metadata["original_rom_name"], inttype)
+                    if original_rom_path and os.path.exists(original_rom_path):
+                        return original_rom_path
+        except (json.JSONDecodeError, IOError):
+            # If metadata file is invalid, fall back to standard naming
+            pass
+
+    # Fall back to standard rom.[ext] naming
+    return get_romfile_path(game, inttype)
+
+
 def list_games(inttype=Integrations.DEFAULT):
     files = []
     for curpath in inttype.paths:
@@ -459,8 +486,29 @@ def merge(*args, quiet=True):
             game, ext, curpath = known_hashes[hash]
             if not quiet:
                 print("Importing", game)
-            with open(os.path.join(curpath, game, "rom%s" % ext), "wb") as f:
+
+            game_path = os.path.join(curpath, game)
+
+            # Always write the standard rom.[ext] file
+            with open(os.path.join(game_path, "rom%s" % ext), "wb") as f:
                 f.write(data)
+
+            # Check if this game has an original_rom_name in metadata (for FBNeo)
+            metadata_path = os.path.join(game_path, "metadata.json")
+            if os.path.exists(metadata_path):
+                try:
+                    with open(metadata_path) as mf:
+                        metadata = json.load(mf)
+                        if "original_rom_name" in metadata:
+                            # Also write the file with its original name
+                            original_name = metadata["original_rom_name"]
+                            with open(os.path.join(game_path, original_name), "wb") as of:
+                                of.write(data)
+                            if not quiet:
+                                print(f"  Also saved as {original_name} for FBNeo compatibility")
+                except (json.JSONDecodeError, IOError):
+                    pass
+
             imported_games += 1
     if not quiet:
         print(f"Imported {imported_games:d} games")

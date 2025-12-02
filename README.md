@@ -44,12 +44,10 @@ As well as additional states on already integrated games.
 	- GameGear (via Genesis Plus GX)
 	- Genesis/Mega Drive (via Genesis Plus GX)
 	- Master System (via Genesis Plus GX)
- 	- 32x (via Picodrive)
-  	- Saturn (via Beetle Saturn)
-  	- Sega CD (via Genesis Plus GX)
-
-**Experimental** (accessible in the fbneo branch)
-- Arcade Machines:
+	- 32x (via Picodrive)
+		- Saturn (via Beetle Saturn)
+		- Sega CD (via Genesis Plus GX)
+- Arcade Machines (via FBNeo):
   	- Neo Geo (MVS hardware: 1990–2004)
  	- Sega System 1 (1983–1987)
  	- Sega System 16 (And similar. 1985–1994)

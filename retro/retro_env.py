@@ -50,7 +50,7 @@ class RetroEnv(gym.Env):
         self.multi_rewards = False
 
         metadata = {}
-        rom_path = retro.data.get_romfile_path(game, inttype)
+        rom_path = retro.data.get_original_romfile_path(game, inttype)
         metadata_path = retro.data.get_file_path(game, "metadata.json", inttype)
 
         if state == retro.State.NONE:

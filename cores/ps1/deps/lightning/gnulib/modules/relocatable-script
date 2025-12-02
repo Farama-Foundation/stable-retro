@@ -1,0 +1,25 @@
+Description:
+Help make shell scripts relocatable, that is, to allow them to
+function properly when copied to an arbitrary directory.
+
+Files:
+doc/relocatable.texi
+build-aux/relocatable.sh.in
+m4/relocatable-lib.m4
+
+Depends-on:
+
+configure.ac:
+AC_REQUIRE([gl_RELOCATABLE_NOP])
+relocatable_sh=$ac_aux_dir/relocatable.sh.in
+AC_SUBST_FILE([relocatable_sh])
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Ben Pfaff

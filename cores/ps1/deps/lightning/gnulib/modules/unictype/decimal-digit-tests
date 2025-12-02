@@ -1,0 +1,14 @@
+Files:
+tests/unictype/test-decdigit.c
+tests/unictype/test-decdigit.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-decdigit
+check_PROGRAMS += test-decdigit
+test_decdigit_SOURCES = unictype/test-decdigit.c
+test_decdigit_LDADD = $(LDADD) $(LIBUNISTRING)

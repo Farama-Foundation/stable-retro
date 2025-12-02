@@ -1,0 +1,33 @@
+Description:
+ldexpf() function: multiply a 'float' by a power of 2.
+
+Files:
+lib/ldexpf.c
+m4/ldexpf.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+ldexp           [test $HAVE_LDEXPF = 0]
+
+configure.ac:
+gl_FUNC_LDEXPF
+if test $HAVE_LDEXPF = 0; then
+  AC_LIBOBJ([ldexpf])
+fi
+gl_MATH_MODULE_INDICATOR([ldexpf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LDEXPF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

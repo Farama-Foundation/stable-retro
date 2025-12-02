@@ -1,0 +1,38 @@
+@node pty.h
+@section @file{pty.h}
+
+Declares the functions @code{openpty} and @code{forkpty}.
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Pseudo-Terminal Pairs,,Opening a Pseudo-Terminal Pair,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Pseudo_002dTerminal-Pairs.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/openpty.3.html,,man openpty}.
+@end itemize
+
+Gnulib module: pty
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms that declare the
+@code{forkpty} and @code{openpty} functions in @code{util.h} or
+@code{libutil.h} instead: macOS 11.1, FreeBSD 6.0, NetBSD 9.0,
+OpenBSD 6.7.
+@item
+This header file is missing on some platforms:
+Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+mingw, MSVC 14.
+@end itemize

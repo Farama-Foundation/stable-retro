@@ -1,0 +1,21 @@
+Description:
+Convert a date/time string to linear time, with debugging.
+
+Files:
+
+Depends-on:
+parse-datetime
+
+configure.ac:
+AC_DEFINE([GNULIB_PARSE_DATETIME2], [1], [Define to support parse_datetime2.])
+
+Makefile.am:
+
+Include:
+"parse-datetime.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert

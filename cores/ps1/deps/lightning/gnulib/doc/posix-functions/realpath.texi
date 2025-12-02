@@ -1,0 +1,41 @@
+@node realpath
+@section @code{realpath}
+@findex realpath
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/realpath.html}
+
+Gnulib module: canonicalize-lgpl
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+This function does not allow for a NULL @samp{resolved} parameter on
+some platforms:
+Mac OS X 10.5, FreeBSD 6.4, OpenBSD 4.4, Solaris 10.
+@item
+This function does not always return an absolute path on some
+platforms:
+Solaris 10.
+@item
+This function fails to detect trailing slashes on non-directories on
+some platforms:
+glibc 2.3.5, macOS 11.1, OpenBSD 6.0.
+@item
+This function fails to recognize non-directories or symlinks to non-directories
+followed by @samp{..} on some platforms:
+Cygwin 2.9.
+@item
+This function misbehaves on consecutive slashes on some platforms:
+musl libc 1.2.2, AIX 7.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function does not allow to determine the required size of output buffer;
+the use of a non-NULL @samp{resolved} buffer is non-portable, since
+PATH_MAX, if it is defined, is nothing more than a guess.
+@end itemize

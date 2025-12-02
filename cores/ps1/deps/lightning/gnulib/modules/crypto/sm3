@@ -1,0 +1,32 @@
+Description:
+Compute SM3 checksums.
+
+Files:
+lib/sm3.h
+lib/sm3.c
+m4/sm3.m4
+
+Depends-on:
+byteswap
+c99
+extern-inline
+stdalign
+stdint
+
+configure.ac:
+gl_SM3
+
+Makefile.am:
+lib_SOURCES += sm3.c
+
+Include:
+"sm3.h"
+
+Link:
+$(LIB_CRYPTO)
+
+License:
+LGPLv2+
+
+Maintainer:
+Jia Zhang

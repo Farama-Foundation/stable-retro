@@ -1,0 +1,17 @@
+Files:
+tests/test-log10.c
+tests/test-log10.h
+tests/minus-zero.h
+tests/signature.h
+tests/macros.h
+tests/randomd.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-log10
+check_PROGRAMS += test-log10
+test_log10_SOURCES = test-log10.c randomd.c
+test_log10_LDADD = $(LDADD) @LOG10_LIBM@

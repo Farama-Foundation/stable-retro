@@ -1,0 +1,27 @@
+Description:
+A C macro for declaring that specific arguments must not be NULL.
+
+Applicability:
+all
+
+Files:
+lib/arg-nonnull.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
+
+ARG_NONNULL_H=$(srcdir)/arg-nonnull.h
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

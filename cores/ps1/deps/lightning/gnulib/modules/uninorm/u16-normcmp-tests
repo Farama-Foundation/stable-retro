@@ -1,0 +1,15 @@
+Files:
+tests/uninorm/test-u16-normcmp.c
+tests/uninorm/test-u16-normcmp.h
+tests/macros.h
+
+Depends-on:
+uninorm/nfd
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-normcmp
+check_PROGRAMS += test-u16-normcmp
+test_u16_normcmp_SOURCES = uninorm/test-u16-normcmp.c
+test_u16_normcmp_LDADD = $(LDADD) $(LIBUNISTRING)

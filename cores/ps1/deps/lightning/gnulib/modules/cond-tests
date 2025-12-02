@@ -1,0 +1,14 @@
+Files:
+tests/test-cond.c
+
+Depends-on:
+lock
+thread
+yield
+gettimeofday
+sleep
+
+Makefile.am:
+TESTS += test-cond
+check_PROGRAMS += test-cond
+test_cond_LDADD = $(LDADD) @LIBMULTITHREAD@ @YIELD_LIB@

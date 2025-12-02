@@ -1,0 +1,23 @@
+@node pthread_attr_init
+@section @code{pthread_attr_init}
+@findex pthread_attr_init
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_attr_init.html}
+
+Gnulib module: pthread-thread
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 14.
+But the provided replacement is just a dummy on some of these platforms:
+Minix 3.1.8.
+@item
+This function is only defined as an inline function on some platforms:
+HP-UX 11.11.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

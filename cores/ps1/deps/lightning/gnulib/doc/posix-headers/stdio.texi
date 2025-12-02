@@ -1,0 +1,27 @@
+@node stdio.h
+@section @file{stdio.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/stdio.h.html}
+
+Gnulib module: stdio
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+The type @code{off_t} is missing on some platforms:
+glibc 2.8, eglibc 2.11.2 and others.
+@item
+The type @code{ssize_t} is missing on some platforms:
+glibc 2.8, Mac OS X 10.5, Solaris 10, MSVC 14, and others.
+@item
+The type @code{va_list} is missing on some platforms:
+glibc 2.8, OpenBSD 4.0, Solaris 11.4, and others.
+@item
+Some platforms provide a @code{NULL} macro that cannot be used in arbitrary
+expressions:
+NetBSD 5.0
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

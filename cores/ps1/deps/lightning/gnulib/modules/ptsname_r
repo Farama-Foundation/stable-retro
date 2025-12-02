@@ -1,0 +1,32 @@
+Description:
+ptsname_r() function: Determine name of the slave side of a pseudo-terminal.
+
+Files:
+lib/ptsname_r.c
+m4/ptsname_r.m4
+
+Depends-on:
+stdlib
+extensions
+isatty          [test $HAVE_PTSNAME_R = 0 || test $REPLACE_PTSNAME_R = 1]
+stat            [test $HAVE_PTSNAME_R = 0 || test $REPLACE_PTSNAME_R = 1]
+ttyname_r       [test $HAVE_PTSNAME_R = 0 || test $REPLACE_PTSNAME_R = 1]
+
+configure.ac:
+gl_FUNC_PTSNAME_R
+if test $HAVE_PTSNAME_R = 0 || test $REPLACE_PTSNAME_R = 1; then
+  AC_LIBOBJ([ptsname_r])
+  gl_PREREQ_PTSNAME_R
+fi
+gl_STDLIB_MODULE_INDICATOR([ptsname_r])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

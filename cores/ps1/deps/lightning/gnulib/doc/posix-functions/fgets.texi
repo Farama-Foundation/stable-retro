@@ -1,0 +1,30 @@
+@node fgets
+@section @code{fgets}
+@findex fgets
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fgets.html}
+
+Gnulib module: stdio, nonblocking
+
+Portability problems fixed by Gnulib module @code{stdio}, together with module @code{nonblocking}:
+@itemize
+@item
+When reading from a non-blocking pipe whose buffer is empty, this function
+fails with @code{errno} being set to @code{EINVAL} instead of @code{EAGAIN} on
+some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+C99 and POSIX.1-2001 and later require end-of-file to be sticky, that
+is, they require this function to act as if it reads end-of-file if
+@code{feof} would return nonzero.  However, on some systems this
+function attempts to read from the underlying file descriptor even if
+the stream's end-of-file indicator is set.  These systems include
+glibc and default Solaris.
+@item
+On Windows platforms (excluding Cygwin), this function does not set @code{errno}
+upon failure.
+@end itemize

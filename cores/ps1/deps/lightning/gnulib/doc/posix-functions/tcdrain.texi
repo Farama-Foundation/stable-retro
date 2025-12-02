@@ -1,0 +1,22 @@
+@node tcdrain
+@section @code{tcdrain}
+@findex tcdrain
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/tcdrain.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14, Android 4.4.
+@item
+On some platforms, @code{tcdrain} on a non-tty fails with @code{errno} set to
+@code{EINVAL} or, on Mac OS X, also @code{EOPNOTSUPP} or @code{ENODEV}, rather
+than @code{ENOTTY}.
+@end itemize

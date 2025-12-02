@@ -1,0 +1,39 @@
+@node fstatat
+@section @code{fstatat}
+@findex fstatat
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fstatat.html}
+
+Gnulib module: fstatat
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.3.6, Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8,
+AIX 5.1, HP-UX 11, IRIX 6.5, Cygwin 1.5.x, mingw, MSVC 14.
+But the replacement function is not safe to be used in libraries and is not multithread-safe.
+@item
+On platforms where @code{off_t} is a 32-bit type, @code{fstatat} may
+not correctly report the size of files or block devices larger than 2
+GB@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@item
+On some platforms, @code{fstatat(fd,"file/",buf,flag)} succeeds instead of
+failing with @code{ENOTDIR}.
+Solaris 9.
+@item
+For symlinks, when the argument ends in a slash, some platforms don't
+dereference the argument:
+Solaris 9.
+@item
+On Solaris 11.4, when this function yields a timestamp with a
+nonpositive @code{tv_sec} value, @code{tv_nsec} might be in the range
+@minus{}1000000000..@minus{}1, representing a negative nanoseconds
+offset from @code{tv_sec}.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+@xref{sys/stat.h}, for general portability problems with @code{struct stat}.
+@end itemize

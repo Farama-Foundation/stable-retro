@@ -1,0 +1,22 @@
+Description:
+Determine whether a directory exists.
+
+Files:
+lib/isdir.c
+lib/isdir.h
+
+Depends-on:
+stat
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += isdir.c
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

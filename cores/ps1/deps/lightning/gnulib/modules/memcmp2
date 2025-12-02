@@ -1,0 +1,22 @@
+Description:
+Compare two memory areas with possibly different lengths.
+
+Files:
+lib/memcmp2.h
+lib/memcmp2.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += memcmp2.c
+
+Include:
+"memcmp2.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

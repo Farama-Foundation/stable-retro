@@ -1,0 +1,27 @@
+Description:
+calloc() function that is glibc compatible.
+
+Files:
+lib/calloc.c
+m4/calloc.m4
+
+Depends-on:
+calloc-posix
+
+configure.ac:
+gl_FUNC_CALLOC_GNU
+if test $REPLACE_CALLOC = 1; then
+  AC_LIBOBJ([calloc])
+fi
+gl_MODULE_INDICATOR([calloc-gnu])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

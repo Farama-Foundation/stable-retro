@@ -1,0 +1,46 @@
+@node utimes
+@section @code{utimes}
+@findex utimes
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/utimes.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 14.
+@item
+On some platforms, this function mis-handles a trailing slash:
+FreeBSD 7.2, Solaris 9.
+@item
+This function cannot set full timestamp resolution.  In particular,
+some platforms incorrectly round rather than truncate.  Use
+@code{utimensat(AT_FDCWD,file,times,0)}, or the gnulib module @code{utimens},
+instead.
+@item
+On some platforms, @code{utimes (file, NULL)} fails to set the
+file's timestamp to the current time:
+glibc 2.3.3.
+@item
+On some platforms, @code{utimes} failed on read-only files when
+@code{utime} worked fine.
+glibc 2.2.5.
+@item
+On OS/2, this function cannot set the timestamp to earlier than the
+year 1980 in local time.
+@item
+On OS/2, this function cannot set the timestamp to an odd number of
+seconds.
+@item
+On OS/2, this function does not work on an opened file.
+@end itemize
+
+Extension: Gnulib provides a module @samp{utimens} that works around these
+problems and allows to set the time with nanosecond resolution (as far as
+supported by the file system).

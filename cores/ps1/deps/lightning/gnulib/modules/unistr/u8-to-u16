@@ -1,0 +1,27 @@
+Description:
+Convert UTF-8 string to UTF-16 string.
+
+Files:
+lib/unistr/u8-to-u16.c
+
+Depends-on:
+unistr/base
+unistr/u8-mbtoucr
+unistr/u16-uctomb
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.3], [unistr/u8-to-u16])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_TO_U16
+lib_SOURCES += unistr/u8-to-u16.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

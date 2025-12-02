@@ -1,0 +1,33 @@
+Description:
+Base layer for Unicode string width.
+
+Files:
+lib/uniwidth.in.h
+lib/localcharset.h
+m4/libunistring-base.m4
+
+Depends-on:
+unitypes
+
+configure.ac:
+gl_LIBUNISTRING_LIBHEADER([0.9.4], [uniwidth.h])
+
+Makefile.am:
+BUILT_SOURCES += $(LIBUNISTRING_UNIWIDTH_H)
+
+uniwidth.h: uniwidth.in.h
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  cat $(srcdir)/uniwidth.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+MOSTLYCLEANFILES += uniwidth.h uniwidth.h-t
+
+Include:
+"uniwidth.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

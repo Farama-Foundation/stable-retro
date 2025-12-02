@@ -1,0 +1,16 @@
+Files:
+tests/test-timespec.c
+tests/macros.h
+
+Depends-on:
+dtotimespec
+intprops
+stdbool
+timespec-add
+timespec-sub
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-timespec
+check_PROGRAMS += test-timespec

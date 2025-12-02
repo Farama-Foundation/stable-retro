@@ -1,0 +1,60 @@
+@node errno.h
+@section @file{errno.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/errno.h.html}
+
+Gnulib module: errno
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+The macro @code{EOVERFLOW} is not defined
+on some platforms:
+OpenBSD 4.0, mingw, MSVC 9.
+@item
+The macro @code{ENOLINK} is not defined
+on some platforms:
+OpenBSD 6.7, mingw, MSVC 9.
+@item
+The macro @code{EMULTIHOP} is not defined
+on some platforms:
+OpenBSD 6.7, mingw, MSVC 14.
+@item
+The macro @code{ECANCELED} is not defined on some platforms:
+OpenBSD 4.0, Cygwin, mingw, MSVC 9.
+@item
+The macros @code{ENOMSG}, @code{EIDRM}, @code{EPROTO}, @code{EBADMSG},
+@code{ENOTSUP} are not defined on some platforms:
+OpenBSD 4.0, mingw, MSVC 9.
+@item
+The macro @code{ESTALE} is not defined on some platforms:
+mingw, MSVC 14.
+@item
+The macro @code{EDQUOT} is not defined on some platforms:
+NonStop Kernel, mingw, MSVC 14.
+@item
+The macros @code{ENETRESET}, @code{ECONNABORTED} are not defined on some
+platforms:
+Minix 3.1.8, mingw, MSVC 9.
+@item
+The macros @code{EWOULDBLOCK}, @code{ETXTBSY}, @code{ELOOP}, @code{ENOTSOCK},
+@code{EDESTADDRREQ}, @code{EMSGSIZE}, @code{EPROTOTYPE}, @code{ENOPROTOOPT},
+@code{EPROTONOSUPPORT}, @code{EOPNOTSUPP}, @code{EAFNOSUPPORT},
+@code{EADDRINUSE}, @code{EADDRNOTAVAIL}, @code{ENETDOWN}, @code{ENETUNREACH},
+@code{ECONNRESET}, @code{ENOBUFS}, @code{EISCONN}, @code{ENOTCONN},
+@code{ETIMEDOUT}, @code{ECONNREFUSED}, @code{EHOSTUNREACH}, @code{EALREADY},
+@code{EINPROGRESS} are not defined on some platforms:
+mingw, MSVC 9.
+@item
+The macros @code{EOWNERDEAD}, @code{ENOTRECOVERABLE} are not defined on
+some platforms:
+glibc/Linux 2.3.6, glibc/Hurd 2.15, glibc/kFreeBSD 2.15,
+Mac OS X 10.5, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.0, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Cygwin, mingw without pthreads-win32, MSVC 9.
+@item
+The macro @code{EILSEQ} is not defined on some platforms:
+LynxOS 178 2.2.2.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

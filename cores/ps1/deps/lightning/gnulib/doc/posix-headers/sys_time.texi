@@ -1,0 +1,31 @@
+@node sys/time.h
+@section @file{sys/time.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_time.h.html}
+
+Gnulib module: sys_time
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+MSVC 14.
+@item
+@samp{struct timeval} is not defined on some platforms.
+@item
+@samp{struct timeval} is defined with a @code{tv_sec} type that is
+narrower than @code{time_t}
+on some native Windows platforms:
+mingw64 in 64-bit mode,
+mingw64 in 32-bit mode when @code{__MINGW_USE_VC2005_COMPAT} is defined,
+MSVC 14 in 64-bit mode,
+MSVC 14 in 32-bit mode when @code{_USE_32BIT_TIME_T} is not defined.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+@samp{struct timeval} is defined with a @code{tv_sec} type that is
+wider than @code{time_t}:
+OpenBSD 5.1 in 64-bit mode.
+@end itemize

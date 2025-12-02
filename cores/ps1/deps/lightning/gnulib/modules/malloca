@@ -1,0 +1,29 @@
+Description:
+Safe automatic memory allocation.
+
+Files:
+lib/malloca.h
+lib/malloca.c
+m4/malloca.m4
+m4/eealloc.m4
+
+Depends-on:
+alloca-opt
+stdint
+verify
+xalloc-oversized
+
+configure.ac:
+gl_MALLOCA
+
+Makefile.am:
+lib_SOURCES += malloca.c
+
+Include:
+"malloca.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,31 @@
+Description:
+renameat() function: rename a file, relative to two directories
+
+Files:
+lib/renameat.c
+lib/at-func2.c
+m4/renameat.m4
+
+Depends-on:
+renameatu        [test $HAVE_RENAMEAT = 0 || test $REPLACE_RENAMEAT = 1]
+
+configure.ac:
+gl_FUNC_RENAMEAT
+if test $HAVE_RENAMEAT = 0 || test $REPLACE_RENAMEAT = 1; then
+  AC_LIBOBJ([renameat])
+fi
+if test $HAVE_RENAMEAT = 0; then
+  AC_LIBOBJ([at-func2])
+fi
+gl_STDIO_MODULE_INDICATOR([renameat])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake

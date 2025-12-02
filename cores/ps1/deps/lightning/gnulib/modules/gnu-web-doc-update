@@ -1,0 +1,21 @@
+Description:
+Update the official GNU web documentation for your project.
+See also readme-release.
+
+Files:
+build-aux/gnu-web-doc-update
+
+Depends-on:
+gendocs
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+coreutils

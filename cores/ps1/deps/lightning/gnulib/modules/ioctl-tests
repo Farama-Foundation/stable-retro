@@ -1,0 +1,12 @@
+Files:
+tests/test-ioctl.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ioctl
+check_PROGRAMS += test-ioctl

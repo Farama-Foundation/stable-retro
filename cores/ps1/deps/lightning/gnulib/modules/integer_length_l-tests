@@ -1,0 +1,11 @@
+Files:
+tests/test-integer_length_l.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-integer_length_l
+check_PROGRAMS += test-integer_length_l

@@ -1,0 +1,27 @@
+Description:
+Spin locks (native Windows implementation).
+
+Files:
+lib/windows-spin.h
+lib/windows-spin.c
+
+Depends-on:
+
+configure.ac:
+AC_REQUIRE([AC_CANONICAL_HOST])
+case "$host_os" in
+  mingw*)
+    AC_LIBOBJ([windows-spin])
+    ;;
+esac
+
+Makefile.am:
+
+Include:
+"windows-spin.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

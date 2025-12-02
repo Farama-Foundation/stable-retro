@@ -1,0 +1,19 @@
+Description:
+Placeholder for eventual signal() replacement.
+
+Files:
+
+Depends-on:
+signal-h
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,25 @@
+Description:
+Generic crypto wrappers for MD5 functions.
+
+Files:
+m4/gc-md5.m4
+
+Depends-on:
+crypto/gc
+crypto/md5 [test "$ac_cv_libgcrypt" != yes]
+
+configure.ac:
+gl_GC_MD5
+gl_MODULE_INDICATOR([gc-md5])
+
+Makefile.am:
+lib_SOURCES += md5.h
+
+Include:
+"gc.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

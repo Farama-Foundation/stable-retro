@@ -1,0 +1,30 @@
+Description:
+Finds the index of the least-significant set bit.
+
+Files:
+lib/ffsl.h
+lib/ffsll.c
+m4/ffsll.m4
+
+Depends-on:
+extensions
+string
+ffs             [test $HAVE_FFSLL = 0 || test $REPLACE_FFSLL = 1]
+
+configure.ac:
+gl_FUNC_FFSLL
+if test $HAVE_FFSLL = 0 || test $REPLACE_FFSLL = 1; then
+  AC_LIBOBJ([ffsll])
+fi
+gl_STRING_MODULE_INDICATOR([ffsll])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

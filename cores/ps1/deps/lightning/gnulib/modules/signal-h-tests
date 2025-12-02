@@ -1,0 +1,11 @@
+Files:
+tests/test-signal-h.c
+
+Depends-on:
+signal-h-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-signal-h
+check_PROGRAMS += test-signal-h

@@ -1,0 +1,15 @@
+Files:
+tests/test-yesno.c
+tests/test-yesno.sh
+
+Depends-on:
+binary-io
+closein
+test-framework-sh
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-yesno.sh
+check_PROGRAMS += test-yesno
+test_yesno_LDADD = $(LDADD) @LIBINTL@ $(LIB_MBRTOWC)

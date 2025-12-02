@@ -1,0 +1,42 @@
+@node unlink
+@section @code{unlink}
+@findex unlink
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/unlink.html}
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-unlink-3.html}
+
+Gnulib module: unlink
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is declared in a different header file (namely, @code{<stdio.h>})
+on some platforms:
+MSVC 14.
+@item
+Some systems mistakenly succeed on @code{unlink("link-to-file/")}:
+GNU/Hurd, FreeBSD 7.2, AIX 7.1, Solaris 9.
+@item
+On Mac OS X 10.10, in a writable HFS mount, @code{unlink("..")} succeeds
+without doing anything.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Some systems allow a superuser to unlink directories, even though this
+can cause file system corruption.  The error given if a process is not
+permitted to unlink directories varies across implementations; it is
+not always the POSIX value of @code{EPERM}.  Meanwhile, if a process
+has the ability to unlink directories, POSIX requires that
+@code{unlink("symlink-to-dir/")} remove @file{dir} and leave
+@file{symlink-to-dir} dangling; this behavior is counter-intuitive.
+The gnulib module @code{unlinkdir} can help determine whether code must be
+cautious of unlinking directories.
+@item
+Removing an open file is non-portable: On Unix this allows the programs that
+have the file already open to continue working with it; the file's storage
+is only freed when the no process has the file open any more.  On Windows,
+the attempt to remove an open file fails.
+@end itemize

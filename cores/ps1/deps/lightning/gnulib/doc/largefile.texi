@@ -1,0 +1,8 @@
+@node Large File Support
+@section Large File Support
+
+The module provides support for files larger than 2 GB.
+To this effect, it ensures that @code{off_t} is a 64-bit integer type
+at least on the following platforms:
+glibc, Mac OS X, FreeBSD, NetBSD, OpenBSD, AIX, HP-UX, IRIX, Solaris,
+Cygwin, mingw, MSVC.

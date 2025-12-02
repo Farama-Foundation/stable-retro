@@ -1,0 +1,28 @@
+Description:
+Uppercase mapping for UTF-16 substrings (locale dependent).
+
+Files:
+lib/unicase/u16-ct-toupper.c
+
+Depends-on:
+unicase/base
+unicase/u8-casemap
+unicase/special-casing
+unicase/toupper
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u16-ct-toupper])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U16_CT_TOUPPER
+lib_SOURCES += unicase/u16-ct-toupper.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

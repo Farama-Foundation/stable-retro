@@ -1,0 +1,30 @@
+@node popen
+@section @code{popen}
+@findex popen
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/popen.html}
+
+Gnulib module: popen
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+MSVC 14.
+@item
+Some platforms start the child with closed stdin or stdout if the
+standard descriptors were closed in the parent:
+Cygwin 1.5.x.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On native Windows platforms, this functions terminates the current process
+with exit code 127 if the environment variable @code{COMSPEC} is not set.
+@item
+Some platforms mistakenly set the close-on-exec bit, then if it is
+cleared by the application, the platform then leaks file descriptors
+from earlier @code{popen} calls into subsequent @code{popen} children:
+Cygwin 1.5.x.
+@end itemize

@@ -1,0 +1,26 @@
+Description:
+remainder() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/remainder-ieee.m4
+
+Depends-on:
+remainder
+fpieee
+
+configure.ac:
+gl_FUNC_REMAINDER_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(REMAINDER_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

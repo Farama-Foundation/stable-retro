@@ -1,0 +1,44 @@
+Description:
+Read, set or clear the non-blocking file descriptor flag.
+
+Files:
+lib/nonblocking.h
+lib/nonblocking.c
+m4/nonblocking.m4
+lib/stdio-read.c
+lib/stdio-write.c
+m4/asm-underscore.m4
+
+Depends-on:
+fcntl-h
+ioctl
+msvc-nothrow
+stdbool
+stdio
+sys_socket
+unistd
+
+configure.ac:
+gl_NONBLOCKING_IO
+gl_FCNTL_MODULE_INDICATOR([nonblocking])
+dnl Define the C macro GNULIB_NONBLOCKING to 1.
+gl_MODULE_INDICATOR([nonblocking])
+dnl Define the substituted variable GNULIB_STDIO_H_NONBLOCKING to 1.
+AC_REQUIRE([gl_STDIO_H_DEFAULTS])
+AC_REQUIRE([gl_ASM_SYMBOL_PREFIX])
+GNULIB_STDIO_H_NONBLOCKING=1
+dnl Define the substituted variable GNULIB_UNISTD_H_NONBLOCKING to 1.
+AC_REQUIRE([gl_UNISTD_H_DEFAULTS])
+GNULIB_UNISTD_H_NONBLOCKING=1
+
+Makefile.am:
+lib_SOURCES += nonblocking.c
+
+Include:
+"nonblocking.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

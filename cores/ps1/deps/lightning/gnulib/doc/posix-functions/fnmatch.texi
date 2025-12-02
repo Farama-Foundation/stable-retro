@@ -1,0 +1,23 @@
+@node fnmatch
+@section @code{fnmatch}
+@findex fnmatch
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fnmatch.html}
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-fnmatch-3.html}
+
+Gnulib module: fnmatch or fnmatch-gnu
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+This function is broken on some platforms:
+some versions of glibc, NetBSD 7.1, some versions of Solaris.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

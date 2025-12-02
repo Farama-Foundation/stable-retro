@@ -1,0 +1,35 @@
+Description:
+Iterating through multibyte strings.
+
+Files:
+lib/mbiter.h
+lib/mbiter.c
+m4/mbiter.m4
+m4/mbrtowc.m4
+
+Depends-on:
+extern-inline
+mbchar
+mbrtowc
+mbsinit
+wchar
+stdbool
+
+configure.ac:
+gl_MBITER
+
+Makefile.am:
+lib_SOURCES += mbiter.h mbiter.c
+
+Include:
+"mbiter.h"
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+$(LIB_MBRTOWC)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

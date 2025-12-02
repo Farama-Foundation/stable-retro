@@ -1,0 +1,18 @@
+@node authunix_create_default
+@subsection @code{authunix_create_default}
+@findex authunix_create_default
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/authunix_create_default.3.html,,man authunix_create_default}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, HP-UX 11, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

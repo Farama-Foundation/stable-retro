@@ -1,0 +1,49 @@
+@node sys/socket.h
+@section @file{sys/socket.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_socket.h.html}
+
+Gnulib module: sys_socket
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+mingw, MSVC 14.
+@item
+This header file is not self-contained on some platforms: it requires
+@code{<sys/types.h>} to be included first.
+@item
+This header file does not define the type @code{socklen_t} on some platforms:
+IRIX 6.5.
+@item
+This header file does not define the type @code{struct iovec} on some platforms:
+OpenBSD 4.4.
+@item
+This header file is lacking the @code{SHUT_RD}, @code{SHUT_WR},
+@code{SHUT_RDWR} macros on some platforms, despite having the @code{shutdown}
+functions:
+emx+gcc.
+@item
+The @code{struct sockaddr_storage} type does not have a member @code{ss_family}
+on some platforms:
+AIX 7.1.
+@item
+The @code{CMSG_SPACE} and @code{CMSG_LEN} macros are not provided on some
+platforms:
+OpenVMS.
+@item
+This header file does not define the @code{SO_REUSEPORT} macro on some
+platforms:
+Minix 3.1.8, Solaris 10, Cygwin, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file does not declare the @code{msg_control} and
+@code{msg_controllen} members of @code{struct msghdr} on some
+platforms.  This can be detected by the absence of the
+@code{CMSG_FIRSTHDR} macro:
+gnulib replacement header, old BSD
+@end itemize

@@ -1,0 +1,18 @@
+@node opterr
+@section @code{opterr}
+@findex opterr
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/opterr.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This variable is missing on some platforms:
+IRIX 6.5, MSVC 14.
+@end itemize

@@ -1,0 +1,23 @@
+Description:
+Convert string to 'uintmax_t', with error checking.
+
+Files:
+lib/xstrtoumax.c
+
+Depends-on:
+xstrtol
+strtoumax
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += xstrtoumax.c
+
+Include:
+"xstrtol.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert

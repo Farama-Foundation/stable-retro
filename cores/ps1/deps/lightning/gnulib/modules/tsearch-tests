@@ -1,0 +1,28 @@
+Files:
+tests/test-tsearch.sh
+tests/test-tsearch.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+stdint
+
+configure.ac:
+TEST_TSEARCH_LIBM=
+AC_LINK_IFELSE(
+  [AC_LANG_PROGRAM(
+     [[#ifndef __NO_MATH_INLINES
+       # define __NO_MATH_INLINES 1 /* for glibc */
+       #endif
+       #include <math.h>
+       double x;]],
+     [[x = log (x);]])],
+  [],
+  [TEST_TSEARCH_LIBM=-lm])
+AC_SUBST([TEST_TSEARCH_LIBM])
+AC_CHECK_FUNCS_ONCE([initstate])
+
+Makefile.am:
+TESTS += test-tsearch.sh
+check_PROGRAMS += test-tsearch
+test_tsearch_LDADD = $(LDADD) @TEST_TSEARCH_LIBM@

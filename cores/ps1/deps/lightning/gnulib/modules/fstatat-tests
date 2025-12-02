@@ -1,0 +1,19 @@
+Files:
+tests/test-fstatat.c
+tests/test-lstat.h
+tests/test-stat.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+getcwd-lgpl
+ignore-value
+openat-h
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fstatat
+check_PROGRAMS += test-fstatat
+test_fstatat_LDADD = $(LDADD) @LIBINTL@

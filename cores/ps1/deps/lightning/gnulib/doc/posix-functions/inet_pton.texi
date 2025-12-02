@@ -1,0 +1,26 @@
+@node inet_pton
+@section @code{inet_pton}
+@findex inet_pton
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/inet_pton.html}
+
+Gnulib module: inet_pton
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+HP-UX 11.00, mingw, MSVC 14.
+@item
+This function is declared in @code{<netdb.h>} instead of @code{<arpa/inet.h>}
+on some platforms:
+NonStop Kernel.
+@item
+This function is declared in @code{<ws2tcpip.h>}, with a POSIX incompatible
+declaration, on some platforms:
+MSVC 14 on Windows >= Vista.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

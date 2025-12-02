@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_ids_binary_operator.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_ids_binary_operator
+check_PROGRAMS += test-pr_ids_binary_operator
+test_pr_ids_binary_operator_SOURCES = unictype/test-pr_ids_binary_operator.c
+test_pr_ids_binary_operator_LDADD = $(LDADD) $(LIBUNISTRING)

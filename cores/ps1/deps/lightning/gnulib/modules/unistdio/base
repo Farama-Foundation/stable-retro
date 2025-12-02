@@ -1,0 +1,32 @@
+Description:
+Base layer for formatted output to strings.
+
+Files:
+lib/unistdio.in.h
+m4/libunistring-base.m4
+
+Depends-on:
+unitypes
+
+configure.ac:
+gl_LIBUNISTRING_LIBHEADER([0.9.4], [unistdio.h])
+
+Makefile.am:
+BUILT_SOURCES += $(LIBUNISTRING_UNISTDIO_H)
+
+unistdio.h: unistdio.in.h
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  cat $(srcdir)/unistdio.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+MOSTLYCLEANFILES += unistdio.h unistdio.h-t
+
+Include:
+"unistdio.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

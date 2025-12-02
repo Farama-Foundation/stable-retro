@@ -1,0 +1,26 @@
+Files:
+tests/nap.h
+tests/test-futimens.h
+tests/test-lutimens.h
+tests/test-utimens.h
+tests/test-utimens-common.h
+tests/test-fdutimensat.c
+tests/macros.h
+
+Depends-on:
+fcntl-h
+ignore-value
+intprops
+nanosleep
+openat
+timespec
+dup
+utimecmp
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fdutimensat
+check_PROGRAMS += test-fdutimensat
+test_fdutimensat_LDADD = $(LDADD) $(LIB_CLOCK_GETTIME) \
+  $(LIB_NANOSLEEP) @LIBINTL@

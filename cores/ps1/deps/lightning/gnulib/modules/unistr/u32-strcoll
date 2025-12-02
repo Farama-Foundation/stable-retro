@@ -1,0 +1,29 @@
+Description:
+Compare UTF-32 strings using the collation rules of the current locale.
+
+Files:
+lib/unistr/u32-strcoll.c
+lib/unistr/u-strcoll.h
+
+Depends-on:
+unistr/base
+unistr/u32-strcmp
+uniconv/u32-strconv-to-enc
+localcharset
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.4], [unistr/u32-strcoll])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_STRCOLL
+lib_SOURCES += unistr/u32-strcoll.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

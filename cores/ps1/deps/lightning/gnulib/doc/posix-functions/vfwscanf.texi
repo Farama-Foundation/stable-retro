@@ -1,0 +1,23 @@
+@node vfwscanf
+@section @code{vfwscanf}
+@findex vfwscanf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/vfwscanf.html}
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-vfwscanf.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+NetBSD 3.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11.23, IRIX 6.5, Cygwin 1.5.x, Android 4.4.
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and therefore cannot
+accommodate all Unicode characters.
+@end itemize

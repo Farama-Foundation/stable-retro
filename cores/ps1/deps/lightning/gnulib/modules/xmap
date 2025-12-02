@@ -1,0 +1,26 @@
+Description:
+Abstract map data type, with out-of-memory checking.
+
+Files:
+lib/gl_xmap.h
+lib/gl_xmap.c
+
+Depends-on:
+map
+extern-inline
+stdbool
+xalloc-die
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_xmap.h gl_xmap.c
+
+Include:
+"gl_xmap.h"
+
+License:
+GPL
+
+Maintainer:
+all

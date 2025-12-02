@@ -1,0 +1,20 @@
+Files:
+tests/test-time-c++.cc
+tests/test-time-c++2.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-time-c++
+check_PROGRAMS += test-time-c++
+test_time_c___SOURCES = test-time-c++.cc test-time-c++2.cc
+test_time_c___LDADD = $(LDADD) $(LIBINTL) $(LIB_NANOSLEEP)
+endif

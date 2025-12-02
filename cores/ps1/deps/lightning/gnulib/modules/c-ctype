@@ -1,0 +1,24 @@
+Description:
+Character handling in C locale.
+
+Files:
+lib/c-ctype.h
+lib/c-ctype.c
+
+Depends-on:
+extern-inline
+stdbool
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += c-ctype.h c-ctype.c
+
+Include:
+"c-ctype.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,22 @@
+@node wcscpy
+@section @code{wcscpy}
+@findex wcscpy
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/wcscpy.html}
+
+Gnulib module: wcscpy
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and therefore cannot
+accommodate all Unicode characters.
+@end itemize
+
+Note: @code{wcscpy (dst, src)} is only safe to use when you can guarantee that
+there are at least @code{wcslen (src) + 1} wide characters allocated at
+@code{dst}.

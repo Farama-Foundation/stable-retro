@@ -1,0 +1,22 @@
+Description:
+Password-Based Key Derivation Function according to PKCS#5/RFC2898
+
+Files:
+lib/gc-pbkdf2.c
+
+Depends-on:
+crypto/gc
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gc-pbkdf2.c
+
+Include:
+"gc.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

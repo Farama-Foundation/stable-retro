@@ -1,0 +1,31 @@
+Description:
+Retrieving the file descriptor of an open directory stream.  (Unportable.)
+
+Files:
+lib/dirfd.c
+m4/dirfd.m4
+
+Depends-on:
+dirent
+extensions
+errno           [test $ac_cv_func_dirfd = no && test $gl_cv_func_dirfd_macro = no || test $REPLACE_DIRFD = 1]
+
+configure.ac:
+gl_FUNC_DIRFD
+if test $ac_cv_func_dirfd = no && test $gl_cv_func_dirfd_macro = no \
+   || test $REPLACE_DIRFD = 1; then
+  AC_LIBOBJ([dirfd])
+  gl_PREREQ_DIRFD
+fi
+gl_DIRENT_MODULE_INDICATOR([dirfd])
+
+Makefile.am:
+
+Include:
+<dirent.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

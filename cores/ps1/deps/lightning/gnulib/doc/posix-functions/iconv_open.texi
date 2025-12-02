@@ -1,0 +1,54 @@
+@node iconv_open
+@section @code{iconv_open}
+@findex iconv_open
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/iconv_open.html}
+
+Gnulib module: iconv, iconv_open, iconv_open-utf
+
+Portability problems fixed by either Gnulib module @code{iconv} or @code{iconv_open}:
+@itemize
+@item
+GNU libiconv is not found if installed in @file{$PREFIX/lib}.
+@end itemize
+
+Portability problems handled by either Gnulib module @code{iconv} or @code{iconv_open}
+(in the sense that @code{HAVE_ICONV} does not get defined if the system's
+@code{iconv_open} function has this problem):
+@itemize
+@item
+No converter from EUC-JP to UTF-8 is provided on some platforms:
+HP-UX 11.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{iconv_open}:
+@itemize
+@item
+This function recognizes only non-standard aliases for many encodings (not
+the IANA registered encoding names) on many platforms:
+AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11 2010-11, z/OS.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{iconv_open-utf}:
+@itemize
+@item
+This function does not support the encodings UTF-16BE, UTF-16LE, UTF-32BE,
+UTF-32LE on many platforms:
+AIX 5.1, HP-UX 11, IRIX 6.5.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, FreeBSD 6.0, OpenBSD 6.7, Minix 3.1.8, Cygwin 2.9, mingw, MSVC 14, Android 8.1,
+when GNU libiconv is not installed.
+@item
+For some encodings A and B, this function cannot convert directly from A to B,
+although an indirect conversion from A through UTF-8 to B is possible.  This
+occurs on some platforms: Solaris 11 2010-11.  Gnulib provides a higher-level
+facility @code{striconveh} (a wrapper around @code{iconv}) that deals with
+this problem.
+@item
+The set of supported encodings and conversions is system dependent.
+@end itemize

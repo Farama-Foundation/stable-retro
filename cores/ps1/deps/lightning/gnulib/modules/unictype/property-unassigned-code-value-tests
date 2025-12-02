@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_unassigned_code_value.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_unassigned_code_value
+check_PROGRAMS += test-pr_unassigned_code_value
+test_pr_unassigned_code_value_SOURCES = unictype/test-pr_unassigned_code_value.c
+test_pr_unassigned_code_value_LDADD = $(LDADD) $(LIBUNISTRING)

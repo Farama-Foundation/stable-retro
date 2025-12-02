@@ -1,0 +1,11 @@
+Files:
+tests/signature.h
+tests/test-getdomainname.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getdomainname
+check_PROGRAMS += test-getdomainname

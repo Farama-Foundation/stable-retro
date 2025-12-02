@@ -1,0 +1,13 @@
+Files:
+tests/test-fpending.c
+tests/test-fpending.sh
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fpending.sh
+check_PROGRAMS += test-fpending
+MOSTLYCLEANFILES += test-fpending.t

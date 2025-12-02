@@ -1,0 +1,11 @@
+Files:
+tests/test-poll-h.c
+
+Depends-on:
+poll-h-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-poll-h
+check_PROGRAMS += test-poll-h

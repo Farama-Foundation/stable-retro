@@ -1,0 +1,14 @@
+Files:
+tests/test-cosl.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+fpucw
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-cosl
+check_PROGRAMS += test-cosl
+test_cosl_LDADD = $(LDADD) @COSL_LIBM@

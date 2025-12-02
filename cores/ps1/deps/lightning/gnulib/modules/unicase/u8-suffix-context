@@ -1,0 +1,31 @@
+Description:
+Case-mapping context of suffix UTF-8 string.
+
+Files:
+lib/unicase/u8-suffix-context.c
+lib/unicase/u-suffix-context.h
+lib/unicase/context.h
+
+Depends-on:
+unicase/base
+unicase/empty-prefix-context
+unicase/ignorable
+unictype/combining-class
+unistr/u8-mbtouc-unsafe
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.10], [unicase/u8-suffix-context])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U8_SUFFIX_CONTEXT
+lib_SOURCES += unicase/u8-suffix-context.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

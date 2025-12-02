@@ -1,0 +1,44 @@
+@node ftello
+@section @code{ftello}
+@findex ftello
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/ftello.html}
+
+Gnulib module: ftello
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+The declaration of @code{ftello} in @code{<stdio.h>} is not enabled by default
+on some platforms:
+glibc 2.3.6.
+@item
+This function produces incorrect results after @code{putc} that followed a
+@code{getc} call that reached EOF on some platforms:
+Solaris 11 2010-11.
+@item
+This function, when invoked after @code{ungetc}, throws away the @code{ungetc}
+buffer, changes the stream's file position, and returns the wrong position on
+some platforms:
+macOS 10.15 and newer.
+@item
+This function fails on seekable stdin, stdout, and stderr: cygwin <= 1.5.24.
+@item
+On platforms where @code{off_t} is a 32-bit type, @code{ftello} does not work
+correctly with files larger than 2 GB@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function produces incorrect results immediately after @code{fseek} on some
+platforms:
+HP-UX 11.
+@item
+@code{fflush}, @code{ftell}, @code{ftello}, @code{fgetpos} behave incorrectly
+on input streams that are opened in @code{O_TEXT} mode and whose contents
+contains Unix line terminators (LF), on some platforms: mingw, MSVC 14.
+@end itemize

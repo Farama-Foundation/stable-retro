@@ -1,0 +1,28 @@
+Description:
+Find start of previous grapheme cluster in UTF-32 string.
+
+Files:
+lib/unigbrk/u32-grapheme-prev.c
+tests/macros.h
+
+Depends-on:
+unigbrk/uc-is-grapheme-break
+unistr/u32-prev
+
+configure.ac:
+gl_MODULE_INDICATOR([unigbrk/u32-grapheme-prev])
+gl_LIBUNISTRING_MODULE([0.9.8], [unigbrk/u32-grapheme-prev])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNIGBRK_U32_GRAPHEME_PREV
+lib_SOURCES += unigbrk/u32-grapheme-prev.c
+endif
+
+Include:
+"unigbrk.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+Ben Pfaff, Daiki Ueno

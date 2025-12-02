@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character is of general category Sm.
+
+Files:
+lib/unictype/categ_Sm.c
+lib/unictype/categ_Sm.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-Sm])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_SM
+lib_SOURCES += unictype/categ_Sm.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

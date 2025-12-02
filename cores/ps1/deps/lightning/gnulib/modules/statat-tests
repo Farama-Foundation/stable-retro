@@ -1,0 +1,12 @@
+Files:
+tests/test-statat.c
+
+Depends-on:
+fstatat-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-statat
+check_PROGRAMS += test-statat
+test_statat_LDADD = $(LDADD) @LIBINTL@

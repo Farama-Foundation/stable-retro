@@ -1,0 +1,22 @@
+Files:
+tests/test-ldexpf.c
+tests/test-ldexp.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+tests/randomf.c
+
+Depends-on:
+isnanf-nolibm
+signbit
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ldexpf
+check_PROGRAMS += test-ldexpf
+test_ldexpf_SOURCES = test-ldexpf.c randomf.c
+test_ldexpf_LDADD = $(LDADD) @LDEXPF_LIBM@

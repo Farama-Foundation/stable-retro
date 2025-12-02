@@ -1,0 +1,19 @@
+Description:
+Prefer GNU C11 and C++11 to earlier versions.
+
+Files:
+m4/std-gnu11.m4
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+all

@@ -1,0 +1,26 @@
+Description:
+rmdir errno for nonempty directories
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+m4/rmdir-errno.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_RMDIR_NOTEMPTY
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

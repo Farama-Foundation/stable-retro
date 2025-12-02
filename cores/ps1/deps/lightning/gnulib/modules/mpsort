@@ -1,0 +1,24 @@
+Description:
+Sort a vector of pointers to data.
+
+Files:
+lib/mpsort.h
+lib/mpsort.c
+m4/mpsort.m4
+
+Depends-on:
+
+configure.ac:
+gl_MPSORT
+
+Makefile.am:
+lib_SOURCES += mpsort.c
+
+Include:
+"mpsort.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert

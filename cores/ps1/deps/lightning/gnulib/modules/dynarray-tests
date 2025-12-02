@@ -1,0 +1,11 @@
+Files:
+tests/test-dynarray.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-dynarray
+check_PROGRAMS += test-dynarray

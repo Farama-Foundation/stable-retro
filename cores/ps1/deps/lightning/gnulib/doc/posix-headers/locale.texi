@@ -1,0 +1,37 @@
+@node locale.h
+@section @file{locale.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/locale.h.html}
+
+Gnulib module: locale
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+The definition of @samp{LC_MESSAGES} is missing on some platforms:
+mingw, MSVC 14.
+
+@item
+The @code{locale_t} type is not defined on some platforms:
+glibc 2.11, macOS 11.1.
+
+@item
+The @code{struct lconv} type does not contain any members on some platforms:
+Android up to 2014.
+
+@item
+The @code{struct lconv} type does not contain the members
+@code{int_p_cs_precedes}, @code{int_p_sign_posn}, @code{int_p_sep_by_space},
+@code{int_n_cs_precedes}, @code{int_n_sign_posn}, @code{int_n_sep_by_space}
+on some platforms:
+glibc, OpenBSD 4.9, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 1.5.x, mingw, MSVC 14.
+
+@item
+Some platforms provide a @code{NULL} macro that cannot be used in arbitrary
+expressions:
+NetBSD 5.0
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

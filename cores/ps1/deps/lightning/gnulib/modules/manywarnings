@@ -1,0 +1,17 @@
+Description:
+Helper M4 functions to help work out a set of warning parameters to use.
+
+Files:
+m4/manywarnings.m4
+m4/manywarnings-c++.m4
+
+Depends-on:
+warnings
+
+configure.ac:
+
+License:
+unlimited
+
+Maintainer:
+Simon Josefsson

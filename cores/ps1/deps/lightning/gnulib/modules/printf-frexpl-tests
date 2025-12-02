@@ -1,0 +1,12 @@
+Files:
+tests/test-printf-frexpl.c
+tests/macros.h
+
+Depends-on:
+fpucw
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-printf-frexpl
+check_PROGRAMS += test-printf-frexpl

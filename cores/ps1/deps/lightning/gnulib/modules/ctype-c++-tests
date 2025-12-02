@@ -1,0 +1,19 @@
+Files:
+tests/test-ctype-c++.cc
+tests/test-ctype-c++2.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-ctype-c++
+check_PROGRAMS += test-ctype-c++
+test_ctype_c___SOURCES = test-ctype-c++.cc test-ctype-c++2.cc
+endif

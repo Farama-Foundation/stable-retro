@@ -1,0 +1,29 @@
+Description:
+execlp() function: Execute a program, replacing the current process.
+
+Files:
+lib/execlp.c
+m4/execlp.m4
+
+Depends-on:
+unistd
+execvp          [test $REPLACE_EXECLP = 1]
+malloca         [test $REPLACE_EXECLP = 1]
+
+configure.ac:
+gl_FUNC_EXECLP
+if test $REPLACE_EXECLP = 1; then
+  AC_LIBOBJ([execlp])
+fi
+gl_UNISTD_MODULE_INDICATOR([execlp])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

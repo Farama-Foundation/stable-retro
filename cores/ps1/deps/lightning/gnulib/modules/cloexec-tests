@@ -1,0 +1,14 @@
+Files:
+tests/test-cloexec.c
+tests/macros.h
+
+Depends-on:
+binary-io
+getdtablesize
+msvc-nothrow
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-cloexec
+check_PROGRAMS += test-cloexec

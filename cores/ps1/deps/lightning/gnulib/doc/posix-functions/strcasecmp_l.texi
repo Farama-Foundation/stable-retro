@@ -1,0 +1,18 @@
+@node strcasecmp_l
+@section @code{strcasecmp_l}
+@findex strcasecmp_l
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strcasecmp_l.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on many platforms:
+FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.0, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.3, Cygwin 1.7.x, mingw, MSVC 14, Android 5.1.
+@end itemize

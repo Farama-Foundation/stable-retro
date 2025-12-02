@@ -1,0 +1,16 @@
+@node arpa/inet.h
+@section @file{arpa/inet.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/arpa_inet.h.html}
+
+Gnulib module: arpa_inet
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms: mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

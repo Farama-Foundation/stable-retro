@@ -1,0 +1,21 @@
+Description:
+Test whether a Unicode character belongs to a given bitmask of categories.
+
+Files:
+
+Depends-on:
+unictype/base
+unictype/category-of
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"unictype.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

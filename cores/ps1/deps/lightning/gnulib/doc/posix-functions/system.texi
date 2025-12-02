@@ -1,0 +1,28 @@
+@node system
+@section @code{system}
+@findex system
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/system.html}
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-system-3.html}
+
+Gnulib module: system-posix
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+The macros @code{WIFSIGNALED}, @code{WIFEXITED}, @code{WIFSTOPPED},
+@code{WTERMSIG}, @code{WEXITSTATUS}, @code{WNOHANG}, @code{WUNTRACED},
+@code{WSTOPSIG} are not defined in @code{<stdlib.h>} (only in
+@code{<sys/wait.h>}) on some platforms:
+MirBSD 10.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), the command processor used by the
+@code{system} function is @file{cmd.exe}, not @file{/bin/sh}.  Accordingly,
+the rules for quoting shell arguments containing spaces, quote or other special
+characters are different.
+@end itemize

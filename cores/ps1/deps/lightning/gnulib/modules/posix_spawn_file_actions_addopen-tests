@@ -1,0 +1,15 @@
+Files:
+tests/test-posix_spawn_file_actions_addopen.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+getdtablesize
+posix_spawn_file_actions_init
+posix_spawn_file_actions_destroy
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-posix_spawn_file_actions_addopen
+check_PROGRAMS += test-posix_spawn_file_actions_addopen

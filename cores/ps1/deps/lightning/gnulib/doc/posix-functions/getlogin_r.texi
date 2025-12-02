@@ -1,0 +1,36 @@
+@node getlogin_r
+@section @code{getlogin_r}
+@findex getlogin_r
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/getlogin_r.html}
+
+Gnulib module: getlogin_r
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+NetBSD 3.0, Minix 3.1.8, mingw, MSVC 14, Android 8.1.
+@item
+This function is not declared unless @code{_REENTRANT} is defined,
+on some platforms:
+HP-UX 11.
+@item
+This function returns a truncated result, instead of failing with error code
+@code{ERANGE}, when the buffer is not large enough, on some platforms:
+macOS 11.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function has an incompatible declaration on some platforms:
+MidnightBSD 2.0, Solaris 11.4 (when @code{_POSIX_PTHREAD_SEMANTICS} is not defined).
+@item
+This function fails even when standard input is a tty on some platforms:
+HP-UX 11.11.
+@item
+This function fails with error code @code{EINVAL} instead of @code{ERANGE} when
+the second argument is zero on some platforms:
+HP-UX 11.31.
+@end itemize

@@ -1,0 +1,29 @@
+Description:
+Generalization of the <ctype.h> isalnum() function and the
+<wctype.h> iswalnum() function.
+
+Files:
+lib/unictype/ctype_alnum.c
+lib/unictype/ctype_alnum.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/ctype-alnum])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CTYPE_ALNUM
+lib_SOURCES += unictype/ctype_alnum.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

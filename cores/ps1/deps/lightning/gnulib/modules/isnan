@@ -1,0 +1,27 @@
+Description:
+isnan macro: test for NaN value.
+
+Files:
+m4/isnan.m4
+
+Depends-on:
+isnanf
+isnand
+isnanl
+math
+extensions
+
+configure.ac:
+gl_ISNAN
+gl_MATH_MODULE_INDICATOR([isnan])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+License:
+LGPL
+
+Maintainer:
+Ben Pfaff

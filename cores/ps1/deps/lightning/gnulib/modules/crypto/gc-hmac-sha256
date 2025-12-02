@@ -1,0 +1,24 @@
+Description:
+Generic crypto wrappers for HMAC-SHA256 functions.
+
+Files:
+m4/gc-hmac-sha256.m4
+
+Depends-on:
+crypto/gc
+crypto/hmac-sha256 [test "$ac_cv_libgcrypt" != yes]
+
+configure.ac:
+gl_GC_HMAC_SHA256
+gl_MODULE_INDICATOR([gc-hmac-sha256])
+
+Makefile.am:
+
+Include:
+"gc.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

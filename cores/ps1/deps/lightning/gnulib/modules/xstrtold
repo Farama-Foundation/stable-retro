@@ -1,0 +1,26 @@
+Description:
+Convert string to 'long double', with error checking.
+
+Files:
+lib/xstrtod.h
+lib/xstrtod.c
+lib/xstrtold.c
+m4/xstrtod.m4
+
+Depends-on:
+stdbool
+
+configure.ac:
+gl_XSTRTOLD
+
+Makefile.am:
+lib_SOURCES += xstrtold.c
+
+Include:
+"xstrtod.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

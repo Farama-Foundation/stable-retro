@@ -1,0 +1,18 @@
+@node free
+@section @code{free}
+@findex free
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/free.html}
+
+Gnulib module: free-posix
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function may clobber @code{errno} on many platforms:
+glibc 2.32, Mac OS X, FreeBSD, NetBSD, OpenBSD 4.4, Minix, AIX, HP-UX, IRIX, Cygwin, mingw, MSVC.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

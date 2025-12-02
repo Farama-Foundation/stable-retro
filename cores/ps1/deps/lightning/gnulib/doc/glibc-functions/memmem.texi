@@ -1,0 +1,57 @@
+@node memmem
+@subsection @code{memmem}
+@findex memmem
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-memmem-3.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Search Functions,,Search Functions,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Search-Functions.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/memmem.3.html,,man memmem}.
+@end itemize
+
+Gnulib module: memmem or memmem-simple
+
+Both modules implement the same replacement for the @code{memmem} function
+with the @code{memmem} module providing a replacement on more platforms where
+the existing @code{memmem} function has a quadratic worst-case complexity.
+
+Portability problems fixed by either Gnulib module @code{memmem-simple}
+or @code{memmem}:
+@itemize
+@item
+This function is missing on some platforms:
+Mac OS X 10.5, FreeBSD 5.2.1, OpenBSD 4.0, Minix 3.1.8, HP-UX 11, IRIX 6.5, Solaris 10, mingw, MSVC 14.
+@item
+This function has reversed arguments on some older platforms:
+Linux libc 5.0.9
+@item
+This function can trigger false positives for long periodic needles on
+some platforms:
+glibc 2.12, Cygwin 1.7.7.
+
+@item
+This function returns incorrect values in some cases, such as when
+given an empty needle:
+glibc <= 2.0, Solaris 11.4, Cygwin 1.5.x.
+@end itemize
+
+Performance problems fixed by Gnulib module @code{memmem}:
+@itemize
+@item
+This function has quadratic instead of linear worst-case complexity on some
+platforms:
+glibc 2.8, FreeBSD 6.2, NetBSD 9.0, AIX 5.1, Solaris 11.4, Cygwin 1.5.x.
+Note for small needles the replacement may be slower.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

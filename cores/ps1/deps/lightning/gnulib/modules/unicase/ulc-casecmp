@@ -1,0 +1,32 @@
+Description:
+Case and normalization insensitive comparison of strings.
+
+Files:
+lib/unicase/ulc-casecmp.c
+lib/unicase/u-casecmp.h
+
+Depends-on:
+unicase/base
+unicase/u8-casefold
+uninorm/decomposing-form
+uniconv/u8-conv-from-enc
+unistr/u8-cmp2
+localcharset
+minmax
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/ulc-casecmp])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_ULC_CASECMP
+lib_SOURCES += unicase/ulc-casecmp.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

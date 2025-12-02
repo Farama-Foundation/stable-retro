@@ -1,0 +1,35 @@
+Description:
+Case mapping for UTF-32 strings (locale dependent).
+
+Files:
+lib/unicase/unicasemap.h
+lib/unicase/u32-casemap.c
+lib/unicase/u-casemap.h
+lib/unicase/context.h
+
+Depends-on:
+unicase/base
+unicase/cased
+unicase/ignorable
+unicase/special-casing
+unictype/combining-class
+unictype/property-soft-dotted
+unistr/u32-mbtouc-unsafe
+unistr/u32-uctomb
+unistr/u32-cpy
+uninorm/u32-normalize
+stdbool
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += unicase/u32-casemap.c
+
+Include:
+"unicase/unicasemap.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

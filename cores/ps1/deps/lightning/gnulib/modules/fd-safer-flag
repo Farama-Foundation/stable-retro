@@ -1,0 +1,27 @@
+Description:
+fd_safer_flag() function: adjust a file descriptor result so that it avoids
+clobbering STD{IN,OUT,ERR}_FILENO, with specific flags.
+
+Files:
+lib/fd-safer-flag.c
+lib/dup-safer-flag.c
+
+Depends-on:
+cloexec
+fcntl
+unistd-safer
+
+configure.ac:
+gl_MODULE_INDICATOR([fd-safer-flag])
+
+Makefile.am:
+lib_SOURCES += fd-safer-flag.c dup-safer-flag.c
+
+Include:
+"unistd-safer.h"
+
+License:
+GPL
+
+Maintainer:
+Eric Blake

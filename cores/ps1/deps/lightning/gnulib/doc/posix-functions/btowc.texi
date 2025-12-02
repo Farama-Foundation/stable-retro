@@ -1,0 +1,34 @@
+@node btowc
+@section @code{btowc}
+@findex btowc
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/btowc.html}
+
+Gnulib module: btowc
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, HP-UX 11.00, mingw.
+@item
+This function returns WEOF for a NUL argument on some platforms:
+Cygwin 1.7.2.
+@item
+This function does not return WEOF for an EOF argument on some platforms:
+IRIX 6.5.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and
+therefore cannot accommodate all Unicode characters.
+However, the Gnulib function @code{btoc32}, provided by Gnulib module
+@code{btoc32}, operates on 32-bit wide characters and therefore does not have
+this limitation.
+@item
+In the C or POSIX locales, this function is not consistent with
+Gnulib's @code{mbrtowc} and can return @code{WEOF}:
+glibc 2.23, MirOS BSD #10.
+@end itemize

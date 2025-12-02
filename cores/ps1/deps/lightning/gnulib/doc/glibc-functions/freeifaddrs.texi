@@ -1,0 +1,18 @@
+@node freeifaddrs
+@subsection @code{freeifaddrs}
+@findex freeifaddrs
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/freeifaddrs.3.html,,man freeifaddrs}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14, Android 6.0.
+@end itemize

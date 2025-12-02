@@ -1,0 +1,27 @@
+Description:
+Query, remove or restore a Solaris privilege
+
+Files:
+lib/priv-set.h
+lib/priv-set.c
+m4/priv-set.m4
+
+Depends-on:
+errno
+extern-inline
+stdbool
+
+configure.ac:
+gl_PRIV_SET
+
+Makefile.am:
+lib_SOURCES += priv-set.c
+
+Include:
+"priv-set.h"
+
+License:
+GPL
+
+Maintainer:
+David Bartley

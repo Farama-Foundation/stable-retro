@@ -1,0 +1,24 @@
+Description:
+Allow use of faster, non-thread-safe stdio functions if available,
+in specific modules.
+
+Files:
+lib/unlocked-io.h
+m4/unlocked-io.m4
+
+Depends-on:
+extensions
+
+configure.ac:
+gl_FUNC_GLIBC_UNLOCKED_IO
+
+Makefile.am:
+
+Include:
+"unlocked-io.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

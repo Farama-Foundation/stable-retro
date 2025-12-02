@@ -1,0 +1,30 @@
+Description:
+Whether a file has an ACL.
+
+Files:
+lib/acl-internal.h
+lib/file-has-acl.c
+m4/acl.m4
+
+Depends-on:
+acl-permissions
+free-posix
+stat
+
+configure.ac:
+gl_FILE_HAS_ACL
+
+Makefile.am:
+lib_SOURCES += file-has-acl.c
+
+Include:
+"acl.h"
+
+Link:
+$(LIB_HAS_ACL)
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

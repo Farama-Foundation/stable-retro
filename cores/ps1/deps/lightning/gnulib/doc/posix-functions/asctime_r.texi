@@ -1,0 +1,24 @@
+@node asctime_r
+@section @code{asctime_r}
+@findex asctime_r
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/asctime_r.html}
+
+Gnulib module: extensions
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function has an incompatible declaration on some platforms:
+Solaris 11.4 (when @code{_POSIX_PTHREAD_SEMANTICS} is not defined).
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+This function may put more than 26 bytes into the argument buffer if an
+invalid year is passed.
+@end itemize

@@ -1,0 +1,31 @@
+Description:
+strtoull() function: convert string to 'unsigned long long'.
+
+Files:
+lib/strtol.c
+lib/strtoul.c
+lib/strtoull.c
+m4/strtoull.m4
+
+Depends-on:
+limits-h
+stdlib
+
+configure.ac:
+gl_FUNC_STRTOULL
+if test $HAVE_STRTOULL = 0; then
+  AC_LIBOBJ([strtoull])
+  gl_PREREQ_STRTOULL
+fi
+gl_STDLIB_MODULE_INDICATOR([strtoull])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPL
+
+Maintainer:
+glibc

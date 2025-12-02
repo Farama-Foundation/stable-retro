@@ -1,0 +1,19 @@
+Files:
+tests/test-spawn-c++.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-spawn-c++
+check_PROGRAMS += test-spawn-c++
+test_spawn_c___SOURCES = test-spawn-c++.cc
+test_spawn_c___LDADD = $(LDADD) $(LIBINTL) $(LIB_NANOSLEEP)
+endif

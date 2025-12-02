@@ -1,0 +1,26 @@
+Description:
+printf_frexp() function: split a double into fraction and mantissa, for
+hexadecimal printf, without requiring libm.
+
+Files:
+lib/printf-frexp.h
+lib/printf-frexp.c
+m4/printf-frexp.m4
+m4/frexp.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_PRINTF_FREXP
+
+Makefile.am:
+lib_SOURCES += printf-frexp.c
+
+Include:
+"printf-frexp.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,14 @@
+Files:
+tests/test-parse-duration.sh
+tests/test-parse-duration.c
+
+Depends-on:
+strdup
+strerror
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-parse-duration.sh
+check_PROGRAMS += test-parse-duration
+test_parse_duration_LDADD = $(LDADD)

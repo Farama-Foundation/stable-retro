@@ -1,0 +1,33 @@
+Description:
+verror and verror_at_line functions: Error reporting with va_list.
+
+Notice:
+If you are using GNU gettext version 0.16.1 or older, add the following options
+to XGETTEXT_OPTIONS in your po/Makevars:
+  --flag=verror:3:c-format --flag=verror_at_line:5:c-format
+
+Files:
+lib/verror.h
+lib/verror.c
+
+Depends-on:
+stdio
+error
+xvasprintf
+
+configure.ac:
+m4_ifdef([AM_XGETTEXT_OPTION],
+  [AM_][XGETTEXT_OPTION([--flag=verror:3:c-format])
+   AM_][XGETTEXT_OPTION([--flag=verror_at_line:5:c-format])])
+
+Makefile.am:
+lib_SOURCES += verror.h verror.c
+
+Include:
+"verror.h"
+
+License:
+GPL
+
+Maintainer:
+Eric Blake

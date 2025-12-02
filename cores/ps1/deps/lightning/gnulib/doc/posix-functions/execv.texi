@@ -1,0 +1,33 @@
+@node execv
+@section @code{execv}
+@findex execv
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/execv.html}
+
+Gnulib module: execv
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), this function does not pass
+command-line arguments correctly if they contain space, tab, backslash,
+or double-quote characters.
+@item
+On Windows platforms (excluding Cygwin), this function spawns an asynchronous
+child process and then exits the current process immediately.  As a
+consequence, the parent of the current process 1. may incorrectly proceed
+as if its child had exited, and 2. will never see the child's exit status.
+@item
+On Windows platforms (excluding Cygwin), the return type of this function is
+@code{intptr_t}, not @code{int}.
+@end itemize
+
+Note: The Gnulib replacement for this function is not async-safe, that is,
+it must not be invoked from a signal handler.
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On some platforms, a script without executable permission is still run:
+Cygwin 1.5.x.
+@end itemize

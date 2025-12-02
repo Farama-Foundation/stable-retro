@@ -1,0 +1,27 @@
+@node stdout
+@section @code{stdout}
+@findex stdout
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/stdout.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+stdout is created in 32-bit mode instead of 64-bit mode: Cygwin 1.5.x.
+One workaround is to use freopen(NULL, ``w'', stdout) on Cygwin 1.5.21
+or newer.  Another is to use the gnulib @code{ftello} module and do
+ftello(stdout).
+@item
+POSIX states that a setuid application can guarantee that fd 1 is
+open, but some systems guarantee this even for non-setuid programs.
+If an application is executed with fd 1 closed, use of @code{stdout}
+can affect an unrelated file that happened to be assigned to fd 1.
+The gnulib *-safer modules may be used to guarantee that fd 1 stays
+reserved for @code{stdout}.
+@end itemize

@@ -1,0 +1,34 @@
+Description:
+forkpty() function: Open a pseudo-terminal, fork, and connect the child process
+to the pseudo-terminal's slave.
+
+Files:
+lib/forkpty.c
+m4/pty.m4
+
+Depends-on:
+pty
+unistd
+openpty
+login_tty
+
+configure.ac:
+gl_FUNC_FORKPTY
+if test $HAVE_FORKPTY = 0 || test $REPLACE_FORKPTY = 1; then
+  AC_LIBOBJ([forkpty])
+fi
+gl_PTY_MODULE_INDICATOR([forkpty])
+
+Makefile.am:
+
+Include:
+<pty.h>
+
+Link:
+$(PTY_LIB)
+
+License:
+LGPL
+
+Maintainer:
+Simon Josefsson

@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character is of general category Z.
+
+Files:
+lib/unictype/categ_Z.c
+lib/unictype/categ_Z.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-Z])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_Z
+lib_SOURCES += unictype/categ_Z.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

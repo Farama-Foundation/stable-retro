@@ -1,0 +1,27 @@
+Description:
+Conversion to UTF-32 from the locale encoding.
+
+Files:
+lib/uniconv/u32-strconv-from-locale.c
+
+Depends-on:
+uniconv/base
+uniconv/u32-strconv-from-enc
+localcharset
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [uniconv/u32-strconv-from-locale])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICONV_U32_STRCONV_FROM_LOCALE
+lib_SOURCES += uniconv/u32-strconv-from-locale.c
+endif
+
+Include:
+"uniconv.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,20 @@
+Description:
+If possible, ignore libraries that are not depended on.
+
+Files:
+m4/lib-ignore.m4
+
+Depends-on:
+
+configure.ac:
+gl_IGNORE_UNUSED_LIBRARIES
+
+Makefile.am:
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+Paul Eggert and Jim Meyering

@@ -1,0 +1,15 @@
+@node FD_ZERO
+@section @code{FD_ZERO}
+@findex FD_ZERO
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/FD_ZERO.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,7 @@
+@node fgetfilecon
+@subsection @code{fgetfilecon}
+@findex fgetfilecon
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/fgetfilecon.3.html,,man fgetfilecon}
+
+@getfileconDesc{fgetfilecon}

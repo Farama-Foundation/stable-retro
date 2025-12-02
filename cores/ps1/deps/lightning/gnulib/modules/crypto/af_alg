@@ -1,0 +1,32 @@
+Description:
+Compute message digest using kernel-supported cryptography algorithms.
+
+Files:
+lib/af_alg.h
+lib/af_alg.c
+lib/sys-limits.h
+m4/af_alg.m4
+
+Depends-on:
+c99             [test $USE_AF_ALG = 1]
+fflush          [test $USE_AF_ALG = 1]
+fseeko          [test $USE_AF_ALG = 1]
+ftello          [test $USE_AF_ALG = 1]
+fstat           [test $USE_AF_ALG = 1]
+sys_socket
+sys_stat
+
+configure.ac:
+gl_AF_ALG
+
+Makefile.am:
+lib_SOURCES += af_alg.c
+
+Include:
+"af_alg.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

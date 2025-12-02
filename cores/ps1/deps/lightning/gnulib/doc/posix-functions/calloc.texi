@@ -1,0 +1,22 @@
+@node calloc
+@section @code{calloc}
+@findex calloc
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/calloc.html}
+
+Gnulib module: calloc-posix
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+Upon failure, the function does not set @code{errno} to @code{ENOMEM} on
+some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize
+
+Extension: Gnulib provides a module @samp{calloc-gnu} that substitutes a
+@code{calloc} implementation that behaves more like the glibc implementation.

@@ -1,0 +1,14 @@
+Files:
+tests/test-listen.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+sockets
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-listen
+check_PROGRAMS += test-listen
+test_listen_LDADD = $(LDADD) @LIBSOCKET@

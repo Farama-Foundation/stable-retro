@@ -1,0 +1,21 @@
+@node endusershell
+@subsection @code{endusershell}
+@findex endusershell
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/endusershell.3.html,,man endusershell}
+
+Gnulib module: getusershell
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, IRIX 6.5, mingw, MSVC 14, Android 9.0.
+@item
+This function is missing a declaration on some platforms:
+Solaris 9.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

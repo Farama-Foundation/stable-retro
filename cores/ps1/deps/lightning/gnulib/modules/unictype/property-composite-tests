@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_composite.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_composite
+check_PROGRAMS += test-pr_composite
+test_pr_composite_SOURCES = unictype/test-pr_composite.c
+test_pr_composite_LDADD = $(LDADD) $(LIBUNISTRING)

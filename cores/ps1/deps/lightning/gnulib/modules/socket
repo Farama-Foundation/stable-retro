@@ -1,0 +1,43 @@
+Description:
+socket() function: create a socket.
+
+Files:
+lib/socket.c
+lib/w32sock.h
+
+Depends-on:
+sys_socket
+socketlib
+errno           [test "$ac_cv_header_winsock2_h" = yes]
+sockets         [test "$ac_cv_header_winsock2_h" = yes]
+msvc-nothrow    [test "$ac_cv_header_winsock2_h" = yes]
+
+configure.ac:
+AC_REQUIRE([gl_HEADER_SYS_SOCKET])
+if test "$ac_cv_header_winsock2_h" = yes; then
+  AC_LIBOBJ([socket])
+fi
+# When this module is used, sockets may actually occur as file descriptors,
+# hence it is worth warning if the modules 'close' and 'ioctl' are not used.
+m4_ifdef([gl_UNISTD_H_DEFAULTS], [AC_REQUIRE([gl_UNISTD_H_DEFAULTS])])
+m4_ifdef([gl_SYS_IOCTL_H_DEFAULTS], [AC_REQUIRE([gl_SYS_IOCTL_H_DEFAULTS])])
+AC_REQUIRE([gl_PREREQ_SYS_H_WINSOCK2])
+if test "$ac_cv_header_winsock2_h" = yes; then
+  UNISTD_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS=1
+  SYS_IOCTL_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS=1
+fi
+gl_SYS_SOCKET_MODULE_INDICATOR([socket])
+
+Makefile.am:
+
+Include:
+<sys/socket.h>
+
+Link:
+$(LIBSOCKET)
+
+License:
+LGPLv2+
+
+Maintainer:
+Paolo Bonzini, Simon Josefsson

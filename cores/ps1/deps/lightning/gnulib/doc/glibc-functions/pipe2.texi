@@ -1,0 +1,27 @@
+@node pipe2
+@subsection @code{pipe2}
+@findex pipe2
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/pipe2.2.html,,man pipe2}
+
+Gnulib module: pipe2
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+glibc 2.8, macOS 11.1, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.3, Cygwin 1.7.1, mingw, MSVC 14, Android 2.2.
+But the replacement function is not atomic; this matters in multi-threaded
+programs that spawn child processes.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function crashes rather than failing with @code{EMFILE} if no
+resources are left on some platforms:
+Cygwin 1.7.9.
+@end itemize
+
+Note: This function portably supports the @code{O_NONBLOCK} flag only if the
+gnulib module @code{nonblocking} is also used.

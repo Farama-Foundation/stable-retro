@@ -1,0 +1,22 @@
+@c Documentation of gnulib module 'c-strtold'.
+
+@c Copyright (C) 2008--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+The @code{c-strtold} module contains a string to number (@samp{long double})
+conversion function operating on single-byte character strings, that operates
+as if the locale encoding was ASCII.
+(The "C" locale on many systems has the locale encoding "ASCII".)
+
+The function is:
+@smallexample
+extern long double c_strtold (const char *string, char **endp);
+@end smallexample
+
+In particular, only a period @samp{.} is accepted as decimal point, even
+when the current locale's notion of decimal point is a comma @samp{,}.

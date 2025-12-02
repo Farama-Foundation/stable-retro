@@ -1,0 +1,21 @@
+@node strpbrk
+@section @code{strpbrk}
+@findex strpbrk
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strpbrk.html}
+
+Gnulib module: strpbrk
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some old platforms.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function cannot work correctly on character strings in multibyte locales.
+Gnulib provides an alternative function @code{mbspbrk} that works on character
+strings in all locales.
+@end itemize

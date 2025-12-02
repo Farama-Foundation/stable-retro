@@ -1,0 +1,23 @@
+Description:
+Parse a duration given as string.
+
+Files:
+lib/parse-duration.h
+lib/parse-duration.c
+
+Depends-on:
+intprops
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += parse-duration.c
+
+Include:
+"parse-duration.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Bruce Korb

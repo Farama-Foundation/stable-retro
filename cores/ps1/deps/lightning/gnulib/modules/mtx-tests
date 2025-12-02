@@ -1,0 +1,20 @@
+Files:
+tests/test-mtx.c
+tests/test-call_once.c
+tests/atomic-int-isoc.h
+tests/macros.h
+
+Depends-on:
+thrd
+lock
+stdint
+
+configure.ac:
+AC_CHECK_HEADERS_ONCE([semaphore.h])
+AC_CHECK_DECLS_ONCE([alarm])
+
+Makefile.am:
+TESTS += test-mtx test-call_once
+check_PROGRAMS += test-mtx test-call_once
+test_mtx_LDADD = $(LDADD) @LIBSTDTHREAD@ @LIBTHREAD@
+test_call_once_LDADD = $(LDADD) @LIBSTDTHREAD@

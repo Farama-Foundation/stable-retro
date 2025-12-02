@@ -1,0 +1,17 @@
+Files:
+tests/uniconv/test-u8-conv-from-enc.c
+tests/iconvsupport.c
+tests/macros.h
+
+Depends-on:
+unistr/u8-strlen
+unistr/u8-cmp
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-conv-from-enc
+check_PROGRAMS += test-u8-conv-from-enc
+test_u8_conv_from_enc_SOURCES = uniconv/test-u8-conv-from-enc.c iconvsupport.c
+test_u8_conv_from_enc_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@
+

@@ -1,0 +1,31 @@
+Description:
+strtol() function: convert string to 'long'.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+lib/strtol.c
+m4/strtol.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_STRTOL
+if test $ac_cv_func_strtol = no; then
+  AC_LIBOBJ([strtol])
+fi
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPL
+
+Maintainer:
+glibc

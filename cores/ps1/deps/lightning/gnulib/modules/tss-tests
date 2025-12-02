@@ -1,0 +1,16 @@
+Files:
+tests/test-tss.c
+tests/macros.h
+
+Depends-on:
+thrd
+mtx
+stdint
+
+configure.ac:
+AC_CHECK_DECLS_ONCE([alarm])
+
+Makefile.am:
+TESTS += test-tss
+check_PROGRAMS += test-tss
+test_tss_LDADD = $(LDADD) @LIBSTDTHREAD@

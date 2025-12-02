@@ -1,0 +1,58 @@
+@node open
+@section @code{open}
+@findex open
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/open.html}
+
+Gnulib module: open, fchdir
+
+Portability problems fixed by the Gnulib module @code{open}:
+@itemize
+@item
+Some platforms do not support @code{O_CLOEXEC}:
+@c See posix-headers/fcntl.texi for the list.
+Mac OS X 10.6, FreeBSD 8.4, NetBSD 5.1, OpenBSD 4.9, Minix 3.1.8, AIX 7.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.7.x, mingw, MSVC 14.
+@item
+On platforms where @code{off_t} is a 32-bit type, @code{open} may not work
+correctly with files larger than 2 GB@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@item
+This function does not fail when the file name argument ends in a slash
+and (without the slash) names a nonexistent file or a file that is not a
+directory, on some platforms:
+macOS 11.1, FreeBSD 7.2, AIX 7.1, HP-UX 11.00, Solaris 9.
+@item
+This function does not support the @code{O_NONBLOCK} flag when it is defined
+by the gnulib module @code{nonblocking} on some platforms:
+mingw, MSVC 14.
+@item
+On Windows platforms (excluding Cygwin), this function does usually not
+recognize the @file{/dev/null} filename.
+@end itemize
+
+Portability problems fixed by the Gnulib module @code{fchdir}:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), this function fails to open a
+read-only descriptor for directories.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The Gnulib replacement for @code{O_CLOEXEC} is not atomic, and so is
+not safe in the presence of multiple threads or signal handlers.
+@item
+@code{open ("symlink", O_NOFOLLOW ...)} fails with @code{errno} set to
+@code{EMLINK} instead of the POSIX-required @code{ELOOP} on some
+platforms:
+FreeBSD 10.1.
+@item
+@code{open ("symlink", O_NOFOLLOW ...)} fails with @code{errno} set to
+@code{EFTYPE} instead of the POSIX-required @code{ELOOP} on some
+platforms:
+NetBSD 6.1.
+@item
+On Windows, this function returns a file handle in @code{O_TEXT} mode by
+default; this means that it translates @code{'\n'} to CR/LF by default.  Use the
+@code{O_BINARY} flag if you need reliable binary I/O.
+@end itemize

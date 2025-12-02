@@ -1,0 +1,26 @@
+Description:
+Name of Unicode character Arabic joining group.
+
+Files:
+lib/unictype/joininggroup_name.c
+lib/unictype/joininggroup_name.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/joininggroup-name])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_JOININGGROUP_NAME
+lib_SOURCES += unictype/joininggroup_name.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

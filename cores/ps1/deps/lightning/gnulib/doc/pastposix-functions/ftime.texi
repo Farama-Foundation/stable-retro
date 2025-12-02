@@ -1,0 +1,25 @@
+@node ftime
+@section @code{ftime}
+@findex ftime
+
+POSIX specification: @url{https://pubs.opengroup.org/onlinepubs/009695399/functions/ftime.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Android 9.0.
+@item
+On native Windows platforms (mingw, MSVC), this function works incorrectly
+when the environment variable @code{TZ} has been set by Cygwin.
+@item
+This function is marked as ``legacy'' in POSIX@.  Better use @code{gettimeofday}
+or @code{clock_gettime} instead, and use @code{ftime} only as a fallback for
+portability to Windows platforms.
+@end itemize

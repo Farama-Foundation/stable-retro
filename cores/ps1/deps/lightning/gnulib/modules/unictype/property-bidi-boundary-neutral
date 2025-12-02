@@ -1,0 +1,29 @@
+Description:
+Test whether a Unicode character is "bidi boundary neutral".
+
+Files:
+lib/unictype/pr_bidi_boundary_neutral.c
+lib/unictype/pr_bidi_boundary_neutral.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+unictype/bidiclass-of
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-bidi-boundary-neutral])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_BIDI_BOUNDARY_NEUTRAL
+lib_SOURCES += unictype/pr_bidi_boundary_neutral.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

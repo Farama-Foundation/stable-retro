@@ -1,0 +1,20 @@
+Description:
+C/C++ attributes
+
+Files:
+lib/attribute.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"attribute.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

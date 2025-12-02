@@ -1,0 +1,31 @@
+Description:
+Return names of valid user shells.
+
+Files:
+lib/getusershell.c
+m4/getusershell.m4
+
+Depends-on:
+unistd
+extensions
+fopen-safer          [test $HAVE_GETUSERSHELL = 0]
+unlocked-io-internal [test $HAVE_GETUSERSHELL = 0]
+xalloc               [test $HAVE_GETUSERSHELL = 0]
+
+configure.ac:
+gl_FUNC_GETUSERSHELL
+if test $HAVE_GETUSERSHELL = 0; then
+  AC_LIBOBJ([getusershell])
+fi
+gl_UNISTD_MODULE_INDICATOR([getusershell])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

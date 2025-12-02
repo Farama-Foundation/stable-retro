@@ -1,0 +1,29 @@
+@node vwarnx
+@subsection @code{vwarnx}
+@findex vwarnx
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Error Messages,,Error Messages,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Error-Messages.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/vwarnx.3.html,,man vwarnx}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, mingw, MSVC 14.
+@end itemize

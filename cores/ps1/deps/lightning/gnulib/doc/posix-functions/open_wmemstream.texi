@@ -1,0 +1,21 @@
+@node open_wmemstream
+@section @code{open_wmemstream}
+@findex open_wmemstream
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/open_wmemstream.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.3.6, Mac OS X 10.5, FreeBSD 6.0, NetBSD 7.1, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.3, Cygwin 1.5.x, mingw, MSVC 14, Android 5.1.
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and therefore cannot
+accommodate all Unicode characters.
+@end itemize

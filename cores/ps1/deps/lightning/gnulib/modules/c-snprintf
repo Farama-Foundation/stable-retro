@@ -1,0 +1,25 @@
+Description:
+c_snprintf(): print formatted output to a fixed length string in C locale
+
+Files:
+lib/c-snprintf.h
+lib/c-snprintf.c
+
+Depends-on:
+stdio
+c-vasnprintf
+
+configure.ac:
+AC_REQUIRE([AC_C_RESTRICT])
+
+Makefile.am:
+lib_SOURCES += c-snprintf.c
+
+Include:
+"c-snprintf.h"
+
+License:
+GPL
+
+Maintainer:
+Ben Pfaff

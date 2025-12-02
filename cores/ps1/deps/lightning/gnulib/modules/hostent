@@ -1,0 +1,27 @@
+Description:
+Library containing
+gethostent() function, sethostent() function, endhostent() function,
+gethostbyname() function, gethostbyaddr() function.
+
+Files:
+m4/hostent.m4
+
+Depends-on:
+sys_socket
+
+configure.ac:
+gl_HOSTENT
+
+Makefile.am:
+
+Include:
+<netdb.h>
+
+Link:
+$(HOSTENT_LIB)
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

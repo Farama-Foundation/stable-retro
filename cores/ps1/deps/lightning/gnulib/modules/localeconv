@@ -1,0 +1,29 @@
+Description:
+localeconv() function: query locale dependent information for formatting
+numbers.
+
+Files:
+lib/localeconv.c
+m4/localeconv.m4
+
+Depends-on:
+locale
+
+configure.ac:
+gl_FUNC_LOCALECONV
+if test $REPLACE_LOCALECONV = 1; then
+  AC_LIBOBJ([localeconv])
+  gl_PREREQ_LOCALECONV
+fi
+gl_LOCALE_MODULE_INDICATOR([localeconv])
+
+Makefile.am:
+
+Include:
+<locale.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

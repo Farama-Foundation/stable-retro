@@ -1,0 +1,12 @@
+Files:
+tests/test-aligned_alloc.c
+tests/macros.h
+
+Depends-on:
+stdint
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-aligned_alloc
+check_PROGRAMS += test-aligned_alloc

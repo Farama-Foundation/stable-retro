@@ -1,0 +1,40 @@
+Description:
+error and error_at_line functions: Error reporting.
+
+Notice:
+If you are using GNU gettext version 0.16.1 or older, add the following options
+to XGETTEXT_OPTIONS in your po/Makevars:
+  --flag=error:3:c-format --flag=error_at_line:5:c-format
+
+Files:
+lib/error.h
+lib/error.c
+m4/error.m4
+
+Depends-on:
+stdio
+getprogname
+strerror        [test $ac_cv_lib_error_at_line = no]
+unistd          [test $ac_cv_lib_error_at_line = no]
+msvc-nothrow    [test $ac_cv_lib_error_at_line = no]
+
+configure.ac:
+gl_ERROR
+if test $ac_cv_lib_error_at_line = no; then
+  AC_LIBOBJ([error])
+  gl_PREREQ_ERROR
+fi
+m4_ifdef([AM_XGETTEXT_OPTION],
+  [AM_][XGETTEXT_OPTION([--flag=error:3:c-format])
+   AM_][XGETTEXT_OPTION([--flag=error_at_line:5:c-format])])
+
+Makefile.am:
+
+Include:
+"error.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

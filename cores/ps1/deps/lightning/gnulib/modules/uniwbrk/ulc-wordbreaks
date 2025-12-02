@@ -1,0 +1,30 @@
+Description:
+Word breaks in strings.
+
+Files:
+lib/uniwbrk/ulc-wordbreaks.c
+
+Depends-on:
+uniwbrk/base
+uniwbrk/u8-wordbreaks
+unilbrk/ulc-common
+uniconv/u8-conv-from-enc
+c-ctype
+localcharset
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uniwbrk/ulc-wordbreaks])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNIWBRK_ULC_WORDBREAKS
+lib_SOURCES += uniwbrk/ulc-wordbreaks.c
+endif
+
+Include:
+"uniwbrk.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

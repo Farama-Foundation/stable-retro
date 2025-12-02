@@ -1,0 +1,22 @@
+Files:
+tests/test-trunc1.c
+tests/test-trunc2.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+float
+isnand-nolibm
+stdbool
+stdint
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-trunc1 test-trunc2
+check_PROGRAMS += test-trunc1 test-trunc2
+test_trunc1_LDADD = $(LDADD) @TRUNC_LIBM@
+test_trunc2_LDADD = $(LDADD) @TRUNC_LIBM@

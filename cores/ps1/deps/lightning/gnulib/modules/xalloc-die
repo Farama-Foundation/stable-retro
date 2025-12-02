@@ -1,0 +1,29 @@
+Description:
+Report a memory allocation failure and exit.
+
+Files:
+lib/xalloc.h
+lib/xalloc-die.c
+
+Depends-on:
+error
+extern-inline
+gettext-h
+exitfail
+stdint
+xalloc-oversized
+
+configure.ac:
+gl_MODULE_INDICATOR([xalloc-die])
+
+Makefile.am:
+lib_SOURCES += xalloc-die.c
+
+Include:
+"xalloc.h"
+
+License:
+GPL
+
+Maintainer:
+all

@@ -1,0 +1,32 @@
+Description:
+log1pf() function: natural logarithm of 1 plus argument.
+
+Files:
+lib/log1pf.c
+m4/log1pf.m4
+
+Depends-on:
+math
+extensions
+log1p           [test $HAVE_LOG1PF = 0 || test $REPLACE_LOG1PF = 1]
+
+configure.ac:
+gl_FUNC_LOG1PF
+if test $HAVE_LOG1PF = 0 || test $REPLACE_LOG1PF = 1; then
+  AC_LIBOBJ([log1pf])
+fi
+gl_MATH_MODULE_INDICATOR([log1pf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOG1PF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

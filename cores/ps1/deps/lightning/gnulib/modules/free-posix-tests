@@ -1,0 +1,12 @@
+Files:
+tests/test-free.c
+tests/macros.h
+
+Depends-on:
+unistd
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-free
+check_PROGRAMS += test-free

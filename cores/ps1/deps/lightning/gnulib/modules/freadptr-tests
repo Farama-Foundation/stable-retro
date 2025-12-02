@@ -1,0 +1,16 @@
+Files:
+tests/test-freadptr.c
+tests/test-freadptr.sh
+tests/test-freadptr2.c
+tests/test-freadptr2.sh
+tests/macros.h
+
+Depends-on:
+lseek
+unistd
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-freadptr.sh test-freadptr2.sh
+check_PROGRAMS += test-freadptr test-freadptr2

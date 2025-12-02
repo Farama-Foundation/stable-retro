@@ -1,0 +1,13 @@
+Files:
+tests/unilbrk/test-u16-possible-linebreaks.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-possible-linebreaks
+check_PROGRAMS += test-u16-possible-linebreaks
+test_u16_possible_linebreaks_SOURCES = unilbrk/test-u16-possible-linebreaks.c
+test_u16_possible_linebreaks_LDADD = $(LDADD) $(LIBUNISTRING)

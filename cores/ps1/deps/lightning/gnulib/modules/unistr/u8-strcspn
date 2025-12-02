@@ -1,0 +1,29 @@
+Description:
+Search for some characters in UTF-8 string.
+
+Files:
+lib/unistr/u8-strcspn.c
+lib/unistr/u-strcspn.h
+
+Depends-on:
+unistr/base
+unistr/u8-strlen
+unistr/u8-strmbtouc
+unistr/u8-strchr
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-strcspn])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_STRCSPN
+lib_SOURCES += unistr/u8-strcspn.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

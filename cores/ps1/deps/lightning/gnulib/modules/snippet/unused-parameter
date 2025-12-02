@@ -1,0 +1,27 @@
+Description:
+A C macro for declaring that specific function parameters are not used.
+
+Applicability:
+all
+
+Files:
+lib/unused-parameter.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
+
+UNUSED_PARAMETER_H=$(srcdir)/unused-parameter.h
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,19 @@
+Files:
+tests/unigbrk/test-ulc-grapheme-breaks.sh
+tests/unigbrk/test-ulc-grapheme-breaks.c
+tests/macros.h
+m4/locale-ar.m4
+m4/codeset.m4
+
+Depends-on:
+setlocale
+
+configure.ac:
+gt_LOCALE_AR
+
+Makefile.am:
+TESTS += unigbrk/test-ulc-grapheme-breaks.sh
+TESTS_ENVIRONMENT += LOCALE_AR='@LOCALE_AR@'
+check_PROGRAMS += test-ulc-grapheme-breaks
+test_ulc_grapheme_breaks_SOURCES = unigbrk/test-ulc-grapheme-breaks.c
+test_ulc_grapheme_breaks_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBUNISTRING) @LIBICONV@

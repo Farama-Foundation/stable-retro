@@ -1,0 +1,18 @@
+@node wcspbrk
+@section @code{wcspbrk}
+@findex wcspbrk
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/wcspbrk.html}
+
+Gnulib module: wcspbrk
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and therefore cannot
+accommodate all Unicode characters.
+@end itemize

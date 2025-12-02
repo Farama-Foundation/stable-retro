@@ -1,0 +1,29 @@
+@node basename
+@section @code{basename}
+@findex basename
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/basename.html}
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-basename-3.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+IRIX 6.5, mingw, MSVC 14.
+@item
+glibc and Android have two different functions @code{basename}: the POSIX
+version and the GNU version.
+@item
+@code{basename} assumes file names in POSIX syntax; it does not work with file
+names in Windows syntax.
+@end itemize
+
+The Gnulib module @code{basename-lgpl} provides similar API, with a function
+@code{last_component}, that also works with Windows file names.

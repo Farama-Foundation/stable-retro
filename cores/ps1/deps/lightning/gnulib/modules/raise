@@ -1,0 +1,29 @@
+Description:
+Send a signal to the executing process.
+
+Files:
+lib/raise.c
+m4/raise.m4
+
+Depends-on:
+signal-h
+msvc-inval      [test $HAVE_RAISE = 0 || test $REPLACE_RAISE = 1]
+
+configure.ac:
+gl_FUNC_RAISE
+if test $HAVE_RAISE = 0 || test $REPLACE_RAISE = 1; then
+  AC_LIBOBJ([raise])
+  gl_PREREQ_RAISE
+fi
+gl_SIGNAL_MODULE_INDICATOR([raise])
+
+Makefile.am:
+
+Include:
+<signal.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

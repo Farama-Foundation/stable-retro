@@ -1,0 +1,18 @@
+@node wcschr
+@section @code{wcschr}
+@findex wcschr
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/wcschr.html}
+
+Gnulib module: wcschr
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and therefore cannot
+accommodate all Unicode characters.
+@end itemize

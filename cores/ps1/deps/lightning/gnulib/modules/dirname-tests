@@ -1,0 +1,12 @@
+Files:
+tests/test-dirname.c
+
+Depends-on:
+strdup
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-dirname
+check_PROGRAMS += test-dirname
+test_dirname_LDADD = $(LDADD) @LIBINTL@

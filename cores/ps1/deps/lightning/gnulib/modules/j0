@@ -1,0 +1,24 @@
+Description:
+j0() function: Bessel function of the first kind of order 0.
+
+Files:
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_COMMON_DOUBLE_MATHFUNC([j0])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(J0_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

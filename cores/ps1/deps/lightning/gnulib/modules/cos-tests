@@ -1,0 +1,13 @@
+Files:
+tests/test-cos.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-cos
+check_PROGRAMS += test-cos
+test_cos_LDADD = $(LDADD) @COS_LIBM@

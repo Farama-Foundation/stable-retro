@@ -1,0 +1,25 @@
+@node getdelim
+@section @code{getdelim}
+@findex getdelim
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/getdelim.html}
+
+Gnulib module: getdelim
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, mingw, MSVC 14, Android 4.2.
+@item
+This function crashes when passed a pointer to a NULL buffer together with a
+pointer to a non-zero buffer size on some platforms:
+FreeBSD 8.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function has quadratic running time for long lines on some platforms:
+uClibc 0.9.31.
+@end itemize

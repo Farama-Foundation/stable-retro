@@ -1,0 +1,13 @@
+Files:
+tests/test-login_tty.c
+
+Depends-on:
+openpty
+tcgetsid
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-login_tty
+check_PROGRAMS += test-login_tty
+test_login_tty_LDADD = $(LDADD) @PTY_LIB@

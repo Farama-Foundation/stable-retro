@@ -1,0 +1,25 @@
+Description:
+acos() function: inverse cosine function.
+
+Files:
+m4/acos.m4
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_ACOS
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ACOS_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

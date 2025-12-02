@@ -1,0 +1,27 @@
+Description:
+ceil() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/ceil-ieee.m4
+m4/minus-zero.m4
+m4/signbit.m4
+
+Depends-on:
+ceil
+
+configure.ac:
+gl_FUNC_CEIL_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(CEIL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

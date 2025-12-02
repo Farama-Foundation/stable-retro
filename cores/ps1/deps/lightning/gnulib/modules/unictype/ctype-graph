@@ -1,0 +1,29 @@
+Description:
+Generalization of the <ctype.h> isgraph() function and the
+<wctype.h> iswgraph() function.
+
+Files:
+lib/unictype/ctype_graph.c
+lib/unictype/ctype_graph.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/ctype-graph])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CTYPE_GRAPH
+lib_SOURCES += unictype/ctype_graph.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

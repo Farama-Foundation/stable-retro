@@ -1,0 +1,25 @@
+Description:
+Extract the last component (base name) of a file name.
+
+Files:
+lib/basename-lgpl.h
+lib/basename-lgpl.c
+
+Depends-on:
+double-slash-root
+filename
+stdbool
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += basename-lgpl.c
+
+Include:
+"basename-lgpl.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

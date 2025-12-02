@@ -1,0 +1,21 @@
+@node sys/wait.h
+@section @file{sys/wait.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_wait.h.html}
+
+Gnulib module: sys_wait
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+System status macros such as @code{WEXITSTATUS} require an lvalue
+argument on some platforms.
+macOS 11.1.
+@end itemize

@@ -1,0 +1,22 @@
+Files:
+tests/test-pipe-filter-ii1.sh
+tests/test-pipe-filter-ii1.c
+tests/test-vasnprintf-posix.c
+tests/test-pipe-filter-ii2.sh
+tests/test-pipe-filter-ii2-main.c
+tests/test-pipe-filter-ii2-child.c
+tests/macros.h
+
+Depends-on:
+binary-io
+c-ctype
+read-file
+full-write
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pipe-filter-ii1.sh test-pipe-filter-ii2.sh
+check_PROGRAMS += test-pipe-filter-ii1 test-pipe-filter-ii2-main test-pipe-filter-ii2-child
+test_pipe_filter_ii1_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD)
+test_pipe_filter_ii2_main_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD)

@@ -1,0 +1,35 @@
+Description:
+frexpl() function: split a 'long double' into its constituents.
+
+Files:
+lib/frexpl.c
+lib/frexp.c
+m4/frexpl.m4
+
+Depends-on:
+math
+extensions
+frexp           [{ test $HAVE_DECL_FREXPL = 0 || test $gl_func_frexpl = no; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+isnanl-nolibm   [{ test $HAVE_DECL_FREXPL = 0 || test $gl_func_frexpl = no; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+fpucw           [{ test $HAVE_DECL_FREXPL = 0 || test $gl_func_frexpl = no; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+AC_REQUIRE([gl_FUNC_FREXPL])
+if test $HAVE_DECL_FREXPL = 0 || test $gl_func_frexpl = no; then
+  AC_LIBOBJ([frexpl])
+fi
+gl_MATH_MODULE_INDICATOR([frexpl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FREXPL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+Paolo Bonzini

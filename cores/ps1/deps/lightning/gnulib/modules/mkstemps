@@ -1,0 +1,35 @@
+Description:
+mkstemps() function: create a private temporary file, with suffix
+
+Files:
+lib/mkstemps.c
+m4/mkstemps.m4
+
+Depends-on:
+stdlib
+extensions
+largefile
+tempname        [test $HAVE_MKSTEMPS = 0]
+
+configure.ac:
+gl_FUNC_MKSTEMPS
+if test $HAVE_MKSTEMPS = 0; then
+  AC_LIBOBJ([mkstemps])
+fi
+gl_MODULE_INDICATOR([mkstemps])
+gl_STDLIB_MODULE_INDICATOR([mkstemps])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+Link:
+$(LIB_GETRANDOM)
+$(LIB_CLOCK_GETTIME)
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

@@ -1,0 +1,24 @@
+Description:
+Program name management.
+
+Files:
+lib/progname.h
+lib/progname.c
+
+Depends-on:
+
+configure.ac:
+AC_CHECK_DECLS([program_invocation_name], [], [], [#include <errno.h>])
+AC_CHECK_DECLS([program_invocation_short_name], [], [], [#include <errno.h>])
+
+Makefile.am:
+lib_SOURCES += progname.h progname.c
+
+Include:
+"progname.h"
+
+License:
+GPL
+
+Maintainer:
+all

@@ -1,0 +1,14 @@
+Files:
+tests/unilbrk/test-ulc-possible-linebreaks.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ulc-possible-linebreaks
+check_PROGRAMS += test-ulc-possible-linebreaks
+test_ulc_possible_linebreaks_SOURCES = unilbrk/test-ulc-possible-linebreaks.c
+test_ulc_possible_linebreaks_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@
+

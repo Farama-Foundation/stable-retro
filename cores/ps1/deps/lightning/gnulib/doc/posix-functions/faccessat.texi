@@ -1,0 +1,44 @@
+@node faccessat
+@section @code{faccessat}
+@findex faccessat
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/faccessat.html}
+
+Gnulib module: faccessat
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.3.6, macOS 10.12, FreeBSD 7.4, NetBSD 6.1.5, OpenBSD 4.9, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14, Android 4.0.4.
+@item
+On some platforms, @code{faccessat (dfd, "file/", amode, flag)}
+succeeds instead of failing when @file{file} is not a directory.
+macOS 11.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The replacement does not always take ACLs into account.
+@item
+The replacement is not safe to be used in libraries.
+@item
+The replacement is not multithread-safe.
+@item
+The replacement does not support the @code{AT_SYMLINK_NOFOLLOW} flag,
+which is supported by GNU @code{faccessat}.
+@item
+On some platforms, @code{faccessat} can mishandle @code{AT_EACCESS}
+after a process starts as root and then becomes non-root:
+@c https://sourceware.org/bugzilla/show_bug.cgi?id=18683
+GNU/Linux with glibc 2.32.
+@end itemize
+
+Other problems of this function:
+@itemize
+@item
+There is an inherent race between calling this function and performing
+some action based on the results; you should think twice before trusting
+this function, especially in a set-uid or set-gid program.
+@end itemize

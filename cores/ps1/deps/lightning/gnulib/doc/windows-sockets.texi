@@ -1,0 +1,23 @@
+@node Windows sockets
+@section Windows sockets
+
+One of the portability problems for native Windows are sockets and
+networking functions.
+
+@subsection Getaddrinfo and WINVER
+
+This was written for the @code{getaddrinfo} module, but may be applicable to
+other functions too.
+
+The @code{getaddrinfo} function exists in @code{ws2tcpip.h} and @code{-lws2_32}
+on Windows XP@.  The function declaration is present if @code{WINVER >= 0x0501}.
+Windows 2000 does not have @code{getaddrinfo} in its @file{WS2_32.DLL}.
+
+Thus, if you want to assume Windows XP or later, you can add
+@code{AC_DEFINE([WINVER], [0x0501])} to avoid compiling the (partial)
+@code{getaddrinfo} implementation.
+
+If you want to support Windows 2000, don't do anything.  The
+replacement function will open @file{WS2_32.DLL} during run-time to
+see if there is a @code{getaddrinfo} function available, and use it when
+available.

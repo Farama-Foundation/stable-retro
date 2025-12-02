@@ -1,0 +1,30 @@
+@node preadv2
+@subsection @code{preadv2}
+@findex preadv2
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Scatter-Gather,,Fast Scatter-Gather I/O,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Scatter_002dGather.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/preadv2.2.html,,man preadv2}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function exists only on Linux and is therefore
+missing on many non-glibc platforms:
+glibc 2.25, macOS 11.1, FreeBSD 12.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

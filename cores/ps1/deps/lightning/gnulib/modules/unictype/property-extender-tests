@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_extender.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_extender
+check_PROGRAMS += test-pr_extender
+test_pr_extender_SOURCES = unictype/test-pr_extender.c
+test_pr_extender_LDADD = $(LDADD) $(LIBUNISTRING)

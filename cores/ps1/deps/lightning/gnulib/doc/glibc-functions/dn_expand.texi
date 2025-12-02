@@ -1,0 +1,18 @@
+@node dn_expand
+@subsection @code{dn_expand}
+@findex dn_expand
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/dn_expand.3.html,,man dn_expand}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Cygwin 1.5.x, mingw, MSVC 14.
+@end itemize

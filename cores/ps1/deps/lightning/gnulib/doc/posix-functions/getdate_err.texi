@@ -1,0 +1,18 @@
+@node getdate_err
+@section @code{getdate_err}
+@findex getdate_err
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/getdate_err.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This variable is missing on some platforms:
+macOS 10.13, FreeBSD 6.0, NetBSD 5.0, OpenBSD 6.7, Minix 3.1.8, IRIX 6.5, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

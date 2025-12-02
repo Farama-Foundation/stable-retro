@@ -1,0 +1,21 @@
+Description:
+Flexible array member support
+
+Files:
+lib/flexmember.h
+m4/flexmember.m4
+
+Depends-on:
+
+configure.ac:
+AC_C_FLEXIBLE_ARRAY_MEMBER
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert, Jim Meyering

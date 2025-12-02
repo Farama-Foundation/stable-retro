@@ -1,0 +1,8 @@
+Files:
+
+Depends-on:
+obstack-printf-tests
+
+configure.ac:
+
+Makefile.am:

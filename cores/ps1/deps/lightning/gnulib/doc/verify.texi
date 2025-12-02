@@ -1,0 +1,121 @@
+@c GNU verify module documentation
+
+@c Copyright (C) 2006, 2009--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+@node Compile-time Assertions
+@section Compile-time Assertions
+
+@cindex assertion
+@findex verify
+@findex verify_expr
+
+This module provides a header file @file{verify.h} that defines
+macros related to compile-time verification.
+
+Two of these macros are @code{verify (@var{V})} and @code{verify_expr
+(@var{V}, @var{EXPR})}.  Both accept an integer constant expression
+argument @var{V} and verify that it is nonzero.  If not, a compile-time error
+results.
+
+These two macros implement compile-time tests, as opposed to
+the standard @code{assert} macro which supports only runtime tests.
+Since the tests occur at compile-time, they are more reliable, and
+they require no runtime overhead.
+
+@code{verify (@var{V});} is a declaration; it can occur outside of
+functions.  In contrast, @code{verify_expr (@var{V}, @var{EXPR})} is
+an expression that returns the value of @var{EXPR}; it can be used in
+macros that expand to expressions.  If @var{EXPR} is an integer
+constant expression, then @code{verify_expr (@var{V}, @var{EXPR})} is
+also an integer constant expression.  Although @var{EXPR} and
+@code{verify_expr (@var{V}, @var{EXPR})}@ are guaranteed to have the
+same side effects and value and type (after integer promotion), they
+need not have the same type if @var{EXPR}'s type is an integer that is
+narrower than @code{int} or @code{unsigned int}.
+
+@var{V} should be an integer constant expression in the sense
+of the C standard.  Its leaf operands should be integer, enumeration,
+or character constants; or @code{sizeof} expressions that return
+constants; or floating constants that are the immediate operands of
+casts.  Outside a @code{sizeof} subexpression, @var{V} should
+not contain any assignments, function calls, comma operators, casts to
+non-integer types, or subexpressions whose values are outside the
+representable ranges for their types.  If @var{V} is not an
+integer constant expression, then a compiler might reject a usage like
+@samp{verify (@var{V});} even when @var{V} is
+nonzero.
+
+Although the standard @code{assert} macro is a runtime test, C2X
+specifies a builtin @code{_Static_assert (@var{V})},
+its @file{assert.h} header has a similar macro
+named @code{static_assert}, and C++17 has a similar
+@code{static_assert} builtin.  These builtins and macros differ
+from @code{verify} in two major ways.  First, they can also be used
+within a @code{struct} or @code{union} specifier, in place of an
+ordinary member declaration.  Second, they allow the programmer to
+specify, as an optional second argument, a compile-time diagnostic as
+a string literal.  If your program is not intended to be portable to
+compilers that lack C2X or C++17 @code{static_assert}, the only
+advantage of @code{verify} is that its name is a bit shorter.
+
+The @file{verify.h} header defines one more macro, @code{assume
+(@var{E})}, which expands to an expression of type @code{void}
+that causes the compiler to assume that @var{E} yields a nonzero
+value.  @var{E} should be a scalar expression, and should not
+have side effects; it may or may not be evaluated.  The behavior is
+undefined if @var{E} would yield zero.  The main use of @code{assume}
+is optimization, as the compiler may be able to generate better code
+if it assumes @var{E}.  For best results, @var{E} should be simple
+enough that a compiler can determine that it has no side effects: if
+@var{E} calls an external function or accesses volatile storage the
+compiler may not be able to optimize @var{E} away and @code{assume
+(@var{E})} may therefore slow down the program.
+
+Here are some example uses of these macros.
+
+@example
+#include <verify.h>
+
+#include <limits.h>
+#include <time.h>
+
+/* Verify that time_t is an integer type.  */
+verify ((time_t) 1.5 == 1);
+
+/* Verify that time_t is no smaller than int.  */
+verify (sizeof (int) <= sizeof (time_t));
+
+/* Verify that time_t is signed.  */
+verify ((time_t) -1 < 0);
+
+/* Verify that time_t uses two's complement representation.  */
+verify (~ (time_t) -1 == 0);
+
+/* Return the maximum value of the integer type T,
+   verifying that T is an unsigned integer type.
+   The cast to (T) is outside the call to verify_expr
+   so that the result is of type T
+   even when T is narrower than unsigned int.  */
+#define MAX_UNSIGNED_VAL(t) \
+   ((T) verify_expr (0 < (T) -1, -1))
+
+/* Return T divided by CHAR_MAX + 1, where behavior is
+   undefined if T < 0.  In the common case where CHAR_MAX
+   is 127 the compiler can therefore implement the division
+   by shifting T right 7 bits, an optimization that would
+   not be valid if T were negative.  */
+time_t
+time_index (time_t t)
+@{
+  assume (0 <= t);
+  return t / (CHAR_MAX + 1);
+@}
+
+
+@end example

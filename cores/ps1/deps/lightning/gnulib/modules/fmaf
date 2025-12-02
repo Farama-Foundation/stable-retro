@@ -1,0 +1,43 @@
+Description:
+fmaf() function: fused multiply-add.
+
+Files:
+lib/fmaf.c
+lib/fma.c
+lib/float+.h
+m4/fmaf.m4
+m4/fegetround.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+float           [test $HAVE_FMAF = 0 || test $REPLACE_FMAF = 1]
+stdbool         [test $HAVE_FMAF = 0 || test $REPLACE_FMAF = 1]
+verify          [test $HAVE_FMAF = 0 || test $REPLACE_FMAF = 1]
+isfinite        [test $HAVE_FMAF = 0 || test $REPLACE_FMAF = 1]
+integer_length  [test $HAVE_FMAF = 0 || test $REPLACE_FMAF = 1]
+frexpf          [test $HAVE_FMAF = 0 || test $REPLACE_FMAF = 1]
+ldexpf          [test $HAVE_FMAF = 0 || test $REPLACE_FMAF = 1]
+
+configure.ac:
+gl_FUNC_FMAF
+if test $HAVE_FMAF = 0 || test $REPLACE_FMAF = 1; then
+  AC_LIBOBJ([fmaf])
+  gl_PREREQ_FMAF
+fi
+gl_MATH_MODULE_INDICATOR([fmaf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FMAF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,18 @@
+@node if_nametoindex
+@section @code{if_nametoindex}
+@findex if_nametoindex
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/if_nametoindex.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, HP-UX 11.23, IRIX 6.5, Cygwin 1.5.x, mingw, MSVC 14.
+@end itemize

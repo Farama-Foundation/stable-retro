@@ -1,0 +1,36 @@
+Description:
+sqrtl() function: square root with long double argument.
+
+Files:
+lib/sqrtl.c
+m4/sqrtl.m4
+
+Depends-on:
+math
+extensions
+sqrt            [{ test $HAVE_SQRTL = 0 || test $REPLACE_SQRTL = 1; }]
+float           [{ test $HAVE_SQRTL = 0 || test $REPLACE_SQRTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+isnanl          [{ test $HAVE_SQRTL = 0 || test $REPLACE_SQRTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+frexpl          [{ test $HAVE_SQRTL = 0 || test $REPLACE_SQRTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+ldexpl          [{ test $HAVE_SQRTL = 0 || test $REPLACE_SQRTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+gl_FUNC_SQRTL
+if test $HAVE_SQRTL = 0 || test $REPLACE_SQRTL = 1; then
+  AC_LIBOBJ([sqrtl])
+fi
+gl_MATH_MODULE_INDICATOR([sqrtl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(SQRTL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+Paolo Bonzini

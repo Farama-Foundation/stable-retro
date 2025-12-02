@@ -1,0 +1,29 @@
+@node pthread.h
+@section @file{pthread.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/pthread.h.html}
+
+Gnulib module: pthread-h
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms.
+Minix 3.1.8, mingw 2.x, MSVC 14.
+But the provided replacement covers only the essential POSIX threads API.
+Furthermore it is just a dummy on some of these platforms:
+Minix 3.1.8.
+@item
+This header pollutes the namespace with some broken macro
+implementations for various functions such as @code{strtok_r} and
+@code{gmtime_r}:
+mingw 3.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file lacks the declaration of @code{pthread_atfork} on some
+platforms:
+IRIX 6.5.
+@end itemize

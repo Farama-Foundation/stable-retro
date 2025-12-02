@@ -1,0 +1,18 @@
+Files:
+tests/test-c-dtoastr.c
+tests/test-c-dtoastr.sh
+m4/locale-fr.m4
+tests/macros.h
+
+Depends-on:
+setlocale
+snprintf
+
+configure.ac:
+gt_LOCALE_FR
+
+Makefile.am:
+TESTS += test-c-dtoastr.sh
+TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@'
+check_PROGRAMS += test-c-dtoastr
+test_c_dtoastr_LDADD = $(LDADD) $(LIB_SETLOCALE)

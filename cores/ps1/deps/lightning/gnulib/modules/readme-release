@@ -1,0 +1,36 @@
+Description:
+Add release instructions customized for the package.
+
+You should add a line like
+
+perl -pi -e "s/\@PACKAGE\@/$package/g" README-release
+
+to autogen.sh or bootstrap.conf's epilogue function to patch the
+package name in.  This is particularly handy for making various URLs
+copy-and-pastable.
+
+Note that, as with any gnulib-tool supplied file, README-release can
+be customized via a .diff file.  This is an easy way to add
+package-specific instructions.
+
+Files:
+top/README-release
+
+Depends-on:
+announce-gen
+do-release-commit-and-tag
+gnu-web-doc-update
+gnupload
+maintainer-makefile
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+bug-gnulib@gnu.org

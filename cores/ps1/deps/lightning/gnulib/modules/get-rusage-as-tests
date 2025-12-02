@@ -1,0 +1,11 @@
+Files:
+tests/test-get-rusage-as.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-get-rusage-as
+check_PROGRAMS += test-get-rusage-as

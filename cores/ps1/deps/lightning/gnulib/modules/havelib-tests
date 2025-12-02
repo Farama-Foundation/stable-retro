@@ -1,0 +1,297 @@
+Status:
+longrunning-test
+unportable-test
+
+Files:
+tests/havelib/README
+tests/havelib/Makefile.am
+tests/havelib/rpath-1
+tests/havelib/rpath-1a
+tests/havelib/rpath-1b
+tests/havelib/rpath-2_a
+tests/havelib/rpath-2_b
+tests/havelib/rpath-2aaa
+tests/havelib/rpath-2aab
+tests/havelib/rpath-2aac
+tests/havelib/rpath-2aad
+tests/havelib/rpath-2aba
+tests/havelib/rpath-2abb
+tests/havelib/rpath-2abc
+tests/havelib/rpath-2abd
+tests/havelib/rpath-2baa
+tests/havelib/rpath-2bab
+tests/havelib/rpath-2bac
+tests/havelib/rpath-2bad
+tests/havelib/rpath-2bba
+tests/havelib/rpath-2bbb
+tests/havelib/rpath-2bbc
+tests/havelib/rpath-2bbd
+tests/havelib/rpath-3_a
+tests/havelib/rpath-3_b
+tests/havelib/rpath-3aaa
+tests/havelib/rpath-3aab
+tests/havelib/rpath-3aac
+tests/havelib/rpath-3aad
+tests/havelib/rpath-3aae
+tests/havelib/rpath-3aaf
+tests/havelib/rpath-3aag
+tests/havelib/rpath-3aah
+tests/havelib/rpath-3aba
+tests/havelib/rpath-3abb
+tests/havelib/rpath-3abc
+tests/havelib/rpath-3abd
+tests/havelib/rpath-3abe
+tests/havelib/rpath-3abf
+tests/havelib/rpath-3abg
+tests/havelib/rpath-3abh
+tests/havelib/rpath-3baa
+tests/havelib/rpath-3bab
+tests/havelib/rpath-3bac
+tests/havelib/rpath-3bad
+tests/havelib/rpath-3bae
+tests/havelib/rpath-3baf
+tests/havelib/rpath-3bag
+tests/havelib/rpath-3bah
+tests/havelib/rpath-3bba
+tests/havelib/rpath-3bbb
+tests/havelib/rpath-3bbc
+tests/havelib/rpath-3bbd
+tests/havelib/rpath-3bbe
+tests/havelib/rpath-3bbf
+tests/havelib/rpath-3bbg
+tests/havelib/rpath-3bbh
+tests/havelib/rpathx/rpathx.c
+tests/havelib/rpathx/Makefile.am
+tests/havelib/rpathx/configure.ac
+tests/havelib/rpathy/rpathy.c
+tests/havelib/rpathy/Makefile.am
+tests/havelib/rpathy/configure.ac
+tests/havelib/rpathz/rpathz.c
+tests/havelib/rpathz/Makefile.am
+tests/havelib/rpathz/configure.ac
+tests/havelib/rpathlx/usex.c
+tests/havelib/rpathlx/Makefile.am
+tests/havelib/rpathlx/configure.ac
+tests/havelib/rpathly/usey.c
+tests/havelib/rpathly/Makefile.am
+tests/havelib/rpathly/configure.ac
+tests/havelib/rpathlz/usez.c
+tests/havelib/rpathlz/Makefile.am
+tests/havelib/rpathlz/configure.ac
+tests/havelib/rpathlyx/usey.c
+tests/havelib/rpathlyx/Makefile.am
+tests/havelib/rpathlyx/configure.ac
+tests/havelib/rpathlzyx/usez.c
+tests/havelib/rpathlzyx/Makefile.am
+tests/havelib/rpathlzyx/configure.ac
+tests/havelib/rpathcfg.sh
+
+Depends-on:
+
+configure.ac:
+HAVELIB_M4_BASE="${gl_m4_base}"
+AC_SUBST([HAVELIB_M4_BASE])
+
+AC_LIB_PREPARE_MULTILIB
+LIBDIRSTEM=$acl_libdirstem
+AC_SUBST([LIBDIRSTEM])
+
+dnl Checks for tests/rpathcfg.
+AC_SUBST([GCC])
+AC_SUBST([LD])
+AC_SUBST([with_gnu_ld])
+
+AC_CONFIG_FILES([havelib/Makefile])
+
+Makefile.am:
+SUBDIRS += havelib
+
+
+# These variables can be overridden on the 'make' command line.
+ACLOCAL = aclocal
+AUTOCONF = autoconf
+AUTOMAKE = automake
+LIBTOOLIZE = libtoolize
+
+HAVELIB_GENERATED_FILES = \
+  havelib/Makefile.in \
+  havelib/rpathx/Makefile.in \
+  havelib/rpathx/aclocal.m4 \
+  havelib/rpathx/configure \
+  havelib/rpathy/Makefile.in \
+  havelib/rpathy/aclocal.m4 \
+  havelib/rpathy/configure \
+  havelib/rpathz/Makefile.in \
+  havelib/rpathz/aclocal.m4 \
+  havelib/rpathz/configure \
+  havelib/rpathlx/Makefile.in \
+  havelib/rpathlx/aclocal.m4 \
+  havelib/rpathlx/configure \
+  havelib/rpathly/Makefile.in \
+  havelib/rpathly/aclocal.m4 \
+  havelib/rpathly/configure \
+  havelib/rpathlz/Makefile.in \
+  havelib/rpathlz/aclocal.m4 \
+  havelib/rpathlz/configure \
+  havelib/rpathlyx/Makefile.in \
+  havelib/rpathlyx/aclocal.m4 \
+  havelib/rpathlyx/configure \
+  havelib/rpathlzyx/Makefile.in \
+  havelib/rpathlzyx/aclocal.m4 \
+  havelib/rpathlzyx/configure
+
+BUILT_SOURCES += \
+  havelib/Makefile.in \
+  havelib/rpathx/Makefile.in \
+  havelib/rpathx/aclocal.m4 \
+  havelib/rpathx/configure \
+  havelib/rpathy/Makefile.in \
+  havelib/rpathy/aclocal.m4 \
+  havelib/rpathy/configure \
+  havelib/rpathz/Makefile.in \
+  havelib/rpathz/aclocal.m4 \
+  havelib/rpathz/configure \
+  havelib/rpathlx/Makefile.in \
+  havelib/rpathlx/aclocal.m4 \
+  havelib/rpathlx/configure \
+  havelib/rpathly/Makefile.in \
+  havelib/rpathly/aclocal.m4 \
+  havelib/rpathly/configure \
+  havelib/rpathlz/Makefile.in \
+  havelib/rpathlz/aclocal.m4 \
+  havelib/rpathlz/configure \
+  havelib/rpathlyx/Makefile.in \
+  havelib/rpathlyx/aclocal.m4 \
+  havelib/rpathlyx/configure \
+  havelib/rpathlzyx/Makefile.in \
+  havelib/rpathlzyx/aclocal.m4 \
+  havelib/rpathlzyx/configure
+
+$(srcdir)/havelib/Makefile.in: $(srcdir)/havelib/Makefile.am
+	cd $(srcdir) && $(AUTOMAKE) havelib/Makefile
+
+# Subdirectories with separate autoconfiguration.
+
+$(srcdir)/havelib/rpathx/Makefile.in: $(srcdir)/havelib/rpathx/Makefile.am $(srcdir)/havelib/rpathx/configure.ac $(srcdir)/havelib/rpathx/aclocal.m4
+	cd $(srcdir)/havelib/rpathx && $(AUTOMAKE) Makefile
+$(srcdir)/havelib/rpathx/aclocal.m4: $(srcdir)/havelib/rpathx/configure.ac
+	cd $(srcdir)/havelib/rpathx && $(LIBTOOLIZE) --copy
+	abs_m4_dir=`cd $(top_srcdir)/@HAVELIB_M4_BASE@ && pwd`; cd $(srcdir)/havelib/rpathx && $(ACLOCAL) -I "$$abs_m4_dir" -I `cd ../ltm4 && pwd`
+$(srcdir)/havelib/rpathx/configure: $(srcdir)/havelib/rpathx/configure.ac $(srcdir)/havelib/rpathx/aclocal.m4
+	cd $(srcdir)/havelib/rpathx && $(AUTOCONF)
+
+$(srcdir)/havelib/rpathy/Makefile.in: $(srcdir)/havelib/rpathy/Makefile.am $(srcdir)/havelib/rpathy/configure.ac $(srcdir)/havelib/rpathy/aclocal.m4
+	cd $(srcdir)/havelib/rpathy && $(AUTOMAKE) Makefile
+$(srcdir)/havelib/rpathy/aclocal.m4: $(srcdir)/havelib/rpathy/configure.ac $(top_srcdir)/@HAVELIB_M4_BASE@/lib-link.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-prefix.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-ld.m4
+	cd $(srcdir)/havelib/rpathy && $(LIBTOOLIZE) --copy
+	abs_m4_dir=`cd $(top_srcdir)/@HAVELIB_M4_BASE@ && pwd`; cd $(srcdir)/havelib/rpathy && $(ACLOCAL) -I "$$abs_m4_dir" -I `cd ../ltm4 && pwd`
+$(srcdir)/havelib/rpathy/configure: $(srcdir)/havelib/rpathy/configure.ac $(srcdir)/havelib/rpathy/aclocal.m4
+	cd $(srcdir)/havelib/rpathy && $(AUTOCONF)
+
+$(srcdir)/havelib/rpathz/Makefile.in: $(srcdir)/havelib/rpathz/Makefile.am $(srcdir)/havelib/rpathz/configure.ac $(srcdir)/havelib/rpathz/aclocal.m4
+	cd $(srcdir)/havelib/rpathz && $(AUTOMAKE) Makefile
+$(srcdir)/havelib/rpathz/aclocal.m4: $(srcdir)/havelib/rpathz/configure.ac $(top_srcdir)/@HAVELIB_M4_BASE@/lib-link.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-prefix.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-ld.m4
+	cd $(srcdir)/havelib/rpathz && $(LIBTOOLIZE) --copy
+	abs_m4_dir=`cd $(top_srcdir)/@HAVELIB_M4_BASE@ && pwd`; cd $(srcdir)/havelib/rpathz && $(ACLOCAL) -I "$$abs_m4_dir" -I `cd ../ltm4 && pwd`
+$(srcdir)/havelib/rpathz/configure: $(srcdir)/havelib/rpathz/configure.ac $(srcdir)/havelib/rpathz/aclocal.m4
+	cd $(srcdir)/havelib/rpathz && $(AUTOCONF)
+
+$(srcdir)/havelib/rpathlx/Makefile.in: $(srcdir)/havelib/rpathlx/Makefile.am $(srcdir)/havelib/rpathlx/configure.ac $(srcdir)/havelib/rpathlx/aclocal.m4
+	cd $(srcdir)/havelib/rpathlx && $(AUTOMAKE) Makefile
+$(srcdir)/havelib/rpathlx/aclocal.m4: $(srcdir)/havelib/rpathlx/configure.ac $(top_srcdir)/@HAVELIB_M4_BASE@/lib-link.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-prefix.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-ld.m4
+	abs_m4_dir=`cd $(top_srcdir)/@HAVELIB_M4_BASE@ && pwd`; cd $(srcdir)/havelib/rpathlx && $(ACLOCAL) -I "$$abs_m4_dir"
+$(srcdir)/havelib/rpathlx/configure: $(srcdir)/havelib/rpathlx/configure.ac $(srcdir)/havelib/rpathlx/aclocal.m4
+	cd $(srcdir)/havelib/rpathlx && $(AUTOCONF)
+
+$(srcdir)/havelib/rpathly/Makefile.in: $(srcdir)/havelib/rpathly/Makefile.am $(srcdir)/havelib/rpathly/configure.ac $(srcdir)/havelib/rpathly/aclocal.m4
+	cd $(srcdir)/havelib/rpathly && $(AUTOMAKE) Makefile
+$(srcdir)/havelib/rpathly/aclocal.m4: $(srcdir)/havelib/rpathly/configure.ac $(top_srcdir)/@HAVELIB_M4_BASE@/lib-link.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-prefix.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-ld.m4
+	abs_m4_dir=`cd $(top_srcdir)/@HAVELIB_M4_BASE@ && pwd`; cd $(srcdir)/havelib/rpathly && $(ACLOCAL) -I "$$abs_m4_dir"
+$(srcdir)/havelib/rpathly/configure: $(srcdir)/havelib/rpathly/configure.ac $(srcdir)/havelib/rpathly/aclocal.m4
+	cd $(srcdir)/havelib/rpathly && $(AUTOCONF)
+
+$(srcdir)/havelib/rpathlyx/Makefile.in: $(srcdir)/havelib/rpathlyx/Makefile.am $(srcdir)/havelib/rpathlyx/configure.ac $(srcdir)/havelib/rpathlyx/aclocal.m4
+	cd $(srcdir)/havelib/rpathlyx && $(AUTOMAKE) Makefile
+$(srcdir)/havelib/rpathlyx/aclocal.m4: $(srcdir)/havelib/rpathlyx/configure.ac $(top_srcdir)/@HAVELIB_M4_BASE@/lib-link.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-prefix.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-ld.m4
+	abs_m4_dir=`cd $(top_srcdir)/@HAVELIB_M4_BASE@ && pwd`; cd $(srcdir)/havelib/rpathlyx && $(ACLOCAL) -I "$$abs_m4_dir"
+$(srcdir)/havelib/rpathlyx/configure: $(srcdir)/havelib/rpathlyx/configure.ac $(srcdir)/havelib/rpathlyx/aclocal.m4
+	cd $(srcdir)/havelib/rpathlyx && $(AUTOCONF)
+
+$(srcdir)/havelib/rpathlz/Makefile.in: $(srcdir)/havelib/rpathlz/Makefile.am $(srcdir)/havelib/rpathlz/configure.ac $(srcdir)/havelib/rpathlz/aclocal.m4
+	cd $(srcdir)/havelib/rpathlz && $(AUTOMAKE) Makefile
+$(srcdir)/havelib/rpathlz/aclocal.m4: $(srcdir)/havelib/rpathlz/configure.ac $(top_srcdir)/@HAVELIB_M4_BASE@/lib-link.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-prefix.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-ld.m4
+	abs_m4_dir=`cd $(top_srcdir)/@HAVELIB_M4_BASE@ && pwd`; cd $(srcdir)/havelib/rpathlz && $(ACLOCAL) -I "$$abs_m4_dir"
+$(srcdir)/havelib/rpathlz/configure: $(srcdir)/havelib/rpathlz/configure.ac $(srcdir)/havelib/rpathlz/aclocal.m4
+	cd $(srcdir)/havelib/rpathlz && $(AUTOCONF)
+
+$(srcdir)/havelib/rpathlzyx/Makefile.in: $(srcdir)/havelib/rpathlzyx/Makefile.am $(srcdir)/havelib/rpathlzyx/configure.ac $(srcdir)/havelib/rpathlzyx/aclocal.m4
+	cd $(srcdir)/havelib/rpathlzyx && $(AUTOMAKE) Makefile
+$(srcdir)/havelib/rpathlzyx/aclocal.m4: $(srcdir)/havelib/rpathlzyx/configure.ac $(top_srcdir)/@HAVELIB_M4_BASE@/lib-link.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-prefix.m4 $(top_srcdir)/@HAVELIB_M4_BASE@/lib-ld.m4
+	abs_m4_dir=`cd $(top_srcdir)/@HAVELIB_M4_BASE@ && pwd`; cd $(srcdir)/havelib/rpathlzyx && $(ACLOCAL) -I "$$abs_m4_dir"
+$(srcdir)/havelib/rpathlzyx/configure: $(srcdir)/havelib/rpathlzyx/configure.ac $(srcdir)/havelib/rpathlzyx/aclocal.m4
+	cd $(srcdir)/havelib/rpathlzyx && $(AUTOCONF)
+
+MAINTAINERCLEANFILES += $(HAVELIB_GENERATED_FILES)
+EXTRA_DIST           += $(HAVELIB_GENERATED_FILES)
+
+# Libtool's infrastructure is installed in
+# - $(top_srcdir)/build-aux/ltmain.sh, which gets distributed,
+# - $(srcdir)/havelib/ltm4/*.m4, which don't need to be distributed, because
+#   they are included in each havelib/rpath*/aclocal.m4 file.
+
+EXTRA_DIST += $(top_srcdir)/build-aux/ltmain.sh
+
+mostlyclean-local: mostlyclean-local-havelib
+
+mostlyclean-local-havelib:
+	rm -rf $(srcdir)/havelib/ltm4
+
+
+# The AC_CONFIG_AUX_DIR argument in the havelib/rpath*/configure.ac files is
+# interpreted in two different contexts:
+#   1. at "make distrib" time, when we call automake, relative to
+#      SRCDIR/havelib/rpath*/,
+#   2. at "make check" time, when the directory is copied and configured,
+#      relative to BUILDDIR/havelib/tst/dir/rp-*/.
+# We choose this argument to be '../../../build-aux', for case 1, and therefore
+# we need to make a local copy of the build-aux directory, for case 2.
+
+HAVELIB_COPIED_FILES = \
+  havelib/build-aux/config.guess \
+  havelib/build-aux/config.sub \
+  havelib/build-aux/install-sh \
+  havelib/build-aux/ltmain.sh \
+  havelib/build-aux/missing \
+  havelib/build-aux/config.rpath
+
+all-local: $(HAVELIB_COPIED_FILES)
+
+havelib/build-aux-dir:
+	test -d havelib/build-aux || mkdir havelib/build-aux
+	touch havelib/build-aux-dir
+
+havelib/build-aux/config.guess: $(top_srcdir)/build-aux/config.guess havelib/build-aux-dir
+	cp $(top_srcdir)/build-aux/config.guess havelib/build-aux/config.guess
+
+havelib/build-aux/config.sub: $(top_srcdir)/build-aux/config.sub havelib/build-aux-dir
+	cp $(top_srcdir)/build-aux/config.sub havelib/build-aux/config.sub
+
+havelib/build-aux/install-sh: $(top_srcdir)/build-aux/install-sh havelib/build-aux-dir
+	cp $(top_srcdir)/build-aux/install-sh havelib/build-aux/install-sh
+
+havelib/build-aux/ltmain.sh: $(top_srcdir)/build-aux/ltmain.sh havelib/build-aux-dir
+	cp $(top_srcdir)/build-aux/ltmain.sh havelib/build-aux/ltmain.sh
+
+havelib/build-aux/missing: $(top_srcdir)/build-aux/missing havelib/build-aux-dir
+	cp $(top_srcdir)/build-aux/missing havelib/build-aux/missing
+
+havelib/build-aux/config.rpath: $(top_srcdir)/build-aux/config.rpath havelib/build-aux-dir
+	cp $(top_srcdir)/build-aux/config.rpath havelib/build-aux/config.rpath
+
+DISTCLEANFILES += $(HAVELIB_COPIED_FILES)
+
+distclean-local: distclean-local-havelib
+
+distclean-local-havelib:
+	rm -rf havelib/build-aux havelib/build-aux-dir
+.PHONY: distclean-local-havelib

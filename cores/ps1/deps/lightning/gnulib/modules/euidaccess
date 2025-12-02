@@ -1,0 +1,37 @@
+Description:
+euidaccess() function: check effective user's permissions for a file.
+
+Files:
+lib/euidaccess.c
+m4/euidaccess.m4
+
+Depends-on:
+unistd
+extensions
+root-uid
+fcntl-h
+group-member    [test $HAVE_EUIDACCESS = 0]
+stat            [test $HAVE_EUIDACCESS = 0]
+sys_stat        [test $HAVE_EUIDACCESS = 0]
+
+configure.ac:
+gl_FUNC_EUIDACCESS
+if test $HAVE_EUIDACCESS = 0; then
+  AC_LIBOBJ([euidaccess])
+  gl_PREREQ_EUIDACCESS
+fi
+gl_UNISTD_MODULE_INDICATOR([euidaccess])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+Link:
+$(LIB_EACCESS)
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering, glibc

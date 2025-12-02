@@ -1,0 +1,57 @@
+Description:
+A GNU-like <iconv.h>.
+
+Files:
+lib/iconv.in.h
+m4/iconv_h.m4
+
+Depends-on:
+include_next
+snippet/arg-nonnull
+snippet/c++defs
+snippet/warn-on-use
+
+configure.ac:
+gl_ICONV_H
+
+Makefile.am:
+BUILT_SOURCES += $(ICONV_H)
+
+# We need the following in order to create <iconv.h> when the system
+# doesn't have one that works with the given compiler.
+if GL_GENERATE_ICONV_H
+iconv.h: iconv.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_ICONV_H''@|$(NEXT_ICONV_H)|g' \
+	      -e 's/@''GNULIB_ICONV''@/$(GNULIB_ICONV)/g' \
+	      -e 's|@''ICONV_CONST''@|$(ICONV_CONST)|g' \
+	      -e 's|@''REPLACE_ICONV''@|$(REPLACE_ICONV)|g' \
+	      -e 's|@''REPLACE_ICONV_OPEN''@|$(REPLACE_ICONV_OPEN)|g' \
+	      -e 's|@''REPLACE_ICONV_UTF''@|$(REPLACE_ICONV_UTF)|g' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
+	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/iconv.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+else
+iconv.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += iconv.h iconv.h-t
+
+Include:
+#if HAVE_ICONV_H
+# include <iconv.h>
+#endif
+
+License:
+LGPLv2+
+
+Maintainer:
+all

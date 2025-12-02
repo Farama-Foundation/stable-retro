@@ -1,0 +1,22 @@
+Description:
+When compiling for SPARC, assume SPARC v8+ or newer.
+
+Files:
+m4/sparcv8+.m4
+
+Depends-on:
+
+configure.ac-early:
+gl_SPARC_V8PLUS
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

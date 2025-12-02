@@ -1,0 +1,13 @@
+Files:
+tests/test-lgamma.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-lgamma
+check_PROGRAMS += test-lgamma
+test_lgamma_LDADD = $(LDADD) @LGAMMA_LIBM@

@@ -1,0 +1,18 @@
+Files:
+tests/test-fabsf.c
+tests/test-fabs.h
+tests/signature.h
+tests/minus-zero.h
+tests/macros.h
+tests/randomf.c
+
+Depends-on:
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fabsf
+check_PROGRAMS += test-fabsf
+test_fabsf_SOURCES = test-fabsf.c randomf.c
+test_fabsf_LDADD = $(LDADD) @FABSF_LIBM@

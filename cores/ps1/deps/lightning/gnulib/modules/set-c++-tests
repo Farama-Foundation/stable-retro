@@ -1,0 +1,17 @@
+Files:
+tests/test-set-c++.cc
+tests/macros.h
+
+Depends-on:
+ansi-c++-opt
+array-set
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-set-c++
+check_PROGRAMS += test-set-c++
+test_set_c___SOURCES = test-set-c++.cc
+test_set_c___LDADD = $(LDADD) @LIBINTL@
+endif

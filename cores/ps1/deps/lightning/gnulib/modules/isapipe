@@ -1,0 +1,32 @@
+Description:
+Test whether a file descriptor is a pipe.
+
+Files:
+lib/isapipe.c
+lib/isapipe.h
+m4/isapipe.m4
+
+Depends-on:
+stdbool         [test $HAVE_ISAPIPE = 0]
+sys_stat        [test $HAVE_ISAPIPE = 0]
+unistd          [test $HAVE_ISAPIPE = 0]
+msvc-nothrow    [test $HAVE_ISAPIPE = 0]
+fstat           [test $HAVE_ISAPIPE = 0]
+
+configure.ac:
+gl_ISAPIPE
+if test $HAVE_ISAPIPE = 0; then
+  AC_LIBOBJ([isapipe])
+  gl_PREREQ_ISAPIPE
+fi
+
+Makefile.am:
+
+Include:
+"isapipe.h"
+
+License:
+LGPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

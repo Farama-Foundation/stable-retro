@@ -1,0 +1,28 @@
+Description:
+Test whether a Unicode character is "unified ideograph".
+
+Files:
+lib/unictype/pr_unified_ideograph.c
+lib/unictype/pr_unified_ideograph.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-unified-ideograph])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_UNIFIED_IDEOGRAPH
+lib_SOURCES += unictype/pr_unified_ideograph.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

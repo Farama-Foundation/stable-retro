@@ -1,0 +1,18 @@
+@node sched_rr_get_interval
+@section @code{sched_rr_get_interval}
+@findex sched_rr_get_interval
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/sched_rr_get_interval.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, OpenBSD 6.7, Minix 3.1.8, HP-UX 11, mingw, MSVC 14.
+@end itemize

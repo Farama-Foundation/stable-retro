@@ -1,0 +1,25 @@
+@node floorf
+@section @code{floorf}
+@findex floorf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/floorf.html}
+
+Gnulib module: floorf or floorf-ieee
+
+Portability problems fixed by either Gnulib module @code{floorf} or @code{floorf-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, HP-UX 11, Solaris 9.
+@item
+This function is only defined as a macro with arguments on some platforms:
+MSVC 14.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{floorf-ieee}:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

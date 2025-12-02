@@ -1,0 +1,27 @@
+Description:
+ctime() function: convert time to string.
+
+Files:
+lib/ctime.c
+m4/ctime.m4
+
+Depends-on:
+time
+
+configure.ac:
+gl_FUNC_CTIME
+if test $REPLACE_CTIME = 1; then
+  AC_LIBOBJ([ctime])
+fi
+gl_TIME_MODULE_INDICATOR([ctime])
+
+Makefile.am:
+
+Include:
+<time.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

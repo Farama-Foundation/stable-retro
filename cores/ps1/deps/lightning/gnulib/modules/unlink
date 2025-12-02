@@ -1,0 +1,30 @@
+Description:
+unlink() function: remove a file.
+
+Files:
+lib/unlink.c
+m4/unlink.m4
+
+Depends-on:
+unistd
+filename        [test $REPLACE_UNLINK = 1]
+lstat           [test $REPLACE_UNLINK = 1]
+malloc-posix    [test $REPLACE_UNLINK = 1]
+
+configure.ac:
+gl_FUNC_UNLINK
+if test $REPLACE_UNLINK = 1; then
+  AC_LIBOBJ([unlink])
+fi
+gl_UNISTD_MODULE_INDICATOR([unlink])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

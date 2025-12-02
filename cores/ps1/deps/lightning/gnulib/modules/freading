@@ -1,0 +1,26 @@
+Description:
+freading() function: Determine whether a FILE stream is currently doing reading.
+
+Files:
+lib/freading.h
+lib/freading.c
+lib/stdio-impl.h
+m4/freading.m4
+
+Depends-on:
+stdbool
+
+configure.ac:
+gl_FUNC_FREADING
+
+Makefile.am:
+lib_SOURCES += freading.c
+
+Include:
+"freading.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

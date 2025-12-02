@@ -1,0 +1,25 @@
+@node expm1
+@section @code{expm1}
+@findex expm1
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/expm1.html}
+
+Gnulib module: expm1 or expm1-ieee
+
+Portability problems fixed by either Gnulib module @code{expm1} or @code{expm1-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 9.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{expm1-ieee}:
+@itemize
+@item
+This function has problems when the argument is minus zero on some platforms:
+AIX 7.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

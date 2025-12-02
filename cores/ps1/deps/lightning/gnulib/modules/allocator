@@ -1,0 +1,22 @@
+Description:
+Storage allocators.
+
+Files:
+lib/allocator.h
+lib/allocator.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += allocator.c
+
+Include:
+"allocator.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

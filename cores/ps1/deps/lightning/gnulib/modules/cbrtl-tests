@@ -1,0 +1,17 @@
+Files:
+tests/test-cbrtl.c
+tests/test-cbrt.h
+tests/signature.h
+tests/macros.h
+tests/randoml.c
+
+Depends-on:
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-cbrtl
+check_PROGRAMS += test-cbrtl
+test_cbrtl_SOURCES = test-cbrtl.c randoml.c
+test_cbrtl_LDADD = $(LDADD) @CBRTL_LIBM@

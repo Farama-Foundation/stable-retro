@@ -1,0 +1,30 @@
+Description:
+File stream functions that avoid clobbering std{in,out,err}.
+
+Files:
+lib/stdlib--.h
+lib/stdlib-safer.h
+lib/mkstemp-safer.c
+
+Depends-on:
+fd-safer-flag
+mkstemp
+stdlib
+unistd-safer
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += mkstemp-safer.c
+
+Include:
+"stdlib-safer.h"
+
+Link:
+$(LIB_GETRANDOM)
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

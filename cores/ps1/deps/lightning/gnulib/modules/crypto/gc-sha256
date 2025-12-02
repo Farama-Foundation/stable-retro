@@ -1,0 +1,24 @@
+Description:
+Generic crypto wrappers for SHA-256 functions.
+
+Files:
+m4/gc-sha256.m4
+
+Depends-on:
+crypto/gc
+crypto/sha256 [test "$ac_cv_libgcrypt" != yes]
+
+configure.ac:
+gl_GC_SHA256
+gl_MODULE_INDICATOR([gc-sha256])
+
+Makefile.am:
+
+Include:
+"gc.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

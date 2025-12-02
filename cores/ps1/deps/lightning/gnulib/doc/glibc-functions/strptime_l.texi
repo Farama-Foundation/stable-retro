@@ -1,0 +1,16 @@
+@node strptime_l
+@subsection @code{strptime_l}
+@findex strptime_l
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on many platforms:
+FreeBSD 6.0, NetBSD 5.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 1.7.x, mingw, MSVC 14, Android 8.1.
+@end itemize

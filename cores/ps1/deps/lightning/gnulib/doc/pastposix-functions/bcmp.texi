@@ -1,0 +1,21 @@
+@node bcmp
+@section @code{bcmp}
+@findex bcmp
+
+POSIX specification: @url{https://pubs.opengroup.org/onlinepubs/009695399/functions/bcmp.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14, Android 9.0.
+@item
+This function is marked as ``legacy'' in POSIX@.  Better use @code{memcmp}
+instead.
+@end itemize

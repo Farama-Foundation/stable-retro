@@ -1,0 +1,16 @@
+Files:
+tests/test-open.h
+tests/test-open.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+stdbool
+fcntl
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-open
+check_PROGRAMS += test-open

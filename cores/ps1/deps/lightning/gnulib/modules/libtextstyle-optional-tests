@@ -1,0 +1,16 @@
+Files:
+tests/test-libtextstyle.c
+tests/test-libtextstyle-default.css
+
+Depends-on:
+c99
+isatty
+
+configure.ac:
+gl_LIBTEXTSTYLE_OPTIONAL
+
+Makefile.am:
+TESTS += test-libtextstyle
+check_PROGRAMS += test-libtextstyle
+test_libtextstyle_CPPFLAGS = $(AM_CPPFLAGS) -DSRCDIR=\"$(srcdir)/\"
+test_libtextstyle_LDADD = $(LDADD) @LIBTEXTSTYLE@

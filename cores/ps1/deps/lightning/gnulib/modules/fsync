@@ -1,0 +1,29 @@
+Description:
+fsync(2) function: synchronize writes, including metadata, to a file.
+
+Files:
+lib/fsync.c
+m4/fsync.m4
+
+Depends-on:
+unistd
+msvc-nothrow    [test $HAVE_FSYNC = 0]
+
+configure.ac:
+gl_FUNC_FSYNC
+if test $HAVE_FSYNC = 0; then
+  AC_LIBOBJ([fsync])
+  gl_PREREQ_FSYNC
+fi
+gl_UNISTD_MODULE_INDICATOR([fsync])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Richard W.M. Jones, Jim Meyering

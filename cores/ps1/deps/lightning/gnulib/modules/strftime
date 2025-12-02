@@ -1,0 +1,26 @@
+Description:
+nstrftime() function: convert date and time to string, with GNU extensions.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete. Use module 'nstrftime' instead.
+
+Files:
+
+Depends-on:
+nstrftime
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"strftime.h"
+
+License:
+LGPL
+
+Maintainer:
+all

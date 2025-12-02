@@ -1,0 +1,31 @@
+Description:
+Look up an environment variable, returning 0 in insecure situations.
+
+Files:
+lib/secure_getenv.c
+m4/secure_getenv.m4
+
+Depends-on:
+stdlib
+extensions
+
+configure.ac:
+gl_FUNC_SECURE_GETENV
+if test $HAVE_SECURE_GETENV = 0; then
+  AC_LIBOBJ([secure_getenv])
+  gl_PREREQ_SECURE_GETENV
+fi
+gl_STDLIB_MODULE_INDICATOR([secure_getenv])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+Link:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

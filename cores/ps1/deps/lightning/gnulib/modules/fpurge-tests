@@ -1,0 +1,14 @@
+Files:
+tests/test-fpurge.c
+tests/macros.h
+
+Depends-on:
+fflush
+ftell
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fpurge
+check_PROGRAMS += test-fpurge
+MOSTLYCLEANFILES += t-fpurge.tmp

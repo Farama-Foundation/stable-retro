@@ -1,0 +1,11 @@
+Files:
+tests/test-arpa_inet.c
+
+Depends-on:
+arpa_inet-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-arpa_inet
+check_PROGRAMS += test-arpa_inet

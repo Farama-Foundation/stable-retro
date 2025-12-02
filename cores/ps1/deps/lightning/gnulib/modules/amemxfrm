@@ -1,0 +1,24 @@
+Description:
+Locale dependent memory area transformation for comparison.
+
+Files:
+lib/amemxfrm.h
+lib/amemxfrm.c
+
+Depends-on:
+free-posix
+
+configure.ac:
+AC_REQUIRE([AC_C_RESTRICT])
+
+Makefile.am:
+lib_SOURCES += amemxfrm.c
+
+Include:
+"amemxfrm.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,28 @@
+Description:
+Test whether a Unicode character is "hex digit".
+
+Files:
+lib/unictype/pr_hex_digit.c
+lib/unictype/pr_hex_digit.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-hex-digit])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_HEX_DIGIT
+lib_SOURCES += unictype/pr_hex_digit.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

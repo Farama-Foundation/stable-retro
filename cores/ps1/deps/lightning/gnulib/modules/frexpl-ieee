@@ -1,0 +1,24 @@
+Description:
+frexpl() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+frexpl
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FREXPL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

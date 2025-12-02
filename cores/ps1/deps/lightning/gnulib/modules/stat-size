@@ -1,0 +1,24 @@
+Description:
+stat-related file size macros
+
+Files:
+lib/stat-size.h
+m4/stat-size.m4
+
+Depends-on:
+fileblocks
+sys_stat
+
+configure.ac:
+gl_STAT_SIZE
+
+Makefile.am:
+
+Include:
+"stat-size.h"
+
+License:
+GPL
+
+Maintainer:
+James Youngman, Jim Meyering

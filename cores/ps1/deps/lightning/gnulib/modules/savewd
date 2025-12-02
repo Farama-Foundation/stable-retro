@@ -1,0 +1,39 @@
+Description:
+Save and restore the working directory, possibly using a child process.
+
+Files:
+lib/savewd.h
+lib/savewd.c
+m4/savewd.m4
+
+Depends-on:
+assure
+attribute
+chdir
+errno
+extern-inline
+fchdir
+fcntl-safer
+fcntl-h
+filename
+raise
+stdbool
+stdlib
+sys_wait
+unistd
+xalloc
+
+configure.ac:
+gl_SAVEWD
+
+Makefile.am:
+lib_SOURCES += savewd.h savewd.c
+
+Include:
+"savewd.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

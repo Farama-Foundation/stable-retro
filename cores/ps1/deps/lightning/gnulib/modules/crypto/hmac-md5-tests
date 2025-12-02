@@ -1,0 +1,12 @@
+Files:
+tests/test-hmac-md5.c
+
+Depends-on:
+c99
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-hmac-md5
+check_PROGRAMS += test-hmac-md5
+test_hmac_md5_LDADD = $(LDADD) @LIB_CRYPTO@

@@ -1,0 +1,29 @@
+Description:
+Tokenize UTF-8 string.
+
+Files:
+lib/unistr/u8-strtok.c
+lib/unistr/u-strtok.h
+
+Depends-on:
+unistr/base
+unistr/u8-strspn
+unistr/u8-strpbrk
+unistr/u8-strmblen
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.6], [unistr/u8-strtok])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_STRTOK
+lib_SOURCES += unistr/u8-strtok.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

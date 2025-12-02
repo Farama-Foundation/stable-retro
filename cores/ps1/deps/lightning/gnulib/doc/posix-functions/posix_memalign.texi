@@ -1,0 +1,27 @@
+@node posix_memalign
+@section @code{posix_memalign}
+@findex posix_memalign
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_memalign.html}
+
+Gnulib module: posix_memalign
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function produces misaligned results on some platforms:
+OpenBSD 6.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Mac OS X 10.5, FreeBSD 6.0, NetBSD 3.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14, Android 4.1.
+@end itemize
+
+The Gnulib module @code{aligned-malloc} provides functions for
+allocating and freeing blocks of suitably aligned memory.
+
+The Gnulib module @code{pagealign_alloc} provides a similar API for
+allocating and freeing blocks of memory aligned on a system page boundary.

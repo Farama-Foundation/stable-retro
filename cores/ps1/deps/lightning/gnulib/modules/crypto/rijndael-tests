@@ -1,0 +1,10 @@
+Files:
+tests/test-rijndael.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-rijndael
+check_PROGRAMS += test-rijndael

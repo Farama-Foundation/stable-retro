@@ -1,0 +1,29 @@
+Description:
+close() function: close a file or socket.
+
+Files:
+lib/close.c
+m4/close.m4
+
+Depends-on:
+unistd
+fd-hook         [test $REPLACE_CLOSE = 1]
+msvc-inval      [test $REPLACE_CLOSE = 1]
+
+configure.ac:
+gl_FUNC_CLOSE
+if test $REPLACE_CLOSE = 1; then
+  AC_LIBOBJ([close])
+fi
+gl_UNISTD_MODULE_INDICATOR([close])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Paolo Bonzini, Simon Josefsson

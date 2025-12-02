@@ -1,0 +1,26 @@
+@node gai_strerror
+@section @code{gai_strerror}
+@findex gai_strerror
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/gai_strerror.html}
+
+Gnulib module: getaddrinfo
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+HP-UX 11.11, IRIX 6.5, Cygwin 1.5.x.
+@item
+This function is only available in @code{<ws2tcpip.h>} on some
+platforms:
+mingw, MSVC 14.
+@item
+This function's return type is @code{char *} instead of @code{const char *}
+on some platforms:
+AIX 7.1, HP-UX 11, Solaris 9, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

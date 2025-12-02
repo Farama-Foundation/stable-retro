@@ -1,0 +1,57 @@
+Files:
+tests/test-posix_spawn-dup2-stdout.c
+tests/test-posix_spawn-dup2-stdout.in.sh
+tests/test-posix_spawn-dup2-stdin.c
+tests/test-posix_spawn-dup2-stdin.in.sh
+tests/test-posix_spawnp-script.c
+tests/executable-script
+tests/executable-script.sh
+tests/executable-shell-script
+tests/signature.h
+
+Depends-on:
+posix_spawn_file_actions_init
+posix_spawn_file_actions_adddup2
+posix_spawn_file_actions_addclose
+posix_spawn_file_actions_addopen
+posix_spawn_file_actions_destroy
+posix_spawnattr_init
+posix_spawnattr_setsigmask
+posix_spawnattr_setflags
+posix_spawnattr_destroy
+stdbool
+unistd
+sys_wait
+dup
+environ
+sh-filename
+sigprocmask
+waitpid
+
+configure.ac:
+
+Makefile.am:
+TESTS += \
+  test-posix_spawn-dup2-stdout \
+  test-posix_spawn-dup2-stdin \
+  test-posix_spawnp-script
+check_PROGRAMS += \
+  test-posix_spawn-dup2-stdout \
+  test-posix_spawn-dup2-stdin \
+  test-posix_spawnp-script
+
+BUILT_SOURCES += test-posix_spawn-dup2-stdout.sh
+test-posix_spawn-dup2-stdout.sh: test-posix_spawn-dup2-stdout.in.sh
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	cp $(srcdir)/test-posix_spawn-dup2-stdout.in.sh $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += test-posix_spawn-dup2-stdout.sh test-posix_spawn-dup2-stdout.sh-t
+
+BUILT_SOURCES += test-posix_spawn-dup2-stdin.sh
+test-posix_spawn-dup2-stdin.sh: test-posix_spawn-dup2-stdin.in.sh
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	cp $(srcdir)/test-posix_spawn-dup2-stdin.in.sh $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += test-posix_spawn-dup2-stdin.sh test-posix_spawn-dup2-stdin.sh-t
+
+test_posix_spawnp_script_CPPFLAGS = $(AM_CPPFLAGS) -DSRCDIR=\"$(srcdir)/\"

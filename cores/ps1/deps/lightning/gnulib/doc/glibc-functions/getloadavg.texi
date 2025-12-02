@@ -1,0 +1,35 @@
+@node getloadavg
+@subsection @code{getloadavg}
+@findex getloadavg
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-getloadavg-3.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Processor Resources,,Learn about the processors available,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Processor-Resources.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/getloadavg.3.html,,man getloadavg}.
+@end itemize
+
+Gnulib module: getloadavg
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+AIX 5.1, HP-UX 11, IRIX 6.5, Cygwin 1.7.x, mingw, MSVC 14, Android 9.0.
+@item
+This function is declared in @code{<sys/loadavg.h>}, not @code{<stdlib.h>},
+on some platforms:
+Solaris 11.4.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

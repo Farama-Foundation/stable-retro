@@ -1,0 +1,14 @@
+Files:
+tests/test-asinl.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+fpucw
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-asinl
+check_PROGRAMS += test-asinl
+test_asinl_LDADD = $(LDADD) @ASINL_LIBM@

@@ -1,0 +1,30 @@
+Description:
+Test whether a file descriptor is a terminal.
+
+Files:
+lib/isatty.c
+m4/isatty.m4
+
+Depends-on:
+unistd
+msvc-inval      [test $REPLACE_ISATTY = 1]
+msvc-nothrow    [test $REPLACE_ISATTY = 1]
+
+configure.ac:
+gl_FUNC_ISATTY
+if test $REPLACE_ISATTY = 1; then
+  AC_LIBOBJ([isatty])
+  gl_PREREQ_ISATTY
+fi
+gl_UNISTD_MODULE_INDICATOR([isatty])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

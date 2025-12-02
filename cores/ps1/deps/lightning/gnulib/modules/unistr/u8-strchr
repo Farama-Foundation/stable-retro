@@ -1,0 +1,26 @@
+Description:
+Search character in UTF-8 string.
+
+Files:
+lib/unistr/u8-strchr.c
+
+Depends-on:
+unistr/base
+unistr/u8-uctomb
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-strchr])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_STRCHR
+lib_SOURCES += unistr/u8-strchr.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,38 @@
+Description:
+POSIX formatted printing into an obstack.
+
+Comment:
+This module should not be used as a dependency from a test module,
+otherwise when this module occurs as a tests-related module, it will
+have side effects on the compilation of the 'vasnprintf' module, if
+that module occurs among the main modules in lib/.
+
+Files:
+m4/obstack-printf.m4
+m4/obstack-printf-posix.m4
+m4/math_h.m4
+lib/obstack_printf.c
+
+Depends-on:
+obstack
+stdio
+vasnprintf-posix
+extensions
+
+configure.ac:
+gl_FUNC_OBSTACK_PRINTF_POSIX
+if test $ac_cv_func_obstack_printf = no || test $REPLACE_OBSTACK_PRINTF = 1; then
+  AC_LIBOBJ([obstack_printf])
+fi
+gl_STDIO_MODULE_INDICATOR([obstack-printf-posix])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+GPL
+
+Maintainer:
+Eric Blake

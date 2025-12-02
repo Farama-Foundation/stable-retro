@@ -1,0 +1,15 @@
+@node difftime
+@section @code{difftime}
+@findex difftime
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/difftime.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

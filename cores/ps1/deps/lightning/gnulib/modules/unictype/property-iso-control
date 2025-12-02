@@ -1,0 +1,30 @@
+Description:
+Test whether a Unicode character is "iso control".
+
+Files:
+lib/unictype/pr_iso_control.c
+lib/unictype/pr_iso_control.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+unictype/category-test
+unictype/category-Cc
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-iso-control])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_ISO_CONTROL
+lib_SOURCES += unictype/pr_iso_control.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,16 @@
+Files:
+tests/test-pthread-rwlock.c
+tests/atomic-int-posix.h
+tests/macros.h
+
+Depends-on:
+pthread-thread
+pthread-mutex
+sched_yield
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pthread-rwlock
+check_PROGRAMS += test-pthread-rwlock
+test_pthread_rwlock_LDADD = $(LDADD) @LIBPMULTITHREAD@ @LIB_SCHED_YIELD@ @LIB_SEMAPHORE@

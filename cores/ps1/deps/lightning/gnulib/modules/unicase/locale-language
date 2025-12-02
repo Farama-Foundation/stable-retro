@@ -1,0 +1,41 @@
+Description:
+Language code of current locale.
+
+Files:
+lib/unicase/locale-language.c
+lib/unicase/locale-languages.gperf
+
+Depends-on:
+unicase/base
+localename
+gperf
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.3], [unicase/locale-language])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_LOCALE_LANGUAGE
+lib_SOURCES += unicase/locale-language.c
+endif
+
+$(srcdir)/unicase/locale-languages.h: $(srcdir)/unicase/locale-languages.gperf
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/unicase/locale-languages.gperf > $(srcdir)/unicase/locale-languages.h-t1 \
+	&& sed -e 's/^const/static const/' < $(srcdir)/unicase/locale-languages.h-t1 > $(srcdir)/unicase/locale-languages.h-t2 \
+	&& mv $(srcdir)/unicase/locale-languages.h-t2 $(srcdir)/unicase/locale-languages.h
+BUILT_SOURCES        += unicase/locale-languages.h
+MOSTLYCLEANFILES     += unicase/locale-languages.h-t1 unicase/locale-languages.h-t2
+MAINTAINERCLEANFILES += unicase/locale-languages.h
+EXTRA_DIST           += unicase/locale-languages.h
+
+Include:
+"unicase.h"
+
+Link:
+@INTL_MACOSX_LIBS@
+$(LIBTHREAD)
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

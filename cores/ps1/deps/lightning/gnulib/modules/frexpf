@@ -1,0 +1,33 @@
+Description:
+frexpf() function: split a float into its constituents.
+
+Files:
+lib/frexpf.c
+m4/frexpf.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+frexp           [test $HAVE_FREXPF = 0 || test $REPLACE_FREXPF = 1]
+
+configure.ac:
+gl_FUNC_FREXPF
+if test $HAVE_FREXPF = 0 || test $REPLACE_FREXPF = 1; then
+  AC_LIBOBJ([frexpf])
+fi
+gl_MATH_MODULE_INDICATOR([frexpf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FREXPF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

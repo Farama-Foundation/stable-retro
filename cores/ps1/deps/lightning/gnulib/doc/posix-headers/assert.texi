@@ -1,0 +1,38 @@
+@node assert.h
+@section @file{assert.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/assert.h.html}
+
+Gnulib module: assert-h
+
+See also the Gnulib modules @code{assert} and @code{verify}.
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On older platforms @code{static_assert} and @code{_Static_assert} do
+not allow the second string-literal argument to be omitted.  For
+example, GCC versions before 9.1 do not support the single-argument
+@code{static_assert} that was standardized by C2X and C++17.
+@item
+Even-older platforms do not support @code{static_assert} or
+@code{_Static_assert} at all.  For example, GCC versions before 4.6 do
+not support @code{_Static_assert}, and G++ versions before 4.3 do not
+support @code{static_assert}, which was standardized by C11 and C++11.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+C @code{_Static_assert} and C++ @code{static_assert}
+are keywords that can be used without including @code{<assert.h>}.
+The Gnulib substitutes are macros that require including @code{<assert.h>}.
+@item
+The C @code{static_assert} and @code{_Static_assert} can also
+be used within a @code{struct} or @code{union} specifier, in place of
+an ordinary declaration of a member of the struct or union.  The
+Gnulib substitute can be used only as an ordinary declaration.
+@item
+In C99 and later, @code{assert} can be applied to any scalar expression.
+In C89, the argument to @code{assert} is of type @code{int}.
+@end itemize

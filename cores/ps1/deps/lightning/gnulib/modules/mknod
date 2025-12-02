@@ -1,0 +1,30 @@
+Description:
+mknod() function: create various special devices
+
+Files:
+lib/mknod.c
+m4/mknod.m4
+
+Depends-on:
+sys_stat
+extensions
+mkfifo          [test $HAVE_MKNOD = 0 || test $REPLACE_MKNOD = 1]
+stat            [test $HAVE_MKNOD = 0 || test $REPLACE_MKNOD = 1]
+
+configure.ac:
+gl_FUNC_MKNOD
+if test $HAVE_MKNOD = 0 || test $REPLACE_MKNOD = 1; then
+  AC_LIBOBJ([mknod])
+fi
+gl_UNISTD_MODULE_INDICATOR([mknod])
+
+Makefile.am:
+
+Include:
+<sys/stat.h>
+
+License:
+LGPL
+
+Maintainer:
+Eric Blake

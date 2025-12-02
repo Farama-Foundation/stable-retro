@@ -1,0 +1,22 @@
+@node getsubopt
+@section @code{getsubopt}
+@findex getsubopt
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/getsubopt.html}
+
+Gnulib module: getsubopt
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14, Android 7.1.
+@item
+This function is declared in @code{unistd.h} instead of
+@code{stdlib.h} on some platforms:
+Cygwin 1.7.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

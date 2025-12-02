@@ -1,0 +1,26 @@
+Description:
+Concatenate UTF-8 strings.
+
+Files:
+lib/unistr/u8-strncat.c
+
+Depends-on:
+unistr/base
+strncat
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-strncat])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_STRNCAT
+lib_SOURCES += unistr/u8-strncat.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

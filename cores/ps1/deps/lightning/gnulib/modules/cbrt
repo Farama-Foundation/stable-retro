@@ -1,0 +1,36 @@
+Description:
+cbrt() function: cube root.
+
+Files:
+lib/cbrt.c
+m4/cbrt.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+isfinite        [test $HAVE_CBRT = 0]
+fabs            [test $HAVE_CBRT = 0]
+frexp           [test $HAVE_CBRT = 0]
+ldexp           [test $HAVE_CBRT = 0]
+
+configure.ac:
+gl_FUNC_CBRT
+if test $HAVE_CBRT = 0; then
+  AC_LIBOBJ([cbrt])
+fi
+gl_MATH_MODULE_INDICATOR([cbrt])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(CBRT_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

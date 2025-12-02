@@ -1,0 +1,26 @@
+Description:
+expm1l() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+expm1l
+fpieee
+expm1-ieee      [test $HAVE_EXPM1L = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+
+configure.ac:
+AC_REQUIRE([gl_FUNC_EXPM1L])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(EXPM1L_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

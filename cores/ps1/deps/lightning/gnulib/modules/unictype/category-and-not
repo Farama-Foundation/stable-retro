@@ -1,0 +1,27 @@
+Description:
+Set-difference of categories of Unicode characters.
+
+Files:
+lib/unictype/categ_and_not.c
+
+Depends-on:
+unictype/base
+unictype/category-none
+unictype/category-test-withtable
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-and-not])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_AND_NOT
+lib_SOURCES += unictype/categ_and_not.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,40 @@
+@node pthread_sigmask
+@section @code{pthread_sigmask}
+@findex pthread_sigmask
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_sigmask.html}
+
+Gnulib module: pthread_sigmask
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 14.
+@item
+This function is declared in @code{<pthread.h>} instead of @code{<signal.h>}
+on some platforms:
+FreeBSD 6.4, OpenBSD 3.8.
+@item
+This function does nothing and always returns 0 in programs that are not
+linked with @code{-lpthread} on some platforms:
+FreeBSD 6.4, MidnightBSD 1.1, HP-UX 11.31, Solaris 9.
+@item
+When it fails, this functions returns @minus{}1 instead of the error number on
+some platforms:
+Cygwin 1.7.5.
+@item
+This function does not immediately raise signals that were pending before
+the call and unblocked by the call on some platforms:
+IRIX 6.5.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On platforms that do not natively support this function,
+it has unspecified behavior in a multi-threaded process.
+@item
+This function may not fail when the first argument is invalid on some platforms:
+NetBSD 8.0.
+@end itemize

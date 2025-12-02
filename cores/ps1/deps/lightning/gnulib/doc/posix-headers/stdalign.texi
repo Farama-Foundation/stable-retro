@@ -1,0 +1,68 @@
+@node stdalign.h
+@section @file{stdalign.h}
+
+POSIX specification:@* Not in POSIX yet, but we expect it will be.
+ISO C11 (latest free draft
+@url{http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf})
+sections 6.5.3.4, 6.7.5, 7.15.
+C++11 (latest free draft
+@url{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2011/n3242.pdf})
+section 18.10.
+
+Gnulib module: stdalign
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on many platforms:
+FreeBSD 6.4, NetBSD 7.1, OpenBSD 6.7, Minix 3.3.0, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3, mingw, MSVC 14, Android 9.0.
+@item
+Clang 3.0's @code{<stdalign.h>} does not define @code{alignof}/@code{_Alignof}.
+@item
+The @code{alignof} and @code{_Alignof} macros return too large values for
+the types @code{double} and @code{long long} in GCC 4.7.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+In ISO C11, the operand of @code{alignof}/@code{_Alignof} must be a
+parenthesized type.  Recent versions of GCC support an extension in
+which the operand can also be a unary expression, as with
+@code{sizeof}.  The Gnulib substitute does not support this extension.
+@item
+On most pre-C11 platforms, the operand of
+@code{alignof}/@code{_Alignof} cannot be a structure type containing a
+flexible array member.
+@item
+@code{_Alignas} and @code{alignas} are not always supported;
+on platforms lacking support, the
+macro @code{__alignas_is_defined} is not defined.
+Supported compilers include GCC, IBM C, Sun C 5.9 and later,
+and MSVC 7.0 and later.
+@item
+Some compilers do not support alignment via
+@code{alignas}/@code{_Alignas} of @code{auto} variables (i.e.,
+variables on the stack).  They diagnose and ignore the alignment: Sun
+C 5.11.
+@item
+Some linkers do not support operands of @code{_Alignas}/@code{alignas}
+that are greater than 8: mingw.
+@item
+Some compilers require the operand of @code{_Alignas}/@code{alignas}
+to be a single integer constant, not an expression: MSVC 7.0 through
+at least 10.0.
+@item
+The Sun C 5.13 compiler sometimes mishandles the alignment of multiple
+external variables that are declared close together with
+@code{_Alignas}/@code{alignas}.  The Sun Studio Developer Bug
+Report Review Team assigned the internal review ID 2125432 (dated
+2011-11-01) to this issue.  The bug appears to be fixed in Sun C 5.15,
+also known as Oracle Developer Studio 12.6.
+@item
+@code{<stdalign.h>} must be #included before @code{_Alignas} and
+@code{_Alignof} can be used.
+@item
+You cannot assume that @code{_Alignas} and @code{_Alignof} are reserved words;
+they might be macros.
+@end itemize

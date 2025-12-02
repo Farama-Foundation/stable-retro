@@ -1,0 +1,28 @@
+Description:
+Formatted output to an UTF-16 string, with automatic memory allocation and
+bounded output size.
+
+Files:
+lib/unistdio/u16-asnprintf.c
+lib/unistdio/u-asnprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/u16-vasnprintf
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistdio/u16-asnprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_U16_ASNPRINTF
+lib_SOURCES += unistdio/u16-asnprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

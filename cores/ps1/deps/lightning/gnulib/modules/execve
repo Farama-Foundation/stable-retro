@@ -1,0 +1,31 @@
+Description:
+execve() function: Execute a program, replacing the current process.
+
+Files:
+lib/execve.c
+m4/execve.m4
+
+Depends-on:
+unistd
+posix_spawn     [test $REPLACE_EXECVE = 1]
+close           [test $REPLACE_EXECVE = 1]
+sys_wait        [test $REPLACE_EXECVE = 1]
+waitpid         [test $REPLACE_EXECVE = 1]
+
+configure.ac:
+gl_FUNC_EXECVE
+if test $REPLACE_EXECVE = 1; then
+  AC_LIBOBJ([execve])
+fi
+gl_UNISTD_MODULE_INDICATOR([execve])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

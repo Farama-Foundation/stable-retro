@@ -1,0 +1,31 @@
+Description:
+Read a response from the user, and its classification as matching "yes" or
+"no".
+
+Files:
+lib/yesno.c
+lib/yesno.h
+m4/yesno.m4
+
+Depends-on:
+getline
+rpmatch
+stdbool
+
+configure.ac:
+gl_YESNO
+
+Makefile.am:
+lib_SOURCES += yesno.c
+
+Include:
+"yesno.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

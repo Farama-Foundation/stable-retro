@@ -1,0 +1,21 @@
+Description:
+Abstract map data type as a C++ class.
+
+Files:
+lib/gl_map.hh
+
+Depends-on:
+xmap
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"gl_map.hh"
+
+License:
+GPL
+
+Maintainer:
+all

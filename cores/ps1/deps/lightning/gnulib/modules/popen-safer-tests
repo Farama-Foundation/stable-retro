@@ -1,0 +1,16 @@
+Files:
+tests/test-popen.h
+tests/test-popen-safer.c
+tests/test-popen-safer2.c
+tests/macros.h
+
+Depends-on:
+dup2
+pclose
+sys_wait
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-popen-safer test-popen-safer2
+check_PROGRAMS += test-popen-safer test-popen-safer2

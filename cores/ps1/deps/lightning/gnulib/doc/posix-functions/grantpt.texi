@@ -1,0 +1,21 @@
+@node grantpt
+@section @code{grantpt}
+@findex grantpt
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/grantpt.html}
+
+Gnulib module: grantpt
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 3.8, Minix 3.1.8, mingw, MSVC 14, Android 4.4.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function reports success for invalid file descriptors on some platforms:
+OpenBSD, Cygwin 1.7.9, musl libc.
+@end itemize

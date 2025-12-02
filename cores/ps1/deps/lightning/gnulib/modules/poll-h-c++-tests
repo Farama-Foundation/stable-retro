@@ -1,0 +1,19 @@
+Files:
+tests/test-poll-h-c++.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-poll-h-c++
+check_PROGRAMS += test-poll-h-c++
+test_poll_h_c___SOURCES = test-poll-h-c++.cc
+test_poll_h_c___LDADD = $(LDADD) $(LIB_POLL)
+endif

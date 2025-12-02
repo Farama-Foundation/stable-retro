@@ -1,0 +1,29 @@
+Description:
+Library containing
+getservent() function, setservent() function, endservent() function,
+getservbyname() function, getservbyport() function,
+getprotoent() function, setprotoent() function, endprotoent() function,
+getprotobyname() function, getprotobynumber() function.
+
+Files:
+m4/servent.m4
+
+Depends-on:
+sys_socket
+
+configure.ac:
+gl_SERVENT
+
+Makefile.am:
+
+Include:
+<netdb.h>
+
+Link:
+$(SERVENT_LIB)
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

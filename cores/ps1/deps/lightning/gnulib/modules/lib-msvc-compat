@@ -1,0 +1,14 @@
+Description:
+Macros to test whether LD support --output-def.
+
+Files:
+m4/ld-output-def.m4
+
+configure.ac:
+gl_LD_OUTPUT_DEF
+
+License:
+unlimited
+
+Maintainer:
+Simon Josefsson

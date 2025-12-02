@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_non_break.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_non_break
+check_PROGRAMS += test-pr_non_break
+test_pr_non_break_SOURCES = unictype/test-pr_non_break.c
+test_pr_non_break_LDADD = $(LDADD) $(LIBUNISTRING)

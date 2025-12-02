@@ -1,0 +1,11 @@
+Files:
+tests/test-gc-sha256.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-gc-sha256
+check_PROGRAMS += test-gc-sha256
+test_gc_sha256_LDADD = $(LDADD) @LIB_CRYPTO@

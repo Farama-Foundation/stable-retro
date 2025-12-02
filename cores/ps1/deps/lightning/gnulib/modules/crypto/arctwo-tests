@@ -1,0 +1,10 @@
+Files:
+tests/test-arctwo.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-arctwo
+check_PROGRAMS += test-arctwo

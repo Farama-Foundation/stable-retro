@@ -1,0 +1,25 @@
+Description:
+DES block cipher.
+
+Files:
+lib/des.c
+lib/des.h
+
+Depends-on:
+stdint
+stdbool
+memcmp
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += des.c
+
+Include:
+"des.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

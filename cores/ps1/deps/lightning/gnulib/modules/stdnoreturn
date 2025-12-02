@@ -1,0 +1,40 @@
+Description:
+A <stdnoreturn.h> that nearly conforms to ISO C11.
+
+Files:
+lib/stdnoreturn.in.h
+m4/stdnoreturn.m4
+
+Depends-on:
+snippet/_Noreturn
+
+configure.ac:
+gl_STDNORETURN_H
+
+Makefile.am:
+BUILT_SOURCES += $(STDNORETURN_H)
+
+# We need the following in order to create <stdnoreturn.h> when the system
+# doesn't have one that works.
+if GL_GENERATE_STDNORETURN_H
+stdnoreturn.h: stdnoreturn.in.h $(top_builddir)/config.status $(_NORETURN_H)
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+	  sed -e '/definition of _Noreturn/r $(_NORETURN_H)' \
+              < $(srcdir)/stdnoreturn.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+else
+stdnoreturn.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += stdnoreturn.h stdnoreturn.h-t
+
+Include:
+<stdnoreturn.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert

@@ -1,0 +1,20 @@
+Files:
+tests/test-isnanl.c
+tests/test-isnanl.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+float
+
+configure.ac:
+gl_LONG_DOUBLE_EXPONENT_LOCATION
+AC_REQUIRE([gl_LONG_DOUBLE_VS_DOUBLE])
+
+Makefile.am:
+TESTS += test-isnanl
+check_PROGRAMS += test-isnanl
+test_isnanl_LDADD = $(LDADD) @ISNANL_LIBM@
+

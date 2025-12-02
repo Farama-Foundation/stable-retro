@@ -1,0 +1,31 @@
+Description:
+Read character delimited data from a stream.
+
+Files:
+lib/getdelim.c
+m4/getdelim.m4
+
+Depends-on:
+stdio
+extensions
+stdint          [test $HAVE_GETDELIM = 0 || test $REPLACE_GETDELIM = 1]
+errno           [test $HAVE_GETDELIM = 0 || test $REPLACE_GETDELIM = 1]
+
+configure.ac:
+gl_FUNC_GETDELIM
+if test $HAVE_GETDELIM = 0 || test $REPLACE_GETDELIM = 1; then
+  AC_LIBOBJ([getdelim])
+  gl_PREREQ_GETDELIM
+fi
+gl_STDIO_MODULE_INDICATOR([getdelim])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

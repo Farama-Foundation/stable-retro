@@ -1,0 +1,13 @@
+@node Precise file timestamps on Windows
+@section Precise file timestamps on Windows
+
+The module @samp{windows-stat-timespec} ensures that,
+on native Windows platforms, @code{struct stat} contains
+@code{st_atim}, @code{st_mtim}, @code{st_ctim} fields of type
+@code{struct timespec}, providing 100 ns resolution for the timestamps
+of files.
+
+Note: On some types of file systems, the timestamp resolution is limited
+by the file system.  For example, on FAT file systems, @code{st_mtim}
+only has a resolution of 2 seconds.  For more details, see
+@url{https://docs.microsoft.com/en-us/windows/desktop/SysInfo/file-times}.

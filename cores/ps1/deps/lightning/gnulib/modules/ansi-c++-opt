@@ -1,0 +1,22 @@
+Description:
+Optional use of an ANSI C++ compiler.
+
+Files:
+m4/ansi-c++.m4
+
+Depends-on:
+
+configure.ac-early:
+AC_REQUIRE([gl_ANSI_CXX])
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

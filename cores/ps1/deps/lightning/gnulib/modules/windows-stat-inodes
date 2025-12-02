@@ -1,0 +1,27 @@
+Description:
+On native Windows platforms, ensure that 'struct stat' contains values
+in the st_dev, st_ino fields that are able to distinguish different inodes.
+
+Comment:
+This module should not be used as a dependency from a test module,
+otherwise when this module occurs as a tests-related module, it will
+have side effects on the compilation of the main modules in lib/.
+
+Files:
+m4/windows-stat-inodes.m4
+
+Depends-on:
+windows-stat-override
+
+configure.ac:
+AC_REQUIRE([gl_WINDOWS_STAT_INODES])
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+Bruno Haible

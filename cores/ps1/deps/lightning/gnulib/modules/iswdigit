@@ -1,0 +1,35 @@
+Description:
+iswdigit() function: test wide character for being a digit.
+
+Files:
+lib/iswdigit.c
+m4/iswdigit.m4
+m4/locale-fr.m4
+m4/locale-ja.m4
+m4/locale-zh.m4
+m4/codeset.m4
+
+Depends-on:
+wctype-h
+
+configure.ac:
+gl_FUNC_ISWDIGIT
+if test $HAVE_ISWCNTRL = 0 || test $REPLACE_ISWCNTRL = 1; then
+  :
+else
+  if test $REPLACE_ISWDIGIT = 1; then
+    AC_LIBOBJ([iswdigit])
+  fi
+fi
+gl_WCTYPE_MODULE_INDICATOR([iswdigit])
+
+Makefile.am:
+
+Include:
+<wctype.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Bruno Haible

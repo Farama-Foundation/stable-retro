@@ -1,0 +1,30 @@
+@node frexpl
+@section @code{frexpl}
+@findex frexpl
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/frexpl.html}
+
+Gnulib module: frexpl
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 5.2.1, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, HP-UX 11, IRIX 6.5, Solaris 9, Cygwin 1.7.x, Android 4.4.
+@item
+This function is only defined as a macro with arguments on some platforms:
+MSVC 14.
+@item
+This function does not work on finite numbers on some platforms:
+AIX 5.1, MSVC 14.
+@item
+This function does not work on denormalized numbers on some platforms:
+macOS 10.13/i386.
+@item
+This function does not work on infinite numbers on some platforms:
+IRIX 6.5, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

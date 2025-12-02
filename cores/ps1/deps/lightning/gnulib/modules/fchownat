@@ -1,0 +1,40 @@
+Description:
+fchownat() function: Change the owner of a file at a directory.
+
+Files:
+lib/fchownat.c
+lib/at-func.c
+m4/fchownat.m4
+
+Depends-on:
+unistd
+extensions
+at-internal     [test $HAVE_FCHOWNAT = 0 || test $REPLACE_FCHOWNAT = 1]
+errno           [test $HAVE_FCHOWNAT = 0 || test $REPLACE_FCHOWNAT = 1]
+extern-inline   [test $HAVE_FCHOWNAT = 0 || test $REPLACE_FCHOWNAT = 1]
+fchdir          [test $HAVE_FCHOWNAT = 0 || test $REPLACE_FCHOWNAT = 1]
+fcntl-h         [test $HAVE_FCHOWNAT = 0 || test $REPLACE_FCHOWNAT = 1]
+filename        [test $HAVE_FCHOWNAT = 0 || test $REPLACE_FCHOWNAT = 1]
+lchown          [test $HAVE_FCHOWNAT = 0 || test $REPLACE_FCHOWNAT = 1]
+openat-die      [test $HAVE_FCHOWNAT = 0 || test $REPLACE_FCHOWNAT = 1]
+openat-h        [test $HAVE_FCHOWNAT = 0 || test $REPLACE_FCHOWNAT = 1]
+save-cwd        [test $HAVE_FCHOWNAT = 0 || test $REPLACE_FCHOWNAT = 1]
+statat          [test $REPLACE_FCHOWNAT = 1]
+
+configure.ac:
+gl_FUNC_FCHOWNAT
+if test $HAVE_FCHOWNAT = 0 || test $REPLACE_FCHOWNAT = 1; then
+  AC_LIBOBJ([fchownat])
+fi
+gl_UNISTD_MODULE_INDICATOR([fchownat])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake, Paul Eggert

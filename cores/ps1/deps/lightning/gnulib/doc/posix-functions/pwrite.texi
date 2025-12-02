@@ -1,0 +1,29 @@
+@node pwrite
+@section @code{pwrite}
+@findex pwrite
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/pwrite.html}
+
+Gnulib module: pwrite
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+On platforms where @code{off_t} is a 32-bit type, this function may not
+work correctly on files larger than 2 GB@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@item
+This function does not fail when an invalid (negative) offset is passed when
+large file support is enabled on some platforms:
+HP-UX 11.11.
+@item
+This function uses an arbitrary offset instead of the @code{off_t} argument
+when large file support is enabled on some platforms:
+HP-UX 11.11.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

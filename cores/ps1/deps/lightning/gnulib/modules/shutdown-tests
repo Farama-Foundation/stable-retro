@@ -1,0 +1,14 @@
+Files:
+tests/test-shutdown.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+sockets
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-shutdown
+check_PROGRAMS += test-shutdown
+test_shutdown_LDADD = $(LDADD) @LIBSOCKET@

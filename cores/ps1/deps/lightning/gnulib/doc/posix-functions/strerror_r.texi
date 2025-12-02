@@ -1,0 +1,88 @@
+@node strerror_r
+@section @code{strerror_r}
+@findex strerror_r
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strerror_r.html}
+
+LSB specification:
+@itemize
+@item
+@url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-strerror-r.html}
+@item
+@url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib---xpg-strerror-r.html}
+@end itemize
+
+Gnulib module: strerror_r-posix
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+NetBSD 3.0, Minix 3.1.8, HP-UX 11.23, IRIX 6.5, Solaris 9, mingw, MSVC 14.
+@item
+glibc, Cygwin, and Android have an incompatible version of this function.
+The POSIX compliant code
+@smallexample
+char *s = (strerror_r (err, buf, buflen) == 0 ? buf : NULL);
+@end smallexample
+is essentially equivalent to this code using the glibc function:
+@smallexample
+char *s = strerror_r (err, buf, buflen);
+@end smallexample
+@item
+This function clobbers the @code{strerror} buffer on some platforms:
+Cygwin 1.7.9.
+@item
+This function is sometimes not declared in @code{<string.h>} on some platforms:
+glibc 2.8.
+@item
+The third argument is of type @code{int} instead of @code{size_t} on some
+platforms:
+AIX 5.1.
+@item
+When this function fails, it returns @minus{}1 and sets @code{errno}, instead of
+returning the error number, on some platforms:
+glibc 2.12 with @code{-D_POSIX_C_SOURCE=200112L}, AIX 6.1.
+@item
+When this function fails, it corrupts @code{errno}, on some platforms:
+Solaris 10.
+@item
+This function does not support many error values defined in @code{<errno.h>} on
+some platforms:
+MSVC 14.
+@item
+This function does not support the error values that are specified by POSIX
+but not defined by the system, on some platforms:
+OpenBSD 4.0, NonStop Kernel, Cygwin 1.5.x.
+@item
+This function reports failure for @code{strerror_r(0, buf, len)},
+although POSIX requires this to succeed, on some platforms:
+FreeBSD 8.2.
+@item
+This function produces a different string for @code{0} than
+@code{strerror} on some platforms:
+macOS 11.1.
+@item
+This function always fails when the third argument is less than 80 on some
+platforms:
+HP-UX 11.31.
+@item
+When the buffer is too small and the value is in range, this function
+does not fail, but instead truncates the result and returns 0 on some
+platforms:
+AIX 6.1, Haiku 2017.
+@item
+When the value is not in range or the buffer is too small, this
+function fails to leave a NUL-terminated string in the buffer on some
+platforms:
+glibc 2.13, FreeBSD 8.2, Solaris 10.
+@item
+When the value is out of range but the buffer is too small, this
+function does not always return the longest possible string on some
+platforms:
+OpenBSD 4.7.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

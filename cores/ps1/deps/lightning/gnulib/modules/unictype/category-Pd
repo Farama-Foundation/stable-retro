@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character is of general category Pd.
+
+Files:
+lib/unictype/categ_Pd.c
+lib/unictype/categ_Pd.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-Pd])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_PD
+lib_SOURCES += unictype/categ_Pd.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

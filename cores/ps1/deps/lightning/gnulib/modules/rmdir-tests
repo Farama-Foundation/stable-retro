@@ -1,0 +1,16 @@
+Files:
+tests/test-rmdir.h
+tests/test-rmdir.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+stdbool
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-rmdir
+check_PROGRAMS += test-rmdir

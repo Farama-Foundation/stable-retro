@@ -1,0 +1,33 @@
+Description:
+Base layer for grapheme cluster breaking.
+
+Files:
+lib/unigbrk.in.h
+m4/libunistring-base.m4
+
+Depends-on:
+unitypes
+stdbool
+
+configure.ac:
+gl_LIBUNISTRING_LIBHEADER([0.9.4], [unigbrk.h])
+
+Makefile.am:
+BUILT_SOURCES += $(LIBUNISTRING_UNIGBRK_H)
+
+unigbrk.h: unigbrk.in.h
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  cat $(srcdir)/unigbrk.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+MOSTLYCLEANFILES += unigbrk.h unigbrk.h-t
+
+Include:
+"unigbrk.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+Ben Pfaff, Daiki Ueno

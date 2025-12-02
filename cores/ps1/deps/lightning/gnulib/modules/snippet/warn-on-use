@@ -1,0 +1,28 @@
+Description:
+A C macro for emitting a warning if a function is used.
+
+Applicability:
+all
+
+Files:
+lib/warn-on-use.h
+m4/warn-on-use.m4
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
+
+WARN_ON_USE_H=$(srcdir)/warn-on-use.h
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

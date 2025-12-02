@@ -1,0 +1,26 @@
+Description:
+Determine bidi class of a Unicode character.
+
+Files:
+lib/unictype/bidi_of.c
+lib/unictype/bidi_of.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/bidiclass-of])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_BIDICLASS_OF
+lib_SOURCES += unictype/bidi_of.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

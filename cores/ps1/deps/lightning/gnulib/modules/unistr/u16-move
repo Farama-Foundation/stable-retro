@@ -1,0 +1,27 @@
+Description:
+Copy piece of UTF-16 string.
+
+Files:
+lib/unistr/u16-move.c
+lib/unistr/u-move.h
+
+Depends-on:
+unistr/base
+memmove
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u16-move])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U16_MOVE
+lib_SOURCES += unistr/u16-move.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

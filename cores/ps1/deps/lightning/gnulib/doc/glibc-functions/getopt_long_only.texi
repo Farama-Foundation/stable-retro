@@ -1,0 +1,70 @@
+@node getopt_long_only
+@subsection @code{getopt_long_only}
+@findex getopt_long_only
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-getopt-long-only-3.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Getopt Long Options,,Parsing Long Options with getopt_long,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Getopt-Long-Options.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/getopt_long_only.3.html,,man getopt_long_only}.
+@end itemize
+
+Gnulib module: getopt-gnu
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+The function @code{getopt_long_only} does not obey the combination of
+@samp{+} and @samp{:} flags in the options string on some platforms:
+glibc 2.11.
+@item
+The use of @samp{W;} in the optstring argument to does not always
+allow @code{-W foo} to behave synonymously with @code{--foo}:
+glibc 2.11.
+@item
+The function @code{getopt_long_only} does not support the @samp{+}
+flag in the options string on some platforms:
+macOS 11.1, AIX 5.2, Solaris 10.
+@item
+The value of @code{optind} after a missing required argument is wrong
+on some platforms:
+macOS 11.1.
+@item
+The function @code{getopt_long_only} does not obey the @samp{-} flag
+in the options string when @env{POSIXLY_CORRECT} is set on some platforms:
+Cygwin 1.7.0.
+@item
+Some implementations fail to reset state, including re-checking
+@env{POSIXLY_CORRECT}, when @code{optind} is set to @samp{0}:
+NetBSD, Cygwin 1.7.0.
+@item
+The function @code{getopt_long_only} does not support options with
+optional arguments on some platforms:
+macOS 11.1, OpenBSD 4.0, AIX 5.2, Solaris 11 2010-11, Cygwin 1.5.x.
+@item
+This function is missing on some platforms:
+FreeBSD 5.2.1, NetBSD 9.0, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, mingw, MSVC 14.
+@item
+This function crashes if the option string includes @code{W;} but
+there are no long options, on some platforms:
+glibc 2.14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Some implementations return success instead of reporting an ambiguity
+if user's option is a prefix of two long options with the same outcome:
+FreeBSD.
+@item
+The GNU Coding Standards discourage the use of @code{getopt_long_only}
+in new programs.
+@end itemize

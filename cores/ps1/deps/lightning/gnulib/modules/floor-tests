@@ -1,0 +1,22 @@
+Files:
+tests/test-floor1.c
+tests/test-floor2.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+float
+isnand-nolibm
+stdbool
+stdint
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-floor1 test-floor2
+check_PROGRAMS += test-floor1 test-floor2
+test_floor1_LDADD = $(LDADD) @FLOOR_LIBM@
+test_floor2_LDADD = $(LDADD) @FLOOR_LIBM@

@@ -1,0 +1,32 @@
+Description:
+copysign() function: copy sign into another 'double' number.
+
+Files:
+lib/copysign.c
+m4/copysign.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+signbit         [test $HAVE_COPYSIGN = 0]
+
+configure.ac:
+gl_FUNC_COPYSIGN
+if test $HAVE_COPYSIGN = 0; then
+  AC_LIBOBJ([copysign])
+fi
+gl_MATH_MODULE_INDICATOR([copysign])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(COPYSIGN_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

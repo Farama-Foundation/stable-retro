@@ -1,0 +1,33 @@
+Description:
+Getter for RLIMIT_AS: Returns the current address space size.
+
+Files:
+lib/resource-ext.h
+lib/get-rusage-as.c
+m4/mmap-anon.m4
+
+Depends-on:
+stdint
+unistd
+extensions
+getpagesize
+open
+vma-iter
+
+configure.ac:
+AC_CHECK_FUNCS_ONCE([setrlimit])
+gl_FUNC_MMAP_ANON
+AC_CHECK_HEADERS_ONCE([sys/mman.h])
+AC_CHECK_FUNCS_ONCE([mprotect])
+
+Makefile.am:
+lib_SOURCES += get-rusage-as.c
+
+Include:
+"resource-ext.h"
+
+License:
+GPL
+
+Maintainer:
+all

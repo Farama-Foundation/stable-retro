@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-ctype_graph.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ctype_graph
+check_PROGRAMS += test-ctype_graph
+test_ctype_graph_SOURCES = unictype/test-ctype_graph.c
+test_ctype_graph_LDADD = $(LDADD) $(LIBUNISTRING)

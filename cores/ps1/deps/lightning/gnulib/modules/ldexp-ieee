@@ -1,0 +1,24 @@
+Description:
+ldexp() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+ldexp
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LDEXP_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

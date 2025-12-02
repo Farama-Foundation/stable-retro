@@ -1,0 +1,20 @@
+@node pthread_getspecific
+@section @code{pthread_getspecific}
+@findex pthread_getspecific
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_getspecific.html}
+
+Gnulib module: pthread-tss
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 14.
+But the provided replacement is just a dummy on some of these platforms:
+Minix 3.1.8.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

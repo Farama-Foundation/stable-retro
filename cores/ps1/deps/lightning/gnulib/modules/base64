@@ -1,0 +1,26 @@
+Description:
+Encode binary data using printable characters (base64).
+
+Files:
+lib/base64.h
+lib/base64.c
+m4/base64.m4
+
+Depends-on:
+stdbool
+memchr
+
+configure.ac:
+gl_FUNC_BASE64
+
+Makefile.am:
+lib_SOURCES += base64.h base64.c
+
+Include:
+"base64.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

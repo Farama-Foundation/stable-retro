@@ -1,0 +1,26 @@
+Description:
+Determine the parent process of a given process.
+
+Files:
+lib/get_ppid_of.h
+lib/get_ppid_of.c
+
+Depends-on:
+extensions
+sys_types
+unistd
+open
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += get_ppid_of.h get_ppid_of.c
+
+Include:
+"get_ppid_of.h"
+
+License:
+LGPL
+
+Maintainer:
+all

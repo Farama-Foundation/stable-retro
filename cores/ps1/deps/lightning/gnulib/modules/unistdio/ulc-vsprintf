@@ -1,0 +1,32 @@
+Description:
+Formatted output to a string.
+
+Files:
+lib/unistdio/ulc-vsprintf.c
+lib/unistdio/u-vsprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/ulc-vasnprintf
+stdint
+errno
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unistdio/ulc-vsprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_ULC_VSPRINTF
+lib_SOURCES += unistdio/ulc-vsprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

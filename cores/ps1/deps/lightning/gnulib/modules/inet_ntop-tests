@@ -1,0 +1,16 @@
+Files:
+tests/test-inet_ntop.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+netinet_in
+sys_socket
+
+configure.ac:
+AC_C_BIGENDIAN
+
+Makefile.am:
+TESTS += test-inet_ntop
+check_PROGRAMS += test-inet_ntop
+test_inet_ntop_LDADD = $(LDADD) @INET_NTOP_LIB@

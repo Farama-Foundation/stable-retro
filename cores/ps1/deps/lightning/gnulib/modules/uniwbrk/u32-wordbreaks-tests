@@ -1,0 +1,18 @@
+Files:
+tests/uniwbrk/test-u32-wordbreaks.c
+tests/uniwbrk/test-uc-wordbreaks.c
+tests/uniwbrk/test-uc-wordbreaks.sh
+tests/uniwbrk/WordBreakTest.txt
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-wordbreaks uniwbrk/test-uc-wordbreaks.sh
+check_PROGRAMS += test-u32-wordbreaks test-uc-wordbreaks
+test_u32_wordbreaks_SOURCES = uniwbrk/test-u32-wordbreaks.c
+test_u32_wordbreaks_LDADD = $(LDADD) $(LIBUNISTRING)
+test_uc_wordbreaks_SOURCES = uniwbrk/test-uc-wordbreaks.c
+test_uc_wordbreaks_LDADD = $(LDADD) $(LIBUNISTRING)

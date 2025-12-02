@@ -1,0 +1,12 @@
+Files:
+tests/test-sys_select.c
+tests/signature.h
+
+Depends-on:
+sys_select-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sys_select
+check_PROGRAMS += test-sys_select

@@ -1,0 +1,15 @@
+Files:
+tests/unistr/test-u32-strcoll.c
+tests/unistr/test-u32-strcmp.h
+tests/unistr/test-strcmp.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-strcoll
+check_PROGRAMS += test-u32-strcoll
+test_u32_strcoll_SOURCES = unistr/test-u32-strcoll.c
+test_u32_strcoll_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@

@@ -1,0 +1,18 @@
+@node sched_get_priority_max
+@section @code{sched_get_priority_max}
+@findex sched_get_priority_max
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/sched_get_priority_max.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 3.8, Minix 3.1.8, HP-UX 11, mingw, MSVC 14.
+@end itemize

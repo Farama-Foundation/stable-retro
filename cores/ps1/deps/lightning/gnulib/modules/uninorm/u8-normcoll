@@ -1,0 +1,28 @@
+Description:
+Locale dependent, normalization insensitive comparison of UTF-8 strings.
+
+Files:
+lib/uninorm/u8-normcoll.c
+lib/uninorm/u-normcoll.h
+
+Depends-on:
+uninorm/base
+uninorm/u8-normxfrm
+memcmp2
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uninorm/u8-normcoll])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINORM_U8_NORMCOLL
+lib_SOURCES += uninorm/u8-normcoll.c
+endif
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

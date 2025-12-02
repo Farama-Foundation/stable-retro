@@ -1,0 +1,47 @@
+Description:
+Initialization of OpenMP support.
+
+Files:
+lib/omp.in.h
+lib/omp-init.c
+m4/omp_h.m4
+
+Depends-on:
+include_next
+c-ctype
+setenv
+
+configure.ac:
+gl_OMP_H
+
+Makefile.am:
+BUILT_SOURCES += omp.h
+
+# We need the following in order to create <omp.h> when the system
+# doesn't have one that works with the given compiler.
+omp.h: omp.in.h $(top_builddir)/config.status $(CXXDEFS_H) \
+  $(_NORETURN_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_OMP_H''@|$(NEXT_OMP_H)|g' \
+	      < $(srcdir)/omp.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += omp.h omp.h-t
+
+lib_SOURCES += omp-init.c
+
+Include:
+#ifdef _OPENMP
+# include <omp.h>
+#endif
+
+License:
+LGPL
+
+Maintainer:
+all

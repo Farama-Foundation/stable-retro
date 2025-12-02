@@ -1,0 +1,25 @@
+Files:
+tests/test-mbsstr1.c
+tests/test-mbsstr2.sh
+tests/test-mbsstr2.c
+tests/test-mbsstr3.sh
+tests/test-mbsstr3.c
+tests/macros.h
+m4/locale-fr.m4
+m4/locale-zh.m4
+m4/codeset.m4
+
+Depends-on:
+setlocale
+
+configure.ac:
+gt_LOCALE_FR_UTF8
+gt_LOCALE_ZH_CN
+
+Makefile.am:
+TESTS += test-mbsstr1 test-mbsstr2.sh test-mbsstr3.sh
+TESTS_ENVIRONMENT += LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-mbsstr1 test-mbsstr2 test-mbsstr3
+test_mbsstr1_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_MBRTOWC)
+test_mbsstr2_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
+test_mbsstr3_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_SETLOCALE) $(LIB_MBRTOWC)

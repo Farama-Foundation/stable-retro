@@ -1,0 +1,29 @@
+Description:
+execl() function: Execute a program, replacing the current process.
+
+Files:
+lib/execl.c
+m4/execl.m4
+
+Depends-on:
+unistd
+execv           [test $REPLACE_EXECL = 1]
+malloca         [test $REPLACE_EXECL = 1]
+
+configure.ac:
+gl_FUNC_EXECL
+if test $REPLACE_EXECL = 1; then
+  AC_LIBOBJ([execl])
+fi
+gl_UNISTD_MODULE_INDICATOR([execl])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

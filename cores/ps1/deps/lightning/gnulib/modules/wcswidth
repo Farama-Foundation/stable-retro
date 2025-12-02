@@ -1,0 +1,33 @@
+Description:
+wcswidth() function: determine number of screen columns needed for a
+size-bounded wide string.
+
+Files:
+lib/wcswidth.c
+lib/wcswidth-impl.h
+m4/wcswidth.m4
+
+Depends-on:
+wchar
+wcwidth         [test $HAVE_WCSWIDTH = 0 || test $REPLACE_WCSWIDTH = 1]
+
+configure.ac:
+gl_FUNC_WCSWIDTH
+if test $HAVE_WCSWIDTH = 0 || test $REPLACE_WCSWIDTH = 1; then
+  AC_LIBOBJ([wcswidth])
+fi
+gl_WCHAR_MODULE_INDICATOR([wcswidth])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+
+License:
+LGPL
+
+Maintainer:
+all

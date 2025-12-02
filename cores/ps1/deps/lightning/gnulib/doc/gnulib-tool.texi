@@ -1,0 +1,1083 @@
+@node Invoking gnulib-tool
+@chapter Invoking gnulib-tool
+
+@c Copyright (C) 2005--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+@pindex gnulib-tool
+@cindex invoking @command{gnulib-tool}
+
+The @command{gnulib-tool} command is the recommended way to import
+Gnulib modules.  It is possible to borrow Gnulib modules in a package
+without using @command{gnulib-tool}, relying only on the
+meta-information stored in the @file{modules/*} files, but with a
+growing number of modules this becomes tedious.  @command{gnulib-tool}
+simplifies the management of source files, @file{Makefile.am}s and
+@file{configure.ac} in packages incorporating Gnulib modules.
+
+@file{gnulib-tool} is not installed in a standard directory that is
+contained in the @code{PATH} variable.  It needs to be run directly in
+the directory that contains the Gnulib source code.  You can do this
+either by specifying the absolute filename of @file{gnulib-tool}, or
+you can also use a symbolic link from a place inside your @code{PATH}
+to the @file{gnulib-tool} file of your preferred and most up-to-date
+Gnulib checkout, like this:
+@smallexample
+$ ln -s $HOME/gnu/src/gnulib.git/gnulib-tool $HOME/bin/gnulib-tool
+@end smallexample
+
+Run @samp{gnulib-tool --help} for information.  To get familiar with
+@command{gnulib-tool} without affecting your sources, you can also try
+some commands with the option @samp{--dry-run}; then
+@code{gnulib-tool} will only report which actions it would perform in
+a real run without changing anything.
+
+@menu
+* Which modules?::              Determining the needed set of Gnulib modules
+* Initial import::              First import of Gnulib modules.
+* Modified imports::            Changing the import specification.
+* Simple update::               Tracking Gnulib development.
+* Source changes::              Impact of Gnulib on your source files.
+* Link-time requirements::      Which libraries to link against
+* Finding POSIX substitutes::   Determining additional suitable Gnulib modules
+* Modified build rules::        Modifying the build rules of a Gnulib import
+* Multiple instances::          Using Gnulib for both a library and a program
+* gettextize and autopoint::    Caveat: @code{gettextize} and @code{autopoint} users!
+* Localization::                Handling Gnulib's own message translations.
+* VCS Issues::                  Integration with Version Control Systems.
+* Unit tests::                  Bundling the unit tests of the Gnulib modules.
+* Conditional dependencies::    Avoiding unnecessary checks and compilations.
+@end menu
+
+
+@node Which modules?
+@section Finding modules
+@cindex Finding modules
+
+There are four ways of finding the names of Gnulib modules that you can use
+in your package:
+
+@itemize
+@item
+You have the complete module list, sorted according to categories, in
+@url{https://www.gnu.org/software/gnulib/MODULES.html}.
+
+@item
+If you are looking for POSIX function replacements that you don't know about
+yet, follow the procedure described in section @ref{Finding POSIX substitutes}.
+
+@item
+If you are looking for a particular POSIX header or function replacement,
+look in the chapters @ref{Header File Substitutes} and
+@ref{Function Substitutes}.  For headers and functions that are provided by
+Glibc but not standardized by POSIX, look in the chapters
+@ref{Glibc Header File Substitutes} and @ref{Glibc Function Substitutes}.
+
+@item
+If you have already found the source file in Gnulib and are looking for the
+module that contains this source file, you can use the command
+@samp{gnulib-tool --find @var{filename}}.
+@end itemize
+
+
+@node Initial import
+@section Initial import
+@cindex initial import
+
+Gnulib assumes that your project uses Autoconf.  When using Gnulib, you
+will need to have Autoconf among your build tools.
+
+Gnulib also assumes that your project's @file{configure.ac} contains the
+line
+@smallexample
+AC_CONFIG_HEADERS([config.h])
+@end smallexample
+The @file{config.h} file gets generated with platform dependent C macro
+definitions, and the source files include it (see @ref{Source changes}).
+
+Unless you use @command{gnulib-tool}'s @option{--gnu-make} option,
+Gnulib also assumes that your project uses Automake at least in a
+subdirectory of your project.  While the use of Automake in your
+project's top level directory is an easy way to fulfil the Makefile
+conventions of the GNU coding standards, Gnulib does not require it.
+
+Invoking @samp{gnulib-tool --import} will copy source files, create a
+@file{Makefile.am} to build them, generate a file @file{gnulib-comp.m4} with
+Autoconf M4 macro declarations used by @file{configure.ac}, and generate
+a file @file{gnulib-cache.m4} containing the cached specification of how
+Gnulib is used.
+
+Our example will be a library that uses Autoconf, Automake and
+Libtool.  It calls @code{strdup}, and you wish to use gnulib to make
+the package portable to C99 and C11 (which don't have @code{strdup}).
+
+@example
+~/src/libfoo$ gnulib-tool --import strdup
+Module list with included dependencies:
+  absolute-header
+  extensions
+  strdup
+  string
+File list:
+  lib/dummy.c
+  lib/strdup.c
+  lib/string.in.h
+  m4/absolute-header.m4
+  m4/extensions.m4
+  m4/gnulib-common.m4
+  m4/strdup.m4
+  m4/string_h.m4
+Creating directory ./lib
+Creating directory ./m4
+Copying file lib/dummy.c
+Copying file lib/strdup.c
+Copying file lib/string.in.h
+Copying file m4/absolute-header.m4
+Copying file m4/extensions.m4
+Copying file m4/gnulib-common.m4
+Copying file m4/gnulib-tool.m4
+Copying file m4/strdup.m4
+Copying file m4/string_h.m4
+Creating lib/Makefile.am
+Creating m4/gnulib-cache.m4
+Creating m4/gnulib-comp.m4
+Finished.
+
+You may need to add #include directives for the following .h files.
+  #include <string.h>
+
+Don't forget to
+  - add "lib/Makefile" to AC_CONFIG_FILES in ./configure.ac,
+  - mention "lib" in SUBDIRS in Makefile.am,
+  - mention "-I m4" in ACLOCAL_AMFLAGS in Makefile.am,
+  - invoke gl_EARLY in ./configure.ac, right after AC_PROG_CC,
+  - invoke gl_INIT in ./configure.ac.
+~/src/libfoo$
+@end example
+
+By default, the source code is copied into @file{lib/} and the M4
+macros in @file{m4/}.  You can override these paths by using
+@code{--source-base=DIRECTORY} and @code{--m4-base=DIRECTORY}.  Some
+modules also provide other files necessary for building.  These files
+are copied into the directory specified by @samp{AC_CONFIG_AUX_DIR} in
+@file{configure.ac} or by the @code{--aux-dir=DIRECTORY} option.  If
+neither is specified, the current directory is assumed.
+
+@code{gnulib-tool} can make symbolic links instead of copying the
+source files.  The option to specify for this is @samp{--symlink}, or
+@samp{-s} for short.  This can be useful to save a few kilobytes of disk
+space.  But it is likely to introduce bugs when @code{gnulib} is updated;
+it is more reliable to use @samp{gnulib-tool --update} (see below)
+to update to newer versions of @code{gnulib}.  Furthermore it requires
+extra effort to create self-contained tarballs, and it may disturb some
+mechanism the maintainer applies to the sources.  For these reasons,
+this option is generally discouraged.
+
+@code{gnulib-tool} will overwrite any pre-existing files, in
+particular @file{Makefile.am}.  It is also possible to separate the
+generated @file{Makefile.am} content (for building the gnulib library)
+into a separate file, say @file{gnulib.mk}, that can be included by your
+handwritten @file{Makefile.am}, but this is a more advanced use of
+@code{gnulib-tool}.
+
+Consequently, it is a good idea to choose directories that are not
+already used by your projects, to separate gnulib imported files from
+your own files.  This approach is also useful if you want to avoid
+conflicts between other tools (e.g., @code{gettextize} that also copy
+M4 files into your package.  Simon Josefsson successfully uses a source
+base of @file{gl/}, and a M4 base of @file{gl/m4/}, in several
+packages.
+
+After the @samp{--import} option on the command line comes the list of
+Gnulib modules that you want to incorporate in your package.  The names
+of the modules coincide with the filenames in Gnulib's @file{modules/}
+directory.
+
+Some Gnulib modules depend on other Gnulib modules.  @code{gnulib-tool}
+will automatically add the needed modules as well; you need not list
+them explicitly.  @code{gnulib-tool} will also memorize which dependent
+modules it has added, so that when someday a dependency is dropped, the
+implicitly added module is dropped as well (unless you have explicitly
+requested that module).
+
+If you want to cut a dependency, i.e., not add a module although one of
+your requested modules depends on it, you may use the option
+@samp{--avoid=@var{module}} to do so.  Multiple uses of this option are
+possible.  Of course, you will then need to implement the same interface
+as the removed module.
+
+A few manual steps are required to finish the initial import.
+@code{gnulib-tool} printed a summary of these steps.
+
+First, you must ensure Autoconf can find the macro definitions in
+@file{gnulib-comp.m4}.  Use the @code{ACLOCAL_AMFLAGS} specifier in
+your top-level @file{Makefile.am} file, as in:
+
+@example
+ACLOCAL_AMFLAGS = -I m4
+@end example
+
+You are now ready to call the M4 macros in @code{gnulib-comp.m4} from
+@file{configure.ac}.  The macro @code{gl_EARLY} must be called as soon
+as possible after verifying that the C compiler is working.
+Typically, this is immediately after @code{AC_PROG_CC}, as in:
+
+@example
+...
+AC_PROG_CC
+gl_EARLY
+...
+@end example
+
+If you are using @code{AC_PROG_CC_STDC}, the macro @code{gl_EARLY} must
+be called after it, like this:
+
+@example
+...
+AC_PROG_CC
+AC_PROG_CC_STDC
+gl_EARLY
+...
+@end example
+
+The core part of the gnulib checks are done by the macro
+@code{gl_INIT}.  Place it further down in the file, typically where
+you normally check for header files or functions.  It must come after
+other checks which may affect the compiler invocation, such as
+@code{AC_MINIX}.  For example:
+
+@example
+...
+# For gnulib.
+gl_INIT
+...
+@end example
+
+@code{gl_INIT} will in turn call the macros related with the
+gnulib functions, be it specific gnulib macros, like @code{gl_FUNC_ALLOCA}
+or Autoconf or Automake macros like @code{AC_FUNC_ALLOCA} or
+@code{AM_FUNC_GETLINE}.  So there is no need to call those macros yourself
+when you use the corresponding gnulib modules.
+
+You must also make sure that the gnulib library is built.  Add the
+@code{Makefile} in the gnulib source base directory to
+@code{AC_CONFIG_FILES}, as in:
+
+@example
+AC_CONFIG_FILES(... lib/Makefile ...)
+@end example
+
+You must also make sure that @code{make} will recurse into the gnulib
+directory.  To achieve this, add the gnulib source base directory to a
+@code{SUBDIRS} Makefile.am statement, as in:
+
+@example
+SUBDIRS = lib
+@end example
+
+or if you, more likely, already have a few entries in @code{SUBDIRS},
+you can add something like:
+
+@example
+SUBDIRS += lib
+@end example
+
+Finally, you have to add compiler and linker flags in the appropriate
+source directories, so that you can make use of the gnulib library.
+Since some modules (@samp{getopt}, for example) may copy files into
+the build directory, @file{top_builddir/lib} is needed as well
+as @file{top_srcdir/lib}.  For example:
+
+@example
+...
+AM_CPPFLAGS = -I$(top_builddir)/lib -I$(top_srcdir)/lib
+...
+LDADD = lib/libgnu.a
+...
+@end example
+
+Don't forget to @code{#include} the various header files.  In this
+example, you would need to make sure that @samp{#include <string.h>}
+is evaluated when compiling all source code files, that want to make
+use of @code{strdup}.
+
+In the usual case where Autoconf is creating a @file{config.h} file,
+you should include @file{config.h} first, before any other include
+file.  That way, for example, if @file{config.h} defines
+@samp{restrict} to be the empty string on a non-C99 host, or a macro
+like @samp{_FILE_OFFSET_BITS} that affects the layout of data
+structures, the definition is consistent for all include files.
+Also, on some platforms macros like @samp{_FILE_OFFSET_BITS} and
+@samp{_GNU_SOURCE} may be ineffective, or may have only a limited
+effect, if defined after the first system header file is included.
+
+Finally, note that you cannot use @code{AC_LIBOBJ} or
+@code{AC_REPLACE_FUNCS} in your @file{configure.ac} and expect the
+resulting object files to be automatically added to @file{lib/libgnu.a}.
+This is because your @code{AC_LIBOBJ} and @code{AC_REPLACE_FUNCS} invocations
+from @file{configure.ac} augment a variable @code{@@LIBOBJS@@} (and/or
+@code{@@LTLIBOBJS@@} if using Libtool), whereas @file{lib/libgnu.a}
+is built from the contents of a different variable, usually
+@code{@@gl_LIBOBJS@@} (or @code{@@gl_LTLIBOBJS@@} if using Libtool).
+
+
+@node Modified imports
+@section Modified imports
+
+You can at any moment decide to use Gnulib differently than the last time.
+
+There are two ways to change how Gnulib is used.  Which one you'll use,
+depends on where you keep track of options and module names that you pass
+to @code{gnulib-tool}.
+
+@itemize @bullet
+@item
+If you store the options and module names in a file under your own
+control, such as @file{autogen.sh}, @file{bootstrap},
+@file{bootstrap.conf}, or similar, simply invoke @command{gnulib-tool}
+again, with modified options and more or fewer module names.
+
+@item
+@code{gnulib-tool} remembers which modules were used last time.  If you
+want to rely on @code{gnulib-tool}'s own memory of the last used
+options and module names, you can use the commands
+@command{gnulib-tool --add-import} and
+@command{gnulib-tool --remove-import}.
+
+So, if you only want to use more Gnulib modules, simply invoke
+@command{gnulib-tool --add-import @var{new-modules}}.  The list of
+modules that you pass after @samp{--add-import} is @emph{added} to the
+previous list of modules.
+
+Similarly, if you want to use fewer Gnulib modules, simply invoke
+@command{gnulib-tool --remove-import @var{unneeded-modules}}.  The list
+of modules that you pass after @samp{--remove-import} is @emph{removed}
+from the previous list of modules.  Note that if a module is then still
+needed as dependency of other modules, it will be used nevertheless.
+If you want to @emph{really} not use a module any more, regardless of
+whether other modules may need it, you need to use the @samp{--avoid}
+option.
+
+For other changes, such as different choices of @samp{--lib},
+@samp{--source-base} or @samp{--aux-dir}, the normal way is to
+modify manually the file @file{gnulib-cache.m4} in the M4 macros
+directory, then launch @samp{gnulib-tool --add-import}.
+
+The only change for which this doesn't work is a change of the
+@samp{--m4-base} directory.  Because, when you pass a different value of
+@samp{--m4-base}, @code{gnulib-tool} will not find the previous
+@file{gnulib-cache.m4} file any more.  A possible solution is to
+manually copy the @file{gnulib-cache.m4} into the new M4 macro directory.
+
+In the @file{gnulib-cache.m4} file, the macros have the following meaning:
+@table @code
+@item gl_MODULES
+The argument is a space separated list of the requested modules, not including
+dependencies.
+
+@item gl_AVOID
+The argument is a space separated list of modules that should not be used,
+even if they occur as dependencies.  Corresponds to the @samp{--avoid}
+command line argument.
+
+@item gl_SOURCE_BASE
+The argument is the relative file name of the directory containing the gnulib
+source files (mostly *.c and *.h files).  Corresponds to the
+@samp{--source-base} command line argument.
+
+@item gl_M4_BASE
+The argument is the relative file name of the directory containing the gnulib
+M4 macros (*.m4 files).  Corresponds to the @samp{--m4-base} command line
+argument.
+
+@item gl_TESTS_BASE
+The argument is the relative file name of the directory containing the gnulib
+unit test files.  Corresponds to the @samp{--tests-base} command line argument.
+
+@item gl_LIB
+The argument is the name of the library to be created.  Corresponds to the
+@samp{--lib} command line argument.
+
+@item gl_LGPL
+The presence of this macro without arguments corresponds to the @samp{--lgpl}
+command line argument.  The presence of this macro with an argument (whose
+value must be 2 or 3) corresponds to the @samp{--lgpl=@var{arg}} command line
+argument.
+
+@item gl_LIBTOOL
+The presence of this macro corresponds to the @samp{--libtool} command line
+argument and to the absence of the @samp{--no-libtool} command line argument.
+It takes no arguments.
+
+@item gl_MACRO_PREFIX
+The argument is the prefix to use for macros in the @file{gnulib-comp.m4}
+file.  Corresponds to the @samp{--macro-prefix} command line argument.
+@end table
+
+@end itemize
+
+@node Simple update
+@section Simple update
+
+When you want to update to a more recent version of Gnulib, without
+changing the list of modules or other parameters, a simple call
+does it:
+
+@smallexample
+$ gnulib-tool --add-import
+@end smallexample
+
+@noindent
+This will create, update or remove files, as needed.
+
+Note: From time to time, changes are made in Gnulib that are not backward
+compatible.  When updating to a more recent Gnulib, you should consult
+Gnulib's @file{NEWS} file to check whether the incompatible changes affect
+your project.
+
+
+@node Source changes
+@section Changing your sources for use with Gnulib
+
+Gnulib contains some header file overrides.  This means that when building
+on systems with deficient header files in @file{/usr/include/}, it may create
+files named @file{string.h}, @file{stdlib.h}, @file{stdint.h} or similar in
+the build directory.  In the other source directories of your package you
+will usually pass @samp{-I} options to the compiler, so that these Gnulib
+substitutes are visible and take precedence over the files in
+@file{/usr/include/}.
+
+These Gnulib substitute header files rely on @file{<config.h>} being
+already included.  Furthermore @file{<config.h>} must be the first include
+in every compilation unit.  This means that to @emph{all your source files}
+and likely also to @emph{all your tests source files} you need to add an
+@samp{#include <config.h>} at the top.  Which source files are affected?
+Exactly those whose compilation includes a @samp{-I} option that refers to
+the Gnulib library directory.
+
+This is annoying, but inevitable: On many systems, @file{<config.h>} is
+used to set system dependent flags (such as @code{_GNU_SOURCE} on GNU systems),
+and these flags have no effect after any system header file has been included.
+
+
+@node Link-time requirements
+@section Changing your link commands for use with Gnulib
+
+When you use Gnulib, you need to augment the set of libraries against which
+your programs and libraries are linked.  This is done by augmenting the
+Automake variable @code{LDADD} (for all programs) or
+@code{@var{prog}_LDADD} (for a single program @code{@var{prog}}) or
+@code{@var{library}_la_LIBADD} (for a single library @code{@var{library}.la}).
+
+What do you need to add to this Automake variable?
+@enumerate
+@item
+The reference to the Gnulib library.  In the example of section
+@ref{Initial import}, this would be @code{lib/libgnu.a} for source in the
+top-level directory, or @code{../lib/libgnu.a} for source in a sibling
+directory of @code{lib/}.
+
+@item
+References to additional libraries, brought in by some of the Gnulib
+modules that you use (directly or indirectly).  The complete list of such
+libraries is printed when you invoke @code{gnulib-tool}.  Alternatively,
+you can retrieve the set of additional libraries required by a specific
+Gnulib module by running
+@smallexample
+./gnulib-tool --extract-recursive-link-directive @var{module}
+@end smallexample
+@noindent
+Beware: By looking into the module description file @code{modules/@var{module}}
+or by running
+@smallexample
+./gnulib-tool --extract-link-directive @var{module}
+@end smallexample
+@noindent
+you would miss the link dependencies of indirectly used modules.
+@end enumerate
+
+
+@node Finding POSIX substitutes
+@section Finding recommended ISO C and POSIX function substitutes
+
+Gnulib contains a wealth of portability workarounds for ISO C and POSIX
+functions.  They are listed in detail in the chapter @ref{Function Substitutes}.
+If you want to know which function substitutes are recommended for your
+package, you can search your source code for ISO C and POSIX functions
+that it uses and read the corresponding sections of said documentation
+chapter.  But this is a tedious task.  Here is an alternative approach
+that makes this task easier.
+
+@enumerate
+@item
+Add the Gnulib module @samp{posixcheck} to the Gnulib imports of your package,
+as described earlier in this chapter.
+
+@item
+Do a @code{make distclean} if you previously built in the top-level directory.
+Then regenerate the Autotools-generated parts of the package.
+
+@item
+On a glibc system, build your package.  Pay attention to the compiler warnings.
+Warnings are generated for uses of ISO C and POSIX functions that have
+portability problems or other important pitfalls and for which you have not yet
+imported the corresponding Gnulib module.  If you get, say, a warning
+``warning: call to 'close' declared with attribute warning: close does not
+portably work on sockets - use gnulib module close for portability'',
+put @samp{close} on your list of modules to import.
+
+@item
+Add the modules you noted to the Gnulib imports of your package.
+
+@item
+Optionally, you can do the same steps again, and make sure that there are no
+warnings left except those that you want to intentionally ignore.
+
+@item
+Finally, remove the Gnulib module @samp{posixcheck} from the Gnulib imports,
+and run @code{make distclean}.
+@end enumerate
+
+
+@node Modified build rules
+@section Modifying the build rules of a Gnulib import directory
+
+In some cases, you may want to set additional compiler options for
+use within the Gnulib import directory.  For example, the
+@samp{relocatable} module operates better if you define the C macros
+@code{ENABLE_COSTLY_RELOCATABLE} and @code{INSTALLDIR} during its
+compilation.
+
+There are two ways to do so: Use of the @code{gnulib-tool} option
+@code{--makefile-name}, and a kitchen-sink module.
+
+With the @code{gnulib-tool} option @code{--makefile-name}, you are
+telling @code{gnulib-tool} to generate an includable @code{Makefile.am}
+portion, rather than a self-contained @code{Makefile.am}.  For example,
+when you use @code{--makefile-name=Makefile.gnulib}, @code{gnulib-tool}
+will generate @code{Makefile.gnulib}, and you will provide a
+hand-written @code{Makefile.am} that includes @code{Makefile.gnulib}
+through a line such as
+@smallexample
+include Makefile.gnulib
+@end smallexample
+Before this include, you need to initialize this set of @code{Makefile.am}
+variables:
+@itemize @bullet
+@item
+@code{AUTOMAKE_OPTIONS}
+@item
+@code{SUBDIRS}
+@item
+@code{noinst_HEADERS}
+@item
+@code{noinst_LIBRARIES}
+@item
+@code{noinst_LTLIBRARIES}
+@item
+@code{pkgdata_DATA} (only with Automake @geq{} 1.11.4)
+@item
+@code{EXTRA_DIST}
+@item
+@code{BUILT_SOURCES}
+@item
+@code{SUFFIXES}
+@item
+@code{MOSTLYCLEANFILES}
+@item
+@code{MOSTLYCLEANDIRS}
+@item
+@code{CLEANFILES}
+@item
+@code{DISTCLEANFILES}
+@item
+@code{MAINTAINERCLEANFILES}
+@item
+@code{AM_CPPFLAGS}
+@item
+@code{AM_CFLAGS}
+@end itemize
+@code{AUTOMAKE_OPTIONS} should be initialized as described in
+@ref{Options,,Changing Automake's Behavior,automake,GNU Automake}.
+The other variables can be initialized to empty.  However, you will most
+likely want to initialize some of them with non-empty values, in order
+to achieve the desired customization.
+
+The other approach, the kitchen-sink module, is more advanced.  See
+chapter @ref{Extending Gnulib}.
+
+
+@node Multiple instances
+@section Using Gnulib for both a library and a program
+
+Your project might build both a library and some accompanying programs
+in the same source tree. In that case you might want to use different
+modules for the library than for the programs. Typically the programs
+might want to make use of @code{getopt-posix} or @code{version-etc},
+while the library wants to stay clear of these modules for technical
+or licensing reasons.
+
+Let's assume that your project contains a @file{lib} directory where
+the source of the library resides and a @file{src} directory for the
+sources of the programs as follows.
+
+@example
+.
+|-- configure.ac
+|-- lib
+|   |-- foo.c
+|   `-- Makefile.am
+|-- Makefile.am
+`-- src
+    |-- bar.c
+    `-- Makefile.am
+@end example
+
+You can now add two instances of Gnulib to your project in separate
+source trees:
+
+@example
+~/src/libfoo$ gnulib-tool --import --lib=libgnu --source-base=gnulib \
+              --m4-base=gnulib/m4 --macro-prefix=gl strndup
+~/src/libfoo$ gnulib-tool --import --lib=libgnutools \
+              --source-base=src/gnulib --m4-base=src/gnulib/m4 \
+              --macro-prefix=gl_tools getopt-gnu
+@end example
+
+The first one will import the module @code{strndup} in @file{gnulib}
+and the second one will import @code{getopt-gnu} in @file{src/gnulib}
+and you will end up with the following source tree (many files omitted
+in the interest of brevity):
+
+@example
+.
+|-- configure.ac
+|-- gnulib
+|   |-- m4
+|   |-- strndup.c
+|-- lib
+|   |-- foo.c
+|   `-- Makefile.am
+|-- Makefile.am
+`-- src
+    |-- bar.c
+    |-- gnulib
+    |   |-- getopt.c
+    |   |-- getopt.in.h
+    |   |-- m4
+    `-- Makefile.am
+@end example
+
+As discussed in @ref{Unit tests}, you may not use @samp{--with-tests}
+for this project since the @code{configure.ac} is shared.
+
+Integration with your code is basically the same as outlined in
+@ref{Initial import} with the one exception that you have to add both
+the macro @code{gl_EARLY} and the macro @code{gl_tools_EARLY} to your
+@file{configure.ac} (and of course also both macros @code{gl_INIT} and
+@code{gl_tools_INIT}). Obviously the name of the second macro is
+dependent on the value of the @option{--macro-prefix} option in your
+@command{gnulib-tool} invocation.
+
+@example
+...
+AC_PROG_CC
+gl_EARLY
+gl_tools_EARLY
+...
+# For gnulib.
+gl_INIT
+gl_tools_INIT
+...
+@end example
+
+Also as outlined in @ref{Initial import} you will have to add compiler
+and linker flags. For the library you might have to add something
+along the line of the following to your @file{Makefile.am}:
+
+@example
+...
+AM_CPPFLAGS = -I$(top_srcdir)/gnulib -I$(top_builddir)/gnulib
+...
+libfoo_la_LIBADD = $(top_builddir)/gnulib/libgnu.la
+...
+@end example
+
+Correspondingly for the programs you will have to add something like
+this:
+
+@example
+...
+AM_CPPFLAGS = -I$(top_srcdir)/src/gnulib -I$(top_builddir)/src/gnulib
+...
+LIBADD = $(top_builddir)/src/gnulib/libgnutools.la
+...
+@end example
+
+The name of the library that you have pass in the linker option
+depends on the @option{--lib} option in @command{gnulib-tool}
+invocation.
+
+
+@node gettextize and autopoint
+@section Caveat: @code{gettextize} and @code{autopoint} users
+
+@cindex gettextize, caveat
+@cindex autopoint, caveat
+The programs @code{gettextize} and @code{autopoint}, part of
+GNU @code{gettext}, import or update the internationalization infrastructure.
+Some of this infrastructure, namely ca.@: 20 Autoconf macro files and the
+@file{config.rpath} file, is also contained in Gnulib and may be imported
+by @code{gnulib-tool}.  The use of @code{gettextize} or @code{autopoint}
+will therefore overwrite some of the files that @code{gnulib-tool} has
+imported, and vice versa.
+
+Avoiding to use @code{gettextize} (manually, as package maintainer) or
+@code{autopoint} (as part of a script like @code{autoreconf} or
+@code{autogen.sh}) is not the solution: These programs also import the
+infrastructure in the @file{po/} and optionally in the @file{intl/} directory.
+
+The copies of the conflicting files in Gnulib are more up-to-date than
+the copies brought in by @code{gettextize} and @code{autopoint}.  When a
+new @code{gettext} release is made, the copies of the files in Gnulib will
+be updated immediately.
+
+The choice of which version of gettext to require depends on the needs
+of your package.  For a package that wants to comply to GNU Coding
+Standards, the steps are:
+
+@enumerate
+@item
+When you run @code{gettextize}, always use the @code{gettextize} from the
+matching GNU gettext release.  For the most recent Gnulib checkout, this is
+the newest release found on @url{https://ftp.gnu.org/gnu/gettext/}.  For an
+older Gnulib snapshot, it is the release that was the most recent release
+at the time the Gnulib snapshot was taken.
+
+@item
+After running @code{gettextize}, invoke @code{gnulib-tool} and import
+the @code{gettext} module.  Also, copy the latest version of gnulib's
+@file{build-aux/po/Makefile.in.in} to your @file{po/} directory (this
+is done for you if you use gnulib's @file{bootstrap} script).
+
+@item
+If you get an error message like
+@code{*** error: gettext infrastructure mismatch:
+using a Makefile.in.in from gettext version ...
+but the Autoconf macros are from gettext version ...},
+it means that a new GNU gettext release was made, and its Autoconf macros
+were integrated into Gnulib and now mismatch the @file{po/} infrastructure.
+In this case, fetch and install the new GNU gettext release and run
+@code{gettextize} followed by @code{gnulib-tool}.
+@end enumerate
+
+On the other hand, if your package is not as concerned with compliance
+to the latest standards, but instead favors development on stable
+environments, the steps are:
+
+@enumerate
+@item
+Determine the oldest version of @code{gettext} that you intend to
+support during development (at this time, gnulib recommends going no
+older than version 0.17).  Run @code{autopoint} (not
+@code{gettextize}) to copy infrastructure into place (newer versions
+of gettext will install the older infrastructure that you requested).
+
+@item
+Invoke @code{gnulib-tool}, and import the @code{gettext-h} module.
+@end enumerate
+
+Regardless of which approach you used to get the infrastructure in
+place, the following steps must then be used to preserve that
+infrastructure (gnulib's @file{bootstrap} script follows these rules):
+
+@enumerate
+@item
+When a script of yours run @code{autopoint}, invoke @code{gnulib-tool}
+afterwards.
+
+@item
+When you invoke @code{autoreconf} after @code{gnulib-tool}, make sure to
+not invoke @code{autopoint} a second time, by setting the @code{AUTOPOINT}
+environment variable, like this:
+@smallexample
+$ env AUTOPOINT=true autoreconf --install
+@end smallexample
+@end enumerate
+
+
+@node Localization
+@section Handling Gnulib's own message translations
+
+Gnulib provides some functions that emit translatable messages using GNU
+@code{gettext}.  The @samp{gnulib} domain at the
+@url{https://translationproject.org/, Translation Project} collects
+translations of these messages, which you should incorporate into your
+own programs.
+
+There are two basic ways to achieve this.  The first, and older, method
+is to list all the source files you use from Gnulib in your own
+@file{po/POTFILES.in} file.  This will cause all the relevant
+translatable strings to be included in your POT file.  When you send
+this POT file to the Translation Project, translators will normally fill
+in the translations of the Gnulib strings from their ``translation
+memory'', and send you back updated PO files.
+
+However, this process is error-prone: you might forget to list some
+source files, or the translator might not be using a translation memory
+and provide a different translation than another translator, or the
+translation might not be kept in sync between Gnulib and your package.
+It is also slow and causes substantial extra work, because a human
+translator must be in the loop for each language and you will need to
+incorporate their work on request.
+
+For these reasons, a new method was designed and is now recommended.  If
+you pass the @code{--po-base=@var{directory}} and @code{--po-domain=@var{domain}}
+options to @code{gnulib-tool}, then @code{gnulib-tool} will create a
+separate directory with its own @file{POTFILES.in}, and fetch current
+translations directly from the Translation Project (using
+@command{rsync} or @command{wget}, whichever is available).
+The POT file in this directory will be called
+@file{@var{domain}-gnulib.pot}, depending on the @var{domain} you gave to the
+@code{--po-domain} option (typically the same as the package name).
+This causes these translations to reside in a separate message domain,
+so that they do not clash either with the translations for the main part
+of your package nor with those of other packages on the system that use
+possibly different versions of Gnulib.
+When you use these options, the functions in Gnulib are built
+in such a way that they will always use this domain regardless of the
+default domain set by @code{textdomain}.
+
+In order to use this method, you must---in each program that might use
+Gnulib code---add an extra line to the part of the program that
+initializes locale-dependent behavior.  Where you would normally write
+something like:
+
+@example
+@group
+  setlocale (LC_ALL, "");
+  bindtextdomain (PACKAGE, LOCALEDIR);
+  textdomain (PACKAGE);
+@end group
+@end example
+
+@noindent
+you should add an additional @code{bindtextdomain} call to inform
+gettext of where the MO files for the extra message domain may be found:
+
+@example
+@group
+  bindtextdomain (PACKAGE "-gnulib", LOCALEDIR);
+@end group
+@end example
+
+(This example assumes that the @var{domain} that you specified
+to @code{gnulib-tool} is the same as the value of the @code{PACKAGE}
+preprocessor macro.)
+
+Since you do not change the @code{textdomain} call, the default message
+domain for your program remains the same and your own use of @code{gettext}
+functions will not be affected.
+
+
+@node VCS Issues
+@section Issues with Version Control Systems
+
+If a project stores its source files in a version control system (VCS),
+such as CVS, Subversion, or Git, one needs to decide which files to commit.
+
+In principle, all files created by @code{gnulib-tool}, except
+@file{gnulib-cache.m4}, can be treated like generated source files,
+like for example a @file{parser.c} file generated from
+@file{parser.y}.  Alternatively, they can be considered source files
+and updated manually.
+
+Here are the three different approaches in common use.  Each has its
+place, and you should use whichever best suits your particular project
+and development methods.
+
+@enumerate
+@item
+In projects which commit all source files, whether generated or not,
+into their VCS, the @code{gnulib-tool} generated files should all be
+committed.  In this case, you should pass the option
+@samp{--no-vc-files} to @code{gnulib-tool}, which avoids alteration of
+VCS-related files such as @file{.gitignore}.
+
+Gnulib also contains files generated by @command{make} (and removed by
+@code{make clean}), using information determined by
+@command{configure}.  For a Gnulib source file of the form
+@file{lib/foo.in.h}, the corresponding @file{lib/foo.h} is such a
+@command{make}-generated file.  These should @emph{not} be checked
+into the VCS, but instead added to @file{.gitignore} or equivalent.
+
+@item
+In projects which customarily omit from their VCS all files that are
+generated from other source files, none of these files and directories
+are added into the VCS@.  As described in @ref{Modified imports}, there
+are two ways to keep track of options and module names that are passed
+to @code{gnulib-tool}.  The command for restoring the omitted files
+depends on it:
+
+@itemize @bullet
+@item
+If they are stored in a file other than @code{gnulib-cache.m4}, such as
+@file{autogen.sh}, @file{bootstrap}, @file{bootstrap.conf}, or similar,
+the restoration command is the entire @code{gnulib-tool ... --import ...}
+invocation with all options and module names.
+
+@item
+If the project relies on @code{gnulib-tool}'s memory of the last used
+options and module names, then the file @file{gnulib-cache.m4} in the M4
+macros directory must be added to the VCS, and the restoration command
+is:
+
+@smallexample
+$ gnulib-tool --update
+@end smallexample
+
+The @samp{--update} option operates much like the @samp{--add-import}
+option, but it does not offer the possibility to change the way Gnulib is
+used.  Also it does not report in the ChangeLogs the files that it had to
+add because they were missing.
+
+@end itemize
+
+Gnulib includes the file @file{build-aux/bootstrap} to aid a developer
+in using this setup.  Furthermore, in projects that use git for
+version control, it is possible to use a git submodule containing the
+precise commit of the gnulib repository, so that each developer
+running @file{bootstrap} will get the same version of all
+gnulib-provided files.  The location of the submodule can be chosen to
+fit the package's needs; here's how to initially create the submodule
+in the directory @file{.gnulib}:
+
+@smallexample
+$ dir=.gnulib
+$ git submodule add -- https://git.savannah.gnu.org/git/gnulib.git $dir
+$ git config alias.syncsub "submodule foreach git pull origin master"
+@end smallexample
+
+@noindent
+Thereafter, @file{bootstrap} can run this command to update the
+submodule to the recorded checkout level:
+
+@smallexample
+git submodule update --init $dir
+@end smallexample
+
+@noindent
+and a developer can use this sequence to update to a newer version of
+gnulib:
+
+@smallexample
+$ git syncsub
+$ git add $dir
+$ ./bootstrap
+@end smallexample
+
+@item
+Some projects take a ``middle road'': they do commit Gnulib source
+files as in the first approach, but they do not commit other derived
+files, such as a @code{Makefile.in} generated by Automake.  This
+increases the size and complexity of the repository, but can help
+occasional contributors by not requiring them to have a full Gnulib
+checkout to do a build, and all developers by ensuring that all
+developers are working with the same version of Gnulib in the
+repository.  It also supports multiple Gnulib instances within a
+project.  It remains important not to commit the
+@command{make}-generated files, as described above.
+
+@end enumerate
+
+
+@node Unit tests
+@section Bundling the unit tests of the Gnulib modules
+
+You can bundle the unit tests of the Gnulib modules together with your
+package, through the @samp{--with-tests} option.  Together with
+@samp{--with-tests}, you also specify the directory for these tests
+through the @samp{--tests-base} option.  Of course, you need to add this
+directory to the @code{SUBDIRS} variable in the @code{Makefile.am} of
+the parent directory.
+
+The advantage of having the unit tests bundled is that when your program
+has a problem on a particular platform, running the unit tests may help
+determine quickly if the problem is on Gnulib's side or on your package's
+side.  Also, it helps verifying Gnulib's portability, of course.
+
+The unit tests will be compiled and run when the user runs @samp{make check}.
+When the user runs only @samp{make}, the unit tests will not be compiled.
+
+In the @code{SUBDIRS} variable, it is useful to put the Gnulib tests directory
+after the directory containing the other tests, not before:
+
+@smallexample
+SUBDIRS = gnulib-lib src man tests gnulib-tests
+@end smallexample
+
+@noindent
+This will ensure that on platforms where there are test failures in either
+directory, users will see and report the failures from the tests of your
+program.
+
+Note: In packages which use more than one invocation of @code{gnulib-tool}
+in the scope of the same @code{configure.ac}, you cannot use
+@samp{--with-tests}.  You will have to use a separate @code{configure.ac}
+in this case.
+
+
+@node Conditional dependencies
+@section Avoiding unnecessary checks and compilations
+
+@cindex conditional dependencies
+In some cases, a module is needed by another module only on specific
+platforms.  But when a module is present, its Autoconf checks are always
+executed, and its @code{Makefile.am} additions are always enabled.  So
+it can happen that some Autoconf checks are executed and some source files
+are compiled, although no other module needs them on this particular
+platform, just @emph{in case} some other module would need them.
+
+The option @samp{--conditional-dependencies} enables an optimization of
+configure checks and @code{Makefile.am} snippets that avoids this.  With
+this option, whether a module is considered ``present'' is no longer decided
+when @code{gnulib-tool} is invoked, but later, when @code{configure} is run.
+This applies to modules that were added as dependencies while
+@code{gnulib-tool} was run; modules that were passed on the command line
+explicitly are always ``present''.
+
+For example, the @code{timegm} module needs, on platforms
+where the system's @code{timegm} function is missing or buggy, a replacement
+that is based on a function @code{mktime_internal}.  The module
+@code{mktime-internal} that provides this function provides it on all
+platforms.  So, by default, the file @file{mktime-internal.c} will be
+compiled on all platforms, even on glibc and BSD systems which have a
+working @code{timegm} function.  When the option
+@samp{--conditional-dependencies} is given, on the other hand, and if
+@code{mktime-internal} was not explicitly required on the command line,
+the file @file{mktime-internal.c} will only be compiled on the platforms
+where the @code{timegm} needs them.
+
+Conditional dependencies are specified in the module description by putting
+the condition on the same line as the dependent module, enclosed in brackets.
+The condition is a boolean shell expression that can assume that the
+@code{configure.ac} snippet from the module description has already been
+executed.  In the example above, the dependency from @code{timegm} to
+@code{mktime-internal} is written like this:
+
+@smallexample
+Depends-on:
+...
+mktime-internal [test $HAVE_TIMEGM = 0 || test $REPLACE_TIMEGM = 1]
+...
+@end smallexample
+
+Note: The option @samp{--conditional-dependencies} cannot be used together
+with the option @samp{--with-tests}.  It also cannot be used when a package
+uses @code{gnulib-tool} for several subdirectories, with different values
+of @samp{--source-base}, in the scope of a single @code{configure.ac} file.

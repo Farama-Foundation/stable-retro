@@ -1,0 +1,27 @@
+Description:
+Test whether an UTF-16 string is already case-folded.
+
+Files:
+lib/unicase/u16-is-casefolded.c
+
+Depends-on:
+unicase/base
+unicase/u16-is-invariant
+unicase/u16-casefold
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u16-is-casefolded])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U16_IS_CASEFOLDED
+lib_SOURCES += unicase/u16-is-casefolded.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

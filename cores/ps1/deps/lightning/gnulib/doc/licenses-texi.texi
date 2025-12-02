@@ -1,0 +1,44 @@
+@node License Texinfo sources
+@section License Texinfo sources
+
+Gnulib provides copies of the GNU GPL, GNU LGPL, GNU Affero GPL, and
+GNU FDL licenses in Texinfo form.  (The master location is
+@url{https://www.gnu.org/licenses/}).  These Texinfo documents do not
+have any node names and structures built into them; for your manual,
+you should @code{@@include} them in an appropriate @code{@@node}.
+
+The conventional name for the GPL node is @samp{Copying} and for the FDL
+@samp{GNU Free Documentation License}.  The LGPL doesn't seem to have
+a conventional node name.
+
+Of course the license texts themselves should not be changed at all.
+
+The recommended way to make use of these license files, consistently
+with current practice, is as follows:
+@itemize
+@item
+The code license (GNU GPL, GNU LGPL, or GNU Affero GPL) is usually
+present as a file in the top-level directory.  This is true not only for
+the release tarballs, but also in the VCS repository.  The file is
+typically named @samp{COPYING} for the GNU GPL, or @samp{COPYING.LIB} or
+@samp{COPYING.LESSER} for the GNU LGPL@.  The presence of this file
+fulfills a legal obligation; see
+@url{https://www.gnu.org/licenses/gpl-faq.html#WhyMustIInclude}.
+
+To make use of the code license in your documentation, you may request
+one of the modules @code{gpl-3.0}, @code{gpl-2.0}, @code{lgpl-3.0},
+@code{lgpl-2.1}, @code{agpl-3.0}, through a @code{gnulib-tool} invocation.
+Or you may copy the relevant Texinfo file directly into your VCS repository.
+Both approaches are equally good.  The Texinfo file changes very rarely.
+@item
+The documentation license file (GNU FDL) is usually not present as a
+file in the top-level directory, because that would be ambiguous: When
+you use the GNU FDL, you need to specify the Invariant Sections, the
+Front-Cover Texts, and the Back-Cover Texts.
+
+To make use of this documentation license, copy the relevant Texinfo
+file into your VCS repository.  This makes sure that anyone who receives
+a copy of your VCS repository has also received a copy of the
+documentation license.  In the documentation, also state what are the
+Invariant Sections, the Front-Cover Texts, and the Back-Cover Texts.
+@end itemize

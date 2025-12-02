@@ -1,0 +1,22 @@
+Description:
+Abstract sequential list data type as a C++ class.
+
+Files:
+lib/gl_list.hh
+
+Depends-on:
+xlist
+xsublist
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"gl_list.hh"
+
+License:
+GPL
+
+Maintainer:
+all

@@ -1,0 +1,30 @@
+Description:
+Locale dependent transformation for comparison of UTF-8 strings.
+
+Files:
+lib/uninorm/u8-normxfrm.c
+lib/uninorm/u-normxfrm.h
+
+Depends-on:
+uninorm/base
+uninorm/u8-normalize
+uniconv/u8-conv-to-enc
+localcharset
+amemxfrm
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uninorm/u8-normxfrm])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINORM_U8_NORMXFRM
+lib_SOURCES += uninorm/u8-normxfrm.c
+endif
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

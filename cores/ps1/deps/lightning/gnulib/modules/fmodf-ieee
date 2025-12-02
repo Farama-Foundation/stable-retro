@@ -1,0 +1,27 @@
+Description:
+fmodf() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/fmodf-ieee.m4
+
+Depends-on:
+fmodf
+fpieee
+fmod-ieee       [test $HAVE_FMODF = 0]
+
+configure.ac:
+gl_FUNC_FMODF_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FMODF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

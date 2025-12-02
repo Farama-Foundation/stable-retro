@@ -1,0 +1,39 @@
+@node threads.h
+@section @file{threads.h}
+
+Defines the multithreading facility of ISO C11.
+
+Gnulib module: threads-h
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on many platforms:
+glibc 2.27, macOS 11.1, FreeBSD 9.3, NetBSD 8.0, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3, Cygwin 2.2.x, mingw, MSVC 14, Android 9.0.
+@item
+This header file defines @code{thrd_start_t} incorrectly on some platforms:
+AIX 7.2.
+@item
+This header file does not define @code{TSS_DTOR_ITERATIONS} on some platforms:
+AIX 7.2.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+There is no way to define a working @code{thread_local} macro on some platforms:
+@itemize
+@item
+Mac OS X 10.5,
+@item
+OpenBSD 6.5,
+@item
+AIX 7.1 with gcc (but it works with @samp{xlc -qthreaded -qtls}),
+@item
+HP-UX 11.31 with cc (but it works with gcc),
+@item
+IRIX 6.5,
+@item
+Android 4.3.
+@end itemize
+@end itemize

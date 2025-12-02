@@ -1,0 +1,11 @@
+Files:
+tests/test-xalloc-die.c
+tests/test-xalloc-die.sh
+
+Depends-on:
+test-framework-sh
+
+Makefile.am:
+TESTS += test-xalloc-die.sh
+check_PROGRAMS += test-xalloc-die
+test_xalloc_die_LDADD = $(LDADD) @LIBINTL@

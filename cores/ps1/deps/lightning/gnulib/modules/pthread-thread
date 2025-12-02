@@ -1,0 +1,31 @@
+Description:
+Creating and controlling POSIX threads.
+
+Files:
+lib/pthread-thread.c
+m4/pthread-thread.m4
+
+Depends-on:
+pthread-h
+windows-thread  [test $gl_threads_api = windows]
+
+configure.ac:
+gl_PTHREAD_THREAD
+if test $HAVE_PTHREAD_CREATE = 0 || test $REPLACE_PTHREAD_CREATE = 1; then
+  AC_LIBOBJ([pthread-thread])
+fi
+gl_PTHREAD_MODULE_INDICATOR([pthread-thread])
+
+Makefile.am:
+
+Include:
+<pthread.h>
+
+Link:
+$(LIBPMULTITHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

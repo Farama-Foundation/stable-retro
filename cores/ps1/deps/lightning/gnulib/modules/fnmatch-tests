@@ -1,0 +1,9 @@
+Files:
+tests/test-fnmatch.c
+tests/signature.h
+tests/macros.h
+
+Makefile.am:
+TESTS += test-fnmatch
+check_PROGRAMS += test-fnmatch
+test_fnmatch_LDADD = $(LDADD) $(LIB_MBRTOWC)

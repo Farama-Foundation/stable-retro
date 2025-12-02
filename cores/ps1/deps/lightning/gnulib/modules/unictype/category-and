@@ -1,0 +1,27 @@
+Description:
+Intersection of categories of Unicode characters.
+
+Files:
+lib/unictype/categ_and.c
+
+Depends-on:
+unictype/base
+unictype/category-none
+unictype/category-test-withtable
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-and])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_AND
+lib_SOURCES += unictype/categ_and.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

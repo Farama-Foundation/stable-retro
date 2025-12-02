@@ -1,0 +1,33 @@
+Description:
+setlocale() function: set the current locale.
+
+Files:
+lib/setlocale.c
+m4/setlocale.m4
+
+Depends-on:
+locale
+localename      [test $NEED_SETLOCALE_IMPROVED = 1]
+setlocale-null  [test $NEED_SETLOCALE_MTSAFE = 1]
+
+configure.ac:
+gl_FUNC_SETLOCALE
+if test $REPLACE_SETLOCALE = 1; then
+  AC_LIBOBJ([setlocale])
+  gl_PREREQ_SETLOCALE
+fi
+gl_LOCALE_MODULE_INDICATOR([setlocale])
+
+Makefile.am:
+
+Include:
+<locale.h>
+
+Link:
+$(LIB_SETLOCALE)
+
+License:
+LGPL
+
+Maintainer:
+all

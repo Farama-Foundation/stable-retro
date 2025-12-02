@@ -1,0 +1,535 @@
+General introduction:
+  http://www.suse.de/~agruen/acl/linux-acls/online/
+
+
+POSIX ACLs
+
+Documents from POSIX.1e (headers & functions) and POSIX.2c (utilities):
+  http://wt.tuxomania.net/publications/posix.1e/download.html
+
+
+Linux ACLs
+
+Introduction:
+  http://www.suse.de/~agruen/acl/linux-acls/online/
+Hands-on tutorial:
+  http://www.vanemery.com/Linux/ACL/linux-acl.html
+
+Manual pages:
+  https://www.kernel.org/doc/man-pages/
+Includes:
+  <sys/acl.h>
+  <acl/libacl.h>
+Library:
+  -lacl
+Functions:
+  acl_add_perm
+  acl_calc_mask
+  acl_check
+  acl_clear_perms
+  acl_cmp
+  acl_copy_entry
+  acl_copy_ext
+  acl_copy_int
+  acl_create_entry
+  acl_delete_def_file
+  acl_delete_entry
+  acl_delete_perm
+  acl_dup
+  acl_entries
+  acl_equiv_mode
+  acl_error
+  acl_extended_fd
+  acl_extended_file
+  acl_free
+  acl_from_mode
+  acl_from_text
+  acl_get_entry
+  acl_get_fd
+  acl_get_file
+  acl_get_perm
+  acl_get_permset
+  acl_get_qualifier
+  acl_get_tag_type
+  acl_init
+  acl_set_fd
+  acl_set_file
+  acl_set_permset
+  acl_set_qualifier
+  acl_set_tag_type
+  acl_size
+  acl_to_any_text
+  acl_to_text
+  acl_valid
+Utilities:
+  getfacl
+  setfacl
+
+
+Solaris ACLs
+
+Introductions:
+  http://www.softpanorama.org/Solaris/ACL/index.shtml
+  https://www.cs.duke.edu/csl/faqs/solaris-acls.php
+Manual pages:
+  https://docs.oracle.com/cd/E23823_01/html/816-5167/acl-2.html
+  https://docs.oracle.com/cd/E23823_01/html/816-5165/getfacl-1.html
+  https://docs.oracle.com/cd/E23823_01/html/816-5165/setfacl-1.html
+  https://docs.oracle.com/cd/E23823_01/html/816-5167/pathconf-2.html
+Includes:
+  <sys/acl.h>
+Library:
+  -lsec
+Functions:
+  acl
+  facl
+Functions in libsec:
+  aclcheck
+  aclfrommode
+  aclfromtext
+  aclsort
+  acltomode
+  acltotext
+Additionally in Solaris 10 patch 118833-17 (<sys/acl.h> version 1.15):
+  acl_t type
+  ACL_NO_TRIVIAL macro
+  ACE_OTHER macro replaced with ACE_EVERYONE macro
+  ACE_OWNER, ACE_GROUP changed their values(!)
+  ALLOW, DENY macros removed(!)
+  acl_check
+  acl_free
+  acl_fromtext
+  acl_get
+  acl_set
+  acl_strip
+  acl_totext
+  acl_trivial
+  facl_get
+  facl_set
+Utilities:
+  getfacl
+  setfacl
+  chmod
+
+
+FreeBSD ACLs
+
+Introduction:
+  https://www.freebsd.org/doc/en/books/handbook/fs-acl.html
+  http://www.onlamp.com/pub/a/bsd/2005/09/22/FreeBSD_Basics.html
+Manual pages:
+  https://www.freebsd.org/cgi/man.cgi
+  https://www.freebsd.org/cgi/man.cgi?query=acl&apropos=0&sektion=0&manpath=FreeBSD+7.0-RELEASE&format=html
+Includes:
+  <sys/acl.h>
+Library:
+  none needed
+Functions:
+  acl_add_perm
+  acl_calc_mask
+  acl_clear_perms
+  acl_copy_entry
+  acl_copy_ext
+  acl_copy_int
+  acl_create_entry
+  acl_delete_entry
+  acl_delete_fd_np
+  acl_delete_file_np
+  acl_delete_link_np
+  acl_delete_def_file
+  acl_delete_def_link_np
+  acl_delete_perm
+  acl_dup
+  acl_free
+  acl_from_text
+  acl_get
+  acl_get_entry
+  acl_get_fd
+  acl_get_fd_np
+  acl_get_file
+  acl_get_link_np
+  acl_get_perm_np
+  acl_get_permset
+  acl_get_qualifier
+  acl_get_tag_type
+  acl_init
+  acl_set
+  acl_set_fd
+  acl_set_fd_np
+  acl_set_file
+  acl_set_link_np
+  acl_set_permset
+  acl_set_qualifier
+  acl_set_tag_type
+  acl_size
+  acl_to_text
+  acl_valid
+  acl_valid_fd_np
+  acl_valid_file_np
+  acl_valid_link_np
+Utilities:
+  getfacl
+  setfacl
+
+
+NetBSD ACLs
+
+Not available.
+
+
+OpenBSD ACLs
+
+Not available.
+
+
+Mac OS X ACLs
+
+Manual pages:
+  https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man3/acl.3.html
+Includes:
+  <sys/acl.h>
+Library:
+  none needed
+Functions:
+  acl_add_flag_np
+  acl_add_perm
+  acl_calc_mask
+  acl_clear_flags_np
+  acl_clear_perms
+  acl_copy_entry
+  acl_copy_ext
+  acl_copy_ext_native
+  acl_copy_int
+  acl_copy_int_native
+  acl_create_entry
+  acl_create_entry_np
+  acl_delete_def_file
+  acl_delete_fd_np (undeclared?)
+  acl_delete_file_np (undeclared?)
+  acl_delete_flag_np
+  acl_delete_link_np (undeclared?)
+  acl_delete_entry
+  acl_delete_perm
+  acl_dup
+  acl_free
+  acl_from_text
+  acl_get_entry
+  acl_get_fd
+  acl_get_fd_np
+  acl_get_file
+  acl_get_flag_np
+  acl_get_flagset_np
+  acl_get_link_np
+  acl_get_perm_np
+  acl_get_permset
+  acl_get_qualifier
+  acl_get_tag_type
+  acl_init
+  acl_set_fd
+  acl_set_fd_np
+  acl_set_file
+  acl_set_flagset_np
+  acl_set_link_np
+  acl_set_permset
+  acl_set_qualifier
+  acl_set_tag_type
+  acl_size
+  acl_to_text
+  acl_valid
+  acl_valid_fd_np
+  acl_valid_file_np
+  acl_valid_link_np
+Utilities:
+  chmod
+
+
+HP-UX 11.00 ACLs
+
+Present in HP-UX >= 11.00. On some machines, yields ENOSYS always.
+Manual pages:
+  getacl, fgetacl: https://nixdoc.net/man-pages/hp-ux/man2/getacl.2.html
+  setacl, fsetacl: https://nixdoc.net/man-pages/hp-ux/man2/setacl.2.html
+  lsacl: https://nixdoc.net/man-pages/hp-ux/man1/lsacl.1.html
+  chacl: https://nixdoc.net/man-pages/hp-ux/man1/chacl.1.html
+Includes:
+  <acl.h> or <sys/acl.h>
+Library:
+  none needed
+Functions:
+  getacl
+  fgetacl
+  fsetacl
+  setacl
+Utilities:
+  lsacl
+  chacl
+  chmod
+
+
+HP-UX 11.11 ACLs
+
+Present in HP-UX >= 11.11.
+Manual pages:
+  acl: https://nixdoc.net/man-pages/hp-ux/man2/acl.2.html
+  aclsort: https://docstore.mik.ua/manuals/hp-ux/en/B2355-60130/aclsort.3C.html?
+  getacl: https://nixdoc.net/man-pages/hp-ux/man1/getacl.1.html
+  setacl: https://nixdoc.net/man-pages/hp-ux/man1/setacl.1.html
+Includes:
+  <aclv.h>
+Library:
+  none needed
+Functions:
+  acl
+  aclsort
+Utilities:
+  getacl
+  setacl
+
+
+IRIX ACLs
+
+Manual pages:
+  http://techpubs.sgi.com/library/tpl/cgi-bin/browse.cgi?cmd=search&db=man&srch=acl&coll=0650&range=0,133
+  http://techpubs.sgi.com/library/tpl/cgi-bin/getdoc.cgi?coll=0650&db=man&fname=/usr/share/catman/p_man/cat4/acl.z
+Includes:
+  <sys/acl.h>
+Library:
+  none needed
+Functions:
+  acl_add_perm
+  acl_calc_mask
+  acl_clear_perms
+  acl_copy_entry
+  acl_copy_ext
+  acl_copy_int
+  acl_create_entry
+  acl_delete_def_file
+  acl_delete_entry
+  acl_delete_perm
+  acl_dup
+  acl_free
+  acl_from_text
+  acl_get_entry
+  acl_get_fd
+  acl_get_file
+  acl_get_permset
+  acl_get_qualifier
+  acl_get_tag_type
+  acl_init
+  acl_set_fd
+  acl_set_file
+  acl_set_permset
+  acl_set_qualifier
+  acl_set_tag_type
+  acl_size
+  acl_to_short_text
+  acl_to_text
+  acl_valid
+Utilities:
+  chacl
+
+
+Tru64 ACLs
+
+Manual pages:
+  https://backdrift.org/man/tru64/man4/acl.4.html
+  https://backdrift.org/man/tru64/man3/acl_add_perm.3.html
+  https://backdrift.org/man/tru64/man3/acl_clear_perm.3.html
+  https://backdrift.org/man/tru64/man3/acl_copy_entry.3.html
+  https://backdrift.org/man/tru64/man3/acl_copy_ext.3.html
+  https://backdrift.org/man/tru64/man3/acl_copy_int.3.html
+  https://backdrift.org/man/tru64/man3/acl_create_entry.3.html
+  https://backdrift.org/man/tru64/man3/acl_delete_def_fd.3.html
+  https://backdrift.org/man/tru64/man3/acl_delete_def_file.3.html
+  https://backdrift.org/man/tru64/man3/acl_delete_entry.3.html
+  https://backdrift.org/man/tru64/man3/acl_delete_perm.3.html
+  https://backdrift.org/man/tru64/man3/acl_dup.3.html
+  https://backdrift.org/man/tru64/man3/acl_first_entry.3.html
+  https://backdrift.org/man/tru64/man3/acl_free.3.html
+  https://backdrift.org/man/tru64/man3/acl_free_qualifier.3.html
+  https://backdrift.org/man/tru64/man3/acl_free_text.3.html
+  https://backdrift.org/man/tru64/man3/acl_from_text.3.html
+  https://backdrift.org/man/tru64/man3/acl_get_entry.3.html
+  https://backdrift.org/man/tru64/man3/acl_get_fd.3.html
+  https://backdrift.org/man/tru64/man3/acl_get_file.3.html
+  https://backdrift.org/man/tru64/man3/acl_get_permset.3.html
+  https://backdrift.org/man/tru64/man3/acl_get_qualifier.3.html
+  https://backdrift.org/man/tru64/man3/acl_get_tag_type.3.html
+  https://backdrift.org/man/tru64/man3/acl_init.3.html
+  https://backdrift.org/man/tru64/man3/acl_set_fd.3.html
+  https://backdrift.org/man/tru64/man3/acl_set_file.3.html
+  https://backdrift.org/man/tru64/man3/acl_set_permset.3.html
+  https://backdrift.org/man/tru64/man3/acl_set_qualifier.3.html
+  https://backdrift.org/man/tru64/man3/acl_set_tag_type.3.html
+  https://backdrift.org/man/tru64/man3/acl_size.3.html
+  https://backdrift.org/man/tru64/man3/acl_to_text.3.html
+  https://backdrift.org/man/tru64/man3/acl_valid.3.html
+Includes:
+  <sys/acl.h>
+Library:
+  -lpacl
+Functions:
+  acl_add_perm
+  acl_clear_perm
+  acl_copy_entry
+  acl_copy_ext
+  acl_copy_int
+  acl_create_entry
+  acl_delete_def_fd
+  acl_delete_def_file
+  acl_delete_entry
+  acl_delete_perm
+  acl_dup
+  acl_first_entry
+  acl_free
+  acl_free_qualifier
+  acl_free_text
+  acl_from_text
+  acl_get_entry
+  acl_get_fd
+  acl_get_file
+  acl_get_permset
+  acl_get_qualifier
+  acl_get_tag_type
+  acl_init
+  acl_set_fd
+  acl_set_file
+  acl_set_permset
+  acl_set_qualifier
+  acl_set_tag_type
+  acl_size
+  acl_to_text
+  acl_valid
+Unportable functions:
+  acl_add_entry
+  acl_delete_access_fd
+  acl_delete_access_file
+  acl_delete_def_dir_fd
+  acl_delete_def_dir_file
+  acl_ext_to_text
+  acl_find_entry
+  acl_get
+  acl_mod_perm
+  acl_set
+  acl_to_fmt_text
+  allocate_acl_entry
+  convert_to_er
+  isaclprop
+Utilities:
+  getacl
+  setacl
+
+
+AIX ACLs
+
+Documentation:
+  https://www.ibm.com/support/knowledgecenter/en/ssw_aix_72/com.ibm.aix.security/access_control_list.htm
+Introduction:
+  http://www1.uni-hamburg.de/RRZ/Software/AIX/ACL.htm
+Includes:
+  <acl.h> or <sys/acl.h>
+  <sys/access.h>
+Library:
+  none needed
+Functions:
+  acl_chg
+  acl_fchg
+  acl_fget
+  acl_fput
+  acl_fset
+  acl_get
+  acl_put
+  acl_set
+  chacl
+  fchacl
+  fstatacl
+  statacl
+Function in AIX 5.3:
+  aclx_convert
+  aclx_fget
+  aclx_fput
+  aclx_get
+  aclx_gettypeinfo
+  aclx_gettypes
+  aclx_print
+  aclx_printStr
+  aclx_put
+  aclx_scan
+  aclx_scanStr
+Utilities:
+  aclget
+  aclput
+  acledit
+
+
+NonStop Kernel ACLs
+
+Documentation:
+  http://bizsupport1.austin.hp.com/bc/docs/support/SupportManual/c02492445/c02492445.pdf p. 249..260
+  http://bizsupport1.austin.hp.com/bc/docs/support/SupportManual/c02128649/c02128649.pdf
+  http://bizsupport2.austin.hp.com/bc/docs/support/SupportManual/c02128680/c02128680.pdf
+Includes:
+  <sys/acl.h>
+Library:
+  none needed
+Functions:
+  acl
+  aclsort
+Utilities:
+  getacl
+  setacl
+
+
+Cygwin ACLs
+
+Documentation:
+  https://cygwin.com/cygwin-ug-net/ntsec.html#ntsec-aclfuncs
+  acl-cygwin.txt
+Includes:
+  <sys/acl.h>
+Library:
+  none needed
+Functions:
+  acl
+  aclcheck
+  aclfrommode
+  aclfrompbits
+  aclfromtext
+  aclsort
+  acltomode
+  acltopbits
+  acltotext
+  facl
+  lacl
+Utilities:
+  getfacl
+  setfacl
+
+
+Native Windows ACLs
+
+Introduction:
+  https://helgeklein.com/blog/2009/03/permissions-a-primer-or-dacl-sacl-owner-sid-and-ace-explained/
+Manual pages:
+  https://docs.microsoft.com/en-us/windows/desktop/SecAuthZ/access-control-lists
+  https://docs.microsoft.com/en-us/windows/desktop/SecAuthZ/getting-information-from-an-acl
+  https://docs.microsoft.com/en-us/windows/desktop/api/winnt/ns-winnt-_acl
+  https://en.wikipedia.org/wiki/Cacls
+Library:
+  ?
+Functions:
+  GetAclInformation
+  SetAclInformation
+  ...
+Utilities:
+  cacls
+
+
+Copyright 2008-2021 Free Software Foundation, Inc.
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3
+or any later version published by the Free Software Foundation;
+with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+Texts.  A copy of the license is included in the "GNU Free
+Documentation License" file as part of this distribution.

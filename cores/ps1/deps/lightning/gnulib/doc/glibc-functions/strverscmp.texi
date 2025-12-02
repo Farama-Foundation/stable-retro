@@ -1,0 +1,36 @@
+@node strverscmp
+@subsection @code{strverscmp}
+@findex strverscmp
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{String/Array Comparison,,String/Array Comparison,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/String_002fArray-Comparison.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/strverscmp.3.html,,man strverscmp}.
+@end itemize
+
+Gnulib module: strverscmp
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on all non-glibc platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 1.7.x, mingw, MSVC 14, Android 9.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On older glibc platforms, this function does not always properly treat
+digit strings with leading zeros as fractions (for example,
+@code{strverscmp ("B0075022800016.gbp.corp.com",
+"B007502357019.GBP.CORP.COM")} does not yield a negative number as it
+should):
+glibc 2.9
+@end itemize

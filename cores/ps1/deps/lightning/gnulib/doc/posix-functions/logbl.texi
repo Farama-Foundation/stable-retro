@@ -1,0 +1,22 @@
+@node logbl
+@section @code{logbl}
+@findex logbl
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/logbl.html}
+
+Gnulib module: logbl
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, older IRIX 6.5, Solaris 9, Cygwin 1.7.x, MSVC 9, Android 4.2.
+@item
+This function produces wrong results for subnormal numbers on some platforms:
+glibc 2.11/powerpc, glibc 2.7/sparc, glibc 2.7/hppa, Solaris 11.4,
+glibc 2.23/powerpc64le.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

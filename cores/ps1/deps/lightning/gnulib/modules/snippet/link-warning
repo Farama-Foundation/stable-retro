@@ -1,0 +1,43 @@
+Description:
+A C macro for emitting link time warnings.
+
+Applicability:
+all
+
+Files:
+build-aux/snippet/link-warning.h
+
+Depends-on:
+
+configure.ac:
+AC_REQUIRE([gl_FEATURES_H])
+
+Makefile.am:
+# The BUILT_SOURCES created by this Makefile snippet are not used via #include
+# statements but through direct file reference. Therefore this snippet must be
+# present in all Makefiles that need it. This is ensured by the applicability
+# 'all' defined above.
+
+# FIXME: The link-warning.h rule probably does not work if
+# gnulib-tool's --gnu-make option is used, when the build is an
+# out-of-source build that relies on VPATH.
+
+BUILT_SOURCES += link-warning.h
+link-warning.h: $(top_srcdir)/build-aux/snippet/link-warning.h
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	sed -n -e '/HAVE_FEATURES_H/,$$p' \
+	  < $(top_srcdir)/build-aux/snippet/link-warning.h \
+	| sed -e 's|@''HAVE_FEATURES_H''@|$(HAVE_FEATURES_H)|g' \
+	  > $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += link-warning.h link-warning.h-t
+
+LINK_WARNING_H=link-warning.h
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

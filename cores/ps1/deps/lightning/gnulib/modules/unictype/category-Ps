@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character is of general category Ps.
+
+Files:
+lib/unictype/categ_Ps.c
+lib/unictype/categ_Ps.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-Ps])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_PS
+lib_SOURCES += unictype/categ_Ps.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

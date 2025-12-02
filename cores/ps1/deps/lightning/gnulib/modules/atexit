@@ -1,0 +1,32 @@
+Description:
+atexit() function: register a function to be called at program termination.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+lib/atexit.c
+m4/atexit.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_ATEXIT
+if test $ac_cv_func_atexit = no; then
+  AC_LIBOBJ([atexit])
+  gl_PREREQ_ATEXIT
+fi
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+public domain
+
+Maintainer:
+Jim Meyering

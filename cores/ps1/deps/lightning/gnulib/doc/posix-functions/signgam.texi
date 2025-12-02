@@ -1,0 +1,18 @@
+@node signgam
+@section @code{signgam}
+@findex signgam
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/signgam.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This variable is missing on some platforms:
+macOS 10.13, Minix 3.1.8, AIX 5.1, IRIX 6.5, mingw, MSVC 14.
+@end itemize

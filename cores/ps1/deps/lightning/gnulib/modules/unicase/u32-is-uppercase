@@ -1,0 +1,27 @@
+Description:
+Test whether an UTF-32 string is entirely upper case.
+
+Files:
+lib/unicase/u32-is-uppercase.c
+
+Depends-on:
+unicase/base
+unicase/u32-is-invariant
+unicase/u32-toupper
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u32-is-uppercase])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U32_IS_UPPERCASE
+lib_SOURCES += unicase/u32-is-uppercase.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

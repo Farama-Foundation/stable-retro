@@ -1,0 +1,32 @@
+Description:
+sqrtf() function: square root.
+
+Files:
+lib/sqrtf.c
+m4/sqrtf.m4
+
+Depends-on:
+math
+extensions
+sqrt            [test $HAVE_SQRTF = 0]
+
+configure.ac:
+gl_FUNC_SQRTF
+if test $HAVE_SQRTF = 0; then
+  AC_LIBOBJ([sqrtf])
+fi
+gl_MATH_MODULE_INDICATOR([sqrtf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(SQRTF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

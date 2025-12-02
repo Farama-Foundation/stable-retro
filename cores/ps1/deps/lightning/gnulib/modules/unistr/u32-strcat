@@ -1,0 +1,27 @@
+Description:
+Concatenate UTF-32 strings.
+
+Files:
+lib/unistr/u32-strcat.c
+lib/unistr/u-strcat.h
+
+Depends-on:
+unistr/base
+unistr/u32-strlen
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u32-strcat])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_STRCAT
+lib_SOURCES += unistr/u32-strcat.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

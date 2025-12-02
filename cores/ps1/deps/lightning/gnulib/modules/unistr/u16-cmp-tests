@@ -1,0 +1,21 @@
+Files:
+tests/unistr/test-u16-cmp.c
+tests/unistr/test-cmp.h
+tests/zerosize-ptr.h
+tests/macros.h
+m4/mmap-anon.m4
+
+Depends-on:
+extensions
+getpagesize
+
+configure.ac:
+gl_FUNC_MMAP_ANON
+AC_CHECK_HEADERS_ONCE([sys/mman.h])
+AC_CHECK_FUNCS_ONCE([mprotect])
+
+Makefile.am:
+TESTS += test-u16-cmp
+check_PROGRAMS += test-u16-cmp
+test_u16_cmp_SOURCES = unistr/test-u16-cmp.c
+test_u16_cmp_LDADD = $(LDADD) $(LIBUNISTRING)

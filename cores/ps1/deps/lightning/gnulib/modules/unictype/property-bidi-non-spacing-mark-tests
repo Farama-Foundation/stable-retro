@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_bidi_non_spacing_mark.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_bidi_non_spacing_mark
+check_PROGRAMS += test-pr_bidi_non_spacing_mark
+test_pr_bidi_non_spacing_mark_SOURCES = unictype/test-pr_bidi_non_spacing_mark.c
+test_pr_bidi_non_spacing_mark_LDADD = $(LDADD) $(LIBUNISTRING)

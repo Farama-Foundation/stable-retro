@@ -1,0 +1,28 @@
+Description:
+strtod() function for old platforms.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+m4/strtod-obsolete.m4
+
+Depends-on:
+strtod
+
+configure.ac:
+gl_FUNC_STRTOD_OBSOLETE
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPL
+
+Maintainer:
+all

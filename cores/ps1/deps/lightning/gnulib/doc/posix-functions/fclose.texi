@@ -1,0 +1,30 @@
+@node fclose
+@section @code{fclose}
+@findex fclose
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fclose.html}
+
+Gnulib module: fclose
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On some platforms, this function fails to set the file position of a
+seekable input stream to the byte after the last one actually read:
+glibc 2.33, FreeBSD, AIX 7.2.
+@item
+This function crashes if the stream's file descriptor has already been
+closed on some platforms:
+MSVC 14.
+@item
+On Windows platforms (excluding Cygwin), @code{socket} and @code{accept}
+followed by @code{fdopen} do not return streams that can be closed by
+@code{fclose}.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), this function does not set @code{errno}
+upon failure.
+@end itemize

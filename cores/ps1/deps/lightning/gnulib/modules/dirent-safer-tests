@@ -1,0 +1,17 @@
+Files:
+tests/test-dirent-safer.c
+tests/macros.h
+
+Depends-on:
+dup2
+opendir
+closedir
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-dirent-safer
+check_PROGRAMS += test-dirent-safer
+# Link with libintl when needed. dirent-safer uses fdopendir if it is present,
+# and fdopendir indirectly depends on openat-die -> gettext-h.
+test_dirent_safer_LDADD = $(LDADD) $(LIBINTL)

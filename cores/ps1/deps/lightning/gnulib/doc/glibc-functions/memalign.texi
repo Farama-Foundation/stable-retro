@@ -1,0 +1,39 @@
+@node memalign
+@subsection @code{memalign}
+@findex memalign
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Aligned Memory Blocks,,Allocating Aligned Memory Blocks,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Aligned-Memory-Blocks.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/memalign.3.html,,man memalign}.
+@end itemize
+
+Gnulib module: memalign
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is declared in @code{<stdlib.h>} instead of @code{<malloc.h>}
+on some platforms:
+Solaris 11.
+@item
+This function doesn't accept an alignment of 1 or 2 on some platforms:
+Solaris 11.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11.00, mingw, MSVC 14.
+@end itemize
+
+The Gnulib module @code{aligned-malloc} provides functions for
+allocating and freeing blocks of suitably aligned memory.

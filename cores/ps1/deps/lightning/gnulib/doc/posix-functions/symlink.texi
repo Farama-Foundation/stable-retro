@@ -1,0 +1,25 @@
+@node symlink
+@section @code{symlink}
+@findex symlink
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/symlink.html}
+
+Gnulib module: symlink
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On some systems, @code{symlink(value,"name/")} mistakenly creates a
+symlink:
+macOS 11.1, FreeBSD 7.2, AIX 7.1, Solaris 9.
+@item
+This function is missing on some platforms; however, the replacement
+always fails with @code{EPERM}:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Some file systems do not support symbolic links.
+@end itemize

@@ -1,0 +1,12 @@
+Files:
+tests/test-vdprintf.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-vdprintf
+check_PROGRAMS += test-vdprintf

@@ -1,0 +1,26 @@
+Description:
+Store a character in UTF-32 string.
+
+Files:
+lib/unistr/u32-uctomb.c
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_MODULE_INDICATOR([unistr/u32-uctomb])
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u32-uctomb])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_UCTOMB
+lib_SOURCES += unistr/u32-uctomb.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

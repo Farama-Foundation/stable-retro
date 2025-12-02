@@ -1,0 +1,14 @@
+Files:
+tests/test-copysign.c
+tests/signature.h
+tests/minus-zero.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-copysign
+check_PROGRAMS += test-copysign
+test_copysign_LDADD = $(LDADD) @COPYSIGN_LIBM@

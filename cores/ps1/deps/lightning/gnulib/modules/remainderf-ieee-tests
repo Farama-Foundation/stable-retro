@@ -1,0 +1,19 @@
+Files:
+tests/test-remainderf-ieee.c
+tests/test-remainder-ieee.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnanf-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-remainderf-ieee
+check_PROGRAMS += test-remainderf-ieee
+test_remainderf_ieee_LDADD = $(LDADD) @REMAINDERF_LIBM@

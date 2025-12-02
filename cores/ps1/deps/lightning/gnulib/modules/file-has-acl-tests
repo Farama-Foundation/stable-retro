@@ -1,0 +1,20 @@
+Files:
+tests/test-file-has-acl.sh
+tests/test-file-has-acl-1.sh
+tests/test-file-has-acl-2.sh
+tests/test-file-has-acl.c
+tests/macros.h
+
+Depends-on:
+unistd
+test-framework-sh
+
+configure.ac:
+AC_CHECK_DECLS_ONCE([alarm])
+
+Makefile.am:
+TESTS += \
+  test-file-has-acl.sh test-file-has-acl-1.sh test-file-has-acl-2.sh
+TESTS_ENVIRONMENT += USE_ACL=$(USE_ACL)
+check_PROGRAMS += test-file-has-acl
+test_file_has_acl_LDADD = $(LDADD) $(LIB_HAS_ACL)

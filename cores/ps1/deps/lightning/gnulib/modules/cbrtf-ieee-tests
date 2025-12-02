@@ -1,0 +1,19 @@
+Files:
+tests/test-cbrtf-ieee.c
+tests/test-cbrt-ieee.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnanf-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-cbrtf-ieee
+check_PROGRAMS += test-cbrtf-ieee
+test_cbrtf_ieee_LDADD = $(LDADD) @CBRTF_LIBM@

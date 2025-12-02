@@ -1,0 +1,61 @@
+@node VCS To ChangeLog
+@section VCS To ChangeLog
+
+@c Copyright (C) 2020--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+@cindex VCS To ChangeLog
+@findex vcs-to-changelog
+
+Gnulib provides the @samp{vcs-to-changelog} module to generate an output
+similar to the GNU ChangeLog format from metadata of source control software
+such as git.  Here's an example of using @samp{vcs-to-changelog}:
+
+@example
+build-aux/vcs-to-changelog.py <from_ref> <to_ref>
+@end example
+
+where @code{<from_ref>} and @code{<to_ref>} refer to the range of commits to
+generate the output.
+
+VCS To ChangeLog currently recognises changes in C source code and can traverse
+commits in git.  Additional source frontends and source control backends may be
+added to the module. @samp{vcs-to-changelog} takes the following optional
+arguments:
+
+@itemize
+@item @code{-d}: Run the parser debugger, used for debugging
+@samp{vcs-to-changelog}
+@item @code{-q filename}: Load @var{filename} as the quirks file for the
+project.
+@end itemize
+
+The quirks file is a python module that must minimally implement a
+@code{get_project_quirks} function that returns an object of type
+@code{ProjectQuirks} or its subclass.  The subclass may override the following
+members of @code{ProjectQuirks}:
+
+@itemize @bullet
+@item @code{repo}: Specify the project repo source control.  The default value
+is @code{git}.
+
+@item @code{IGNORE_LIST}: A list of files to ignore in the changesets, either
+because they are not needed (such as the ChangeLog) or because they are
+not parseable.  For example, the GNU C Library has a header file that is only
+assembly code, which breaks the C parser.
+
+@item @code{MACRO_QUIRKS}: A list of dictionary entries with indexes as
+@code{orig} and @code{sub} where @code{orig} is a Python regular expression
+pattern to match and @code{sub} is the substitution.  These substitutions are
+used to work around C/C++ macros that are known to break parsing of C programs.
+
+@item @code{C_MACROS}: This is a list of C preprocessor macro definitions that
+are extensively used and are known to break parsing due to some characteristic,
+mainly the lack of a semicolon at the end.
+
+@end itemize

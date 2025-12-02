@@ -1,0 +1,25 @@
+Description:
+Return amount of total/available physical memory.
+
+Files:
+lib/physmem.h
+lib/physmem.c
+m4/physmem.m4
+
+Depends-on:
+unistd
+
+configure.ac:
+gl_PHYSMEM
+
+Makefile.am:
+lib_SOURCES += physmem.c
+
+Include:
+"physmem.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert, Jim Meyering

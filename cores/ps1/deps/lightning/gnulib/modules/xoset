@@ -1,0 +1,26 @@
+Description:
+Abstract ordered set data type, with out-of-memory checking.
+
+Files:
+lib/gl_xoset.h
+lib/gl_xoset.c
+
+Depends-on:
+oset
+extern-inline
+stdbool
+xalloc-die
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_xoset.h gl_xoset.c
+
+Include:
+"gl_xoset.h"
+
+License:
+GPL
+
+Maintainer:
+all

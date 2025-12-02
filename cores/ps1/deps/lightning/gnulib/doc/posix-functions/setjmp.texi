@@ -1,0 +1,23 @@
+@node setjmp
+@section @code{setjmp}
+@findex setjmp
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/setjmp.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+POSIX does not specify whether @code{setjmp} saves the signal mask in the
+@code{jmp_buf}.  It does on BSD platforms, and on glibc platforms when
+@code{_BSD_SOURCE} (and/or @code{_DEFAULT_SOURCE} on glibc >= 2.19) is defined;
+in this case @code{setjmp} behaves like @code{sigsetjmp(.,1)}, and functions
+@code{_setjmp} and @code{_longjmp} are available that don't save or restore
+the signal mask.  On System V platforms (excluding HP-UX), and on glibc
+platforms by default, @code{setjmp} doesn't save the signal mask.
+@end itemize

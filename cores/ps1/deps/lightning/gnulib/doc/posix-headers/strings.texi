@@ -1,0 +1,23 @@
+@node strings.h
+@section @file{strings.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/strings.h.html}
+
+Gnulib module: strings
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is not self-contained on some platforms:
+Minix 3.1.8.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+MSVC 14.
+@item
+This header file defines symbols, such as @samp{index}, often used for
+variables, making debugging harder.
+@end itemize

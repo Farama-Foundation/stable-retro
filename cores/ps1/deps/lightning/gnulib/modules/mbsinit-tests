@@ -1,0 +1,20 @@
+Files:
+tests/test-mbsinit.sh
+tests/test-mbsinit.c
+tests/signature.h
+tests/macros.h
+m4/locale-fr.m4
+m4/codeset.m4
+
+Depends-on:
+mbrtowc
+setlocale
+
+configure.ac:
+gt_LOCALE_FR_UTF8
+
+Makefile.am:
+TESTS += test-mbsinit.sh
+TESTS_ENVIRONMENT += LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
+check_PROGRAMS += test-mbsinit
+test_mbsinit_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)

@@ -1,0 +1,32 @@
+@node readdir
+@section @code{readdir}
+@findex readdir
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/readdir.html}
+
+Gnulib module: readdir
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+MSVC 14.
+@item
+On platforms where @code{off_t} is a 32-bit type, this function may not
+work correctly on huge directories larger than 2 GB@.  Also, on platforms
+where @code{ino_t} is a 32-bit type, this function may report inode numbers
+incorrectly.  This can occur with file systems such as XFS (typically on
+large disks) and NFS@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Although POSIX places no restrictions on @code{d_ino} values, some
+older systems are rumored to return @code{d_ino} values equal to zero
+for directory entries that do not really exist.  Although Gnulib
+formerly attempted to cater to these older systems, this caused
+misbehavior on standard systems and so Gnulib does not attempt to
+cater to them any more.  If you know of any problems caused by this,
+please send a bug report.
+@end itemize

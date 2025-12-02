@@ -1,0 +1,30 @@
+Description:
+Getter for RLIMIT_DATA: Returns the data segment size.
+
+Files:
+lib/resource-ext.h
+lib/get-rusage-data.c
+m4/mmap-anon.m4
+
+Depends-on:
+stdint
+unistd
+extensions
+getpagesize
+vma-iter
+
+configure.ac:
+AC_CHECK_FUNCS_ONCE([sbrk setrlimit])
+gl_FUNC_MMAP_ANON
+
+Makefile.am:
+lib_SOURCES += get-rusage-data.c
+
+Include:
+"resource-ext.h"
+
+License:
+GPL
+
+Maintainer:
+all

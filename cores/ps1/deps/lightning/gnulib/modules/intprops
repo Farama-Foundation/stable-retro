@@ -1,0 +1,20 @@
+Description:
+Properties of integer types
+
+Files:
+lib/intprops.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"intprops.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert

@@ -1,0 +1,17 @@
+@node netinet/tcp.h
+@section @file{netinet/tcp.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/netinet_tcp.h.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+mingw, MSVC 14.
+@end itemize

@@ -1,0 +1,17 @@
+Files:
+tests/test-term-style-control-hello.c
+tests/test-term-style-control-yes.c
+
+Depends-on:
+stdbool
+unistd
+full-write
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-term-style-control-hello
+check_PROGRAMS += test-term-style-control-hello
+noinst_PROGRAMS += test-term-style-control-yes
+test_term_style_control_hello_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD)
+test_term_style_control_yes_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD)

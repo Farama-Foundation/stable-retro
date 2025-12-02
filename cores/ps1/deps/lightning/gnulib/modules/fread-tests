@@ -1,0 +1,15 @@
+Files:
+tests/test-fread.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+unistd
+fdopen
+msvc-inval
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fread
+check_PROGRAMS += test-fread

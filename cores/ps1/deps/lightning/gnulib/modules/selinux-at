@@ -1,0 +1,35 @@
+Description:
+openat-style fd-relative functions for SE Linux
+
+Files:
+lib/selinux-at.h
+lib/selinux-at.c
+lib/at-func.c
+
+Depends-on:
+selinux-h
+at-internal
+errno
+extensions
+fchdir
+fcntl-h
+filename
+openat-die
+openat-h
+save-cwd
+unistd
+
+configure.ac:
+AC_CHECK_HEADERS([selinux/flask.h])
+
+Makefile.am:
+lib_SOURCES += selinux-at.h selinux-at.c
+
+Include:
+"selinux-at.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

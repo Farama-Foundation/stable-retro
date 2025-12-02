@@ -1,0 +1,22 @@
+@node dup
+@section @code{dup}
+@findex dup
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/dup.html}
+
+Gnulib module: dup
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is declared in a different header file (namely, @code{<io.h>})
+on some platforms:
+MSVC 14.
+@item
+This function crashes when invoked with invalid arguments on some platforms:
+MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,36 @@
+Description:
+Convert a number (usually a file size) to a human readable string, possibly
+with K/M/G suffix.
+
+Files:
+lib/human.h
+lib/human.c
+m4/human.m4
+
+Depends-on:
+argmatch
+error
+intprops
+localeconv
+memmove
+xstrtoumax
+stdbool
+stdint
+
+configure.ac:
+gl_HUMAN
+
+Makefile.am:
+lib_SOURCES += human.c
+
+Include:
+"human.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert

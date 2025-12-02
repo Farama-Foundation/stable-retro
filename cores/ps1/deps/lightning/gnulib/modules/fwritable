@@ -1,0 +1,28 @@
+Description:
+fwritable() function: Determine whether a FILE stream supports writing.
+
+Files:
+lib/fwritable.h
+lib/fwritable.c
+lib/stdio-impl.h
+m4/fwritable.m4
+
+Depends-on:
+stdbool
+
+configure.ac:
+gl_FUNC_FWRITABLE
+if test $ac_cv_func___fwritable = no; then
+  AC_LIBOBJ([fwritable])
+fi
+
+Makefile.am:
+
+Include:
+"fwritable.h"
+
+License:
+LGPL
+
+Maintainer:
+Eric Blake

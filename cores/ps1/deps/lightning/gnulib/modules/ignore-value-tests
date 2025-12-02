@@ -1,0 +1,12 @@
+Files:
+tests/test-ignore-value.c
+
+Depends-on:
+attribute
+stdio
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ignore-value
+check_PROGRAMS += test-ignore-value

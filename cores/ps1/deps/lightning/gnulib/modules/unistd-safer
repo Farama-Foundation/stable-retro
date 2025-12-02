@@ -1,0 +1,30 @@
+Description:
+File descriptor functions that avoid clobbering STD{IN,OUT,ERR}_FILENO.
+
+Files:
+lib/unistd--.h
+lib/dup-safer.c
+lib/fd-safer.c
+lib/pipe-safer.c
+lib/unistd-safer.h
+m4/unistd-safer.m4
+
+Depends-on:
+fcntl
+unistd
+pipe-posix
+
+configure.ac:
+gl_UNISTD_SAFER
+
+Makefile.am:
+lib_SOURCES += dup-safer.c fd-safer.c pipe-safer.c
+
+Include:
+"unistd-safer.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

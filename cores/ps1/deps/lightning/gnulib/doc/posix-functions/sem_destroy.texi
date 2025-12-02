@@ -1,0 +1,21 @@
+@node sem_destroy
+@section @code{sem_destroy}
+@findex sem_destroy
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/sem_destroy.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 14.
+@item
+This function is not implemented on some platforms:
+Mac OS X 10.11.
+@end itemize

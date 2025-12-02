@@ -1,0 +1,38 @@
+Description:
+Execute a C# program.
+
+Files:
+lib/csharpexec.h
+lib/csharpexec.c
+lib/classpath.h
+lib/classpath.c
+
+Depends-on:
+stdbool
+execute
+xsetenv
+sh-quote
+xalloc
+xmalloca
+error
+gettext-h
+csharpexec-script
+
+configure.ac:
+
+Makefile.am:
+DEFS += -DEXEEXT=\"@EXEEXT@\"
+lib_SOURCES += csharpexec.h csharpexec.c
+
+Include:
+"csharpexec.h"
+
+Link:
+$(LIB_MBRTOWC)
+$(LIBTHREAD)
+
+License:
+GPL
+
+Maintainer:
+all

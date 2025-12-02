@@ -1,0 +1,24 @@
+@node strtoimax
+@section @code{strtoimax}
+@findex strtoimax
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strtoimax.html}
+
+Gnulib module: strtoimax
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 3.8, Minix 3.1.8, IRIX 6.5, Solaris 9, MSVC 9.
+@item
+This function fails on valid input strings on some platforms:
+AIX 5.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is only defined as a macro on some platforms:
+HP-UX 11.11.
+@end itemize

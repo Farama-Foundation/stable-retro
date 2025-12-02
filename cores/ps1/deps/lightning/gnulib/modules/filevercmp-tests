@@ -1,0 +1,11 @@
+Files:
+tests/test-filevercmp.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-filevercmp
+check_PROGRAMS += test-filevercmp

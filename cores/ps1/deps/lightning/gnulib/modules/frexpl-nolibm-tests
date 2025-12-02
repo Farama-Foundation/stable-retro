@@ -1,0 +1,21 @@
+Files:
+tests/test-frexpl.c
+tests/test-frexp.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+tests/randoml.c
+
+Depends-on:
+fpucw
+isnanl-nolibm
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-frexpl-nolibm
+check_PROGRAMS += test-frexpl-nolibm
+test_frexpl_nolibm_SOURCES = test-frexpl.c randoml.c

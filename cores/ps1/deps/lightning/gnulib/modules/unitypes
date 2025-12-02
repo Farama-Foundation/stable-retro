@@ -1,0 +1,32 @@
+Description:
+Base types for Unicode string functions.
+
+Files:
+lib/unitypes.in.h
+m4/libunistring-base.m4
+
+Depends-on:
+stdint
+
+configure.ac:
+gl_LIBUNISTRING_LIBHEADER([0.9.4], [unitypes.h])
+
+Makefile.am:
+BUILT_SOURCES += $(LIBUNISTRING_UNITYPES_H)
+
+unitypes.h: unitypes.in.h
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  cat $(srcdir)/unitypes.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+MOSTLYCLEANFILES += unitypes.h unitypes.h-t
+
+Include:
+"unitypes.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

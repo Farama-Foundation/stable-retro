@@ -1,0 +1,27 @@
+Description:
+freadptr() function: Pointer to the input buffer of a stream.
+
+Files:
+lib/freadptr.h
+lib/freadptr.c
+lib/stdio-impl.h
+m4/freadptr.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_FREADPTR
+if test $ac_cv_func___freadptr = no; then
+  AC_LIBOBJ([freadptr])
+fi
+
+Makefile.am:
+
+Include:
+"freadptr.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

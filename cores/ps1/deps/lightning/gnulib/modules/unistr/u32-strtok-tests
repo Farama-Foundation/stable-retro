@@ -1,0 +1,15 @@
+Files:
+tests/unistr/test-u32-strtok.c
+tests/unistr/test-u-strtok.h
+tests/macros.h
+
+Depends-on:
+unistr/u32-uctomb
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-strtok
+check_PROGRAMS += test-u32-strtok
+test_u32_strtok_SOURCES = unistr/test-u32-strtok.c
+test_u32_strtok_LDADD = $(LDADD) $(LIBUNISTRING)

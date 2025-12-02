@@ -1,0 +1,20 @@
+Description:
+Macros for dealing with variable length arrays.
+
+Files:
+lib/vla.h
+
+Depends-on:
+vararrays
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+all

@@ -1,0 +1,21 @@
+Description:
+Abstract set data type as a C++ class.
+
+Files:
+lib/gl_set.hh
+
+Depends-on:
+xset
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"gl_set.hh"
+
+License:
+GPL
+
+Maintainer:
+all

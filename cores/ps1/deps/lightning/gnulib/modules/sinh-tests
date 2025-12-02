@@ -1,0 +1,13 @@
+Files:
+tests/test-sinh.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sinh
+check_PROGRAMS += test-sinh
+test_sinh_LDADD = $(LDADD) @SINH_LIBM@

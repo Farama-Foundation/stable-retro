@@ -1,0 +1,29 @@
+Description:
+Map data type implemented by a hash table with a linked list.
+
+Files:
+lib/gl_linkedhash_map.h
+lib/gl_linkedhash_map.c
+lib/gl_anyhash1.h
+lib/gl_anyhash2.h
+lib/gl_anyhash_primes.h
+
+Depends-on:
+map
+stdint
+xsize
+c99
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_linkedhash_map.h gl_linkedhash_map.c gl_anyhash1.h gl_anyhash2.h gl_anyhash_primes.h
+
+Include:
+"gl_linkedhash_map.h"
+
+License:
+GPL
+
+Maintainer:
+all

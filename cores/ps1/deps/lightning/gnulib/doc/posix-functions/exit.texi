@@ -1,0 +1,18 @@
+@node exit
+@section @code{exit}
+@findex exit
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/exit.html}
+
+Gnulib module: stdlib
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+Some problems with the macros @code{EXIT_SUCCESS} and @code{EXIT_FAILURE},
+see @ref{stdlib.h}.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

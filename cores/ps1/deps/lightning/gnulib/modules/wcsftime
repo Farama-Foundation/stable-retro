@@ -1,0 +1,27 @@
+Description:
+wcsftime() function: convert broken-down time to wide string.
+
+Files:
+lib/wcsftime.c
+m4/wcsftime.m4
+
+Depends-on:
+wchar
+
+configure.ac:
+gl_FUNC_WCSFTIME
+if test $REPLACE_WCSFTIME = 1; then
+  AC_LIBOBJ([wcsftime])
+fi
+gl_WCHAR_MODULE_INDICATOR([wcsftime])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,20 @@
+Description:
+Allows wrapping a broken system header in a gnulib replacement.
+
+Files:
+m4/include_next.m4
+
+Depends-on:
+absolute-header
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,21 @@
+@node unlockpt
+@section @code{unlockpt}
+@findex unlockpt
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/unlockpt.html}
+
+Gnulib module: unlockpt
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 3.8, Minix 3.1.8, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function reports success for invalid file descriptors on some platforms:
+NetBSD 5.1, Cygwin 1.7.9.
+@end itemize

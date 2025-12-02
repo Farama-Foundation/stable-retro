@@ -1,0 +1,28 @@
+Description:
+wmemchr() function: search wide character array for a wide character.
+
+Files:
+lib/wmemchr.c
+lib/wmemchr-impl.h
+m4/wmemchr.m4
+
+Depends-on:
+wchar
+
+configure.ac:
+gl_FUNC_WMEMCHR
+if test $HAVE_WMEMCHR = 0; then
+  AC_LIBOBJ([wmemchr])
+fi
+gl_WCHAR_MODULE_INDICATOR([wmemchr])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

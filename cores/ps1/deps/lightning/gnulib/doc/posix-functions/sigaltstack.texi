@@ -1,0 +1,26 @@
+@node sigaltstack
+@section @code{sigaltstack}
+@findex sigaltstack
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/sigaltstack.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, Cygwin 1.7.x, mingw, MSVC 14.
+@item
+@code{sigaltstack} doesn't work on HP-UX 11/IA-64 and
+OpenBSD 3.6/Sparc64.
+@item
+This function interprets the @code{ss_sp} member of @code{stack_t} as
+the upper bound instead of the lower bound of the alternate stack on
+some platforms:
+IRIX 6.5
+@end itemize

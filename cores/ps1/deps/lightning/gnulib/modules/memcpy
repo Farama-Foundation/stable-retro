@@ -1,0 +1,33 @@
+Description:
+memcpy() function: copy memory area.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+lib/memcpy.c
+m4/memcpy.m4
+
+Depends-on:
+string
+
+configure.ac:
+gl_FUNC_MEMCPY
+if test $ac_cv_func_memcpy = no; then
+  AC_LIBOBJ([memcpy])
+  gl_PREREQ_MEMCPY
+fi
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

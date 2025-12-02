@@ -1,0 +1,42 @@
+Files:
+tests/test-wcrtomb.sh
+tests/test-wcrtomb.c
+tests/test-wcrtomb-w32-1.sh
+tests/test-wcrtomb-w32-2.sh
+tests/test-wcrtomb-w32-3.sh
+tests/test-wcrtomb-w32-4.sh
+tests/test-wcrtomb-w32-5.sh
+tests/test-wcrtomb-w32-6.sh
+tests/test-wcrtomb-w32-7.sh
+tests/test-wcrtomb-w32.c
+tests/signature.h
+tests/macros.h
+m4/locale-fr.m4
+m4/locale-ja.m4
+m4/locale-zh.m4
+m4/codeset.m4
+
+Depends-on:
+btowc
+setlocale
+localcharset
+
+configure.ac:
+gt_LOCALE_FR
+gt_LOCALE_FR_UTF8
+gt_LOCALE_JA
+gt_LOCALE_ZH_CN
+
+Makefile.am:
+TESTS += \
+  test-wcrtomb.sh \
+  test-wcrtomb-w32-1.sh test-wcrtomb-w32-2.sh test-wcrtomb-w32-3.sh \
+  test-wcrtomb-w32-4.sh test-wcrtomb-w32-5.sh test-wcrtomb-w32-6.sh \
+  test-wcrtomb-w32-7.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-wcrtomb test-wcrtomb-w32
+test_wcrtomb_LDADD = $(LDADD) $(LIB_SETLOCALE)

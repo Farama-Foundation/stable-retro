@@ -1,0 +1,27 @@
+@node fseeko
+@section @code{fseeko}
+@findex fseeko
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fseeko.html}
+
+Gnulib module: fseeko
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+The declaration of @code{fseeko} in @code{<stdio.h>} is not enabled by default
+on some platforms:
+glibc 2.3.6.
+@item
+This function fails on seekable stdin, stdout, and stderr: cygwin <= 1.5.24.
+@item
+On platforms where @code{off_t} is a 32-bit type, @code{fseeko} does not work
+correctly with files larger than 2 GB@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

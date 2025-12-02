@@ -1,0 +1,29 @@
+Description:
+Test whether a Unicode character is "bidi block separator".
+
+Files:
+lib/unictype/pr_bidi_block_separator.c
+lib/unictype/pr_bidi_block_separator.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+unictype/bidiclass-of
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-bidi-block-separator])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_BIDI_BLOCK_SEPARATOR
+lib_SOURCES += unictype/pr_bidi_block_separator.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

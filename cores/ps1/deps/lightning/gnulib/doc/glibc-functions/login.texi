@@ -1,0 +1,29 @@
+@node login
+@subsection @code{login}
+@findex login
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Logging In and Out,,Logging In and Out,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Logging-In-and-Out.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/login.3.html,,man login}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.4, mingw, MSVC 14, Android 9.0.
+@end itemize

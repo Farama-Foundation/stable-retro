@@ -1,0 +1,29 @@
+Description:
+Return current locale's character encoding.
+
+Files:
+lib/localcharset.h
+lib/localcharset.c
+m4/codeset.m4
+m4/localcharset.m4
+
+Depends-on:
+extensions
+
+configure.ac:
+gl_LOCALCHARSET
+dnl For backward compatibility. Some packages still use this.
+LOCALCHARSET_TESTS_ENVIRONMENT=
+AC_SUBST([LOCALCHARSET_TESTS_ENVIRONMENT])
+
+Makefile.am:
+lib_SOURCES += localcharset.c
+
+Include:
+"localcharset.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

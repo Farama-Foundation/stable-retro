@@ -1,0 +1,13 @@
+Files:
+tests/unictype/test-joininggroup_name.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-joininggroup_name
+check_PROGRAMS += test-joininggroup_name
+test_joininggroup_name_SOURCES = unictype/test-joininggroup_name.c
+test_joininggroup_name_LDADD = $(LDADD) $(LIBUNISTRING)

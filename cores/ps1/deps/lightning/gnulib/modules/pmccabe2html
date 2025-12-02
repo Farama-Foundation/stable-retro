@@ -1,0 +1,22 @@
+Description:
+Produce fancy cyclomatic code complexity charts, using pmccabe.
+See <https://people.debian.org/~bame/pmccabe/>.
+
+Files:
+build-aux/pmccabe2html
+build-aux/pmccabe.css
+
+Depends-on:
+
+configure.ac:
+AC_PATH_PROG([PMCCABE], [pmccabe], [false])
+
+Makefile.am:
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+gnupdf and Simon Josefsson

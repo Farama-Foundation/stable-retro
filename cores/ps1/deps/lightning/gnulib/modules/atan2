@@ -1,0 +1,25 @@
+Description:
+atan2() function: angle of a point in the plane.
+
+Files:
+m4/atan2.m4
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_ATAN2
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ATAN2_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

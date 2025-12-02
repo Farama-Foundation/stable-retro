@@ -1,0 +1,30 @@
+Description:
+dup2() function: duplicate an open file descriptor.
+
+Files:
+lib/dup2.c
+m4/dup2.m4
+
+Depends-on:
+unistd
+msvc-inval      [test $REPLACE_DUP2 = 1]
+msvc-nothrow    [test $REPLACE_DUP2 = 1]
+
+configure.ac:
+gl_FUNC_DUP2
+if test $REPLACE_DUP2 = 1; then
+  AC_LIBOBJ([dup2])
+  gl_PREREQ_DUP2
+fi
+gl_UNISTD_MODULE_INDICATOR([dup2])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert, Jim Meyering

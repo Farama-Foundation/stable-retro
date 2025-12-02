@@ -1,0 +1,18 @@
+@node globfree
+@section @code{globfree}
+@findex globfree
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/globfree.html}
+
+Gnulib module: glob
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14, Android 8.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

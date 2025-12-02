@@ -1,0 +1,20 @@
+ifndef C64_TOOLS_DSP_ROOT
+$(error need C64_TOOLS_DSP_ROOT)
+endif
+ifndef TI_CGTOOLS
+$(error need TI_CGTOOLS and stuff, source c64_tools/dsp/setenv.sh)
+endif
+
+include $(C64_TOOLS_DSP_ROOT)/install.mk
+
+TARGET_BASENAME = pcsxr_spu
+OPTFLAGS += -o3
+CFLAGS += -mo
+#CFLAGS += -k -mw
+CFLAGS += -DNO_OS -DWANT_THREAD_CODE
+
+OBJ = \
+	spu_c64x_dspcode.o64
+
+include $(C64_TOOLS_DSP_ROOT)/build_area3.mk
+include $(C64_TOOLS_DSP_ROOT)/build.mk

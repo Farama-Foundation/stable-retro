@@ -1,0 +1,25 @@
+Description:
+Casefolding mapping for Unicode characters (locale and context independent).
+
+Files:
+lib/unicase/casefold.h
+lib/unicase/tocasefold.c
+lib/unicase/tocasefold.h
+lib/unicase/simple-mapping.h
+
+Depends-on:
+unicase/base
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += unicase/tocasefold.c
+
+Include:
+"unicase/casefold.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

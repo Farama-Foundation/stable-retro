@@ -1,0 +1,28 @@
+Description:
+posix_spawnattr_setflags() function: specify bitmask of attributes for child
+process.
+
+Files:
+lib/spawnattr_setflags.c
+m4/posix_spawn.m4
+
+Depends-on:
+spawn
+
+configure.ac:
+gl_POSIX_SPAWN
+if test $HAVE_POSIX_SPAWN = 0 || test $REPLACE_POSIX_SPAWN = 1; then
+  AC_LIBOBJ([spawnattr_setflags])
+fi
+gl_SPAWN_MODULE_INDICATOR([posix_spawnattr_setflags])
+
+Makefile.am:
+
+Include:
+<spawn.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+glibc

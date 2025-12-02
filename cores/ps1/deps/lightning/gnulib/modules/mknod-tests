@@ -1,0 +1,16 @@
+Files:
+tests/test-mkfifo.h
+tests/test-mknod.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+stdbool
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-mknod
+check_PROGRAMS += test-mknod

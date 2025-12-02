@@ -1,0 +1,19 @@
+Files:
+tests/test-floorl.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+fpucw
+isnanl-nolibm
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-floorl
+check_PROGRAMS += test-floorl
+test_floorl_LDADD = $(LDADD) @FLOORL_LIBM@

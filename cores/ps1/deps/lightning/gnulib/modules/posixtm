@@ -1,0 +1,27 @@
+Description:
+Convert a date/time string (POSIX syntax) to linear time or broken-down time.
+
+Files:
+lib/posixtm.h
+lib/posixtm.c
+m4/posixtm.m4
+
+Depends-on:
+mktime
+stdbool
+stpcpy
+
+configure.ac:
+gl_POSIXTM
+
+Makefile.am:
+lib_SOURCES += posixtm.c
+
+Include:
+"posixtm.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

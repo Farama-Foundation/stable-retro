@@ -1,0 +1,43 @@
+Description:
+POSIX compatible snprintf() function: print formatted output to a fixed length
+string
+
+Comment:
+This module should not be used as a dependency from a test module,
+otherwise when this module occurs as a tests-related module, it will
+have side effects on the compilation of the 'vasnprintf' module, if
+that module occurs among the main modules in lib/.
+
+Files:
+m4/snprintf-posix.m4
+m4/printf.m4
+m4/math_h.m4
+
+Depends-on:
+snprintf
+nocrash
+printf-safe
+multiarch
+vasnprintf      [test $ac_cv_func_snprintf = no || test $REPLACE_SNPRINTF = 1]
+isnand-nolibm   [test $ac_cv_func_snprintf = no || test $REPLACE_SNPRINTF = 1]
+isnanl-nolibm   [test $ac_cv_func_snprintf = no || test $REPLACE_SNPRINTF = 1]
+frexp-nolibm    [test $ac_cv_func_snprintf = no || test $REPLACE_SNPRINTF = 1]
+frexpl-nolibm   [test $ac_cv_func_snprintf = no || test $REPLACE_SNPRINTF = 1]
+printf-frexp    [test $ac_cv_func_snprintf = no || test $REPLACE_SNPRINTF = 1]
+printf-frexpl   [test $ac_cv_func_snprintf = no || test $REPLACE_SNPRINTF = 1]
+signbit         [test $ac_cv_func_snprintf = no || test $REPLACE_SNPRINTF = 1]
+fpucw           [test $ac_cv_func_snprintf = no || test $REPLACE_SNPRINTF = 1]
+
+configure.ac:
+gl_FUNC_SNPRINTF_POSIX
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,24 @@
+@node sys/select.h
+@section @file{sys/select.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_select.h.html}
+
+Gnulib module: sys_select
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+HP-UX 11.11, NonStop Kernel, mingw, MSVC 14.
+@item
+This header file is not self-contained on some platforms: it requires
+@code{<sys/types.h>} to be included first.
+@item
+This header file is not self-contained---it requires @code{<string.h>}
+before @code{FD_ZERO} can be used---on some platforms:
+AIX 7.1, Solaris 11.4.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

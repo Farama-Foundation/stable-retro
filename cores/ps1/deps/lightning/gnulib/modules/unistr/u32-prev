@@ -1,0 +1,25 @@
+Description:
+Iterate over previous character in UTF-32 string.
+
+Files:
+lib/unistr/u32-prev.c
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u32-prev])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_PREV
+lib_SOURCES += unistr/u32-prev.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,30 @@
+Description:
+alphasort() function: compare entries of a directory alphabetically
+
+Files:
+lib/alphasort.c
+m4/alphasort.m4
+
+Depends-on:
+dirent
+extensions
+
+configure.ac:
+gl_FUNC_ALPHASORT
+if test $HAVE_ALPHASORT = 0; then
+  AC_LIBOBJ([alphasort])
+  gl_PREREQ_ALPHASORT
+fi
+gl_DIRENT_MODULE_INDICATOR([alphasort])
+
+Makefile.am:
+
+Include:
+<dirent.h>
+
+License:
+LGPL
+
+Maintainer:
+all, glibc
+

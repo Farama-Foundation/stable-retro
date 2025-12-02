@@ -1,0 +1,30 @@
+Description:
+ISO C 11 thread-specific storage functions.
+
+Files:
+lib/tss.c
+
+Depends-on:
+threads-h
+windows-tls
+
+configure.ac:
+AC_REQUIRE([gl_THREADS_H])
+if test $HAVE_THREADS_H = 0; then
+  AC_LIBOBJ([tss])
+fi
+gl_THREADS_MODULE_INDICATOR([tss])
+
+Makefile.am:
+
+Include:
+<threads.h>
+
+Link:
+$(LIBSTDTHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

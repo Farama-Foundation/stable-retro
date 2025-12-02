@@ -1,0 +1,20 @@
+Description:
+Assume config.h exists, to avoid -DHAVE_CONFIG_H clutter in 'make' output.
+
+Files:
+m4/config-h.m4
+
+Depends-on:
+
+configure.ac:
+gl_CONFIG_H
+
+Makefile.am:
+
+Include:
+
+License:
+LGPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

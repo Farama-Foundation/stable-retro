@@ -1,0 +1,26 @@
+Description:
+hypot() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/hypot-ieee.m4
+
+Depends-on:
+hypot
+fpieee
+
+configure.ac:
+gl_FUNC_HYPOT_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(HYPOT_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

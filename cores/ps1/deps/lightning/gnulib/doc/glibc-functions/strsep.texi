@@ -1,0 +1,31 @@
+@node strsep
+@subsection @code{strsep}
+@findex strsep
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-strsep-3.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Finding Tokens in a String,,Finding Tokens in a String,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Finding-Tokens-in-a-String.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/strsep.3.html,,man strsep}.
+@end itemize
+
+Gnulib module: strsep
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+HP-UX 11, IRIX 6.5, Solaris 10, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

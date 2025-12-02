@@ -1,0 +1,17 @@
+Files:
+tests/test-map-c++.cc
+tests/macros.h
+
+Depends-on:
+ansi-c++-opt
+array-map
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-map-c++
+check_PROGRAMS += test-map-c++
+test_map_c___SOURCES = test-map-c++.cc
+test_map_c___LDADD = $(LDADD) @LIBINTL@
+endif

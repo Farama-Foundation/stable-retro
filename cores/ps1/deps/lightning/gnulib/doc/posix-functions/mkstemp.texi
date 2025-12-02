@@ -1,0 +1,28 @@
+@node mkstemp
+@section @code{mkstemp}
+@findex mkstemp
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/mkstemp.html}
+
+Gnulib module: mkstemp
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+On platforms where @code{off_t} is a 32-bit type, @code{mkstemp} may not work
+correctly to create files larger than 2 GB@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@item
+On some older platforms, @code{mkstemp} can create a world or group
+writable or readable file, if you haven't set the process umask to
+077.  This is a security risk.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize
+
+The gnulib module @code{clean-temp} can create temporary files that will not
+be left behind after signals such as SIGINT.

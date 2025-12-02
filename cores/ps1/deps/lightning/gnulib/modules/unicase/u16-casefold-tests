@@ -1,0 +1,16 @@
+Files:
+tests/unicase/test-u16-casefold.c
+tests/macros.h
+
+Depends-on:
+unistr/u16-cmp
+uninorm/nfc
+uninorm/nfd
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-casefold
+check_PROGRAMS += test-u16-casefold
+test_u16_casefold_SOURCES = unicase/test-u16-casefold.c
+test_u16_casefold_LDADD = $(LDADD) $(LIBUNISTRING)

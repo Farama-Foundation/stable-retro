@@ -1,0 +1,31 @@
+@node adjtime
+@subsection @code{adjtime}
+@findex adjtime
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-adjtime-2.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{High-Resolution Calendar,,High-Resolution Calendar,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/High_002dResolution-Calendar.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/adjtime.3.html,,man adjtime}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

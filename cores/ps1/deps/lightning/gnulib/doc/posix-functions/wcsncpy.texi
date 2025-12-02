@@ -1,0 +1,27 @@
+@node wcsncpy
+@section @code{wcsncpy}
+@findex wcsncpy
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/wcsncpy.html}
+
+Gnulib module: wcsncpy
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and therefore
+cannot accommodate all Unicode characters.
+@end itemize
+
+Note: This function has no real use: It cannot be used for filling a fixed-size
+record with a wide string, before writing it to a file, because the wide string
+encoding is platform dependent and, on some platforms, also locale dependent.
+And this function is @strong{not} appropriate for copying a wide string into a
+bounded memory area, because you have no guarantee that the result will be
+null-terminated. Even if you add the null character at the end yourself, this
+function is inefficient (as it spends time clearing unused memory) and will
+allow silent truncation to occur, which is not a good behavior for GNU programs.

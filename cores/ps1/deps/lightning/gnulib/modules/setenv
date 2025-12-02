@@ -1,0 +1,31 @@
+Description:
+setenv() function: set an environment variable.
+
+Files:
+lib/setenv.c
+m4/setenv.m4
+
+Depends-on:
+stdlib
+malloca         [test $HAVE_SETENV = 0 || test $REPLACE_SETENV = 1]
+alloca-opt      [test $HAVE_SETENV = 0 || test $REPLACE_SETENV = 1]
+unistd          [test $HAVE_SETENV = 0 || test $REPLACE_SETENV = 1]
+environ         [test $HAVE_SETENV = 0 || test $REPLACE_SETENV = 1]
+
+configure.ac:
+gl_FUNC_SETENV
+if test $HAVE_SETENV = 0 || test $REPLACE_SETENV = 1; then
+  AC_LIBOBJ([setenv])
+fi
+gl_STDLIB_MODULE_INDICATOR([setenv])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

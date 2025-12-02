@@ -1,0 +1,39 @@
+@node va_arg
+@section @code{va_arg}
+@findex va_arg
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/va_arg.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The second argument of @code{va_arg} must be a type that is invariant under
+the ``default argument promotions'' (ISO C 99 6.5.2.2 paragraph 6).  This
+means that the following are not valid here:
+@table @asis
+@item @samp{float}
+Use @samp{double} instead.
+@item @samp{bool}
+Use @samp{int} instead.
+@item Integer types smaller than @samp{int}.
+Use @samp{int} or @samp{unsigned int} instead.
+@end table
+
+This is a portability problem because you don't know the width of some
+abstract types like @code{uid_t}, @code{gid_t}, @code{mode_t}.  So, instead of
+@smallexample
+mode = va_arg (ap, mode_t);
+@end smallexample
+you have to write
+@smallexample
+mode = (sizeof (mode_t) < sizeof (int)
+        ? va_arg (ap, int)
+        : va_arg (ap, mode_t));
+@end smallexample
+@end itemize

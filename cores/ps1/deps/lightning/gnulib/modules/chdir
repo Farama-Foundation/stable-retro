@@ -1,0 +1,21 @@
+Description:
+chdir() function: switch to another current directory
+
+Files:
+
+Depends-on:
+unistd
+
+configure.ac:
+gl_UNISTD_MODULE_INDICATOR([chdir])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

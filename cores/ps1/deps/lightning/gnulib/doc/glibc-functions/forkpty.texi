@@ -1,0 +1,47 @@
+@node forkpty
+@subsection @code{forkpty}
+@findex forkpty
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Pseudo-Terminal Pairs,,Opening a Pseudo-Terminal Pair,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Pseudo_002dTerminal-Pairs.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/forkpty.3.html,,man forkpty}.
+@end itemize
+
+Gnulib module: forkpty
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.3, Android 5.1.
+@item
+One some systems (at least including Cygwin
+and Mac OS X) linking with @code{-lutil} is not required.
+@item
+On glibc, OpenBSD, NetBSD and FreeBSD linking with @code{-lutil} is
+required.
+@item
+The function is declared in pty.h on glibc and Cygwin.
+It is declared in util.h on Mac OS X, OpenBSD, and NetBSD.
+It is declared in libutil.h on FreeBSD.
+It is declared in termios.h on Solaris.
+@item
+Some platforms declare the function without marking the last two
+parameters @code{const}.
+FreeBSD, Solaris 11.4, Cygwin 1.7.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@end itemize

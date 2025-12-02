@@ -1,0 +1,23 @@
+Description:
+floorl() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+floorl
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FLOORL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

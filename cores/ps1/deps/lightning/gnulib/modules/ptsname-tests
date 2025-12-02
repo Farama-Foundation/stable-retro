@@ -1,0 +1,14 @@
+Files:
+tests/test-ptsname.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+same-inode
+
+configure.ac:
+AC_CHECK_DECLS_ONCE([alarm])
+
+Makefile.am:
+TESTS += test-ptsname
+check_PROGRAMS += test-ptsname

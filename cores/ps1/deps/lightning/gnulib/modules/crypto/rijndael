@@ -1,0 +1,27 @@
+Description:
+Rijndael block cipher.
+
+Files:
+lib/rijndael-alg-fst.c
+lib/rijndael-alg-fst.h
+lib/rijndael-api-fst.c
+lib/rijndael-api-fst.h
+
+Depends-on:
+stdint
+
+configure.ac:
+AC_REQUIRE([AC_C_RESTRICT])
+
+Makefile.am:
+lib_SOURCES += rijndael-alg-fst.c rijndael-api-fst.c
+
+Include:
+"rijndael-alg-fst.h"
+"rijndael-api-fst.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

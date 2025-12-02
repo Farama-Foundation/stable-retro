@@ -1,0 +1,25 @@
+@node log1p
+@section @code{log1p}
+@findex log1p
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/log1p.html}
+
+Gnulib module: log1p or log1p-ieee
+
+Portability problems fixed by either Gnulib module @code{log1p} or @code{log1p-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, MSVC 9.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{log1p-ieee}:
+@itemize
+@item
+This function has problems when the argument is minus zero on some platforms:
+AIX 7.1, HP-UX 11.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

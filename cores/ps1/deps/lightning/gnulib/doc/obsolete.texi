@@ -1,0 +1,23 @@
+@node Obsolete modules
+@section Obsolete modules
+
+@cindex Obsolete modules
+Modules can be marked obsolete.  This means that the problems they fix
+don't occur any more on the platforms that are reasonable porting targets
+now.  @code{gnulib-tool} warns when obsolete modules are mentioned on the
+command line, and by default ignores dependencies from modules to obsolete
+modules.  When you pass the option @code{--with-obsolete} to
+@code{gnulib-tool}, dependencies to obsolete modules will be included,
+however, unless blocked through an @code{--avoid} option.  This option
+is useful if your package should be portable even to very old platforms.
+
+In order to mark a module obsolete, you need to add this to the module
+description:
+
+@example
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+@end example

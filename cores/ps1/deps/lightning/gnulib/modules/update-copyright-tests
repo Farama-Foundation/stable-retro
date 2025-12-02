@@ -1,0 +1,12 @@
+Files:
+tests/test-update-copyright.sh
+
+Depends-on:
+
+configure.ac:
+abs_aux_dir=`cd "$ac_aux_dir"; pwd`
+AC_SUBST([abs_aux_dir])
+
+Makefile.am:
+TESTS += test-update-copyright.sh
+TESTS_ENVIRONMENT += abs_aux_dir='$(abs_aux_dir)'

@@ -1,0 +1,22 @@
+Files:
+tests/test-verify.c
+tests/test-verify-try.c
+tests/test-verify.sh
+
+Depends-on:
+test-framework-sh
+
+configure.ac:
+
+Makefile.am:
+TESTS_ENVIRONMENT += MAKE='$(MAKE)'
+TESTS += test-verify test-verify.sh
+check_PROGRAMS += test-verify
+# test-verify-try is never built, but test-verify.sh needs a rule to
+# build test-verify-try.o.
+EXTRA_PROGRAMS += test-verify-try
+
+# This test expects compilation of test-verify-try.c to fail, and
+# each time it fails, the makefile rule does not perform the usual
+#  "mv -f $name.Tpo $name.po, so tell make clean to remove that file.
+MOSTLYCLEANFILES += .deps/test-verify-try.Tpo

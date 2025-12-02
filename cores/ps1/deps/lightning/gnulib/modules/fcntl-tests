@@ -1,0 +1,17 @@
+Files:
+tests/test-fcntl.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+binary-io
+close
+getdtablesize
+msvc-nothrow
+stdbool
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fcntl
+check_PROGRAMS += test-fcntl

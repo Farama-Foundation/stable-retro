@@ -1,0 +1,18 @@
+Files:
+tests/test-utime-h-c++.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-utime-h-c++
+check_PROGRAMS += test-utime-h-c++
+test_utime_h_c___SOURCES = test-utime-h-c++.cc
+endif

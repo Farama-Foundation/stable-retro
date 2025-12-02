@@ -1,0 +1,15 @@
+Files:
+tests/test-posixtm.c
+tests/macros.h
+
+Depends-on:
+intprops
+setenv
+stdint
+strftime
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-posixtm
+check_PROGRAMS += test-posixtm

@@ -1,0 +1,14 @@
+Files:
+tests/test-linkedhash_set.c
+tests/macros.h
+
+Depends-on:
+array-set
+xalloc
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-linkedhash_set
+check_PROGRAMS += test-linkedhash_set
+test_linkedhash_set_LDADD = $(LDADD) @LIBINTL@

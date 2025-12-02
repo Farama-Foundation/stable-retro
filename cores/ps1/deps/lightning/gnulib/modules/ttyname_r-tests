@@ -1,0 +1,12 @@
+Files:
+tests/test-ttyname_r.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ttyname_r
+check_PROGRAMS += test-ttyname_r

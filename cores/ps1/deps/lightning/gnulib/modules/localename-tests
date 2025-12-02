@@ -1,0 +1,19 @@
+Files:
+tests/test-localename.c
+tests/macros.h
+
+Depends-on:
+locale
+setenv
+unsetenv
+setlocale
+strdup
+
+configure.ac:
+AC_CHECK_FUNCS_ONCE([newlocale])
+
+Makefile.am:
+TESTS += test-localename
+check_PROGRAMS += test-localename
+test_localename_LDADD = $(LDADD) $(LIB_SETLOCALE) @INTL_MACOSX_LIBS@ $(LIBTHREAD)
+

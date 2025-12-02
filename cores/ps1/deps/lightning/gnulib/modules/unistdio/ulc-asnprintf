@@ -1,0 +1,31 @@
+Description:
+Formatted output to a string, with automatic memory allocation and bounded
+output size.
+
+Files:
+lib/unistdio/ulc-asnprintf.c
+lib/unistdio/u-asnprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/ulc-vasnprintf
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unistdio/ulc-asnprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_ULC_ASNPRINTF
+lib_SOURCES += unistdio/ulc-asnprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

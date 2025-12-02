@@ -1,0 +1,61 @@
+@node fcntl
+@section @code{fcntl}
+@findex fcntl
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fcntl.html}
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-fcntl-3.html}
+
+Gnulib module: fcntl
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+
+@item
+This function does not support @code{F_DUPFD_CLOEXEC} on some
+platforms:
+glibc with Linux kernels before 2.6.24,
+Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 6.7, AIX 7.1, HP-UX 11,
+IRIX 6.5, Solaris 11 2010-11, Cygwin 1.7.1.
+Note that the gnulib replacement code is functional but not atomic.
+
+@item
+The @code{F_DUPFD_CLOEXEC} action of this function does not set the
+@code{FD_CLOEXEC} flag on some platforms:
+NetBSD 9.0.
+
+@item
+The @code{F_DUPFD_CLOEXEC} action of this function sets the
+@code{FD_CLOEXEC} flag on the wrong file descriptor on some platforms:
+Haiku.
+
+@item
+The @code{F_DUPFD} action of this function does not reject
+out-of-range targets properly on some platforms:
+AIX 7.1, Cygwin 1.5.x, Haiku.
+
+@item
+The @code{F_DUPFD} action of this function mistakenly clears
+@code{FD_CLOEXEC} on the source descriptor on some platforms:
+Haiku.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The replacement function does not support @code{F_SETFD},
+@code{F_GETFL}, @code{F_SETFL}, @code{F_GETOWN}, @code{F_SETOWN},
+@code{F_GETLK}, @code{F_SETLK}, and @code{F_SETLKW} on some platforms:
+mingw, MSVC 14.
+
+@item
+When a file does not support locking (such as on an NFS file system
+that does not support file locking), calls with @code{F_SETLK} and
+@code{F_SETLKW} fail with @code{errno} set to different values on
+different systems: @code{EINVAL} on OpenIndiana (as suggested by the
+POSIX 1003.1-2017 @code{fcntl} specification), @code{ENOLCK} on
+GNU/Linux, and @code{EOPNOTSUPP} on FreeBSD.
+@end itemize

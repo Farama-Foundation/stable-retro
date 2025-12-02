@@ -1,0 +1,27 @@
+@node random
+@section @code{random}
+@findex random
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/random.html}
+
+Gnulib module: random
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+This function is only defined as an inline function on some platforms:
+Android 4.4.
+@item
+
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function has a slightly incompatible declaration (the return type being
+@samp{int} instead of @samp{long}) on some platforms:
+Cygwin 1.5.25, Haiku.
+@end itemize

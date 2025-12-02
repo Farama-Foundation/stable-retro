@@ -1,0 +1,28 @@
+Description:
+wmemcmp() function: compare wide character arrays.
+
+Files:
+lib/wmemcmp.c
+lib/wmemcmp-impl.h
+m4/wmemcmp.m4
+
+Depends-on:
+wchar
+
+configure.ac:
+gl_FUNC_WMEMCMP
+if test $HAVE_WMEMCMP = 0; then
+  AC_LIBOBJ([wmemcmp])
+fi
+gl_WCHAR_MODULE_INDICATOR([wmemcmp])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,53 @@
+Description:
+A correct <float.h>.
+
+Files:
+lib/float.in.h
+lib/float.c
+lib/itold.c
+m4/float_h.m4
+
+Depends-on:
+include_next
+
+configure.ac:
+gl_FLOAT_H
+if test $REPLACE_FLOAT_LDBL = 1; then
+  AC_LIBOBJ([float])
+fi
+if test $REPLACE_ITOLD = 1; then
+  AC_LIBOBJ([itold])
+fi
+
+Makefile.am:
+BUILT_SOURCES += $(FLOAT_H)
+
+# We need the following in order to create <float.h> when the system
+# doesn't have one that works with the given compiler.
+if GL_GENERATE_FLOAT_H
+float.h: float.in.h $(top_builddir)/config.status
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_FLOAT_H''@|$(NEXT_FLOAT_H)|g' \
+	      -e 's|@''REPLACE_ITOLD''@|$(REPLACE_ITOLD)|g' \
+	      < $(srcdir)/float.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+else
+float.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += float.h float.h-t
+
+Include:
+<float.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

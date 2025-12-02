@@ -1,0 +1,15 @@
+Files:
+tests/unicase/test-uc_totitle.c
+tests/unicase/test-mapping-part1.h
+tests/unicase/test-mapping-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-uc_totitle
+check_PROGRAMS += test-uc_totitle
+test_uc_totitle_SOURCES = unicase/test-uc_totitle.c
+test_uc_totitle_LDADD = $(LDADD) $(LIBUNISTRING)

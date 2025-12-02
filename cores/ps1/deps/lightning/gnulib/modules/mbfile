@@ -1,0 +1,35 @@
+Description:
+Multibyte character I/O.
+
+Files:
+lib/mbfile.h
+lib/mbfile.c
+m4/mbfile.m4
+m4/mbrtowc.m4
+
+Depends-on:
+extern-inline
+mbchar
+mbrtowc
+mbsinit
+wchar
+stdbool
+
+configure.ac:
+gl_MBFILE
+
+Makefile.am:
+lib_SOURCES += mbfile.h mbfile.c
+
+Include:
+"mbfile.h"
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+$(LIB_MBRTOWC)
+
+License:
+LGPL
+
+Maintainer:
+all

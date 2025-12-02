@@ -1,0 +1,19 @@
+Description:
+Provide the GNU General Public License version 3.0 in Texinfo format.
+
+Files:
+doc/gpl-3.0.texi
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+unmodifiable license text
+
+Maintainer:
+all

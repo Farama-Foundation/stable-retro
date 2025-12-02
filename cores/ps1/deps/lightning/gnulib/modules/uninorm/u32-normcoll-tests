@@ -1,0 +1,16 @@
+Files:
+tests/uninorm/test-u32-normcoll.c
+tests/uninorm/test-u32-normcmp.h
+tests/macros.h
+
+Depends-on:
+uninorm/nfc
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-normcoll
+check_PROGRAMS += test-u32-normcoll
+test_u32_normcoll_SOURCES = uninorm/test-u32-normcoll.c
+test_u32_normcoll_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@
+

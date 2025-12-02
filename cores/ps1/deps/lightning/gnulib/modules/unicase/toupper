@@ -1,0 +1,27 @@
+Description:
+Uppercase mapping for Unicode characters (locale and context independent).
+
+Files:
+lib/unicase/toupper.c
+lib/unicase/toupper.h
+lib/unicase/simple-mapping.h
+
+Depends-on:
+unicase/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/toupper])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_TOUPPER
+lib_SOURCES += unicase/toupper.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,27 @@
+Description:
+truncf() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/truncf-ieee.m4
+m4/minus-zero.m4
+m4/signbit.m4
+
+Depends-on:
+truncf
+
+configure.ac:
+gl_FUNC_TRUNCF_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(TRUNCF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

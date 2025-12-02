@@ -1,0 +1,32 @@
+Description:
+Enable faster, non-thread-safe stdio functions if available,
+globally throughout the package.
+
+Files:
+
+Depends-on:
+unlocked-io-internal
+
+configure.ac:
+AC_DEFINE([GNULIB_STDIO_SINGLE_THREAD], [1],
+  [Define to 1 if you want the FILE stream functions getc, putc, etc.
+   to use unlocked I/O if available, throughout the package.
+   Unlocked I/O can improve performance, sometimes dramatically.
+   But unlocked I/O is safe only in single-threaded programs,
+   as well as in multithreaded programs for which you can guarantee that
+   every FILE stream, including stdin, stdout, stderr, is used only
+   in a single thread.])
+
+AC_DEFINE([USE_UNLOCKED_IO], [GNULIB_STDIO_SINGLE_THREAD],
+  [An alias of GNULIB_STDIO_SINGLE_THREAD.])
+
+Makefile.am:
+
+Include:
+"unlocked-io.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

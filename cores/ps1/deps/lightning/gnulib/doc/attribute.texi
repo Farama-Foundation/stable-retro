@@ -1,0 +1,43 @@
+@c attribute module documentation
+
+@c Copyright 2020--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+@node Attributes
+@section Attributes
+
+@cindex Attributes
+@findex __attribute__
+
+This module provides a header file @file{attribute.h} that defines
+macros related to C and C++ attributes and the GCC
+@code{__attribute__} keyword.
+
+Here is an example of its use:
+
+@example
+#include <attribute.h>
+
+extern char *crypt (char const *, char const *)
+  ATTRIBUTE_NOTHROW ATTRIBUTE_LEAF ATTRIBUTE_NONNULL ((1, 2));
+@end example
+
+@noindent
+@code{ATTRIBUTE_NOTHROW} expands to @code{__attribute__
+((__nothrow__))} if the compiler is a recent-enough GCC or GCC-like
+compiler, and to nothing otherwise.  Similarly for
+@code{ATTRIBUTE_LEAF}.  @code{ATTRIBUTE_NONNULL ((1, 2))} expands to
+@code{__attribute__ ((__nonnull__ (1, 2)))} if the compiler is
+recent-enough GCC, and to nothing otherwise.
+
+Most of these attribute names begin with @code{ATTRIBUTE_}.
+A few do not, because they are part of C2X and their
+names are not likely to clash with other macro names.
+These macros are @code{DEPRECATED}, @code{FALLTHROUGH},
+@code{MAYBE_UNUSED}, and @code{NODISCARD}, which can
+be defined to @code{[[deprecated]]} etc.@: on C2X platforms.

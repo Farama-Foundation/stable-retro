@@ -1,0 +1,29 @@
+Description:
+An interface to the write() function that retries after interrupts.
+
+Files:
+lib/safe-write.h
+lib/safe-write.c
+lib/safe-read.c
+lib/sys-limits.h
+m4/safe-write.m4
+m4/safe-read.m4
+
+Depends-on:
+ssize_t
+write
+
+configure.ac:
+gl_PREREQ_SAFE_WRITE
+
+Makefile.am:
+lib_SOURCES += safe-write.c
+
+Include:
+"safe-write.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

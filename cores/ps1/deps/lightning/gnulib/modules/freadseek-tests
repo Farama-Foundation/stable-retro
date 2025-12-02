@@ -1,0 +1,13 @@
+Files:
+tests/test-freadseek.c
+tests/test-freadseek.sh
+tests/macros.h
+
+Depends-on:
+unistd
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-freadseek.sh
+check_PROGRAMS += test-freadseek

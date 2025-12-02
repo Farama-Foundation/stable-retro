@@ -1,0 +1,14 @@
+Files:
+tests/unicase/test-u16-is-titlecase.c
+tests/unicase/test-is-titlecase.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-is-titlecase
+check_PROGRAMS += test-u16-is-titlecase
+test_u16_is_titlecase_SOURCES = unicase/test-u16-is-titlecase.c
+test_u16_is_titlecase_LDADD = $(LDADD) $(LIBUNISTRING)

@@ -1,0 +1,32 @@
+Description:
+exp2f() function: exponential base 2 function.
+
+Files:
+lib/exp2f.c
+m4/exp2f.m4
+
+Depends-on:
+math
+extensions
+exp2            [test $HAVE_EXP2F = 0]
+
+configure.ac:
+gl_FUNC_EXP2F
+if test $HAVE_EXP2F = 0; then
+  AC_LIBOBJ([exp2f])
+fi
+gl_MATH_MODULE_INDICATOR([exp2f])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(EXP2F_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

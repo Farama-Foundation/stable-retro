@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-ctype_punct.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ctype_punct
+check_PROGRAMS += test-ctype_punct
+test_ctype_punct_SOURCES = unictype/test-ctype_punct.c
+test_ctype_punct_LDADD = $(LDADD) $(LIBUNISTRING)

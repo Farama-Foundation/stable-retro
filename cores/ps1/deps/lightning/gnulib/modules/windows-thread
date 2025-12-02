@@ -1,0 +1,29 @@
+Description:
+Creating and controlling threads (native Windows implementation).
+
+Files:
+lib/windows-thread.h
+lib/windows-thread.c
+
+Depends-on:
+windows-once
+windows-tls
+
+configure.ac:
+AC_REQUIRE([AC_CANONICAL_HOST])
+case "$host_os" in
+  mingw*)
+    AC_LIBOBJ([windows-thread])
+    ;;
+esac
+
+Makefile.am:
+
+Include:
+"windows-thread.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,15 @@
+Files:
+tests/unicase/test-u8-toupper.c
+tests/macros.h
+
+Depends-on:
+unistr/u8-cmp
+uninorm/nfc
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-toupper
+check_PROGRAMS += test-u8-toupper
+test_u8_toupper_SOURCES = unicase/test-u8-toupper.c
+test_u8_toupper_LDADD = $(LDADD) $(LIBUNISTRING)

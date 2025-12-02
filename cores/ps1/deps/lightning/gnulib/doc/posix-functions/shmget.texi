@@ -1,0 +1,21 @@
+@node shmget
+@section @code{shmget}
+@findex shmget
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/shmget.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14, Android 7.1.
+@item
+On many platforms (not Linux), SHMMAX is so small that it is unusable for
+reasonable applications, and/or @code{shmget} requires superuser privileges.
+@end itemize

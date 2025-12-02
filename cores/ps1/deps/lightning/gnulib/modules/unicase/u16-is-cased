@@ -1,0 +1,32 @@
+Description:
+Test whether case matters for an UTF-16 string.
+
+Files:
+lib/unicase/u16-is-cased.c
+lib/unicase/u-is-cased.h
+
+Depends-on:
+unicase/base
+unicase/u16-toupper
+unicase/u16-tolower
+unicase/u16-totitle
+uninorm/u16-normalize
+uninorm/nfd
+unistr/u16-cmp
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u16-is-cased])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U16_IS_CASED
+lib_SOURCES += unicase/u16-is-cased.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

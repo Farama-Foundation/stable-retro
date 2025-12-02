@@ -1,0 +1,17 @@
+@node search.h
+@section @file{search.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/search.h.html}
+
+Gnulib module: search
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+Minix 3.1.8.
+@end itemize

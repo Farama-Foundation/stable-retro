@@ -1,0 +1,18 @@
+Files:
+tests/test-mbsncasecmp.sh
+tests/test-mbsncasecmp.c
+tests/macros.h
+m4/locale-tr.m4
+m4/codeset.m4
+
+Depends-on:
+setlocale
+
+configure.ac:
+gt_LOCALE_TR_UTF8
+
+Makefile.am:
+TESTS += test-mbsncasecmp.sh
+TESTS_ENVIRONMENT += LOCALE_TR_UTF8='@LOCALE_TR_UTF8@'
+check_PROGRAMS += test-mbsncasecmp
+test_mbsncasecmp_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_SETLOCALE) $(LIB_MBRTOWC)

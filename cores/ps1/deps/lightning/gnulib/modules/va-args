@@ -1,0 +1,20 @@
+Description:
+Detect whether the preprocessor supports C99 variadic macros and __VA_ARGS__.
+
+Files:
+m4/va-args.m4
+
+Depends-on:
+
+configure.ac:
+gl_VA_ARGS
+
+Makefile.am:
+
+Include:
+
+License:
+LGPL
+
+Maintainer:
+Eric Blake

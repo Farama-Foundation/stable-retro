@@ -1,0 +1,30 @@
+@node thrd_join
+@section @code{thrd_join}
+@findex thrd_join
+
+Documentation:@*
+@ifinfo
+@ref{ISO C Thread Management,,Creation and Control,libc}.
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/ISO-C-Thread-Management.html}.
+@end ifnotinfo
+
+Gnulib module: thrd
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on many platforms:
+glibc 2.27, macOS 11.1, FreeBSD 9.3, NetBSD 8.0, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@item
+This function never stores an exit code on some platforms:
+AIX 7.2.
+@item
+This function crashes when the second argument is NULL on some platforms:
+Solaris 11.4.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,35 @@
+@node execinfo.h
+@section @file{execinfo.h}
+
+Declares the functions @code{backtrace}, @code{backtrace_symbols},
+@code{backtrace_symbols_fd}.
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Backtraces,,,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Backtraces.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/backtrace.3.html,,man backtrace}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+FreeBSD 6.0, NetBSD 5.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin, mingw, MSVC 14, Android 9.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On platforms where the header file is missing,
+the Gnulib substitute implementation is just a stub,
+and does nothing.
+@end itemize

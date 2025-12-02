@@ -1,0 +1,21 @@
+Files:
+tests/test-frexpf.c
+tests/test-frexp.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+tests/randomf.c
+
+Depends-on:
+isnanf-nolibm
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-frexpf
+check_PROGRAMS += test-frexpf
+test_frexpf_SOURCES = test-frexpf.c randomf.c
+test_frexpf_LDADD = $(LDADD) @FREXPF_LIBM@

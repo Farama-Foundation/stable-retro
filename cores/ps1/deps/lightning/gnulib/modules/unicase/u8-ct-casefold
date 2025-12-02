@@ -1,0 +1,32 @@
+Description:
+Casefolding mapping for UTF-8 substrings (locale dependent).
+
+Files:
+lib/unicase/u8-ct-casefold.c
+lib/unicase/u-ct-casefold.h
+
+Depends-on:
+unicase/base
+unicase/u8-casemap
+unicase/special-casing
+unicase/tocasefold
+uninorm/decomposing-form
+uninorm/u8-normalize
+uninorm/nfd
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u8-ct-casefold])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U8_CT_CASEFOLD
+lib_SOURCES += unicase/u8-ct-casefold.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

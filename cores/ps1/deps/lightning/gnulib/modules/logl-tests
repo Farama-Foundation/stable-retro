@@ -1,0 +1,19 @@
+Files:
+tests/test-logl.c
+tests/test-log.h
+tests/minus-zero.h
+tests/signature.h
+tests/macros.h
+tests/randoml.c
+
+Depends-on:
+fpucw
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-logl
+check_PROGRAMS += test-logl
+test_logl_SOURCES = test-logl.c randoml.c
+test_logl_LDADD = $(LDADD) @LOGL_LIBM@

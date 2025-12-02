@@ -1,0 +1,11 @@
+Files:
+tests/test-sys_ioctl.c
+
+Depends-on:
+sys_ioctl-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sys_ioctl
+check_PROGRAMS += test-sys_ioctl

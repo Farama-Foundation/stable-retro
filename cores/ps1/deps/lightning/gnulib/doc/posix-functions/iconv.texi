@@ -1,0 +1,46 @@
+@node iconv
+@section @code{iconv}
+@findex iconv
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/iconv.html}
+
+Gnulib module: iconv
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+GNU libiconv is not found if installed in @file{$PREFIX/lib}.
+@end itemize
+
+Portability problems handled by Gnulib
+(in the sense that @code{HAVE_ICONV} does not get defined if the system's
+@code{iconv} function has this problem):
+@itemize
+@item
+Failures are not distinguishable from successful returns on some platforms:
+AIX 5.1..7.2, Solaris 10.
+@item
+A buffer overrun can occur on some platforms:
+AIX 6.1..7.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, FreeBSD 6.0, OpenBSD 6.7, Minix 3.1.8, Cygwin 2.9, mingw, MSVC 14, Android 8.1,
+when GNU libiconv is not installed.
+@item
+This function was not correctly implemented in glibc versions before 2.2.
+@item
+When @code{iconv} encounters an input character that is valid but that
+cannot be converted to the output character set, glibc's and GNU libiconv's
+@code{iconv} stop the conversion.  Some other implementations put an
+implementation-defined character into the output buffer.
+Gnulib provides higher-level facilities @code{striconv} and @code{striconveh}
+(wrappers around @code{iconv}) that deal with conversion errors in a platform
+independent way.
+@item
+This function returns a positive return value, instead of zero, when
+converting from ISO-8859-1 to UTF-8 on HP-UX 11.
+@end itemize

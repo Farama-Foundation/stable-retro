@@ -1,0 +1,35 @@
+@node time.h
+@section @file{time.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/time.h.html}
+
+Gnulib module: time
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+@samp{struct timespec} is not defined on some platforms.
+@item
+The macro @code{TIME_UTC} is not defined on many platforms:
+glibc 2.15, macOS 10.13, FreeBSD 6.4, NetBSD 7.1, OpenBSD 6.0, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@item
+Some platforms provide a @code{NULL} macro that cannot be used in arbitrary
+expressions:
+NetBSD 5.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On platforms with 32-bit @code{time_t}, functions like @code{stat} can
+fail with @code{errno == EOVERFLOW} when a timestamp is out of range,
+such as with a file timestamp in the far future or past; on others,
+the functions silently return the low-order 32 bits of the correct
+timestamp.  These platforms will be obsolete when 32-bit @code{time_t}
+rolls around, which will occur in 2038 for the typical case when
+@code{time_t} is signed.
+@item
+On some platforms the @code{tv_nsec} member of @code{struct timespec}
+is not of type @code{long}, but is of type @code{long long} instead:
+glibc x32
+@end itemize

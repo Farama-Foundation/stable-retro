@@ -1,0 +1,26 @@
+Description:
+Return a string (?rwxrwxrwx format) describing the type and permissions of a
+file.
+
+Files:
+lib/filemode.h
+lib/filemode.c
+m4/filemode.m4
+
+Depends-on:
+sys_stat
+
+configure.ac:
+gl_FILEMODE
+
+Makefile.am:
+lib_SOURCES += filemode.c
+
+Include:
+"filemode.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

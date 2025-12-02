@@ -1,0 +1,13 @@
+Files:
+tests/test-carray_list.c
+tests/macros.h
+
+Depends-on:
+array-list
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-carray_list
+check_PROGRAMS += test-carray_list
+

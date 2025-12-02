@@ -1,0 +1,12 @@
+Files:
+tests/unigbrk/test-u8-grapheme-breaks.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-grapheme-breaks
+check_PROGRAMS += test-u8-grapheme-breaks
+test_u8_grapheme_breaks_SOURCES = unigbrk/test-u8-grapheme-breaks.c
+test_u8_grapheme_breaks_LDADD = $(LDADD) $(LIBUNISTRING)

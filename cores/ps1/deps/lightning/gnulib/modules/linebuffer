@@ -1,0 +1,24 @@
+Description:
+Read a line from a stream.
+
+Files:
+lib/linebuffer.h
+lib/linebuffer.c
+
+Depends-on:
+xalloc
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += linebuffer.h linebuffer.c
+
+Include:
+"linebuffer.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering
+

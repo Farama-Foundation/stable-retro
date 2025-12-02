@@ -1,0 +1,225 @@
+@c GNU xstdopen and *-safer modules documentation
+
+@c Copyright (C) 2019--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+@c Written by Bruno Haible, based on ideas from Paul Eggert.
+
+@node Closed standard fds
+@section Handling closed standard file descriptors
+
+@cindex xstdopen
+@cindex stdopen
+@cindex dirent-safer
+@cindex fcntl-safer
+@cindex fopen-safer
+@cindex freopen-safer
+@cindex openat-safer
+@cindex pipe2-safer
+@cindex popen-safer
+@cindex stdlib-safer
+@cindex tmpfile-safer
+@cindex unistd-safer
+
+Usually, when a program gets invoked, its file descriptors
+0 (for standard input), 1 (for standard output), and 2 (for standard error)
+are open.  But there are situations when some of these file descriptors are
+closed.  These situations can arise when
+@itemize @bullet
+@item
+The invoking process invokes @code{close()} on the file descriptor before
+@code{exec}, or
+@item
+The invoking process invokes @code{posix_spawn_file_actions_addclose()} for
+the file descriptor before @code{posix_spawn} or @code{posix_spawnp}, or
+@item
+The invoking process is a Bourne shell, and the shell script uses the
+POSIX syntax for closing the file descriptor:
+@code{<&-} for closing standard input,
+@code{>&-} for closing standard output, or
+@code{2>&-} for closing standard error.
+@end itemize
+
+When a closed file descriptor is accessed through a system call, such as
+@code{fcntl()}, @code{fstat()}, @code{read()}, or @code{write()}, the
+system calls fails with error @code{EBADF} ("Bad file descriptor").
+
+When a new file descriptor is allocated, the operating system chooses the
+smallest non-negative integer that does not yet correspond to an open file
+descriptor.  So, when a given fd (0, 1, or 2) is closed, opening a new file
+descriptor may assign the new file descriptor to this fd.  This can have
+unintended effects, because now standard input/output/error of your process
+is referring to a file that was not meant to be used in that role.
+
+This situation is a security risk because the behaviour of the program
+in this situation was surely never tested, therefore anything can happen
+then -- from overwriting precious files of the user to endless loops.
+
+To deal with this situation, you first need to determine whether your
+program is affected by the problem.
+@itemize @bullet
+@item
+Does your program invoke functions that allocate new file descriptors?
+These are the system calls
+@itemize @bullet
+@item
+@code{open()}, @code{openat()}, @code{creat()}
+@item
+@code{dup()}
+@item
+@code{fopen()}, @code{freopen()}
+@item
+@code{pipe()}, @code{pipe2()}, @code{popen()}
+@item
+@code{opendir()}
+@item
+@code{tmpfile()}, @code{mkstemp()}, @code{mkstemps()}, @code{mkostemp()},
+@code{mkostemps()}
+@end itemize
+@noindent
+Note that you also have to consider the libraries that your program uses.
+@item
+If your program may open two or more file descriptors or FILE streams for
+reading at the same time, and some of them may reference standard input,
+your program @emph{is affected}.
+@item
+If your program may open two or more file descriptors or FILE streams for
+writing at the same time, and some of them may reference standard output
+or standard error, your program @emph{is affected}.
+@item
+If your program does not open new file descriptors or FILE streams, it is
+@emph{not affected}.
+@item
+If your program opens only one new file descriptor or FILE stream at a time,
+it is @emph{not affected}.  This is often the case for programs that are
+structured in simple phases: first a phase where input is read from a file
+into memory, then a phase of processing in memory, finally a phase where
+the result is written to a file.
+@item
+If your program opens only two new file descriptors or FILE streams at a
+time, out of which one is for reading and the one is for writing, it is
+@emph{not affected}.  This is because if the first file descriptor is
+allocated and the second file descriptor is picked as 0, 1, or 2, and
+both happen to be the same, writing to the one opened in @code{O_RDONLY}
+mode will produce an error @code{EBADF}, as desired.
+@end itemize
+
+If your program is affected, what is the mitigation?
+
+Some operating systems install open file descriptors in place of the
+closed ones, either in the @code{exec} system call or during program
+startup.  When such a file descriptor is accessed through a system call,
+it behaves like an open file descriptor opened for the ``wrong'' direction:
+the system calls @code{fcntl()} and @code{fstat()} succeed, whereas
+@code{read()} from fd 0 and @code{write()} to fd 1 or 2 fail with error
+@code{EBADF} ("Bad file descriptor").  The important point here is that
+when your program allocates a new file descriptor, it will have a value
+greater than 2.
+
+This mitigation is enabled on HP-UX, for all programs, and on glibc,
+FreeBSD, NetBSD, OpenBSD, but only for setuid or setgid programs.  Since
+it is operating system dependent, it is not a complete mitigation.
+
+For a complete mitigation, Gnulib provides two alternative sets of modules:
+@itemize @bullet
+@item
+The @code{xstdopen} module.
+@item
+The @code{*-safer} modules:
+@code{fcntl-safer},
+@code{openat-safer},
+@code{unistd-safer},
+@code{fopen-safer},
+@code{freopen-safer},
+@code{pipe2-safer},
+@code{popen-safer},
+@code{dirent-safer},
+@code{tmpfile-safer},
+@code{stdlib-safer}.
+@end itemize
+
+The approach with the @code{xstdopen} module is simpler, but it adds three
+system calls to program startup.  Whereas the approach with the @code{*-safer}
+modules is more complex, but adds no overhead (no additional system calls)
+in the normal case.
+
+To use the approach with the @code{xstdopen} module:
+@enumerate
+@item
+Import the module @code{xstdopen} from Gnulib.
+@item
+In the compilation unit that contains the @code{main} function, include
+@code{"xstdopen.h"}.
+@item
+In the @code{main} function, near the beginning, namely right after
+the i18n related initializations (@code{setlocale}, @code{bindtextdomain},
+@code{textdomain} invocations, if any) and
+the @code{closeout} initialization (if any), insert the invocation:
+@smallexample
+/* Ensure that stdin, stdout, stderr are open.  */
+xstdopen ();
+@end smallexample
+@end enumerate
+
+To use the approach with the @code{*-safer} modules:
+@enumerate
+@item
+Import the relevant modules from Gnulib.
+@item
+In the compilation units that contain these function calls, include the
+replacement header file.
+@end enumerate
+Do so according to this table:
+@multitable @columnfractions .28 .32 .4
+@headitem Function @tab Module @tab Header file
+@item @code{open()}
+@tab @code{fcntl-safer}
+@tab @code{"fcntl--.h"}
+@item @code{openat()}
+@tab @code{openat-safer}
+@tab @code{"fcntl--.h"}
+@item @code{creat()}
+@tab @code{fcntl-safer}
+@tab @code{"fcntl--.h"}
+@item @code{dup()}
+@tab @code{unistd-safer}
+@tab @code{"unistd--.h"}
+@item @code{fopen()}
+@tab @code{fopen-safer}
+@tab @code{"stdio--.h"}
+@item @code{freopen()}
+@tab @code{freopen-safer}
+@tab @code{"stdio--.h"}
+@item @code{pipe()}
+@tab @code{unistd-safer}
+@tab @code{"unistd--.h"}
+@item @code{pipe2()}
+@tab @code{pipe2-safer}
+@tab @code{"unistd--.h"}
+@item @code{popen()}
+@tab @code{popen-safer}
+@tab @code{"stdio--.h"}
+@item @code{opendir()}
+@tab @code{dirent-safer}
+@tab @code{"dirent--.h"}
+@item @code{tmpfile()}
+@tab @code{tmpfile-safer}
+@tab @code{"stdio--.h"}
+@item @code{mkstemp()}
+@tab @code{stdlib-safer}
+@tab @code{"stdlib--.h"}
+@item @code{mkstemps()}
+@tab @code{stdlib-safer}
+@tab @code{"stdlib--.h"}
+@item @code{mkostemp()}
+@tab @code{stdlib-safer}
+@tab @code{"stdlib--.h"}
+@item @code{mkostemps()}
+@tab @code{stdlib-safer}
+@tab @code{"stdlib--.h"}
+@end multitable

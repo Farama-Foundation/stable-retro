@@ -1,0 +1,18 @@
+Files:
+tests/test-stddef-c++.cc
+tests/test-stddef-c++2.cc
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-stddef-c++
+check_PROGRAMS += test-stddef-c++
+test_stddef_c___SOURCES = test-stddef-c++.cc test-stddef-c++2.cc
+endif

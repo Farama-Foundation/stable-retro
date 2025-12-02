@@ -1,0 +1,14 @@
+Files:
+tests/unistr/test-u8-cmp2.c
+tests/unistr/test-cmp2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-cmp2
+check_PROGRAMS += test-u8-cmp2
+test_u8_cmp2_SOURCES = unistr/test-u8-cmp2.c
+test_u8_cmp2_LDADD = $(LDADD) $(LIBUNISTRING)

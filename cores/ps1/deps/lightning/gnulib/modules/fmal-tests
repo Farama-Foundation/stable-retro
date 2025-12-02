@@ -1,0 +1,24 @@
+Files:
+tests/test-fmal1.c
+tests/test-fma1.h
+tests/test-fmal2.c
+tests/test-fma2.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+lib/float+.h
+
+Depends-on:
+float
+fpucw
+isnanl-nolibm
+ldexpl
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fmal1 test-fmal2
+check_PROGRAMS += test-fmal1 test-fmal2
+test_fmal1_LDADD = $(LDADD) @FMAL_LIBM@
+test_fmal2_LDADD = $(LDADD) @FMAL_LIBM@ @LDEXPL_LIBM@

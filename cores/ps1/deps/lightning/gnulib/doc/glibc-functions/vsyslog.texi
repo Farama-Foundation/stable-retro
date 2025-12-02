@@ -1,0 +1,31 @@
+@node vsyslog
+@subsection @code{vsyslog}
+@findex vsyslog
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-vsyslog-3.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{syslog; vsyslog,,syslog, vsyslog,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/syslog_003b-vsyslog.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/vsyslog.3.html,,man vsyslog}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, HP-UX 11, mingw, MSVC 14.
+@end itemize

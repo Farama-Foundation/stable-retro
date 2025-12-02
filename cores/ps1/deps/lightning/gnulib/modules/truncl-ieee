@@ -1,0 +1,27 @@
+Description:
+truncl() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/truncl-ieee.m4
+m4/minus-zero.m4
+m4/signbit.m4
+
+Depends-on:
+truncl
+
+configure.ac:
+gl_FUNC_TRUNCL_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(TRUNCL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

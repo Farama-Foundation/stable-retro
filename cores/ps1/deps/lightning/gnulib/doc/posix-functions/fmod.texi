@@ -1,0 +1,23 @@
+@node fmod
+@section @code{fmod}
+@findex fmod
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fmod.html}
+
+Gnulib module: fmod or fmod-ieee
+
+Portability problems fixed by either Gnulib module @code{fmod} or @code{fmod-ieee}:
+@itemize
+@end itemize
+
+Portability problems fixed by Gnulib module @code{fmod-ieee}:
+@itemize
+@item
+This function has problems when the first argument is minus zero on some
+platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

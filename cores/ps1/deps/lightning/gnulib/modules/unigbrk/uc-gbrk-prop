@@ -1,0 +1,26 @@
+Description:
+Determine a Unicode character's Grapheme_Cluster_Break property.
+
+Files:
+lib/unigbrk/gbrkprop.h
+lib/unigbrk/uc-gbrk-prop.c
+
+Depends-on:
+unigbrk/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unigbrk/uc-gbrk-prop])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNIGBRK_UC_GBRK_PROP
+lib_SOURCES += unigbrk/uc-gbrk-prop.c
+endif
+
+Include:
+"unigbrk.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+Ben Pfaff, Daiki Ueno

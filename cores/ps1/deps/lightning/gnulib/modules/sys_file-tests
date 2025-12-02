@@ -1,0 +1,10 @@
+Files:
+tests/test-sys_file.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sys_file
+check_PROGRAMS += test-sys_file

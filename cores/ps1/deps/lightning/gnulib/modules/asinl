@@ -1,0 +1,33 @@
+Description:
+asinl() function: inverse sine function with long double argument.
+
+Files:
+lib/asinl.c
+m4/asinl.m4
+
+Depends-on:
+math
+extensions
+asin            [test $HAVE_ASINL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+sqrtl           [test $HAVE_ASINL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+gl_FUNC_ASINL
+if test $HAVE_ASINL = 0; then
+  AC_LIBOBJ([asinl])
+fi
+gl_MATH_MODULE_INDICATOR([asinl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ASINL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+Paolo Bonzini

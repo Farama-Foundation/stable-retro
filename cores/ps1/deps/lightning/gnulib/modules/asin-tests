@@ -1,0 +1,13 @@
+Files:
+tests/test-asin.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-asin
+check_PROGRAMS += test-asin
+test_asin_LDADD = $(LDADD) @ASIN_LIBM@

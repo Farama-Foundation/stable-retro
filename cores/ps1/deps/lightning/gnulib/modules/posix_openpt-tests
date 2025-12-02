@@ -1,0 +1,15 @@
+Files:
+tests/test-posix_openpt.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+grantpt
+ptsname
+unlockpt
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-posix_openpt
+check_PROGRAMS += test-posix_openpt

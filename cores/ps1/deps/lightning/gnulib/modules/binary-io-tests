@@ -1,0 +1,13 @@
+Files:
+tests/test-binary-io.sh
+tests/test-binary-io.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-binary-io.sh
+check_PROGRAMS += test-binary-io
+

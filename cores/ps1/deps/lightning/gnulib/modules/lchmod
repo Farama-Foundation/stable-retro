@@ -1,0 +1,35 @@
+Description:
+lchmod that is actually chmod (!) on hosts lacking lchmod
+
+Files:
+lib/lchmod.c
+m4/lchmod.m4
+
+Depends-on:
+c99           [test $HAVE_LCHMOD = 0]
+errno         [test $HAVE_LCHMOD = 0]
+extensions
+fcntl-h       [test $HAVE_LCHMOD = 0]
+intprops      [test $HAVE_LCHMOD = 0]
+lstat         [test $HAVE_LCHMOD = 0]
+sys_stat
+unistd        [test $HAVE_LCHMOD = 0]
+
+configure.ac:
+gl_FUNC_LCHMOD
+if test $HAVE_LCHMOD = 0; then
+  AC_LIBOBJ([lchmod])
+  gl_PREREQ_LCHMOD
+fi
+gl_SYS_STAT_MODULE_INDICATOR([lchmod])
+
+Makefile.am:
+
+Include:
+<sys/stat.h>
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

@@ -1,0 +1,29 @@
+Description:
+fwriting() function: Determine whether a FILE stream is currently doing writing.
+
+Files:
+lib/fwriting.h
+lib/fwriting.c
+lib/stdio-impl.h
+m4/fwriting.m4
+
+Depends-on:
+stdbool
+
+configure.ac:
+gl_FUNC_FWRITING
+if test $ac_cv_func___fwriting = no; then
+  AC_LIBOBJ([fwriting])
+fi
+
+Makefile.am:
+
+Include:
+"fwriting.h"
+
+License:
+LGPL
+
+Maintainer:
+Eric Blake
+

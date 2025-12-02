@@ -1,0 +1,29 @@
+Description:
+Test whether a Unicode character is "bidi embedding or override".
+
+Files:
+lib/unictype/pr_bidi_embedding_or_override.c
+lib/unictype/pr_bidi_embedding_or_override.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+unictype/bidiclass-of
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-bidi-embedding-or-override])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_BIDI_EMBEDDING_OR_OVERRIDE
+lib_SOURCES += unictype/pr_bidi_embedding_or_override.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

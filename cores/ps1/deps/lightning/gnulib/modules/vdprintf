@@ -1,0 +1,28 @@
+Description:
+vdprintf() function: print formatted output to a file descriptor
+
+Files:
+lib/vdprintf.c
+m4/vdprintf.m4
+
+Depends-on:
+stdio
+vasnprintf      [test $ac_cv_func_vdprintf = no || test $REPLACE_VDPRINTF = 1]
+free-posix      [test $ac_cv_func_vdprintf = no || test $REPLACE_VDPRINTF = 1]
+full-write      [test $ac_cv_func_vdprintf = no || test $REPLACE_VDPRINTF = 1]
+errno           [test $ac_cv_func_vdprintf = no || test $REPLACE_VDPRINTF = 1]
+
+configure.ac:
+gl_FUNC_VDPRINTF
+gl_STDIO_MODULE_INDICATOR([vdprintf])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPL
+
+Maintainer:
+all

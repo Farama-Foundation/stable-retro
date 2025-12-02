@@ -1,0 +1,11 @@
+Files:
+tests/test-ino-map.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ino-map
+check_PROGRAMS += test-ino-map

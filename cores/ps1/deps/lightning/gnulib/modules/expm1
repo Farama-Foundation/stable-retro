@@ -1,0 +1,36 @@
+Description:
+expm1() function: exponential function minus one.
+
+Files:
+lib/expm1.c
+m4/expm1.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+isnand          [test $HAVE_EXPM1 = 0 || test $REPLACE_EXPM1 = 1]
+exp             [test $HAVE_EXPM1 = 0 || test $REPLACE_EXPM1 = 1]
+round           [test $HAVE_EXPM1 = 0 || test $REPLACE_EXPM1 = 1]
+ldexp           [test $HAVE_EXPM1 = 0 || test $REPLACE_EXPM1 = 1]
+
+configure.ac:
+gl_FUNC_EXPM1
+if test $HAVE_EXPM1 = 0 || test $REPLACE_EXPM1 = 1; then
+  AC_LIBOBJ([expm1])
+fi
+gl_MATH_MODULE_INDICATOR([expm1])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(EXPM1_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

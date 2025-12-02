@@ -1,0 +1,12 @@
+Files:
+tests/test-string.c
+
+Depends-on:
+verify
+string-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-string
+check_PROGRAMS += test-string

@@ -1,0 +1,21 @@
+Description:
+Define HAVE_LONG_LONG_INT if 'long long int' works.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+m4/longlong.m4
+
+configure.ac:
+AC_REQUIRE([AC_TYPE_LONG_LONG_INT])
+AC_REQUIRE([AC_TYPE_UNSIGNED_LONG_LONG_INT])
+
+License:
+LGPL
+
+Maintainer:
+Ben Pfaff

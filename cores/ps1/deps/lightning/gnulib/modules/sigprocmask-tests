@@ -1,0 +1,13 @@
+Files:
+tests/test-sigprocmask.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+sleep
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sigprocmask
+check_PROGRAMS += test-sigprocmask

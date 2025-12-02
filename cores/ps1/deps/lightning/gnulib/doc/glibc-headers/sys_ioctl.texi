@@ -1,0 +1,33 @@
+@node sys/ioctl.h
+@section @file{sys/ioctl.h}
+
+Declares the function @code{ioctl}.
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{IOCTLs,,,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/IOCTLs.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/ioctl.2.html,,man ioctl}.
+@end itemize
+
+Gnulib module: sys_ioctl
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+mingw, MSVC 14.
+@item
+This header file does not declare the @code{ioctl} function on some platforms:
+AIX 5.1, Solaris 11.4, Haiku 2017.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

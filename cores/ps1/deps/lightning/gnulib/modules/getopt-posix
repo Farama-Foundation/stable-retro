@@ -1,0 +1,70 @@
+Description:
+getopt() function: process command line arguments.
+
+Files:
+lib/getopt.c
+lib/getopt1.c
+lib/getopt.in.h
+lib/getopt-cdefs.in.h
+lib/getopt-core.h
+lib/getopt-ext.h
+lib/getopt-pfx-core.h
+lib/getopt-pfx-ext.h
+lib/getopt_int.h
+m4/getopt.m4
+
+Depends-on:
+unistd
+extensions
+include_next
+gettext-h       [test $REPLACE_GETOPT = 1]
+snippet/arg-nonnull
+
+configure.ac:
+gl_FUNC_GETOPT_POSIX
+if test $REPLACE_GETOPT = 1; then
+  AC_LIBOBJ([getopt])
+  AC_LIBOBJ([getopt1])
+  dnl Arrange for unistd.h to include getopt.h.
+  GNULIB_${gl_include_guard_prefix}_UNISTD_H_GETOPT=1
+fi
+AC_SUBST([GNULIB_${gl_include_guard_prefix}_UNISTD_H_GETOPT])
+gl_UNISTD_MODULE_INDICATOR([getopt-posix])
+
+Makefile.am:
+BUILT_SOURCES += $(GETOPT_H) $(GETOPT_CDEFS_H)
+
+# We need the following in order to create <getopt.h> when the system
+# doesn't have one that works with the given compiler.
+getopt.h: getopt.in.h $(top_builddir)/config.status $(ARG_NONNULL_H)
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's|@''HAVE_GETOPT_H''@|$(HAVE_GETOPT_H)|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_GETOPT_H''@|$(NEXT_GETOPT_H)|g' \
+	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      < $(srcdir)/getopt.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+
+getopt-cdefs.h: getopt-cdefs.in.h $(top_builddir)/config.status
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+          sed -e 's|@''HAVE_SYS_CDEFS_H''@|$(HAVE_SYS_CDEFS_H)|g' \
+	      < $(srcdir)/getopt-cdefs.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+
+MOSTLYCLEANFILES += getopt.h getopt.h-t getopt-cdefs.h getopt-cdefs.h-t
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

@@ -1,0 +1,29 @@
+Description:
+mkdir() function: create a directory.
+
+Files:
+lib/mkdir.c
+m4/mkdir.m4
+
+Depends-on:
+sys_stat
+dirname-lgpl    [test $REPLACE_MKDIR = 1]
+stat            [test $REPLACE_MKDIR = 1]
+
+configure.ac:
+gl_FUNC_MKDIR
+if test $REPLACE_MKDIR = 1; then
+  AC_LIBOBJ([mkdir])
+fi
+gl_SYS_STAT_MODULE_INDICATOR([mkdir])
+
+Makefile.am:
+
+Include:
+<sys/stat.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

@@ -1,0 +1,27 @@
+Description:
+Return the current working directory, without size limitations.
+
+Files:
+lib/xgetcwd.h
+lib/xgetcwd.c
+m4/xgetcwd.m4
+
+Depends-on:
+getcwd
+xalloc
+stdbool
+
+configure.ac:
+gl_XGETCWD
+
+Makefile.am:
+lib_SOURCES += xgetcwd.c
+
+Include:
+"xgetcwd.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

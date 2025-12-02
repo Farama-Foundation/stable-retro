@@ -1,0 +1,27 @@
+Description:
+Conversion to UTF-8 from the locale encoding.
+
+Files:
+lib/uniconv/u8-strconv-from-locale.c
+
+Depends-on:
+uniconv/base
+uniconv/u8-strconv-from-enc
+localcharset
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [uniconv/u8-strconv-from-locale])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICONV_U8_STRCONV_FROM_LOCALE
+lib_SOURCES += uniconv/u8-strconv-from-locale.c
+endif
+
+Include:
+"uniconv.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

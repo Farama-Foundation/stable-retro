@@ -1,0 +1,36 @@
+Description:
+Determine the number of screen columns needed for a string.
+
+Files:
+lib/mbswidth.h
+lib/mbswidth.c
+m4/mbstate_t.m4
+m4/mbrtowc.m4
+m4/mbswidth.m4
+
+Depends-on:
+wchar
+wctype-h
+mbrtowc
+mbsinit
+wcwidth
+extensions
+
+configure.ac:
+gl_MBSWIDTH
+
+Makefile.am:
+lib_SOURCES += mbswidth.h mbswidth.c
+
+Include:
+"mbswidth.h"
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+all

@@ -1,0 +1,23 @@
+@node fgetpos
+@section @code{fgetpos}
+@findex fgetpos
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fgetpos.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+@code{fflush}, @code{ftell}, @code{ftello}, @code{fgetpos} behave incorrectly
+on input streams that are opened in @code{O_TEXT} mode and whose contents
+contains Unix line terminators (LF), on some platforms: mingw, MSVC 14.
+@item
+On platforms where @code{off_t} is a 32-bit type, this function may not
+work correctly on files larger than 2 GB@.  The fix is to use the
+@code{AC_SYS_LARGEFILE} macro.
+@end itemize

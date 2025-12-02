@@ -1,0 +1,13 @@
+Files:
+tests/unictype/test-sy_java_ident.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sy_java_ident
+check_PROGRAMS += test-sy_java_ident
+test_sy_java_ident_SOURCES = unictype/test-sy_java_ident.c
+test_sy_java_ident_LDADD = $(LDADD) $(LIBUNISTRING)

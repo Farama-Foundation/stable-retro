@@ -1,0 +1,23 @@
+Files:
+tests/test-snprintf-posix.c
+tests/test-snprintf-posix.h
+tests/test-snprintf.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+stdint
+float
+
+configure.ac:
+AC_REQUIRE([gl_LONG_DOUBLE_VS_DOUBLE])
+AC_DEFINE([CHECK_SNPRINTF_POSIX], 1,
+  [Define to 1 for strict checking in test-snprintf.c.])
+
+Makefile.am:
+TESTS += test-snprintf-posix test-snprintf
+check_PROGRAMS += test-snprintf-posix test-snprintf
+

@@ -1,0 +1,20 @@
+@node libgen.h
+@section @file{libgen.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/libgen.h.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+The Gnulib module @code{dirname} provides similar API, with functions
+@code{base_name} and @code{dir_name} that also work with Windows file names.

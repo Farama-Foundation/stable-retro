@@ -1,0 +1,30 @@
+Description:
+unsetenv() function: remove an environment variable.
+
+Files:
+lib/unsetenv.c
+m4/setenv.m4
+
+Depends-on:
+stdlib
+unistd          [test $HAVE_UNSETENV = 0 || test $REPLACE_UNSETENV = 1]
+environ         [test $HAVE_UNSETENV = 0 || test $REPLACE_UNSETENV = 1]
+
+configure.ac:
+gl_FUNC_UNSETENV
+if test $HAVE_UNSETENV = 0 || test $REPLACE_UNSETENV = 1; then
+  AC_LIBOBJ([unsetenv])
+  gl_PREREQ_UNSETENV
+fi
+gl_STDLIB_MODULE_INDICATOR([unsetenv])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

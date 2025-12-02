@@ -1,0 +1,28 @@
+Description:
+Efficient case-insensitive searching in a string in C locale.
+
+Files:
+lib/c-strcasestr.h
+lib/c-strcasestr.c
+lib/str-two-way.h
+
+Depends-on:
+c-ctype
+c-strcase
+stdbool
+memchr
+memcmp
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += c-strcasestr.h c-strcasestr.c
+
+Include:
+"c-strcasestr.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

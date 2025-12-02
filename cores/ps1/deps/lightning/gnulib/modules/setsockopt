@@ -1,0 +1,34 @@
+Description:
+setsockopt() function: specify optional settings on a socket.
+
+Files:
+lib/setsockopt.c
+lib/w32sock.h
+
+Depends-on:
+sys_socket
+socketlib
+sys_time        [test "$ac_cv_header_winsock2_h" = yes]
+errno           [test "$ac_cv_header_winsock2_h" = yes]
+msvc-nothrow    [test "$ac_cv_header_winsock2_h" = yes]
+
+configure.ac:
+AC_REQUIRE([gl_HEADER_SYS_SOCKET])
+if test "$ac_cv_header_winsock2_h" = yes; then
+  AC_LIBOBJ([setsockopt])
+fi
+gl_SYS_SOCKET_MODULE_INDICATOR([setsockopt])
+
+Makefile.am:
+
+Include:
+<sys/socket.h>
+
+Link:
+$(LIBSOCKET)
+
+License:
+LGPLv2+
+
+Maintainer:
+Paolo Bonzini, Simon Josefsson

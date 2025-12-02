@@ -1,0 +1,28 @@
+Description:
+Test whether a Unicode character is "logical order exception".
+
+Files:
+lib/unictype/pr_logical_order_exception.c
+lib/unictype/pr_logical_order_exception.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-logical-order-exception])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_LOGICAL_ORDER_EXCEPTION
+lib_SOURCES += unictype/pr_logical_order_exception.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

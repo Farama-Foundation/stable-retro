@@ -1,0 +1,25 @@
+Description:
+Name of Unicode character bidi class.
+
+Files:
+lib/unictype/bidi_name.c
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/bidiclass-name])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_BIDICLASS_NAME
+lib_SOURCES += unictype/bidi_name.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

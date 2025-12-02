@@ -1,0 +1,22 @@
+@node setkey
+@section @code{setkey}
+@findex setkey
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/setkey.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.33, NetBSD 5.0, OpenBSD 6.7, Minix 3.1.8, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@item
+This function is not declared in @code{<stdlib.h>}
+(without @code{-D_GNU_SOURCE}) on some platforms:
+glibc (at least 2.11--2.13).
+@end itemize

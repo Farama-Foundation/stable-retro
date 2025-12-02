@@ -1,0 +1,12 @@
+Files:
+tests/test-fdopen.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fdopen
+check_PROGRAMS += test-fdopen

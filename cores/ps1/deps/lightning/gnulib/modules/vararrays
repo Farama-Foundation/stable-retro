@@ -1,0 +1,20 @@
+Description:
+Variable-length arrays
+
+Files:
+m4/vararrays.m4
+
+Depends-on:
+
+configure.ac:
+AC_C_VARARRAYS
+
+Makefile.am:
+
+Include:
+
+License:
+LGPL
+
+Maintainer:
+Paul Eggert

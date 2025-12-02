@@ -1,0 +1,11 @@
+Files:
+tests/test-alloca-opt.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-alloca-opt
+check_PROGRAMS += test-alloca-opt
+

@@ -1,0 +1,33 @@
+@node sys/random.h
+@section @file{sys/random.h}
+
+Declares the function @code{getrandom} and the flags for it.
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Unpredictable Bytes,,Generating Unpredictable Bytes,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Unpredictable-Bytes.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/getrandom.2.html,,man getrandom}.
+@end itemize
+
+Gnulib module: sys_random
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+glibc 2.24, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.11, IRIX 6.5, Cygwin 2.6.x, mingw, MSVC 14.
+@item
+This header file is not self-contained on some platforms:
+uClibc, macOS 11.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

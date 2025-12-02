@@ -1,0 +1,34 @@
+Description:
+ISO C 11 mutex functions.
+
+Files:
+lib/mtx.c
+
+Depends-on:
+threads-h
+pthread_mutex_timedlock
+windows-mutex
+windows-recmutex
+windows-timedmutex
+windows-timedrecmutex
+
+configure.ac:
+AC_REQUIRE([gl_THREADS_H])
+if test $HAVE_THREADS_H = 0; then
+  AC_LIBOBJ([mtx])
+fi
+gl_THREADS_MODULE_INDICATOR([mtx])
+
+Makefile.am:
+
+Include:
+<threads.h>
+
+Link:
+$(LIBSTDTHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

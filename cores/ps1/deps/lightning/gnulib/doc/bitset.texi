@@ -1,0 +1,67 @@
+@node Bitsets
+@section Bitsets
+
+The module @samp{bitset} provides a common interface to several
+implementations of bitsets.  It also provides routines for vectors of bitsets.
+
+To look at an existing use, see GNU Bison.
+
+Currently it supports five flavours of bitsets:
+@description @code
+@item BITSET_ARRAY
+Array of bits (fixed size, fast for dense bitsets). Memory for bit array
+and bitset structure allocated contiguously.
+@item BITSET_LIST
+Linked list of arrays of bits (variable size, least storage for large
+very sparse sets).
+@item BITSET_TABLE
+Expandable table of pointers to arrays of bits (variable size, less
+storage for large sparse sets).  Faster than @code{BITSET_LIST} for
+random access.
+@item BITSET_VECTOR
+Variable array of bits (variable size, fast for dense bitsets).
+@item BITSET_STATS
+Wrapper bitset for internal use only.  Used for gathering statistics
+and/or better run-time checking.
+@end description
+
+However, the choice of the actual implementation is performed by the
+library, based on the user provided attributes:
+
+@description @code
+@code BITSET_FIXED
+Bitset size fixed.
+@code BITSET_VARIABLE
+Bitset size variable.
+@code BITSET_DENSE
+Bitset dense.
+@code BITSET_SPARSE
+Bitset sparse.
+@code BITSET_FRUGAL
+Prefer most compact.
+@code BITSET_GREEDY
+Prefer fastest at memory expense.
+@end description
+
+
+@smallexample
+enum { nbits = 32 };
+
+bitset bs0 = bitset_create (nbits, BITSET_FIXED);
+bitset_set (bs0, 1);
+bitset_set (bs0, 3);
+bitset_set (bs0, 5);
+
+bitset bs1 = bitset_create (nbits, BITSET_FIXED);
+bitset_set (bs1, 0);
+bitset_set (bs1, 2);
+bitset_set (bs1, 4);
+
+bitset bs = bitset_create (nbits, BITSET_FIXED);
+bitset_or (bs, bs0, bs1);
+ASSERT (bitset_count (bs) == 6);
+
+bitset_free (bs);
+bitset_free (bs1);
+bitset_free (bs0);
+@end smallexample

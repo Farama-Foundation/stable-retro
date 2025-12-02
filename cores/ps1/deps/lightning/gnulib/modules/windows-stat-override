@@ -1,0 +1,30 @@
+Description:
+On native Windows platforms, override 'struct stat'.
+
+Comment:
+This module should not be used as a dependency from a test module,
+otherwise when this module occurs as a tests-related module, it will
+have side effects on the compilation of the main modules in lib/.
+
+Files:
+
+Depends-on:
+sys_stat
+
+configure.ac:
+AC_REQUIRE([gl_SYS_STAT_H_DEFAULTS])
+AC_REQUIRE([AC_CANONICAL_HOST])
+case "$host_os" in
+  mingw*) GNULIB_OVERRIDES_STRUCT_STAT=1 ;;
+esac
+
+Makefile.am:
+
+Include:
+<sys/stat.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Bruno Haible

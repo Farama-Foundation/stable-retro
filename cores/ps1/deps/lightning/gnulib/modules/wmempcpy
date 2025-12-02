@@ -1,0 +1,27 @@
+Description:
+wmempcpy() function: copy wide character array, return pointer after last written wide character.
+
+Files:
+lib/wmempcpy.c
+m4/wmempcpy.m4
+
+Depends-on:
+wchar
+
+configure.ac:
+gl_FUNC_WMEMPCPY
+if test $HAVE_WMEMPCPY = 0; then
+  AC_LIBOBJ([wmempcpy])
+fi
+gl_WCHAR_MODULE_INDICATOR([wmempcpy])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

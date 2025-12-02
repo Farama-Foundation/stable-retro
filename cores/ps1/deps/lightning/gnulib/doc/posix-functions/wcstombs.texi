@@ -1,0 +1,21 @@
+@node wcstombs
+@section @code{wcstombs}
+@findex wcstombs
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/wcstombs.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and
+therefore cannot accommodate all Unicode characters.
+However, the Gnulib function @code{c32stombs}, provided by Gnulib module
+@code{c32stombs}, operates on 32-bit wide characters and therefore does not
+have this limitation.
+@end itemize

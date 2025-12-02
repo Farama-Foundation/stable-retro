@@ -1,0 +1,25 @@
+Description:
+Copy UTF-8 string.
+
+Files:
+lib/unistr/u8-strcpy.c
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-strcpy])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_STRCPY
+lib_SOURCES += unistr/u8-strcpy.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

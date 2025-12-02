@@ -1,0 +1,18 @@
+@node j0
+@section @code{j0}
+@findex j0
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/j0.html}
+
+Gnulib module: j0
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8.
+@end itemize

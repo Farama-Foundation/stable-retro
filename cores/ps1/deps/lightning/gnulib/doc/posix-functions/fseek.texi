@@ -1,0 +1,25 @@
+@node fseek
+@section @code{fseek}
+@findex fseek
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fseek.html}
+
+Gnulib module: fseek
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function mistakenly succeeds on pipes on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), this function does not set @code{errno}
+upon failure.
+@item
+On platforms where @code{long} is a 32-bit type, @code{fseek} does not work
+correctly with files larger than 2 GB, even when the @code{AC_SYS_LARGEFILE}
+macro is used.  The fix is to use @code{fseeko} instead.
+@end itemize

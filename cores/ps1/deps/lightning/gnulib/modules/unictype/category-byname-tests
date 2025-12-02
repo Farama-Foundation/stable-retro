@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-categ_byname.c
+tests/macros.h
+
+Depends-on:
+stdbool
+unictype/category-test
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-categ_byname
+check_PROGRAMS += test-categ_byname
+test_categ_byname_SOURCES = unictype/test-categ_byname.c
+test_categ_byname_LDADD = $(LDADD) $(LIBUNISTRING)

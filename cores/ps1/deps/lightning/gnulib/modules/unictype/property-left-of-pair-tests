@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_left_of_pair.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_left_of_pair
+check_PROGRAMS += test-pr_left_of_pair
+test_pr_left_of_pair_SOURCES = unictype/test-pr_left_of_pair.c
+test_pr_left_of_pair_LDADD = $(LDADD) $(LIBUNISTRING)

@@ -1,0 +1,21 @@
+Description:
+Test for the 'inline' keyword or equivalent and whether it is actually
+effective.
+
+Files:
+m4/inline.m4
+
+Depends-on:
+
+configure.ac:
+gl_INLINE
+
+Makefile.am:
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+all

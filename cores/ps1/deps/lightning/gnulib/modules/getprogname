@@ -1,0 +1,27 @@
+Description:
+Program name management.
+
+Files:
+lib/getprogname.h
+lib/getprogname.c
+m4/getprogname.m4
+
+Depends-on:
+basename-lgpl
+extensions
+open
+
+configure.ac:
+gl_FUNC_GETPROGNAME
+
+Makefile.am:
+lib_SOURCES += getprogname.h getprogname.c
+
+Include:
+"getprogname.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+All

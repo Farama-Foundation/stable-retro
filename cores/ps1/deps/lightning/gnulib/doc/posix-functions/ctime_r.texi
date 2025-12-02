@@ -1,0 +1,37 @@
+@node ctime_r
+@section @code{ctime_r}
+@findex ctime_r
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/ctime_r.html}
+
+Gnulib module: extensions
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function has an incompatible declaration on some platforms:
+Solaris 11.4 (when @code{_POSIX_PTHREAD_SEMANTICS} is not defined).
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+This function may put more than 26 bytes into the argument buffer if an
+invalid year is passed.
+@end itemize
+
+@code{ctime_r} takes a pre-allocated buffer and length of the buffer,
+and returns @code{NULL} on errors.
+The input buffer should be at least 26 bytes in size.  The output
+string is locale-independent.  However, years can have more than 4
+digits if @code{time_t} is sufficiently wide, so the length of the
+required output buffer is not easy to determine.  Increasing the
+buffer size when @code{ctime_r} returns @code{NULL} is not necessarily
+sufficient.  The @code{NULL} return value could mean some other error
+condition, which will not go away by increasing the buffer size.
+
+A more flexible function is @code{strftime}.  However, note that it is
+locale dependent.

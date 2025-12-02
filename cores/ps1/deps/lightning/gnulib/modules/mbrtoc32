@@ -1,0 +1,54 @@
+Description:
+mbrtoc32() function: convert multibyte character to 32-bit wide character.
+
+Files:
+lib/mbrtoc32.c
+lib/mbrtowc-impl.h
+lib/mbrtowc-impl-utf8.h
+lib/lc-charset-dispatch.h
+lib/lc-charset-dispatch.c
+lib/mbtowc-lock.h
+lib/mbtowc-lock.c
+lib/windows-initguard.h
+m4/mbrtoc32.m4
+m4/mbrtowc.m4
+m4/mbstate_t.m4
+m4/threadlib.m4
+m4/visibility.m4
+
+Depends-on:
+uchar
+attribute       [test $HAVE_MBRTOC32 = 0 || test $REPLACE_MBRTOC32 = 1]
+c99             [{ test $HAVE_MBRTOC32 = 0 || test $REPLACE_MBRTOC32 = 1; } && test $REPLACE_MBSTATE_T = 0]
+hard-locale     [{ test $HAVE_MBRTOC32 = 0 || test $REPLACE_MBRTOC32 = 1; } && test $REPLACE_MBSTATE_T = 0]
+mbrtowc         [{ test $HAVE_MBRTOC32 = 0 || test $REPLACE_MBRTOC32 = 1; } && test $REPLACE_MBSTATE_T = 0]
+localcharset    [test $HAVE_MBRTOC32 = 0 || test $REPLACE_MBRTOC32 = 1]
+streq           [test $HAVE_MBRTOC32 = 0 || test $REPLACE_MBRTOC32 = 1]
+verify          [test $HAVE_MBRTOC32 = 0 || test $REPLACE_MBRTOC32 = 1]
+
+configure.ac:
+gl_FUNC_MBRTOC32
+if test $HAVE_MBRTOC32 = 0 || test $REPLACE_MBRTOC32 = 1; then
+  AC_LIBOBJ([mbrtoc32])
+  if test $REPLACE_MBSTATE_T = 1; then
+    AC_LIBOBJ([lc-charset-dispatch])
+    AC_LIBOBJ([mbtowc-lock])
+    gl_PREREQ_MBTOWC_LOCK
+  fi
+  gl_PREREQ_MBRTOC32
+fi
+gl_UCHAR_MODULE_INDICATOR([mbrtoc32])
+
+Makefile.am:
+
+Include:
+<uchar.h>
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+LGPLv2+
+
+Maintainer:
+Bruno Haible

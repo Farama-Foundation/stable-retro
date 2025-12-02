@@ -1,0 +1,26 @@
+Description:
+c_asprintf and c_vasprintf with out-of-memory checking.
+
+Files:
+lib/c-xvasprintf.h
+lib/c-xasprintf.c
+lib/c-xvasprintf.c
+
+Depends-on:
+stdio
+c-vasprintf
+xalloc-die
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += c-xasprintf.c c-xvasprintf.c
+
+Include:
+"c-xvasprintf.h"
+
+License:
+GPL
+
+Maintainer:
+Ben Pfaff

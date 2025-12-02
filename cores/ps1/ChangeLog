@@ -1,0 +1,2092 @@
+August 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/r3000a.h: Refactored the interrupt scheduling code to make it a
+   little more readable than using the "magic" numbers.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/mdec.c: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxdma.h: Likewise.
+ * libpcsxcore/misc.c: Bumped savestate version.
+ * debian/changelog: Updated version.
+ * macosx/Info.plist: Likewise.
+ * po/zh_TW.po: Corrected a minor translation error.
+
+August 2, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Added some more optimizations
+   parameters for the Deployment build.
+
+August 1, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfinput/cfg-gtk2.c: Only accept axis input if the current axis
+   position is off enough from the previous position or initial position.
+ * macosx/plugins/DFInput/macsrc/cfg.c: Likewise.
+ * macosx/plugins/DFInput/macsrc/cfg.h: Likewise.
+ * macosx/plugins/DFInput/macsrc/MappingCell.m: Likewise.
+ * macosx/plugins/DFInput/DFInput.xcodeproj/project.pbxproj: Fixed compile
+   error.
+
+July 31, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfsound/spu.c: Silenced warning on Mac OS X and FreeBSD.
+ * macosx/plugins/DFInput/SDL/include/SDL_haptic.h: Upgraded to SDL 1.3 Beta.
+ * macosx/plugins/DFInput/SDL/include/SDL_error.h: Likewise.
+ * macosx/plugins/DFInput/SDL/include/begin_code.h: Likewise.
+ * macosx/plugins/DFInput/SDL/include/close_code.h: Likewise.
+ * macosx/plugins/DFInput/SDL/include/SDL_endian.h: Likewise.
+ * macosx/plugins/DFInput/SDL/include/SDL_joystick.h: Likewise.
+ * macosx/plugins/DFInput/SDL/include/SDL.h: Likewise.
+ * macosx/plugins/DFInput/SDL/include/SDL_main.h: Likewise.
+ * macosx/plugins/DFInput/SDL/include/SDL_stdinc.h: Likewise.
+ * macosx/plugins/DFInput/SDL/include/SDL_platform.h: Likewise.
+ * macosx/plugins/DFInput/SDL/include/SDL_config.h: Likewise.
+ * macosx/plugins/DFInput/SDL/src/joystick/SDL_joystick.c: Likewise.
+ * macosx/plugins/DFInput/SDL/src/joystick/darwin/SDL_sysjoystick.c: Likewise.
+ * macosx/plugins/DFInput/SDL/src/joystick/darwin/SDL_sysjoystick_c.h: Likewise.
+ * macosx/plugins/DFInput/SDL/src/joystick/SDL_sysjoystick.h: Likewise.
+ * macosx/plugins/DFInput/SDL/src/joystick/SDL_joystick_c.h: Likewise.
+ * macosx/plugins/DFInput/SDL/src/SDL.c: Likewise.
+ * macosx/plugins/DFInput/SDL/src/SDL_error_c.h: Likewise.
+ * macosx/plugins/DFInput/SDL/src/haptic/SDL_syshaptic.h: Likewise.
+ * macosx/plugins/DFInput/SDL/src/haptic/SDL_haptic_c.h: Likewise.
+ * macosx/plugins/DFInput/SDL/src/haptic/darwin/SDL_syshaptic.c: Likewise.
+ * macosx/plugins/DFInput/SDL/src/haptic/SDL_haptic.c: Likewise.
+ * macosx/plugins/DFInput/SDL/src/SDL_error.c: Likewise.
+ * macosx/plugins/DFInput/SDL/include/SDL_name.h: Deleted.
+ * macosx/plugins/DFInput/SDL/include/SDL_version.h: Likewise.
+ * macosx/plugins/DFInput/DFInput.xcodeproj/project.pbxproj: Updated.
+ * macosx/plugins/DFInput/macsrc/cfg.h: Include SDL_joystick.h.
+ * plugins/dfinput/pad.h: Likewise.
+ * macosx/PcsxController.h: Removed some useless stuff.
+ * macosx/PcsxController.m: Likewise.
+ * macosx/English.lproj/PCSX.nib/objects.nib: Likewise.
+ * macosx/English.lproj/PCSX.nib/classes.nib: Likewise.
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Added some optimizations for
+   Deployment build.
+
+July 29, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/plugins/DFInput/DFInput.xcodeproj/project.pbxproj: Implemented
+   config dialog box.
+ * macosx/plugins/DFInput/macsrc/cfg.c: Likewise.
+ * macosx/plugins/DFInput/macsrc/MappingCell.h: Likewise.
+ * macosx/plugins/DFInput/macsrc/PadController.m: Likewise.
+ * macosx/plugins/DFInput/macsrc/cfg.h: Likewise.
+ * macosx/plugins/DFInput/macsrc/ControllerList.h: Likewise.
+ * macosx/plugins/DFInput/macsrc/PadView.h: Likewise.
+ * macosx/plugins/DFInput/macsrc/MappingCell.m: Likewise.
+ * macosx/plugins/DFInput/macsrc/ControllerList.m: Likewise.
+ * macosx/plugins/DFInput/macsrc/PadView.m: Likewise.
+ * macosx/plugins/DFInput/macsrc/PadController.h: Likewise.
+ * macosx/plugins/DFInput/English.lproj/NetPcsxHIDInputPluginMain.nib:
+   Likewise.
+ * macosx/plugins/DFInput/English.lproj/NetPcsxHIDInputPluginMain.nib/
+   info.nib: Likewise.
+ * macosx/plugins/DFInput/English.lproj/NetPcsxHIDInputPluginMain.nib/
+   keyedobjects.nib: Likewise.
+ * macosx/plugins/DFInput/English.lproj/NetPcsxHIDInputPluginMain.nib/
+   classes.nib: Likewise.
+ * macosx/plugins/DFInput/English.lproj/Credits.rtf: Likewise.
+ * macosx/plugins/DFCdrom/macsrc/cdr-macosx.c: Add check for whether the
+   disc is really a PSX CD or not.
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Added DFInput to project.
+ * macosx/plugins/HIDInput: Removed.
+ * plugins/peopsxgl/draw.c: Replaced global symbols with glXGetProcAddress
+   call (courtesy of siveritas).
+ * AUTHORS: Updated info.
+
+July 25, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cdr.c: Wait for reading thread to complete for all
+   operations.
+ * plugins/dfcdrom/cdr.h: Don't define USE_NULL under Mac OS X.
+ * macosx/plugins/DFCdrom: Added Mac OS X port of DFCdrom.
+ * macosx/plugins/CDDeviceInterface: Removed old CDDeviceInterface plugin.
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Added DFCdrom into project.
+ * plugins/dfinput/pad.c: Minor change for Mac OS X.
+ * plugins/dfinput/pad.h: Likewise.
+ * macosx/plugins/DFInput: Added Mac OS X port of DFInput (prelimiary, no
+   config dialog yet).
+
+July 18, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2: Tweaked the config dialog
+   to make it less confusing.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Likewise.
+
+July 17, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cdr-libcdio.c: Include libcdio headers before cdr.h.
+ * macosx/plugins/CDDeviceInterface/src/PlugCD.c: Check for kIODVDMediaClass
+   as well (MIGHT fix the "Can't check CD-ROM" issue, cannot test).
+
+July 15, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cdr-libcdio.c: Force CAM access mode on FreeBSD.
+ * plugins/dfcdrom/cdrcfg-0.1df/main.c: Use /dev/cd? instead on /dev/acd? on
+   FreeBSD.
+ * plugins/dfcdrom/cdr.h: Likewise.
+ * plugins/dfxvideo/cfg.c: Don't use 2xSai when no config file exists.
+ * autogen.sh: Use autoreconf.
+
+July 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cdr.h: Silenced warning on macro redefination when using
+   libcdio with some special configuration.
+ * plugins/dfsound/spucfg-0.1df/main.c: Set volume to High by default.
+
+July 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/socket.c: Fixed FTBFS on Windows.
+ * po/zh_CN.po: Updated.
+
+July 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * configure.ac: Use pkgconfig to detect libcdio.
+ * plugins/dfcdrom/Makefile.am: Likewise.
+
+July 11, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cfg.c: Pick default cdrom device automatically on Solaris.
+ * plugins/dfsound/spu.c: Reverted the previous change.
+
+July 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * configure.ac: Added --enable-libcdio parameter.
+ * libpcsxcore/cdriso.c: Moved CRC check into...
+ * libpcsxcore/cdrom.c: ...here.
+ * libpcsxcore/misc.c: Moved calcCrc() to misc.c.
+ * libpcsxcore/misc.h: Likewise.
+ * libpcsxcore/plugins.h: Added CRC field to SubQ struct.
+ * plugins/dfcdrom/cdr-freebsd.c: Removed.
+ * plugins/dfcdrom/cdr-solaris.c: Likewise.
+ * plugins/dfcdrom/cdr-linux.c: Added raw MMC command support.
+ * plugins/dfcdrom/cdr-null.c: Return 0 for PlayCDDA()/StopCDDA().
+ * plugins/dfcdrom/cdr.c: Moved several utility functions to util.c.
+ * plugins/dfcdrom/util.c: Added.
+ * plugins/dfcdrom/cfg.c: Removed unnecessary includes.
+ * plugins/dfcdrom/cdr-libcdio.c: Added libcdio support.
+ * plugins/dfcdrom/Makefile.am: Added util.c and cdr-libcdio.c, removed
+   cdr-freebsd.c and cdr-solaris.c.
+ * plugins/dfsound/cfg.c: Store config file into plugins dir by default.
+ * plugins/dfsound/spu.c: Made volume louder.
+ * po/POTFILES.in: Added files in plugins/bladesio1.
+ * po/update-pot.sh: Likewise.
+ * po/pcsx.pot, po/*.po: Updated.
+
+July 9, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cdr-solaris.c: Added (not implemented for now).
+ * plugins/dfcdrom/Makefile.am: Added cdr-solaris.c.
+ * plugins/dfcdrom/cdr-freebsd.c: Return 0 for PlayCDDA()/StopCDDA().
+ * gui/ConfDlg.c: Don't use dlerror() to check for symbol load failure.
+ * plugins/dfcdrom/cdr.c: Make cdHandle singleton as it could be different
+   type on some OS and we don't need to open multiple handles.
+ * plugins/dfcdrom/cdr.h: Likewise.
+ * plugins/dfcdrom/cdr-linux.c: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/main.c: Added device listing for Solaris.
+ * configure.ac: Fixed FTBFS on Solaris.
+ * plugins/peopsxgl/draw.c: Don't use glColorTableEXT on Solaris.
+ * libpcsxcore/socket.c: Silenced warning on Solaris.
+ * plugins/dfinput/cfg.c: Renamed LoadConfig()/SaveConfig() to avoid problems
+   with some OSes like Solaris.
+ * plugins/dfinput/cfg-gtk2.c: Likewise.
+ * plugins/dfinput/pad.c: Likewise.
+ * plugins/dfinput/pad.h: Likewise.
+ * gui/AboutDlg.c: Minor text change.
+
+July 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cdr.c: Refactored for better portability.
+ * plugins/dfcdrom/cdr.h: Likewise.
+ * plugins/dfcdrom/cfg.c: Likewise.
+ * plugins/dfcdrom/cdr-linux.c: Likewise.
+ * plugins/dfcdrom/cdr-null.c: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/main.c: Likewise.
+ * plugins/dfcdrom/cdr-freebsd.c: Added prelimiary FreeBSD port (not working
+   yet).
+ * plugins/dfcdrom/Makefile.am: Added cdr-linux.c, cdr-null.c, cdr-freebsd.c.
+ * configure.ac: Added bladesio1.
+ * Makefile.am: Likewise.
+
+July 7, 2010 edgbla <edgbla@yandex.ru>
+
+ * plugins/bladesio1/gui.c: Sio1 plugin (dummy).
+ * plugins/bladesio1/Makefile.am: Likewise.
+ * plugins/bladesio1/settings.c: Likewise.
+ * plugins/bladesio1/settings.h: Likewise.
+ * plugins/bladesio1/sio1.c: Likewise.
+ * plugins/bladesio1/sio1.h: Likewise.
+ * plugins/bladesio1/sio1.glade2: Likewise.
+
+July 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/plugins.c: #ifdef'ed out the currently unused Sio1 API.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/psxhw.c: Likewise.
+ * win32/gui/AboutDlg.c: Minor text change.
+ * po/pcsx.pot, po/*.po: Updated.
+ * libpcsxcore/socket.c: Fixed FTBFS on FreeBSD.
+ * configure.ac: Likewise.
+ * gui/Makefile.am: Likewise.
+ * plugins/dfcdrom/cdr-null.c: Likewise.
+ * libpcsxcore/plugins.c: Fixed plugin loading with FreeBSD.
+
+July 4, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/plugins.c: GPUvBlank (for gpuBladeSoft now, experimental).
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+
+July 3, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/psxhw.c: Sio1 interface (link cable).
+ * libpcsxcore/plugins.c: Likewise.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/psxcommon.h: Likewise.
+
+July 2, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/cdriso.c: Fixed subchannel data handling with images ripped
+   with cdrdao. Removed support for AcetoneISO. Parse .cue file as .toc file
+   when needed to satisfy some stupid tutorials which tell users to use cdrdao
+   to rip a "bin/cue" image which is in fact a "bin/toc" image.
+
+July 2, 2010 edgbla <edgbla@yandex.ru>
+
+ * po/ru_RU.po: Updated.
+ 
+July 1, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/cdriso.c: Added support for images ripped with cdrdao with
+   "--read-subchan rw_raw" for subchannel data.
+ * po/pcsx.pot, po/*.po: Updated.
+
+Jun 30, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/PcsxController.m: Default dynarec to off until it's actually working
+   for Mac OS X :(
+
+Jun 29, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * win32/gui/plugin.c: Close PAD plugins before other plugins and don't check
+   return value for PADclose(), which should fix issues with LilyPad.
+ * plugins/dfxvideo/gpu.c: Added 'fake gpu busy' hack and GPUsetFix() API
+   from P.E.Op.S Soft GPU 1.18.
+ * plugins/dfxvideo/externals.h: Likewise.
+ * plugins/dfxvideo/prim.c: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2: Likewise.
+ * macosx/plugins/DFXVideo/English.lproj/NetSfPeopsSoftGPUConfig.nib/classes.nib:
+   Likewise.
+ * macosx/plugins/DFXVideo/English.lproj/NetSfPeopsSoftGPUConfig.nib/keyedobjects.nib:
+   Likewise.
+ * po/pcsx.pot, po/*.po: Updated.
+
+Jun 26, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/psxbios.c: Fixed bcopy() (FF9 battle crash with HLE BIOS - my
+   mistake :( ).
+ * libpcsxcore/misc.c: Added check for HLE BIOS in savestate, bumped savestate
+   version, don't byteswap savestate version as part of savestate data is not
+   endianness clean.
+
+Jun 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfsound/spu.c: Reset lastch to -1 in SPUinit().
+ * plugins/dfsound/psemu.c: Removed support for obsoleted ancient API.
+ * plugins/dfsound/Makefile.am: Removed psemu.c.
+ * macosx/plugins/DFSound/PeopsSPU.xcodeproj/project.pbxproj: Likewise.
+
+Jun 23, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/sio.c: Convert more ASCII characters to half-width.
+
+Jun 21, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/psxbios.c: Use a separate flag to identify whether we are
+   inside a softcall or not, as ra might be modified inside the interrupt
+   handler.
+ * libpcsxcore/psxbios.h: Likewise.
+ * libpcsxcore/psxcommon.c: Likewise.
+ * plugins/dfsound/spu.c: Moved initialization routine from SPUopen() into
+   SPUinit().
+ * plugins/dfsound/freeze.c: Save spuAddr as well.
+ * po/Makefile.in.in: Silenced warning.
+
+Jun 20, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfsound/freeze.c: Reset lastch when loading state, which fixes
+   occasionally crash after state loading.
+ * plugins/dfsound/spu.c: Likewise.
+
+Jun 19, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/PcsxController.m: Do not simulate CD case open if user clicked
+   Cancel in switch ISO dialog.
+
+Jun 16, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/psxcommon.c: Do not allow hotkeys inside a softcall from HLE
+   BIOS.
+ * configure.ac: Removed -fno-dse, which is no longer necessary.
+
+Jun 9, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * win32/pcsx.rc: Embed manifest properly under MSVC6.
+
+Jun 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cdr-linux.c: Implemented CDRgetTE() and CDRreadCDDA() (not
+   tested).
+ * plugins/dfcdrom/cdr-null.c: Added CDRgetBufferSub().
+ * libpcsxcore/plugins.c: CDRgetBufferSub() is now mandatory (again) :)
+
+Jun 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/cdrom.c: Use boolean/TRUE/FALSE for where it should, don't use
+   "long" type for cdrStruct which is to be saved in savestates.
+ * libpcsxcore/cdrom.h: Likewise.
+ * libpcsxcore/misc.c: Bumped savestate version.
+ * libpcsxcore/plugins.c: Added support for CDRreadCDDA()/CDRgetTE() (not used
+   for now).
+ * libpcsxcore/plugins.h: Likewise.
+
+Jun 6, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/sio.c: Fixed: 'y' and 'z' not converted to half-width.
+
+Jun 4, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/Plugin.c: Hack-fixed the bug which causes crash when loading state
+   with dynarec CPU core. A large amount of refactor is needed for a proper
+   fix.
+ * win32/gui/WndMain.c: Changed language code corresponding to the ones in
+   source tree.
+ * libpcsxcore/psxmem.c: Minor comment fix.
+
+Jun 3, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/cheat.c: Fixed endianness issue (not tested).
+ * libpcsxcore/cdrom.c: Changed CDR interrupt timing value so that it behaves
+   the same as old revisions. Not sure if it breaks or unbreaks anything.
+ * libpcsxcore/psxbios.c: Silenced some GCC warnings.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/misc.c: Bumped savestate version.
+ * libpcsxcore/ix86/iR3000A.c: Use %x instead of %lx.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * po/zh_CN.po, po/zh_TW.po: Updated ("PS" seems to be more common than "PSX"
+   in Asian regions).
+
+Jun 2, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/MemcardDlg.c: Use unsigned for currentIcon.
+ * libpcsxcore/cdrom.c: Use %x instead of %lx.
+ * libpcsxcore/psxbios.c: Likewise.
+ * libpcsxcore/psxdma.c: Likewise.
+ * libpcsxcore/psxhw.c: Likewise.
+ * gui/Makefile.am: Added -ldl.
+ * plugins/dfinput/Makefile.am: Added -lX11 to cfgDFInput_LDFLAGS.
+
+Jun 1, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/MemcardDlg.c: Fixed icon animation.
+ * gui/ConfDlg.c: Minor text change.
+ * win32/gui/ConfigurePlugins.c: Likewise.
+ * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po, po/ru_RU.po, po/it.po, po/pt_BR.po:
+   Updated.
+ * win32/pcsx.dev: Added sjisfont.h.
+
+May 31, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/psxbios.c: Implemented Krom2RawAdd().
+ * libpcsxcore/sjisfont.h: Added font data.
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Added sjisfont.h.
+ * win32/pcsx.vcproj: Likewise.
+ * win32/pcsx.dsp: Likewise.
+ * libpcsxcore/Makefile.am: Likewise.
+
+May 30, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/psxbios.c: Fixed memcpy(), create new stack for interrupt
+   handlers.
+
+May 29, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/psxbios.c: Implemented more functions without standard C library
+   calls.
+
+May 28, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Fixed Xcode Project.
+ * macosx/English.lproj/InfoPlist.strings: Updated info.
+ * autogen.sh: Removed autoreconf.
+ * libpcsxcore/psxbios.c: Implemented more functions by hand (qsort() is not
+   tested).
+
+May 25, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * po/pt_BR.po, po/it.po, po/zh_TW.po, po/ru_RU.po, po/pcsx.pot, po/zh_CN.po:
+   Updated.
+ * win32/gui/WndMain.c: Do not make temporary buffer static.
+ * win32/intl/gettext.c: Likewise.
+
+May 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * win32/gui/WndMain.c: Also show Japanese titles properly for Windows
+   (need to set ACP to east-asian languages).
+ * win32/intl/gettext.c: Added a hack for UTF-8 support.
+ * win32/gui/AboutDlg.c: Updated info.
+ * win32/config.h: Silenced MSVC6 warnings.
+ * libpcsxcore/psxbios.c: Implemented more functions. RNG should behave
+   exactly the same as real BIOS now.
+ * libpcsxcore/psxcounters.c: Fixed freeze bug when launching an NTSC game
+   when Config.PsxAuto is enabled and Config.PsxType is set to PAL.
+
+May 23, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * AUTHORS: Updated info.
+ * gui/AboutDlg.c: Likewise, and fixed FTBFS on SLED 10.
+ * gui/MemcardDlg.c: Show Japanese titles properly.
+ * libpcsxcore/sio.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+
+May 22, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfsound/pulseaudio.c: Use Native Endian instead of Little Endian.
+
+May 21, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfsound/oss.c: Readded OSS, PulseAudio, ALSA & NULL backends.
+ * plugins/dfsound/pulseaudio.c: Likewise.
+ * plugins/dfsound/nullsnd.c: Likewise.
+ * plugins/dfsound/alsa.c: Likewise.
+ * plugins/dfsound/spu.c: Likewise.
+ * configure.ac: Added an option --enable-sound to specify the sound backend.
+ * plugins/dfsound/Makefile.am: Likewise.
+ * po/pt_BR.po, po/it.po, po/zh_TW.po, po/ru_RU.po, po/pcsx.pot, po/zh_CN.po:
+   Updated.
+ * libpcsxcore/psxbios.c: Implemented several HLE BIOS functions inside the
+   core instead of calling the standard C functions. (Not done yet)
+ * plugins/dfsound/sdl.c: Changed buffer size.
+ * libpcsxcore/psxinterpreter.c: Revert the previous revert (why the problem
+   on amd64 disappeared?).
+ * libpcsxcore/ppc/pR3000A.c: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/ix86/iR3000A.c: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxdma.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/mdec.c: Likewise, and fixed the cycle value in mdec1Interrupt().
+
+May 20, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/main.m: Removed obsolete code, added const to function definations.
+ * libpcsxcore/plugins.c: Added brackets around the use of CheckErr().
+ * libpcsxcore/psxcommon.h: Added brackets around gzfreeze().
+ * plugins/dfinput/Makefile.am: Use $(SDL_CFLAGS) and $(SDL_LIBS).
+ * plugins/dfsound/Makefile.am: Likewise.
+ * libpcsxcore/psxmem.c: Map 1fc00000-1fc7ffff and 9fc00000-9fc7ffff to BIOS
+   as well.
+
+May 19, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfsound/sdl.c: Use SDL for Sound Plugin.
+ * plugins/dfsound/oss.c: Removed OSS, PulseAudio, ALSA & NULL sound code. If
+   these are ever needed in the future we still have the thing called version
+   control.
+ * plugins/dfsound/pulseaudio.c: Likewise.
+ * plugins/dfsound/nullsnd.c: Likewise.
+ * plugins/dfsound/alsa.c: Likewise.
+ * plugins/dfsound/spu.c: Removed OSS/PulseAudio/ALSA/NULL plugin names,
+   added SDL plugin name.
+ * debian/control: Removed libasound2-dev.
+ * debian/rules: Removed --enable-alsa.
+ * configure.ac: Removed ALSA, PulseAudio & OSS stuff.
+ * plugins/dfsound/Makefile.am: Likewise.
+ * po/pt_BR.po, po/it.po, po/zh_TW.po, po/ru_RU.po, po/pcsx.pot, po/zh_CN.po:
+   Updated.
+ * libpcsxcore/psxinterpreter.c: Reverted the change to how BIAS was handled in
+   r48024, which was causing problems with x64 dynarec core.
+ * libpcsxcore/ppc/pR3000A.c: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/mdec.c: Likewise.
+ * libpcsxcore/ix86/iR3000A.c: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxdma.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+
+May 16, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/plugins.c: Added brackets around CheckErr() and LoadSym().
+
+May 15, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/psxdma.h: spu dma was fixed.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/psxdma.c: Likewise.
+
+May 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/plugins.c: Fixed crash when launching another game if netplay
+   plugin is selected but not used during the previously running game.
+ * gui/Plugin.c: Use TRUE/FALSE for Config.UseNet.
+ * win32/gui/plugin.c: Likewise.
+ * libpcsxcore/psxbios.c: Minor cleanup.
+
+May 14, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/psxinterpreter.c: Bias was moved into rec/int.
+ * libpcsxcore/ppc/pR3000A.c: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/mdec.c: Likewise.
+ * libpcsxcore/ix86/iR3000A.c: Likewise.
+ * libpcsxcore/psxcommon.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxdma.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * po/ru_RU.po: Updated.
+
+May 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * data/pcsx.glade2: Moved About dialog box out of glade2 file.
+ * gui/AboutDlg.c: Added.
+ * gui/AboutDlg.h: Likewise.
+ * gui/Gtk2Gui.c: Call RunAboutDialog() instead of showing about dialog from
+   glade2 file.
+ * po/pcsx.pot, po/pt_BR.po, po/it.po, po/zh_TW.po, po/ru_RU.po, po/zh_CN.po:
+   Updated.
+ * gui/Makefile.am: Added AboutDlg.c.
+ * po/POTFILES.in: Added all current files.
+
+May 13, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/plugins.h: CDRgetBufferSub for internal cdr plugin.
+ * libpcsxcore/plugins.c: Likewise.
+
+May 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfnet/gui.c: Get the correct address under GNU/Linux.
+ * plugins/dfnet/dfnet.c: Removed sockGetIP(), which is unused in plugin.
+ * plugins/dfnet/dfnet.h: Likewise.
+ * plugins/dfnet/dfnet.glade2: Fixed max length of IP address entry.
+ * libpcsxcore/gte.c: Improved accuracy (or 'inaccuracy') of the divider
+   (courtesy of shalma).
+ * libpcsxcore/gte_divider.h: Added.
+ * win32/pcsx.dsp: Added gte_divider.h.
+ * win32/pcsx.vcproj: Likewise.
+ * win32/pcsx.dev: Likewise.
+
+May 13, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/plugins.h: PADreadPort1/2 for NRage pad plugin (windows).
+ * libpcsxcore/plugins.c: Likewise.
+ * po/ru_RU.po: Updated.
+
+May 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * configure.ac: Added plugins/dfnet/Makefile.am.
+ * Makefile.am: Added plugins/dfnet.
+ * plugins/dfnet/dfnet.c: Added NetPlay plugin (based on netSock).
+ * plugins/dfnet/unix.c: Likewise.
+ * plugins/dfnet/cfg.c: Likewise.
+ * plugins/dfnet/gui.c: Likewise.
+ * plugins/dfnet/dfnet.h: Likewise.
+ * plugins/dfnet/Makefile.am: Likewise.
+ * plugins/dfnet/dfnet.glade2: Likewise.
+ * plugins/dfinput/cfg-gtk2.c: Use gtk_dialog_run() for about dialog.
+ * plugins/dfcdrom/cdrcfg-0.1df/main.c: Likewise.
+ * po/pt_BR.po, po/it.po, po/zh_CN.po, po/zh_TW.po, po/ru_RU.po, po/pcsx.pot:
+   Updated.
+ * po/update-pot.sh: Added files in plugins/dfnet.
+
+May 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/sio.c: Erase CdromId and CdromLabel when net connection closed.
+ * libpcsxcore/psxcommon.h: Use boolean type for config values, byte for enum
+   values.
+ * gui/Config.c: Use TRUE/FALSE for boolean values, enums for byte values in
+   config.
+ * gui/ConfDlg.c: Likewise.
+ * macosx/PcsxController.m: Likewise.
+ * win32/gui/ConfigurePlugins.c: Likewise.
+ * win32/gui/WndMain.c: Likewise.
+ * libpcsxcore/psxmem.c: Likewise.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/plugins.c: Likewise.
+ * libpcsxcore/misc.c: Likewise.
+ * AUTHORS: Updated info.
+
+May 11, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/Gtk2Gui.c: Use TRUE/FALSE instead of 0/1 for NetOpened.
+ * gui/Plugin.c: Likewise.
+ * win32/gui/plugin.c: Likewise.
+ * macosx/Plugin.c: Removed obsolete code.
+
+May 10, 2010 edgbla <edgbla@yandex.ru>
+
+ * data/pcsx.glade2: Memory cards dialog is now resizable, icons were
+   enlarged and animated. (experimental,gtk)
+ * gui/MemcardDlg.c: Likewise.
+
+May 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/psxcommon.c: Include ppf.h.
+ * libpcsxcore/misc.c: Silenced MSVC warning.
+
+May 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/plugins.c: Use functions instead of using global variables,
+   other minor cleanups.
+ * gui/Plugin.c: Likewise.
+ * gui/LnxMain.c: Likewise.
+ * gui/Gtk2Gui.c: Likewise.
+ * win32/gui/plugin.c: Likewise.
+ * win32/gui/WndMain.c: Likewise.
+ * libpcsxcore/cdriso.c: Likewise.
+ * libpcsxcore/psxcommon.c: Likewise.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/psxcommon.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxhw.c: Likewise.
+ * libpcsxcore/psxbios.c: Moved declaration of netError() into ...
+ * libpcsxcore/sio.h: Here.
+
+May 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/cdrom.c: Got rid of gzfreezel.
+ * libpcsxcore/mdec.c: Likewise.
+ * libpcsxcore/psxcommon.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/misc.c: Added savestate versioning support.
+ * gui/Gtk2Gui.c: Don't reset when loading from savestate unless loading
+   succeeded.
+
+May 10, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/sio.h: Some code (regs,macro) was moved to the 'c' file. 
+ * libpcsxcore/sio.c: Likewise.
+
+May 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * configure.ac: libbz2 is no longer needed.
+ * debian/control: Likewise.
+ * libpcsxcore/plugins.c: CDRgetBufferSub() is now mandatory.
+ * libpcsxcore/cdrom.h: Savestate compatibility is already broken, so no need
+   to stuff garbage into saved files :)
+ * libpcsxcore/mdec.c: Likewise.
+ * libpcsxcore/psxhw.c: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+
+May 9, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/psxcounters.c: psxRcntFreeze was fixed.
+ * plugins/dfxvideo/prim.c: Returned some code (iGPUHeight=1024), IMO, it's
+   wrong, can't perform the tests.
+
+May 9, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/plugins.c: Removed support for ancient GPU/SPU plugin APIs.
+ * libpcsxcore/plugins.h: Likewise.
+
+May 8, 2010 edgbla <edgbla@yandex.ru>
+
+ * plugins/dfxvideo/prim.c: Dithering logic was fixed.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Likewise.
+
+May 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/misc.c: Use const for input strings.
+ * libpcsxcore/misc.h: Likewise.
+ * libpcsxcore/spu.c: Got rid of 0x80000000 flag of psxRegs.interrupt.
+ * libpcsxcore/psxinterpreter.c: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/psxhw.c: Likewise.
+ * libpcsxcore/r3000a.h: Likewise.
+ * libpcsxcore/ix86/iR3000A.c: Likewise.
+ * libpcsxcore/psxhw.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+
+May 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/sio.h: Added extern "C" to all headers.
+ * libpcsxcore/misc.h: Likewise.
+ * libpcsxcore/ppc/reguse.h: Likewise.
+ * libpcsxcore/ppc/pGte.h: Likewise.
+ * libpcsxcore/ppc/ppc.h: Likewise.
+ * libpcsxcore/psxdma.h: Likewise.
+ * libpcsxcore/psxcounters.h: Likewise.
+ * libpcsxcore/cdrom.h: Likewise.
+ * libpcsxcore/psxmem.h: Likewise.
+ * libpcsxcore/decode_xa.h: Likewise.
+ * libpcsxcore/coff.h: Likewise.
+ * libpcsxcore/gte.h: Likewise.
+ * libpcsxcore/ix86_64/iGte.h: Likewise.
+ * libpcsxcore/cdriso.h: Likewise.
+ * libpcsxcore/system.h: Likewise.
+ * libpcsxcore/ppf.h: Likewise.
+ * libpcsxcore/debug.h: Likewise.
+ * libpcsxcore/psxbios.h: Likewise.
+ * libpcsxcore/psxhle.h: Likewise.
+ * libpcsxcore/r3000a.h: Likewise.
+ * libpcsxcore/spu.h: Likewise.
+ * libpcsxcore/psemu_plugin_defs.h: Likewise.
+ * libpcsxcore/mdec.h: Likewise.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/ix86/iGte.h: Likewise.
+ * libpcsxcore/psxhw.h: Likewise.
+ * libpcsxcore/cheat.h: Likewise.
+ * libpcsxcore/socket.h: Likewise.
+ * libpcsxcore/r3000a.c: Separated cheat related stuff out of the r3000a code.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/psxcommon.h: Added EmuInit, EmuReset, EmuShutdown & EmuReset.
+ * libpcsxcore/misc.c: Moved logging stuff to psxcommon.c.
+ * libpcsxcore/psxcommon.c: Added EmuInit, EmuReset, EmuShutdown & EmuReset,
+   moved logging stuff from misc.c to here.
+ * gui/LnxMain.c: Call Emu* instead of psx*.
+ * macosx/main.m: Likewise.
+ * macosx/EmuThread.m: Likewise.
+ * win32/gui/WndMain.c: Likewise.
+ * libpcsxcore/ix86/ix86.c: Moved definations in ix86.h to source file.
+ * libpcsxcore/ix86/ix86.h: Likewise.
+
+May 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/r3000a.c: Removed unneeded declarations, other minor cleanups.
+ * libpcsxcore/plugins.c: Likewise.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/psxcommon.h: Added definations for boolean type, as well as
+   TRUE and FALSE (not used for now).
+ * gui/Linux.h: Declares StatesC here.
+
+May 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/misc.h: Preparing for refactor/cleanup, moved all definations
+   into .c files, other minor cleanups. (Breaks Mac OS X and maybe Windows as
+   well for now, will fix later)
+ * libpcsxcore/psxdma.h: Likewise.
+ * libpcsxcore/psxcounters.h: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/cdrom.h: Likewise.
+ * libpcsxcore/psxmem.c: Likewise.
+ * libpcsxcore/psxmem.h: Likewise.
+ * libpcsxcore/cdriso.c: Likewise.
+ * libpcsxcore/ppf.c: Likewise.
+ * libpcsxcore/cdriso.h: Likewise.
+ * libpcsxcore/system.h: Likewise.
+ * libpcsxcore/debug.h: Likewise.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/psxhle.h: Likewise.
+ * libpcsxcore/spu.h: Likewise.
+ * libpcsxcore/mdec.h: Likewise.
+ * libpcsxcore/psxhw.h: Likewise.
+ * libpcsxcore/plugins.c: Likewise.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/psxcommon.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/misc.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/ix86_64/ix86-64.c: Likewise.
+ * gui/LnxMain.c: Likewise.
+ * gui/Gtk2Gui.c: Likewise.
+ * win32/WndMain.c: Likewise.
+ * libpcsxcore/psxcommon.c: Added.
+ * win32/pcsx.dsp: Added psxcommon.c.
+ * win32/pcsx.dev: Likewise.
+ * win32/pcsx.vcproj: Likewise.
+ * libpcsxcore/Makefile.am: Likewise.
+ * autogen.sh: Run autoreconf as well.
+ * AUTHORS: Updated info.
+
+May 5, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/psxcounters.c: Updated (Rc2Disable).
+
+May 5, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/DebugMemory.c: Show 0x7f as dots.
+ * libpcsxcore/plugins.c: Got rid of old PAD_readPort1()/PAD_readPort2() APIs.
+   PAD_startPoll() and PAD_poll() are now required.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psemu_plugin_defs.h: Updated info.
+
+May 2, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/psxcounters.h: Root counters code was written from scratch.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/psxhw.c: Likewise.
+ * libpcsxcore/misc.c: Likewise.
+ * libpcsxcore/ix86/iR3000A.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/ppc/pR3000A.c: Likewise.
+
+April 30, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * Mass update to the copyright headers. Fixed typo in FSF's address,
+   Removed obsolete URL. (No real change :) )
+
+April 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * win32/pcsx.rc: Don't include afxres.h, which doesn't exist in MSVC
+   2010 Express.
+
+April 18, 2010 edgbla <edgbla@yandex.ru>
+
+ * po/ru_RU.po: Updated.
+
+April 17, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * po/ru_RU.po: Added Russian translation by edgbla.
+ * po/update-pot.sh: Added ru_RU.po.
+ * po/LINGUAS: Likewise.
+ * AUTHORS: Updated info.
+
+April 16, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/peopsxgl/soft.c: Applied the same fix by edgbla as dfxvideo.
+ * libpcsxcore/gte.c: Use integer math for division operations.
+
+April 15, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfsound/freeze.c: Fixed the sound doesn't always play properly
+   after loading the state. (Thanks edgbla)
+ * libpcsxcore/psxmem.c: Fixed KKND freeze at startup. (edgbla)
+ * libpcsxcore/gte.c: Fixed gteDCPL. (edgbla)
+ * AUTHORS: Updated info.
+
+April 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/gte.c: Use u32 instead of unsigned long.
+ * COPYING: Fixed a typo in FSF's address.
+ * plugins/dfxvideo/soft.c: Army Man invisible bullets fix (courtesy of
+   edgbla).
+ * AUTHORS: Updated info.
+ * data/pcsx.glade2: Likewise.
+
+April 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/gte.c: Backported the new GTE code from PCSX-Revolution project
+   (http://code.google.com/p/pcsx-revolution), which is more accurate & fixes
+   at least graphic corruption problems with Mat Hoffman's Pro BMX.
+ * libpcsxcore/gte.h: Likewise.
+ * libpcsxcore/r3000a.h: Likewise.
+ * libpcsxcore/ppc/pGte.h: Call functions in gte.c instead of generating
+   machine code directly for now.
+ * libpcsxcore/ix86_64/iGte.h: Likewise.
+ * libpcsxcore/ix86/iGte.h: Likewise.
+ * libpcsxcore/debug.h: Removed GTE_DUMP.
+ * gui/LnxMain.c: Likewise.
+ * macosx/main.m: Likewise.
+ * win32/gui/WndMain.c: Likewise.
+
+April 11, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/cdriso.c: Check the CRC value of subchannel after reading.
+ * gui/DebugMemory.c: Allow using a hexa string instead of one value for
+   Memory Patch.
+ * po/zh_CN.po, po/zh_TW.po, po/it.po, po/pt_BR.po, po/pcsx.pot: Updated.
+
+April 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * data/pcsx.glade2: Added "Memory Dump" to menu item. Added Memory Viewer
+   dialog box. Added more info to About dialog box.
+ * gui/Gtk2Gui.c: Likewise.
+ * gui/DebugMemory.c: Implemented memory viewer/dumper.
+ * gui/DebugMemory.h: Likewise.
+ * gui/Makefile.am: Added DebugMemory.c.
+ * gui/Cheat.c: Changed the order of OK/Cancel buttons for consistency with
+   GNOME UI standards.
+ * libpcsxcore/psxmem.c: Minor cleanup (thanks Sebun).
+ * libpcsxcore/spu.c: Likewise.
+ * libpcsxcore/cdrom.c: Check case open/close in CdlStop (courtesy of shalma).
+ * plugins/peopsxgl/gpucfg/callbacks.c: Fixed warnings.
+ * po/zh_CN.po, po/zh_TW.po, po/it.po, po/pt_BR.po, po/pcsx.pot: Updated.
+
+March 21, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/mdec.c: Minor cleanup.
+
+March 18, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/plugins/HIDInput/src/PlugPAD.c: Commented out calls to
+   HIDCalibrateValue(), which caused problem in some cases.
+
+March 17, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/plugins/HIDInput/HIDInput.xcodeproj/project.pbxproj: Fixed build
+   issue.
+
+March 16, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * po/it.po: Updated Italian translation by Giovanni Scafora.
+
+March 15, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/mdec.c: 0x1f should be 31 rather than 15 (stupid /me).
+ * po/it.po: Added Italian translation (Thanks Giovanni Scafora).
+ * AUTHORS, po/LINGUAS, po/update-pot.sh: Updated.
+
+March 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/mdec.c: Rewritten MDEC decoder to replace non-free code, also
+   fixes image quality issues and improves decoding speed. (Thanks gorlik)
+ * AUTHORS: Updated info.
+
+March 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/LnxMain.c: Fixed -cdfile switch (Thanks NeToU).
+ * AUTHORS: Updated info.
+
+March 6, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/ppf.c: Speeded up the PPF loading routine when the PPF file
+   is "in order".
+
+February 23, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfinput/analog.c: Confirmed center value should be 127 instead of
+   128, removed obsolete comments.
+   (http://code.google.com/p/pcsx2/source/detail?r=2587)
+
+February 18, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * AUTHORS: Updated info.
+
+February 17, 2010 Tristin Celestin <cetris1@umbc.edu>
+
+ * configure.ac: Removed PulseAudio Simple API support.
+ * plugins/dfsound/Makefile.am: Likewise.
+ * plugins/dfsound/nullsnd.c: Likewise.
+ * plugins/dfsound/spu.c: Likewise.
+ * plugins/dfsound/pulseaudiosimple.c: Removed.
+ * plugins/dfsound/pulseaudio.c: Fixed high-compatibility (SPUasync) mode.
+
+February 15, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/psxhw.c: Don't skip calls to psxDman() when TR flag of CHCR is
+   true, which fixes the menu problem in Dragon Quest 7.
+ * plugins/dfcdrom/cdr-linux.c: Fixed subchannel reading in threaded mode.
+
+February 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/cdrom.c: Fixed GetlocP, which solves the problem with libcrypt
+   copy protected games. (Thanks shalma)
+
+February 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/cdrom.c: Clear the 0x20 flag when stop reading, which fixes the
+   problem with Syphon Filter.
+ * libpcsxcore/psxhw.c: Always update HW_DMAx_CHCR in DmaExec(), which fixes
+   the problem with Harvest Moon.
+   (Thanks shalma: http://forums.ngemu.com/pcsx-discussion/116599-developers-wanted-pcsx-revival-2.html)
+
+February 10, 2010 Tristin Celestin <cetris1@umbc.edu>
+
+ * plugins/dfsound/pulseaudio.c: PulseAudio Normal API support is now working
+   in threaded non-SPUasync() mode.
+
+February 7, 2010 Tristin Celestin <cetris1@umbc.edu>
+
+ * plugins/dfsound/pulseaudio.c: Added PulseAudio support (not working yet).
+ * plugins/dfsound/pulseaudiosimple.c: Added PulseAudio Simple API support
+   (not working with SPUasync).
+ * plugins/dfsound/alsa.c: Fixed the alsa plugin so that it produces cleaner
+   audio through PulseAudio.
+ * plugins/dfsound/nullsnd.c: Don't compile when PulseAudio or PulseAudio
+   Simple API support is enabled.
+ * plugins/dfsound/spu.c: Added strings for PulseAudio plugin.
+ * plugins/dfsound/Makefile.am: Added pulseaudio.c and pulseaudiosimple.c.
+ * configure.ac: Added PulseAudio-related stuff.
+ * po/zh_CN.po, po/zh_TW.po, po/pt_BR.po, po/pcsx.pot: Updated.
+
+February 1, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/plugins/HIDInput/src/HID_Utilities.h: Removed duplicate file.
+ * macosx/plugins/HIDInput/src/PlugPAD.c: #include HID_Utilities_External.h
+   instead of HID_Utilities.h.
+ * macosx/plugins/HIDInput/src/PadController.m: Likewise.
+ * macosx/plugins/HIDInput/src/KeyConfig.h: Likewise.
+
+January 31, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/EmuThread.m: Use setjmp()/longjmp() for resetting to avoid nasty
+   plugin issues.
+ * libpcsxcore/mdec.c: Minor cleanup.
+
+January 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/LnxMain.c: Don't always move the mouse to the right for screensaver
+   disabling.
+ * win32/pcsx.sln, win32/pcsx.vcproj: Added VC8 Project File.
+
+January 23, 2010 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Moved several definations into cdriso.h.
+ * libpcsxcore/cdriso.h: Likewise.
+ * libpcsxcore/ppf.c: Added PPF patch support.
+ * libpcsxcore/ppf.h: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/cdrom.h: Likewise.
+ * libpcsxcore/misc.c: Likewise.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/psxcommon.h: Likewise.
+ * gui/LnxMain.c: Likewise.
+ * gui/Linux.h: Likewise.
+ * win32/gui/WndMain.c: Likewise.
+ * macosx/main.m: Likewise.
+ * macosx/PcsxController.m: Likewise.
+ * libpcsxcore/Makefile.am: Added ppf.c and ppf.h.
+ * win32/pcsx.dsp: Likewise.
+ * win32/pcsx.dev: Likewise.
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Likewise.
+ * po/zh_CN.po, po/zh_TW.po, po/pt_BR.po, po/pcsx.pot: Updated.
+
+January 7, 2010 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/draw.c: MaintainAspect() now only depends on screen
+   resolution.
+
+December 28, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * data/pcsx.glade2: Reverted to "Close" button instead of "OK/Cancel" for
+   consistency with GNOME UI standards.
+ * plugins/dfsound/spucfg-0.1df/dfsound.glade2: Likewise.
+ * plugins/dfsound/spucfg-0.1df/main.c: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Likewise.
+ * plugins/dfinput/cfg-gtk2.c: Likewise.
+ * plugins/dfinput/dfinput.glade2: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/main.c: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2: Likewise.
+ * gui/ConfDlg.c: Likewise.
+ * po/zh_TW.po: Updated.
+ * README, NEWS: Updated.
+
+December 19, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/gui/WndMain.c: Added Portuguese (Brazilian) to the language list.
+ * po/pt_BR.po, po/zh_CN.po, po/zh_TW.po, po/pcsx.pot: Updated.
+
+December 8, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/peopsxgl/gpu.c: Hide the panels in fullscreen mode.
+
+December 4, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfinput/analog.c: Allow analog sticks to be mapped to non-axis
+   events (keyboard & joystick buttons) as well.
+ * plugins/dfinput/cfg.c: Likewise.
+ * plugins/dfinput/cfg-gtk2.c: Likewise.
+ * plugins/dfinput/xkb.c: Likewise.
+ * plugins/dfinput/pad.h: Likewise.
+ * po/zh_CN.po, po/zh_TW.po, po/pt_BR.po, po/pcsx.pot: Updated.
+ * libpcsxcore/psxbios.c: Don't touch the stack pointer if pointed to the
+   hardware area, which fixes FF7 chocobo racing problem. Don't always
+   allocate stack spaces before softcall.
+
+December 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfinput/pad.c: Changed the value of center position to 127 instead
+   of 128, which fixes the FF8 problem. Still need further confirmation about
+   this, as all of the protocol docs I've read as well as psemu_plugin_defs.h
+   say 128 is the center position.
+ * libpcsxcore/r3000a.c: Minor cleanup.
+
+December 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfinput/pad.c: Removed DualShock2-specific stuff in PADpoll().
+ * macosx/plugins/HIDInput/src/PlugPAD.c: Likewise.
+
+December 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfcdrom/cdr-linux.c: Fixed crash bug when resuming emulation in
+   Threaded mode.
+ * gui/MemcardDlg.c: Don't keep previous selection after creating a new
+   memcard or changing a memcard.
+ * gui/Gtk2Gui.c: Minor cleanup.
+
+November 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * macosx/plugins/DFSound/PeopsSPU.xcodeproj/project.pbxproj: Changed build
+   directory into ../../build.
+ * macosx/plugins/HIDInput/HIDInput.xcodeproj/project.pbxproj: Likewise.
+ * macosx/plugins/CDDeviceInterface/CDDeviceInterfacePlugin.xcodeproj/
+   project.pbxproj: Likewise.
+ * macosx/plugins/DFXVideo/PeopsSoftGPU.xcodeproj/project.pbxproj: Likewise.
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Include building and copying plugins
+   to the bundle (thanks avlex).
+
+November 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * data/pcsx.glade2: Got rid of GtkFileChooserButton, which is buggy. Added
+   a Toolbar which contains several most-used functions.
+ * gui/MemcardDlg.c: Got rid of GtkFileChooserButton.
+ * gui/Gtk2Gui.c: Moved configuration-related stuff into ConfDlg.c. Added
+   Toolbar support.
+ * gui/ConfDlg.c: Added.
+ * gui/ConfDlg.h: Added.
+ * gui/Linux.h: Removed unnecessary prototypes. Moved some stuff into
+   ConfDlg.h.
+ * libpcsxcore/psxcommon.h: Use MAXPATHLEN for string lengths.
+ * po/pt_BR.po, po/zh_CN.po, po/zh_TW.po, po/pcsx.pot: Updated.
+ * po/update-pot.sh: Also run msgmerge automatically.
+ * doc/pcsx.1: Don't say "PCSX-df".
+ * macosx/main.m: Minor cleanup.
+ * macosx/PluginController.m: Likewise.
+ * macosx/PcsxController.m: Made the memory card files configurable.
+ * macosx/ConfigurationController.m: Likewise.
+ * macosx/ConfigurationController.h: Likewise.
+ * macosx/English.lproj/Configuration.nib/info.nib: Likewise.
+ * macosx/English.lproj/Configuration.nib/classes.nib: Likewise.
+
+November 28, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * data/pcsx.glade2: Adjusted Memcard dialog.
+ * po/pt_BR.po, po/zh_CN.po, po/zh_TW.po, po/pcsx.pot: Updated.
+ * gui/Cheat.c: Fixed memory leaks.
+ * plugins/dfinput/cfg-gtk2.c: Likewise.
+ * gui/Gtk2Gui.c: Moved memcard dialog stuff into MemcardDlg.c.
+ * gui/MemcardDlg.c: Added.
+ * gui/MemcardDlg.h: Likewise.
+ * gui/Makefile.am: Added MemcardDlg.c.
+ * gui/LnxMain.c: Minor cleanup.
+ * gui/Linux.h: Likewise.
+
+November 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfcdrom/cdrcfg-0.1df/main.c: Rewritten the configuration utility
+   with libglade.
+ * plugins/dfcdrom/Makefile.am: Fixed compiling.
+ * plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2: Added.
+ * plugins/dfcdrom/cdrcfg-0.1df/callbacks.c: Removed Glade-generated code.
+ * plugins/dfcdrom/cdrcfg-0.1df/callbacks.h: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/support.c: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/support.h: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/interface.c: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/interface.h: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/cfgCdr.glade: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/cfg-gtk2: Likewise.
+ * plugins/dfcdrom/cdr-linux.c: Added selection of spin-down time.
+   Don't return NULL when CDRgetBuffer() is called more than once without
+   another CDRreadTrack() call in threaded mode, which solves the problem
+   with Final Fantasy 6 (maybe other games too).
+ * plugins/dfcdrom/cfg.c: Likewise.
+ * plugins/dfcdrom/cfg.h: Likewise.
+ * po/update-pot.sh: Include files from plugins/dfcdrom/cdrcfg-0.1df.
+ * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po, po/pt_BR.po: Updated.
+ * plugins/dfcdrom/cdr.h: Moved global variables into cdr-linux.c.
+ * plugins/dfxvideo/draw.c: Removed the screensaver disabling code.
+ * plugins/dfxvideo/Makefile.am: Don't link against Xtst.
+ * gui/LnxMain.c: Disable screensaver in the main emu, so that it will be
+   effective in all of the plugins.
+ * gui/Makefile.am: Added -lXext -lXtst.
+
+November 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfcdrom/cdr.c: Separated GNU/Linux-specific code and NULL code
+   into separate files (cdr-linux.c and cdr-null.c).
+ * plugins/dfcdrom/cdr-linux.c: Added.
+ * plugins/dfcdrom/cdr-null.c: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df: Moved configuration utility into a subdir.
+ * plugins/dfcdrom/interface.c: Moved into cdrcfg-0.1df directory.
+ * plugins/dfcdrom/interface.h: Likewise.
+ * plugins/dfcdrom/cfg-gtk2.c: Likewise.
+ * plugins/dfcdrom/support.c: Likewise.
+ * plugins/dfcdrom/support.h: Likewise.
+ * plugins/dfcdrom/main.c: Likewise.
+ * plugins/dfcdrom/callbacks.c: Likewise.
+ * plugins/dfcdrom/callbacks.h: Likewise.
+ * plugins/dfcdrom/cfgCdr.glade: Likewise.
+ * plugins/dfcdrom/Makefile.am: Likewise.
+ * libpcsxcore/psxbios.c: Fixed MSVC6 errors when psxbios logging is enabled.
+ * debian/changelog: Changed version number.
+ * libpcsxcore/cdriso.c: Added support for reporting current CDDA play time.
+
+November 25, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * po/zh_CN.po, po/zh_TW.po: Updated.
+
+November 13, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/misc.c: Fixed CheckCdrom() and LoadCdrom() so that format like
+   "cdrom:\\FILENAME" and "cdrom:/FILENAME" in SYSTEM.CNF can be accepted.
+ * libpcsxcore/ix86_64/README: Removed obsolete information.
+ * macosx/plugins/CDDeviceInterface/src/PlugCD.c: Changed the include path
+   to SCSITaskLib.h for compatibility with Mac OS X 10.6 SDK (Thanks magiix).
+ * macosx/English.lproj/PCSX.nib/objects.nib: Added 2 more savestate slots.
+ * macosx/English.lproj/PCSX.nib/info.nib: Likewise.
+
+November 9, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/draw.c: Fixed green edge in YUV mode.
+
+November 8, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/r3000a.c: Commented out the check for psxRegs.interrupt
+   before checking for hardware interrupts, which fixes the issue with I.Q.
+   Final (maybe other games too).
+
+November 7, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/draw.c: Don't bail out if the color depth is not set to 32.
+
+November 5, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/draw.c: Check for centering during blits.
+
+November 4, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/sio.c: Fixed the format of new memory card file, which solves
+   the saving problem with Final Fantasy 6.
+ * macosx/EmuThread.h: Added "Run BIOS" menu item.
+ * macosx/PcsxController.h: Likewise.
+ * macosx/EmuThread.m: Likewise.
+ * macosx/PcsxController.m: Likewise.
+ * macosx/English.lproj/PCSX.nib/objects.nib: Likewise.
+ * macosx/English.lproj/PCSX.nib/info.nib: Likewise.
+ * macosx/English.lproj/PCSX.nib/classes.nib: Likewise.
+ * macosx/main.m: Reload plugins at each time emulation starts.
+ * macosx/Info.plist: Changed version number.
+
+November 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * macosx/plugins/HIDInput/src/PlugPAD.c: Implemented PADstartPoll() and
+   PADpoll().
+ * plugins/dfxvideo/key.c: Handle Fullscreen toggle message for Mac OS X.
+ * macosx/plugins/DFXVideo/macsrc/PluginGLView.m: Fixed one byte-order issue.
+
+November 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * macosx/plugins/DFXVideo: Added project file and necessary codes for
+   building existing dfxvideo sources for Mac OS X. (NOT bug-free yet!!!)
+ * dfxvideo/gpu.c: Made necessary changes for Mac OS X build.
+ * dfxvideo/externals.h: Likewise.
+ * macosx/plugins/HIDInput/HIDInput.xcodeproj/project.pbxproj: Use
+   psemu_plugin_defs.h from libpcsxcore.
+ * macosx/plugins/HIDInput/src/PlugPAD.c: Likewise.
+ * macosx/plugins/CDDeviceInterface/CDDeviceInterfacePlugin.xcodeproj/
+   project.pbxproj: Likewise.
+ * macosx/plugins/CDDeviceInterface/src/PlugCD.c: Likewise.
+ * macosx/plugins/HIDInput/src/PSEmu_Plugin_Defs.h: Removed.
+ * macosx/plugins/CDDeviceInterface/src/PSEmu_Plugin_Defs.h: Removed.
+ * macosx/PcsxController.m: Don't allow starting game when Preferences dialog
+   box is opened. Don't allow opening the Preferences dialog when game is
+   running.
+
+November 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * macosx/plugins/PeopsSpu109: Removed.
+ * macosx/plugins/DFSound: Added project file and necessary platform-dependant
+   files for building existing dfsound sources for Mac OS X.
+ * plugins/dfsound/stdafx.h: Made necessary changes for Mac OS X build.
+ * plugins/dfsound/spu.c: Likewise.
+ * plugins/dfsound/xa.c: Likewise.
+
+October 31, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Declare thread controlling variable as volatile.
+ * plugins/dfinput/pad.c: Likewise.
+ * macosx/plugins/PeopsSpu109: Added SPU plugin for Mac OS X.
+
+October 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * data/pcsx.glade2: Do not allow resizing for dialog boxes.
+ * plugins/dfsound/spucfg-0.1df/dfsound.glade2: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2: Likewise.
+ * plugins/dfinput/pad.h: Declare several variables as volatile.
+ * plugins/dfinput/Makefile.am: Use $(SDL_CONFIG) instead of "sdl-config".
+
+October 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * data/pcsx.glade2: Replaced the "Close" button on many dialog boxes to
+   "OK/Cancel" buttons.
+ * gui/Gtk2Gui.c: Likewise.
+ * plugins/dfsound/spucfg-0.1df/dfsound.glade2: Likewise.
+ * plugins/dfsound/spucfg-0.1df/main.c: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Likewise.
+ * plugins/dfinput/dfinput.glade2: Likewise.
+ * plugins/dfinput/cfg-gtk2.c: Likewise.
+
+October 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfinput/xkb.c: Use XkbSetDetectableAutoRepeat() instead of
+   disabling autorepeat globally.
+ * po/zh_CN.po: Updated.
+ * plugins/peopsxgl/gpu.c: Allow clicking close button to return to the main
+   UI instead of bailing out.
+
+October 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfinput/cfg.c: Fixed a bug which caused the settings for analog
+   pad not correctly read from the config file.
+
+October 25, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfinput/cfg.c: Replaced dfinput with new SDL/Xkb-based input plugin.
+ * plugins/dfinput/analog.c: Likewise.
+ * plugins/dfinput/Makefile.in: Likewise.
+ * plugins/dfinput/cfg-gtk2.c: Likewise.
+ * plugins/dfinput/pad.c: Likewise.
+ * plugins/dfinput/sdljoy.c: Likewise.
+ * plugins/dfinput/xkb.c: Likewise.
+ * plugins/dfinput/dfinput.glade2: Likewise.
+ * plugins/dfinput/Makefile.am: Likewise.
+ * plugins/dfinput/pad.h: Likewise.
+ * plugins/dfinput/padjoy.h: Removed.
+ * configure.ac: Check for SDL on configure.
+ * debian/control: Added libsdl1.2-dev to Build-Depends.
+ * po/pt_BR.po, po/zh_TW.po, po/zh_CN.po, po/pcsx.pot: Updated.
+
+October 24, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Fixed Mac OS X build.
+ * macosx/plugins: Added CDR and PAD plugins for Mac OS X..
+
+October 9, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * gui/hdebug.c: Removed PCSX-df debugger, which is incompleted and buggy.
+ * gui/hdebug.h: Likewise.
+ * gui/Makefile.am: Likewise.
+ * libpcsxcore/debug.c: Added telnet-based debugger from PCSX CVS. GUI-based
+   debugger should be worked on for better usability.
+ * libpcsxcore/debug.h: Likewise.
+ * libpcsxcore/socket.c: Likewise.
+ * libpcsxcore/socket.h: Likewise.
+ * libpcsxcore/psxinterpreter.c: Likewise.
+ * libpcsxcore/psxmem.c: Likewise.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/r3000a.h: Likewise.
+ * libpcsxcore/psxcommon.h: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/Makefile.am: Likewise.
+ * gui/Config.c: Likewise.
+ * gui/LnxMain.c: Likewise.
+ * gui/Gtk2Gui.c: Likewise.
+ * win32/pcsx.rc: Likewise.
+ * win32/pcsx.dsp: Likewise.
+ * win32/gui/ConfigurePlugins.c: Likewise.
+ * win32/gui/WndMain.c: Likewise.
+ * win32/pcsx.dev: Likewise.
+ * win32/resource.h: Likewise.
+
+October 4, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Fixed: when trying to choose
+   resolution for dfxvideo, values>1024x768 doesn't save.
+ * plugins/peopsxgl/cfg.c: Minor cleanup.
+ * plugins/peopsxgl/gpu.c: Use fork()/execl() instead of system() to launch
+   the configuration utility.
+ * plugins/dfsound/cfg.c: Likewise.
+ * plugins/dfxvideo/cfg.c: Likewise.
+ * plugins/dfinput/pad.c: Likewise.
+ * plugins/dfcdrom/cdr.c: Likewise.
+ * plugins/dfsound/spucfg-0.1df/dfsound.glade2: Display the dialog box at
+   the center of the screen. Removed unused About dialog box.
+ * plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2: Likewise.
+ * plugins/dfsound/spucfg-0.1df/main.c: Minor cleanup.
+ * plugins/dfinput/dfinput.glade2: Fixed problem with new version of glade-3.
+ * plugins/dfcdrom/cfgCdr.glade: Likewise.
+ * libpcsxcore/cdriso.c: Fixed crash bug when the .toc/.cue file contains
+   empty lines.
+
+October 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfsound/spucfg-0.1df/dfsound.glade2: Removed the "Enable XA" option
+   as we already have such an option in the main emu.
+ * plugins/dfsound/spucfg-0.1df/main.c: Likewise.
+ * plugins/dfsound/cfg.c: Likewise.
+ * plugins/dfsound/spu.c: Likewise.
+ * plugins/dfsound/externals.h: Likewise.
+ * plugins/dfsound/psemu.c: Likewise.
+
+October 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * gui/Gtk2Gui.c: Disable the "Graphics/Sound/CD-ROM/Controller" menuitems
+   when the emu is already running.
+ * data/pcsx.glade2: Merged the "Controller 1" and "Controller 2" menuitems.
+
+September 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * data/pcsx.glade2: Re-added the "Graphics/Sound/CD-ROM/Controller" menuitems
+   in the configuration menu, which are more self-explanative than a "Plugins
+   and BIOS".
+ * gui/Gtk2Gui.c: Likewise.
+ * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po, po/pt_BR.po: Updated.
+ * libpcsxcore/cdriso.c: Implemented MDS parsing. MDF files with interleaved
+   subchannel data is now supported.
+ * win32/gui/WndMain.c: Moved States submenu from File menu to Emulator menu.
+
+September 24, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Fixed filenames with spaces when loading .toc file
+   (Thanks dario86). Force byteswap if .toc file is loaded as cdrdao uses
+   Big-Endian for CD Audio. Fixed skipping of the first 2 seconds when playing
+   CDDA Track #2. Check for image.toc if image.toc.bin is loaded.
+
+September 22, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/gui/CheatDlg.c: Always enable the value inputbox when "New Search" is
+   clicked.
+
+September 21, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdrom.c: Reverted the previous change as the CD change problem
+   can be fixed in the cdrSapu plugin.
+
+September 20, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/glue/sys/mman.h: Use VirtualAlloc() and VirtualFree() instead of
+   malloc() and free().
+ * libpcsxcore/ix86/iR3000A.c: Minor cleanup.
+ * po/zh_TW.po: Updated.
+ * libpcsxcore/cdrom.c: Close & reopen the CDR plugin after switching discs.
+
+September 18, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/gui/CheatDlg.c: Disable "Search Type" combo box if search results
+   already exist.
+
+September 16, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * po/pt_BR.po, po/pt_BR.gmo: Added Portuguese (Brazil) translation. Thanks
+   to Tibério Vítor <tvtoon at gmail dot com>.
+ * po/LINGUAS: Added pt_BR.po.
+ * po/pcsx.pot: Updated.
+ * gui/Cheat.c: Use checkboxes for toggling cheats.
+ * data/pcsx.glade2: Likewise.
+
+September 15, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * debian/changelog: Bumped version.
+
+September 12, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Disregard the synchronization information and header
+   data when playing CDDA music.
+
+September 8, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/gui/ConfigurePlugins.c: Select a real BIOS instead of the Internal
+   HLE BIOS by default at the first run.
+ * gui/Gtk2Gui.c: Likewise.
+ * gui/LnxMain.c: Scan BIOSes in certain system-wide directories and place
+   symlinks in ~/.pcsx/bios.
+ * gui/Makefile.am, gui/Makefile.in: Added PSEMU_DATA_DIR.
+ * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po: Updated.
+
+September 7, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfsound/alsa.c: Removed ALSA-specific CDDA stuff, which causes
+   problems with some versions of PulseAudio.
+ * plugins/dfsound/spu.c: Implemented CDDA support in a more "general" way.
+ * plugins/dfsound/xa.c: Likewise.
+ * plugins/dfsound/externals.h: Likewise.
+ * plugins/dfsound/spu.h: Likewise.
+ * plugins/dfsound/xa.h: Likewise.
+ * plugins/dfsound/cfg.c: Removed NOTHREADLIB.
+ * plugins/dfsound/spu.c: Likewise.
+ * plugins/dfsound/stdafx.h: Likewise.
+ * libpcsxcore/cdriso.c: Reverted to the method which feeds the CDDA data to
+   the SPU plugin at an interval instead of continuously, otherwise it's still
+   broken with spuEternal in SPUasync mode.
+
+September 6, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfsound/spu.c: Fixed frequency modulation emulation. Handle IRQs
+   in the decoded sound buffer areas. (sync'ed from the P.E.Op.S SPU 1.09)
+ * plugins/dfsound/dma.c: Likewise.
+ * plugins/dfsound/registers.c: Likewise.
+ * plugins/dfsound/xa.c: Likewise.
+ * plugins/dfsound/externals.h: Likewise.
+
+September 5, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Don't feed CDDA data to the SPU plugin when CDDA
+   is muted, which fixes the "noise" in Final Fantasy 8. Also check for
+   image.bin.toc in addition to image.toc.
+ * plugins/dfsound/alsa.c: Added support for CDDA volume.
+
+September 4, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Don't delay before feeding CDDA data to the SPU
+   plugin.
+ * plugins/dfsound/alsa.c: Don't try initializing CDDA sound handle over
+   and over and over again if failed.
+
+September 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Fixed time overflow on 32-bit GNU/Linux system.
+
+September 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdrom.c: Added the definations of some missing commands.
+
+August 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Implemented CDDA playing via SPUplayCDDAchannel().
+   Now CD tracks can be played directly via a SPU plugin which implements the
+   SPUplayCDDAchannel() function, e.g., spuEternal.
+ * libpcsxcore/cdriso.h: Removed unused prototypes.
+ * doc/tweaks.txt: Removed obsolete information.
+ * win32/pcsx.dsp: Use Multithreaded instead of Singlethreaded.
+ * plugins/dfsound/alsa.c: Set the buffer_time and period_time manually,
+   hopefully the "lagging" issue can be fixed. Implemented
+   SPUplayCDDAchannel() in the ALSA driver.
+
+August 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfcdrom/cdr.c: Don't restart the track if play was called with
+   the same time as the previous call.
+ * libpcsxcore/cdriso.c: Added playCDDA() and stopCDDA() functions. (still
+   not implemented)
+
+August 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/plugins.h: Added prototype and interface for
+   SPUplayCDDAchannel().
+ * libpcsxcore/plugins.c: Likewise.
+
+August 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/pcsx.rc: Completed the Cheat Search dialog.
+ * win32/resource.h: Likewise.
+ * win32/gui/CheatDlg.c: Implemented the Cheat Search dialog. Fixed MinGW
+   compilation issue.
+ * win32/gui/pcsx.dev: Fixed Dev-C++ build.
+ * win32/WndMain.c: Moved Language menu into the Config menu.
+ * gui/Cheat.c: Clamp values when editing value in Cheat Search dialog.
+ * doc/tweaks.txt: Added instructions to allow CD-DA playing when using
+   image files (as suggested by dario86).
+
+August 24, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/gui/WndMain.c: Set the language to the OS language by default.
+ * win32/gui/ConfigurePlugins.c: Made some strings translatable.
+ * win32/gui/CheatDlg.c: Fixed incorrect usage of SysMessage().
+ * win32/pcsx.rc, win32/resource.h: Fixed manifest.
+
+August 23, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * data/pcsx.glade2: Added "..." in menu items which will popup a dialog.
+ * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po: Updated.
+
+August 22, 2009 dario86
+
+ * libpcsxcore/cdrom.c: Demute the CD-DA by default, which fixes the music
+   problem with Tekken 1.
+
+August 22, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/misc.c: Also check for PSX.EXE in CheckCdrom(). Added support
+   for CPE binaries. Returns -1 in Load() if EXE is not found. Print the
+   EXE loading error messages in console instead of a message box.
+ * gui/Gtk2Gui.c: Show files with .cpe extension in the Load EXE dialog box.
+ * debian/rules: Removed dh_desktop.
+
+August 17, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/peopsxgl/gpu.c: Made the name of the plugin translatable.
+ * plugins/dfsound/spu.c: Likewise.
+ * plugins/dfxvideo/gpu.c: Likewise.
+ * plugins/dfinput/pad.c: Likewise.
+ * plugins/dfcdrom/cdr.c: Likewise.
+ * plugins/dfcdrom/interface.c: #include locale.h.
+ * po/update-pot.sh: Also check plugins' source files.
+ * plugins/dfxvideo/Makefile.am: Removed VERSION and NUMBER defination.
+ * po/zh_CN.po, po/zh_TW.po, po/pcsx.pot: Updated.
+
+August 9, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/cdrom02.ico: Reworked the icon.
+ * win32/pcsx.rc: Added cheat-related dialogs.
+ * win32/resource.h: Likewise.
+ * win32/gui/CheatDlg.c: Added, implemented Cheat Dialog.
+ * win32/pcsx.dsp: Added CheatDlg.c.
+ * win32/pcsx.dev: Likewise.
+ * win32/gui/plugin.c: Use lowercase for #include's.
+ * win32/gui/AboutDlg.c: Likewise.
+ * win32/gui/ConfigurePlugins.c: Likewise.
+ * win32/gui/Win32.h: Added prototype from CheatDlg.c.
+ * win32/gui/WndMain.c: Added Cheat functions to the menu.
+ * win32/glue/stdint.h: Added a "no warranty" disclaimer.
+ * win32/glue/sys/mman.h: Likewise.
+
+August 5, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/prim.c: Reverted the previous change, which is wrong.
+
+July 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/prim.c: Clamp the offsets before performing
+   blkfill.
+
+July 24, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Implemented CCD parsing.
+ * libpcsxcore/cheat.c: Optimized Cheat Applying a bit.
+
+July 15, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/psxbios.c: Allocate more stack spaces to fix crash at FF7
+   minigames.
+ * libpcsxcore/cdriso.c: Implemented CUE parsing.
+
+July 7, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/psxbios.c: Use u32 instead of native pointer for
+   DIRENTRY::next. It's a pointer in PSX subsystem and not in native system.
+
+July 4, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * debian/control: Added libasound2-dev to Build-Depends.
+ * libpcsxcore/plugins.h: Fixed SubQ struct.
+ * plugins/dfcdrom/cdr.c: Likewise.
+ * libpcsxcore/cdriso.c: Implemented subchannel reading from CloneCD
+   .sub file.
+
+July 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/psxbios.c: Use s32 instead of long in DIRENTRY struct for
+   compatibility with x86_64. Fixed error in MSVC6.
+
+June 30, 2009 Peter Collingbourne <peter@pcc.me.uk>
+
+ * libpcsxcore/psxbios.c: Implemented psxBios_rename(). Interpret a file
+   path of the form buX0: as buX0:* in firstfile() and nextfile(). Ensure
+   that memory card data is saved when deleting a file. Advance the file
+   offset when a write or synchronous read occurs.
+
+June 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/peopsxgl/gpu.c: Changed a format string from %08lx to %08x.
+
+June 30, 2009 Peter Collingbourne <peter@pcc.me.uk>
+
+ * plugins/dfcdrom/main.c: #include locale.h as well as libintl.h to allow
+   the code to compile in unoptimized mode.
+ * plugins/dfinput/cfg.c: Likewise.
+ * plugins/dfsound/spucfg-0.1df/main.c: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Likewise.
+ * plugins/peopsxgl/gpucfg/main.c: Likewise.
+ * plugins/peopsxgl/gpucfg/interface.c: Likewise.
+ * libpcsxcore/psxbios.c: Fixed a cast that may cause problems on x86_64.
+   Allocate stack space for programs which store data below the stack pointer
+   when an interrupt occurs.
+
+June 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cheat.c: Implemented Cheat Search.
+ * libpcsxcore/cheat.h: Likewise.
+ * gui/Cheat.c: Likewise.
+ * gui/Gtk2Gui.c: Backup the memory for cheat search when continuing emulation.
+ * data/pcsx.glade2: Tweaked the cheat search dialog for implemention. Fixed
+   the main menu under newer version of Glade.
+ * libpcsxcore/r3000a.c: Free cheat search results on exit.
+ * libpcsxcore/psxmem.h: Fixed a typo in psxMu8(). Removed check for __sh__
+   macro.
+ * win32/gui/WndMain.c: Restarting is no longer needed at first run.
+ * po/zh_CN.po, po/zh_TW.po: Updated.
+
+June 20, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/misc.c: Fixed a bug which prevented files in a subdirectory
+   from being located correctly in GetCdromFile().
+
+June 19, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * gui/Gtk2Gui.c: Also allow extensions with capital letters in the open
+   file dialog.
+ * plugins/dfsound/alsa.c: Don't include alsa.h, which is useless. Don't
+   set the buffer time and period time manually.
+ * plugins/dfsound/alsa.h: Deleted.
+ * plugins/dfsound/oss.c: Moved the definations from oss.h to oss.c.
+ * plugins/dfsound/oss.h: Deleted.
+ * debian/rules: Added --enable-alsa to configure parameters.
+
+June 18, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/peopsxgl/soft.c: Fixed crash with full-software (FVP) enabled
+   on x86_64.
+ * macosx/main.m: Removed LoadCdBios.
+
+June 16, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfOpenGL: Removed experimental dfOpenGL plugin.
+ * configure.ac: OpenGL plugin is only built with --enable-opengl.
+ * Makefile.am: Likewise.
+ * debian/rules: Added --enable-opengl to configure parameters.
+ * plugins/peopsxgl/draw.c: Don't enable OpenGL Extension by default, which
+   may be unsupported or slow with some old cards.
+ * plugins/peopsxgl/gpucfg/main.c: Likewise.
+
+June 11, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * macosx/English.lproj/PCSX.nib/objects.nib: Added "Run ISO" function.
+ * macosx/English.lproj/PCSX.nib/info.nib: Likewise.
+ * macosx/English.lproj/PCSX.nib/classes.nib: Likewise.
+ * macosx/PcsxController.h: Likewise.
+ * macosx/PcsxController.m: Likewise.
+
+June 10, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/plugins.c: Don't add "_" to function name for Mac OS X.
+ * macosx/Info.plist: Modified software information.
+ * macosx/English.lproj/InfoPlist.strings: Likewise.
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Tweaked parameter.
+ * macosx/English.lproj/PCSX.nib/objects.nib: Removed Edit menu.
+ * macosx/English.lproj/PCSX.nib/info.nib: Likewise.
+
+June 9, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * macosx/*: Added preliminary Mac OS X port. Code copied from PCSX Mac
+   Project (Still not working).
+
+June 4, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * po/zh_CN.po, po/zh_TW.po: Don't use UTF-8.
+ * debian/changelog: Bumped version.
+
+June 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/peopsxgl/interface.c: Tweaked UI.
+
+June 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/peopsxgl/Makefile.am: Added config utility.
+ * plugins/peopsxgl/gpucfg/callbacks.c: Added.
+ * plugins/peopsxgl/gpucfg/callbacks.h: Added.
+ * plugins/peopsxgl/gpucfg/interface.c: Added.
+ * plugins/peopsxgl/gpucfg/interface.h: Added.
+ * plugins/peopsxgl/gpucfg/main.c: Added.
+ * plugins/peopsxgl/gpucfg/support.c: Added.
+ * plugins/peopsxgl/gpucfg/support.h: Added.
+ * plugins/peopsxgl/cfg.c: Reverted the filename of config file.
+ * plugins/dfcdrom/interface.c: Supported translation.
+ * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po: Updated.
+
+May 31, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * gui/Config.c, plugins/dfxvideo/cfg.c: Fixed invalid memory access.
+ * debian/control: Added libxxf86vm-dev to Build-Depend.
+ * plugins/dfOpenGL/cfg.c: Don't use sprintf().
+
+May 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/peopsxgl/draw.c: Modified for compatiability with x86_64.
+ * plugins/peopsxgl/draw.h: Likewise.
+ * plugins/peopsxgl/externals.h: Likewise.
+ * plugins/peopsxgl/fps.c: Likewise.
+ * plugins/peopsxgl/fps.h: Likewise.
+ * plugins/peopsxgl/gpu.c: Likewise.
+ * plugins/peopsxgl/key.c: Likewise.
+ * plugins/peopsxgl/menu.c: Likewise.
+ * plugins/peopsxgl/prim.c: Likewise.
+ * plugins/peopsxgl/prim.h: Likewise.
+ * plugins/peopsxgl/soft.c: Likewise.
+ * plugins/peopsxgl/soft.h: Likewise.
+ * plugins/peopsxgl/texture.c: Likewise.
+ * plugins/peopsxgl/texture.h: Likewise.
+
+Apr 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/peopsxgl/cfg.c: Integrated P.E.Op.S OpenGL GPU into the build tree.
+   Cleaned up the sources, removed Windows-specific stuff.
+ * plugins/peopsxgl/cfg.h: Likewise.
+ * plugins/peopsxgl/draw.c: Likewise.
+ * plugins/peopsxgl/draw.h: Likewise.
+ * plugins/peopsxgl/externals.h: Likewise.
+ * plugins/peopsxgl/fps.c: Likewise.
+ * plugins/peopsxgl/fps.h: Likewise.
+ * plugins/peopsxgl/gl_ext.h: Likewise.
+ * plugins/peopsxgl/gpu.c: Likewise.
+ * plugins/peopsxgl/gpu.h: Likewise.
+ * plugins/peopsxgl/key.c: Likewise.
+ * plugins/peopsxgl/key.h: Likewise.
+ * plugins/peopsxgl/menu.c: Likewise.
+ * plugins/peopsxgl/menu.h: Likewise.
+ * plugins/peopsxgl/prim.c: Likewise.
+ * plugins/peopsxgl/prim.h: Likewise.
+ * plugins/peopsxgl/soft.c: Likewise.
+ * plugins/peopsxgl/soft.h: Likewise.
+ * plugins/peopsxgl/stdafx.h: Likewise.
+ * plugins/peopsxgl/texture.c: Likewise.
+ * plugins/peopsxgl/texture.h: Likewise.
+ * plugins/peopsxgl/zn.c: Likewise.
+ * plugins/peopsxgl/Makefile.am: Likewise.
+ * plugins/dfOpenGL/GPU.c: Changed the name of the plugin into "PCSX-df OpenGL
+   Driver" to avoid confusion.
+
+Apr 23, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * gui/LnxMain.c: use BIOS_DIR instead of "/.pcsx/bios/". Always set the
+   default memcard when config file does not exist.
+
+Mar 25, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * data/pcsx.glade2: Reorganized the menu a bit. Added Cheat Search
+   dialog.
+
+Mar 22, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/gpu.c: Capture screenshots correctly in RGB24
+   mode.
+
+Mar 11, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * gui/Gtk2Gui.c, win32/gui/WndMain.c: Don't call CheckCdrom() and
+   LoadCdrom() when switching ISO.
+
+Mar 6, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * data/pcsx.glade2: Reorganized menu.
+ * po/zh_CN.po, po/zh_TW.po, po/pcsx.pot: Updated.
+
+Mar 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * gui/Gtk2Gui.c: Remember last used directory in the Open Image dialog.
+
+Feb 27, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * libpcsxcore/plugins.c, win32/gui/WndMain.c, gui/Plugin.c: Moved
+   cdOpenCase to libpcsxcore.
+ * data/pcsx.glade2, gui/Gtk2Gui.c: Added "Switch ISO" function.
+ * win32/gui/WndMain.c, win32/resource.h: Likewise.
+ * libpcsxcore/mdec.c: Don't use precalculated table in ROUND(), which
+   may cause crashes due to subscript out of the bound in some cases.
+ * libpcsxcore/psxinterpreter.c: Silenced GCC warnings.
+
+Feb 20, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * configure.ac, Makefile.am: dfOpenGL is now only built when specified
+   with --enable-dfopengl during configure.
+
+Feb 19, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * configure.ac: Allow changing plugins install directory with --libdir.
+ * plugins/dfinput/Makefile.am: Likewise.
+ * plugins/dfcdrom/Makefile.am: Likewise.
+ * plugins/dfxvideo/Makefile.am: Likewise.
+ * plugins/dfsound/Makefile.am: Likewise.
+ * plugins/dfOpenGL/Makefile.am: Likewise.
+ * gui/Cheat.c, libpcsxcore/cheat.c: Moved platform-indepandent stuff
+   to libpcsxcore. Use dynamic memory allocation.
+ * libpcsxcore/cheat.h: Added.
+ * libpcsxcore/r3000a.c: Free all cheats on shutdown.
+ * gui/LnxMain.c, libpcsxcore/psxcounters.c: Moved cheat applying to
+   psxcounters.c from SysUpdate().
+
+Feb 13, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * plugins/dfOpenGL/gpu_i.h: include stdint.h.
+ * plugins/dfOpenGL/cfg.c: Use frame limit by default.
+ * libpcsxcore/ix86/iR3000A.c: Don't execute x86Init(), which causes crash
+   in certain computers.
+
+Feb 12, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * gui/Cheat.c, data/pcsx.glade2: Implemented the Cheat List dialog.
+ * data/pcsx.glade2: Tweaked the About Dialog.
+ * plugins/dfsound/cfg.c: The Volume value in config file should now be
+   handled correctly as 0 (lowest) to 3 (loudest).
+
+Feb 11, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * gui/Cheat.c, gui/Cheat.h: Added cheat support.
+ * gui/Plugin.c: Apply cheats in SysUpdate().
+
+Feb 10, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * gui/Config.c, gui/LnxMain.c: Moved the dotdir creation routine into
+   LnxMain.c. Check the directories and symlinks to plugins each time
+   the program starts.
+ * gui/Gtk2Gui.c, gui/LnxMain.c, gui/Plugin.c: Load the plugins at
+   emulation start instead of program start.
+
+Feb 9, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * libpcsxcore/psxmem.c: Define MAP_ANONYMOUS into MAP_ANON if it's not
+   defined.
+ * libpcsxcore/ix86/iR3000A.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/ppc/pR3000A.c: Likewise.
+ * pixmaps/pcsx-icon.png: Replaced the icon with a better one from PCSX
+   Mac OS X Port project.
+ * win32/gui/cdrom02.ico: Likewise.
+ * configure.ac: Only enable NASM in GNU/Linux.
+ * plugins/dfOpenGL/Makefile.am: Added /usr/X11R6 search path.
+ * plugins/dfxvideo/Makefile.am: Likewise.
+ * plugins/dfinput/Makefile.am: Likewise.
+ * plugins/dfinput/pad.c: Only enable joystick support in GNU/Linux.
+ * plugins/dfinput/cfg.c: Likewise.
+ * configure.ac: Add detection for sys/soundcard.h.
+ * plugins/dfsound/Makefile.am: Use NULL sound input if sys/soundcard.h
+   cannot be found.
+ * plugins/dfsound/nullsnd.c: Added.
+ * plugins/dfsound/spuPeopsSound.c: Removed unused files.
+ * plugins/dfsound/spuPeopsSound.def: Likewise.
+ * plugins/dfsound/stdafx.c: Likewise.
+
+Feb 8, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * data/pcsx.glade2, gui/Gtk2Gui.c: Changed "btn_ConfAbout" to
+   "btn_AboutNet" in the netplay config dialog.
+
+Feb 7, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * plugins/dfinput/cfg.c, plugins/dfinput/pad.c: Use Keyboard instead of
+   Joystick by default when no config file exists.
+ * plugins/dfinput/cfg.c: Update the UI when user switches the current pad.
+   Removed the useless "Device File" label.
+ * plugins/dfcdrom/interface.c: Fixed the behavior when closing the dfcdrom
+   config dialog box directly.
+ * gui/Gtk2Gui.c: Don't enable the "Use Debugger" checkbox when interpreter
+   core is not selected in CPU Config dialog box. Always enable the "Use
+   Interpreter CPU" when dynarec is not enabled during compilation.
+ * configure.ac: --disable-dynarec can now correctly disable the compilation
+   of dynamic recompiler core.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Disable the checkboxes for game
+   fixes initially if the "Enable Special Game Fixes" is not checked.
+
+Feb 6, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * data/pcsx.glade2, gui/Gtk2Gui.c: Enable the GtkFileChooserButton in
+   memcard config dialog only when ready.
+ * win32/pcsx.dsp, win32/pcsx.dev: Added cdriso.c, cdriso.h.
+ * win32/gui/WndMain.c, win32/gui/Win32.h, win32/gui/plugin.c,
+   win32/resource.h: Make use of the internal image reader.
+ * libpcsxcore/cdriso.c: Cast the return value of ISOgetBuffer into
+   unsigned char * instead of char *.
+ * plugins/dfinput/pad.c: Removed usage of pcsx_style.
+ * plugins/dfinput/cfg.c, plugins/dfinput/dfinput.glade2: Likewise.
+
+Feb 5, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * libpcsxcore/plugins.h, win32/gui/plugin.h: Moved definations of GPUopen,
+   SPUopen, PADopen and NETopen to libpcsxcore.
+ * libpcsxcore/plugins.c: Check for each type of plugins in ReleasePlugins().
+ * gui/Plugin.h: Removed useless file.
+ * libpcsxcore/cdriso.c, libpcsxcore/cdriso.h: Added internal image reader.
+ * libpcsxcore/plugins.c, gui/Gtk2Gui.c, gui/LnxMain.c: Make use of the
+   internal image reader.
+ * data/pcsx.glade2: Added "Run ISO" menu item.
+ * libpcsxcore/plugins.c: Initialize handles to plugins with NULL.
+ * plugins/dfiso, plugins/dfbinimage: Removed.
+ * plugins/dfxvideo/gpucfg-0.1df/callbacks.c: Removed unused files.
+ * plugins/dfxvideo/gpucfg-0.1df/callbacks.h: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/interface.c: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/interface.h: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/support.c: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/support.h: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/HACKING: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/gpucfg.gladep: Likewise.
+ * plugins/dfxvideo/callbacks.c: Likewise.
+ * plugins/dfxvideo/callbacks.h: Likewise.
+ * plugins/dfxvideo/interface.c: Likewise.
+ * plugins/dfxvideo/interface.h: Likewise.
+ * plugins/dfxvideo/support.c: Likewise.
+ * plugins/dfxvideo/support.h: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Removed support.h, interface.h.
+ * plugins/dfsound/cfg.c: Removed Windows-specific code.
+ * plugins/dfsound/spu.c: Likewise.
+ * plugins/dfsound/stdafx.c: Likewise.
+ * plugins/dfsound/alsa.c: Likewise.
+ * plugins/dfsound/oss.c: Likewise.
+ * plugins/dfsound/cfg.h: Likewise.
+ * plugins/dfsound/externals.h: Likewise.
+ * plugins/dfsound/freeze.c: Likewise.
+ * plugins/dfsound/debug.c: Removed unused files.
+ * plugins/dfsound/debug.h: Likewise.
+ * plugins/dfsound/resource.h: Likewise.
+ * plugins/dfsound/record.c: Likewise.
+ * plugins/dfsound/record.h: Likewise.
+ * gui/LnxMain.c: Fixed EXE loading in command line.
+ * plugins/dfsound/spucfg-0.1df/main.c: Added default values.
+
+Feb 4, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * gui/Makefile.am, libpcsxcore/Makefile.am: Now libpcsxcore is always
+   statically linked.
+ * INSTALL: Updated.
+ * gui/Gtk2Gui.c, gui/LnxMain.c: Moved ScanPlugins() and
+   check_symlink_in_path() to LnxMain.c.
+ * win32/gui/WndMain.c: Tweaked GUI behaviors.
+ * win32/gui/WndMain.c: Fixed Save/Load state.
+
+Feb 3, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * gui/Gtk2Gui.c, gui/Linux.h, gui/LnxMain.c: Tweaked some of the behaviors
+   of GUI.
+ * gui/Gtk2Gui.c: Removed some unnecessary debug messages.
+
+Feb 2, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * plugins/dfsound/spucfg-0.1df/interface.c: Removed unused files.
+ * plugins/dfsound/spucfg-0.1df/interface.h: Likewise.
+ * plugins/dfsound/spucfg-0.1df/support.c: Likewise.
+ * plugins/dfsound/spucfg-0.1df/support.h: Likewise.
+ * plugins/dfsound/spucfg-0.1df/callbacks.h: Likewise.
+ * plugins/dfsound/spucfg-0.1df/callbacks.h: Likewise.
+ * plugins/dfsound/spucfg-0.1df/Makefile: Likewise.
+ * plugins/dfsound/spucfg-0.1df/HACKING: Likewise.
+ * plugins/dfsound/spucfg-0.1df/spucfg2.gladep: Likewise.
+ * plugins/dfinput/Makefile.noautoconf: Likewise.
+ * plugins/dfcdrom/PSEmu Plugin Defs.h: Removed duplicate files.
+ * plugins/dfcdrom/Makefile.am: Added -I../../libpcsxcore.
+ * plugins/dfcdrom/cdr.h: Changed "PSEmu Plugin Defs.h" into
+   "psemu_plugin_defs.h". Added #include <stdint.h>.
+ * gui/Makefile.am: Added DEF_PLUGIN_DIR defination.
+ * gui/LnxMain.c, gui/Gtk2Gui.c: Also scan for plugins in DEF_PLUGIN_DIR,
+   so that the program can be installed to any path.
+ * libpcsxcore/psxmem.c, libpcsxcore/plugins.c: Don't use GLIB in libpcsxcore.
+ * win32/glue/glib.h: Removed.
+ * win32/pcsx.dsp, win32/pcsx.dev: Removed glib.h.
+ * win32/plugin.c, win32/WndMain.c: Unified the save state naming convention
+   with the GTK port.
+ * win32/WndMain.c: Fixed OpenFile Dialog usage.
+ * data/pcsx.glade2: Changed hotkey for save state into Ctrl+1~5, as Shift
+   key is not working. Changed hotkey for Load Other/Save Other into Alt+0
+   and Ctrl+0.
+ * doc/tweaks.txt, doc/keys.txt: Updated.
+ * debian/docs: Added ChangeLog.df file.
+ * debian/control: This package should be in otherosfs section according
+   to Debian policy.
+ * gui/Gtk2Gui.c: Disable state save/load in menu if no CD is loaded.
+
+Feb 1, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * win32/gui/WndMain.c: Don't paint the logo when the emu is running.
+ * win32/intl/intlconfig.h: Silented MSVC2005 warnings.
+ * Applied x86_64 patch by Dylan Simon (not tested).
+
+Jan 31, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * po/pcsx.pot: Regenerated.
+ * po/zh_CN.po, po/zh_TW.po: Updated.
+ * win32/pcsx.dev: Added Dev-C++ project file.
+ * win32/pcsx.rc: Adjusted some dialog boxes.
+ * Updated FSF's snail address in source files.
+ * data/pcsx.glade2: Fixed shortcut keys for "Save State" menu items.
+
+Jan 30, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * First alpha release of PCSX Reloaded.
+   - Backported to Windows.
+   - PCSX-df XVideo Plugin: Don't allow screen saver in fullscreen mode.
+   - PCSX-df XVideo Plugin: Don't show the GNOME panels in fullscreen mode.
+   - Minor bugfixes for UI.
+   - Fixed a bug which caused crash in FF8 Final Boss Fight.
+   - GCC 4.3 support.

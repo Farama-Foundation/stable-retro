@@ -1,0 +1,12 @@
+Files:
+tests/test-scratch-buffer.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-scratch-buffer
+check_PROGRAMS += test-scratch-buffer
+test_scratch_buffer_SOURCES = test-scratch-buffer.c

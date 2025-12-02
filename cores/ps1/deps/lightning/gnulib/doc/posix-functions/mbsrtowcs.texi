@@ -1,0 +1,37 @@
+@node mbsrtowcs
+@section @code{mbsrtowcs}
+@findex mbsrtowcs
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/mbsrtowcs.html}
+
+Gnulib module: mbsrtowcs
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, HP-UX 11.00, IRIX 6.5, mingw.
+@item
+This function does not work on some platforms:
+HP-UX 11, Solaris 11 2010-11.
+@item
+This function does not work when the first argument is NULL on some platforms:
+mingw.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and
+therefore cannot accommodate all Unicode characters.
+However, the Gnulib function @code{mbsrtoc32s}, provided by Gnulib module
+@code{mbsrtoc32s}, operates on 32-bit wide characters and therefore does not
+have this limitation.
+@item
+The specification is not clear about whether this function should update the
+conversion state when the first argument (the destination pointer) is NULL.
+The glibc implementation does not update the state in this case; the macOS
+and FreeBSD implementations do.
+For portability, when passing a NULL destination argument, it is best to pass
+a pointer to a temporary copy of the conversion state.
+@end itemize

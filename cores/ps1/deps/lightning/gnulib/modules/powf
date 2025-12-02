@@ -1,0 +1,32 @@
+Description:
+powf() function: power function.
+
+Files:
+lib/powf.c
+m4/powf.m4
+
+Depends-on:
+math
+extensions
+pow             [test $HAVE_POWF = 0]
+
+configure.ac:
+gl_FUNC_POWF
+if test $HAVE_POWF = 0; then
+  AC_LIBOBJ([powf])
+fi
+gl_MATH_MODULE_INDICATOR([powf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(POWF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

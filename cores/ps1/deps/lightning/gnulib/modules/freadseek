@@ -1,0 +1,29 @@
+Description:
+freadseek() function: Read and discard input from a stream.
+
+Files:
+lib/freadseek.h
+lib/freadseek.c
+lib/stdio-impl.h
+m4/freadseek.m4
+
+Depends-on:
+freadahead
+freadptr
+fseeko
+lseek
+
+configure.ac:
+gl_FUNC_FREADSEEK
+
+Makefile.am:
+lib_SOURCES += freadseek.c
+
+Include:
+"freadseek.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

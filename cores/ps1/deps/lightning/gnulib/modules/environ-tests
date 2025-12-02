@@ -1,0 +1,11 @@
+Files:
+tests/test-environ.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-environ
+check_PROGRAMS += test-environ
+

@@ -1,0 +1,34 @@
+@node unsetenv
+@section @code{unsetenv}
+@findex unsetenv
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/unsetenv.html}
+
+Gnulib module: unsetenv
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+AIX 5.1, HP-UX 11.23, IRIX 6.5, Solaris 9, mingw, MSVC 14.
+@item
+This function has the return type @samp{void} instead of @samp{int} on some
+platforms:
+FreeBSD 6.0, NetBSD 1.6, OpenBSD 3.8.
+@item
+On some platforms, this function does not fail with @samp{EINVAL} when
+passed an empty string or a string containing @samp{=}:
+FreeBSD 6.0, NetBSD 1.6, OpenBSD 4.7.
+@item
+This function removes only the first value association for the given
+environment variable, not all of them, on some platforms:
+Solaris 11.4, Haiku.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Older versions of POSIX required that @code{unsetenv(NULL)} gracefully
+fail with @code{EINVAL}, but not all implementations guarantee this,
+and the requirement was removed.
+@end itemize

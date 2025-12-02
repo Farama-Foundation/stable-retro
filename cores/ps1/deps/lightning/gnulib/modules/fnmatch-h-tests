@@ -1,0 +1,11 @@
+Files:
+tests/test-fnmatch-h.c
+
+Depends-on:
+fnmatch-h-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fnmatch-h
+check_PROGRAMS += test-fnmatch-h

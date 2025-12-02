@@ -1,0 +1,18 @@
+@node labs
+@section @code{labs}
+@findex labs
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/labs.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Android 4.3.
+@end itemize

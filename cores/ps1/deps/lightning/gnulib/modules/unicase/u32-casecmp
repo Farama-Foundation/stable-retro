@@ -1,0 +1,30 @@
+Description:
+Case and normalization insensitive comparison of UTF-32 strings.
+
+Files:
+lib/unicase/u32-casecmp.c
+lib/unicase/u-casecmp.h
+
+Depends-on:
+unicase/base
+unicase/u32-casefold
+uninorm/decomposing-form
+unistr/u32-cmp2
+minmax
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u32-casecmp])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U32_CASECMP
+lib_SOURCES += unicase/u32-casecmp.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,26 @@
+Files:
+tests/unicase/test-ulc-casecmp1.sh
+tests/unicase/test-ulc-casecmp2.sh
+tests/unicase/test-ulc-casecmp.c
+tests/unicase/test-casecmp.h
+tests/macros.h
+m4/locale-fr.m4
+m4/codeset.m4
+
+Depends-on:
+uninorm/nfd
+setlocale
+
+configure.ac:
+gt_LOCALE_FR
+gt_LOCALE_FR_UTF8
+
+Makefile.am:
+TESTS += unicase/test-ulc-casecmp1.sh unicase/test-ulc-casecmp2.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
+check_PROGRAMS += test-ulc-casecmp
+test_ulc_casecmp_SOURCES = unicase/test-ulc-casecmp.c
+test_ulc_casecmp_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBUNISTRING) @LIBICONV@
+

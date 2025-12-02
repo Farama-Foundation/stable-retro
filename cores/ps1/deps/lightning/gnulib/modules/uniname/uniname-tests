@@ -1,0 +1,22 @@
+Files:
+tests/uniname/test-uninames.sh
+tests/uniname/test-uninames.c
+tests/uniname/UnicodeData.txt
+tests/uniname/HangulSyllableNames.txt
+tests/uniname/NameAliases.txt
+
+Depends-on:
+xalloc
+
+configure.ac:
+
+Makefile.am:
+# Unlike other libunistring modules, this test passes only when the
+# same version of uniname/uniname.c is used (even if it is newer).
+if LIBUNISTRING_COMPILE_UNINAME_UNINAME
+TESTS += uniname/test-uninames.sh
+check_PROGRAMS += test-uninames
+test_uninames_SOURCES = uniname/test-uninames.c
+test_uninames_LDADD = $(LDADD) @LIBINTL@
+endif
+

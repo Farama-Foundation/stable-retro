@@ -1,0 +1,21 @@
+Description:
+Copyright variable for FSF projects
+
+Files:
+lib/version-etc-fsf.c
+
+Depends-on:
+version-etc
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += version-etc-fsf.c
+
+Include:
+
+License:
+LGPL
+
+Maintainer:
+Jim Meyering

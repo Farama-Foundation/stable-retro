@@ -1,0 +1,29 @@
+@node secure_getenv
+@subsection @code{secure_getenv}
+@findex secure_getenv
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Environment Access,,Environment Access,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Environment-Access.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/secure_getenv.3.html,,man secure_getenv}.
+@end itemize
+
+Gnulib module: secure_getenv
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+glibc 2.16, OS X 10.8, FreeBSD 9.1, NetBSD 9.0, OpenBSD 5.2, Minix 3.2.0, AIX 7.1, HP-UX 11, IRIX 6.5, Solaris 11.3, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,22 @@
+@node toupper
+@section @code{toupper}
+@findex toupper
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/toupper.html}
+
+Gnulib module: ctype
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function cannot be called from plain inline or extern inline functions
+on some platforms:
+OS X 10.8.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and therefore cannot
+accommodate all Unicode characters.
+@end itemize

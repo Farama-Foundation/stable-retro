@@ -1,0 +1,14 @@
+Files:
+tests/unistr/test-u8-to-u32.c
+tests/macros.h
+
+Depends-on:
+unistr/u32-cmp
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-to-u32
+check_PROGRAMS += test-u8-to-u32
+test_u8_to_u32_SOURCES = unistr/test-u8-to-u32.c
+test_u8_to_u32_LDADD = $(LDADD) $(LIBUNISTRING)

@@ -1,0 +1,20 @@
+Files:
+tests/test-link.h
+tests/test-linkat.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+areadlink-with-size
+filenamecat-lgpl
+getcwd-lgpl
+same-inode
+unlinkat
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-linkat
+check_PROGRAMS += test-linkat
+test_linkat_LDADD = $(LDADD) @LIBINTL@

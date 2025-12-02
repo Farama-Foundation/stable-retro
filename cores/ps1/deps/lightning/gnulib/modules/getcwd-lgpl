@@ -1,0 +1,29 @@
+Description:
+Ensure getcwd(NULL, 0) returns a buffer allocated by the malloc() function.
+
+Files:
+lib/getcwd-lgpl.c
+m4/getcwd.m4
+
+Depends-on:
+unistd
+free-posix      [test $REPLACE_GETCWD = 1]
+strdup          [test $REPLACE_GETCWD = 1]
+
+configure.ac:
+gl_FUNC_GETCWD_LGPL
+if test $REPLACE_GETCWD = 1; then
+  AC_LIBOBJ([getcwd-lgpl])
+fi
+gl_UNISTD_MODULE_INDICATOR([getcwd])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

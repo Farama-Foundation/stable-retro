@@ -1,0 +1,32 @@
+Description:
+ioctl() function: issue device specific requests on files, devices, or sockets.
+
+Files:
+lib/ioctl.c
+lib/w32sock.h
+m4/ioctl.m4
+
+Depends-on:
+sys_ioctl
+sys_socket      [test $HAVE_IOCTL = 0 || test $REPLACE_IOCTL = 1]
+errno           [test $HAVE_IOCTL = 0 || test $REPLACE_IOCTL = 1]
+fd-hook         [test $HAVE_IOCTL = 0 || test $REPLACE_IOCTL = 1]
+msvc-nothrow    [test $HAVE_IOCTL = 0 || test $REPLACE_IOCTL = 1]
+
+configure.ac:
+gl_FUNC_IOCTL
+if test $HAVE_IOCTL = 0 || test $REPLACE_IOCTL = 1; then
+  AC_LIBOBJ([ioctl])
+fi
+gl_SYS_IOCTL_MODULE_INDICATOR([ioctl])
+
+Makefile.am:
+
+Include:
+<sys/ioctl.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Paolo Bonzini, Simon Josefsson

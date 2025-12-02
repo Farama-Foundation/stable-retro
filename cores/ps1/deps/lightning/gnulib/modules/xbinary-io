@@ -1,0 +1,29 @@
+Description:
+Checked Binary mode I/O.
+
+Files:
+lib/xbinary-io.h
+lib/xbinary-io.c
+
+Depends-on:
+binary-io
+error
+exitfail
+extern-inline
+gettext-h
+stdbool
+verify
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += xbinary-io.h xbinary-io.c
+
+Include:
+"xbinary-io.h"
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,28 @@
+Description:
+Test whether a Unicode character can occur in identifiers in the C language.
+
+Files:
+lib/unictype/sy_c_ident.c
+lib/unictype/sy_c_ident.h
+lib/unictype/identsyntaxmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/syntax-c-ident])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_SYNTAX_C_IDENT
+lib_SOURCES += unictype/sy_c_ident.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

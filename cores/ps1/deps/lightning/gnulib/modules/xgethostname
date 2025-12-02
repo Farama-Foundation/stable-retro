@@ -1,0 +1,25 @@
+Description:
+Return machine's hostname, without size limitations.
+
+Files:
+lib/xgethostname.h
+lib/xgethostname.c
+
+Depends-on:
+free-posix
+gethostname
+xalloc
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += xgethostname.h xgethostname.c
+
+Include:
+"xgethostname.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

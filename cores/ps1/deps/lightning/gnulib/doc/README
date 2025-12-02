@@ -1,0 +1,53 @@
+Misc notes
+----------
+
+regexprops-generic.texi is generated via a utility in findutils.
+
+How to update gnulib manual on www.gnu.org
+------------------------------------------
+
+1) You need a non-anonymous checkout of the web pages directory.
+
+   $ cvs -d :ext:jas@cvs.savannah.gnu.org:/web/gnulib \
+         checkout gnulib
+
+2) Get familiar with the instructions for web page maintainers.
+   https://www.gnu.org/server/standards/readme_index.html
+   https://www.gnu.org/server/standards/README.software.html
+   especially the note about symlinks.
+
+3) Assuming GNULIB_CHECKOUT refers to a checkout of the gnulib dir,
+   and      GNULIB_WWW_CHECKOUT refers to the other directory created above (1),
+   do
+
+   GNULIB_WWW_CHECKOUT=`cd $GNULIB_WWW_CHECKOUT && pwd`
+   cd $GNULIB_WWW_CHECKOUT
+   tar -cf html-CVS.tar manual/html_node/CVS manual/html_node/.symlinks
+   cd $GNULIB_CHECKOUT/doc
+   make updated-stamp
+   ../build-aux/gendocs.sh \
+     -I ../build-aux \
+     --email bug-gnulib@gnu.org \
+     -o "$GNULIB_WWW_CHECKOUT/manual" \
+     gnulib "The GNU Portability Library"
+   cd $GNULIB_WWW_CHECKOUT
+   tar -xf html-CVS.tar
+   rm html-CVS.tar
+
+   Run 'cvs diff -u' and verify that the output looks sane.
+
+4) Commit the modified and the new files.
+
+5) Find the files which have not been overwritten (because they belonged
+   to sections that have been removed or renamed):
+
+   $ cd manual/html_node
+   $ ls -lt
+
+   Remove these files and commit their removal to CVS.
+   For each of these files, add a line to the file .symlinks. This will
+   ensure that hyperlinks to the removed files will redirect to the entire
+   manual; this is better than a 404 error.
+
+There is a problem with 'index.html' being written twice (once for POSIX
+function 'index', once for the table of contents); you can ignore this issue.

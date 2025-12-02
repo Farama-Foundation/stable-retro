@@ -1,0 +1,37 @@
+Description:
+cbrtf() function: cube root.
+
+Files:
+lib/cbrtf.c
+m4/cbrtf.m4
+m4/cbrt.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+isfinite        [test $HAVE_CBRTF = 0 || test $REPLACE_CBRTF = 1]
+fabsf           [test $HAVE_CBRTF = 0 || test $REPLACE_CBRTF = 1]
+frexpf          [test $HAVE_CBRTF = 0 || test $REPLACE_CBRTF = 1]
+ldexpf          [test $HAVE_CBRTF = 0 || test $REPLACE_CBRTF = 1]
+
+configure.ac:
+gl_FUNC_CBRTF
+if test $HAVE_CBRTF = 0 || test $REPLACE_CBRTF = 1; then
+  AC_LIBOBJ([cbrtf])
+fi
+gl_MATH_MODULE_INDICATOR([cbrtf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(CBRTF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

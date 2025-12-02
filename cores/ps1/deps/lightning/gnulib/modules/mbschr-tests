@@ -1,0 +1,18 @@
+Files:
+tests/test-mbschr.sh
+tests/test-mbschr.c
+tests/macros.h
+m4/locale-zh.m4
+m4/codeset.m4
+
+Depends-on:
+setlocale
+
+configure.ac:
+gt_LOCALE_ZH_CN
+
+Makefile.am:
+TESTS += test-mbschr.sh
+TESTS_ENVIRONMENT += LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-mbschr
+test_mbschr_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_SETLOCALE) $(LIB_MBRTOWC)

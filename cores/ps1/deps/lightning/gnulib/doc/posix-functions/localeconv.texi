@@ -1,0 +1,24 @@
+@node localeconv
+@section @code{localeconv}
+@findex localeconv
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/localeconv.html}
+
+Gnulib module: localeconv
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+The @code{struct lconv} type does not contain any members on some platforms:
+Android up to 2014.
+@item
+The @code{struct lconv} type does not contain the members
+@code{int_p_cs_precedes}, @code{int_p_sign_posn}, @code{int_p_sep_by_space},
+@code{int_n_cs_precedes}, @code{int_n_sign_posn}, @code{int_n_sep_by_space}
+on some platforms:
+glibc, OpenBSD 4.9, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 1.5.x, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

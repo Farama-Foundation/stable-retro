@@ -1,0 +1,1186 @@
+#define GENTABLE	0
+#define EXPANDFULL	0
+
+#if GENTABLE
+.data	128
+fmt:
+#  if __WORDSIZE == 32
+.c	"%s(%2d, 0x%08x, %2d, 0x%08x, 0x%08x)"
+#  else
+.c	"%s(%3d, 0x%016lx, %2d, 0x%016lx, 0x%016lx)"
+#  endif
+opt_start:
+.c	"\tOPTIONAL("
+opt_end:
+.c	")\n"
+use_start:
+.c	"\t"
+use_end:
+.c	"\n"
+QLSH:
+.c		" QLSH"
+QLSHU:
+.c		"QLSHU"
+QRSH:
+.c		" QRSH"
+QRSHU:
+.c		"QRSHU"
+#else
+#include "qalu.inc"
+#endif
+
+#define  QLSH(N, VAL, SH, LO, HI)	QALU(N,   , qlsh, VAL, SH, LO, HI)
+#define QLSHU(N, VAL, SH, LO, HI)	QALU(N, _u, qlsh, VAL, SH, LO, HI)
+#define  QRSH(N, VAL, SH, LO, HI)	QALU(N,   , qrsh, VAL, SH, LO, HI)
+#define QRSHU(N, VAL, SH, LO, HI)	QALU(N, _u, qrsh, VAL, SH, LO, HI)
+
+#if EXPANDFULL
+#  define OPTIONAL(OPT) 		OPT
+#else
+#  define OPTIONAL(OPT) 		/**/
+#endif
+
+.code
+#if GENTABLE
+	jmpi main
+func_qlsh:
+	prolog
+	arg $value
+	arg $shift
+	arg $num
+	getarg %v0 $value
+	getarg %v1 $shift
+	getarg %v2 $num
+	allocai $((__WORDSIZE >> 3) * 3) $buf
+	beqi func_qlsh_zero %v1 0
+	beqi func_qlsh_overflow %v1 __WORDSIZE
+	rsbi %r0 %v1 __WORDSIZE
+	rshr %r1 %v0 %r0
+	lshr %r0 %v0 %v1
+	jmpi func_qlsh_done
+func_qlsh_overflow:
+	movr %r1 %v0
+	movi %r0 0
+	jmpi func_qlsh_done
+func_qlsh_zero:
+	movr %r0 %v0
+	rshi %r1 %v0 $(__WORDSIZE - 1)
+func_qlsh_done:
+	stxi $buf %fp %r0
+	stxi $($buf + (__WORDSIZE >> 3)) %fp %r1
+	stxi $($buf + (__WORDSIZE >> 2)) %fp %v2
+	beqi func_qlsh_not_optional %v1 0
+	beqi func_qlsh_not_optional %v1 1
+	beqi func_qlsh_not_optional %v1 $(__WORDSIZE / 2 - 1)
+	beqi func_qlsh_not_optional %v1 $(__WORDSIZE / 2)
+	beqi func_qlsh_not_optional %v1 $(__WORDSIZE / 2 + 1)
+	beqi func_qlsh_not_optional %v1 $(__WORDSIZE - 1)
+	beqi func_qlsh_not_optional %v1 $(__WORDSIZE)
+	jmpi func_qlsh_optional
+func_qlsh_not_optional:
+	prepare
+		pushargi use_start
+	finishi @printf
+	movi %v2 0
+	jmpi func_qlsh_printf
+func_qlsh_optional:
+	prepare
+		pushargi opt_start
+	finishi @printf
+	movi %v2 1
+func_qlsh_printf:
+	ldxi %r0 %fp $buf
+	ldxi %r1 %fp $($buf + (__WORDSIZE >> 3))
+	ldxi %r2 %fp $($buf + (__WORDSIZE >> 2))
+	prepare
+		pushargi fmt
+		ellipsis
+		pushargi QLSH
+		pushargr %r2
+		pushargr %v0
+		pushargr %v1
+		pushargr %r0
+		pushargr %r1
+	finishi @printf
+	beqi func_qlsh_not_optional_end %v2 0
+	prepare
+		pushargi opt_end
+	finishi @printf
+	jmpi func_qlsh_ret
+func_qlsh_not_optional_end:
+	prepare
+		pushargi use_end
+	finishi @printf
+func_qlsh_ret:
+	ret
+	epilog
+
+func_qlsh_u:
+	prolog
+	arg $value
+	arg $shift
+	arg $num
+	getarg %v0 $value
+	getarg %v1 $shift
+	getarg %v2 $num
+	allocai $((__WORDSIZE >> 3) * 3) $buf
+	beqi func_qlsh_u_zero %v1 0
+	beqi func_qlsh_u_overflow %v1 __WORDSIZE
+	rsbi %r0 %v1 __WORDSIZE
+	rshr_u %r1 %v0 %r0
+	lshr %r0 %v0 %v1
+	jmpi func_qlsh_u_done
+func_qlsh_u_overflow:
+	movr %r1 %v0
+	movi %r0 0
+	jmpi func_qlsh_u_done
+func_qlsh_u_zero:
+	movr %r0 %v0
+	movi %r1 0
+func_qlsh_u_done:
+	stxi $buf %fp %r0
+	stxi $($buf + (__WORDSIZE >> 3)) %fp %r1
+	stxi $($buf + (__WORDSIZE >> 2)) %fp %v2
+	beqi func_qlsh_u_not_optional %v1 0
+	beqi func_qlsh_u_not_optional %v1 1
+	beqi func_qlsh_u_not_optional %v1 $(__WORDSIZE / 2 - 1)
+	beqi func_qlsh_u_not_optional %v1 $(__WORDSIZE / 2)
+	beqi func_qlsh_u_not_optional %v1 $(__WORDSIZE / 2 + 1)
+	beqi func_qlsh_u_not_optional %v1 $(__WORDSIZE - 1)
+	beqi func_qlsh_u_not_optional %v1 $(__WORDSIZE)
+	jmpi func_qlsh_u_optional
+func_qlsh_u_not_optional:
+	prepare
+		pushargi use_start
+	finishi @printf
+	movi %v2 0
+	jmpi func_qlsh_u_printf
+func_qlsh_u_optional:
+	prepare
+		pushargi opt_start
+	finishi @printf
+	movi %v2 1
+func_qlsh_u_printf:
+	ldxi %r0 %fp $buf
+	ldxi %r1 %fp $($buf + (__WORDSIZE >> 3))
+	ldxi %r2 %fp $($buf + (__WORDSIZE >> 2))
+	prepare
+		pushargi fmt
+		ellipsis
+		pushargi QLSHU
+		pushargr %r2
+		pushargr %v0
+		pushargr %v1
+		pushargr %r0
+		pushargr %r1
+	finishi @printf
+	beqi func_qlsh_u_not_optional_end %v2 0
+	prepare
+		pushargi opt_end
+	finishi @printf
+	jmpi func_qlsh_u_ret
+func_qlsh_u_not_optional_end:
+	prepare
+		pushargi use_end
+	finishi @printf
+func_qlsh_u_ret:
+	ret
+	epilog
+
+func_qrsh:
+	prolog
+	arg $value
+	arg $shift
+	arg $num
+	getarg %v0 $value
+	getarg %v1 $shift
+	getarg %v2 $num
+	allocai $((__WORDSIZE >> 3) * 3) $buf
+	beqi func_qrsh_zero %v1 0
+	beqi func_qrsh_overflow %v1 __WORDSIZE
+	rsbi %r0 %v1 __WORDSIZE
+	lshr %r1 %v0 %r0
+	rshr %r0 %v0 %v1
+	jmpi func_qrsh_done
+func_qrsh_overflow:
+	movr %r1 %v0
+	rshi %r0 %v0 $(__WORDSIZE - 1)
+	jmpi func_qrsh_done
+func_qrsh_zero:
+	movr %r0 %v0
+	movi %r1 0
+func_qrsh_done:
+	stxi $buf %fp %r0
+	stxi $($buf + (__WORDSIZE >> 3)) %fp %r1
+	stxi $($buf + (__WORDSIZE >> 2)) %fp %v2
+	beqi func_qrsh_not_optional %v1 0
+	beqi func_qrsh_not_optional %v1 1
+	beqi func_qrsh_not_optional %v1 $(__WORDSIZE / 2 - 1)
+	beqi func_qrsh_not_optional %v1 $(__WORDSIZE / 2)
+	beqi func_qrsh_not_optional %v1 $(__WORDSIZE / 2 + 1)
+	beqi func_qrsh_not_optional %v1 $(__WORDSIZE - 1)
+	beqi func_qrsh_not_optional %v1 $(__WORDSIZE)
+	jmpi func_qrsh_optional
+func_qrsh_not_optional:
+	prepare
+		pushargi use_start
+	finishi @printf
+	movi %v2 0
+	jmpi func_qrsh_printf
+func_qrsh_optional:
+	prepare
+		pushargi opt_start
+	finishi @printf
+	movi %v2 1
+func_qrsh_printf:
+	ldxi %r0 %fp $buf
+	ldxi %r1 %fp $($buf + (__WORDSIZE >> 3))
+	ldxi %r2 %fp $($buf + (__WORDSIZE >> 2))
+	prepare
+		pushargi fmt
+		ellipsis
+		pushargi QRSH
+		pushargr %r2
+		pushargr %v0
+		pushargr %v1
+		pushargr %r0
+		pushargr %r1
+	finishi @printf
+	beqi func_qrsh_not_optional_end %v2 0
+	prepare
+		pushargi opt_end
+	finishi @printf
+	jmpi func_qrsh_ret
+func_qrsh_not_optional_end:
+	prepare
+		pushargi use_end
+	finishi @printf
+func_qrsh_ret:
+	ret
+	epilog
+
+func_qrsh_u:
+	prolog
+	arg $value
+	arg $shift
+	arg $num
+	getarg %v0 $value
+	getarg %v1 $shift
+	getarg %v2 $num
+	allocai $((__WORDSIZE >> 3) * 3) $buf
+	beqi func_qrsh_u_zero %v1 0
+	beqi func_qrsh_u_overflow %v1 __WORDSIZE
+	rsbi %r0 %v1 __WORDSIZE
+	lshr %r1 %v0 %r0
+	rshr_u %r0 %v0 %v1
+	jmpi func_qrsh_u_done
+func_qrsh_u_overflow:
+	movr %r1 %v0
+	movi %r0 0
+	jmpi func_qrsh_u_done
+func_qrsh_u_zero:
+	movr %r0 %v0
+	movi %r1 0
+func_qrsh_u_done:
+	stxi $buf %fp %r0
+	stxi $($buf + (__WORDSIZE >> 3)) %fp %r1
+	stxi $($buf + (__WORDSIZE >> 2)) %fp %v2
+	beqi func_qrsh_u_not_optional %v1 0
+	beqi func_qrsh_u_not_optional %v1 1
+	beqi func_qrsh_u_not_optional %v1 $(__WORDSIZE / 2 - 1)
+	beqi func_qrsh_u_not_optional %v1 $(__WORDSIZE / 2)
+	beqi func_qrsh_u_not_optional %v1 $(__WORDSIZE / 2 + 1)
+	beqi func_qrsh_u_not_optional %v1 $(__WORDSIZE - 1)
+	beqi func_qrsh_u_not_optional %v1 $(__WORDSIZE)
+	jmpi func_qrsh_u_optional
+func_qrsh_u_not_optional:
+	prepare
+		pushargi use_start
+	finishi @printf
+	movi %v2 0
+	jmpi func_qrsh_u_printf
+func_qrsh_u_optional:
+	prepare
+		pushargi opt_start
+	finishi @printf
+	movi %v2 1
+func_qrsh_u_printf:
+	ldxi %r0 %fp $buf
+	ldxi %r1 %fp $($buf + (__WORDSIZE >> 3))
+	ldxi %r2 %fp $($buf + (__WORDSIZE >> 2))
+	prepare
+		pushargi fmt
+		ellipsis
+		pushargi QRSHU
+		pushargr %r2
+		pushargr %v0
+		pushargr %v1
+		pushargr %r0
+		pushargr %r1
+	finishi @printf
+	beqi func_qrsh_u_not_optional_end %v2 0
+	prepare
+		pushargi opt_end
+	finishi @printf
+	jmpi func_qrsh_u_ret
+func_qrsh_u_not_optional_end:
+	prepare
+		pushargi use_end
+	finishi @printf
+func_qrsh_u_ret:
+	epilog
+#endif
+
+	name main
+main:
+	prolog
+#if GENTABLE
+#  if __WORDSIZE == 32
+	movi %v0 0x89abcdef
+	movi %v2 0x12345678
+#  else
+	movi %v0 0x89abcdef01234567
+	movi %v2 0x123456789abcdef0
+#  endif
+	movi %v1 0
+loop:
+	prepare
+		pushargr %v0
+		pushargr %v1
+		pushargr %v1
+	finishi func_qlsh
+	addi %r2 %v1 $(__WORDSIZE + 1)
+	prepare
+		pushargr %v2
+		pushargr %v1
+		pushargr %r2
+	finishi func_qlsh
+	prepare
+		pushargr %v0
+		pushargr %v1
+		pushargr %v1
+	finishi func_qlsh_u
+	addi %r2 %v1 $(__WORDSIZE + 1)
+	prepare
+		pushargr %v2
+		pushargr %v1
+		pushargr %r2
+	finishi func_qlsh_u
+	prepare
+		pushargr %v0
+		pushargr %v1
+		pushargr %v1
+	finishi func_qrsh
+	addi %r2 %v1 $(__WORDSIZE + 1)
+	prepare
+		pushargr %v2
+		pushargr %v1
+		pushargr %r2
+	finishi func_qrsh
+	prepare
+		pushargr %v0
+		pushargr %v1
+		pushargr %v1
+	finishi func_qrsh_u
+	addi %r2 %v1 $(__WORDSIZE + 1)
+	prepare
+		pushargr %v2
+		pushargr %v1
+		pushargr %r2
+	finishi func_qrsh_u
+	addi %v1 %v1 1
+	blei loop %v1 __WORDSIZE
+#else
+#  if __WORDSIZE == 32
+	 QLSH( 0, 0x89abcdef,  0, 0x89abcdef, 0xffffffff)
+	 QLSH(33, 0x12345678,  0, 0x12345678, 0x00000000)
+	QLSHU( 0, 0x89abcdef,  0, 0x89abcdef, 0x00000000)
+	QLSHU(33, 0x12345678,  0, 0x12345678, 0x00000000)
+	 QRSH( 0, 0x89abcdef,  0, 0x89abcdef, 0x00000000)
+	 QRSH(33, 0x12345678,  0, 0x12345678, 0x00000000)
+	QRSHU( 0, 0x89abcdef,  0, 0x89abcdef, 0x00000000)
+	QRSHU(33, 0x12345678,  0, 0x12345678, 0x00000000)
+	 QLSH( 1, 0x89abcdef,  1, 0x13579bde, 0xffffffff)
+	 QLSH(34, 0x12345678,  1, 0x2468acf0, 0x00000000)
+	QLSHU( 1, 0x89abcdef,  1, 0x13579bde, 0x00000001)
+	QLSHU(34, 0x12345678,  1, 0x2468acf0, 0x00000000)
+	 QRSH( 1, 0x89abcdef,  1, 0xc4d5e6f7, 0x80000000)
+	 QRSH(34, 0x12345678,  1, 0x091a2b3c, 0x00000000)
+	QRSHU( 1, 0x89abcdef,  1, 0x44d5e6f7, 0x80000000)
+	QRSHU(34, 0x12345678,  1, 0x091a2b3c, 0x00000000)
+	OPTIONAL( QLSH( 2, 0x89abcdef,  2, 0x26af37bc, 0xfffffffe))
+	OPTIONAL( QLSH(35, 0x12345678,  2, 0x48d159e0, 0x00000000))
+	OPTIONAL(QLSHU( 2, 0x89abcdef,  2, 0x26af37bc, 0x00000002))
+	OPTIONAL(QLSHU(35, 0x12345678,  2, 0x48d159e0, 0x00000000))
+	OPTIONAL( QRSH( 2, 0x89abcdef,  2, 0xe26af37b, 0xc0000000))
+	OPTIONAL( QRSH(35, 0x12345678,  2, 0x048d159e, 0x00000000))
+	OPTIONAL(QRSHU( 2, 0x89abcdef,  2, 0x226af37b, 0xc0000000))
+	OPTIONAL(QRSHU(35, 0x12345678,  2, 0x048d159e, 0x00000000))
+	OPTIONAL( QLSH( 3, 0x89abcdef,  3, 0x4d5e6f78, 0xfffffffc))
+	OPTIONAL( QLSH(36, 0x12345678,  3, 0x91a2b3c0, 0x00000000))
+	OPTIONAL(QLSHU( 3, 0x89abcdef,  3, 0x4d5e6f78, 0x00000004))
+	OPTIONAL(QLSHU(36, 0x12345678,  3, 0x91a2b3c0, 0x00000000))
+	OPTIONAL( QRSH( 3, 0x89abcdef,  3, 0xf13579bd, 0xe0000000))
+	OPTIONAL( QRSH(36, 0x12345678,  3, 0x02468acf, 0x00000000))
+	OPTIONAL(QRSHU( 3, 0x89abcdef,  3, 0x113579bd, 0xe0000000))
+	OPTIONAL(QRSHU(36, 0x12345678,  3, 0x02468acf, 0x00000000))
+	OPTIONAL( QLSH( 4, 0x89abcdef,  4, 0x9abcdef0, 0xfffffff8))
+	OPTIONAL( QLSH(37, 0x12345678,  4, 0x23456780, 0x00000001))
+	OPTIONAL(QLSHU( 4, 0x89abcdef,  4, 0x9abcdef0, 0x00000008))
+	OPTIONAL(QLSHU(37, 0x12345678,  4, 0x23456780, 0x00000001))
+	OPTIONAL( QRSH( 4, 0x89abcdef,  4, 0xf89abcde, 0xf0000000))
+	OPTIONAL( QRSH(37, 0x12345678,  4, 0x01234567, 0x80000000))
+	OPTIONAL(QRSHU( 4, 0x89abcdef,  4, 0x089abcde, 0xf0000000))
+	OPTIONAL(QRSHU(37, 0x12345678,  4, 0x01234567, 0x80000000))
+	OPTIONAL( QLSH( 5, 0x89abcdef,  5, 0x3579bde0, 0xfffffff1))
+	OPTIONAL( QLSH(38, 0x12345678,  5, 0x468acf00, 0x00000002))
+	OPTIONAL(QLSHU( 5, 0x89abcdef,  5, 0x3579bde0, 0x00000011))
+	OPTIONAL(QLSHU(38, 0x12345678,  5, 0x468acf00, 0x00000002))
+	OPTIONAL( QRSH( 5, 0x89abcdef,  5, 0xfc4d5e6f, 0x78000000))
+	OPTIONAL( QRSH(38, 0x12345678,  5, 0x0091a2b3, 0xc0000000))
+	OPTIONAL(QRSHU( 5, 0x89abcdef,  5, 0x044d5e6f, 0x78000000))
+	OPTIONAL(QRSHU(38, 0x12345678,  5, 0x0091a2b3, 0xc0000000))
+	OPTIONAL( QLSH( 6, 0x89abcdef,  6, 0x6af37bc0, 0xffffffe2))
+	OPTIONAL( QLSH(39, 0x12345678,  6, 0x8d159e00, 0x00000004))
+	OPTIONAL(QLSHU( 6, 0x89abcdef,  6, 0x6af37bc0, 0x00000022))
+	OPTIONAL(QLSHU(39, 0x12345678,  6, 0x8d159e00, 0x00000004))
+	OPTIONAL( QRSH( 6, 0x89abcdef,  6, 0xfe26af37, 0xbc000000))
+	OPTIONAL( QRSH(39, 0x12345678,  6, 0x0048d159, 0xe0000000))
+	OPTIONAL(QRSHU( 6, 0x89abcdef,  6, 0x0226af37, 0xbc000000))
+	OPTIONAL(QRSHU(39, 0x12345678,  6, 0x0048d159, 0xe0000000))
+	OPTIONAL( QLSH( 7, 0x89abcdef,  7, 0xd5e6f780, 0xffffffc4))
+	OPTIONAL( QLSH(40, 0x12345678,  7, 0x1a2b3c00, 0x00000009))
+	OPTIONAL(QLSHU( 7, 0x89abcdef,  7, 0xd5e6f780, 0x00000044))
+	OPTIONAL(QLSHU(40, 0x12345678,  7, 0x1a2b3c00, 0x00000009))
+	OPTIONAL( QRSH( 7, 0x89abcdef,  7, 0xff13579b, 0xde000000))
+	OPTIONAL( QRSH(40, 0x12345678,  7, 0x002468ac, 0xf0000000))
+	OPTIONAL(QRSHU( 7, 0x89abcdef,  7, 0x0113579b, 0xde000000))
+	OPTIONAL(QRSHU(40, 0x12345678,  7, 0x002468ac, 0xf0000000))
+	OPTIONAL( QLSH( 8, 0x89abcdef,  8, 0xabcdef00, 0xffffff89))
+	OPTIONAL( QLSH(41, 0x12345678,  8, 0x34567800, 0x00000012))
+	OPTIONAL(QLSHU( 8, 0x89abcdef,  8, 0xabcdef00, 0x00000089))
+	OPTIONAL(QLSHU(41, 0x12345678,  8, 0x34567800, 0x00000012))
+	OPTIONAL( QRSH( 8, 0x89abcdef,  8, 0xff89abcd, 0xef000000))
+	OPTIONAL( QRSH(41, 0x12345678,  8, 0x00123456, 0x78000000))
+	OPTIONAL(QRSHU( 8, 0x89abcdef,  8, 0x0089abcd, 0xef000000))
+	OPTIONAL(QRSHU(41, 0x12345678,  8, 0x00123456, 0x78000000))
+	OPTIONAL( QLSH( 9, 0x89abcdef,  9, 0x579bde00, 0xffffff13))
+	OPTIONAL( QLSH(42, 0x12345678,  9, 0x68acf000, 0x00000024))
+	OPTIONAL(QLSHU( 9, 0x89abcdef,  9, 0x579bde00, 0x00000113))
+	OPTIONAL(QLSHU(42, 0x12345678,  9, 0x68acf000, 0x00000024))
+	OPTIONAL( QRSH( 9, 0x89abcdef,  9, 0xffc4d5e6, 0xf7800000))
+	OPTIONAL( QRSH(42, 0x12345678,  9, 0x00091a2b, 0x3c000000))
+	OPTIONAL(QRSHU( 9, 0x89abcdef,  9, 0x0044d5e6, 0xf7800000))
+	OPTIONAL(QRSHU(42, 0x12345678,  9, 0x00091a2b, 0x3c000000))
+	OPTIONAL( QLSH(10, 0x89abcdef, 10, 0xaf37bc00, 0xfffffe26))
+	OPTIONAL( QLSH(43, 0x12345678, 10, 0xd159e000, 0x00000048))
+	OPTIONAL(QLSHU(10, 0x89abcdef, 10, 0xaf37bc00, 0x00000226))
+	OPTIONAL(QLSHU(43, 0x12345678, 10, 0xd159e000, 0x00000048))
+	OPTIONAL( QRSH(10, 0x89abcdef, 10, 0xffe26af3, 0x7bc00000))
+	OPTIONAL( QRSH(43, 0x12345678, 10, 0x00048d15, 0x9e000000))
+	OPTIONAL(QRSHU(10, 0x89abcdef, 10, 0x00226af3, 0x7bc00000))
+	OPTIONAL(QRSHU(43, 0x12345678, 10, 0x00048d15, 0x9e000000))
+	OPTIONAL( QLSH(11, 0x89abcdef, 11, 0x5e6f7800, 0xfffffc4d))
+	OPTIONAL( QLSH(44, 0x12345678, 11, 0xa2b3c000, 0x00000091))
+	OPTIONAL(QLSHU(11, 0x89abcdef, 11, 0x5e6f7800, 0x0000044d))
+	OPTIONAL(QLSHU(44, 0x12345678, 11, 0xa2b3c000, 0x00000091))
+	OPTIONAL( QRSH(11, 0x89abcdef, 11, 0xfff13579, 0xbde00000))
+	OPTIONAL( QRSH(44, 0x12345678, 11, 0x0002468a, 0xcf000000))
+	OPTIONAL(QRSHU(11, 0x89abcdef, 11, 0x00113579, 0xbde00000))
+	OPTIONAL(QRSHU(44, 0x12345678, 11, 0x0002468a, 0xcf000000))
+	OPTIONAL( QLSH(12, 0x89abcdef, 12, 0xbcdef000, 0xfffff89a))
+	OPTIONAL( QLSH(45, 0x12345678, 12, 0x45678000, 0x00000123))
+	OPTIONAL(QLSHU(12, 0x89abcdef, 12, 0xbcdef000, 0x0000089a))
+	OPTIONAL(QLSHU(45, 0x12345678, 12, 0x45678000, 0x00000123))
+	OPTIONAL( QRSH(12, 0x89abcdef, 12, 0xfff89abc, 0xdef00000))
+	OPTIONAL( QRSH(45, 0x12345678, 12, 0x00012345, 0x67800000))
+	OPTIONAL(QRSHU(12, 0x89abcdef, 12, 0x00089abc, 0xdef00000))
+	OPTIONAL(QRSHU(45, 0x12345678, 12, 0x00012345, 0x67800000))
+	OPTIONAL( QLSH(13, 0x89abcdef, 13, 0x79bde000, 0xfffff135))
+	OPTIONAL( QLSH(46, 0x12345678, 13, 0x8acf0000, 0x00000246))
+	OPTIONAL(QLSHU(13, 0x89abcdef, 13, 0x79bde000, 0x00001135))
+	OPTIONAL(QLSHU(46, 0x12345678, 13, 0x8acf0000, 0x00000246))
+	OPTIONAL( QRSH(13, 0x89abcdef, 13, 0xfffc4d5e, 0x6f780000))
+	OPTIONAL( QRSH(46, 0x12345678, 13, 0x000091a2, 0xb3c00000))
+	OPTIONAL(QRSHU(13, 0x89abcdef, 13, 0x00044d5e, 0x6f780000))
+	OPTIONAL(QRSHU(46, 0x12345678, 13, 0x000091a2, 0xb3c00000))
+	OPTIONAL( QLSH(14, 0x89abcdef, 14, 0xf37bc000, 0xffffe26a))
+	OPTIONAL( QLSH(47, 0x12345678, 14, 0x159e0000, 0x0000048d))
+	OPTIONAL(QLSHU(14, 0x89abcdef, 14, 0xf37bc000, 0x0000226a))
+	OPTIONAL(QLSHU(47, 0x12345678, 14, 0x159e0000, 0x0000048d))
+	OPTIONAL( QRSH(14, 0x89abcdef, 14, 0xfffe26af, 0x37bc0000))
+	OPTIONAL( QRSH(47, 0x12345678, 14, 0x000048d1, 0x59e00000))
+	OPTIONAL(QRSHU(14, 0x89abcdef, 14, 0x000226af, 0x37bc0000))
+	OPTIONAL(QRSHU(47, 0x12345678, 14, 0x000048d1, 0x59e00000))
+	 QLSH(15, 0x89abcdef, 15, 0xe6f78000, 0xffffc4d5)
+	 QLSH(48, 0x12345678, 15, 0x2b3c0000, 0x0000091a)
+	QLSHU(15, 0x89abcdef, 15, 0xe6f78000, 0x000044d5)
+	QLSHU(48, 0x12345678, 15, 0x2b3c0000, 0x0000091a)
+	 QRSH(15, 0x89abcdef, 15, 0xffff1357, 0x9bde0000)
+	 QRSH(48, 0x12345678, 15, 0x00002468, 0xacf00000)
+	QRSHU(15, 0x89abcdef, 15, 0x00011357, 0x9bde0000)
+	QRSHU(48, 0x12345678, 15, 0x00002468, 0xacf00000)
+	 QLSH(16, 0x89abcdef, 16, 0xcdef0000, 0xffff89ab)
+	 QLSH(49, 0x12345678, 16, 0x56780000, 0x00001234)
+	QLSHU(16, 0x89abcdef, 16, 0xcdef0000, 0x000089ab)
+	QLSHU(49, 0x12345678, 16, 0x56780000, 0x00001234)
+	 QRSH(16, 0x89abcdef, 16, 0xffff89ab, 0xcdef0000)
+	 QRSH(49, 0x12345678, 16, 0x00001234, 0x56780000)
+	QRSHU(16, 0x89abcdef, 16, 0x000089ab, 0xcdef0000)
+	QRSHU(49, 0x12345678, 16, 0x00001234, 0x56780000)
+	 QLSH(17, 0x89abcdef, 17, 0x9bde0000, 0xffff1357)
+	 QLSH(50, 0x12345678, 17, 0xacf00000, 0x00002468)
+	QLSHU(17, 0x89abcdef, 17, 0x9bde0000, 0x00011357)
+	QLSHU(50, 0x12345678, 17, 0xacf00000, 0x00002468)
+	 QRSH(17, 0x89abcdef, 17, 0xffffc4d5, 0xe6f78000)
+	 QRSH(50, 0x12345678, 17, 0x0000091a, 0x2b3c0000)
+	QRSHU(17, 0x89abcdef, 17, 0x000044d5, 0xe6f78000)
+	QRSHU(50, 0x12345678, 17, 0x0000091a, 0x2b3c0000)
+	OPTIONAL( QLSH(18, 0x89abcdef, 18, 0x37bc0000, 0xfffe26af))
+	OPTIONAL( QLSH(51, 0x12345678, 18, 0x59e00000, 0x000048d1))
+	OPTIONAL(QLSHU(18, 0x89abcdef, 18, 0x37bc0000, 0x000226af))
+	OPTIONAL(QLSHU(51, 0x12345678, 18, 0x59e00000, 0x000048d1))
+	OPTIONAL( QRSH(18, 0x89abcdef, 18, 0xffffe26a, 0xf37bc000))
+	OPTIONAL( QRSH(51, 0x12345678, 18, 0x0000048d, 0x159e0000))
+	OPTIONAL(QRSHU(18, 0x89abcdef, 18, 0x0000226a, 0xf37bc000))
+	OPTIONAL(QRSHU(51, 0x12345678, 18, 0x0000048d, 0x159e0000))
+	OPTIONAL( QLSH(19, 0x89abcdef, 19, 0x6f780000, 0xfffc4d5e))
+	OPTIONAL( QLSH(52, 0x12345678, 19, 0xb3c00000, 0x000091a2))
+	OPTIONAL(QLSHU(19, 0x89abcdef, 19, 0x6f780000, 0x00044d5e))
+	OPTIONAL(QLSHU(52, 0x12345678, 19, 0xb3c00000, 0x000091a2))
+	OPTIONAL( QRSH(19, 0x89abcdef, 19, 0xfffff135, 0x79bde000))
+	OPTIONAL( QRSH(52, 0x12345678, 19, 0x00000246, 0x8acf0000))
+	OPTIONAL(QRSHU(19, 0x89abcdef, 19, 0x00001135, 0x79bde000))
+	OPTIONAL(QRSHU(52, 0x12345678, 19, 0x00000246, 0x8acf0000))
+	OPTIONAL( QLSH(20, 0x89abcdef, 20, 0xdef00000, 0xfff89abc))
+	OPTIONAL( QLSH(53, 0x12345678, 20, 0x67800000, 0x00012345))
+	OPTIONAL(QLSHU(20, 0x89abcdef, 20, 0xdef00000, 0x00089abc))
+	OPTIONAL(QLSHU(53, 0x12345678, 20, 0x67800000, 0x00012345))
+	OPTIONAL( QRSH(20, 0x89abcdef, 20, 0xfffff89a, 0xbcdef000))
+	OPTIONAL( QRSH(53, 0x12345678, 20, 0x00000123, 0x45678000))
+	OPTIONAL(QRSHU(20, 0x89abcdef, 20, 0x0000089a, 0xbcdef000))
+	OPTIONAL(QRSHU(53, 0x12345678, 20, 0x00000123, 0x45678000))
+	OPTIONAL( QLSH(21, 0x89abcdef, 21, 0xbde00000, 0xfff13579))
+	OPTIONAL( QLSH(54, 0x12345678, 21, 0xcf000000, 0x0002468a))
+	OPTIONAL(QLSHU(21, 0x89abcdef, 21, 0xbde00000, 0x00113579))
+	OPTIONAL(QLSHU(54, 0x12345678, 21, 0xcf000000, 0x0002468a))
+	OPTIONAL( QRSH(21, 0x89abcdef, 21, 0xfffffc4d, 0x5e6f7800))
+	OPTIONAL( QRSH(54, 0x12345678, 21, 0x00000091, 0xa2b3c000))
+	OPTIONAL(QRSHU(21, 0x89abcdef, 21, 0x0000044d, 0x5e6f7800))
+	OPTIONAL(QRSHU(54, 0x12345678, 21, 0x00000091, 0xa2b3c000))
+	OPTIONAL( QLSH(22, 0x89abcdef, 22, 0x7bc00000, 0xffe26af3))
+	OPTIONAL( QLSH(55, 0x12345678, 22, 0x9e000000, 0x00048d15))
+	OPTIONAL(QLSHU(22, 0x89abcdef, 22, 0x7bc00000, 0x00226af3))
+	OPTIONAL(QLSHU(55, 0x12345678, 22, 0x9e000000, 0x00048d15))
+	OPTIONAL( QRSH(22, 0x89abcdef, 22, 0xfffffe26, 0xaf37bc00))
+	OPTIONAL( QRSH(55, 0x12345678, 22, 0x00000048, 0xd159e000))
+	OPTIONAL(QRSHU(22, 0x89abcdef, 22, 0x00000226, 0xaf37bc00))
+	OPTIONAL(QRSHU(55, 0x12345678, 22, 0x00000048, 0xd159e000))
+	OPTIONAL( QLSH(23, 0x89abcdef, 23, 0xf7800000, 0xffc4d5e6))
+	OPTIONAL( QLSH(56, 0x12345678, 23, 0x3c000000, 0x00091a2b))
+	OPTIONAL(QLSHU(23, 0x89abcdef, 23, 0xf7800000, 0x0044d5e6))
+	OPTIONAL(QLSHU(56, 0x12345678, 23, 0x3c000000, 0x00091a2b))
+	OPTIONAL( QRSH(23, 0x89abcdef, 23, 0xffffff13, 0x579bde00))
+	OPTIONAL( QRSH(56, 0x12345678, 23, 0x00000024, 0x68acf000))
+	OPTIONAL(QRSHU(23, 0x89abcdef, 23, 0x00000113, 0x579bde00))
+	OPTIONAL(QRSHU(56, 0x12345678, 23, 0x00000024, 0x68acf000))
+	OPTIONAL( QLSH(24, 0x89abcdef, 24, 0xef000000, 0xff89abcd))
+	OPTIONAL( QLSH(57, 0x12345678, 24, 0x78000000, 0x00123456))
+	OPTIONAL(QLSHU(24, 0x89abcdef, 24, 0xef000000, 0x0089abcd))
+	OPTIONAL(QLSHU(57, 0x12345678, 24, 0x78000000, 0x00123456))
+	OPTIONAL( QRSH(24, 0x89abcdef, 24, 0xffffff89, 0xabcdef00))
+	OPTIONAL( QRSH(57, 0x12345678, 24, 0x00000012, 0x34567800))
+	OPTIONAL(QRSHU(24, 0x89abcdef, 24, 0x00000089, 0xabcdef00))
+	OPTIONAL(QRSHU(57, 0x12345678, 24, 0x00000012, 0x34567800))
+	OPTIONAL( QLSH(25, 0x89abcdef, 25, 0xde000000, 0xff13579b))
+	OPTIONAL( QLSH(58, 0x12345678, 25, 0xf0000000, 0x002468ac))
+	OPTIONAL(QLSHU(25, 0x89abcdef, 25, 0xde000000, 0x0113579b))
+	OPTIONAL(QLSHU(58, 0x12345678, 25, 0xf0000000, 0x002468ac))
+	OPTIONAL( QRSH(25, 0x89abcdef, 25, 0xffffffc4, 0xd5e6f780))
+	OPTIONAL( QRSH(58, 0x12345678, 25, 0x00000009, 0x1a2b3c00))
+	OPTIONAL(QRSHU(25, 0x89abcdef, 25, 0x00000044, 0xd5e6f780))
+	OPTIONAL(QRSHU(58, 0x12345678, 25, 0x00000009, 0x1a2b3c00))
+	OPTIONAL( QLSH(26, 0x89abcdef, 26, 0xbc000000, 0xfe26af37))
+	OPTIONAL( QLSH(59, 0x12345678, 26, 0xe0000000, 0x0048d159))
+	OPTIONAL(QLSHU(26, 0x89abcdef, 26, 0xbc000000, 0x0226af37))
+	OPTIONAL(QLSHU(59, 0x12345678, 26, 0xe0000000, 0x0048d159))
+	OPTIONAL( QRSH(26, 0x89abcdef, 26, 0xffffffe2, 0x6af37bc0))
+	OPTIONAL( QRSH(59, 0x12345678, 26, 0x00000004, 0x8d159e00))
+	OPTIONAL(QRSHU(26, 0x89abcdef, 26, 0x00000022, 0x6af37bc0))
+	OPTIONAL(QRSHU(59, 0x12345678, 26, 0x00000004, 0x8d159e00))
+	OPTIONAL( QLSH(27, 0x89abcdef, 27, 0x78000000, 0xfc4d5e6f))
+	OPTIONAL( QLSH(60, 0x12345678, 27, 0xc0000000, 0x0091a2b3))
+	OPTIONAL(QLSHU(27, 0x89abcdef, 27, 0x78000000, 0x044d5e6f))
+	OPTIONAL(QLSHU(60, 0x12345678, 27, 0xc0000000, 0x0091a2b3))
+	OPTIONAL( QRSH(27, 0x89abcdef, 27, 0xfffffff1, 0x3579bde0))
+	OPTIONAL( QRSH(60, 0x12345678, 27, 0x00000002, 0x468acf00))
+	OPTIONAL(QRSHU(27, 0x89abcdef, 27, 0x00000011, 0x3579bde0))
+	OPTIONAL(QRSHU(60, 0x12345678, 27, 0x00000002, 0x468acf00))
+	OPTIONAL( QLSH(28, 0x89abcdef, 28, 0xf0000000, 0xf89abcde))
+	OPTIONAL( QLSH(61, 0x12345678, 28, 0x80000000, 0x01234567))
+	OPTIONAL(QLSHU(28, 0x89abcdef, 28, 0xf0000000, 0x089abcde))
+	OPTIONAL(QLSHU(61, 0x12345678, 28, 0x80000000, 0x01234567))
+	OPTIONAL( QRSH(28, 0x89abcdef, 28, 0xfffffff8, 0x9abcdef0))
+	OPTIONAL( QRSH(61, 0x12345678, 28, 0x00000001, 0x23456780))
+	OPTIONAL(QRSHU(28, 0x89abcdef, 28, 0x00000008, 0x9abcdef0))
+	OPTIONAL(QRSHU(61, 0x12345678, 28, 0x00000001, 0x23456780))
+	OPTIONAL( QLSH(29, 0x89abcdef, 29, 0xe0000000, 0xf13579bd))
+	OPTIONAL( QLSH(62, 0x12345678, 29, 0x00000000, 0x02468acf))
+	OPTIONAL(QLSHU(29, 0x89abcdef, 29, 0xe0000000, 0x113579bd))
+	OPTIONAL(QLSHU(62, 0x12345678, 29, 0x00000000, 0x02468acf))
+	OPTIONAL( QRSH(29, 0x89abcdef, 29, 0xfffffffc, 0x4d5e6f78))
+	OPTIONAL( QRSH(62, 0x12345678, 29, 0x00000000, 0x91a2b3c0))
+	OPTIONAL(QRSHU(29, 0x89abcdef, 29, 0x00000004, 0x4d5e6f78))
+	OPTIONAL(QRSHU(62, 0x12345678, 29, 0x00000000, 0x91a2b3c0))
+	OPTIONAL( QLSH(30, 0x89abcdef, 30, 0xc0000000, 0xe26af37b))
+	OPTIONAL( QLSH(63, 0x12345678, 30, 0x00000000, 0x048d159e))
+	OPTIONAL(QLSHU(30, 0x89abcdef, 30, 0xc0000000, 0x226af37b))
+	OPTIONAL(QLSHU(63, 0x12345678, 30, 0x00000000, 0x048d159e))
+	OPTIONAL( QRSH(30, 0x89abcdef, 30, 0xfffffffe, 0x26af37bc))
+	OPTIONAL( QRSH(63, 0x12345678, 30, 0x00000000, 0x48d159e0))
+	OPTIONAL(QRSHU(30, 0x89abcdef, 30, 0x00000002, 0x26af37bc))
+	OPTIONAL(QRSHU(63, 0x12345678, 30, 0x00000000, 0x48d159e0))
+	 QLSH(31, 0x89abcdef, 31, 0x80000000, 0xc4d5e6f7)
+	 QLSH(64, 0x12345678, 31, 0x00000000, 0x091a2b3c)
+	QLSHU(31, 0x89abcdef, 31, 0x80000000, 0x44d5e6f7)
+	QLSHU(64, 0x12345678, 31, 0x00000000, 0x091a2b3c)
+	 QRSH(31, 0x89abcdef, 31, 0xffffffff, 0x13579bde)
+	 QRSH(64, 0x12345678, 31, 0x00000000, 0x2468acf0)
+	QRSHU(31, 0x89abcdef, 31, 0x00000001, 0x13579bde)
+	QRSHU(64, 0x12345678, 31, 0x00000000, 0x2468acf0)
+	 QLSH(32, 0x89abcdef, 32, 0x00000000, 0x89abcdef)
+	 QLSH(65, 0x12345678, 32, 0x00000000, 0x12345678)
+	QLSHU(32, 0x89abcdef, 32, 0x00000000, 0x89abcdef)
+	QLSHU(65, 0x12345678, 32, 0x00000000, 0x12345678)
+	 QRSH(32, 0x89abcdef, 32, 0xffffffff, 0x89abcdef)
+	 QRSH(65, 0x12345678, 32, 0x00000000, 0x12345678)
+	QRSHU(32, 0x89abcdef, 32, 0x00000000, 0x89abcdef)
+	QRSHU(65, 0x12345678, 32, 0x00000000, 0x12345678)
+#  else
+	 QLSH(  0, 0x89abcdef01234567,  0, 0x89abcdef01234567, 0xffffffffffffffff)
+	 QLSH( 65, 0x123456789abcdef0,  0, 0x123456789abcdef0, 0x0000000000000000)
+	QLSHU(  0, 0x89abcdef01234567,  0, 0x89abcdef01234567, 0x0000000000000000)
+	QLSHU( 65, 0x123456789abcdef0,  0, 0x123456789abcdef0, 0x0000000000000000)
+	 QRSH(  0, 0x89abcdef01234567,  0, 0x89abcdef01234567, 0x0000000000000000)
+	 QRSH( 65, 0x123456789abcdef0,  0, 0x123456789abcdef0, 0x0000000000000000)
+	QRSHU(  0, 0x89abcdef01234567,  0, 0x89abcdef01234567, 0x0000000000000000)
+	QRSHU( 65, 0x123456789abcdef0,  0, 0x123456789abcdef0, 0x0000000000000000)
+	 QLSH(  1, 0x89abcdef01234567,  1, 0x13579bde02468ace, 0xffffffffffffffff)
+	 QLSH( 66, 0x123456789abcdef0,  1, 0x2468acf13579bde0, 0x0000000000000000)
+	QLSHU(  1, 0x89abcdef01234567,  1, 0x13579bde02468ace, 0x0000000000000001)
+	QLSHU( 66, 0x123456789abcdef0,  1, 0x2468acf13579bde0, 0x0000000000000000)
+	 QRSH(  1, 0x89abcdef01234567,  1, 0xc4d5e6f78091a2b3, 0x8000000000000000)
+	 QRSH( 66, 0x123456789abcdef0,  1, 0x091a2b3c4d5e6f78, 0x0000000000000000)
+	QRSHU(  1, 0x89abcdef01234567,  1, 0x44d5e6f78091a2b3, 0x8000000000000000)
+	QRSHU( 66, 0x123456789abcdef0,  1, 0x091a2b3c4d5e6f78, 0x0000000000000000)
+	OPTIONAL( QLSH(  2, 0x89abcdef01234567,  2, 0x26af37bc048d159c, 0xfffffffffffffffe))
+	OPTIONAL( QLSH( 67, 0x123456789abcdef0,  2, 0x48d159e26af37bc0, 0x0000000000000000))
+	OPTIONAL(QLSHU(  2, 0x89abcdef01234567,  2, 0x26af37bc048d159c, 0x0000000000000002))
+	OPTIONAL(QLSHU( 67, 0x123456789abcdef0,  2, 0x48d159e26af37bc0, 0x0000000000000000))
+	OPTIONAL( QRSH(  2, 0x89abcdef01234567,  2, 0xe26af37bc048d159, 0xc000000000000000))
+	OPTIONAL( QRSH( 67, 0x123456789abcdef0,  2, 0x048d159e26af37bc, 0x0000000000000000))
+	OPTIONAL(QRSHU(  2, 0x89abcdef01234567,  2, 0x226af37bc048d159, 0xc000000000000000))
+	OPTIONAL(QRSHU( 67, 0x123456789abcdef0,  2, 0x048d159e26af37bc, 0x0000000000000000))
+	OPTIONAL( QLSH(  3, 0x89abcdef01234567,  3, 0x4d5e6f78091a2b38, 0xfffffffffffffffc))
+	OPTIONAL( QLSH( 68, 0x123456789abcdef0,  3, 0x91a2b3c4d5e6f780, 0x0000000000000000))
+	OPTIONAL(QLSHU(  3, 0x89abcdef01234567,  3, 0x4d5e6f78091a2b38, 0x0000000000000004))
+	OPTIONAL(QLSHU( 68, 0x123456789abcdef0,  3, 0x91a2b3c4d5e6f780, 0x0000000000000000))
+	OPTIONAL( QRSH(  3, 0x89abcdef01234567,  3, 0xf13579bde02468ac, 0xe000000000000000))
+	OPTIONAL( QRSH( 68, 0x123456789abcdef0,  3, 0x02468acf13579bde, 0x0000000000000000))
+	OPTIONAL(QRSHU(  3, 0x89abcdef01234567,  3, 0x113579bde02468ac, 0xe000000000000000))
+	OPTIONAL(QRSHU( 68, 0x123456789abcdef0,  3, 0x02468acf13579bde, 0x0000000000000000))
+	OPTIONAL( QLSH(  4, 0x89abcdef01234567,  4, 0x9abcdef012345670, 0xfffffffffffffff8))
+	OPTIONAL( QLSH( 69, 0x123456789abcdef0,  4, 0x23456789abcdef00, 0x0000000000000001))
+	OPTIONAL(QLSHU(  4, 0x89abcdef01234567,  4, 0x9abcdef012345670, 0x0000000000000008))
+	OPTIONAL(QLSHU( 69, 0x123456789abcdef0,  4, 0x23456789abcdef00, 0x0000000000000001))
+	OPTIONAL( QRSH(  4, 0x89abcdef01234567,  4, 0xf89abcdef0123456, 0x7000000000000000))
+	OPTIONAL( QRSH( 69, 0x123456789abcdef0,  4, 0x0123456789abcdef, 0x0000000000000000))
+	OPTIONAL(QRSHU(  4, 0x89abcdef01234567,  4, 0x089abcdef0123456, 0x7000000000000000))
+	OPTIONAL(QRSHU( 69, 0x123456789abcdef0,  4, 0x0123456789abcdef, 0x0000000000000000))
+	OPTIONAL( QLSH(  5, 0x89abcdef01234567,  5, 0x3579bde02468ace0, 0xfffffffffffffff1))
+	OPTIONAL( QLSH( 70, 0x123456789abcdef0,  5, 0x468acf13579bde00, 0x0000000000000002))
+	OPTIONAL(QLSHU(  5, 0x89abcdef01234567,  5, 0x3579bde02468ace0, 0x0000000000000011))
+	OPTIONAL(QLSHU( 70, 0x123456789abcdef0,  5, 0x468acf13579bde00, 0x0000000000000002))
+	OPTIONAL( QRSH(  5, 0x89abcdef01234567,  5, 0xfc4d5e6f78091a2b, 0x3800000000000000))
+	OPTIONAL( QRSH( 70, 0x123456789abcdef0,  5, 0x0091a2b3c4d5e6f7, 0x8000000000000000))
+	OPTIONAL(QRSHU(  5, 0x89abcdef01234567,  5, 0x044d5e6f78091a2b, 0x3800000000000000))
+	OPTIONAL(QRSHU( 70, 0x123456789abcdef0,  5, 0x0091a2b3c4d5e6f7, 0x8000000000000000))
+	OPTIONAL( QLSH(  6, 0x89abcdef01234567,  6, 0x6af37bc048d159c0, 0xffffffffffffffe2))
+	OPTIONAL( QLSH( 71, 0x123456789abcdef0,  6, 0x8d159e26af37bc00, 0x0000000000000004))
+	OPTIONAL(QLSHU(  6, 0x89abcdef01234567,  6, 0x6af37bc048d159c0, 0x0000000000000022))
+	OPTIONAL(QLSHU( 71, 0x123456789abcdef0,  6, 0x8d159e26af37bc00, 0x0000000000000004))
+	OPTIONAL( QRSH(  6, 0x89abcdef01234567,  6, 0xfe26af37bc048d15, 0x9c00000000000000))
+	OPTIONAL( QRSH( 71, 0x123456789abcdef0,  6, 0x0048d159e26af37b, 0xc000000000000000))
+	OPTIONAL(QRSHU(  6, 0x89abcdef01234567,  6, 0x0226af37bc048d15, 0x9c00000000000000))
+	OPTIONAL(QRSHU( 71, 0x123456789abcdef0,  6, 0x0048d159e26af37b, 0xc000000000000000))
+	OPTIONAL( QLSH(  7, 0x89abcdef01234567,  7, 0xd5e6f78091a2b380, 0xffffffffffffffc4))
+	OPTIONAL( QLSH( 72, 0x123456789abcdef0,  7, 0x1a2b3c4d5e6f7800, 0x0000000000000009))
+	OPTIONAL(QLSHU(  7, 0x89abcdef01234567,  7, 0xd5e6f78091a2b380, 0x0000000000000044))
+	OPTIONAL(QLSHU( 72, 0x123456789abcdef0,  7, 0x1a2b3c4d5e6f7800, 0x0000000000000009))
+	OPTIONAL( QRSH(  7, 0x89abcdef01234567,  7, 0xff13579bde02468a, 0xce00000000000000))
+	OPTIONAL( QRSH( 72, 0x123456789abcdef0,  7, 0x002468acf13579bd, 0xe000000000000000))
+	OPTIONAL(QRSHU(  7, 0x89abcdef01234567,  7, 0x0113579bde02468a, 0xce00000000000000))
+	OPTIONAL(QRSHU( 72, 0x123456789abcdef0,  7, 0x002468acf13579bd, 0xe000000000000000))
+	OPTIONAL( QLSH(  8, 0x89abcdef01234567,  8, 0xabcdef0123456700, 0xffffffffffffff89))
+	OPTIONAL( QLSH( 73, 0x123456789abcdef0,  8, 0x3456789abcdef000, 0x0000000000000012))
+	OPTIONAL(QLSHU(  8, 0x89abcdef01234567,  8, 0xabcdef0123456700, 0x0000000000000089))
+	OPTIONAL(QLSHU( 73, 0x123456789abcdef0,  8, 0x3456789abcdef000, 0x0000000000000012))
+	OPTIONAL( QRSH(  8, 0x89abcdef01234567,  8, 0xff89abcdef012345, 0x6700000000000000))
+	OPTIONAL( QRSH( 73, 0x123456789abcdef0,  8, 0x00123456789abcde, 0xf000000000000000))
+	OPTIONAL(QRSHU(  8, 0x89abcdef01234567,  8, 0x0089abcdef012345, 0x6700000000000000))
+	OPTIONAL(QRSHU( 73, 0x123456789abcdef0,  8, 0x00123456789abcde, 0xf000000000000000))
+	OPTIONAL( QLSH(  9, 0x89abcdef01234567,  9, 0x579bde02468ace00, 0xffffffffffffff13))
+	OPTIONAL( QLSH( 74, 0x123456789abcdef0,  9, 0x68acf13579bde000, 0x0000000000000024))
+	OPTIONAL(QLSHU(  9, 0x89abcdef01234567,  9, 0x579bde02468ace00, 0x0000000000000113))
+	OPTIONAL(QLSHU( 74, 0x123456789abcdef0,  9, 0x68acf13579bde000, 0x0000000000000024))
+	OPTIONAL( QRSH(  9, 0x89abcdef01234567,  9, 0xffc4d5e6f78091a2, 0xb380000000000000))
+	OPTIONAL( QRSH( 74, 0x123456789abcdef0,  9, 0x00091a2b3c4d5e6f, 0x7800000000000000))
+	OPTIONAL(QRSHU(  9, 0x89abcdef01234567,  9, 0x0044d5e6f78091a2, 0xb380000000000000))
+	OPTIONAL(QRSHU( 74, 0x123456789abcdef0,  9, 0x00091a2b3c4d5e6f, 0x7800000000000000))
+	OPTIONAL( QLSH( 10, 0x89abcdef01234567, 10, 0xaf37bc048d159c00, 0xfffffffffffffe26))
+	OPTIONAL( QLSH( 75, 0x123456789abcdef0, 10, 0xd159e26af37bc000, 0x0000000000000048))
+	OPTIONAL(QLSHU( 10, 0x89abcdef01234567, 10, 0xaf37bc048d159c00, 0x0000000000000226))
+	OPTIONAL(QLSHU( 75, 0x123456789abcdef0, 10, 0xd159e26af37bc000, 0x0000000000000048))
+	OPTIONAL( QRSH( 10, 0x89abcdef01234567, 10, 0xffe26af37bc048d1, 0x59c0000000000000))
+	OPTIONAL( QRSH( 75, 0x123456789abcdef0, 10, 0x00048d159e26af37, 0xbc00000000000000))
+	OPTIONAL(QRSHU( 10, 0x89abcdef01234567, 10, 0x00226af37bc048d1, 0x59c0000000000000))
+	OPTIONAL(QRSHU( 75, 0x123456789abcdef0, 10, 0x00048d159e26af37, 0xbc00000000000000))
+	OPTIONAL( QLSH( 11, 0x89abcdef01234567, 11, 0x5e6f78091a2b3800, 0xfffffffffffffc4d))
+	OPTIONAL( QLSH( 76, 0x123456789abcdef0, 11, 0xa2b3c4d5e6f78000, 0x0000000000000091))
+	OPTIONAL(QLSHU( 11, 0x89abcdef01234567, 11, 0x5e6f78091a2b3800, 0x000000000000044d))
+	OPTIONAL(QLSHU( 76, 0x123456789abcdef0, 11, 0xa2b3c4d5e6f78000, 0x0000000000000091))
+	OPTIONAL( QRSH( 11, 0x89abcdef01234567, 11, 0xfff13579bde02468, 0xace0000000000000))
+	OPTIONAL( QRSH( 76, 0x123456789abcdef0, 11, 0x0002468acf13579b, 0xde00000000000000))
+	OPTIONAL(QRSHU( 11, 0x89abcdef01234567, 11, 0x00113579bde02468, 0xace0000000000000))
+	OPTIONAL(QRSHU( 76, 0x123456789abcdef0, 11, 0x0002468acf13579b, 0xde00000000000000))
+	OPTIONAL( QLSH( 12, 0x89abcdef01234567, 12, 0xbcdef01234567000, 0xfffffffffffff89a))
+	OPTIONAL( QLSH( 77, 0x123456789abcdef0, 12, 0x456789abcdef0000, 0x0000000000000123))
+	OPTIONAL(QLSHU( 12, 0x89abcdef01234567, 12, 0xbcdef01234567000, 0x000000000000089a))
+	OPTIONAL(QLSHU( 77, 0x123456789abcdef0, 12, 0x456789abcdef0000, 0x0000000000000123))
+	OPTIONAL( QRSH( 12, 0x89abcdef01234567, 12, 0xfff89abcdef01234, 0x5670000000000000))
+	OPTIONAL( QRSH( 77, 0x123456789abcdef0, 12, 0x000123456789abcd, 0xef00000000000000))
+	OPTIONAL(QRSHU( 12, 0x89abcdef01234567, 12, 0x00089abcdef01234, 0x5670000000000000))
+	OPTIONAL(QRSHU( 77, 0x123456789abcdef0, 12, 0x000123456789abcd, 0xef00000000000000))
+	OPTIONAL( QLSH( 13, 0x89abcdef01234567, 13, 0x79bde02468ace000, 0xfffffffffffff135))
+	OPTIONAL( QLSH( 78, 0x123456789abcdef0, 13, 0x8acf13579bde0000, 0x0000000000000246))
+	OPTIONAL(QLSHU( 13, 0x89abcdef01234567, 13, 0x79bde02468ace000, 0x0000000000001135))
+	OPTIONAL(QLSHU( 78, 0x123456789abcdef0, 13, 0x8acf13579bde0000, 0x0000000000000246))
+	OPTIONAL( QRSH( 13, 0x89abcdef01234567, 13, 0xfffc4d5e6f78091a, 0x2b38000000000000))
+	OPTIONAL( QRSH( 78, 0x123456789abcdef0, 13, 0x000091a2b3c4d5e6, 0xf780000000000000))
+	OPTIONAL(QRSHU( 13, 0x89abcdef01234567, 13, 0x00044d5e6f78091a, 0x2b38000000000000))
+	OPTIONAL(QRSHU( 78, 0x123456789abcdef0, 13, 0x000091a2b3c4d5e6, 0xf780000000000000))
+	OPTIONAL( QLSH( 14, 0x89abcdef01234567, 14, 0xf37bc048d159c000, 0xffffffffffffe26a))
+	OPTIONAL( QLSH( 79, 0x123456789abcdef0, 14, 0x159e26af37bc0000, 0x000000000000048d))
+	OPTIONAL(QLSHU( 14, 0x89abcdef01234567, 14, 0xf37bc048d159c000, 0x000000000000226a))
+	OPTIONAL(QLSHU( 79, 0x123456789abcdef0, 14, 0x159e26af37bc0000, 0x000000000000048d))
+	OPTIONAL( QRSH( 14, 0x89abcdef01234567, 14, 0xfffe26af37bc048d, 0x159c000000000000))
+	OPTIONAL( QRSH( 79, 0x123456789abcdef0, 14, 0x000048d159e26af3, 0x7bc0000000000000))
+	OPTIONAL(QRSHU( 14, 0x89abcdef01234567, 14, 0x000226af37bc048d, 0x159c000000000000))
+	OPTIONAL(QRSHU( 79, 0x123456789abcdef0, 14, 0x000048d159e26af3, 0x7bc0000000000000))
+	OPTIONAL( QLSH( 15, 0x89abcdef01234567, 15, 0xe6f78091a2b38000, 0xffffffffffffc4d5))
+	OPTIONAL( QLSH( 80, 0x123456789abcdef0, 15, 0x2b3c4d5e6f780000, 0x000000000000091a))
+	OPTIONAL(QLSHU( 15, 0x89abcdef01234567, 15, 0xe6f78091a2b38000, 0x00000000000044d5))
+	OPTIONAL(QLSHU( 80, 0x123456789abcdef0, 15, 0x2b3c4d5e6f780000, 0x000000000000091a))
+	OPTIONAL( QRSH( 15, 0x89abcdef01234567, 15, 0xffff13579bde0246, 0x8ace000000000000))
+	OPTIONAL( QRSH( 80, 0x123456789abcdef0, 15, 0x00002468acf13579, 0xbde0000000000000))
+	OPTIONAL(QRSHU( 15, 0x89abcdef01234567, 15, 0x000113579bde0246, 0x8ace000000000000))
+	OPTIONAL(QRSHU( 80, 0x123456789abcdef0, 15, 0x00002468acf13579, 0xbde0000000000000))
+	OPTIONAL( QLSH( 16, 0x89abcdef01234567, 16, 0xcdef012345670000, 0xffffffffffff89ab))
+	OPTIONAL( QLSH( 81, 0x123456789abcdef0, 16, 0x56789abcdef00000, 0x0000000000001234))
+	OPTIONAL(QLSHU( 16, 0x89abcdef01234567, 16, 0xcdef012345670000, 0x00000000000089ab))
+	OPTIONAL(QLSHU( 81, 0x123456789abcdef0, 16, 0x56789abcdef00000, 0x0000000000001234))
+	OPTIONAL( QRSH( 16, 0x89abcdef01234567, 16, 0xffff89abcdef0123, 0x4567000000000000))
+	OPTIONAL( QRSH( 81, 0x123456789abcdef0, 16, 0x0000123456789abc, 0xdef0000000000000))
+	OPTIONAL(QRSHU( 16, 0x89abcdef01234567, 16, 0x000089abcdef0123, 0x4567000000000000))
+	OPTIONAL(QRSHU( 81, 0x123456789abcdef0, 16, 0x0000123456789abc, 0xdef0000000000000))
+	OPTIONAL( QLSH( 17, 0x89abcdef01234567, 17, 0x9bde02468ace0000, 0xffffffffffff1357))
+	OPTIONAL( QLSH( 82, 0x123456789abcdef0, 17, 0xacf13579bde00000, 0x0000000000002468))
+	OPTIONAL(QLSHU( 17, 0x89abcdef01234567, 17, 0x9bde02468ace0000, 0x0000000000011357))
+	OPTIONAL(QLSHU( 82, 0x123456789abcdef0, 17, 0xacf13579bde00000, 0x0000000000002468))
+	OPTIONAL( QRSH( 17, 0x89abcdef01234567, 17, 0xffffc4d5e6f78091, 0xa2b3800000000000))
+	OPTIONAL( QRSH( 82, 0x123456789abcdef0, 17, 0x0000091a2b3c4d5e, 0x6f78000000000000))
+	OPTIONAL(QRSHU( 17, 0x89abcdef01234567, 17, 0x000044d5e6f78091, 0xa2b3800000000000))
+	OPTIONAL(QRSHU( 82, 0x123456789abcdef0, 17, 0x0000091a2b3c4d5e, 0x6f78000000000000))
+	OPTIONAL( QLSH( 18, 0x89abcdef01234567, 18, 0x37bc048d159c0000, 0xfffffffffffe26af))
+	OPTIONAL( QLSH( 83, 0x123456789abcdef0, 18, 0x59e26af37bc00000, 0x00000000000048d1))
+	OPTIONAL(QLSHU( 18, 0x89abcdef01234567, 18, 0x37bc048d159c0000, 0x00000000000226af))
+	OPTIONAL(QLSHU( 83, 0x123456789abcdef0, 18, 0x59e26af37bc00000, 0x00000000000048d1))
+	OPTIONAL( QRSH( 18, 0x89abcdef01234567, 18, 0xffffe26af37bc048, 0xd159c00000000000))
+	OPTIONAL( QRSH( 83, 0x123456789abcdef0, 18, 0x0000048d159e26af, 0x37bc000000000000))
+	OPTIONAL(QRSHU( 18, 0x89abcdef01234567, 18, 0x0000226af37bc048, 0xd159c00000000000))
+	OPTIONAL(QRSHU( 83, 0x123456789abcdef0, 18, 0x0000048d159e26af, 0x37bc000000000000))
+	OPTIONAL( QLSH( 19, 0x89abcdef01234567, 19, 0x6f78091a2b380000, 0xfffffffffffc4d5e))
+	OPTIONAL( QLSH( 84, 0x123456789abcdef0, 19, 0xb3c4d5e6f7800000, 0x00000000000091a2))
+	OPTIONAL(QLSHU( 19, 0x89abcdef01234567, 19, 0x6f78091a2b380000, 0x0000000000044d5e))
+	OPTIONAL(QLSHU( 84, 0x123456789abcdef0, 19, 0xb3c4d5e6f7800000, 0x00000000000091a2))
+	OPTIONAL( QRSH( 19, 0x89abcdef01234567, 19, 0xfffff13579bde024, 0x68ace00000000000))
+	OPTIONAL( QRSH( 84, 0x123456789abcdef0, 19, 0x000002468acf1357, 0x9bde000000000000))
+	OPTIONAL(QRSHU( 19, 0x89abcdef01234567, 19, 0x0000113579bde024, 0x68ace00000000000))
+	OPTIONAL(QRSHU( 84, 0x123456789abcdef0, 19, 0x000002468acf1357, 0x9bde000000000000))
+	OPTIONAL( QLSH( 20, 0x89abcdef01234567, 20, 0xdef0123456700000, 0xfffffffffff89abc))
+	OPTIONAL( QLSH( 85, 0x123456789abcdef0, 20, 0x6789abcdef000000, 0x0000000000012345))
+	OPTIONAL(QLSHU( 20, 0x89abcdef01234567, 20, 0xdef0123456700000, 0x0000000000089abc))
+	OPTIONAL(QLSHU( 85, 0x123456789abcdef0, 20, 0x6789abcdef000000, 0x0000000000012345))
+	OPTIONAL( QRSH( 20, 0x89abcdef01234567, 20, 0xfffff89abcdef012, 0x3456700000000000))
+	OPTIONAL( QRSH( 85, 0x123456789abcdef0, 20, 0x00000123456789ab, 0xcdef000000000000))
+	OPTIONAL(QRSHU( 20, 0x89abcdef01234567, 20, 0x0000089abcdef012, 0x3456700000000000))
+	OPTIONAL(QRSHU( 85, 0x123456789abcdef0, 20, 0x00000123456789ab, 0xcdef000000000000))
+	OPTIONAL( QLSH( 21, 0x89abcdef01234567, 21, 0xbde02468ace00000, 0xfffffffffff13579))
+	OPTIONAL( QLSH( 86, 0x123456789abcdef0, 21, 0xcf13579bde000000, 0x000000000002468a))
+	OPTIONAL(QLSHU( 21, 0x89abcdef01234567, 21, 0xbde02468ace00000, 0x0000000000113579))
+	OPTIONAL(QLSHU( 86, 0x123456789abcdef0, 21, 0xcf13579bde000000, 0x000000000002468a))
+	OPTIONAL( QRSH( 21, 0x89abcdef01234567, 21, 0xfffffc4d5e6f7809, 0x1a2b380000000000))
+	OPTIONAL( QRSH( 86, 0x123456789abcdef0, 21, 0x00000091a2b3c4d5, 0xe6f7800000000000))
+	OPTIONAL(QRSHU( 21, 0x89abcdef01234567, 21, 0x0000044d5e6f7809, 0x1a2b380000000000))
+	OPTIONAL(QRSHU( 86, 0x123456789abcdef0, 21, 0x00000091a2b3c4d5, 0xe6f7800000000000))
+	OPTIONAL( QLSH( 22, 0x89abcdef01234567, 22, 0x7bc048d159c00000, 0xffffffffffe26af3))
+	OPTIONAL( QLSH( 87, 0x123456789abcdef0, 22, 0x9e26af37bc000000, 0x0000000000048d15))
+	OPTIONAL(QLSHU( 22, 0x89abcdef01234567, 22, 0x7bc048d159c00000, 0x0000000000226af3))
+	OPTIONAL(QLSHU( 87, 0x123456789abcdef0, 22, 0x9e26af37bc000000, 0x0000000000048d15))
+	OPTIONAL( QRSH( 22, 0x89abcdef01234567, 22, 0xfffffe26af37bc04, 0x8d159c0000000000))
+	OPTIONAL( QRSH( 87, 0x123456789abcdef0, 22, 0x00000048d159e26a, 0xf37bc00000000000))
+	OPTIONAL(QRSHU( 22, 0x89abcdef01234567, 22, 0x00000226af37bc04, 0x8d159c0000000000))
+	OPTIONAL(QRSHU( 87, 0x123456789abcdef0, 22, 0x00000048d159e26a, 0xf37bc00000000000))
+	OPTIONAL( QLSH( 23, 0x89abcdef01234567, 23, 0xf78091a2b3800000, 0xffffffffffc4d5e6))
+	OPTIONAL( QLSH( 88, 0x123456789abcdef0, 23, 0x3c4d5e6f78000000, 0x0000000000091a2b))
+	OPTIONAL(QLSHU( 23, 0x89abcdef01234567, 23, 0xf78091a2b3800000, 0x000000000044d5e6))
+	OPTIONAL(QLSHU( 88, 0x123456789abcdef0, 23, 0x3c4d5e6f78000000, 0x0000000000091a2b))
+	OPTIONAL( QRSH( 23, 0x89abcdef01234567, 23, 0xffffff13579bde02, 0x468ace0000000000))
+	OPTIONAL( QRSH( 88, 0x123456789abcdef0, 23, 0x0000002468acf135, 0x79bde00000000000))
+	OPTIONAL(QRSHU( 23, 0x89abcdef01234567, 23, 0x00000113579bde02, 0x468ace0000000000))
+	OPTIONAL(QRSHU( 88, 0x123456789abcdef0, 23, 0x0000002468acf135, 0x79bde00000000000))
+	OPTIONAL( QLSH( 24, 0x89abcdef01234567, 24, 0xef01234567000000, 0xffffffffff89abcd))
+	OPTIONAL( QLSH( 89, 0x123456789abcdef0, 24, 0x789abcdef0000000, 0x0000000000123456))
+	OPTIONAL(QLSHU( 24, 0x89abcdef01234567, 24, 0xef01234567000000, 0x000000000089abcd))
+	OPTIONAL(QLSHU( 89, 0x123456789abcdef0, 24, 0x789abcdef0000000, 0x0000000000123456))
+	OPTIONAL( QRSH( 24, 0x89abcdef01234567, 24, 0xffffff89abcdef01, 0x2345670000000000))
+	OPTIONAL( QRSH( 89, 0x123456789abcdef0, 24, 0x000000123456789a, 0xbcdef00000000000))
+	OPTIONAL(QRSHU( 24, 0x89abcdef01234567, 24, 0x00000089abcdef01, 0x2345670000000000))
+	OPTIONAL(QRSHU( 89, 0x123456789abcdef0, 24, 0x000000123456789a, 0xbcdef00000000000))
+	OPTIONAL( QLSH( 25, 0x89abcdef01234567, 25, 0xde02468ace000000, 0xffffffffff13579b))
+	OPTIONAL( QLSH( 90, 0x123456789abcdef0, 25, 0xf13579bde0000000, 0x00000000002468ac))
+	OPTIONAL(QLSHU( 25, 0x89abcdef01234567, 25, 0xde02468ace000000, 0x000000000113579b))
+	OPTIONAL(QLSHU( 90, 0x123456789abcdef0, 25, 0xf13579bde0000000, 0x00000000002468ac))
+	OPTIONAL( QRSH( 25, 0x89abcdef01234567, 25, 0xffffffc4d5e6f780, 0x91a2b38000000000))
+	OPTIONAL( QRSH( 90, 0x123456789abcdef0, 25, 0x000000091a2b3c4d, 0x5e6f780000000000))
+	OPTIONAL(QRSHU( 25, 0x89abcdef01234567, 25, 0x00000044d5e6f780, 0x91a2b38000000000))
+	OPTIONAL(QRSHU( 90, 0x123456789abcdef0, 25, 0x000000091a2b3c4d, 0x5e6f780000000000))
+	OPTIONAL( QLSH( 26, 0x89abcdef01234567, 26, 0xbc048d159c000000, 0xfffffffffe26af37))
+	OPTIONAL( QLSH( 91, 0x123456789abcdef0, 26, 0xe26af37bc0000000, 0x000000000048d159))
+	OPTIONAL(QLSHU( 26, 0x89abcdef01234567, 26, 0xbc048d159c000000, 0x000000000226af37))
+	OPTIONAL(QLSHU( 91, 0x123456789abcdef0, 26, 0xe26af37bc0000000, 0x000000000048d159))
+	OPTIONAL( QRSH( 26, 0x89abcdef01234567, 26, 0xffffffe26af37bc0, 0x48d159c000000000))
+	OPTIONAL( QRSH( 91, 0x123456789abcdef0, 26, 0x000000048d159e26, 0xaf37bc0000000000))
+	OPTIONAL(QRSHU( 26, 0x89abcdef01234567, 26, 0x000000226af37bc0, 0x48d159c000000000))
+	OPTIONAL(QRSHU( 91, 0x123456789abcdef0, 26, 0x000000048d159e26, 0xaf37bc0000000000))
+	OPTIONAL( QLSH( 27, 0x89abcdef01234567, 27, 0x78091a2b38000000, 0xfffffffffc4d5e6f))
+	OPTIONAL( QLSH( 92, 0x123456789abcdef0, 27, 0xc4d5e6f780000000, 0x000000000091a2b3))
+	OPTIONAL(QLSHU( 27, 0x89abcdef01234567, 27, 0x78091a2b38000000, 0x00000000044d5e6f))
+	OPTIONAL(QLSHU( 92, 0x123456789abcdef0, 27, 0xc4d5e6f780000000, 0x000000000091a2b3))
+	OPTIONAL( QRSH( 27, 0x89abcdef01234567, 27, 0xfffffff13579bde0, 0x2468ace000000000))
+	OPTIONAL( QRSH( 92, 0x123456789abcdef0, 27, 0x00000002468acf13, 0x579bde0000000000))
+	OPTIONAL(QRSHU( 27, 0x89abcdef01234567, 27, 0x000000113579bde0, 0x2468ace000000000))
+	OPTIONAL(QRSHU( 92, 0x123456789abcdef0, 27, 0x00000002468acf13, 0x579bde0000000000))
+	OPTIONAL( QLSH( 28, 0x89abcdef01234567, 28, 0xf012345670000000, 0xfffffffff89abcde))
+	OPTIONAL( QLSH( 93, 0x123456789abcdef0, 28, 0x89abcdef00000000, 0x0000000001234567))
+	OPTIONAL(QLSHU( 28, 0x89abcdef01234567, 28, 0xf012345670000000, 0x00000000089abcde))
+	OPTIONAL(QLSHU( 93, 0x123456789abcdef0, 28, 0x89abcdef00000000, 0x0000000001234567))
+	OPTIONAL( QRSH( 28, 0x89abcdef01234567, 28, 0xfffffff89abcdef0, 0x1234567000000000))
+	OPTIONAL( QRSH( 93, 0x123456789abcdef0, 28, 0x0000000123456789, 0xabcdef0000000000))
+	OPTIONAL(QRSHU( 28, 0x89abcdef01234567, 28, 0x000000089abcdef0, 0x1234567000000000))
+	OPTIONAL(QRSHU( 93, 0x123456789abcdef0, 28, 0x0000000123456789, 0xabcdef0000000000))
+	OPTIONAL( QLSH( 29, 0x89abcdef01234567, 29, 0xe02468ace0000000, 0xfffffffff13579bd))
+	OPTIONAL( QLSH( 94, 0x123456789abcdef0, 29, 0x13579bde00000000, 0x0000000002468acf))
+	OPTIONAL(QLSHU( 29, 0x89abcdef01234567, 29, 0xe02468ace0000000, 0x00000000113579bd))
+	OPTIONAL(QLSHU( 94, 0x123456789abcdef0, 29, 0x13579bde00000000, 0x0000000002468acf))
+	OPTIONAL( QRSH( 29, 0x89abcdef01234567, 29, 0xfffffffc4d5e6f78, 0x091a2b3800000000))
+	OPTIONAL( QRSH( 94, 0x123456789abcdef0, 29, 0x0000000091a2b3c4, 0xd5e6f78000000000))
+	OPTIONAL(QRSHU( 29, 0x89abcdef01234567, 29, 0x000000044d5e6f78, 0x091a2b3800000000))
+	OPTIONAL(QRSHU( 94, 0x123456789abcdef0, 29, 0x0000000091a2b3c4, 0xd5e6f78000000000))
+	OPTIONAL( QLSH( 30, 0x89abcdef01234567, 30, 0xc048d159c0000000, 0xffffffffe26af37b))
+	OPTIONAL( QLSH( 95, 0x123456789abcdef0, 30, 0x26af37bc00000000, 0x00000000048d159e))
+	OPTIONAL(QLSHU( 30, 0x89abcdef01234567, 30, 0xc048d159c0000000, 0x00000000226af37b))
+	OPTIONAL(QLSHU( 95, 0x123456789abcdef0, 30, 0x26af37bc00000000, 0x00000000048d159e))
+	OPTIONAL( QRSH( 30, 0x89abcdef01234567, 30, 0xfffffffe26af37bc, 0x048d159c00000000))
+	OPTIONAL( QRSH( 95, 0x123456789abcdef0, 30, 0x0000000048d159e2, 0x6af37bc000000000))
+	OPTIONAL(QRSHU( 30, 0x89abcdef01234567, 30, 0x0000000226af37bc, 0x048d159c00000000))
+	OPTIONAL(QRSHU( 95, 0x123456789abcdef0, 30, 0x0000000048d159e2, 0x6af37bc000000000))
+	 QLSH( 31, 0x89abcdef01234567, 31, 0x8091a2b380000000, 0xffffffffc4d5e6f7)
+	 QLSH( 96, 0x123456789abcdef0, 31, 0x4d5e6f7800000000, 0x00000000091a2b3c)
+	QLSHU( 31, 0x89abcdef01234567, 31, 0x8091a2b380000000, 0x0000000044d5e6f7)
+	QLSHU( 96, 0x123456789abcdef0, 31, 0x4d5e6f7800000000, 0x00000000091a2b3c)
+	 QRSH( 31, 0x89abcdef01234567, 31, 0xffffffff13579bde, 0x02468ace00000000)
+	 QRSH( 96, 0x123456789abcdef0, 31, 0x000000002468acf1, 0x3579bde000000000)
+	QRSHU( 31, 0x89abcdef01234567, 31, 0x0000000113579bde, 0x02468ace00000000)
+	QRSHU( 96, 0x123456789abcdef0, 31, 0x000000002468acf1, 0x3579bde000000000)
+	 QLSH( 32, 0x89abcdef01234567, 32, 0x0123456700000000, 0xffffffff89abcdef)
+	 QLSH( 97, 0x123456789abcdef0, 32, 0x9abcdef000000000, 0x0000000012345678)
+	QLSHU( 32, 0x89abcdef01234567, 32, 0x0123456700000000, 0x0000000089abcdef)
+	QLSHU( 97, 0x123456789abcdef0, 32, 0x9abcdef000000000, 0x0000000012345678)
+	 QRSH( 32, 0x89abcdef01234567, 32, 0xffffffff89abcdef, 0x0123456700000000)
+	 QRSH( 97, 0x123456789abcdef0, 32, 0x0000000012345678, 0x9abcdef000000000)
+	QRSHU( 32, 0x89abcdef01234567, 32, 0x0000000089abcdef, 0x0123456700000000)
+	QRSHU( 97, 0x123456789abcdef0, 32, 0x0000000012345678, 0x9abcdef000000000)
+	 QLSH( 33, 0x89abcdef01234567, 33, 0x02468ace00000000, 0xffffffff13579bde)
+	 QLSH( 98, 0x123456789abcdef0, 33, 0x3579bde000000000, 0x000000002468acf1)
+	QLSHU( 33, 0x89abcdef01234567, 33, 0x02468ace00000000, 0x0000000113579bde)
+	QLSHU( 98, 0x123456789abcdef0, 33, 0x3579bde000000000, 0x000000002468acf1)
+	 QRSH( 33, 0x89abcdef01234567, 33, 0xffffffffc4d5e6f7, 0x8091a2b380000000)
+	 QRSH( 98, 0x123456789abcdef0, 33, 0x00000000091a2b3c, 0x4d5e6f7800000000)
+	QRSHU( 33, 0x89abcdef01234567, 33, 0x0000000044d5e6f7, 0x8091a2b380000000)
+	QRSHU( 98, 0x123456789abcdef0, 33, 0x00000000091a2b3c, 0x4d5e6f7800000000)
+	OPTIONAL( QLSH( 34, 0x89abcdef01234567, 34, 0x048d159c00000000, 0xfffffffe26af37bc))
+	OPTIONAL( QLSH( 99, 0x123456789abcdef0, 34, 0x6af37bc000000000, 0x0000000048d159e2))
+	OPTIONAL(QLSHU( 34, 0x89abcdef01234567, 34, 0x048d159c00000000, 0x0000000226af37bc))
+	OPTIONAL(QLSHU( 99, 0x123456789abcdef0, 34, 0x6af37bc000000000, 0x0000000048d159e2))
+	OPTIONAL( QRSH( 34, 0x89abcdef01234567, 34, 0xffffffffe26af37b, 0xc048d159c0000000))
+	OPTIONAL( QRSH( 99, 0x123456789abcdef0, 34, 0x00000000048d159e, 0x26af37bc00000000))
+	OPTIONAL(QRSHU( 34, 0x89abcdef01234567, 34, 0x00000000226af37b, 0xc048d159c0000000))
+	OPTIONAL(QRSHU( 99, 0x123456789abcdef0, 34, 0x00000000048d159e, 0x26af37bc00000000))
+	OPTIONAL( QLSH( 35, 0x89abcdef01234567, 35, 0x091a2b3800000000, 0xfffffffc4d5e6f78))
+	OPTIONAL( QLSH(100, 0x123456789abcdef0, 35, 0xd5e6f78000000000, 0x0000000091a2b3c4))
+	OPTIONAL(QLSHU( 35, 0x89abcdef01234567, 35, 0x091a2b3800000000, 0x000000044d5e6f78))
+	OPTIONAL(QLSHU(100, 0x123456789abcdef0, 35, 0xd5e6f78000000000, 0x0000000091a2b3c4))
+	OPTIONAL( QRSH( 35, 0x89abcdef01234567, 35, 0xfffffffff13579bd, 0xe02468ace0000000))
+	OPTIONAL( QRSH(100, 0x123456789abcdef0, 35, 0x0000000002468acf, 0x13579bde00000000))
+	OPTIONAL(QRSHU( 35, 0x89abcdef01234567, 35, 0x00000000113579bd, 0xe02468ace0000000))
+	OPTIONAL(QRSHU(100, 0x123456789abcdef0, 35, 0x0000000002468acf, 0x13579bde00000000))
+	OPTIONAL( QLSH( 36, 0x89abcdef01234567, 36, 0x1234567000000000, 0xfffffff89abcdef0))
+	OPTIONAL( QLSH(101, 0x123456789abcdef0, 36, 0xabcdef0000000000, 0x0000000123456789))
+	OPTIONAL(QLSHU( 36, 0x89abcdef01234567, 36, 0x1234567000000000, 0x000000089abcdef0))
+	OPTIONAL(QLSHU(101, 0x123456789abcdef0, 36, 0xabcdef0000000000, 0x0000000123456789))
+	OPTIONAL( QRSH( 36, 0x89abcdef01234567, 36, 0xfffffffff89abcde, 0xf012345670000000))
+	OPTIONAL( QRSH(101, 0x123456789abcdef0, 36, 0x0000000001234567, 0x89abcdef00000000))
+	OPTIONAL(QRSHU( 36, 0x89abcdef01234567, 36, 0x00000000089abcde, 0xf012345670000000))
+	OPTIONAL(QRSHU(101, 0x123456789abcdef0, 36, 0x0000000001234567, 0x89abcdef00000000))
+	OPTIONAL( QLSH( 37, 0x89abcdef01234567, 37, 0x2468ace000000000, 0xfffffff13579bde0))
+	OPTIONAL( QLSH(102, 0x123456789abcdef0, 37, 0x579bde0000000000, 0x00000002468acf13))
+	OPTIONAL(QLSHU( 37, 0x89abcdef01234567, 37, 0x2468ace000000000, 0x000000113579bde0))
+	OPTIONAL(QLSHU(102, 0x123456789abcdef0, 37, 0x579bde0000000000, 0x00000002468acf13))
+	OPTIONAL( QRSH( 37, 0x89abcdef01234567, 37, 0xfffffffffc4d5e6f, 0x78091a2b38000000))
+	OPTIONAL( QRSH(102, 0x123456789abcdef0, 37, 0x000000000091a2b3, 0xc4d5e6f780000000))
+	OPTIONAL(QRSHU( 37, 0x89abcdef01234567, 37, 0x00000000044d5e6f, 0x78091a2b38000000))
+	OPTIONAL(QRSHU(102, 0x123456789abcdef0, 37, 0x000000000091a2b3, 0xc4d5e6f780000000))
+	OPTIONAL( QLSH( 38, 0x89abcdef01234567, 38, 0x48d159c000000000, 0xffffffe26af37bc0))
+	OPTIONAL( QLSH(103, 0x123456789abcdef0, 38, 0xaf37bc0000000000, 0x000000048d159e26))
+	OPTIONAL(QLSHU( 38, 0x89abcdef01234567, 38, 0x48d159c000000000, 0x000000226af37bc0))
+	OPTIONAL(QLSHU(103, 0x123456789abcdef0, 38, 0xaf37bc0000000000, 0x000000048d159e26))
+	OPTIONAL( QRSH( 38, 0x89abcdef01234567, 38, 0xfffffffffe26af37, 0xbc048d159c000000))
+	OPTIONAL( QRSH(103, 0x123456789abcdef0, 38, 0x000000000048d159, 0xe26af37bc0000000))
+	OPTIONAL(QRSHU( 38, 0x89abcdef01234567, 38, 0x000000000226af37, 0xbc048d159c000000))
+	OPTIONAL(QRSHU(103, 0x123456789abcdef0, 38, 0x000000000048d159, 0xe26af37bc0000000))
+	OPTIONAL( QLSH( 39, 0x89abcdef01234567, 39, 0x91a2b38000000000, 0xffffffc4d5e6f780))
+	OPTIONAL( QLSH(104, 0x123456789abcdef0, 39, 0x5e6f780000000000, 0x000000091a2b3c4d))
+	OPTIONAL(QLSHU( 39, 0x89abcdef01234567, 39, 0x91a2b38000000000, 0x00000044d5e6f780))
+	OPTIONAL(QLSHU(104, 0x123456789abcdef0, 39, 0x5e6f780000000000, 0x000000091a2b3c4d))
+	OPTIONAL( QRSH( 39, 0x89abcdef01234567, 39, 0xffffffffff13579b, 0xde02468ace000000))
+	OPTIONAL( QRSH(104, 0x123456789abcdef0, 39, 0x00000000002468ac, 0xf13579bde0000000))
+	OPTIONAL(QRSHU( 39, 0x89abcdef01234567, 39, 0x000000000113579b, 0xde02468ace000000))
+	OPTIONAL(QRSHU(104, 0x123456789abcdef0, 39, 0x00000000002468ac, 0xf13579bde0000000))
+	OPTIONAL( QLSH( 40, 0x89abcdef01234567, 40, 0x2345670000000000, 0xffffff89abcdef01))
+	OPTIONAL( QLSH(105, 0x123456789abcdef0, 40, 0xbcdef00000000000, 0x000000123456789a))
+	OPTIONAL(QLSHU( 40, 0x89abcdef01234567, 40, 0x2345670000000000, 0x00000089abcdef01))
+	OPTIONAL(QLSHU(105, 0x123456789abcdef0, 40, 0xbcdef00000000000, 0x000000123456789a))
+	OPTIONAL( QRSH( 40, 0x89abcdef01234567, 40, 0xffffffffff89abcd, 0xef01234567000000))
+	OPTIONAL( QRSH(105, 0x123456789abcdef0, 40, 0x0000000000123456, 0x789abcdef0000000))
+	OPTIONAL(QRSHU( 40, 0x89abcdef01234567, 40, 0x000000000089abcd, 0xef01234567000000))
+	OPTIONAL(QRSHU(105, 0x123456789abcdef0, 40, 0x0000000000123456, 0x789abcdef0000000))
+	OPTIONAL( QLSH( 41, 0x89abcdef01234567, 41, 0x468ace0000000000, 0xffffff13579bde02))
+	OPTIONAL( QLSH(106, 0x123456789abcdef0, 41, 0x79bde00000000000, 0x0000002468acf135))
+	OPTIONAL(QLSHU( 41, 0x89abcdef01234567, 41, 0x468ace0000000000, 0x00000113579bde02))
+	OPTIONAL(QLSHU(106, 0x123456789abcdef0, 41, 0x79bde00000000000, 0x0000002468acf135))
+	OPTIONAL( QRSH( 41, 0x89abcdef01234567, 41, 0xffffffffffc4d5e6, 0xf78091a2b3800000))
+	OPTIONAL( QRSH(106, 0x123456789abcdef0, 41, 0x0000000000091a2b, 0x3c4d5e6f78000000))
+	OPTIONAL(QRSHU( 41, 0x89abcdef01234567, 41, 0x000000000044d5e6, 0xf78091a2b3800000))
+	OPTIONAL(QRSHU(106, 0x123456789abcdef0, 41, 0x0000000000091a2b, 0x3c4d5e6f78000000))
+	OPTIONAL( QLSH( 42, 0x89abcdef01234567, 42, 0x8d159c0000000000, 0xfffffe26af37bc04))
+	OPTIONAL( QLSH(107, 0x123456789abcdef0, 42, 0xf37bc00000000000, 0x00000048d159e26a))
+	OPTIONAL(QLSHU( 42, 0x89abcdef01234567, 42, 0x8d159c0000000000, 0x00000226af37bc04))
+	OPTIONAL(QLSHU(107, 0x123456789abcdef0, 42, 0xf37bc00000000000, 0x00000048d159e26a))
+	OPTIONAL( QRSH( 42, 0x89abcdef01234567, 42, 0xffffffffffe26af3, 0x7bc048d159c00000))
+	OPTIONAL( QRSH(107, 0x123456789abcdef0, 42, 0x0000000000048d15, 0x9e26af37bc000000))
+	OPTIONAL(QRSHU( 42, 0x89abcdef01234567, 42, 0x0000000000226af3, 0x7bc048d159c00000))
+	OPTIONAL(QRSHU(107, 0x123456789abcdef0, 42, 0x0000000000048d15, 0x9e26af37bc000000))
+	OPTIONAL( QLSH( 43, 0x89abcdef01234567, 43, 0x1a2b380000000000, 0xfffffc4d5e6f7809))
+	OPTIONAL( QLSH(108, 0x123456789abcdef0, 43, 0xe6f7800000000000, 0x00000091a2b3c4d5))
+	OPTIONAL(QLSHU( 43, 0x89abcdef01234567, 43, 0x1a2b380000000000, 0x0000044d5e6f7809))
+	OPTIONAL(QLSHU(108, 0x123456789abcdef0, 43, 0xe6f7800000000000, 0x00000091a2b3c4d5))
+	OPTIONAL( QRSH( 43, 0x89abcdef01234567, 43, 0xfffffffffff13579, 0xbde02468ace00000))
+	OPTIONAL( QRSH(108, 0x123456789abcdef0, 43, 0x000000000002468a, 0xcf13579bde000000))
+	OPTIONAL(QRSHU( 43, 0x89abcdef01234567, 43, 0x0000000000113579, 0xbde02468ace00000))
+	OPTIONAL(QRSHU(108, 0x123456789abcdef0, 43, 0x000000000002468a, 0xcf13579bde000000))
+	OPTIONAL( QLSH( 44, 0x89abcdef01234567, 44, 0x3456700000000000, 0xfffff89abcdef012))
+	OPTIONAL( QLSH(109, 0x123456789abcdef0, 44, 0xcdef000000000000, 0x00000123456789ab))
+	OPTIONAL(QLSHU( 44, 0x89abcdef01234567, 44, 0x3456700000000000, 0x0000089abcdef012))
+	OPTIONAL(QLSHU(109, 0x123456789abcdef0, 44, 0xcdef000000000000, 0x00000123456789ab))
+	OPTIONAL( QRSH( 44, 0x89abcdef01234567, 44, 0xfffffffffff89abc, 0xdef0123456700000))
+	OPTIONAL( QRSH(109, 0x123456789abcdef0, 44, 0x0000000000012345, 0x6789abcdef000000))
+	OPTIONAL(QRSHU( 44, 0x89abcdef01234567, 44, 0x0000000000089abc, 0xdef0123456700000))
+	OPTIONAL(QRSHU(109, 0x123456789abcdef0, 44, 0x0000000000012345, 0x6789abcdef000000))
+	OPTIONAL( QLSH( 45, 0x89abcdef01234567, 45, 0x68ace00000000000, 0xfffff13579bde024))
+	OPTIONAL( QLSH(110, 0x123456789abcdef0, 45, 0x9bde000000000000, 0x000002468acf1357))
+	OPTIONAL(QLSHU( 45, 0x89abcdef01234567, 45, 0x68ace00000000000, 0x0000113579bde024))
+	OPTIONAL(QLSHU(110, 0x123456789abcdef0, 45, 0x9bde000000000000, 0x000002468acf1357))
+	OPTIONAL( QRSH( 45, 0x89abcdef01234567, 45, 0xfffffffffffc4d5e, 0x6f78091a2b380000))
+	OPTIONAL( QRSH(110, 0x123456789abcdef0, 45, 0x00000000000091a2, 0xb3c4d5e6f7800000))
+	OPTIONAL(QRSHU( 45, 0x89abcdef01234567, 45, 0x0000000000044d5e, 0x6f78091a2b380000))
+	OPTIONAL(QRSHU(110, 0x123456789abcdef0, 45, 0x00000000000091a2, 0xb3c4d5e6f7800000))
+	OPTIONAL( QLSH( 46, 0x89abcdef01234567, 46, 0xd159c00000000000, 0xffffe26af37bc048))
+	OPTIONAL( QLSH(111, 0x123456789abcdef0, 46, 0x37bc000000000000, 0x0000048d159e26af))
+	OPTIONAL(QLSHU( 46, 0x89abcdef01234567, 46, 0xd159c00000000000, 0x0000226af37bc048))
+	OPTIONAL(QLSHU(111, 0x123456789abcdef0, 46, 0x37bc000000000000, 0x0000048d159e26af))
+	OPTIONAL( QRSH( 46, 0x89abcdef01234567, 46, 0xfffffffffffe26af, 0x37bc048d159c0000))
+	OPTIONAL( QRSH(111, 0x123456789abcdef0, 46, 0x00000000000048d1, 0x59e26af37bc00000))
+	OPTIONAL(QRSHU( 46, 0x89abcdef01234567, 46, 0x00000000000226af, 0x37bc048d159c0000))
+	OPTIONAL(QRSHU(111, 0x123456789abcdef0, 46, 0x00000000000048d1, 0x59e26af37bc00000))
+	OPTIONAL( QLSH( 47, 0x89abcdef01234567, 47, 0xa2b3800000000000, 0xffffc4d5e6f78091))
+	OPTIONAL( QLSH(112, 0x123456789abcdef0, 47, 0x6f78000000000000, 0x0000091a2b3c4d5e))
+	OPTIONAL(QLSHU( 47, 0x89abcdef01234567, 47, 0xa2b3800000000000, 0x000044d5e6f78091))
+	OPTIONAL(QLSHU(112, 0x123456789abcdef0, 47, 0x6f78000000000000, 0x0000091a2b3c4d5e))
+	OPTIONAL( QRSH( 47, 0x89abcdef01234567, 47, 0xffffffffffff1357, 0x9bde02468ace0000))
+	OPTIONAL( QRSH(112, 0x123456789abcdef0, 47, 0x0000000000002468, 0xacf13579bde00000))
+	OPTIONAL(QRSHU( 47, 0x89abcdef01234567, 47, 0x0000000000011357, 0x9bde02468ace0000))
+	OPTIONAL(QRSHU(112, 0x123456789abcdef0, 47, 0x0000000000002468, 0xacf13579bde00000))
+	OPTIONAL( QLSH( 48, 0x89abcdef01234567, 48, 0x4567000000000000, 0xffff89abcdef0123))
+	OPTIONAL( QLSH(113, 0x123456789abcdef0, 48, 0xdef0000000000000, 0x0000123456789abc))
+	OPTIONAL(QLSHU( 48, 0x89abcdef01234567, 48, 0x4567000000000000, 0x000089abcdef0123))
+	OPTIONAL(QLSHU(113, 0x123456789abcdef0, 48, 0xdef0000000000000, 0x0000123456789abc))
+	OPTIONAL( QRSH( 48, 0x89abcdef01234567, 48, 0xffffffffffff89ab, 0xcdef012345670000))
+	OPTIONAL( QRSH(113, 0x123456789abcdef0, 48, 0x0000000000001234, 0x56789abcdef00000))
+	OPTIONAL(QRSHU( 48, 0x89abcdef01234567, 48, 0x00000000000089ab, 0xcdef012345670000))
+	OPTIONAL(QRSHU(113, 0x123456789abcdef0, 48, 0x0000000000001234, 0x56789abcdef00000))
+	OPTIONAL( QLSH( 49, 0x89abcdef01234567, 49, 0x8ace000000000000, 0xffff13579bde0246))
+	OPTIONAL( QLSH(114, 0x123456789abcdef0, 49, 0xbde0000000000000, 0x00002468acf13579))
+	OPTIONAL(QLSHU( 49, 0x89abcdef01234567, 49, 0x8ace000000000000, 0x000113579bde0246))
+	OPTIONAL(QLSHU(114, 0x123456789abcdef0, 49, 0xbde0000000000000, 0x00002468acf13579))
+	OPTIONAL( QRSH( 49, 0x89abcdef01234567, 49, 0xffffffffffffc4d5, 0xe6f78091a2b38000))
+	OPTIONAL( QRSH(114, 0x123456789abcdef0, 49, 0x000000000000091a, 0x2b3c4d5e6f780000))
+	OPTIONAL(QRSHU( 49, 0x89abcdef01234567, 49, 0x00000000000044d5, 0xe6f78091a2b38000))
+	OPTIONAL(QRSHU(114, 0x123456789abcdef0, 49, 0x000000000000091a, 0x2b3c4d5e6f780000))
+	OPTIONAL( QLSH( 50, 0x89abcdef01234567, 50, 0x159c000000000000, 0xfffe26af37bc048d))
+	OPTIONAL( QLSH(115, 0x123456789abcdef0, 50, 0x7bc0000000000000, 0x000048d159e26af3))
+	OPTIONAL(QLSHU( 50, 0x89abcdef01234567, 50, 0x159c000000000000, 0x000226af37bc048d))
+	OPTIONAL(QLSHU(115, 0x123456789abcdef0, 50, 0x7bc0000000000000, 0x000048d159e26af3))
+	OPTIONAL( QRSH( 50, 0x89abcdef01234567, 50, 0xffffffffffffe26a, 0xf37bc048d159c000))
+	OPTIONAL( QRSH(115, 0x123456789abcdef0, 50, 0x000000000000048d, 0x159e26af37bc0000))
+	OPTIONAL(QRSHU( 50, 0x89abcdef01234567, 50, 0x000000000000226a, 0xf37bc048d159c000))
+	OPTIONAL(QRSHU(115, 0x123456789abcdef0, 50, 0x000000000000048d, 0x159e26af37bc0000))
+	OPTIONAL( QLSH( 51, 0x89abcdef01234567, 51, 0x2b38000000000000, 0xfffc4d5e6f78091a))
+	OPTIONAL( QLSH(116, 0x123456789abcdef0, 51, 0xf780000000000000, 0x000091a2b3c4d5e6))
+	OPTIONAL(QLSHU( 51, 0x89abcdef01234567, 51, 0x2b38000000000000, 0x00044d5e6f78091a))
+	OPTIONAL(QLSHU(116, 0x123456789abcdef0, 51, 0xf780000000000000, 0x000091a2b3c4d5e6))
+	OPTIONAL( QRSH( 51, 0x89abcdef01234567, 51, 0xfffffffffffff135, 0x79bde02468ace000))
+	OPTIONAL( QRSH(116, 0x123456789abcdef0, 51, 0x0000000000000246, 0x8acf13579bde0000))
+	OPTIONAL(QRSHU( 51, 0x89abcdef01234567, 51, 0x0000000000001135, 0x79bde02468ace000))
+	OPTIONAL(QRSHU(116, 0x123456789abcdef0, 51, 0x0000000000000246, 0x8acf13579bde0000))
+	OPTIONAL( QLSH( 52, 0x89abcdef01234567, 52, 0x5670000000000000, 0xfff89abcdef01234))
+	OPTIONAL( QLSH(117, 0x123456789abcdef0, 52, 0xef00000000000000, 0x000123456789abcd))
+	OPTIONAL(QLSHU( 52, 0x89abcdef01234567, 52, 0x5670000000000000, 0x00089abcdef01234))
+	OPTIONAL(QLSHU(117, 0x123456789abcdef0, 52, 0xef00000000000000, 0x000123456789abcd))
+	OPTIONAL( QRSH( 52, 0x89abcdef01234567, 52, 0xfffffffffffff89a, 0xbcdef01234567000))
+	OPTIONAL( QRSH(117, 0x123456789abcdef0, 52, 0x0000000000000123, 0x456789abcdef0000))
+	OPTIONAL(QRSHU( 52, 0x89abcdef01234567, 52, 0x000000000000089a, 0xbcdef01234567000))
+	OPTIONAL(QRSHU(117, 0x123456789abcdef0, 52, 0x0000000000000123, 0x456789abcdef0000))
+	OPTIONAL( QLSH( 53, 0x89abcdef01234567, 53, 0xace0000000000000, 0xfff13579bde02468))
+	OPTIONAL( QLSH(118, 0x123456789abcdef0, 53, 0xde00000000000000, 0x0002468acf13579b))
+	OPTIONAL(QLSHU( 53, 0x89abcdef01234567, 53, 0xace0000000000000, 0x00113579bde02468))
+	OPTIONAL(QLSHU(118, 0x123456789abcdef0, 53, 0xde00000000000000, 0x0002468acf13579b))
+	OPTIONAL( QRSH( 53, 0x89abcdef01234567, 53, 0xfffffffffffffc4d, 0x5e6f78091a2b3800))
+	OPTIONAL( QRSH(118, 0x123456789abcdef0, 53, 0x0000000000000091, 0xa2b3c4d5e6f78000))
+	OPTIONAL(QRSHU( 53, 0x89abcdef01234567, 53, 0x000000000000044d, 0x5e6f78091a2b3800))
+	OPTIONAL(QRSHU(118, 0x123456789abcdef0, 53, 0x0000000000000091, 0xa2b3c4d5e6f78000))
+	OPTIONAL( QLSH( 54, 0x89abcdef01234567, 54, 0x59c0000000000000, 0xffe26af37bc048d1))
+	OPTIONAL( QLSH(119, 0x123456789abcdef0, 54, 0xbc00000000000000, 0x00048d159e26af37))
+	OPTIONAL(QLSHU( 54, 0x89abcdef01234567, 54, 0x59c0000000000000, 0x00226af37bc048d1))
+	OPTIONAL(QLSHU(119, 0x123456789abcdef0, 54, 0xbc00000000000000, 0x00048d159e26af37))
+	OPTIONAL( QRSH( 54, 0x89abcdef01234567, 54, 0xfffffffffffffe26, 0xaf37bc048d159c00))
+	OPTIONAL( QRSH(119, 0x123456789abcdef0, 54, 0x0000000000000048, 0xd159e26af37bc000))
+	OPTIONAL(QRSHU( 54, 0x89abcdef01234567, 54, 0x0000000000000226, 0xaf37bc048d159c00))
+	OPTIONAL(QRSHU(119, 0x123456789abcdef0, 54, 0x0000000000000048, 0xd159e26af37bc000))
+	OPTIONAL( QLSH( 55, 0x89abcdef01234567, 55, 0xb380000000000000, 0xffc4d5e6f78091a2))
+	OPTIONAL( QLSH(120, 0x123456789abcdef0, 55, 0x7800000000000000, 0x00091a2b3c4d5e6f))
+	OPTIONAL(QLSHU( 55, 0x89abcdef01234567, 55, 0xb380000000000000, 0x0044d5e6f78091a2))
+	OPTIONAL(QLSHU(120, 0x123456789abcdef0, 55, 0x7800000000000000, 0x00091a2b3c4d5e6f))
+	OPTIONAL( QRSH( 55, 0x89abcdef01234567, 55, 0xffffffffffffff13, 0x579bde02468ace00))
+	OPTIONAL( QRSH(120, 0x123456789abcdef0, 55, 0x0000000000000024, 0x68acf13579bde000))
+	OPTIONAL(QRSHU( 55, 0x89abcdef01234567, 55, 0x0000000000000113, 0x579bde02468ace00))
+	OPTIONAL(QRSHU(120, 0x123456789abcdef0, 55, 0x0000000000000024, 0x68acf13579bde000))
+	OPTIONAL( QLSH( 56, 0x89abcdef01234567, 56, 0x6700000000000000, 0xff89abcdef012345))
+	OPTIONAL( QLSH(121, 0x123456789abcdef0, 56, 0xf000000000000000, 0x00123456789abcde))
+	OPTIONAL(QLSHU( 56, 0x89abcdef01234567, 56, 0x6700000000000000, 0x0089abcdef012345))
+	OPTIONAL(QLSHU(121, 0x123456789abcdef0, 56, 0xf000000000000000, 0x00123456789abcde))
+	OPTIONAL( QRSH( 56, 0x89abcdef01234567, 56, 0xffffffffffffff89, 0xabcdef0123456700))
+	OPTIONAL( QRSH(121, 0x123456789abcdef0, 56, 0x0000000000000012, 0x3456789abcdef000))
+	OPTIONAL(QRSHU( 56, 0x89abcdef01234567, 56, 0x0000000000000089, 0xabcdef0123456700))
+	OPTIONAL(QRSHU(121, 0x123456789abcdef0, 56, 0x0000000000000012, 0x3456789abcdef000))
+	OPTIONAL( QLSH( 57, 0x89abcdef01234567, 57, 0xce00000000000000, 0xff13579bde02468a))
+	OPTIONAL( QLSH(122, 0x123456789abcdef0, 57, 0xe000000000000000, 0x002468acf13579bd))
+	OPTIONAL(QLSHU( 57, 0x89abcdef01234567, 57, 0xce00000000000000, 0x0113579bde02468a))
+	OPTIONAL(QLSHU(122, 0x123456789abcdef0, 57, 0xe000000000000000, 0x002468acf13579bd))
+	OPTIONAL( QRSH( 57, 0x89abcdef01234567, 57, 0xffffffffffffffc4, 0xd5e6f78091a2b380))
+	OPTIONAL( QRSH(122, 0x123456789abcdef0, 57, 0x0000000000000009, 0x1a2b3c4d5e6f7800))
+	OPTIONAL(QRSHU( 57, 0x89abcdef01234567, 57, 0x0000000000000044, 0xd5e6f78091a2b380))
+	OPTIONAL(QRSHU(122, 0x123456789abcdef0, 57, 0x0000000000000009, 0x1a2b3c4d5e6f7800))
+	OPTIONAL( QLSH( 58, 0x89abcdef01234567, 58, 0x9c00000000000000, 0xfe26af37bc048d15))
+	OPTIONAL( QLSH(123, 0x123456789abcdef0, 58, 0xc000000000000000, 0x0048d159e26af37b))
+	OPTIONAL(QLSHU( 58, 0x89abcdef01234567, 58, 0x9c00000000000000, 0x0226af37bc048d15))
+	OPTIONAL(QLSHU(123, 0x123456789abcdef0, 58, 0xc000000000000000, 0x0048d159e26af37b))
+	OPTIONAL( QRSH( 58, 0x89abcdef01234567, 58, 0xffffffffffffffe2, 0x6af37bc048d159c0))
+	OPTIONAL( QRSH(123, 0x123456789abcdef0, 58, 0x0000000000000004, 0x8d159e26af37bc00))
+	OPTIONAL(QRSHU( 58, 0x89abcdef01234567, 58, 0x0000000000000022, 0x6af37bc048d159c0))
+	OPTIONAL(QRSHU(123, 0x123456789abcdef0, 58, 0x0000000000000004, 0x8d159e26af37bc00))
+	OPTIONAL( QLSH( 59, 0x89abcdef01234567, 59, 0x3800000000000000, 0xfc4d5e6f78091a2b))
+	OPTIONAL( QLSH(124, 0x123456789abcdef0, 59, 0x8000000000000000, 0x0091a2b3c4d5e6f7))
+	OPTIONAL(QLSHU( 59, 0x89abcdef01234567, 59, 0x3800000000000000, 0x044d5e6f78091a2b))
+	OPTIONAL(QLSHU(124, 0x123456789abcdef0, 59, 0x8000000000000000, 0x0091a2b3c4d5e6f7))
+	OPTIONAL( QRSH( 59, 0x89abcdef01234567, 59, 0xfffffffffffffff1, 0x3579bde02468ace0))
+	OPTIONAL( QRSH(124, 0x123456789abcdef0, 59, 0x0000000000000002, 0x468acf13579bde00))
+	OPTIONAL(QRSHU( 59, 0x89abcdef01234567, 59, 0x0000000000000011, 0x3579bde02468ace0))
+	OPTIONAL(QRSHU(124, 0x123456789abcdef0, 59, 0x0000000000000002, 0x468acf13579bde00))
+	OPTIONAL( QLSH( 60, 0x89abcdef01234567, 60, 0x7000000000000000, 0xf89abcdef0123456))
+	OPTIONAL( QLSH(125, 0x123456789abcdef0, 60, 0x0000000000000000, 0x0123456789abcdef))
+	OPTIONAL(QLSHU( 60, 0x89abcdef01234567, 60, 0x7000000000000000, 0x089abcdef0123456))
+	OPTIONAL(QLSHU(125, 0x123456789abcdef0, 60, 0x0000000000000000, 0x0123456789abcdef))
+	OPTIONAL( QRSH( 60, 0x89abcdef01234567, 60, 0xfffffffffffffff8, 0x9abcdef012345670))
+	OPTIONAL( QRSH(125, 0x123456789abcdef0, 60, 0x0000000000000001, 0x23456789abcdef00))
+	OPTIONAL(QRSHU( 60, 0x89abcdef01234567, 60, 0x0000000000000008, 0x9abcdef012345670))
+	OPTIONAL(QRSHU(125, 0x123456789abcdef0, 60, 0x0000000000000001, 0x23456789abcdef00))
+	OPTIONAL( QLSH( 61, 0x89abcdef01234567, 61, 0xe000000000000000, 0xf13579bde02468ac))
+	OPTIONAL( QLSH(126, 0x123456789abcdef0, 61, 0x0000000000000000, 0x02468acf13579bde))
+	OPTIONAL(QLSHU( 61, 0x89abcdef01234567, 61, 0xe000000000000000, 0x113579bde02468ac))
+	OPTIONAL(QLSHU(126, 0x123456789abcdef0, 61, 0x0000000000000000, 0x02468acf13579bde))
+	OPTIONAL( QRSH( 61, 0x89abcdef01234567, 61, 0xfffffffffffffffc, 0x4d5e6f78091a2b38))
+	OPTIONAL( QRSH(126, 0x123456789abcdef0, 61, 0x0000000000000000, 0x91a2b3c4d5e6f780))
+	OPTIONAL(QRSHU( 61, 0x89abcdef01234567, 61, 0x0000000000000004, 0x4d5e6f78091a2b38))
+	OPTIONAL(QRSHU(126, 0x123456789abcdef0, 61, 0x0000000000000000, 0x91a2b3c4d5e6f780))
+	OPTIONAL( QLSH( 62, 0x89abcdef01234567, 62, 0xc000000000000000, 0xe26af37bc048d159))
+	OPTIONAL( QLSH(127, 0x123456789abcdef0, 62, 0x0000000000000000, 0x048d159e26af37bc))
+	OPTIONAL(QLSHU( 62, 0x89abcdef01234567, 62, 0xc000000000000000, 0x226af37bc048d159))
+	OPTIONAL(QLSHU(127, 0x123456789abcdef0, 62, 0x0000000000000000, 0x048d159e26af37bc))
+	OPTIONAL( QRSH( 62, 0x89abcdef01234567, 62, 0xfffffffffffffffe, 0x26af37bc048d159c))
+	OPTIONAL( QRSH(127, 0x123456789abcdef0, 62, 0x0000000000000000, 0x48d159e26af37bc0))
+	OPTIONAL(QRSHU( 62, 0x89abcdef01234567, 62, 0x0000000000000002, 0x26af37bc048d159c))
+	OPTIONAL(QRSHU(127, 0x123456789abcdef0, 62, 0x0000000000000000, 0x48d159e26af37bc0))
+	 QLSH( 63, 0x89abcdef01234567, 63, 0x8000000000000000, 0xc4d5e6f78091a2b3)
+	 QLSH(128, 0x123456789abcdef0, 63, 0x0000000000000000, 0x091a2b3c4d5e6f78)
+	QLSHU( 63, 0x89abcdef01234567, 63, 0x8000000000000000, 0x44d5e6f78091a2b3)
+	QLSHU(128, 0x123456789abcdef0, 63, 0x0000000000000000, 0x091a2b3c4d5e6f78)
+	 QRSH( 63, 0x89abcdef01234567, 63, 0xffffffffffffffff, 0x13579bde02468ace)
+	 QRSH(128, 0x123456789abcdef0, 63, 0x0000000000000000, 0x2468acf13579bde0)
+	QRSHU( 63, 0x89abcdef01234567, 63, 0x0000000000000001, 0x13579bde02468ace)
+	QRSHU(128, 0x123456789abcdef0, 63, 0x0000000000000000, 0x2468acf13579bde0)
+	 QLSH( 64, 0x89abcdef01234567, 64, 0x0000000000000000, 0x89abcdef01234567)
+	 QLSH(129, 0x123456789abcdef0, 64, 0x0000000000000000, 0x123456789abcdef0)
+	QLSHU( 64, 0x89abcdef01234567, 64, 0x0000000000000000, 0x89abcdef01234567)
+	QLSHU(129, 0x123456789abcdef0, 64, 0x0000000000000000, 0x123456789abcdef0)
+	 QRSH( 64, 0x89abcdef01234567, 64, 0xffffffffffffffff, 0x89abcdef01234567)
+	 QRSH(129, 0x123456789abcdef0, 64, 0x0000000000000000, 0x123456789abcdef0)
+	QRSHU( 64, 0x89abcdef01234567, 64, 0x0000000000000000, 0x89abcdef01234567)
+	QRSHU(129, 0x123456789abcdef0, 64, 0x0000000000000000, 0x123456789abcdef0)
+  #endif
+	prepare
+		pushargi ok
+	finishi @printf
+#endif
+	ret
+	epilog

@@ -1,0 +1,31 @@
+Description:
+posix_spawn() function: create a child process.
+
+Files:
+lib/spawn.c
+m4/posix_spawn.m4
+
+Depends-on:
+spawn
+posix_spawn-internal [test $HAVE_POSIX_SPAWN = 0 || test $REPLACE_POSIX_SPAWN = 1]
+
+configure.ac:
+gl_POSIX_SPAWN
+if test $HAVE_POSIX_SPAWN = 0 || test $REPLACE_POSIX_SPAWN = 1; then
+  AC_LIBOBJ([spawn])
+fi
+gl_SPAWN_MODULE_INDICATOR([posix_spawn])
+
+Makefile.am:
+
+Include:
+<spawn.h>
+
+Link:
+$(LIB_POSIX_SPAWN)
+
+License:
+LGPLv2+
+
+Maintainer:
+glibc

@@ -1,0 +1,14 @@
+Files:
+tests/test-nanosleep.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+AC_CHECK_DECLS_ONCE([alarm])
+
+Makefile.am:
+TESTS += test-nanosleep
+check_PROGRAMS += test-nanosleep
+test_nanosleep_LDADD = $(LDADD) $(LIB_NANOSLEEP)

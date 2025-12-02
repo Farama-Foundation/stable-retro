@@ -1,0 +1,32 @@
+Description:
+reallocarray function that is glibc compatible.
+
+Files:
+lib/reallocarray.c
+m4/reallocarray.m4
+
+Depends-on:
+extensions
+xalloc-oversized
+realloc-gnu
+stdlib
+
+configure.ac:
+gl_FUNC_REALLOCARRAY
+if test $HAVE_REALLOCARRAY = 0; then
+  AC_LIBOBJ([reallocarray])
+  gl_PREREQ_REALLOCARRAY
+fi
+gl_MODULE_INDICATOR([reallocarray])
+gl_STDLIB_MODULE_INDICATOR([reallocarray])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPL
+
+Maintainer:
+all

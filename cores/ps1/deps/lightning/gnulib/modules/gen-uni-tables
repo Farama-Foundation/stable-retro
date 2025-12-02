@@ -1,0 +1,26 @@
+Description:
+Generates the tables in lib/unictype/* and lib/unilbrk/* and lib/uniwbrk/* and
+lib/unicase/*.
+
+Files:
+lib/gen-uni-tables.c
+lib/unictype/3level.h
+lib/unictype/3levelbit.h
+
+Depends-on:
+memcmp
+strdup
+strstr-simple
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+
+Makefile.am:
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+all

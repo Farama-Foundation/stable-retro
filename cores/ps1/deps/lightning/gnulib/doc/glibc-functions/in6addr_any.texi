@@ -1,0 +1,24 @@
+@node in6addr_any
+@subsection @code{in6addr_any}
+@findex in6addr_any
+
+Documentation:@*
+@ifinfo
+@ref{Host Address Data Type,,Host Address Data Type,libc}.
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Host-Address-Data-Type.html}.
+@end ifnotinfo
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This constant is missing on some platforms:
+macOS 10.13, Minix 3.1.8, HP-UX 11.00, IRIX 6.5, Cygwin 1.5.x, mingw, MSVC 14, Android 6.0.
+@end itemize

@@ -1,0 +1,44 @@
+@node login_tty
+@subsection @code{login_tty}
+@findex login_tty
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Logging In and Out,,Logging In and Out,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Logging-In-and-Out.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/login_tty.3.html,,man login_tty}.
+@end itemize
+
+Gnulib module: login_tty
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.3, Android 5.1.
+@item
+This function requires linking with @code{-lutil} on some platforms:
+glibc 2.3.6, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8.
+It is available without link options on other platforms:
+macOS 11.1, Cygwin.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+This function is declared in @code{<utmp.h>} on glibc, Cygwin,
+in @code{<util.h>} on macOS 11.1, NetBSD 5.0, OpenBSD 3.8,
+and in @code{<libutil.h>} on FreeBSD 6.0, Haiku.
+Also note that @code{<sys/types.h>} is
+a prerequisite of @code{<utmp.h>} on FreeBSD 8.0, OpenBSD 4.6 and
+of @code{<libutil.h>} on FreeBSD 8.0.
+@end itemize

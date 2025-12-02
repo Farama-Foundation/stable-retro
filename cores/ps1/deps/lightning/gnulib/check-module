@@ -1,0 +1,299 @@
+#!/usr/bin/perl -w
+# Check a gnulib module.
+
+# Copyright (C) 2005-2007, 2009-2021 Free Software Foundation, Inc.
+
+# This file is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+# Read a module description file and derive the set of files
+# included directly by any .c or .h file listed in the 'Files:' section.
+# Take the union of all such sets for any dependent modules.
+# Then, compare that set with the set derived from the names
+# listed in the various Files: sections.
+
+# This script makes no attempt to diagnose invalid or empty
+# module-description files.
+
+# Written by Jim Meyering
+
+# FIXME:
+# for each .m4 file listed in the Files: section(s)
+# parse it for AC_LIBSOURCES directives, and accumulate the set
+# of files "required" via all AC_LIBSOURCES.
+# If this set is not empty, ensure that it contains
+# the same (.c and .h only?) files as are listed in the Files: sections.
+
+use strict;
+use Getopt::Long;
+use File::Basename;
+#use Coda;
+
+my $COPYRIGHT_NOTICE = "Copyright (C) 2012 Free Software Foundation, Inc.\n".
+"This is free software.  You may redistribute copies of it under the terms of\n".
+"the GNU General Public License <https://www.gnu.org/licenses/gpl.html>.\n".
+"There is NO WARRANTY, to the extent permitted by law.\n";
+
+(my $VERSION = '$Revision: 1.8 $ ') =~ tr/[0-9].//cd;
+(my $ME = $0) =~ s|.*/||;
+
+use constant ST_INIT => 1;
+use constant ST_FILES => 2;
+use constant ST_DEPENDENTS => 3;
+
+# Parse a module file (returning list of Files: names and
+# list of dependent-modules.
+# my ($file, $dep) = parse_module_file $module_file;
+sub parse_module_file ($)
+{
+  my ($module_file) = @_;
+
+  open FH, '<', $module_file
+    or die "$ME: can't open '$module_file' for reading: $!\n";
+
+  my %file_set;
+  my %dep_set;
+
+  my $state = ST_INIT;
+  while (defined (my $line = <FH>))
+    {
+      if ($state eq ST_INIT)
+	{
+	  if ($line =~ /^Files:$/)
+	    {
+	      $state = ST_FILES;
+	    }
+	  elsif ($line =~ /^Depends-on:$/)
+	    {
+	      $state = ST_DEPENDENTS;
+	    }
+	}
+      else
+	{
+	  chomp $line;
+	  $line =~ s/^\s+//;
+	  $line =~ s/\s+$//;
+	  if ( ! $line)
+	    {
+	      $state = ST_INIT;
+	      next;
+	    }
+
+	  if ($state eq ST_FILES)
+	    {
+	      $file_set{$line} = 1;
+	    }
+	  elsif ($state eq ST_DEPENDENTS)
+	    {
+	      $dep_set{$line} = 1;
+	      (my $base = $module_file) =~ s,.*/,,;
+	      $line eq $base
+		and die "$ME: module $module_file depends on itself\n";
+	    }
+	}
+    }
+  close FH;
+
+  # my @t = sort keys %file_set;
+  # print "files: @t\n";
+  # my @u = sort keys %dep_set;
+  # print "dependents: @u\n";
+
+  return (\%file_set, \%dep_set);
+}
+
+# Extract the set of files required for this module, including
+# those required via dependent modules.
+
+# Files:
+# lib/stat.c
+# m4/stat.m4
+# lib/foo.h
+#
+# Depends-on:
+# some-other-module
+
+sub usage ($)
+{
+  my ($exit_code) = @_;
+  my $STREAM = ($exit_code == 0 ? *STDOUT : *STDERR);
+  if ($exit_code != 0)
+    {
+      print $STREAM "Try '$ME --help' for more information.\n";
+    }
+  else
+    {
+      print $STREAM <<EOF;
+Usage: $ME [OPTIONS] FILE...
+
+Read a module description file and derive the set of files
+included directly by any .c or .h file listed in the 'Files:' section.
+Take the union of all such sets for any dependent modules.
+Then, compare that set with the set derived from the names
+listed in the various Files: sections.
+
+OPTIONS:
+
+   --help             display this help and exit
+   --version          output version information and exit
+
+EOF
+    }
+  exit $exit_code;
+}
+
+sub find_included_lib_files ($)
+{
+  my ($file) = @_;
+
+  # Special cases...
+  my %special_non_dup = ( 'fnmatch_loop.c' => 1,
+			  'regex.c' => 1, 'at-func.c' => 1,
+			  'vasnprintf.c' => 1
+			);
+  my %dup_include_ok;
+  $dup_include_ok{'vasnprintf.c'}{'isnand-nolibm.h'} = 1;
+  $dup_include_ok{'vasnprintf.c'}{'isnanl-nolibm.h'} = 1;
+  $dup_include_ok{'vasnprintf.c'}{'fpucw.h'} = 1;
+  $dup_include_ok{'gen-uni-tables.c'}{'3level.h'} = 1;
+  $dup_include_ok{'csharpexec.c'}{'classpath.c'} = 1;
+  $dup_include_ok{'csharpexec.c'}{'classpath.h'} = 1;
+
+  my %inc;
+  open FH, '<', $file
+    or die "$ME: can't open '$file' for reading: $!\n";
+
+  while (defined (my $line = <FH>))
+    {
+      # Ignore test-driver code at end of file.
+      $line =~ m!^\#if(def)? TEST_!
+	and last;
+
+      $line =~ m!^\s*\#\s*include\s+"!
+	or next;
+      $line =~ s///;
+      chomp $line;
+      $line =~ s/".*//;
+      exists $inc{$line} && ! exists $special_non_dup{$line}
+	  && ! exists $dup_include_ok{basename $file}{$line}
+	and warn "$ME: $file: duplicate inclusion of $line\n";
+
+      $inc{$line} = 1;
+    }
+  close FH;
+
+  return \%inc;
+}
+
+my %exempt_header =
+  (
+   # Exempt headers like unlocked-io.h that are '#include'd
+   # but not necessarily used.
+   'unlocked-io.h' => 1,
+
+   # Give gettext.h a free pass only when included from lib/error.c,
+   # since we've made that exception solely to make the error
+   # module easier to use -- at RMS's request.
+   'lib/error.c:gettext.h' => 1,
+
+   # The full-read module shares code with the full-write module.
+   'lib/full-write.c:full-read.h' => 1,
+
+   # The safe-write module shares code with the safe-read module.
+   'lib/safe-read.c:safe-write.h' => 1,
+
+   # The use of obstack.h in the hash module is conditional, off by default.
+   'lib/hash.c:obstack.h' => 1,
+
+   # C files in the gc module have conditional includes.
+   'lib/gc-gnulib.c:des.h' => 1,
+   'lib/gc-gnulib.c:arcfour.h' => 1,
+   'lib/gc-gnulib.c:arctwo.h' => 1,
+   'lib/gc-gnulib.c:md2.h' => 1,
+   'lib/gc-gnulib.c:md4.h' => 1,
+   'lib/gc-gnulib.c:md5.h' => 1,
+   'lib/gc-gnulib.c:rijndael.h' => 1,
+   'lib/gc-gnulib.c:sha1.h' => 1,
+   'lib/gc-gnulib.c:rijndael-api-fst.h' => 1,
+   'lib/gc-gnulib.c:hmac.h' => 1,
+   'lib/gc-libgcrypt.c:md2.h' => 1,
+  );
+
+sub check_module ($)
+{
+  my @m = @_;
+
+  my %file;
+  my %module_all_files;
+  my %dep;
+  my %seen_module;
+
+  while (@m)
+    {
+      my $m = pop @m;
+      # warn "M: $m\n";
+      exists $seen_module{$m}
+	and next;
+      $seen_module{$m} = 1;
+      my ($file, $dep) = parse_module_file $m;
+      push @m, keys %$dep;
+      foreach my $f (keys %$file)
+	{
+	  $module_all_files{$f} = 1;
+	}
+    }
+
+  my @t = sort keys %module_all_files;
+  # warn "ALL files: @t\n";
+
+  # Derive from %module_all_files (by parsing the .c and .h files therein),
+  # the list of all #include'd files that reside in lib/.
+  foreach my $f (keys %module_all_files)
+    {
+      $f =~ /\.[ch]$/
+	or next;
+      # FIXME: this is too naive
+      my $inc = find_included_lib_files "../$f";
+      foreach my $i (sort keys %$inc)
+	{
+	  my $lib_file = "lib/$i";
+	  exists $exempt_header{"$f:$i"}
+	    || exists $exempt_header{$i}
+	      and next;
+	  !exists $module_all_files{$lib_file} && -f "../lib/$i"
+	    and warn "$f: $i is '#include'd, but not "
+	      . "listed in module's Files: section\n";
+	}
+      #my @t = sort keys %$inc;
+      #print "** $f: @t\n";
+    }
+}
+
+{
+  GetOptions
+    (
+     help => sub { usage 0 },
+     version => sub { print "$ME version $VERSION\n$COPYRIGHT_NOTICE"; exit },
+    ) or usage 1;
+
+  @ARGV < 1
+    and (warn "$ME: missing FILE argument\n"), usage 1;
+
+  foreach my $module (@ARGV)
+    {
+      check_module $module;
+    }
+
+  exit 0;
+}

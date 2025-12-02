@@ -1,0 +1,38 @@
+Description:
+Open a directory stream from a file descriptor.
+
+Files:
+lib/fdopendir.c
+m4/fdopendir.m4
+
+Depends-on:
+dirent
+extensions
+at-internal     [test $HAVE_FDOPENDIR = 0]
+dirfd           [test $HAVE_FDOPENDIR = 0]
+dup             [test $HAVE_FDOPENDIR = 0]
+errno           [test $HAVE_FDOPENDIR = 0]
+fchdir          [test $HAVE_FDOPENDIR = 0]
+fstat           [test $HAVE_FDOPENDIR = 0]
+openat-die      [test $HAVE_FDOPENDIR = 0]
+opendir         [test $HAVE_FDOPENDIR = 0]
+save-cwd        [test $HAVE_FDOPENDIR = 0]
+
+configure.ac:
+gl_FUNC_FDOPENDIR
+if test $HAVE_FDOPENDIR = 0 || test $REPLACE_FDOPENDIR = 1; then
+  AC_LIBOBJ([fdopendir])
+fi
+gl_DIRENT_MODULE_INDICATOR([fdopendir])
+gl_MODULE_INDICATOR([fdopendir])
+
+Makefile.am:
+
+Include:
+<dirent.h>
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake

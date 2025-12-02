@@ -1,0 +1,12 @@
+Files:
+tests/test-wctype-h.c
+tests/macros.h
+
+Depends-on:
+wctype-h-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-wctype-h
+check_PROGRAMS += test-wctype-h

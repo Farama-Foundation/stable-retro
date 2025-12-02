@@ -1,0 +1,15 @@
+Files:
+tests/signature.h
+tests/test-getaddrinfo.c
+
+Depends-on:
+sockets
+inet_ntop
+strerror
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getaddrinfo
+check_PROGRAMS += test-getaddrinfo
+test_getaddrinfo_LDADD = $(LDADD) @GETADDRINFO_LIB@ @LIBINTL@

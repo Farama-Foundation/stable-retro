@@ -1,0 +1,27 @@
+Description:
+Memory allocation with expensive empty allocations (glibc compatible).
+
+Files:
+lib/eealloc.h
+lib/eealloc.c
+m4/eealloc.m4
+m4/malloc.m4
+m4/realloc.m4
+
+Depends-on:
+extern-inline
+
+configure.ac:
+gl_EEALLOC
+
+Makefile.am:
+lib_SOURCES += eealloc.c
+
+Include:
+<eealloc.h>
+
+License:
+GPL
+
+Maintainer:
+all

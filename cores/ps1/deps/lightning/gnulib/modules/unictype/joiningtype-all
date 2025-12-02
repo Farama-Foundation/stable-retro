@@ -1,0 +1,24 @@
+Description:
+Complete API for Unicode character Arabic joining types.
+
+Files:
+
+Depends-on:
+unictype/base
+unictype/joiningtype-byname
+unictype/joiningtype-longname
+unictype/joiningtype-name
+unictype/joiningtype-of
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

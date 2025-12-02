@@ -1,0 +1,27 @@
+Description:
+Macros for porting to systems with DOS-style file names.
+
+Status:
+deprecated
+
+Notice:
+This module is deprecated. Use the module 'filename' instead.
+
+Files:
+lib/dosname.h
+
+Depends-on:
+filename
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"dosname.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake, Paul Eggert, Jim Meyering

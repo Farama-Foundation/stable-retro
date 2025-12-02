@@ -1,0 +1,29 @@
+Description:
+stpcpy() function: copy a string, returning a pointer to its end.
+
+Files:
+lib/stpcpy.c
+m4/stpcpy.m4
+
+Depends-on:
+extensions
+string
+
+configure.ac:
+gl_FUNC_STPCPY
+if test $HAVE_STPCPY = 0; then
+  AC_LIBOBJ([stpcpy])
+  gl_PREREQ_STPCPY
+fi
+gl_STRING_MODULE_INDICATOR([stpcpy])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+glibc

@@ -1,0 +1,38 @@
+Description:
+expl() function: exponential function with long double argument.
+
+Files:
+lib/expl.c
+lib/expl-table.c
+m4/expl.m4
+
+Depends-on:
+math
+extensions
+exp             [{ test $HAVE_EXPL = 0 || test $REPLACE_EXPL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+float           [{ test $HAVE_EXPL = 0 || test $REPLACE_EXPL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+isnanl          [{ test $HAVE_EXPL = 0 || test $REPLACE_EXPL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+roundl          [{ test $HAVE_EXPL = 0 || test $REPLACE_EXPL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+ldexpl          [{ test $HAVE_EXPL = 0 || test $REPLACE_EXPL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+gl_FUNC_EXPL
+if test $HAVE_EXPL = 0 || test $REPLACE_EXPL = 1; then
+  AC_LIBOBJ([expl])
+  AC_LIBOBJ([expl-table])
+fi
+gl_MATH_MODULE_INDICATOR([expl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(EXPL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

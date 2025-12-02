@@ -1,0 +1,15 @@
+Files:
+tests/test-symlink.h
+tests/test-symlink.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+stdbool
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-symlink
+check_PROGRAMS += test-symlink

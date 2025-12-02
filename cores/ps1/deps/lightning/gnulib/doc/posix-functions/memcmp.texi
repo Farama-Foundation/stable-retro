@@ -1,0 +1,22 @@
+@node memcmp
+@section @code{memcmp}
+@findex memcmp
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/memcmp.html}
+
+Gnulib module: memcmp
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function fails when comparing 16 bytes or more and with at least one
+buffer not starting on a 4-byte boundary on some older platforms:
+NeXTstep/x86.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function produces wrong results when the arguments are constant strings
+and the compiler is clang 6.0.1.
+@end itemize

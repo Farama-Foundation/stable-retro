@@ -1,0 +1,13 @@
+Files:
+tests/test-unsetenv.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+putenv
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-unsetenv
+check_PROGRAMS += test-unsetenv

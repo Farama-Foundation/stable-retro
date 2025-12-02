@@ -1,0 +1,15 @@
+Files:
+tests/test-pipe.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+stdbool
+binary-io
+msvc-nothrow
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pipe
+check_PROGRAMS += test-pipe

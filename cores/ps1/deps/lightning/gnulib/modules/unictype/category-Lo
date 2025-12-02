@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character is of general category Lo.
+
+Files:
+lib/unictype/categ_Lo.c
+lib/unictype/categ_Lo.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-Lo])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_LO
+lib_SOURCES += unictype/categ_Lo.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

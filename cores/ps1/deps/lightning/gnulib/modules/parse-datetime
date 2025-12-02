@@ -1,0 +1,84 @@
+Description:
+Convert a date/time string to linear time.
+
+Files:
+doc/parse-datetime.texi
+lib/parse-datetime.h
+lib/parse-datetime.y
+m4/tm_gmtoff.m4
+m4/parse-datetime.m4
+
+Depends-on:
+bison
+c99
+c-ctype
+stdbool
+gettime
+gettext-h
+idx
+intprops
+inttypes
+mktime
+nstrftime
+setenv
+unsetenv
+time
+time_r
+time_rz
+timegm
+verify
+
+configure.ac:
+gl_PARSE_DATETIME
+
+Makefile.am:
+# The Automake generated .y.c rule is broken: When executed in a VPATH build,
+#   - The .c file gets generated in the build directory. But since it requires
+#     special tools to rebuild it, we need to distribute it in the tarballs,
+#     and by the GNU Coding Standards
+#     <https://www.gnu.org/prep/standards/html_node/Makefile-Basics.html>
+#     the file should be generated in the source directory.
+#   - The #line directives in the .c file refer to a nonexistent file once it
+#     has been moved from the build directory to the source directory. This
+#     leads to error if 'lcov' is used later.
+# Additionally, here we assume GNU Bison and therefore don't need the ylwrap
+# script.
+# Therefore we override this rule.
+# Since this is a rule that produces multiple files, we apply the idiom from
+# <https://lists.gnu.org/archive/html/bug-make/2020-09/msg00008.html>, so that
+# it works also in parallel 'make'.
+generate-parse-datetime:
+	$(AM_V_YACC)$(PARSE_DATETIME_BISON) -d $(YFLAGS) $(AM_YFLAGS) $(srcdir)/parse-datetime.y \
+	&& test ':' = '$(PARSE_DATETIME_BISON)' || { \
+	  sed -e 's|".*/parse-datetime\.y"|"parse-datetime.y"|' \
+	      -e 's|"parse-datetime\.tab\.c"|"parse-datetime.c"|' \
+	      -e 's|"parse-datetime\.tab\.h"|"parse-datetime-gen.h"|' \
+	      < parse-datetime.tab.c > parse-datetime.c-tmp \
+	  && sed -e 's|".*/parse-datetime\.y"|"parse-datetime.y"|' \
+	         -e 's|"parse-datetime\.tab\.h"|"parse-datetime-gen.h"|' \
+	         < parse-datetime.tab.h > parse-datetime-gen.h-tmp \
+	  && rm -f parse-datetime.tab.c parse-datetime.tab.h \
+	  && mv parse-datetime.c-tmp $(srcdir)/parse-datetime.c \
+	  && mv parse-datetime-gen.h-tmp $(srcdir)/parse-datetime-gen.h; \
+	}
+.PHONY: generate-parse-datetime
+# The above rule will generate files with time stamp order
+# parse-datetime.y <= parse-datetime.c <= parse-datetime-gen.h.
+parse-datetime.c: parse-datetime.y
+	@{ test -f $(srcdir)/parse-datetime.c && test ! $(srcdir)/parse-datetime.c -ot $(srcdir)/parse-datetime.y; } || $(MAKE) generate-parse-datetime
+parse-datetime-gen.h: parse-datetime.c
+	@{ test -f $(srcdir)/parse-datetime-gen.h && test ! $(srcdir)/parse-datetime-gen.h -ot $(srcdir)/parse-datetime.c; } || $(MAKE) generate-parse-datetime
+lib_SOURCES += parse-datetime.y
+BUILT_SOURCES += parse-datetime.c parse-datetime-gen.h
+MOSTLYCLEANFILES += parse-datetime.tab.c parse-datetime.tab.h parse-datetime.c-tmp parse-datetime-gen.h-tmp
+MAINTAINERCLEANFILES += parse-datetime.c parse-datetime-gen.h
+EXTRA_DIST += parse-datetime.c parse-datetime-gen.h
+
+Include:
+"parse-datetime.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert

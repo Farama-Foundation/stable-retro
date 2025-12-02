@@ -1,0 +1,21 @@
+@node strndup
+@section @code{strndup}
+@findex strndup
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strndup.html}
+
+Gnulib module: strndup
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Mac OS X 10.5, FreeBSD 6.0, NetBSD 3.0, OpenBSD 3.8, Minix 3.1.8, HP-UX 11, IRIX 6.5, Solaris 10, mingw, MSVC 14.
+@item
+This function does not NUL-terminate the result on some platforms:
+AIX 5.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

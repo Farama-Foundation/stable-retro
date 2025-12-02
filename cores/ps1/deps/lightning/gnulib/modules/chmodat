@@ -1,0 +1,23 @@
+Description:
+chmodat and lchmodat functions: Change access permissions of a file at a directory.
+
+Files:
+lib/chmodat.c
+
+Depends-on:
+fchmodat
+
+configure.ac:
+gl_MODULE_INDICATOR([chmodat]) dnl for lib/openat.h
+
+Makefile.am:
+lib_SOURCES += chmodat.c
+
+Include:
+"openat.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake, Paul Eggert

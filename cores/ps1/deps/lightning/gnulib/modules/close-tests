@@ -1,0 +1,12 @@
+Files:
+tests/test-close.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-close
+check_PROGRAMS += test-close

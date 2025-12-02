@@ -1,0 +1,34 @@
+Description:
+Locating a program in a given path.
+
+Files:
+lib/findprog.h
+lib/findprog-in.c
+m4/findprog-in.m4
+m4/eaccess.m4
+
+Depends-on:
+stdbool
+sys_stat
+filename
+concat-filename
+access
+stat
+strdup-posix
+malloc-posix
+unistd
+
+configure.ac:
+gl_FINDPROG_IN
+
+Makefile.am:
+lib_SOURCES += findprog.h findprog-in.c
+
+Include:
+"findprog.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

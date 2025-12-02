@@ -1,0 +1,27 @@
+Description:
+remainderf() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/remainderf-ieee.m4
+
+Depends-on:
+remainderf
+fpieee
+remainder-ieee  [test $HAVE_REMAINDERF = 0 || test $REPLACE_REMAINDERF = 1]
+
+configure.ac:
+gl_FUNC_REMAINDERF_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(REMAINDERF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

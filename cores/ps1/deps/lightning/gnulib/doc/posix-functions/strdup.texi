@@ -1,0 +1,25 @@
+@node strdup
+@section @code{strdup}
+@findex strdup
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strdup.html}
+
+Gnulib module: strdup or strdup-posix
+
+Portability problems fixed by either Gnulib module @code{strdup} or @code{strdup-posix}:
+@itemize
+@item
+This function has no prototype in @code{<string.h>} on some old platforms.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{strdup-posix}:
+@itemize
+@item
+Upon failure, the function does not set @code{errno} to @code{ENOMEM} on
+some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

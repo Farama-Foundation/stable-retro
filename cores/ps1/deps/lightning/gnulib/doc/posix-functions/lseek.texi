@@ -1,0 +1,36 @@
+@node lseek
+@section @code{lseek}
+@findex lseek
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/lseek.html}
+
+Gnulib module: lseek
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is declared in a different header file (namely, @code{<io.h>})
+on some platforms:
+MSVC 14.
+@item
+On platforms where @code{off_t} is a 32-bit type, @code{lseek} does not work
+correctly with files larger than 2 GB@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@item
+This function mistakenly succeeds on pipes on some platforms: mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+POSIX does not specify which file descriptors support seeking and which don't.
+In practice, regular files and block devices support seeking, and ttys, pipes,
+and most character devices don't support it.
+@item
+When the third argument is invalid, POSIX says that @code{lseek} should set
+@code{errno} to @code{EINVAL} and return @minus{}1, but in this situation a
+@code{SIGSYS} signal is raised on some platforms:
+IRIX 6.5.
+@item
+Some systems do not support @code{SEEK_DATA} and @code{SEEK_HOLE}:
+AIX, HP-UX, Microsoft Windows, NetBSD, OpenBSD.
+@end itemize

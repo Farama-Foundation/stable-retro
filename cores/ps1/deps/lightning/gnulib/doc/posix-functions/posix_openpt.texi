@@ -1,0 +1,25 @@
+@node posix_openpt
+@section @code{posix_openpt}
+@findex posix_openpt
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_openpt.html}
+
+Gnulib module: posix_openpt
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11.23, IRIX 6.5, Solaris 9, Cygwin 1.5.x, mingw, MSVC 14, Android 4.4.
+However, the replacement may fail with @code{ENOSYS} or @code{ENOENT} on
+some platforms.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize
+
+Note that when using this function to open the master side of a
+pseudo-terminal, you still need platform dependent code to open the
+corresponding slave side.  The Gnulib module @code{openpty} provides
+an easy-to-use API that does both at once.

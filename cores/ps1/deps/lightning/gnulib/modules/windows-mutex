@@ -1,0 +1,28 @@
+Description:
+Plain mutexes (native Windows implementation).
+
+Files:
+lib/windows-mutex.h
+lib/windows-mutex.c
+lib/windows-initguard.h
+
+Depends-on:
+
+configure.ac:
+AC_REQUIRE([AC_CANONICAL_HOST])
+case "$host_os" in
+  mingw*)
+    AC_LIBOBJ([windows-mutex])
+    ;;
+esac
+
+Makefile.am:
+
+Include:
+"windows-mutex.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

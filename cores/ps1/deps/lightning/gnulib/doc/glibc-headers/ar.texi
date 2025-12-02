@@ -1,0 +1,19 @@
+@node ar.h
+@section @file{ar.h}
+
+Describes the structure of files produced by the @samp{ar} program.
+Defines the type @code{struct ar_hdr} and the macros @code{ARMAG},
+@code{SARMAG}, @code{ARFMAG}.
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+mingw, MSVC 14.
+@end itemize

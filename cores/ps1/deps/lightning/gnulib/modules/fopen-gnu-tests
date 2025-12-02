@@ -1,0 +1,12 @@
+Files:
+tests/test-fopen-gnu.c
+tests/macros.h
+
+Depends-on:
+fcntl
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fopen-gnu
+check_PROGRAMS += test-fopen-gnu

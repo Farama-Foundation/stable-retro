@@ -1,0 +1,18 @@
+@node res_init
+@subsection @code{res_init}
+@findex res_init
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/res_init.3.html,,man res_init}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Cygwin 1.5.x, mingw, MSVC 14.
+@end itemize

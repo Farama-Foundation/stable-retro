@@ -1,0 +1,34 @@
+Description:
+Base layer for Unicode character case mappings.
+
+Files:
+lib/unicase.in.h
+m4/libunistring-base.m4
+
+Depends-on:
+unitypes
+uninorm/base
+stdbool
+
+configure.ac:
+gl_LIBUNISTRING_LIBHEADER([0.9.4], [unicase.h])
+
+Makefile.am:
+BUILT_SOURCES += $(LIBUNISTRING_UNICASE_H)
+
+unicase.h: unicase.in.h
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  cat $(srcdir)/unicase.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+MOSTLYCLEANFILES += unicase.h unicase.h-t
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

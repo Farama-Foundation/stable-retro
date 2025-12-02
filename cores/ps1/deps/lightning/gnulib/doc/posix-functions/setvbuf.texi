@@ -1,0 +1,22 @@
+@node setvbuf
+@section @code{setvbuf}
+@findex setvbuf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/setvbuf.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), this function does not set @code{errno}
+upon failure.
+@item
+On Windows platforms (excluding Cygwin), @code{_IOLBF} (line-buffering)
+is treated as if it were @code{_IOFBF} (full buffering),
+possibly with a warning generated.
+@end itemize

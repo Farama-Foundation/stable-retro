@@ -1,0 +1,12 @@
+Files:
+tests/test-c-strstr.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-c-strstr
+check_PROGRAMS += test-c-strstr
+

@@ -1,0 +1,30 @@
+Description:
+Formatted printing into an obstack.
+
+Files:
+m4/obstack-printf.m4
+lib/obstack_printf.c
+
+Depends-on:
+obstack
+stdio
+vasnprintf
+extensions
+
+configure.ac:
+gl_FUNC_OBSTACK_PRINTF
+if test $ac_cv_func_obstack_printf = no || test $REPLACE_OBSTACK_PRINTF = 1; then
+  AC_LIBOBJ([obstack_printf])
+fi
+gl_STDIO_MODULE_INDICATOR([obstack-printf])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+GPL
+
+Maintainer:
+Eric Blake

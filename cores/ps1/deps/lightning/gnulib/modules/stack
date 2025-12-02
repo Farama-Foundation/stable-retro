@@ -1,0 +1,25 @@
+Description:
+Type-safe stack data type.
+
+Files:
+lib/stack.h
+
+Depends-on:
+assure
+stdbool
+stdlib
+xalloc
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += stack.h
+
+Include:
+"stack.h"
+
+License:
+GPL
+
+Maintainer:
+Marc Nieper-Wißkirchen

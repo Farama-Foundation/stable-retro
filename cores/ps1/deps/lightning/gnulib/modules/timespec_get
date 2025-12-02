@@ -1,0 +1,32 @@
+Description:
+timespec_get() function: return the current time with up to nanosecond resolution
+
+Files:
+lib/timespec_get.c
+m4/timespec_get.m4
+
+Depends-on:
+time
+extensions
+gettime         [test $HAVE_TIMESPEC_GET = 0]
+
+configure.ac:
+gl_FUNC_TIMESPEC_GET
+if test $HAVE_TIMESPEC_GET = 0; then
+  AC_LIBOBJ([timespec_get])
+fi
+gl_TIME_MODULE_INDICATOR([timespec_get])
+
+Makefile.am:
+
+Include:
+<time.h>
+
+Link:
+$(LIB_CLOCK_GETTIME)
+
+License:
+LGPL
+
+Maintainer:
+all

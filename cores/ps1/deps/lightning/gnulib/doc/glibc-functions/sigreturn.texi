@@ -1,0 +1,20 @@
+@node sigreturn
+@subsection @code{sigreturn}
+@findex sigreturn
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-sigreturn-2.html}
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/sigreturn.2.html,,man sigreturn}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, NetBSD 9.0, OpenBSD 6.7, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

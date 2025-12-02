@@ -1,0 +1,132 @@
+The following packages appear to be using gnulib and gnulib-tool:
+
+  acct            https://svn.savannah.gnu.org/viewvc/trunk/?root=acct
+  anubis          https://git.savannah.gnu.org/gitweb/?p=anubis.git;a=tree
+  augeas          https://github.com/hercules-team/augeas
+  autobuild       https://git.savannah.nongnu.org/gitweb/?p=autobuild.git;a=tree
+  barcode         https://git.savannah.gnu.org/gitweb/?p=barcode.git;a=tree
+  bison           https://git.savannah.gnu.org/gitweb/?p=bison.git;a=tree
+  clisp           https://gitlab.com/gnu-clisp/clisp
+  coreutils       https://git.savannah.gnu.org/gitweb/?p=coreutils.git;a=tree
+  cmogstored      https://yhbt.net/cmogstored/
+  cpio            https://git.savannah.gnu.org/gitweb/?p=cpio.git;a=tree
+  CSSC            https://git.savannah.gnu.org/gitweb/?p=cssc.git;a=tree
+  cvs             https://cvs.savannah.gnu.org/viewcvs/cvs/ccvs/
+  cvsps           https://sourceforge.net/projects/cvsps/
+  datamash        https://git.savannah.gnu.org/gitweb/?p=datamash.git;a=tree
+  diffutils       https://git.savannah.gnu.org/gitweb/?p=diffutils.git;a=tree
+  emacs           https://git.savannah.gnu.org/gitweb/?p=emacs.git;a=tree
+  febootstrap     https://fedorapeople.org/cgit/rjones/public_git/febootstrap.git/
+  findutils       https://git.savannah.gnu.org/gitweb/?p=findutils.git;a=tree
+  freedink        https://git.savannah.gnu.org/gitweb/?p=freedink.git;a=tree
+  gcal            https://git.savannah.gnu.org/gitweb/?p=gcal.git;a=tree
+  gdb             https://sourceware.org/git/?p=gdb.git;a=tree
+  gettext         https://git.savannah.gnu.org/gitweb/?p=gettext.git;a=tree
+  gengetopt       https://git.savannah.gnu.org/gitweb/?p=gengetopt.git;a=tree
+  gmediaserver    https://cvs.savannah.gnu.org/viewvc/gmediaserver/gmediaserver/
+  gnuit           https://www.gnu.org/software/gnuit/
+                  https://git.savannah.gnu.org/gitweb/?p=gnuit.git;a=tree
+  gnutls          https://www.gnutls.org/
+                  https://gitlab.com/gnutls/gnutls.git
+  gpg             https://gnupg.org/
+                  https://git.gnupg.org/
+  groff           https://git.savannah.gnu.org/gitweb/?p=groff.git;a=tree
+  grub            https://git.savannah.gnu.org/gitweb/?p=grub.git;a=tree
+  gsasl           https://git.savannah.gnu.org/gitweb/?p=gsasl.git;a=tree
+  gss             https://git.savannah.gnu.org/gitweb/?p=gss.git;a=tree
+  gtkreindeer     https://git.savannah.gnu.org/gitweb/?p=gtkreindeer.git;a=tree
+  gtk-vnc         https://gitlab.gnome.org/GNOME/gtk-vnc/tree/master/
+  grep            https://git.savannah.gnu.org/gitweb/?p=grep.git;a=tree
+  guile           https://git.savannah.gnu.org/gitweb/?p=guile.git;a=tree
+  gzip            https://git.savannah.gnu.org/gitweb/?p=gzip.git;a=tree
+  hello           https://git.savannah.gnu.org/gitweb/?p=hello.git;a=tree
+  hivex           https://github.com/libguestfs/hivex
+  icoutils        https://git.savannah.nongnu.org/gitweb/?p=icoutils.git;a=tree
+  inetutils       https://git.savannah.gnu.org/gitweb/?p=inetutils.git;a=tree
+  iwhd            https://github.com/markmc/iwhd
+  jugtail         https://cvs.savannah.gnu.org/viewvc/jugtail/jugtail/
+  jwhois          https://git.savannah.gnu.org/gitweb/?p=jwhois.git;a=tree
+  libdap          https://github.com/OPENDAP/libdap
+  libffcall       https://git.savannah.gnu.org/gitweb/?p=libffcall.git;a=tree
+  libgnupdf       https://bzr.savannah.gnu.org/lh/pdf/libgnupdf/trunk/files
+  libguestfs      https://github.com/libguestfs/libguestfs
+  libiconv        https://git.savannah.gnu.org/gitweb/?p=libiconv.git;a=tree
+  libidn          https://git.savannah.gnu.org/gitweb/?p=libidn.git;a=tree
+  libidn2         https://gitlab.com/libidn/libidn2
+  libksba         https://www.gnupg.org/related_software/libksba/index.html
+  libntlm         https://git.savannah.nongnu.org/gitweb/?p=libntlm.git;a=tree
+  libprelude      https://www.prelude-siem.org/projects/libprelude/repository
+  libpreludedb    https://www.prelude-siem.org/projects/libpreludedb/repository
+  libtasn1        https://git.savannah.gnu.org/gitweb/?p=libtasn1.git;a=tree
+  libunistring    https://git.savannah.gnu.org/gitweb/?p=libunistring.git;a=tree
+  libvirt         https://libvirt.org/
+                  https://libvirt.org/git/?p=libvirt.git;a=tree
+  m4              https://git.savannah.gnu.org/gitweb/?p=m4.git;a=tree
+  mailfromd       http://git.gnu.org.ua/cgit/mailfromd.git/tree/
+  mailutils       https://git.savannah.gnu.org/gitweb/?p=mailutils.git;a=tree
+  man-db          https://bazaar.launchpad.net/~cjwatson/man-db/master/files
+  miktex          https://miktex.org/
+                  https://github.com/MiKTeX/miktex
+  mini-httpd      https://git.savannah.gnu.org/gitweb/?p=mini-httpd.git;a=tree
+  msmtp           https://git.marlam.de/gitweb/?p=msmtp.git;a=tree
+  myserver        https://git.savannah.gnu.org/gitweb/?p=myserver.git;a=summary
+  nagios-plugins  https://github.com/nagios-plugins/nagios-plugins
+  nano            https://git.savannah.gnu.org/gitweb/?p=nano.git;a=tree
+  Net::CDP        http://cpansearch.perl.org/src/MCHAPMAN/Net-CDP-0.09/libcdp/
+  netcf           https://pagure.io/netcf/tree/master
+  OATH Toolkit    https://gitlab.com/oath-toolkit/oath-toolkit/
+  octave          https://hg.savannah.gnu.org/hgweb/octave/file/
+  OPeNDAP         https://scm.opendap.org/svn/trunk/
+  parted          https://git.savannah.gnu.org/gitweb/?p=parted.git;a=tree
+  patch           https://git.savannah.gnu.org/gitweb/?p=patch.git;a=tree
+  poke            https://git.savannah.gnu.org/gitweb/?p=poke.git;a=tree
+  prelude-lml     https://www.prelude-siem.org/projects/prelude-lml/repository
+  prelude-manager https://www.prelude-siem.org/projects/prelude-manager/repository
+  pspp            https://git.savannah.gnu.org/gitweb/?p=pspp.git;a=tree
+  radius          https://git.savannah.gnu.org/gitweb/?p=radius.git;a=tree
+  recutils        https://git.savannah.gnu.org/gitweb/?p=recutils.git;a=tree
+  reindeer        https://git.savannah.gnu.org/gitweb/?p=reindeer.git;a=tree
+  rcs             https://git.savannah.gnu.org/gitweb/?p=rcs.git;a=tree
+  sed             https://git.savannah.gnu.org/gitweb/?p=sed.git;a=tree
+  sharutils       https://git.savannah.gnu.org/gitweb/?p=sharutils.git;a=tree
+  shishi          https://git.savannah.gnu.org/gitweb/?p=shishi.git;a=tree
+  tar             https://git.savannah.gnu.org/gitweb/?p=tar.git;a=tree
+  texinfo         https://git.savannah.gnu.org/gitweb/?p=texinfo.git;a=tree
+  time            https://git.savannah.gnu.org/gitweb/?p=time.git;a=tree
+  tmpwatch        https://pagure.io/tmpwatch/tree/master
+  vc-dwim         https://git.savannah.gnu.org/gitweb/?p=vc-dwim.git;a=tree
+  wdiff           https://bzr.savannah.gnu.org/lh/wdiff/trunk/files
+  wget            https://git.savannah.gnu.org/gitweb/?p=wget.git;a=tree
+  wget2           https://git.savannah.gnu.org/gitweb/?p=wget/wget2.git;a=tree
+  wydawca         http://git.gnu.org.ua/cgit/wydawca.git/tree/
+  wyslij-po       http://svn.gnu.org.ua/viewvc/wyslij-po/trunk/
+  zile            https://git.savannah.gnu.org/gitweb/?p=zile.git;a=tree
+
+The following packages are using gnulib without gnulib-tool:
+
+  gawk            https://git.savannah.gnu.org/gitweb/?p=gawk.git;a=tree
+  libtool         https://git.savannah.gnu.org/gitweb/?p=libtool.git;a=tree
+  libgcrypt       https://git.gnupg.org/cgi-bin/gitweb.cgi?p=libgcrypt.git;a=tree
+
+Articles:
+
+  "Using Gnulib to improve software portability",
+  by Diego 'Flameeyes' Pettenò on December 28, 2005,
+  https://www.linux.com/news/using-gnulib-improve-software-portability
+
+-----
+
+Copyright (C) 2006-2021 Free Software Foundation, Inc.
+
+This file is free documentation; the Free Software Foundation
+gives unlimited permission to copy and/or distribute it,
+with or without modifications, as long as this notice is preserved.
+
+-----
+
+Hey Emacs!
+Local Variables:
+coding: utf-8
+indent-tabs-mode: nil
+whitespace-check-buffer-indent: nil
+End:

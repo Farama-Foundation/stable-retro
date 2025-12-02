@@ -1,0 +1,26 @@
+Description:
+Convert UTF-32 string to UTF-8 string.
+
+Files:
+lib/unistr/u32-to-u8.c
+
+Depends-on:
+unistr/base
+unistr/u8-uctomb
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u32-to-u8])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_TO_U8
+lib_SOURCES += unistr/u32-to-u8.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

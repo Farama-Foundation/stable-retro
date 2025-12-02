@@ -1,0 +1,29 @@
+Description:
+Line breaking of UTF-8 strings.
+
+Files:
+lib/unilbrk/u8-possible-linebreaks.c
+lib/uniwidth/cjk.h
+
+Depends-on:
+unilbrk/base
+unilbrk/tables
+unistr/u8-mbtouc-unsafe
+streq
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unilbrk/u8-possible-linebreaks])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNILBRK_U8_POSSIBLE_LINEBREAKS
+lib_SOURCES += unilbrk/u8-possible-linebreaks.c
+endif
+
+Include:
+"unilbrk.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

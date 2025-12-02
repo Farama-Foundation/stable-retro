@@ -1,0 +1,29 @@
+Description:
+flock(2) function: advisory file locks.
+
+Files:
+lib/flock.c
+m4/flock.m4
+
+Depends-on:
+sys_file
+msvc-nothrow    [test $HAVE_FLOCK = 0]
+
+configure.ac:
+gl_FUNC_FLOCK
+if test $HAVE_FLOCK = 0; then
+  AC_LIBOBJ([flock])
+  gl_PREREQ_FLOCK
+fi
+gl_HEADER_SYS_FILE_MODULE_INDICATOR([flock])
+
+Makefile.am:
+
+Include:
+<sys/file.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Richard W.M. Jones, Jim Meyering

@@ -1,0 +1,23 @@
+Description:
+Script to execute a C# program.
+
+Files:
+build-aux/csharpexec.sh.in
+m4/csharpexec.m4
+m4/csharp.m4
+
+Depends-on:
+
+configure.ac:
+# You need to invoke gt_CSHARPEXEC yourself, possibly with arguments.
+AC_CONFIG_FILES([csharpexec.sh:build-aux/csharpexec.sh.in])
+
+Makefile.am:
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+all

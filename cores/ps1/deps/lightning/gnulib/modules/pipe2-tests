@@ -1,0 +1,15 @@
+Files:
+tests/test-pipe2.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+stdbool
+msvc-nothrow
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pipe2
+check_PROGRAMS += test-pipe2
+test_pipe2_LDADD = $(LDADD) $(LIBSOCKET)

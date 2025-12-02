@@ -1,0 +1,36 @@
+Description:
+gethostname() function: Return machine's hostname.
+
+Files:
+lib/gethostname.c
+m4/gethostname.m4
+lib/w32sock.h
+
+Depends-on:
+unistd
+sys_socket      [test $HAVE_GETHOSTNAME = 0]
+errno           [test $HAVE_GETHOSTNAME = 0]
+sockets         [test $HAVE_GETHOSTNAME = 0]
+msvc-nothrow    [test $HAVE_GETHOSTNAME = 0]
+
+configure.ac:
+gl_FUNC_GETHOSTNAME
+if test $HAVE_GETHOSTNAME = 0; then
+  AC_LIBOBJ([gethostname])
+  gl_PREREQ_GETHOSTNAME
+fi
+gl_UNISTD_MODULE_INDICATOR([gethostname])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+Link:
+$(GETHOSTNAME_LIB)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

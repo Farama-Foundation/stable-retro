@@ -1,0 +1,31 @@
+Description:
+c32srtombs() function: convert 32-bit wide string to string.
+
+Files:
+lib/c32srtombs.c
+lib/wcsrtombs-impl.h
+lib/c32srtombs-state.c
+
+Depends-on:
+uchar
+wchar
+verify
+c32rtomb
+wcsrtombs       [test $SMALL_WCHAR_T = 0]
+
+configure.ac:
+AC_REQUIRE([gl_UCHAR_H])
+AC_LIBOBJ([c32srtombs-state])
+gl_UCHAR_MODULE_INDICATOR([c32srtombs])
+
+Makefile.am:
+lib_SOURCES += c32srtombs.c
+
+Include:
+<uchar.h>
+
+License:
+LGPL
+
+Maintainer:
+Bruno Haible

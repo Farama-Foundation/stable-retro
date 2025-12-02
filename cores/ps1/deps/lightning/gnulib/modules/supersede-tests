@@ -1,0 +1,22 @@
+Files:
+tests/test-supersede.c
+tests/test-supersede-open.h
+tests/test-supersede-fopen.h
+tests/macros.h
+
+Depends-on:
+c99
+mkdtemp
+filenamecat
+write
+read-file
+unlink
+rmdir
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-supersede
+check_PROGRAMS += test-supersede
+test_supersede_LDADD = $(LDADD) $(LIB_ACL) $(LIB_CLOCK_GETTIME) $(LIB_GETRANDOM) $(LIBINTL) $(LIBTHREAD)

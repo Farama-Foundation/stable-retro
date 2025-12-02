@@ -1,0 +1,28 @@
+Description:
+Test whether a Unicode character is "deprecated".
+
+Files:
+lib/unictype/pr_deprecated.c
+lib/unictype/pr_deprecated.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-deprecated])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_DEPRECATED
+lib_SOURCES += unictype/pr_deprecated.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

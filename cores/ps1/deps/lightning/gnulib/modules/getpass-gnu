@@ -1,0 +1,29 @@
+Description:
+getpass() function: read a password of arbitrary length from /dev/tty.
+
+Files:
+lib/getpass.h
+lib/getpass.c
+m4/getpass.m4
+
+Depends-on:
+getpass
+
+configure.ac:
+gl_FUNC_GETPASS_GNU
+if test $HAVE_GETPASS = 0 || test $REPLACE_GETPASS = 1; then
+  AC_LIBOBJ([getpass])
+  gl_PREREQ_GETPASS
+fi
+gl_UNISTD_MODULE_INDICATOR([getpass])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPL
+
+Maintainer:
+Jim Meyering, glibc

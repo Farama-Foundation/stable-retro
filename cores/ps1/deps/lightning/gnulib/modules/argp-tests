@@ -1,0 +1,11 @@
+Files:
+tests/test-argp.c
+tests/test-argp-2.sh
+tests/macros.h
+
+Depends-on:
+
+Makefile.am:
+TESTS += test-argp test-argp-2.sh
+check_PROGRAMS += test-argp
+test_argp_LDADD = $(LDADD) @LIBINTL@

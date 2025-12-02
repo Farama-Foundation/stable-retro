@@ -1,0 +1,31 @@
+Description:
+link() function: create a new link for an existing file
+
+Files:
+lib/link.c
+m4/link.m4
+
+Depends-on:
+unistd
+free-posix      [test $HAVE_LINK = 0 || test $REPLACE_LINK = 1]
+stat            [test $HAVE_LINK = 0 || test $REPLACE_LINK = 1]
+strdup-posix    [test $HAVE_LINK = 0 || test $REPLACE_LINK = 1]
+sys_stat        [test $HAVE_LINK = 0 || test $REPLACE_LINK = 1]
+
+configure.ac:
+gl_FUNC_LINK
+if test $HAVE_LINK = 0 || test $REPLACE_LINK = 1; then
+  AC_LIBOBJ([link])
+fi
+gl_UNISTD_MODULE_INDICATOR([link])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Martin Lambers, Eric Blake

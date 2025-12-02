@@ -1,0 +1,28 @@
+Description:
+Allocate memory with indefinite extent and specified alignment.
+
+Files:
+lib/aligned-malloc.h
+m4/malloc-align.m4
+
+Depends-on:
+stdint
+posix_memalign
+aligned_alloc
+memalign
+
+configure.ac:
+gl_MALLOC_ALIGNMENT
+AC_REQUIRE([AC_C_INLINE])
+AC_CHECK_FUNCS_ONCE([posix_memalign aligned_alloc memalign])
+
+Makefile.am:
+
+Include:
+"aligned-malloc.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

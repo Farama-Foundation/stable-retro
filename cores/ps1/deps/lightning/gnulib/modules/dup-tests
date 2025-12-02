@@ -1,0 +1,12 @@
+Files:
+tests/test-dup.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-dup
+check_PROGRAMS += test-dup

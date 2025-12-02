@@ -1,0 +1,31 @@
+@node vswprintf
+@section @code{vswprintf}
+@findex vswprintf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/vswprintf.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The @code{%m} directive is not portable, use @code{%s} mapped to an
+argument of @code{strerror(errno)} (or a version of @code{strerror_r})
+instead.
+@item
+This function is missing on some platforms:
+NetBSD 3.0, OpenBSD 3.8, Minix 3.1.8, HP-UX 11.00, IRIX 6.5, Cygwin 1.5.x.
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and therefore cannot
+accommodate all Unicode characters.
+@item
+On Windows, this function does not take a buffer size as second argument.
+@item
+When formatting an integer with grouping flag, this function inserts thousands
+separators even in the "C" locale on some platforms:
+NetBSD 5.1.
+@end itemize

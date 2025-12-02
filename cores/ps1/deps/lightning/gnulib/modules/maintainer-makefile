@@ -1,0 +1,26 @@
+Description:
+Helper GNUmakefile with syntax checks, build improvements, etc.
+See also readme-release.
+
+Files:
+top/maint.mk
+
+Depends-on:
+gnumakefile
+useless-if-before-free
+vc-list-files
+
+configure.ac:
+AC_CONFIG_COMMANDS_PRE([m4_ifdef([AH_HEADER],
+  [AC_SUBST([CONFIG_INCLUDE], m4_defn([AH_HEADER]))])])
+AC_REQUIRE([AC_PROG_SED])
+AC_REQUIRE([AC_PROG_GREP])
+
+Makefile.am:
+EXTRA_DIST += $(top_srcdir)/maint.mk
+
+License:
+GPLed build tool
+
+Maintainer:
+all

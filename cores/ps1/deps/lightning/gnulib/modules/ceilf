@@ -1,0 +1,33 @@
+Description:
+ceilf() function: round towards positive infinity.
+
+Files:
+lib/ceilf.c
+lib/ceil.c
+m4/ceilf.m4
+
+Depends-on:
+math
+extensions
+float           [test $HAVE_DECL_CEILF = 0 || test $REPLACE_CEILF = 1]
+
+configure.ac:
+gl_FUNC_CEILF
+if test $HAVE_DECL_CEILF = 0 || test $REPLACE_CEILF = 1; then
+  AC_LIBOBJ([ceilf])
+fi
+gl_MATH_MODULE_INDICATOR([ceilf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(CEILF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

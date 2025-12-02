@@ -1,0 +1,23 @@
+Description:
+Set exit status for fatal signal.
+
+Files:
+lib/exitfail.h
+lib/exitfail.c
+
+Depends-on:
+stdlib
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += exitfail.c
+
+Include:
+"exitfail.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert

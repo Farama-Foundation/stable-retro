@@ -1,0 +1,13 @@
+Files:
+tests/test-yn.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-yn
+check_PROGRAMS += test-yn
+test_yn_LDADD = $(LDADD) @YN_LIBM@

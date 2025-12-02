@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/pcercuei/lightrec.git
+	branch = master
+	commit = a173cf409e11fbbdd4801aacc683a3d7592f499c
+	parent = 8da7189ef558eacaa80a37d542ade67b6717c812
+	method = merge
+	cmdver = 0.4.6

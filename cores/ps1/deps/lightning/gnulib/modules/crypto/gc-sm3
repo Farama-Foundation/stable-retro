@@ -1,0 +1,24 @@
+Description:
+Generic crypto wrappers for SM3 functions.
+
+Files:
+m4/gc-sm3.m4
+
+Depends-on:
+crypto/gc
+crypto/sm3 [test "$ac_cv_libgcrypt" != yes]
+
+configure.ac:
+gl_GC_SM3
+gl_MODULE_INDICATOR([gc-sm3])
+
+Makefile.am:
+
+Include:
+"gc.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Jia Zhang

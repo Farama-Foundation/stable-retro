@@ -1,0 +1,25 @@
+Description:
+memchr2() function: scan memory for the first of two bytes.
+
+Files:
+lib/memchr2.h
+lib/memchr2.c
+lib/memchr2.valgrind
+
+Depends-on:
+stdint
+memchr
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += memchr2.h memchr2.c
+
+Include:
+"memchr2.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

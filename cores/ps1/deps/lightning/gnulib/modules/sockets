@@ -1,0 +1,32 @@
+Description:
+General facilities for using sockets
+
+Files:
+lib/sockets.c
+lib/sockets.h
+lib/w32sock.h
+m4/sockets.m4
+
+Depends-on:
+socketlib
+sys_socket
+fd-hook
+msvc-nothrow
+
+configure.ac:
+AC_REQUIRE([gl_SOCKETS])
+
+Makefile.am:
+lib_SOURCES += sockets.h sockets.c
+
+Include:
+"sockets.h"
+
+Link:
+$(LIBSOCKET)
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

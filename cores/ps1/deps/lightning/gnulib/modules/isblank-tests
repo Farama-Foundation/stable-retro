@@ -1,0 +1,12 @@
+Files:
+tests/test-isblank.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-isblank
+check_PROGRAMS += test-isblank

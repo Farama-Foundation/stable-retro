@@ -1,0 +1,14 @@
+Files:
+tests/test-write.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+binary-io
+open
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-write
+check_PROGRAMS += test-write

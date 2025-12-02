@@ -1,0 +1,28 @@
+@node remainderf
+@section @code{remainderf}
+@findex remainderf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/remainderf.html}
+
+Gnulib module: remainderf or remainderf-ieee
+
+Portability problems fixed by either Gnulib module @code{remainderf} or @code{remainderf-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, HP-UX 11, older IRIX 6.5, Solaris 9, MSVC 9.
+@item
+This function is not declared on some platforms:
+IRIX 6.5.
+@item
+This function may go into an endless loop on some platforms:
+IRIX 6.5.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{remainderf-ieee}:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

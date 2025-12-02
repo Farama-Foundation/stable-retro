@@ -1,0 +1,26 @@
+Description:
+Quote arguments for use in error messages.
+
+Files:
+lib/quote.h
+m4/quote.m4
+
+Depends-on:
+quotearg
+
+configure.ac:
+gl_QUOTE
+
+Makefile.am:
+
+Include:
+"quote.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert

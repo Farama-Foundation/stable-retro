@@ -1,0 +1,53 @@
+@node Library version handling
+@section Library version handling
+
+The module @samp{check-version} can be useful when your gnulib
+application is a system library.  You will typically wrap the call to
+the @code{check_version} function through a library API, your library
+header file may contain:
+
+@example
+#define STRINGPREP_VERSION "0.5.18"
+...
+  extern const char *stringprep_check_version (const char *req_version);
+@end example
+
+To avoid ELF symbol collisions with other libraries that use the
+@samp{check-version} module, add to @file{config.h} through a
+AC_DEFINE something like:
+
+@example
+AC_DEFINE(check_version, stringprep_check_version,
+          [Rename check_version.])
+@end example
+
+The @code{stringprep_check_version} function will thus be implemented
+by the @code{check_version} module.
+
+There are two uses of the interface.  The first is a way to provide
+for applications to find out the version number of the library it
+uses.  The application may contain diagnostic code such as:
+
+@example
+  printf ("Stringprep version: header %s library %s",
+          STRINGPREP_VERSION,
+          stringprep_check_version (NULL));
+@end example
+
+Separating the library and header file version can be useful when
+searching for version mismatch related problems.
+
+The second uses is as a rudimentary test of proper library version, by
+making sure the application get a library version that is the same, or
+newer, than the header file used when building the application.  This
+doesn't catch all problems, libraries may change backwards incompatibly
+in later versions, but enable applications to require a certain
+minimum version before it may proceed.
+
+Typical uses look like:
+
+@example
+       /* Check version of libgcrypt. */
+       if (!gcry_check_version (GCRYPT_VERSION))
+         die ("version mismatch\n");
+@end example

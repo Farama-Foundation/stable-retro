@@ -1,0 +1,15 @@
+@node tanh
+@section @code{tanh}
+@findex tanh
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/tanh.html}
+
+Gnulib module: tanh
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

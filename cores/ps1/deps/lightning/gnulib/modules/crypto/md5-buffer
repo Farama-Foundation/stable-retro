@@ -1,0 +1,35 @@
+Description:
+Compute MD5 checksum.
+
+Files:
+lib/gl_openssl.h
+lib/md5.h
+lib/md5.c
+m4/gl-openssl.m4
+m4/md5.m4
+
+Depends-on:
+byteswap
+c99
+extern-inline
+stdalign
+stdint
+
+configure.ac:
+AC_REQUIRE([AC_C_RESTRICT])
+gl_MD5
+
+Makefile.am:
+lib_SOURCES += md5.c
+
+Include:
+"md5.h"
+
+Link:
+$(LIB_CRYPTO)
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering, glibc

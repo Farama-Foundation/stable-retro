@@ -1,0 +1,99 @@
+@c GNU extern-inline module documentation
+
+@c Copyright (C) 2013--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+@c Written by Paul Eggert.
+
+@node extern inline
+@section Extern inline functions
+
+@cindex extern inline
+@cindex inline
+
+The @code{extern-inline} module supports the use of C99-style
+@code{extern inline} functions so that the code still runs on
+compilers that do not support this feature correctly.
+
+C code ordinarily should not use @code{inline}.  Typically it is
+better to let the compiler figure out whether to inline, as compilers
+are pretty good about optimization nowadays.  In this sense,
+@code{inline} is like @code{register}, another keyword that is
+typically no longer needed.
+
+Functions defined (not merely declared) in headers are an exception,
+as avoiding @code{inline} would commonly cause problems for these
+functions.  Suppose @file{aaa.h} defines the function @code{aaa_fun},
+and @file{aaa.c}, @file{bbb.c} and @file{ccc.c} all include
+@file{aaa.h}.  If code is intended to portable to non-C99 compilers,
+@code{aaa_fun} cannot be declared with the C99 @code{inline} keyword.
+This problem cannot be worked around by making @code{aaa_fun} an
+ordinary function, as it would be defined three times with external
+linkage and the definitions would clash.  Although @code{aaa_fun}
+could be a static function, with separate compilation if
+@code{aaa_fun} is not inlined its code will appear in the executable
+three times.
+
+To avoid this code bloat, @file{aaa.h} can do this:
+
+@example
+/* aaa.h */
+/* #include any other headers here */
+#ifndef _GL_INLINE_HEADER_BEGIN
+ #error "Please include config.h first."
+#endif
+_GL_INLINE_HEADER_BEGIN
+#ifndef AAA_INLINE
+# define AAA_INLINE _GL_INLINE
+#endif
+...
+AAA_INLINE int
+aaa_fun (int i)
+@{
+  return i + 1;
+@}
+...
+_GL_INLINE_HEADER_END
+@end example
+
+@noindent
+and @file{aaa.c} can do this:
+
+@example
+/* aaa.c */
+#include <config.h>
+#define AAA_INLINE _GL_EXTERN_INLINE
+#include <aaa.h>
+@end example
+
+@noindent
+whereas @file{bbb.c} and @file{ccc.c} can include @file{aaa.h} in the
+usual way.  C99 compilers expand @code{AAA_INLINE} to C99-style
+@code{inline} usage, where @code{aaa_fun} is declared @code{extern
+inline} in @file{aaa.c} and plain @code{inline} in other modules.
+Non-C99 compilers that are compatible with GCC use GCC-specific syntax
+to accomplish the same ends.  Other non-C99 compilers use @code{static
+inline} so they suffer from code bloat, but they are not mainline
+platforms and will die out eventually.
+
+@findex _GL_INLINE
+@code{_GL_INLINE} is a portable alternative to C99 plain @code{inline}.
+
+@findex _GL_EXTERN_INLINE
+@code{_GL_EXTERN_INLINE} is a portable alternative to C99 @code{extern inline}.
+
+@findex _GL_INLINE_HEADER_BEGIN
+Invoke @code{_GL_INLINE_HEADER_BEGIN} before all uses of
+@code{_GL_INLINE} in an include file.  This suppresses some
+bogus warnings in GCC versions before 5.1.  If an include file includes
+other files, it is better to invoke this macro after including the
+other files.
+
+@findex _GL_INLINE_HEADER_END
+Invoke @code{_GL_INLINE_HEADER_END} after all uses of
+@code{_GL_INLINE} in an include file.

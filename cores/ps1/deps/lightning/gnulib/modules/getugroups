@@ -1,0 +1,25 @@
+Description:
+Return the group IDs of a user.
+
+Files:
+lib/getugroups.c
+lib/getugroups.h
+m4/getugroups.m4
+
+Depends-on:
+errno
+
+configure.ac:
+gl_GETUGROUPS
+
+Makefile.am:
+lib_SOURCES += getugroups.c
+
+Include:
+"getugroups.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

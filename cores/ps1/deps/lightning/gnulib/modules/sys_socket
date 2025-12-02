@@ -1,0 +1,80 @@
+Description:
+A POSIX-like <sys/socket.h>.
+
+Files:
+lib/sys_socket.c
+lib/sys_socket.in.h
+m4/sys_socket_h.m4
+m4/sockpfaf.m4
+
+Depends-on:
+errno
+extern-inline
+include_next
+snippet/arg-nonnull
+snippet/c++defs
+snippet/warn-on-use
+socklen
+ssize_t
+stdalign
+sys_uio
+
+configure.ac:
+AC_REQUIRE([gl_HEADER_SYS_SOCKET])
+AC_PROG_MKDIR_P
+
+Makefile.am:
+BUILT_SOURCES += sys/socket.h
+lib_SOURCES += sys_socket.c
+
+# We need the following in order to create <sys/socket.h> when the system
+# doesn't have one that works with the given compiler.
+sys/socket.h: sys_socket.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H) $(ARG_NONNULL_H)
+	$(AM_V_at)$(MKDIR_P) sys
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_SYS_SOCKET_H''@|$(NEXT_SYS_SOCKET_H)|g' \
+	      -e 's|@''HAVE_SYS_SOCKET_H''@|$(HAVE_SYS_SOCKET_H)|g' \
+	      -e 's/@''GNULIB_CLOSE''@/$(GNULIB_CLOSE)/g' \
+	      -e 's/@''GNULIB_SOCKET''@/$(GNULIB_SOCKET)/g' \
+	      -e 's/@''GNULIB_CONNECT''@/$(GNULIB_CONNECT)/g' \
+	      -e 's/@''GNULIB_ACCEPT''@/$(GNULIB_ACCEPT)/g' \
+	      -e 's/@''GNULIB_BIND''@/$(GNULIB_BIND)/g' \
+	      -e 's/@''GNULIB_GETPEERNAME''@/$(GNULIB_GETPEERNAME)/g' \
+	      -e 's/@''GNULIB_GETSOCKNAME''@/$(GNULIB_GETSOCKNAME)/g' \
+	      -e 's/@''GNULIB_GETSOCKOPT''@/$(GNULIB_GETSOCKOPT)/g' \
+	      -e 's/@''GNULIB_LISTEN''@/$(GNULIB_LISTEN)/g' \
+	      -e 's/@''GNULIB_RECV''@/$(GNULIB_RECV)/g' \
+	      -e 's/@''GNULIB_SEND''@/$(GNULIB_SEND)/g' \
+	      -e 's/@''GNULIB_RECVFROM''@/$(GNULIB_RECVFROM)/g' \
+	      -e 's/@''GNULIB_SENDTO''@/$(GNULIB_SENDTO)/g' \
+	      -e 's/@''GNULIB_SETSOCKOPT''@/$(GNULIB_SETSOCKOPT)/g' \
+	      -e 's/@''GNULIB_SHUTDOWN''@/$(GNULIB_SHUTDOWN)/g' \
+	      -e 's/@''GNULIB_ACCEPT4''@/$(GNULIB_ACCEPT4)/g' \
+	      -e 's|@''HAVE_WINSOCK2_H''@|$(HAVE_WINSOCK2_H)|g' \
+	      -e 's|@''HAVE_WS2TCPIP_H''@|$(HAVE_WS2TCPIP_H)|g' \
+	      -e 's|@''HAVE_STRUCT_SOCKADDR_STORAGE''@|$(HAVE_STRUCT_SOCKADDR_STORAGE)|g' \
+	      -e 's|@''HAVE_STRUCT_SOCKADDR_STORAGE_SS_FAMILY''@|$(HAVE_STRUCT_SOCKADDR_STORAGE_SS_FAMILY)|g' \
+	      -e 's|@''HAVE_SA_FAMILY_T''@|$(HAVE_SA_FAMILY_T)|g' \
+	      -e 's|@''HAVE_ACCEPT4''@|$(HAVE_ACCEPT4)|g' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
+	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/sys_socket.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+MOSTLYCLEANFILES += sys/socket.h sys/socket.h-t
+MOSTLYCLEANDIRS += sys
+
+Include:
+<sys/socket.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

@@ -1,0 +1,30 @@
+Description:
+Read a line from a stream.
+
+Files:
+lib/getline.c
+m4/getline.m4
+
+Depends-on:
+stdio
+extensions
+getdelim        [test $REPLACE_GETLINE = 1]
+
+configure.ac:
+gl_FUNC_GETLINE
+if test $REPLACE_GETLINE = 1; then
+  AC_LIBOBJ([getline])
+  gl_PREREQ_GETLINE
+fi
+gl_STDIO_MODULE_INDICATOR([getline])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

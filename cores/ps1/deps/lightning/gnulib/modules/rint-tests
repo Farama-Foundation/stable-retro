@@ -1,0 +1,20 @@
+Files:
+tests/test-rint.c
+tests/test-rint.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+tests/randomd.c
+
+Depends-on:
+isnand-nolibm
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-rint
+check_PROGRAMS += test-rint
+test_rint_SOURCES = test-rint.c randomd.c
+test_rint_LDADD = $(LDADD) @RINT_LIBM@

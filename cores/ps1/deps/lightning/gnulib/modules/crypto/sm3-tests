@@ -1,0 +1,11 @@
+Files:
+tests/test-sm3.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sm3
+check_PROGRAMS += test-sm3
+test_sm3_LDADD = $(LDADD) @LIB_CRYPTO@

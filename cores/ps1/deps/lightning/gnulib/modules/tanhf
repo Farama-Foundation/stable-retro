@@ -1,0 +1,32 @@
+Description:
+tanhf() function: hyperbolic tangent function.
+
+Files:
+lib/tanhf.c
+m4/tanhf.m4
+
+Depends-on:
+math
+extensions
+tanh            [test $HAVE_TANHF = 0]
+
+configure.ac:
+gl_FUNC_TANHF
+if test $HAVE_TANHF = 0; then
+  AC_LIBOBJ([tanhf])
+fi
+gl_MATH_MODULE_INDICATOR([tanhf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(TANHF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

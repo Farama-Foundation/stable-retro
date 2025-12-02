@@ -1,0 +1,13 @@
+Files:
+tests/test-snprintf.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-snprintf
+check_PROGRAMS += test-snprintf
+

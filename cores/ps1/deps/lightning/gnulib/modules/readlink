@@ -1,0 +1,29 @@
+Description:
+readlink() function: read the value of a symbolic link.
+
+Files:
+lib/readlink.c
+m4/readlink.m4
+
+Depends-on:
+unistd
+stat            [test $HAVE_READLINK = 0 || test $REPLACE_READLINK = 1]
+
+configure.ac:
+gl_FUNC_READLINK
+if test $HAVE_READLINK = 0 || test $REPLACE_READLINK = 1; then
+  AC_LIBOBJ([readlink])
+  gl_PREREQ_READLINK
+fi
+gl_UNISTD_MODULE_INDICATOR([readlink])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

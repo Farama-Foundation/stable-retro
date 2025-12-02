@@ -1,0 +1,17 @@
+Files:
+tests/test-pthread-once1.c
+tests/test-pthread-once2.c
+tests/macros.h
+
+Depends-on:
+pthread-thread
+pthread-mutex
+sched_yield
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pthread-once1 test-pthread-once2
+check_PROGRAMS += test-pthread-once1 test-pthread-once2
+test_pthread_once1_LDADD = $(LDADD) @LIBPMULTITHREAD@
+test_pthread_once2_LDADD = $(LDADD) @LIBPMULTITHREAD@ @LIB_SCHED_YIELD@

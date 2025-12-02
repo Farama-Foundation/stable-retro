@@ -1,0 +1,13 @@
+Files:
+tests/test-freading.c
+tests/macros.h
+
+Depends-on:
+fflush
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-freading
+check_PROGRAMS += test-freading
+MOSTLYCLEANFILES += t-freading.tmp

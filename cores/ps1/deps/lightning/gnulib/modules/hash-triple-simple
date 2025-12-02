@@ -1,0 +1,24 @@
+Description:
+Hash functions for file-related triples: name, device, inode.
+
+Files:
+lib/hash-triple-simple.c
+lib/hash-triple.h
+
+Depends-on:
+hash-pjw
+same-inode
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += hash-triple-simple.c
+
+Include:
+"hash-triple.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

@@ -1,0 +1,27 @@
+Description:
+Lowercase mapping for Unicode characters (locale and context independent).
+
+Files:
+lib/unicase/tolower.c
+lib/unicase/tolower.h
+lib/unicase/simple-mapping.h
+
+Depends-on:
+unicase/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/tolower])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_TOLOWER
+lib_SOURCES += unicase/tolower.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

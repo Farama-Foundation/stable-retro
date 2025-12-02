@@ -1,0 +1,22 @@
+Description:
+Compute MD5 checksum.
+
+Files:
+
+Depends-on:
+crypto/af_alg
+crypto/md5-buffer
+
+configure.ac:
+AC_DEFINE([GL_COMPILE_CRYPTO_STREAM], 1, [Compile Gnulib crypto stream ops.])
+
+Makefile.am:
+
+Include:
+"md5.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering, glibc

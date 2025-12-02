@@ -1,0 +1,18 @@
+@node strtoull
+@section @code{strtoull}
+@findex strtoull
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strtoull.html}
+
+Gnulib module: strtoull
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+HP-UX 11.11, MSVC 9.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

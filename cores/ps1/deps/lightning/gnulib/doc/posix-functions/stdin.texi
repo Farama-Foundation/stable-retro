@@ -1,0 +1,27 @@
+@node stdin
+@section @code{stdin}
+@findex stdin
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/stdin.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+stdin is created in 32-bit mode instead of 64-bit mode: Cygwin 1.5.x.
+One workaround is to use freopen(NULL, ``r'', stdin) on Cygwin 1.5.21
+or newer.  Another is to use the gnulib ftello module and do
+ftello(stdin).
+@item
+POSIX states that a setuid application can guarantee that fd 0 is
+open, but some systems guarantee this even for non-setuid programs.
+If an application is executed with fd 0 closed, use of @code{stdin}
+can affect an unrelated file that happened to be assigned to fd 0.
+The gnulib *-safer modules may be used to guarantee that fd 0 stays
+reserved for @code{stdin}.
+@end itemize

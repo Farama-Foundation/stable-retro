@@ -1,0 +1,24 @@
+Description:
+Macros to search for libraries.
+
+Files:
+m4/lib-ld.m4
+m4/lib-link.m4
+m4/lib-prefix.m4
+m4/host-cpu-c-abi.m4
+build-aux/config.rpath
+
+Depends-on:
+
+configure.ac:
+AC_DEFUN([gl_HAVE_MODULE_HAVELIB])
+
+Makefile.am:
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+all

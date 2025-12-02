@@ -1,0 +1,26 @@
+Description:
+Encode binary data using printable characters (base32).
+
+Files:
+lib/base32.h
+lib/base32.c
+m4/base32.m4
+
+Depends-on:
+stdbool
+memchr
+
+configure.ac:
+gl_FUNC_BASE32
+
+Makefile.am:
+lib_SOURCES += base32.h base32.c
+
+Include:
+"base32.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+TODO

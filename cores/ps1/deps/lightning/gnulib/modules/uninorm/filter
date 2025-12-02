@@ -1,0 +1,29 @@
+Description:
+Normalization of a stream of Unicode characters.
+
+Files:
+lib/uninorm/uninorm-filter.c
+lib/uninorm/normalize-internal.h
+
+Depends-on:
+uninorm/base
+unictype/combining-class
+uninorm/decompose-internal
+malloc-posix
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uninorm/filter])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINORM_FILTER
+lib_SOURCES += uninorm/uninorm-filter.c
+endif
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

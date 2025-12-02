@@ -1,0 +1,36 @@
+Description:
+vsprintf with automatic memory allocation.
+
+Notice:
+If you are using GNU gettext version 0.16.1 or older, add the following options
+to XGETTEXT_OPTIONS in your po/Makevars:
+  --flag=asprintf:2:c-format --flag=vasprintf:2:c-format
+
+Files:
+lib/vasprintf.c
+lib/asprintf.c
+m4/vasprintf.m4
+
+Depends-on:
+stdio
+extensions
+vasnprintf      [test $HAVE_VASPRINTF = 0 || test $REPLACE_VASPRINTF = 1]
+errno           [test $HAVE_VASPRINTF = 0 || test $REPLACE_VASPRINTF = 1]
+
+configure.ac:
+gl_FUNC_VASPRINTF
+gl_STDIO_MODULE_INDICATOR([vasprintf])
+m4_ifdef([AM_XGETTEXT_OPTION],
+  [AM_][XGETTEXT_OPTION([--flag=asprintf:2:c-format])
+   AM_][XGETTEXT_OPTION([--flag=vasprintf:2:c-format])])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

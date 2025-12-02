@@ -1,0 +1,29 @@
+@node umount
+@subsection @code{umount}
+@findex umount
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Mount-Unmount-Remount,,Mount Unmount Remount,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Mount_002dUnmount_002dRemount.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/umount.2.html,,man umount}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, AIX 5.1, mingw, MSVC 14.
+@end itemize

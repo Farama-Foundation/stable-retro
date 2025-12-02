@@ -1,0 +1,13 @@
+Files:
+tests/test-flock.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+unistd
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-flock
+check_PROGRAMS += test-flock

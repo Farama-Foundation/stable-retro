@@ -1,0 +1,12 @@
+Files:
+tests/test-fopen.h
+tests/test-fopen-safer.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fopen-safer
+check_PROGRAMS += test-fopen-safer

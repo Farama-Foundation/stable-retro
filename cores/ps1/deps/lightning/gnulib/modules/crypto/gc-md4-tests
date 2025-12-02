@@ -1,0 +1,11 @@
+Files:
+tests/test-gc-md4.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-gc-md4
+check_PROGRAMS += test-gc-md4
+test_gc_md4_LDADD = $(LDADD) @LIB_CRYPTO@

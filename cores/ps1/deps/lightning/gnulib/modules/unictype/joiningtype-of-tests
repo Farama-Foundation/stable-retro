@@ -1,0 +1,14 @@
+Files:
+tests/unictype/test-joiningtype_of.c
+tests/unictype/test-joiningtype_of.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-joiningtype_of
+check_PROGRAMS += test-joiningtype_of
+test_joiningtype_of_SOURCES = unictype/test-joiningtype_of.c
+test_joiningtype_of_LDADD = $(LDADD) $(LIBUNISTRING)

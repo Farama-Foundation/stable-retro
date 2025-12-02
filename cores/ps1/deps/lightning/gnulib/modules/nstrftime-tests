@@ -1,0 +1,15 @@
+Files:
+tests/test-nstrftime.c
+tests/macros.h
+
+Depends-on:
+atoll
+c99
+intprops
+strerror
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-nstrftime
+check_PROGRAMS += test-nstrftime

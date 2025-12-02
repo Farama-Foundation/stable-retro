@@ -1,0 +1,31 @@
+@node ptsname
+@section @code{ptsname}
+@findex ptsname
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/ptsname.html}
+
+Gnulib module: ptsname
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 3.8, Minix 3.1.8, mingw, MSVC 14.
+@item
+This function fails to set errno on failure on some platforms:
+FreeBSD 8.2.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Solaris 11 2010-11, this function fails on all BSD-style @file{/dev/pty*}
+device files.
+@item
+This function is not thread-safe on some platforms:
+Cygwin 1.7.9.
+Likewise, the gnulib replacement is not thread-safe.
+@end itemize
+
+Note that the Gnulib module @code{ptsname_r} is a version of this
+function that is more likely to be thread-safe.

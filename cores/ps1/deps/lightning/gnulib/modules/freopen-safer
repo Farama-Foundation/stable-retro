@@ -1,0 +1,29 @@
+Description:
+freopen function that avoids clobbering std{in,out,err}.
+
+Files:
+lib/stdio--.h
+lib/stdio-safer.h
+lib/freopen-safer.c
+
+Depends-on:
+attribute
+dup2
+freopen
+open
+stdbool
+
+configure.ac:
+gl_MODULE_INDICATOR([freopen-safer])
+
+Makefile.am:
+lib_SOURCES += freopen-safer.c
+
+Include:
+"stdio-safer.h"
+
+License:
+GPL
+
+Maintainer:
+Eric Blake

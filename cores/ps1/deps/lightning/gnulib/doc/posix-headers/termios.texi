@@ -1,0 +1,24 @@
+@node termios.h
+@section @file{termios.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/termios.h.html}
+
+Gnulib module: termios
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+mingw, MSVC 14.
+@item
+This header does not declare @code{pid_t} on all platforms:
+glibc on some architectures, FreeBSD 6.4, OpenBSD 4.9, Cygwin 1.7.11.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The types @code{struct termios}, @code{cc_t}, @code{speed_t}, @code{tcflag_t}
+are not defined on some platforms:
+mingw, MSVC 14.
+@end itemize

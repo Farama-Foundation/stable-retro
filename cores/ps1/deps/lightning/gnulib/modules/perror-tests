@@ -1,0 +1,18 @@
+Files:
+tests/macros.h
+tests/signature.h
+tests/test-perror.c
+tests/test-perror2.c
+tests/test-perror.sh
+
+Depends-on:
+dup2
+ftruncate
+strerror
+test-framework-sh
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-perror.sh test-perror2
+check_PROGRAMS += test-perror test-perror2

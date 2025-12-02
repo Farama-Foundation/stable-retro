@@ -1,0 +1,30 @@
+Description:
+getdtablesize() function: return tight upper bound for file descriptor values.
+
+Files:
+lib/getdtablesize.c
+m4/getdtablesize.m4
+
+Depends-on:
+unistd
+extensions
+msvc-inval      [test $HAVE_GETDTABLESIZE = 0]
+
+configure.ac:
+gl_FUNC_GETDTABLESIZE
+if test $HAVE_GETDTABLESIZE = 0 || test $REPLACE_GETDTABLESIZE = 1; then
+  AC_LIBOBJ([getdtablesize])
+  gl_PREREQ_GETDTABLESIZE
+fi
+gl_UNISTD_MODULE_INDICATOR([getdtablesize])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

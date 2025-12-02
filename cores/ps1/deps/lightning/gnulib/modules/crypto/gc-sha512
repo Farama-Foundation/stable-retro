@@ -1,0 +1,24 @@
+Description:
+Generic crypto wrappers for SHA-512 functions.
+
+Files:
+m4/gc-sha512.m4
+
+Depends-on:
+crypto/gc
+crypto/sha512 [test "$ac_cv_libgcrypt" != yes]
+
+configure.ac:
+gl_GC_SHA512
+gl_MODULE_INDICATOR([gc-sha512])
+
+Makefile.am:
+
+Include:
+"gc.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

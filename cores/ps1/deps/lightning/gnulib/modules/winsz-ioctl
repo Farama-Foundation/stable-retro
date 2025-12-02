@@ -1,0 +1,21 @@
+Description:
+Test whether use of TIOCGWINSZ requires sys/ioctl.h.
+
+Files:
+m4/jm-winsz2.m4
+
+Depends-on:
+winsz-termios
+
+configure.ac:
+gl_HEADER_TIOCGWINSZ_NEEDS_SYS_IOCTL
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

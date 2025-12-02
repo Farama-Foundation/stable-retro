@@ -1,0 +1,37 @@
+@node getpass
+@subsection @code{getpass}
+@findex getpass
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{getpass,,Reading Passphrases,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/getpass.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/getpass.3.html,,man getpass}.
+@end itemize
+
+Gnulib module: getpass or getpass-gnu
+
+Portability problems fixed by either Gnulib module @code{getpass} or @code{getpass-gnu}:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14, Android 9.0.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{getpass-gnu}:
+@itemize
+@item
+The returned password is truncated to PASS_MAX characters on some platforms:
+uClibc (256), musl (128), macOS 11.1 (128), FreeBSD 6.2 (128), NetBSD 3.0 (128), OpenBSD 4.0 (128), AIX 5.1 (32), HP-UX 11 (8), IRIX 6.5 (32), Solaris 11 2010-11 (8, even less than PASS_MAX), Cygwin (128).
+The gnulib implementation returns the password untruncated.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

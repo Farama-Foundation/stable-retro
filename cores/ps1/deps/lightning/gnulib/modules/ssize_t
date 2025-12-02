@@ -1,0 +1,21 @@
+Description:
+Define ssize_t if it does not already exist.
+
+Files:
+m4/ssize_t.m4
+
+Depends-on:
+
+configure.ac:
+gt_TYPE_SSIZE_T
+
+Makefile.am:
+
+Include:
+<sys/types.h>
+
+License:
+unlimited
+
+Maintainer:
+all

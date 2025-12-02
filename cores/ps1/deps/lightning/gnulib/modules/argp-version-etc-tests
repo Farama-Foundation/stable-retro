@@ -1,0 +1,12 @@
+Files:
+tests/test-argp-version-etc.c
+tests/test-argp-version-etc-1.sh
+
+Depends-on:
+argp
+version-etc-fsf
+
+Makefile.am:
+TESTS += test-argp-version-etc test-argp-version-etc-1.sh
+check_PROGRAMS += test-argp-version-etc
+test_argp_version_etc_LDADD = $(LDADD) @LIBINTL@

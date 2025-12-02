@@ -1,0 +1,35 @@
+@node rmdir
+@section @code{rmdir}
+@findex rmdir
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/rmdir.html}
+
+Gnulib module: rmdir
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is declared in different header files (namely, @code{<io.h>} or
+@code{<direct.h>}) on some platforms:
+mingw, MSVC 14.
+@item
+This function mistakenly removes a directory with
+@code{rmdir("dir/./")} on some platforms:
+Cygwin 1.5.x.
+@item
+This function fails with @code{EINVAL} instead of the expected
+@code{ENOTDIR} for @code{rmdir("file/")} on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+When @code{rmdir} fails because the specified directory is not empty, the
+@code{errno} value is system dependent.
+@item
+POSIX requires that @code{rmdir("link-to-empty/")} remove @file{empty}
+and leave @file{link-to-empty} as a dangling symlink.  This is
+counter-intuitive, so some systems fail with @code{ENOTDIR} instead:
+glibc
+@end itemize

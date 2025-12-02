@@ -1,0 +1,13 @@
+Files:
+tests/unistr/test-u16-prev.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-prev
+check_PROGRAMS += test-u16-prev
+test_u16_prev_SOURCES = unistr/test-u16-prev.c
+test_u16_prev_LDADD = $(LDADD) $(LIBUNISTRING)

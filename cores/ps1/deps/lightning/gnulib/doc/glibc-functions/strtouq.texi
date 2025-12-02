@@ -1,0 +1,34 @@
+@node strtouq
+@subsection @code{strtouq}
+@findex strtouq
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-strtouq-3.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Parsing of Integers,,Parsing of Integers,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Parsing-of-Integers.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/strtouq.3.html,,man strtouq}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14.
+@item
+This function is not declared on some platforms:
+Android 9.0.
+@end itemize

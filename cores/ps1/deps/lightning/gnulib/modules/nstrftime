@@ -1,0 +1,32 @@
+Description:
+nstrftime() function: convert date and time to string, with GNU extensions.
+
+Files:
+lib/strftime.h
+lib/nstrftime.c
+m4/tm_gmtoff.m4
+m4/nstrftime.m4
+
+Depends-on:
+attribute
+c99
+errno
+extensions
+intprops
+stdbool
+time_rz
+
+configure.ac:
+gl_FUNC_GNU_STRFTIME
+
+Makefile.am:
+lib_SOURCES += nstrftime.c
+
+Include:
+"strftime.h"
+
+License:
+LGPL
+
+Maintainer:
+Jim Meyering, glibc

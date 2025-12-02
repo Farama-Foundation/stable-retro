@@ -1,0 +1,22 @@
+@node c32rtomb
+@section @code{c32rtomb}
+@findex c32rtomb
+
+Gnulib module: c32rtomb
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on most non-glibc platforms:
+glibc 2.15, macOS 11.1, FreeBSD 6.4, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3, Cygwin 2.9, mingw, MSVC 9, Android 4.4.
+@item
+This function returns 0 when the first argument is NULL in some locales on some platforms:
+AIX 7.2.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is only defined as an inline function on some platforms:
+Haiku 2020.
+@end itemize

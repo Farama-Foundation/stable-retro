@@ -1,0 +1,35 @@
+@node putc
+@section @code{putc}
+@findex putc
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/putc.html}
+
+Gnulib module: stdio, nonblocking, sigpipe
+
+Portability problems fixed by Gnulib module @code{stdio}, together with module @code{nonblocking}:
+@itemize
+@item
+When writing to a non-blocking pipe whose buffer is full, this function fails
+with @code{errno} being set to @code{ENOSPC} instead of @code{EAGAIN} on some
+platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{stdio}, together with module @code{sigpipe}:
+@itemize
+@item
+When writing to a pipe with no readers, this function fails, instead of
+obeying the current @code{SIGPIPE} handler, on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), this function does not set @code{errno}
+upon failure.
+@item
+On some platforms, this function does not set @code{errno} or the
+stream error indicator on attempts to write to a read-only stream:
+Cygwin 1.7.9.
+@end itemize

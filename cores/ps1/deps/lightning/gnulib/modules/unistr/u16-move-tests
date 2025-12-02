@@ -1,0 +1,14 @@
+Files:
+tests/unistr/test-u16-move.c
+tests/unistr/test-move.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-move
+check_PROGRAMS += test-u16-move
+test_u16_move_SOURCES = unistr/test-u16-move.c
+test_u16_move_LDADD = $(LDADD) $(LIBUNISTRING)

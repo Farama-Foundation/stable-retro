@@ -1,0 +1,27 @@
+Description:
+Determine display width of Unicode character.
+
+Files:
+lib/uniwidth/width.c
+lib/uniwidth/cjk.h
+
+Depends-on:
+uniwidth/base
+streq
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uniwidth/width])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNIWIDTH_WIDTH
+lib_SOURCES += uniwidth/width.c
+endif
+
+Include:
+"uniwidth.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

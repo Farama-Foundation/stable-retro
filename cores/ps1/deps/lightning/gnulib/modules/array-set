@@ -1,0 +1,25 @@
+Description:
+Set data type implemented by an array.
+
+Files:
+lib/gl_array_set.h
+lib/gl_array_set.c
+
+Depends-on:
+set
+stdint
+xsize
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_array_set.h gl_array_set.c
+
+Include:
+"gl_array_set.h"
+
+License:
+GPL
+
+Maintainer:
+all

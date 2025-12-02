@@ -1,0 +1,22 @@
+@node getpwuid
+@section @code{getpwuid}
+@findex getpwuid
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/getpwuid.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is unsafe to call between @code{fork} and @code{exec} if
+the parent process is multi-threaded.  Instead, use @code{getpwuid_r}
+prior to forking.
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@end itemize

@@ -1,0 +1,35 @@
+Description:
+Auxiliary functions for the creation of subprocesses on native Windows.
+
+Files:
+lib/windows-spawn.h
+lib/windows-spawn.c
+
+Depends-on:
+findprog-in
+msvc-nothrow
+stdbool
+stdint
+stdlib
+strpbrk
+unistd
+malloc-posix
+
+configure.ac:
+AC_REQUIRE([AC_CANONICAL_HOST])
+case "$host_os" in
+  mingw*)
+    AC_LIBOBJ([windows-spawn])
+    ;;
+esac
+
+Makefile.am:
+
+Include:
+"windows-spawn.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

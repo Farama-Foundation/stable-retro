@@ -1,0 +1,161 @@
+@node Exported Symbols of Shared Libraries
+@section Controlling the Exported Symbols of Shared Libraries
+
+@c Documentation of gnulib module 'lib-symbol-visibility'.
+
+@c Copyright (C) 2005--2006, 2009--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+The @code{lib-symbol-visibility} module allows precise control of the
+symbols exported by a shared library.  This is useful because
+
+@itemize @bullet
+@item
+It prevents abuse of undocumented APIs of your library.  Symbols that
+are not exported from the library cannot be used.  This eliminates the
+problem that when the maintainer of the library changes internals of the
+library, maintainers of other projects cry ``breakage''.  Instead, these
+maintainers are forced to negotiate the desired API from the maintainer
+of the library.
+
+@item
+It reduces the risk of symbol collision between your library and other
+libraries.  For example, the symbol @samp{readline} is defined in several
+libraries, most of which don't have the same semantics and the same calling
+convention as the GNU readline library.
+
+@item
+It reduces the startup time of programs linked to the library.  This is
+because the dynamic loader has less symbols to process.
+
+@item
+It allows the compiler to generate better code.  Within a shared library,
+a call to a function that is a global symbol costs a ``call'' instruction
+to a code location in the so-called PLT (procedure linkage table) which
+contains a ``jump'' instruction to the actual function's code.  (This is
+needed so that the function can be overridden, for example by a function
+with the same name in the executable or in a shared library interposed
+with @code{LD_PRELOAD}.) Whereas a call to a function for which the compiler
+can assume that it is in the same shared library is just a direct ``call''
+instructions.  Similarly for variables: A reference to a global variable
+fetches a pointer in the so-called GOT (global offset table); this is a
+pointer to the variable's memory.  So the code to access it is two memory
+load instructions.  Whereas for a variable which is known to reside in the
+same shared library, it is just a direct memory access: one memory load
+instruction.
+@end itemize
+
+There are traditionally three ways to specify the exported symbols of a
+shared library.
+
+@itemize @bullet
+@item
+The programmer specifies the list of symbols to be exported when the
+shared library is created.  Usually a command-line option is passed
+to the linker, with the name of a file containing the symbols.
+
+The upside of this approach is flexibility: it allows the same code to
+be used in different libraries with different export lists.  The downsides
+are: 1. it's a lot of maintenance overhead when the symbol list is platform
+dependent, 2. it doesn't work well with C++, due to name mangling.
+
+@item
+The programmer specifies a ``hidden'' attribute for every variable and
+function that shall not be exported.
+
+The drawbacks of this approach are: Symbols are still exported from
+the library by default.  It's a lot of maintenance work to mark every non-
+exported variable and function.  But usually the exported API is quite small,
+compared to the internal API of the library.  And it's the wrong paradigm:
+It doesn't force thinking when introducing new exported API.
+
+@item
+The programmer specifies a ``hidden'' attribute for all files that make up
+the shared library, and an ``exported'' attribute for those symbols in these
+files that shall be exported.
+
+This is perfect: It burdens the maintainer only for exported API, not
+for library-internal API@.  And it keeps the annotations in the source code.
+@end itemize
+
+GNU libtool's @option{-export-symbols} option implements the first approach.
+The script @code{declared.sh} from Gnulib can help to produce the list of
+symbols.
+
+This gnulib module implements the third approach.  For this it relies on
+GNU GCC 4.0 or newer, namely on its @samp{-fvisibility=hidden} command-line
+option and the ``visibility'' attribute.  (The ``visibility'' attribute
+was already supported in GCC 3.4, but without the command line option,
+introduced in GCC 4.0, the third approach could not be used.)
+
+More explanations on this subject can be found in
+@url{https://gcc.gnu.org/wiki/Visibility}, which contains more details
+on the GCC features and additional advice for C++ libraries, and in
+Ulrich Drepper's paper @url{https://www.akkadia.org/drepper/dsohowto.pdf},
+which also explains other tricks for reducing the startup time impact
+of shared libraries.
+
+The gnulib autoconf macro @code{gl_VISIBILITY} tests for GCC 4.0 or newer.
+It defines a Makefile variable @code{@@CFLAG_VISIBILITY@@} containing
+@samp{-fvisibility=hidden} or nothing.  It also defines as a C macro and
+as a substituted variable: @@HAVE_VISIBILITY@@.  Its value is 1 when symbol
+visibility control is supported, and 0 otherwise.
+
+To use this module in a library, say libfoo, you will do these steps:
+
+@enumerate
+@item
+Add @code{@@CFLAG_VISIBILITY@@} or (in a Makefile.am)
+@code{$(CFLAG_VISIBILITY)} to the CFLAGS for the compilation of the sources
+that make up the library.
+
+@item
+Add a C macro definition, say @samp{-DBUILDING_LIBFOO}, to the CPPFLAGS
+for the compilation of the sources that make up the library.
+
+@item
+Define a macro specific to your library like this.
+@smallexample
+#if BUILDING_LIBFOO && HAVE_VISIBILITY
+#define LIBFOO_DLL_EXPORTED __attribute__((__visibility__("default")))
+#else
+#define LIBFOO_DLL_EXPORTED
+#endif
+@end smallexample
+This macro should be enabled in all public header files of your library.
+
+@item
+Annotate all variable, function and class declarations in all public header
+files of your library with @samp{LIBFOO_DLL_EXPORTED}.  This annotation
+can occur at different locations: between the @samp{extern} and the
+type or return type, or just before the entity being declared, or after
+the entire declarator.  My preference is to put it right after @samp{extern},
+so that the declarations in the header files remain halfway readable.
+@end enumerate
+
+Note that the precise control of the exported symbols will not work with
+other compilers than GCC >= 4.0, and will not work on systems where the
+assembler or linker lack the support of ``hidden'' visibility.  Therefore,
+it's good if, in order to reduce the risk of collisions with symbols in
+other libraries, you continue to use a prefix specific to your library
+for all non-static variables and functions and for all C++ classes in
+your library.
+
+Note about other compilers: MSVC support can be added easily, by extending
+the definition of the macro mentioned above, to something like this:
+@smallexample
+#if BUILDING_LIBFOO && HAVE_VISIBILITY
+#define LIBFOO_DLL_EXPORTED __attribute__((__visibility__("default")))
+#elif BUILDING_LIBFOO && defined _MSC_VER
+#define LIBFOO_DLL_EXPORTED __declspec(dllexport)
+#elif defined _MSC_VER
+#define LIBFOO_DLL_EXPORTED __declspec(dllimport)
+#else
+#define LIBFOO_DLL_EXPORTED
+#endif
+@end smallexample

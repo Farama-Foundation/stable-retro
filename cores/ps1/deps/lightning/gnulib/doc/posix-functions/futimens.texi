@@ -1,0 +1,46 @@
+@node futimens
+@section @code{futimens}
+@findex futimens
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/futimens.html}
+
+Gnulib module: futimens
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.5, Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14, Android 4.3.
+However, the replacement function may end up truncating timestamps to
+worse resolution than supported by the file system.
+@item
+This function returns a bogus value instead of failing with
+@code{ENOSYS} on some platforms:
+Linux kernel 2.6.21.
+@item
+When using @code{UTIME_OMIT} or @code{UTIME_NOW}, some systems require
+the @code{tv_sec} argument to be 0, and don't necessarily handle all
+file permissions in the manner required by POSIX:
+Linux kernel 2.6.25.
+@item
+When using @code{UTIME_OMIT} for the modification time, but specifying
+an access time, some systems fail to update the change time:
+Linux kernel 2.6.32, macOS 11.1, NetBSD 9.0, Solaris 11.1.
+@item
+Passing @code{AT_FDCWD} as the fd argument does not properly fail with
+@code{EBADF} on some systems:
+glibc 2.11, musl libc, Solaris 11.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Some platforms lack the ability to change the timestamps of a file
+descriptor, so the replacement can fail with @code{ENOSYS}; the gnulib
+module @samp{utimens} provides a more reliable interface @code{fdutimens}.
+@item
+The mere act of using @code{stat} modifies the access time of
+directories on some platforms, so @code{utimensat} can only
+effectively change directory modification time:
+Cygwin 1.5.x.
+@end itemize

@@ -1,0 +1,34 @@
+Description:
+Pass file descriptors along Unix domain sockets
+
+Files:
+lib/passfd.h
+lib/passfd.c
+m4/passfd.m4
+
+Depends-on:
+cloexec
+sys_socket
+socketlib
+
+configure.ac:
+gl_PASSFD
+
+Makefile.am:
+lib_SOURCES += passfd.c
+
+Include:
+"passfd.h"
+
+Link:
+$(LIBSOCKET)
+
+License:
+LGPLv2+
+
+Maintainer:
+Bastien ROUCARIÈS
+
+Local Variables:
+coding: utf-8
+End:

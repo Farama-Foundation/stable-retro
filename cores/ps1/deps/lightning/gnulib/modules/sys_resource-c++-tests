@@ -1,0 +1,18 @@
+Files:
+tests/test-sys_resource-c++.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-sys_resource-c++
+check_PROGRAMS += test-sys_resource-c++
+test_sys_resource_c___SOURCES = test-sys_resource-c++.cc
+endif

@@ -1,0 +1,12 @@
+Files:
+tests/test-strerrorname_np.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-strerrorname_np
+check_PROGRAMS += test-strerrorname_np

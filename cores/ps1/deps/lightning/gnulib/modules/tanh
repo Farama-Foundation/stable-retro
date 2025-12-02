@@ -1,0 +1,25 @@
+Description:
+tanh() function: hyperbolic tangent function.
+
+Files:
+m4/tanh.m4
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_TANH
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(TANH_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

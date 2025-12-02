@@ -1,0 +1,28 @@
+Description:
+strerrorname_np() function: name of system error code.
+
+Files:
+lib/strerrorname_np.c
+m4/strerrorname_np.m4
+
+Depends-on:
+extensions
+string
+
+configure.ac:
+gl_FUNC_STRERRORNAME_NP
+if test $HAVE_STRERRORNAME_NP = 0 || test $REPLACE_STRERRORNAME_NP = 1; then
+  AC_LIBOBJ([strerrorname_np])
+fi
+gl_STRING_MODULE_INDICATOR([strerrorname_np])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

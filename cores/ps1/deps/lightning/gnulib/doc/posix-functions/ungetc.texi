@@ -1,0 +1,18 @@
+@node ungetc
+@section @code{ungetc}
+@findex ungetc
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/ungetc.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), this function does not set @code{errno}
+upon failure.
+@end itemize

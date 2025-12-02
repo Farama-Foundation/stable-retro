@@ -1,0 +1,11 @@
+Files:
+tests/test-termios.c
+
+Depends-on:
+termios-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-termios
+check_PROGRAMS += test-termios

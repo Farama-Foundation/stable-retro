@@ -1,0 +1,11 @@
+Files:
+tests/test-aligned-malloc.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-aligned-malloc
+check_PROGRAMS += test-aligned-malloc

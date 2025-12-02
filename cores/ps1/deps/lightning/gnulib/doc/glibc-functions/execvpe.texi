@@ -1,0 +1,33 @@
+@node execvpe
+@subsection @code{execvpe}
+@findex execvpe
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/execvpe.3.html,,man execvpe}
+
+Gnulib module: execvpe
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+glibc 2.10, macOS 11.1, FreeBSD 6.0, NetBSD 7.1, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.3, Cygwin 1.5.x, mingw, Android 4.4.
+@item
+This function is not declared on some platforms:
+AIX 7.1.
+@item
+On Windows platforms (excluding Cygwin), this function does not pass
+command-line arguments correctly if they contain space, tab, backslash,
+or double-quote characters.
+@item
+On Windows platforms (excluding Cygwin), this function spawns an asynchronous
+child process and then exits the current process immediately.  As a
+consequence, the parent of the current process 1. may incorrectly proceed
+as if its child had exited, and 2. will never see the child's exit status.
+@item
+On Windows platforms (excluding Cygwin), the return type of this function is
+@code{intptr_t}, not @code{int}.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

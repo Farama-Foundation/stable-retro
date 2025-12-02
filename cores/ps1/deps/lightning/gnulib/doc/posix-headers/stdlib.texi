@@ -1,0 +1,35 @@
+@node stdlib.h
+@section @file{stdlib.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/stdlib.h.html}
+
+Gnulib module: stdlib, system-posix
+
+Portability problems fixed by the Gnulib module @code{stdlib}:
+@itemize
+@item
+The macros @code{EXIT_SUCCESS} and @code{EXIT_FAILURE} are not defined on
+some platforms.
+@item
+Some platforms provide a @code{NULL} macro that cannot be used in arbitrary
+expressions:
+NetBSD 5.0
+@end itemize
+
+Portability problems fixed by the Gnulib module @code{system-posix}:
+@itemize
+@item
+The macros @code{WIFSIGNALED}, @code{WIFEXITED}, @code{WIFSTOPPED},
+@code{WTERMSIG}, @code{WEXITSTATUS}, @code{WNOHANG}, @code{WUNTRACED},
+@code{WSTOPSIG} are not defined in this header file (only in
+@code{<sys/wait.h>}) on some platforms:
+MirBSD 10.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+System status macros such as @code{WEXITSTATUS} require an lvalue
+argument on some platforms.
+macOS 11.1.
+@end itemize

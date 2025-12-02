@@ -1,0 +1,14 @@
+Files:
+tests/test-freadahead.c
+tests/test-freadahead.sh
+tests/macros.h
+
+Depends-on:
+lseek
+unistd
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-freadahead.sh
+check_PROGRAMS += test-freadahead

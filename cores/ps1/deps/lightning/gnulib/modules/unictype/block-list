@@ -1,0 +1,26 @@
+Description:
+List of Unicode character blocks.
+
+Files:
+lib/unictype/blocks.c
+lib/unictype/blocks.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/block-list])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_BLOCK_LIST
+lib_SOURCES += unictype/blocks.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,20 @@
+# Message catalog that maps the ASCII replacements for single-quote characters
+# to real single-quote characters.
+# The header entry is commented out on purpose, so that gettext() performs no
+# no character set conversion from the PO file's encoding to the locale
+# encoding. This allows us to use the same PO file in various locales.
+#msgid ""
+#msgstr ""
+#"Project-Id-Version: GNU gnulib\n"
+#"PO-Revision-Date: 2009-01-26 01:02+01:00\n"
+#"Last-Translator: Eric Blake <ebb9@byu.net>\n"
+#"Language-Team: Undetermined <und@li.org>\n"
+#"MIME-Version: 1.0\n"
+#"Content-Type: text/plain; charset=UTF-8\n"
+#"Content-Transfer-Encoding: 8bit\n"
+
+msgid "`"
+msgstr "\302\253"
+
+msgid "'"
+msgstr "\302\273"

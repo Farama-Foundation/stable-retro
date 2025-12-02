@@ -1,0 +1,20 @@
+Files:
+tests/uniwbrk/test-ulc-wordbreaks.sh
+tests/uniwbrk/test-ulc-wordbreaks.c
+tests/macros.h
+m4/locale-fr.m4
+m4/codeset.m4
+
+Depends-on:
+setlocale
+
+configure.ac:
+gt_LOCALE_FR
+
+Makefile.am:
+TESTS += uniwbrk/test-ulc-wordbreaks.sh
+TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@'
+check_PROGRAMS += test-ulc-wordbreaks
+test_ulc_wordbreaks_SOURCES = uniwbrk/test-ulc-wordbreaks.c
+test_ulc_wordbreaks_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBUNISTRING) @LIBICONV@
+

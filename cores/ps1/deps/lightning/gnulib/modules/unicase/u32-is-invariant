@@ -1,0 +1,29 @@
+Description:
+Test whether an UTF-32 string is invariant under a given case mapping.
+
+Files:
+lib/unicase/u32-is-invariant.c
+lib/unicase/invariant.h
+lib/unicase/u-is-invariant.h
+
+Depends-on:
+unitypes
+uninorm/base
+uninorm/u32-normalize
+uninorm/nfd
+unistr/u32-cmp
+stdbool
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += unicase/u32-is-invariant.c
+
+Include:
+"unicase/invariant.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

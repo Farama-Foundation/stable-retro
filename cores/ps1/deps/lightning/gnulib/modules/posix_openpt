@@ -1,0 +1,28 @@
+Description:
+posix_openpt() function: Open the master side of a pseudo-terminal.
+
+Files:
+lib/posix_openpt.c
+m4/posix_openpt.m4
+
+Depends-on:
+extensions
+stdlib
+
+configure.ac:
+gl_FUNC_POSIX_OPENPT
+if test $HAVE_POSIX_OPENPT = 0; then
+  AC_LIBOBJ([posix_openpt])
+fi
+gl_STDLIB_MODULE_INDICATOR([posix_openpt])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

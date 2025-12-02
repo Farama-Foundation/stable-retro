@@ -1,0 +1,25 @@
+Description:
+Detect write error on a stream.
+
+Files:
+lib/fwriteerror.h
+lib/fwriteerror.c
+
+Depends-on:
+errno
+stdbool
+
+configure.ac:
+gl_MODULE_INDICATOR([fwriteerror])
+
+Makefile.am:
+lib_SOURCES += fwriteerror.h fwriteerror.c
+
+Include:
+"fwriteerror.h"
+
+License:
+GPL
+
+Maintainer:
+all

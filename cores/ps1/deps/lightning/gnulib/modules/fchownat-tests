@@ -1,0 +1,25 @@
+Files:
+tests/nap.h
+tests/test-chown.h
+tests/test-lchown.h
+tests/test-fchownat.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+errno
+ignore-value
+intprops
+mgetgroups
+nanosleep
+openat-h
+stat-time
+symlink
+
+configure.ac:
+AC_CHECK_FUNCS_ONCE([getegid])
+
+Makefile.am:
+TESTS += test-fchownat
+check_PROGRAMS += test-fchownat
+test_fchownat_LDADD = $(LDADD) $(LIB_NANOSLEEP) @LIBINTL@

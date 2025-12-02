@@ -1,0 +1,20 @@
+@node ptrace
+@subsection @code{ptrace}
+@findex ptrace
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-ptrace-1.html}
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/ptrace.2.html,,man ptrace}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+AIX 5.1, Cygwin 2.9, mingw, MSVC 14.
+@end itemize

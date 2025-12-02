@@ -1,0 +1,36 @@
+Description:
+Determine the Java version supported by javaexec.
+
+Files:
+lib/javaversion.h
+lib/javaversion.c
+lib/javaversion.java
+lib/javaversion.class
+
+Depends-on:
+javaexec
+stdbool
+spawn-pipe
+wait-process
+getline
+gettext-h
+configmake
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += javaversion.h javaversion.c
+pkgdata_DATA += javaversion.class
+
+Include:
+"javaversion.h"
+
+Link:
+$(LIB_MBRTOWC)
+$(LIBTHREAD)
+
+License:
+GPL
+
+Maintainer:
+all

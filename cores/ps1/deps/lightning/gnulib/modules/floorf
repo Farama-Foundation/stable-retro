@@ -1,0 +1,33 @@
+Description:
+floorf() function: round towards negative infinity.
+
+Files:
+lib/floorf.c
+lib/floor.c
+m4/floorf.m4
+
+Depends-on:
+math
+extensions
+float           [test $HAVE_DECL_FLOORF = 0 || test $REPLACE_FLOORF = 1]
+
+configure.ac:
+gl_FUNC_FLOORF
+if test $HAVE_DECL_FLOORF = 0 || test $REPLACE_FLOORF = 1; then
+  AC_LIBOBJ([floorf])
+fi
+gl_MATH_MODULE_INDICATOR([floorf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FLOORF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

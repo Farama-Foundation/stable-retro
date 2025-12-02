@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_hyphen.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_hyphen
+check_PROGRAMS += test-pr_hyphen
+test_pr_hyphen_SOURCES = unictype/test-pr_hyphen.c
+test_pr_hyphen_LDADD = $(LDADD) $(LIBUNISTRING)

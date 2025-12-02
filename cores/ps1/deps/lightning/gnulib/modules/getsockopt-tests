@@ -1,0 +1,15 @@
+Files:
+tests/test-getsockopt.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+netinet_in
+sockets
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getsockopt
+check_PROGRAMS += test-getsockopt
+test_getsockopt_LDADD = $(LDADD) @LIBSOCKET@

@@ -1,0 +1,12 @@
+Files:
+tests/test-forkpty.c
+tests/signature.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-forkpty
+check_PROGRAMS += test-forkpty
+test_forkpty_LDADD = $(LDADD) @PTY_LIB@

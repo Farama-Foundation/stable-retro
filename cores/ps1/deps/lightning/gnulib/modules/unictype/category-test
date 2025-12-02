@@ -1,0 +1,27 @@
+Description:
+Test whether a Unicode character belongs to a given category.
+
+Files:
+lib/unictype/categ_test.c
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-test])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_TEST
+lib_SOURCES += unictype/categ_test.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

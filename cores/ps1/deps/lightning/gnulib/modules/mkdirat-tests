@@ -1,0 +1,16 @@
+Files:
+tests/test-mkdirat.c
+tests/test-mkdir.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-mkdirat
+check_PROGRAMS += test-mkdirat
+test_mkdirat_LDADD = $(LDADD) @LIBINTL@

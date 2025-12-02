@@ -1,0 +1,29 @@
+Description:
+Binary tree data structure.
+
+Files:
+lib/tsearch.c
+m4/tsearch.m4
+
+Depends-on:
+search
+
+configure.ac:
+gl_FUNC_TSEARCH
+if test $HAVE_TSEARCH = 0 || test $HAVE_TWALK = 0 || test $REPLACE_TSEARCH = 1; then
+  AC_LIBOBJ([tsearch])
+  gl_PREREQ_TSEARCH
+fi
+gl_SEARCH_MODULE_INDICATOR([tsearch])
+
+Makefile.am:
+
+Include:
+<search.h>
+
+License:
+LGPL
+
+Maintainer:
+all, glibc
+

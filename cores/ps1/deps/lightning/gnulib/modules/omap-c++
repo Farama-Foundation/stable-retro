@@ -1,0 +1,21 @@
+Description:
+Abstract ordered map data type as a C++ class.
+
+Files:
+lib/gl_omap.hh
+
+Depends-on:
+xomap
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"gl_omap.hh"
+
+License:
+GPL
+
+Maintainer:
+all

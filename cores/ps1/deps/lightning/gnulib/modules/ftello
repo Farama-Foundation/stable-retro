@@ -1,0 +1,41 @@
+Description:
+ftello() function: Retrieve the position of a FILE stream.
+
+Files:
+lib/ftello.c
+lib/stdio-impl.h
+m4/fseeko.m4
+m4/ftello.m4
+m4/ungetc.m4
+
+Depends-on:
+stdio
+extensions
+largefile
+sys_types
+lseek           [test $HAVE_FTELLO = 0 || test $REPLACE_FTELLO = 1]
+intprops        [test $HAVE_FTELLO = 0 || test $REPLACE_FTELLO = 1]
+# Just to guarantee consistency between ftell() and ftello().
+ftell
+
+configure.ac-early:
+AC_REQUIRE([gl_SET_LARGEFILE_SOURCE])
+
+configure.ac:
+gl_FUNC_FTELLO
+if test $HAVE_FTELLO = 0 || test $REPLACE_FTELLO = 1; then
+  AC_LIBOBJ([ftello])
+  gl_PREREQ_FTELLO
+fi
+gl_STDIO_MODULE_INDICATOR([ftello])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,50 @@
+Description:
+Traverse a file hierarchy.
+
+Files:
+lib/fts_.h
+lib/fts.c
+lib/fts-cycle.c
+m4/fts.m4
+
+Depends-on:
+attribute
+c99
+closedir
+cycle-check
+d-ino
+d-type
+fchdir
+fcntl
+fcntl-h
+flexmember
+fstat
+hash
+i-ring
+lstat
+memmove
+open
+openat-h
+opendir
+opendirat
+readdir
+stdalign
+stdbool
+stddef
+
+configure.ac:
+gl_FUNC_FTS
+dnl Use this version of fts unconditionally, since the GNU libc and
+dnl NetBSD versions have bugs and/or unnecessary limitations.
+AC_LIBOBJ([fts])
+
+Makefile.am:
+
+Include:
+"fts_.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

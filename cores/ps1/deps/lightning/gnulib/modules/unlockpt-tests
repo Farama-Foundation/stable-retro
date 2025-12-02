@@ -1,0 +1,12 @@
+Files:
+tests/test-unlockpt.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-unlockpt
+check_PROGRAMS += test-unlockpt

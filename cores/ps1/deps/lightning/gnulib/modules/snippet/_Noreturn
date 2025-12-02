@@ -1,0 +1,27 @@
+Description:
+The _Noreturn keyword of C11.
+
+Applicability:
+all
+
+Files:
+lib/_Noreturn.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
+
+_NORETURN_H=$(srcdir)/_Noreturn.h
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

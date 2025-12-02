@@ -1,0 +1,36 @@
+Files:
+tests/uninorm/test-nfd.c
+tests/uninorm/test-u8-nfd.c
+tests/uninorm/test-u16-nfd.c
+tests/uninorm/test-u32-nfd.c
+tests/uninorm/test-u32-nfd-big.sh
+tests/uninorm/test-u32-nfd-big.c
+tests/uninorm/test-u32-normalize-big.h
+tests/uninorm/test-u32-normalize-big.c
+tests/uninorm/NormalizationTest.txt
+tests/macros.h
+
+Depends-on:
+unistr/u8-cmp
+unistr/u16-cmp
+unistr/u32-cmp
+unistr/u32-strlen
+xalloc
+
+configure.ac:
+AC_CHECK_DECLS_ONCE([alarm])
+
+Makefile.am:
+TESTS += test-nfd uninorm/test-u32-nfd-big.sh
+check_PROGRAMS += test-nfd test-u32-nfd-big
+test_nfd_SOURCES = \
+  uninorm/test-nfd.c \
+  uninorm/test-u8-nfd.c \
+  uninorm/test-u16-nfd.c \
+  uninorm/test-u32-nfd.c
+test_nfd_LDADD = $(LDADD) $(LIBUNISTRING)
+test_u32_nfd_big_SOURCES = \
+  uninorm/test-u32-nfd-big.c \
+  uninorm/test-u32-normalize-big.c
+test_u32_nfd_big_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@
+

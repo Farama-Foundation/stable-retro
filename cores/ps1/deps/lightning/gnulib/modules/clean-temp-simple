@@ -1,0 +1,39 @@
+Description:
+Temporary files with automatic cleanup.
+
+Files:
+lib/clean-temp-simple.h
+lib/clean-temp-private.h
+lib/clean-temp-simple.c
+
+Depends-on:
+c99
+stdbool
+list
+asyncsafe-spin
+unistd
+lock
+thread-optim
+error
+fatal-signal
+rmdir
+linkedhash-list
+gettext-h
+
+configure.ac:
+AC_DEFINE([SIGNAL_SAFE_LIST], [1], [Define if lists must be signal-safe.])
+
+Makefile.am:
+lib_SOURCES += clean-temp-simple.h clean-temp-simple.c
+
+Include:
+"clean-temp-simple.h"
+
+Link:
+$(LIBTHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

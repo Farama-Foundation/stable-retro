@@ -1,0 +1,22 @@
+Files:
+tests/unistr/test-u32-strchr.c
+tests/unistr/test-strchr.h
+tests/zerosize-ptr.h
+tests/macros.h
+m4/mmap-anon.m4
+
+Depends-on:
+extensions
+getpagesize
+unistr/u32-set
+
+configure.ac:
+gl_FUNC_MMAP_ANON
+AC_CHECK_HEADERS_ONCE([sys/mman.h])
+AC_CHECK_FUNCS_ONCE([mprotect])
+
+Makefile.am:
+TESTS += test-u32-strchr
+check_PROGRAMS += test-u32-strchr
+test_u32_strchr_SOURCES = unistr/test-u32-strchr.c
+test_u32_strchr_LDADD = $(LDADD) $(LIBUNISTRING)

@@ -1,0 +1,15 @@
+Files:
+tests/uninorm/test-u32-normcmp.c
+tests/uninorm/test-u32-normcmp.h
+tests/macros.h
+
+Depends-on:
+uninorm/nfd
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-normcmp
+check_PROGRAMS += test-u32-normcmp
+test_u32_normcmp_SOURCES = uninorm/test-u32-normcmp.c
+test_u32_normcmp_LDADD = $(LDADD) $(LIBUNISTRING)

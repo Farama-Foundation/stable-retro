@@ -1,0 +1,12 @@
+Files:
+tests/test-fchmod.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fchmod
+check_PROGRAMS += test-fchmod

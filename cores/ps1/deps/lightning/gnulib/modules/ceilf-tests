@@ -1,0 +1,22 @@
+Files:
+tests/test-ceilf1.c
+tests/test-ceilf2.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+float
+isnanf-nolibm
+stdbool
+stdint
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ceilf1 test-ceilf2
+check_PROGRAMS += test-ceilf1 test-ceilf2
+test_ceilf1_LDADD = $(LDADD) @CEILF_LIBM@
+test_ceilf2_LDADD = $(LDADD) @CEILF_LIBM@

@@ -1,0 +1,25 @@
+Description:
+Test whether a Unicode character belongs to a given Unicode block.
+
+Files:
+lib/unictype/block_test.c
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/block-test])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_BLOCK_TEST
+lib_SOURCES += unictype/block_test.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

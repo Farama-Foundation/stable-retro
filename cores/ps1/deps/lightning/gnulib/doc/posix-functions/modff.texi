@@ -1,0 +1,31 @@
+@node modff
+@section @code{modff}
+@findex modff
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/modff.html}
+
+Gnulib module: modff or modff-ieee
+
+Portability problems fixed by either Gnulib module @code{modff} or @code{modff-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, HP-UX 11.
+@item
+This function is only defined as a buggy macro with arguments on some platforms:
+MSVC 14.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{modff-ieee}:
+@itemize
+@item
+This function has problems with a NaN argument on some platforms:
+NetBSD 5.1, OpenBSD 6.7, Solaris 9, Cygwin.
+@item
+This function has problems with infinite arguments on some platforms:
+IRIX 6.5, mingw.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

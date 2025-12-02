@@ -1,0 +1,29 @@
+Description:
+roundf() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/roundf-ieee.m4
+m4/minus-zero.m4
+m4/signbit.m4
+
+Depends-on:
+roundf
+floorf-ieee     [test $HAVE_ROUNDF = 0 || test $REPLACE_ROUNDF = 1]
+ceilf-ieee      [test $HAVE_ROUNDF = 0 || test $REPLACE_ROUNDF = 1]
+
+configure.ac:
+gl_FUNC_ROUNDF_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ROUNDF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

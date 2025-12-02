@@ -1,0 +1,13 @@
+Files:
+tests/test-atan2f.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-atan2f
+check_PROGRAMS += test-atan2f
+test_atan2f_LDADD = $(LDADD) @ATAN2F_LIBM@

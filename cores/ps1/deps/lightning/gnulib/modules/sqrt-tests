@@ -1,0 +1,16 @@
+Files:
+tests/test-sqrt.c
+tests/test-sqrt.h
+tests/signature.h
+tests/macros.h
+tests/randomd.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sqrt
+check_PROGRAMS += test-sqrt
+test_sqrt_SOURCES = test-sqrt.c randomd.c
+test_sqrt_LDADD = $(LDADD) @SQRT_LIBM@

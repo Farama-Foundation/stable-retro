@@ -1,0 +1,34 @@
+@node chown
+@section @code{chown}
+@findex chown
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/chown.html}
+
+Gnulib module: chown
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+Some platforms fail to detect trailing slash on non-directories, as in
+@code{chown("link-to-file/",uid,gid)}:
+FreeBSD 7.2, AIX 7.1, Solaris 9.
+@item
+Some platforms fail to update the change time when at least one
+argument was not @minus{}1, but no ownership changes resulted:
+OpenBSD 6.7.
+@item
+When passed an argument of @minus{}1, some implementations really set the owner
+user/group id of the file to this value, rather than leaving that id of the
+file alone.
+@item
+When applied to a symbolic link, some implementations don't dereference
+the symlink, i.e.@: they behave like @code{lchown}.
+@item
+This function is missing on some platforms; however, the replacement
+always fails with @code{ENOSYS}:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

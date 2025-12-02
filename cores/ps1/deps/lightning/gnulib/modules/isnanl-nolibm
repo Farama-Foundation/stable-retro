@@ -1,0 +1,34 @@
+Description:
+isnanl() function: test for NaN, without requiring libm.
+
+Files:
+lib/isnanl-nolibm.h
+lib/isnanl.c
+lib/isnan.c
+lib/float+.h
+m4/exponentl.m4
+m4/isnanl.m4
+m4/math_h.m4
+
+Depends-on:
+float
+fpieee
+memcmp
+
+configure.ac:
+gl_FUNC_ISNANL_NO_LIBM
+if test $gl_func_isnanl_no_libm != yes; then
+  AC_LIBOBJ([isnanl])
+  gl_PREREQ_ISNANL
+fi
+
+Makefile.am:
+
+Include:
+"isnanl-nolibm.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

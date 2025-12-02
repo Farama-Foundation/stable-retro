@@ -1,0 +1,25 @@
+@node modf
+@section @code{modf}
+@findex modf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/modf.html}
+
+Gnulib module: modf or modf-ieee
+
+Portability problems fixed by either Gnulib module @code{modf} or @code{modf-ieee}:
+@itemize
+@end itemize
+
+Portability problems fixed by Gnulib module @code{modf-ieee}:
+@itemize
+@item
+This function has problems with a NaN argument on some platforms:
+NetBSD 5.1, Cygwin.
+@item
+This function has problems with infinite arguments on some platforms:
+FreeBSD 6.4, OpenBSD 6.7, IRIX 6.5.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

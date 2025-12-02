@@ -1,0 +1,27 @@
+Description:
+Read symbolic links into a buffer without size limitation, relative to fd.
+
+Files:
+lib/careadlinkat.c
+lib/careadlinkat.h
+
+Depends-on:
+allocator
+ssize_t
+unistd
+
+configure.ac:
+AC_REQUIRE([AC_C_RESTRICT])
+AC_CHECK_FUNCS_ONCE([readlinkat])
+
+Makefile.am:
+lib_SOURCES += careadlinkat.c
+
+Include:
+"careadlinkat.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert, Jim Meyering

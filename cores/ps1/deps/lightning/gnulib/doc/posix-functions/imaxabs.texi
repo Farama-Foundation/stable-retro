@@ -1,0 +1,18 @@
+@node imaxabs
+@section @code{imaxabs}
+@findex imaxabs
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/imaxabs.html}
+
+Gnulib module: imaxabs
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+NetBSD 3.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11.23, IRIX 6.5, Solaris 9, MSVC 9, Android 4.3.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

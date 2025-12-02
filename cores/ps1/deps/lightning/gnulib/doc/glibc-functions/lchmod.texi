@@ -1,0 +1,32 @@
+@node lchmod
+@subsection @code{lchmod}
+@findex lchmod
+
+Gnulib module: lchmod
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 6.7, Minix 3.1.8, AIX 5.1, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@item
+This function is not declared on some platforms:
+HP-UX 11.31.
+@item
+This function always fails with @code{errno} set to @code{ENOSYS},
+even when the file is not a symbolic link:
+GNU/Linux with glibc 2.31.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Some platforms do not allow changing the access bits on symbolic
+links.
+
+@item
+This function can fail with @code{errno} set to @code{EMFILE} or @code{ENFILE},
+and it fails with @code{errno} set to @code{EOPNOTSUPP} if the
+@file{/proc} file system is not mounted:
+GNU/Linux with glibc 2.33.
+@end itemize

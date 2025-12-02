@@ -1,0 +1,21 @@
+Description:
+Building bison-generated parsers.
+
+Files:
+m4/bison.m4
+
+Depends-on:
+
+configure.ac:
+# See the comments in bison.m4.
+
+Makefile.am:
+# See the comments in bison.m4.
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+all

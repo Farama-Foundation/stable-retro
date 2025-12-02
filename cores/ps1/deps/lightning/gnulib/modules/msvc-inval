@@ -1,0 +1,28 @@
+Description:
+invalid parameter handler for MSVC runtime libraries
+
+Files:
+lib/msvc-inval.h
+lib/msvc-inval.c
+m4/msvc-inval.m4
+
+Depends-on:
+
+configure.ac:
+AC_REQUIRE([gl_MSVC_INVAL])
+if test $HAVE_MSVC_INVALID_PARAMETER_HANDLER = 1; then
+  AC_LIBOBJ([msvc-inval])
+fi
+
+Makefile.am:
+
+Include:
+#if HAVE_MSVC_INVALID_PARAMETER_HANDLER
+# include "msvc-inval.h"
+#endif
+
+License:
+LGPLv2+
+
+Maintainer:
+all

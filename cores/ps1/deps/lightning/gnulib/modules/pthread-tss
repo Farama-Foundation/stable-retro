@@ -1,0 +1,31 @@
+Description:
+POSIX thread-specific storage.
+
+Files:
+lib/pthread-tss.c
+m4/pthread-tss.m4
+
+Depends-on:
+pthread-h
+windows-tls     [test $gl_threads_api = windows]
+
+configure.ac:
+gl_PTHREAD_TSS
+if test $HAVE_PTHREAD_KEY_CREATE = 0 || test $REPLACE_PTHREAD_KEY_CREATE = 1; then
+  AC_LIBOBJ([pthread-tss])
+fi
+gl_PTHREAD_MODULE_INDICATOR([pthread-tss])
+
+Makefile.am:
+
+Include:
+<pthread.h>
+
+Link:
+$(LIBPMULTITHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

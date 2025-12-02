@@ -1,0 +1,12 @@
+Files:
+tests/test-pthread-thread.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pthread-thread
+check_PROGRAMS += test-pthread-thread
+test_pthread_thread_LDADD = $(LDADD) @LIBPMULTITHREAD@

@@ -1,0 +1,14 @@
+Files:
+tests/unistr/test-u16-strtok.c
+tests/unistr/test-u-strtok.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-strtok
+check_PROGRAMS += test-u16-strtok
+test_u16_strtok_SOURCES = unistr/test-u16-strtok.c
+test_u16_strtok_LDADD = $(LDADD) $(LIBUNISTRING)

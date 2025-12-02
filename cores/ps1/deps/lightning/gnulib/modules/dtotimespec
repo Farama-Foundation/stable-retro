@@ -1,0 +1,25 @@
+Description:
+Convert double to timespec.
+
+Files:
+lib/dtotimespec.c
+
+Depends-on:
+intprops
+timespec
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += dtotimespec.c
+
+Include:
+"timespec.h"
+
+Link:
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

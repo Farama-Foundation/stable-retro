@@ -1,0 +1,28 @@
+Description:
+mbspcasecmp() function: case-insensitive string prefix comparison.
+
+Files:
+lib/mbspcasecmp.c
+
+Depends-on:
+mbuiter
+string
+
+configure.ac:
+gl_STRING_MODULE_INDICATOR([mbspcasecmp])
+
+Makefile.am:
+lib_SOURCES += mbspcasecmp.c
+
+Include:
+<string.h>
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+$(LIB_MBRTOWC)
+
+License:
+LGPL
+
+Maintainer:
+all

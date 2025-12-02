@@ -1,0 +1,21 @@
+Description:
+Abstract ordered set data type as a C++ class.
+
+Files:
+lib/gl_oset.hh
+
+Depends-on:
+xoset
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"gl_oset.hh"
+
+License:
+GPL
+
+Maintainer:
+all

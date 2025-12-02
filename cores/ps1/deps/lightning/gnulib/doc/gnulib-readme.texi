@@ -1,0 +1,574 @@
+@c Gnulib README
+
+@c Copyright 2001, 2003--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+@menu
+* Gnulib Basics::
+* Git Checkout::
+* Keeping Up-to-date::
+* Contributing to Gnulib::
+* Portability guidelines::
+* High Quality::
+@end menu
+
+@node Gnulib Basics
+@section Gnulib Basics
+
+While portability across operating systems is not one of GNU's primary
+goals, it has helped introduce many people to the GNU system, and is
+worthwhile when it can be achieved at a low cost.  This collection helps
+lower that cost.
+
+Gnulib is intended to be the canonical source for most of the important
+``portability'' and/or common files for GNU projects.  These are files
+intended to be shared at the source level; Gnulib is not a typical
+library meant to be installed and linked against.  Thus, unlike most
+projects, Gnulib does not normally generate a source tarball
+distribution; instead, developers grab modules directly from the
+source repository.
+
+The easiest, and recommended, way to do this is to use the
+@command{gnulib-tool} script.  Since there is no installation
+procedure for Gnulib, @command{gnulib-tool} needs to be run directly
+in the directory that contains the Gnulib source code.  You can do
+this either by specifying the absolute filename of
+@command{gnulib-tool}, or by using a symbolic link from a place inside
+your @env{PATH} to the @command{gnulib-tool} file of your preferred
+Gnulib checkout.  For example:
+
+@example
+$ ln -s $HOME/gnu/src/gnulib.git/gnulib-tool $HOME/bin/gnulib-tool
+@end example
+
+@node Git Checkout
+@section Git Checkout
+
+Gnulib is available for anonymous checkout.  In any Bourne-shell the
+following should work:
+
+@example
+$ git clone https://git.savannah.gnu.org/git/gnulib.git
+@end example
+
+For a read-write checkout you need to have a login on
+@samp{savannah.gnu.org} and be a member of the Gnulib project at
+@url{https://savannah.gnu.org/projects/gnulib}.  Then, instead of the
+URL @url{https://git.savannah.gnu.org/git/gnulib.git}, use the URL
+@samp{ssh://@var{user}@@git.savannah.gnu.org/srv/git/gnulib} where
+@var{user} is your login name on savannah.gnu.org.
+
+git resources:
+
+@table @asis
+@item Overview:
+@url{https://en.wikipedia.org/wiki/Git_(software)}
+@item Homepage:
+@url{https://git-scm.com/}
+@end table
+
+When you use @code{git annotate} or @code{git blame} with Gnulib, it's
+recommended that you use the @option{-w} option, in order to ignore
+massive whitespace changes that happened in 2009.
+
+@node Keeping Up-to-date
+@section Keeping Up-to-date
+
+The best way to work with Gnulib is to check it out of git.
+To synchronize, you can use @code{git pull}.
+
+Subscribing to the @email{bug-gnulib@@gnu.org} mailing list will help
+you to plan when to update your local copy of Gnulib (which you use to
+maintain your software) from git.  You can review the archives,
+subscribe, etc., via
+@url{https://lists.gnu.org/mailman/listinfo/bug-gnulib}.
+
+Sometimes, using an updated version of Gnulib will require you to use
+newer versions of GNU Automake or Autoconf.  You may find it helpful
+to join the autotools-announce mailing list to be advised of such
+changes.
+
+@node Contributing to Gnulib
+@section Contributing to Gnulib
+
+All software here is copyrighted by the Free Software Foundation---you need
+to have filled out an assignment form for a project that uses the
+module for that contribution to be accepted here.
+
+If you have a piece of code that you would like to contribute, please
+email @email{bug-gnulib@@gnu.org}.
+
+Generally we are looking for files that fulfill at least one of the
+following requirements:
+
+@itemize
+@item
+If your @file{.c} and @file{.h} files define functions that are broken or
+missing on some other system, we should be able to include it.
+
+@item
+If your functions remove arbitrary limits from existing
+functions (either under the same name, or as a slightly different
+name), we should be able to include it.
+@end itemize
+
+If your functions define completely new but rarely used functionality,
+you should probably consider packaging it as a separate library.
+
+@menu
+* Gnulib licensing::
+* Indent with spaces not TABs::
+* How to add a new module::
+@end menu
+
+@node Gnulib licensing
+@subsection Gnulib licensing
+
+Gnulib contains code both under GPL and LGPL@.  Because several packages
+that use Gnulib are GPL, the files state they are licensed under GPL@.
+However, to support LGPL projects as well, you may use some of the
+files under LGPL@.  The ``License:'' information in the files under
+modules/ clarifies the real license that applies to the module source.
+
+Keep in mind that if you submit patches to files in Gnulib, you should
+license them under a compatible license, which means that sometimes
+the contribution will have to be LGPL, if the original file is
+available under LGPL via a ``License: LGPL'' information in the
+projects' modules/ file.
+
+@node Indent with spaces not TABs
+@subsection Indent with spaces not TABs
+
+We use space-only indentation in nearly all files. This includes all
+@file{*.h}, @file{*.c}, @file{*.y} files, except for the @code{regex}
+module. Makefile and ChangeLog files are excluded, since TAB
+characters are part of their format.
+
+In order to tell your editor to produce space-only indentation, you
+can use these instructions.
+
+@itemize
+@item
+For Emacs: Add these lines to your Emacs initialization file
+(@file{$HOME/.emacs} or similar):
+
+@example
+;; In Gnulib, indent with spaces everywhere (not TABs).
+;; Exceptions: Makefile and ChangeLog modes.
+(add-hook 'find-file-hook '(lambda ()
+  (if (and buffer-file-name
+           (string-match "/gnulib\\>" (buffer-file-name))
+           (not (string-equal mode-name "Change Log"))
+           (not (string-equal mode-name "Makefile")))
+      (setq indent-tabs-mode nil))))
+@end example
+
+@item
+For vi (vim): Add these lines to your @file{$HOME/.vimrc} file:
+
+@example
+" Don't use tabs for indentation. Spaces are nicer to work with.
+set expandtab
+@end example
+
+For Makefile and ChangeLog files, compensate for this by adding this
+to your @file{$HOME/.vim/after/indent/make.vim} file, and similarly
+for your @file{$HOME/.vim/after/indent/changelog.vim} file:
+
+@example
+" Use tabs for indentation, regardless of the global setting.
+set noexpandtab
+@end example
+
+@item
+For Eclipse: In the ``Window|Preferences'' dialog (or ``Eclipse|Preferences''
+dialog on Mac OS),
+
+@enumerate
+@item
+Under ``General|Editors|Text Editors'', select the ``Insert spaces for tabs''
+checkbox.
+
+@item
+Under ``C/C++|Code Style'', select a code style profile that has the
+``Indentation|Tab policy'' combobox set to ``Spaces only'', such as the
+``GNU [built-in]'' policy.
+@end enumerate
+
+If you use the GNU indent program, pass it the option @option{--no-tabs}.
+@end itemize
+
+@node How to add a new module
+@subsection How to add a new module
+
+@itemize
+@item
+Add the header files and source files to @file{lib/}.
+
+@item
+If the module needs configure-time checks, write an Autoconf
+macro for it in @file{m4/@var{module}.m4}. See @file{m4/README} for details.
+
+@item
+Write a module description @file{modules/@var{module}}, based on
+@file{modules/TEMPLATE}.
+
+@item
+If the module contributes a section to the end-user documentation,
+put this documentation in @file{doc/@var{module}.texi} and add it to the ``Files''
+section of @file{modules/@var{module}}.  Most modules don't do this; they have only
+documentation for the programmer (= Gnulib user).  Such documentation
+usually goes into the @file{lib/} source files.  It may also go into @file{doc/};
+but don't add it to the module description in this case.
+
+@item
+Add the module to the list in @file{MODULES.html.sh}.
+@end itemize
+
+@noindent
+You can test that a module builds correctly with:
+
+@example
+$ ./gnulib-tool --create-testdir --dir=/tmp/testdir module1 ... moduleN
+$ cd /tmp/testdir
+$ ./configure && make
+@end example
+
+@noindent
+Other things:
+
+@itemize
+@item
+Check the license and copyright year of headers.
+
+@item
+Check that the source code follows the GNU coding standards;
+see @url{https://www.gnu.org/prep/standards}.
+
+@item
+Add source files to @file{config/srclist*} if they are identical to upstream
+and should be upgraded in Gnulib whenever the upstream source changes.
+
+@item
+Include header files in source files to verify the function prototypes.
+
+@item
+Make sure a replacement function doesn't cause warnings or clashes on
+systems that have the function.
+
+@item
+Autoconf functions can use @samp{gl_*} prefix. The @samp{AC_*} prefix is for
+autoconf internal functions.
+
+@item
+Build files only if they are needed on a platform.  Look at the
+@code{alloca} and @code{fnmatch} modules for how to achieve this.  If
+for some reason you cannot do this, and you have a @file{.c} file that
+leads to an empty @file{.o} file on some platforms (through some big
+@code{#if} around all the code), then ensure that the compilation unit
+is not empty after preprocessing.  One way to do this is to
+@code{#include <stddef.h>} or @code{<stdio.h>} before the big
+@code{#if}.
+@end itemize
+
+@node Portability guidelines
+@section Portability guidelines
+
+Gnulib code is intended to be portable to a wide variety of platforms,
+not just GNU platforms.  Gnulib typically attempts to support a
+platform as long as it is still supported by its provider, even if the
+platform is not the latest version.  @xref{Target Platforms}.
+
+Many Gnulib modules exist so that applications need not worry about
+undesirable variability in implementations.  For example, an
+application that uses the @code{malloc} module need not worry about
+@code{malloc@ (0)} returning @code{NULL} on some Standard C
+platforms; and @code{glob} users need not worry about @code{glob}
+silently omitting symbolic links to nonexistent files on some
+platforms that do not conform to POSIX.
+
+Gnulib code is intended to port without problem to new hosts, e.g.,
+hosts conforming to recent C and POSIX standards.  Hence Gnulib code
+should avoid using constructs that these newer standards no longer
+require, without first testing for the presence of these constructs.
+For example, because C11 made variable length arrays optional, Gnulib
+code should avoid them unless it first uses the @code{vararrays}
+module to check whether they are supported.
+
+The following subsections discuss some exceptions and caveats to the
+general Gnulib portability guidelines.
+
+@menu
+* C language versions::
+* C99 features assumed::
+* C99 features avoided::
+* Other portability assumptions::
+@end menu
+
+@node C language versions
+@subsection C language versions
+
+Currently Gnulib assumes at least a freestanding C99 compiler,
+possibly operating with a C library that predates C99; with time this
+assumption will likely be strengthened to later versions of the C
+standard.  Old platforms currently supported include AIX 6.1, HP-UX
+11i v1 and Solaris 10, though these platforms are rarely tested.
+Gnulib itself is so old that it contains many fixes for obsolete
+platforms, fixes that may be removed in the future.
+
+Because of the freestanding C99 assumption, Gnulib code can include
+@code{<float.h>}, @code{<limits.h>}, @code{<stdarg.h>},
+@code{<stdbool.h>}, @code{<stddef.h>}, and @code{<stdint.h>}
+unconditionally.   Gnulib code can also assume the existence
+of @code{<ctype.h>}, @code{<errno.h>}, @code{<fcntl.h>},
+@code{<locale.h>}, @code{<signal.h>}, @code{<stdio.h>},
+@code{<stdlib.h>}, @code{<string.h>}, and @code{<time.h>}.  Similarly,
+many modules include @code{<sys/types.h>} even though it's not even in
+C11; that's OK since @code{<sys/types.h>} has been around nearly
+forever.
+
+Even if the include files exist, they may not conform to the C standard.
+However, GCC has a @command{fixincludes} script that attempts to fix most
+C89-conformance problems.  Gnulib currently assumes include files
+largely conform to C89 or better.  People still using ancient hosts
+should use fixincludes or fix their include files manually.
+
+Even if the include files conform, the library itself may not.
+For example, @code{strtod} and @code{mktime} have some bugs on some platforms.
+You can work around some of these problems by requiring the relevant
+modules, e.g., the Gnulib @code{mktime} module supplies a working and
+conforming @code{mktime}.
+
+@node C99 features assumed
+@subsection C99 features assumed by Gnulib
+
+Although the C99 standard specifies many features, Gnulib code
+is conservative about using them, partly because Gnulib predates
+the widespread adoption of C99, and partly because many C99
+features are not well-supported in practice.  C99 features that
+are reasonably portable nowadays include:
+
+@itemize
+@item
+A declarations after a statement, or as the first clause in a
+@code{for} statement.
+
+@item
+@code{long long int}.
+
+@item
+@code{<stdbool.h>}, assuming the @code{stdbool} module is used.
+@xref{stdbool.h}.
+
+@item
+@code{<stdint.h>}, assuming the @code{stdint} module is used.
+@xref{stdint.h}.
+
+@item
+Compound literals and designated initializers.
+
+@item
+Variadic macros.
+
+@item
+@code{static inline} functions.
+
+@item
+@code{__func__}, assuming the @code{func} module is used.  @xref{func}.
+
+@item
+The @code{restrict} qualifier, assuming
+@code{AC_REQUIRE([AC_C_RESTRICT])} is used.
+This qualifier is sometimes implemented via a macro, so C++ code that
+uses Gnulib should avoid using @code{restrict} as an identifier.
+
+@item
+Flexible array members (however, see the @code{flexmember} module).
+@end itemize
+
+@node C99 features avoided
+@subsection C99 features avoided by Gnulib
+
+Gnulib avoids some features even though they are standardized by C99,
+as they have portability problems in practice.  Here is a partial list
+of avoided C99 features.  Many other C99 features are portable only if
+their corresponding modules are used; Gnulib code that uses such a
+feature should require the corresponding module.
+
+@itemize
+@item
+Variable length arrays, unless @code{__STDC_NO_VLA__} is defined.
+See the @code{vararrays} module.
+
+@item
+@code{extern inline} functions, without checking whether they are
+supported.  @xref{extern inline}.
+
+@item
+Type-generic math functions.
+
+@item
+Universal character names in source code.
+
+@item
+@code{<iso646.h>}, since GNU programs need not worry about deficient
+source-code encodings.
+
+@item
+Comments beginning with @samp{//}.  This is mostly for style reasons.
+@end itemize
+
+@node Other portability assumptions
+@subsection Other portability assumptions made by Gnulib
+
+The GNU coding standards allow one departure from strict C: Gnulib
+code can assume that standard internal types like
+@code{ptrdiff_t} and @code{size_t} are no
+wider than @code{long}.  POSIX requires implementations to support at
+least one programming environment where this is true, and such
+environments are recommended for Gnulib-using applications.  When it
+is easy to port to non-POSIX platforms like MinGW where these types
+are wider than @code{long}, new Gnulib code should do so, e.g., by
+using @code{ptrdiff_t} instead of @code{long}.  However, it is not
+always that easy, and no effort has been made to check that all Gnulib
+modules work on MinGW-like environments.
+
+Gnulib code makes the following additional assumptions:
+
+@itemize
+@item
+@code{int} and @code{unsigned int} are at least 32 bits wide.  POSIX
+and the GNU coding standards both require this.
+
+@item
+Signed integer arithmetic is two's complement.
+
+Previously, Gnulib code sometimes also assumed that signed integer
+arithmetic wraps around, but modern compiler optimizations
+sometimes do not guarantee this, and Gnulib code with this
+assumption is now considered to be questionable.
+@xref{Integer Properties}.
+
+Although some Gnulib modules contain explicit support for the other signed
+integer representations allowed by the C standard (ones' complement and signed
+magnitude), these modules are the exception rather than the rule.
+All practical Gnulib targets use two's complement.
+
+@item
+There are no ``holes'' in integer values: all the bits of an integer
+contribute to its value in the usual way.
+In particular, an unsigned type and its signed counterpart have the
+same number of bits when you count the latter's sign bit.
+
+@item
+Objects with all bits zero are treated as 0 or NULL@.  For example,
+@code{memset@ (A, 0, sizeof@ A)} initializes an array @code{A} of
+pointers to NULL.
+
+@item
+The types @code{intptr_t} and @code{uintptr_t} exist, and pointers
+can be converted to and from these types without loss of information.
+
+@item
+Addresses and sizes behave as if objects reside in a flat address space.
+In particular:
+
+@itemize
+@item
+If two nonoverlapping objects have sizes @var{S} and @var{T} represented as
+@code{ptrdiff_t} or @code{size_t} values, then @code{@var{S} + @var{T}}
+cannot overflow.
+
+@item
+A pointer @var{P} points within an object @var{O} if and only if
+@code{(char *) &@var{O} <= (char *) @var{P} && (char *) @var{P} <
+(char *) (&@var{O} + 1)}.
+
+@item
+Arithmetic on a valid pointer is equivalent to the same arithmetic on
+the pointer converted to @code{uintptr_t}, except that offsets are
+multiplied by the size of the pointed-to objects.
+For example, if @code{P + I} is a valid expression involving a pointer
+@var{P} and an integer @var{I}, then @code{(uintptr_t) (P + I) ==
+(uintptr_t) ((uintptr_t) P + I * sizeof *P)}.
+Similar arithmetic can be done with @code{intptr_t}, although more
+care must be taken in case of integer overflow or negative integers.
+
+@item
+A pointer @code{P} has alignment @code{A} if and only if
+@code{(uintptr_t) P % A} is zero, and similarly for @code{intptr_t}.
+
+@item
+If an existing object has size @var{S}, and if @var{T} is sufficiently
+small (e.g., 8 KiB), then @code{@var{S} + @var{T}} cannot overflow.
+Overflow in this case would mean that the rest of your program fits
+into @var{T} bytes, which can't happen in realistic flat-address-space
+hosts.
+
+@item
+Adding zero to a null pointer does not change the pointer.
+For example, @code{0 + (char *) NULL == (char *) NULL}.
+@end itemize
+@end itemize
+
+Some system platforms violate these assumptions and are therefore not
+Gnulib porting targets.  @xref{Unsupported Platforms}.
+
+@node High Quality
+@section High Quality
+
+We develop and maintain a testsuite for Gnulib.  The goal is to have a
+100% firm interface so that maintainers can feel free to update to the
+code in git at @emph{any} time and know that their application will not
+break.  This means that before any change can be committed to the
+repository, a test suite program must be produced that exposes the bug
+for regression testing.  All experimental work should be done on
+branches to help promote this.
+
+When compiling and testing Gnulib and Gnulib-using programs, certain
+compiler options can help improve reliability.  The
+@code{manywarnings} module enables several forms of static checking in
+GCC and related compilers (@pxref{manywarnings}).  For dynamic checking,
+you can run @code{configure} with @code{CFLAGS} options appropriate
+for your compiler.  For example:
+
+@example
+./configure \
+ CFLAGS='-g3 -O2'\
+' -D_FORTIFY_SOURCE=2'\
+' -fsanitize=undefined'\
+' -fsanitize-undefined-trap-on-error'
+@end example
+
+@noindent
+Here:
+
+@itemize @bullet
+@item
+@code{-D_FORTIFY_SOURCE=2} enables extra security hardening checks in
+the GNU C library.
+@item
+@code{-fsanitize=undefined} enables GCC's undefined behavior sanitizer
+(@code{ubsan}), and
+@item
+@code{-fsanitize-undefined-trap-on-error} causes @code{ubsan} to
+abort the program (through an ``illegal instruction'' signal).  This
+measure stops exploit attempts and also allows you to debug the issue.
+@end itemize
+
+Without the @code{-fsanitize-undefined-trap-on-error} option,
+@code{-fsanitize=undefined} causes messages to be printed, and
+execution continues after an undefined behavior situation.
+The message printing causes GCC-like compilers to arrange for the
+program to dynamically link to libraries it might not otherwise need.
+With GCC, instead of @code{-fsanitize-undefined-trap-on-error} you can
+use the @code{-static-libubsan} option to arrange for two of the extra
+libraries (@code{libstdc++} and @code{libubsan}) to be linked
+statically rather than dynamically, though this typically bloats the
+executable and the remaining extra libraries are still linked
+dynamically.

@@ -1,0 +1,27 @@
+Description:
+pipe() function: Creation of a pipe.
+
+Files:
+lib/pipe.c
+m4/pipe.m4
+
+Depends-on:
+unistd
+
+configure.ac:
+gl_FUNC_PIPE
+if test $HAVE_PIPE = 0; then
+  AC_LIBOBJ([pipe])
+fi
+gl_UNISTD_MODULE_INDICATOR([pipe])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

@@ -1,0 +1,41 @@
+Description:
+chdir-like function that tries not to fail due to ENAMETOOLONG
+
+Files:
+lib/chdir-long.h
+lib/chdir-long.c
+m4/chdir-long.m4
+m4/pathmax.m4
+
+Depends-on:
+unistd
+pathmax
+chdir
+assure          [test $gl_cv_have_unlimited_file_name_length = no]
+atexit          [test $gl_cv_have_unlimited_file_name_length = no]
+fchdir          [test $gl_cv_have_unlimited_file_name_length = no]
+fcntl-h         [test $gl_cv_have_unlimited_file_name_length = no]
+openat          [test $gl_cv_have_unlimited_file_name_length = no]
+memchr          [test $gl_cv_have_unlimited_file_name_length = no]
+mempcpy         [test $gl_cv_have_unlimited_file_name_length = no]
+memrchr         [test $gl_cv_have_unlimited_file_name_length = no]
+stdbool         [test $gl_cv_have_unlimited_file_name_length = no]
+stdlib          [test $gl_cv_have_unlimited_file_name_length = no]
+
+configure.ac:
+gl_FUNC_CHDIR_LONG
+if test $gl_cv_have_unlimited_file_name_length = no; then
+  AC_LIBOBJ([chdir-long])
+  gl_PREREQ_CHDIR_LONG
+fi
+
+Makefile.am:
+
+Include:
+"chdir-long.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

@@ -1,0 +1,25 @@
+Description:
+Help make Perl scripts relocatable, that is, to allow them to
+function properly when copied to an arbitrary directory.
+
+Files:
+doc/relocatable.texi
+build-aux/relocatable.pl.in
+m4/relocatable-lib.m4
+
+Depends-on:
+
+configure.ac:
+AC_REQUIRE([gl_RELOCATABLE_NOP])
+relocatable_pl=$ac_aux_dir/relocatable.pl.in
+AC_SUBST_FILE([relocatable_pl])
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Ben Pfaff, Reuben Thomas

@@ -1,0 +1,25 @@
+Description:
+Test whether a Unicode character is whitespace in the C language syntax.
+
+Files:
+lib/unictype/sy_c_whitespace.c
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/syntax-c-whitespace])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_SYNTAX_C_WHITESPACE
+lib_SOURCES += unictype/sy_c_whitespace.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

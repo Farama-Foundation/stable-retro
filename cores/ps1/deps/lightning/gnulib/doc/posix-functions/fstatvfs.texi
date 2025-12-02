@@ -1,0 +1,23 @@
+@node fstatvfs
+@section @code{fstatvfs}
+@findex fstatvfs
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fstatvfs.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 3.8, mingw, MSVC 14, Android 4.3.
+@item
+On platforms where @code{f_blocks} in @samp{struct statvfs} is a 32-bit
+value, this function may not work correctly on files systems larger than
+4 TiB@.  The fix is to use the @code{AC_SYS_LARGEFILE} macro.  This affects
+glibc/Hurd, HP-UX 11, Solaris.
+@end itemize

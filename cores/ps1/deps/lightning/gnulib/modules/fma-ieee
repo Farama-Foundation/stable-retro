@@ -1,0 +1,24 @@
+Description:
+fma() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+fma
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FMA_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

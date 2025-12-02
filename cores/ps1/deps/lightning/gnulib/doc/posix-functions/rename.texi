@@ -1,0 +1,77 @@
+@node rename
+@section @code{rename}
+@findex rename
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/rename.html}
+
+Gnulib module: rename
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function does not allow trailing slashes when creating a
+destination directory, as in @code{rename("dir","new/")}:
+NetBSD 1.6.
+@item
+This function does not reject trailing slashes on the destination for
+non-directories on some platforms, as in @code{rename("file","new/")}:
+AIX 7.1, Solaris 11.3, Cygwin 1.5.x, mingw, MSVC 14.
+@item
+This function does not reject trailing slashes on symlinks to
+non-directories on some platforms, as in
+@code{rename("link-to-file/","f")}:
+FreeBSD 7.2.
+@item
+This function ignores trailing slashes on symlinks on some platforms,
+such that @code{rename("link/","new")} corrupts @file{link}:
+Solaris 9.
+@item
+This function incorrectly reduces the link count when comparing two
+spellings of a hard link on some platforms:
+NetBSD 1.6, Cygwin 1.5.x.
+@item
+This function will not always replace an existing destination on some
+platforms:
+Cygwin 1.5.x, mingw, MSVC 14.
+However, the replacement is not atomic for directories, and may end up
+losing the empty destination if the source could not be renamed.
+@item
+This function mistakenly allows names ending in @samp{.} or @samp{..}
+on some platforms:
+Cygwin 1.5.x, mingw, MSVC 14.
+@item
+This function does not reject attempts to rename existing directories
+and non-directories onto one another on some platforms:
+Cygwin 1.5.x, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+POSIX requires that @code{rename("symlink-to-dir/","dir2")} rename
+@file{dir} and leave @file{symlink-to-dir} dangling; likewise, it
+requires that @code{rename("dir","dangling/")} rename @file{dir} so
+that @file{dangling} is no longer a dangling symlink.  This behavior
+is counter-intuitive, so on some systems, @code{rename} fails with
+@code{ENOTDIR} if either argument is a symlink with a trailing slash:
+glibc, OpenBSD, Cygwin 1.7.
+@item
+POSIX requires that @code{rename} do nothing and return 0 if the
+source and destination are hard links to the same file.  This behavior
+is counterintuitive, and on some systems @code{renameat} is a no-op in
+this way only if the source and destination identify the same
+directory entry.  On these systems, for example, although renaming
+@file{./f} to @file{f} is a no-op, renaming @file{f} to @file{g}
+deletes @file{f} when @file{f} and @file{g} are hard links to the same
+file:
+NetBSD 7.0.
+@item
+After renaming a non-empty directory over an existing empty directory,
+the old directory name is still visible through the @code{stat} function
+for 30 seconds after the rename, on NFS file systems, on some platforms:
+Linux 2.6.18.
+@item
+This function will not rename a source that is currently opened
+by any process:
+mingw, MSVC 14.
+@end itemize

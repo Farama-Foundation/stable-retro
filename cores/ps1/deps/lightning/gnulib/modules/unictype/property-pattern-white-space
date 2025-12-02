@@ -1,0 +1,28 @@
+Description:
+Test whether a Unicode character is "pattern white space".
+
+Files:
+lib/unictype/pr_pattern_white_space.c
+lib/unictype/pr_pattern_white_space.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-pattern-white-space])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_PATTERN_WHITE_SPACE
+lib_SOURCES += unictype/pr_pattern_white_space.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

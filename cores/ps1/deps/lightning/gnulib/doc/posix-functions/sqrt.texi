@@ -1,0 +1,15 @@
+@node sqrt
+@section @code{sqrt}
+@findex sqrt
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/sqrt.html}
+
+Gnulib module: sqrt
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

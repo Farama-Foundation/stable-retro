@@ -1,0 +1,28 @@
+Description:
+getrusage() function: Get resource usage of current process.
+
+Files:
+lib/getrusage.c
+m4/getrusage.m4
+
+Depends-on:
+sys_resource
+stdint          [test $HAVE_GETRUSAGE = 0]
+
+configure.ac:
+gl_FUNC_GETRUSAGE
+if test $HAVE_GETRUSAGE = 0; then
+  AC_LIBOBJ([getrusage])
+fi
+gl_SYS_RESOURCE_MODULE_INDICATOR([getrusage])
+
+Makefile.am:
+
+Include:
+<sys/resource.h>
+
+License:
+LGPL
+
+Maintainer:
+all

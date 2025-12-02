@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character belongs to a given bidi class.
+
+Files:
+lib/unictype/bidi_test.c
+
+Depends-on:
+unictype/base
+unictype/bidiclass-of
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/bidiclass-test])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_BIDICLASS_TEST
+lib_SOURCES += unictype/bidi_test.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,37 @@
+@node getpagesize
+@subsection @code{getpagesize}
+@findex getpagesize
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-getpagesize.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Query Memory Parameters,,How to get information about the memory subsystem?,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Query-Memory-Parameters.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/getpagesize.2.html,,man getpagesize}.
+@end itemize
+
+Gnulib module: getpagesize
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+MSVC 14, Android 4.4.
+@item
+This function is not declared on some platforms:
+HP-UX 11 with compiler option @code{-D_XOPEN_SOURCE=600}.
+@item
+This function is broken on some platforms:
+mingw.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,28 @@
+Description:
+Report a SIGPIPE signal and exit.
+
+Files:
+lib/sigpipe-die.h
+lib/sigpipe-die.c
+
+Depends-on:
+error
+gettext-h
+exitfail
+sigpipe
+sigprocmask
+sigaction
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += sigpipe-die.h sigpipe-die.c
+
+Include:
+"sigpipe-die.h"
+
+License:
+GPL
+
+Maintainer:
+all

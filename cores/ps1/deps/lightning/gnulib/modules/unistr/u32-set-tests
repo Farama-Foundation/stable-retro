@@ -1,0 +1,14 @@
+Files:
+tests/unistr/test-u32-set.c
+tests/unistr/test-set.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-set
+check_PROGRAMS += test-u32-set
+test_u32_set_SOURCES = unistr/test-u32-set.c
+test_u32_set_LDADD = $(LDADD) $(LIBUNISTRING)

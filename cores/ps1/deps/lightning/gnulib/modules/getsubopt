@@ -1,0 +1,31 @@
+Description:
+getsubopt: Parse comma separated list into words.
+
+Files:
+lib/getsubopt.c
+m4/getsubopt.m4
+
+Depends-on:
+stdlib
+extensions
+strchrnul       [test $HAVE_GETSUBOPT = 0]
+memchr          [test $HAVE_GETSUBOPT = 0]
+
+configure.ac:
+gl_FUNC_GETSUBOPT
+if test $HAVE_GETSUBOPT = 0; then
+  AC_LIBOBJ([getsubopt])
+  gl_PREREQ_GETSUBOPT
+fi
+gl_STDLIB_MODULE_INDICATOR([getsubopt])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPL
+
+Maintainer:
+all, glibc

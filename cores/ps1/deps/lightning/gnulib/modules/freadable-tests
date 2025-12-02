@@ -1,0 +1,13 @@
+Files:
+tests/test-freadable.c
+tests/macros.h
+
+Depends-on:
+fflush
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-freadable
+check_PROGRAMS += test-freadable
+MOSTLYCLEANFILES += t-freadable.tmp

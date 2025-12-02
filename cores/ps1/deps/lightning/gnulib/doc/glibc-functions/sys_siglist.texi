@@ -1,0 +1,24 @@
+@node sys_siglist
+@subsection @code{sys_siglist}
+@findex sys_siglist
+
+Documentation:@*
+@ifinfo
+@ref{Signal Messages,,Signal Messages,libc}.
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Signal-Messages.html}.
+@end ifnotinfo
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This constant is missing on some platforms:
+macOS 10.13, Minix 3.1.8, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 1.7.9, mingw, MSVC 14.
+@end itemize

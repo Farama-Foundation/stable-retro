@@ -1,0 +1,13 @@
+Files:
+tests/test-locale.c
+
+Depends-on:
+verify
+locale-c++-tests
+
+configure.ac:
+AC_CHECK_FUNCS_ONCE([newlocale])
+
+Makefile.am:
+TESTS += test-locale
+check_PROGRAMS += test-locale

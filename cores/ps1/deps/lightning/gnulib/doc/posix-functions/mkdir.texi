@@ -1,0 +1,40 @@
+@node mkdir
+@section @code{mkdir}
+@findex mkdir
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/mkdir.html}
+
+Gnulib module: sys_stat or mkdir
+
+Portability problems fixed by either Gnulib module @code{sys_stat} or @code{mkdir}:
+@itemize
+@item
+This function is declared in different header files (namely, @code{<io.h>} or
+@code{<direct.h>}) on some platforms:
+mingw, MSVC 14.
+@item
+On Windows platforms (excluding Cygwin), this function is called @code{_mkdir}
+and takes only one argument.  The fix (without Gnulib) is to define a macro
+like this:
+@smallexample
+#define mkdir ((int (*)()) _mkdir)
+@end smallexample
+or
+@smallexample
+#define mkdir(path,mode) _mkdir (path)
+@end smallexample
+@end itemize
+
+Portability problems fixed by Gnulib module @code{mkdir}:
+@itemize
+@item
+When the argument ends in a slash, the function call fails on some platforms.
+@item
+This function mistakenly succeeds on @samp{mkdir("d/./",mode)} on
+some platforms:
+Cygwin 1.5.x, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

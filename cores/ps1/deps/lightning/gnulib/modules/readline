@@ -1,0 +1,32 @@
+Description:
+Simple implementation of readline.
+
+Files:
+lib/readline.h
+lib/readline.c
+m4/readline.m4
+
+Depends-on:
+havelib
+getline         [test "$gl_cv_lib_readline" = no]
+
+configure.ac:
+gl_FUNC_READLINE
+if test "$gl_cv_lib_readline" = no; then
+  AC_LIBOBJ([readline])
+  gl_PREREQ_READLINE
+fi
+
+Makefile.am:
+
+Include:
+"readline.h"
+
+Link:
+$(LTLIBREADLINE) when linking with libtool, $(LIBREADLINE) otherwise
+
+License:
+GPL
+
+Maintainer:
+Simon Josefsson

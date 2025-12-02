@@ -1,0 +1,587 @@
+@node Integer Properties
+@section Integer Properties
+
+@c Copyright (C) 2011--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+@c Written by Paul Eggert.
+
+@cindex integer properties
+
+The @code{intprops} module consists of an include file @code{<intprops.h>}
+that defines several macros useful for testing properties of integer
+types.
+
+@cindex integer overflow
+@cindex overflow, integer
+
+Integer overflow is a common source of problems in programs written in
+C and other languages.  In some cases, such as signed integer
+arithmetic in C programs, the resulting behavior is undefined, and
+practical platforms do not always behave as if integers wrap around
+reliably.  In other cases, such as unsigned integer arithmetic in C,
+the resulting behavior is well-defined, but programs may still
+misbehave badly after overflow occurs.
+
+Many techniques have been proposed to attack these problems.  These
+include precondition testing, wraparound behavior where signed integer
+arithmetic is guaranteed to be modular, saturation semantics where
+overflow reliably yields an extreme value, undefined behavior
+sanitizers where overflow is guaranteed to trap, and various static
+analysis techniques.
+
+Gnulib supports wraparound arithmetic and precondition testing, as
+these are relatively easy to support portably and efficiently.  There
+are two families of precondition tests: the first, for integer types,
+is easier to use, while the second, for integer ranges, has a simple
+and straightforward portable implementation.
+
+Like other Gnulib modules, the implementation of the @code{intprops}
+module assumes that integers use a two's complement representation,
+but it does not assume that signed integer arithmetic wraps around.
+@xref{Other portability assumptions}.
+
+@menu
+* Arithmetic Type Properties::  Determining properties of arithmetic types.
+* Integer Bounds::              Bounds on integer values and representations.
+* Checking Integer Overflow::   Checking for overflow while computing integers.
+* Wraparound Arithmetic::       Well-defined behavior on integer overflow.
+* Integer Type Overflow::       General integer overflow checking.
+* Integer Range Overflow::      Integer overflow checking if bounds are known.
+@end menu
+
+@node Arithmetic Type Properties
+@subsection Arithmetic Type Properties
+
+@findex TYPE_IS_INTEGER
+@code{TYPE_IS_INTEGER (@var{t})} is an arithmetic constant
+expression that is 1 if the arithmetic type @var{t} is an integer type.
+@code{_Bool} counts as an integer type.
+
+@findex TYPE_SIGNED
+@code{TYPE_SIGNED (@var{t})} is an arithmetic constant expression
+that is 1 if the real type @var{t} is a signed integer type or a
+floating type.  If @var{t} is an integer type, @code{TYPE_SIGNED (@var{t})}
+is an integer constant expression.
+
+@findex EXPR_SIGNED
+@code{EXPR_SIGNED (@var{e})} is 1 if the real expression @var{e}
+has a signed integer type or a floating type.  If @var{e} is an
+integer constant expression or an arithmetic constant expression,
+@code{EXPR_SIGNED (@var{e})} is likewise.  The expression
+@var{e} is not evaluated, and @code{EXPR_SIGNED
+(@var{e})} is typically optimized to a constant.
+
+Example usage:
+
+@example
+#include <intprops.h>
+#include <time.h>
+
+enum
+@{
+  time_t_is_signed_integer =
+    TYPE_IS_INTEGER (time_t) && TYPE_SIGNED (time_t)
+@};
+
+int
+CLOCKS_PER_SEC_is_signed (void)
+@{
+  return EXPR_SIGNED (CLOCKS_PER_SEC);
+@}
+@end example
+
+@node Integer Bounds
+@subsection Integer Bounds
+
+@cindex integer bounds
+
+@findex INT_BUFSIZE_BOUND
+@code{INT_BUFSIZE_BOUND (@var{t})} is an integer constant
+expression that is a bound on the size of the string representing an
+integer type or expression @var{t} in decimal notation, including the
+terminating null character and any leading @code{-} character.  For
+example, if @code{INT_BUFSIZE_BOUND (int)} is 12, any value of type
+@code{int} can be represented in 12 bytes or less, including the
+terminating null.  The bound is not necessarily tight.
+
+Example usage:
+
+@example
+#include <intprops.h>
+#include <stdio.h>
+int
+int_strlen (int i)
+@{
+  char buf[INT_BUFSIZE_BOUND (int)];
+  return sprintf (buf, "%d", i);
+@}
+@end example
+
+@findex INT_STRLEN_BOUND
+@code{INT_STRLEN_BOUND (@var{t})} is an integer constant
+expression that is a bound on the length of the string representing an
+integer type or expression @var{t} in decimal notation, including any
+leading @code{-} character.  This is one less than
+@code{INT_BUFSIZE_BOUND (@var{t})}.
+
+@findex TYPE_MINIMUM
+@findex TYPE_MAXIMUM
+@code{TYPE_MINIMUM (@var{t})} and @code{TYPE_MAXIMUM (@var{t})} are
+integer constant expressions equal to the minimum and maximum
+values of the integer type @var{t}.  These expressions are of the type
+@var{t} (or more precisely, the type @var{t} after integer
+promotions).
+
+Example usage:
+
+@example
+#include <stdint.h>
+#include <sys/types.h>
+#include <intprops.h>
+int
+in_off_t_range (intmax_t a)
+@{
+  return TYPE_MINIMUM (off_t) <= a && a <= TYPE_MAXIMUM (off_t);
+@}
+@end example
+
+@node Checking Integer Overflow
+@subsection Checking Integer Overflow
+
+@cindex integer overflow checking
+
+Signed integer arithmetic has undefined behavior on overflow in C@.
+Although almost all modern computers use two's complement signed
+arithmetic that is well-defined to wrap around, C compilers routinely
+optimize assuming that signed integer overflow cannot occur, which
+means that a C program cannot easily get at the underlying machine
+arithmetic.  For example:
+
+@example
+if ((a + b < b) == (a < 0))
+  a += b;
+else
+  printf ("overflow\n");
+@end example
+
+@noindent
+might not work as expected if @code{a} and @code{b} are signed,
+because a compiler can assume that signed overflow cannot occur and
+treat the entire @code{if} expression as if it were true.  And even if
+@code{a} is unsigned, the expression might not work as expected if
+@code{b} is negative or is wider than @code{a}.
+
+The following macros work around this problem by returning an overflow
+indication while computing the sum, difference, or product of two
+integers.  For example, if @code{i} is of type @code{int},
+@code{INT_ADD_OK (INT_MAX - 1, 1, &i)} sets @code{i} to
+@code{INT_MAX} and returns true, whereas @code{INT_ADD_OK (INT_MAX, 1,
+&i)} returns false.
+
+Example usage:
+
+@example
+#include <intprops.h>
+#include <stdio.h>
+
+/* Compute A * B, reporting whether overflow occurred.  */
+void
+print_product (long int a, long int b)
+@{
+  long int r;
+  if (INT_MULTIPLY_OK (a, b, r))
+    printf ("result is %ld\n", r);
+  else
+    printf ("overflow\n");
+@}
+@end example
+
+These macros work for both signed and unsigned integers, so they can
+be used with integer types like @code{time_t} that may or may not be
+signed, depending on the platform.
+
+These macros have the following restrictions:
+
+@itemize @bullet
+@item
+Their first two arguments must be integer expressions.
+
+@item
+Their last argument must be a non-null pointer to an integer.
+
+@item
+They may evaluate their arguments zero or multiple times, so the
+arguments should not have side effects.
+
+@item
+They are not necessarily constant expressions, even if all their
+arguments are constant expressions.
+@end itemize
+
+@table @code
+@item INT_ADD_OK (@var{a}, @var{b}, @var{r})
+@findex INT_ADD_OK
+Compute the sum of @var{a} and @var{b}.  If it fits into
+@code{*@var{r}}, store it there and return true.  Otherwise return
+false, possibly modifying @code{*@var{r}} to an unspecified value.
+See above for restrictions.
+
+@item INT_SUBTRACT_OK (@var{a}, @var{b}, @var{r})
+@findex INT_SUBTRACT_OK
+Compute the difference between @var{a} and @var{b}.  If it fits into
+@code{*@var{r}}, store it there and return true.  Otherwise return
+false, possibly modifying @code{*@var{r}} to an unspecified value.
+See above for restrictions.
+
+@item INT_MULTIPLY_OK (@var{a}, @var{b}, @var{r})
+@findex INT_MULTIPLY_OK
+Compute the product of @var{a} and @var{b}.  If it fits into
+@code{*@var{r}}, store it there and return true.  Otherwise return
+false, possibly modifying @code{*@var{r}} to an unspecified value.
+See above for restrictions.
+@end table
+
+Other macros are available if you need wrapped-around results when
+overflow occurs (@pxref{Wraparound Arithmetic}), or if you need to
+check for overflow in operations other than addition, subtraction, and
+multiplication (@pxref{Integer Type Overflow}).
+
+@node Wraparound Arithmetic
+@subsection Wraparound Arithmetic with Integers
+
+@cindex wraparound integer arithmetic
+
+Signed integer arithmetic has undefined behavior on overflow in C@.
+Although almost all modern computers use two's complement signed
+arithmetic that is well-defined to wrap around, C compilers routinely
+optimize assuming that signed integer overflow cannot occur, which
+means that a C program cannot easily get at the underlying machine
+arithmetic.  For example, on a typical machine with 32-bit two's
+complement @code{int} the expression @code{INT_MAX + 1} does not
+necessarily yield @code{INT_MIN}, because the compiler may do
+calculations with a 64-bit register, or may generate code that
+traps on signed integer overflow.
+
+The following macros work around this problem by storing the
+wraparound value, i.e., the low-order bits of the correct answer, and
+by returning an overflow indication.  For example, if @code{i} is of
+type @code{int}, @code{INT_ADD_WRAPV (INT_MAX, 1, &i)} sets @code{i}
+to @code{INT_MIN} and returns 1 on a two's complement machine.
+@xref{Integer Type Overflow}.
+
+Example usage:
+
+@example
+#include <intprops.h>
+#include <stdio.h>
+
+/* Print the low order bits of A * B,
+   reporting whether overflow occurred.  */
+void
+print_product (long int a, long int b)
+@{
+  long int r;
+  int overflow = INT_MULTIPLY_WRAPV (a, b, &r);
+  printf ("result is %ld (%s)\n", r,
+          (overflow
+           ? "after overflow"
+           : "no overflow"));
+@}
+@end example
+
+These macros work for both signed and unsigned integers, so they can
+be used with integer types like @code{time_t} that may or may not be
+signed, depending on the platform.
+
+These macros have the following restrictions:
+
+@itemize @bullet
+@item
+Their first two arguments must be integer expressions.
+
+@item
+Their last argument must be a non-null pointer to an integer.
+
+@item
+They may evaluate their arguments zero or multiple times, so the
+arguments should not have side effects.
+
+@item
+They are not necessarily constant expressions, even if all their
+arguments are constant expressions.
+@end itemize
+
+@table @code
+@item INT_ADD_WRAPV (@var{a}, @var{b}, @var{r})
+@findex INT_ADD_WRAPV
+Store the low-order bits of the sum of @var{a} and @var{b} into
+@code{*@var{r}}.  Return true if overflow occurred, false if the
+low-order bits are the mathematically-correct sum.  See above for
+restrictions.
+
+@item INT_SUBTRACT_WRAPV (@var{a}, @var{b}, @var{r})
+@findex INT_SUBTRACT_WRAPV
+Store the low-order bits of the difference between @var{a} and @var{b}
+into @code{*@var{r}}.  Return true if overflow occurred, false if the
+low-order bits are the mathematically-correct difference.  See above
+for restrictions.
+
+@item INT_MULTIPLY_WRAPV (@var{a}, @var{b}, @var{r})
+@findex INT_MULTIPLY_WRAPV
+Store the low-order bits of the product of @var{a} and @var{b} into
+@code{*@var{r}}.  Return true if overflow occurred, false if the
+low-order bits are the mathematically-correct product.  See above for
+restrictions.
+@end table
+
+Other macros are available if you do not need wrapped-around results
+when overflow occurs (@pxref{Checking Integer Overflow}), or if you
+need to check for overflow in operations other than addition,
+subtraction, and multiplication (@pxref{Integer Type Overflow}).
+
+@node Integer Type Overflow
+@subsection Integer Type Overflow
+
+@cindex integer type overflow
+@cindex overflow, integer type
+
+Although unsigned integer arithmetic wraps around modulo a power of
+two, signed integer arithmetic has undefined behavior on overflow in
+C@.  Almost all modern computers use two's complement signed
+arithmetic that is well-defined to wrap around, but C compilers
+routinely optimize based on the assumption that signed integer
+overflow cannot occur, which means that a C program cannot easily get
+at the underlying machine behavior.  For example, the signed integer
+expression @code{(a + b < b) != (a < 0)} is not a reliable test for
+whether @code{a + b} overflows, because a compiler can assume that
+signed overflow cannot occur and treat the entire expression as if it
+were false.
+
+These macros yield 1 if the corresponding C operators might not yield
+numerically correct answers due to arithmetic overflow of an integer
+type.  They work correctly on all known practical hosts, and do not
+rely on undefined behavior due to signed arithmetic overflow.  They
+are integer constant expressions if their arguments are.  They
+are typically easier to use than the integer range overflow macros
+(@pxref{Integer Range Overflow}), and they support more operations and
+evaluation contexts than the wraparound macros (@pxref{Wraparound
+Arithmetic}).
+
+Example usage:
+
+@example
+#include <intprops.h>
+#include <limits.h>
+#include <stdio.h>
+
+/* Print A * B if in range, an overflow
+   indicator otherwise.  */
+void
+print_product (long int a, long int b)
+@{
+  if (INT_MULTIPLY_OVERFLOW (a, b))
+    printf ("multiply would overflow");
+  else
+    printf ("product is %ld", a * b);
+@}
+
+/* Does the product of two ints always fit
+   in a long int?  */
+enum @{
+  INT_PRODUCTS_FIT_IN_LONG
+    = ! (INT_MULTIPLY_OVERFLOW
+         ((long int) INT_MIN, INT_MIN))
+@};
+@end example
+
+@noindent
+These macros have the following restrictions:
+
+@itemize @bullet
+@item
+Their arguments must be integer expressions.
+
+@item
+They may evaluate their arguments zero or multiple times, so the
+arguments should not have side effects.
+@end itemize
+
+@noindent
+These macros are tuned for their last argument being a constant.
+
+@table @code
+@item INT_ADD_OVERFLOW (@var{a}, @var{b})
+@findex INT_ADD_OVERFLOW
+Yield 1 if @code{@var{a} + @var{b}} would overflow.  See above for
+restrictions.
+
+@item INT_SUBTRACT_OVERFLOW (@var{a}, @var{b})
+@findex INT_SUBTRACT_OVERFLOW
+Yield 1 if @code{@var{a} - @var{b}} would overflow.  See above for
+restrictions.
+
+@item INT_NEGATE_OVERFLOW (@var{a})
+@findex INT_NEGATE_OVERFLOW
+Yields 1 if @code{-@var{a}} would overflow.  See above for restrictions.
+
+@item INT_MULTIPLY_OVERFLOW (@var{a}, @var{b})
+@findex INT_MULTIPLY_OVERFLOW
+Yield 1 if @code{@var{a} * @var{b}} would overflow.  See above for
+restrictions.
+
+@item INT_DIVIDE_OVERFLOW (@var{a}, @var{b})
+@findex INT_DIVIDE_OVERFLOW
+Yields 1 if @code{@var{a} / @var{b}} would overflow.  See above for
+restrictions.  Division overflow can happen on two's complement hosts
+when dividing the most negative integer by @minus{}1.  This macro does
+not check for division by zero.
+
+@item INT_REMAINDER_OVERFLOW (@var{a}, @var{b})
+@findex INT_REMAINDER_OVERFLOW
+Yield 1 if @code{@var{a} % @var{b}} would overflow.  See above for
+restrictions.  Remainder overflow can happen on two's complement hosts
+when dividing the most negative integer by @minus{}1; although the
+mathematical result is always 0, in practice some implementations
+trap, so this counts as an overflow.  This macro does not check for
+division by zero.
+
+@item INT_LEFT_SHIFT_OVERFLOW (@var{a}, @var{b})
+@findex INT_LEFT_SHIFT_OVERFLOW
+Yield 1 if @code{@var{a} << @var{b}} would overflow.  See above for
+restrictions.  The C standard says that behavior is undefined for
+shifts unless 0@leq{}@var{b}<@var{w} where @var{w} is @var{a}'s word
+width, and that when @var{a} is negative then @code{@var{a} <<
+@var{b}} has undefined behavior, but this macro does not check these
+other restrictions.
+@end table
+
+@node Integer Range Overflow
+@subsection Integer Range Overflow
+
+@cindex integer range overflow
+@cindex overflow, integer range
+
+These macros yield 1 if the corresponding C operators might not yield
+numerically correct answers due to arithmetic overflow.  They do not
+rely on undefined or implementation-defined behavior.  They are
+integer constant expressions if their arguments are.  Their
+implementations are simple and straightforward, but they are typically
+harder to use than the integer type overflow macros.  @xref{Integer
+Type Overflow}.
+
+Although the implementation of these macros is similar to that
+suggested in the SEI CERT C Secure Coding Standard,
+in its two sections
+``@url{https://www.securecoding.cert.org/confluence/display/c/INT30-C.+Ensure+that+unsigned+integer+operations+do+not+wrap,
+INT30-C@. Ensure that unsigned integer operations do not wrap}'' and
+``@url{https://www.securecoding.cert.org/confluence/display/c/INT32-C.+Ensure+that+operations+on+signed+integers+do+not+result+in+overflow,
+INT32-C@. Ensure that operations on signed integers do not result in
+overflow}'', Gnulib's implementation was derived independently of
+CERT's suggestions.
+
+Example usage:
+
+@example
+#include <intprops.h>
+#include <limits.h>
+#include <stdio.h>
+
+void
+print_product (long int a, long int b)
+@{
+  if (INT_MULTIPLY_RANGE_OVERFLOW (a, b, LONG_MIN, LONG_MAX))
+    printf ("multiply would overflow");
+  else
+    printf ("product is %ld", a * b);
+@}
+
+/* Does the product of two ints always fit
+   in a long int?  */
+enum @{
+  INT_PRODUCTS_FIT_IN_LONG
+    = ! (INT_MULTIPLY_RANGE_OVERFLOW
+         ((long int) INT_MIN, (long int) INT_MIN,
+          LONG_MIN, LONG_MAX))
+@};
+@end example
+
+@noindent
+These macros have the following restrictions:
+
+@itemize @bullet
+@item
+Their arguments must be integer expressions.
+
+@item
+They may evaluate their arguments zero or multiple times, so
+the arguments should not have side effects.
+
+@item
+The arithmetic arguments (including the @var{min} and @var{max}
+arguments) must be of the same integer type after the usual arithmetic
+conversions, and the type must have minimum value @var{min} and
+maximum @var{max}.  Unsigned values should use a zero @var{min} of the
+proper type, for example, @code{(unsigned int) 0}.
+@end itemize
+
+@noindent
+These macros are tuned for constant @var{min} and @var{max}.  For
+commutative operations such as @code{@var{a} + @var{b}}, they are also
+tuned for constant @var{b}.
+
+@table @code
+@item INT_ADD_RANGE_OVERFLOW (@var{a}, @var{b}, @var{min}, @var{max})
+@findex INT_ADD_RANGE_OVERFLOW
+Yield 1 if @code{@var{a} + @var{b}} would overflow in
+[@var{min},@var{max}] integer arithmetic.  See above for restrictions.
+
+@item INT_SUBTRACT_RANGE_OVERFLOW (@var{a}, @var{b}, @var{min}, @var{max})
+@findex INT_SUBTRACT_RANGE_OVERFLOW
+Yield 1 if @code{@var{a} - @var{b}} would overflow in
+[@var{min},@var{max}] integer arithmetic.  See above for restrictions.
+
+@item INT_NEGATE_RANGE_OVERFLOW (@var{a}, @var{min}, @var{max})
+@findex INT_NEGATE_RANGE_OVERFLOW
+Yield 1 if @code{-@var{a}} would overflow in [@var{min},@var{max}]
+integer arithmetic.  See above for restrictions.
+
+@item INT_MULTIPLY_RANGE_OVERFLOW (@var{a}, @var{b}, @var{min}, @var{max})
+@findex INT_MULTIPLY_RANGE_OVERFLOW
+Yield 1 if @code{@var{a} * @var{b}} would overflow in
+[@var{min},@var{max}] integer arithmetic.  See above for restrictions.
+
+@item INT_DIVIDE_RANGE_OVERFLOW (@var{a}, @var{b}, @var{min}, @var{max})
+@findex INT_DIVIDE_RANGE_OVERFLOW
+Yield 1 if @code{@var{a} / @var{b}} would overflow in
+[@var{min},@var{max}] integer arithmetic.  See above for restrictions.
+Division overflow can happen on two's complement hosts when dividing
+the most negative integer by @minus{}1.  This macro does not check for
+division by zero.
+
+@item INT_REMAINDER_RANGE_OVERFLOW (@var{a}, @var{b}, @var{min}, @var{max})
+@findex INT_REMAINDER_RANGE_OVERFLOW
+Yield 1 if @code{@var{a} % @var{b}} would overflow in
+[@var{min},@var{max}] integer arithmetic.  See above for restrictions.
+Remainder overflow can happen on two's complement hosts when dividing
+the most negative integer by @minus{}1; although the mathematical
+result is always 0, in practice some implementations trap, so this
+counts as an overflow.  This macro does not check for division by
+zero.
+
+@item INT_LEFT_SHIFT_RANGE_OVERFLOW (@var{a}, @var{b}, @var{min}, @var{max})
+@findex INT_LEFT_SHIFT_RANGE_OVERFLOW
+Yield 1 if @code{@var{a} << @var{b}} would overflow in
+[@var{min},@var{max}] integer arithmetic.  See above for restrictions.
+Here, @var{min} and @var{max} are for @var{a} only, and @var{b} need
+not be of the same type as the other arguments.  The C standard says
+that behavior is undefined for shifts unless 0@leq{}@var{b}<@var{w}
+where @var{w} is @var{a}'s word width, and that when @var{a} is negative
+then @code{@var{a} << @var{b}} has undefined behavior, but this macro
+does not check these other restrictions.
+@end table

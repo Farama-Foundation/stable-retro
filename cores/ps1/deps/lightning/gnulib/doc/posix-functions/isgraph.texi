@@ -1,0 +1,44 @@
+@node isgraph
+@section @code{isgraph}
+@findex isgraph
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/isgraph.html}
+
+Gnulib module: ctype
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function cannot be called from plain inline or extern inline functions
+on some platforms:
+OS X 10.8.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize
+
+Note: This function's behaviour depends on the locale, but does not support
+the multibyte characters that occur in strings in locales with
+@code{MB_CUR_MAX > 1} (this includes all the common UTF-8 locales).
+There are four alternative APIs:
+
+@table @code
+@item c_isgraph
+This function operates in a locale independent way and returns true only for
+ASCII characters.  It is provided by the Gnulib module @samp{c-ctype}.
+
+@item iswgraph
+This function operates in a locale dependent way, on wide characters.  In
+order to use it, you first have to convert from multibyte to wide characters,
+using the @code{mbrtowc} function.  It is provided by the Gnulib module
+@samp{wctype}.
+
+@item mb_isgraph
+This function operates in a locale dependent way, on multibyte characters.
+It is provided by the Gnulib module @samp{mbchar}.
+
+@item uc_is_graph
+This function operates in a locale independent way, on Unicode characters.
+It is provided by the Gnulib module @samp{unictype/ctype-graph}.
+@end table

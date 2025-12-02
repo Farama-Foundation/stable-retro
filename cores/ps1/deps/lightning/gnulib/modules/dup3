@@ -1,0 +1,29 @@
+Description:
+dup3() function: copy a file descriptor, applying specific flags.
+
+Files:
+lib/dup3.c
+m4/dup3.m4
+
+Depends-on:
+unistd
+fcntl
+binary-io
+getdtablesize
+extensions
+
+configure.ac:
+gl_FUNC_DUP3
+gl_UNISTD_MODULE_INDICATOR([dup3])
+
+Makefile.am:
+lib_SOURCES += dup3.c
+
+Include:
+<unistd.h>
+
+License:
+LGPL
+
+Maintainer:
+Jim Meyering

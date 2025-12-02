@@ -1,0 +1,18 @@
+@node swapon
+@subsection @code{swapon}
+@findex swapon
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/swapon.2.html,,man swapon}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 6.7, Minix 3.1.8, AIX 5.1, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 4.3.
+@end itemize

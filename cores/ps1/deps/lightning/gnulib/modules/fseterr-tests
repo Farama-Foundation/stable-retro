@@ -1,0 +1,11 @@
+Files:
+tests/test-fseterr.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fseterr
+check_PROGRAMS += test-fseterr
+

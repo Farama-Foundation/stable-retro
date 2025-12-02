@@ -1,0 +1,24 @@
+Description:
+Complete API for Unicode character canonical combining classes.
+
+Files:
+
+Depends-on:
+unictype/base
+unictype/combining-class
+unictype/combining-class-byname
+unictype/combining-class-longname
+unictype/combining-class-name
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

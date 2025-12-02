@@ -1,0 +1,15 @@
+Files:
+tests/unistr/test-u32-strstr.c
+tests/unistr/test-u-strstr.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+AC_CHECK_DECLS_ONCE([alarm])
+
+Makefile.am:
+TESTS += test-u32-strstr
+check_PROGRAMS += test-u32-strstr
+test_u32_strstr_SOURCES = unistr/test-u32-strstr.c
+test_u32_strstr_LDADD = $(LDADD) $(LIBUNISTRING)

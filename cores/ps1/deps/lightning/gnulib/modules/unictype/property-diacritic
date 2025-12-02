@@ -1,0 +1,28 @@
+Description:
+Test whether a Unicode character is "diacritic".
+
+Files:
+lib/unictype/pr_diacritic.c
+lib/unictype/pr_diacritic.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-diacritic])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_DIACRITIC
+lib_SOURCES += unictype/pr_diacritic.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

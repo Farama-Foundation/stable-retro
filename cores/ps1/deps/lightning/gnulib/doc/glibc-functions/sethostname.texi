@@ -1,0 +1,43 @@
+@node sethostname
+@subsection @code{sethostname}
+@findex sethostname
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-sethostname-2.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Host Identification,,Host Identification,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Host-Identification.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/sethostname.2.html,,man sethostname}.
+@end itemize
+
+Gnulib module: sethostname
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, Cygwin 1.7.x, mingw, MSVC 14, Android 5.1.
+Note that the Gnulib replacement may fail with ENOSYS on some platforms.
+@item
+This function is not declared on some platforms:
+AIX 7.1, Solaris 10.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The first parameter is @code{char *} instead of @code{const char *}
+on some platforms:
+Solaris 11 2010-11.
+@item
+The second parameter is @code{int} instead of @code{size_t}
+on some platforms:
+macOS 11.1, MidnightBSD 2.0, Solaris 11 2010-11.
+@end itemize

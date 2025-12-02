@@ -1,0 +1,24 @@
+Description:
+memxor() function: binary exclusive or operation on two memory blocks
+
+Files:
+lib/memxor.h
+lib/memxor.c
+m4/memxor.m4
+
+Depends-on:
+
+configure.ac:
+gl_MEMXOR
+
+Makefile.am:
+lib_SOURCES += memxor.c
+
+Include:
+"memxor.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

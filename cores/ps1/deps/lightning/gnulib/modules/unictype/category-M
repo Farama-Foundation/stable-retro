@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character is of general category M.
+
+Files:
+lib/unictype/categ_M.c
+lib/unictype/categ_M.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-M])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_M
+lib_SOURCES += unictype/categ_M.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,24 @@
+@node getpwuid_r
+@section @code{getpwuid_r}
+@findex getpwuid_r
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/getpwuid_r.html}
+
+Gnulib module: extensions
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function has an incompatible declaration on some platforms:
+Solaris 11.3 (when @code{_POSIX_PTHREAD_SEMANTICS} is not defined).
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is unsafe to call between @code{fork} and @code{exec} if
+the parent process is multi-threaded.  Use it prior to forking.
+@item
+This function is missing on some platforms:
+OpenBSD 3.8, Minix 3.1.8, mingw, MSVC 14, Android 3.0.
+@end itemize

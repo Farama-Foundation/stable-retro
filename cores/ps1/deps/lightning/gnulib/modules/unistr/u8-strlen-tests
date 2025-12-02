@@ -1,0 +1,13 @@
+Files:
+tests/unistr/test-u8-strlen.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-strlen
+check_PROGRAMS += test-u8-strlen
+test_u8_strlen_SOURCES = unistr/test-u8-strlen.c
+test_u8_strlen_LDADD = $(LDADD) $(LIBUNISTRING)

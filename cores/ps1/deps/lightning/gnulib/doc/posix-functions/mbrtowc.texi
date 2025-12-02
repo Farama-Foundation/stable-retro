@@ -1,0 +1,58 @@
+@node mbrtowc
+@section @code{mbrtowc}
+@findex mbrtowc
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/mbrtowc.html}
+
+Gnulib module: mbrtowc
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, HP-UX 11.00, IRIX 6.5, mingw.
+@item
+In the C or POSIX locales, this function can return @code{(size_t) -1}
+and set @code{errno} to @code{EILSEQ}:
+glibc 2.23.
+@item
+This function returns 0 instead of @code{(size_t) -2} when the input
+is empty:
+glibc 2.19.
+@item
+This function returns @code{(size_t) -1} instead of @code{(size_t) -2}
+when the input is empty:
+AIX 7.2.
+@item
+This function does not put the state into non-initial state when parsing an
+incomplete multibyte character on some platforms:
+AIX 7.2.
+@item
+This function stores a wide character when when parsing an incomplete multibyte
+character on some platforms:
+MSVC 14.
+@item
+This function returns the total number of bytes that make up the multibyte
+character, not the number of bytes that were needed to complete the multibyte
+character, on some platforms:
+HP-UX 11.11, Solaris 11 2010-11, mingw, possibly MSVC 14.
+@item
+This function may not return 0 when parsing the NUL character on some platforms:
+Solaris 9.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+In UTF-8 locales, this function may return wide characters up to 0x7FFFFFFF
+(that is, beyond 0x0010FFFF) on some platforms:
+@c https://sourceware.org/bugzilla/show_bug.cgi?id=2373
+@c https://sourceware.org/bugzilla/show_bug.cgi?id=26034
+glibc 2.33.
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and
+therefore cannot accommodate all Unicode characters.
+However, the ISO C11 function @code{mbrtoc32}, provided by Gnulib module
+@code{mbrtoc32}, operates on 32-bit wide characters and therefore does not have
+this limitation.
+@end itemize

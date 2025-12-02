@@ -1,0 +1,31 @@
+@node statvfs
+@section @code{statvfs}
+@findex statvfs
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/statvfs.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 3.8, mingw, MSVC 14, Android 4.3.
+@item
+This function can hang if it stats all preceding
+entries in /proc/mounts, and any of those file systems
+are hard-mounted and not available.  This affects
+Linux < 2.6.36.
+@item
+On platforms where @code{f_blocks} in @samp{struct statvfs} is a 32-bit
+value, this function may not work correctly on files systems larger than
+4 TiB@.  The fix is to use the @code{AC_SYS_LARGEFILE} macro.  This affects
+glibc/Hurd, HP-UX 11, Solaris.
+@end itemize
+
+Gnulib provides a module @code{fsusage} that provides similar information
+as @code{statvfs}.

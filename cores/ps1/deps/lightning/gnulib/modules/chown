@@ -1,0 +1,36 @@
+Description:
+chown() function: change ownership of a file, following symlinks.
+
+Files:
+lib/chown.c
+lib/fchown-stub.c
+m4/chown.m4
+
+Depends-on:
+unistd
+fstat           [test $HAVE_CHOWN = 0 || test $REPLACE_CHOWN = 1]
+open            [test $HAVE_CHOWN = 0 || test $REPLACE_CHOWN = 1]
+stat            [test $HAVE_CHOWN = 0 || test $REPLACE_CHOWN = 1]
+stdbool         [test $HAVE_CHOWN = 0 || test $REPLACE_CHOWN = 1]
+sys_stat        [test $HAVE_CHOWN = 0 || test $REPLACE_CHOWN = 1]
+
+configure.ac:
+gl_FUNC_CHOWN
+if test $HAVE_CHOWN = 0 || test $REPLACE_CHOWN = 1; then
+  AC_LIBOBJ([chown])
+fi
+if test $REPLACE_CHOWN = 1 && test $ac_cv_func_fchown = no; then
+  AC_LIBOBJ([fchown-stub])
+fi
+gl_UNISTD_MODULE_INDICATOR([chown])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

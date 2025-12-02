@@ -1,0 +1,36 @@
+@node wcwidth
+@section @code{wcwidth}
+@findex wcwidth
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/wcwidth.html}
+
+Gnulib module: wcwidth
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 14.
+@item
+This function is not declared (without @code{-D_GNU_SOURCE}) on some platforms:
+glibc 2.8.
+@item
+This function handles combining characters in UTF-8 locales incorrectly on some
+platforms:
+NetBSD 9.0, OpenBSD 5.8, MidnightBSD 1.1.
+@item
+This function returns 2 for characters with ambiguous east asian width, even in
+Western locales, on some platforms:
+Solaris 11.4.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and therefore cannot
+accommodate all Unicode characters.
+@item
+This function treats zero-width spaces like control characters on some
+platforms:
+AIX 7.2.
+@end itemize

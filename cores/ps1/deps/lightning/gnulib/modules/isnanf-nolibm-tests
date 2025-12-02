@@ -1,0 +1,17 @@
+Files:
+tests/test-isnanf-nolibm.c
+tests/test-isnanf.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+gl_FLOAT_EXPONENT_LOCATION
+
+Makefile.am:
+TESTS += test-isnanf-nolibm
+check_PROGRAMS += test-isnanf-nolibm
+

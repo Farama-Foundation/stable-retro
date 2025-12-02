@@ -1,0 +1,14 @@
+Files:
+tests/unistr/test-u16-stpcpy.c
+tests/unistr/test-stpcpy.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-stpcpy
+check_PROGRAMS += test-u16-stpcpy
+test_u16_stpcpy_SOURCES = unistr/test-u16-stpcpy.c
+test_u16_stpcpy_LDADD = $(LDADD) $(LIBUNISTRING)

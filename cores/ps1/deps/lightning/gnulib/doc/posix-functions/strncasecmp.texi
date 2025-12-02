@@ -1,0 +1,23 @@
+@node strncasecmp
+@section @code{strncasecmp}
+@findex strncasecmp
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strncasecmp.html}
+
+Gnulib module: strcase
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function cannot work correctly on character strings in multibyte locales.
+Gnulib provides alternative functions @code{mbsncasecmp} and @code{mbspcasecmp}
+that do a case insensitive comparison of character strings and that work in all
+locales.
+@end itemize

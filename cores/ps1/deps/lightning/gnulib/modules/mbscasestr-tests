@@ -1,0 +1,30 @@
+Files:
+tests/test-mbscasestr1.c
+tests/test-mbscasestr2.sh
+tests/test-mbscasestr2.c
+tests/test-mbscasestr3.sh
+tests/test-mbscasestr3.c
+tests/test-mbscasestr4.sh
+tests/test-mbscasestr4.c
+tests/macros.h
+m4/locale-fr.m4
+m4/locale-tr.m4
+m4/locale-zh.m4
+m4/codeset.m4
+
+Depends-on:
+setlocale
+
+configure.ac:
+gt_LOCALE_FR_UTF8
+gt_LOCALE_TR_UTF8
+gt_LOCALE_ZH_CN
+
+Makefile.am:
+TESTS += test-mbscasestr1 test-mbscasestr2.sh test-mbscasestr3.sh test-mbscasestr4.sh
+TESTS_ENVIRONMENT += LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' LOCALE_TR_UTF8='@LOCALE_TR_UTF8@' LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-mbscasestr1 test-mbscasestr2 test-mbscasestr3 test-mbscasestr4
+test_mbscasestr1_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_MBRTOWC)
+test_mbscasestr2_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
+test_mbscasestr3_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_SETLOCALE) $(LIB_MBRTOWC)
+test_mbscasestr4_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_SETLOCALE) $(LIB_MBRTOWC)

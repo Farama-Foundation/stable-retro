@@ -1,0 +1,23 @@
+Files:
+tests/test-setlocale_null.c
+tests/test-setlocale_null-mt-one.c
+tests/test-setlocale_null-mt-all.c
+
+Depends-on:
+thread
+nanosleep
+
+configure.ac:
+
+Makefile.am:
+TESTS += \
+  test-setlocale_null \
+  test-setlocale_null-mt-one \
+  test-setlocale_null-mt-all
+check_PROGRAMS += \
+  test-setlocale_null \
+  test-setlocale_null-mt-one \
+  test-setlocale_null-mt-all
+test_setlocale_null_LDADD = $(LDADD) @LIB_SETLOCALE_NULL@
+test_setlocale_null_mt_one_LDADD = $(LDADD) @LIB_SETLOCALE_NULL@ $(LIBMULTITHREAD) $(LIB_NANOSLEEP)
+test_setlocale_null_mt_all_LDADD = $(LDADD) @LIB_SETLOCALE_NULL@ $(LIBMULTITHREAD) $(LIB_NANOSLEEP)

@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character is of general category P.
+
+Files:
+lib/unictype/categ_P.c
+lib/unictype/categ_P.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-P])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_P
+lib_SOURCES += unictype/categ_P.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

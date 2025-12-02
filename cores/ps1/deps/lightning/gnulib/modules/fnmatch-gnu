@@ -1,0 +1,31 @@
+Description:
+fnmatch() function: wildcard matching, with GNU extensions.
+
+Files:
+lib/fnmatch.c
+
+Depends-on:
+fnmatch
+
+configure.ac:
+gl_FUNC_FNMATCH_GNU
+if test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1; then
+  AC_LIBOBJ([fnmatch])
+  gl_PREREQ_FNMATCH
+fi
+gl_MODULE_INDICATOR([fnmatch-gnu])
+
+Makefile.am:
+
+Include:
+<fnmatch.h>
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+LGPLv2+
+
+Maintainer:
+all
+

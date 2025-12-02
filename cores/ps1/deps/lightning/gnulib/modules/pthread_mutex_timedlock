@@ -1,0 +1,28 @@
+Description:
+Lock a mutex, abandoning after a certain time.
+
+Files:
+lib/pthread_mutex_timedlock.c
+m4/pthread_mutex_timedlock.m4
+
+Depends-on:
+pthread-h
+nanosleep       [test $HAVE_PTHREAD_T = 1 && test $HAVE_PTHREAD_MUTEX_TIMEDLOCK = 0]
+
+configure.ac:
+gl_FUNC_PTHREAD_MUTEX_TIMEDLOCK
+if test $HAVE_PTHREAD_T = 1 && test $HAVE_PTHREAD_MUTEX_TIMEDLOCK = 0; then
+  AC_LIBOBJ([pthread_mutex_timedlock])
+fi
+gl_PTHREAD_MODULE_INDICATOR([pthread_mutex_timedlock])
+
+Makefile.am:
+
+Include:
+<pthread.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

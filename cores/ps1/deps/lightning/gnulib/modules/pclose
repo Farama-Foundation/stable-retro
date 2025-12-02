@@ -1,0 +1,28 @@
+Description:
+pclose() function: close a stream to a shell command.
+
+Files:
+lib/pclose.c
+m4/pclose.m4
+
+Depends-on:
+stdio
+
+configure.ac:
+gl_FUNC_PCLOSE
+if test $HAVE_PCLOSE = 0; then
+  AC_LIBOBJ([pclose])
+  gl_PREREQ_PCLOSE
+fi
+gl_STDIO_MODULE_INDICATOR([pclose])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,37 @@
+@node setgroups
+@subsection @code{setgroups}
+@findex setgroups
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-setgroups-2.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Setting Groups,,Setting the Group IDs,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Setting-Groups.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/setgroups.2.html,,man setgroups}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+AIX 5.1, mingw, MSVC 14.
+@item
+On very old systems, this function operated on an array of @samp{int},
+even though that was a different size than an array of @samp{gid_t};
+you can use autoconf's AC_TYPE_GETGROUPS to set @code{GETGROUPS_T} to
+the appropriate size (since @code{getgroups} and @code{setgroups}
+share the same bug).
+@end itemize

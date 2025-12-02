@@ -1,0 +1,36 @@
+Description:
+modfl() function: get signed integer and fractional parts.
+
+Files:
+lib/modfl.c
+m4/modfl.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+modf            [{ test $HAVE_MODFL = 0 || test $REPLACE_MODFL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+isfinite        [{ test $HAVE_MODFL = 0 || test $REPLACE_MODFL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+truncl          [{ test $HAVE_MODFL = 0 || test $REPLACE_MODFL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+isinf           [{ test $HAVE_MODFL = 0 || test $REPLACE_MODFL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+gl_FUNC_MODFL
+if test $HAVE_MODFL = 0 || test $REPLACE_MODFL = 1; then
+  AC_LIBOBJ([modfl])
+fi
+gl_MATH_MODULE_INDICATOR([modfl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(MODFL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

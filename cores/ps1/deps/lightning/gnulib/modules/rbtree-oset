@@ -1,0 +1,26 @@
+Description:
+Ordered set data type implemented by a binary tree.
+
+Files:
+lib/gl_rbtree_oset.h
+lib/gl_rbtree_oset.c
+lib/gl_rbtree_ordered.h
+lib/gl_anytree_oset.h
+
+Depends-on:
+oset
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+
+Makefile.am:
+lib_SOURCES += gl_rbtree_oset.h gl_rbtree_oset.c gl_rbtree_ordered.h gl_anytree_oset.h
+
+Include:
+"gl_rbtree_oset.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

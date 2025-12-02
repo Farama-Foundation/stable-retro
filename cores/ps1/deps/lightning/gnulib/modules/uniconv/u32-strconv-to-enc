@@ -1,0 +1,30 @@
+Description:
+Conversion from UTF-32 to legacy encodings.
+
+Files:
+lib/uniconv/u32-strconv-to-enc.c
+lib/uniconv/u-strconv-to-enc.h
+
+Depends-on:
+uniconv/base
+striconveha
+uniconv/u8-strconv-to-enc
+unistr/u32-to-u8
+unistr/u32-strlen
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [uniconv/u32-strconv-to-enc])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICONV_U32_STRCONV_TO_ENC
+lib_SOURCES += uniconv/u32-strconv-to-enc.c
+endif
+
+Include:
+"uniconv.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

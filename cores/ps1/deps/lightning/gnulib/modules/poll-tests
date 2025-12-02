@@ -1,0 +1,32 @@
+Files:
+tests/test-poll.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+stdbool
+sys_socket
+netinet_in
+arpa_inet
+sys_ioctl
+extensions
+inet_pton
+errno
+perror
+sockets
+socket
+bind
+setsockopt
+listen
+connect
+accept
+ioctl
+close
+
+configure.ac:
+AC_CHECK_HEADERS_ONCE([unistd.h sys/wait.h])
+
+Makefile.am:
+TESTS += test-poll
+check_PROGRAMS += test-poll
+test_poll_LDADD = $(LDADD) $(LIB_POLL) @LIBSOCKET@ $(INET_PTON_LIB)

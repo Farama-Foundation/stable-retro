@@ -1,0 +1,11 @@
+Files:
+tests/test-base32.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-base32
+check_PROGRAMS += test-base32

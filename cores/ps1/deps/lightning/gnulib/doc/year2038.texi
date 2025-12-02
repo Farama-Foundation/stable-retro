@@ -1,0 +1,10 @@
+@node Avoiding the year 2038 problem
+@section Avoiding the year 2038 problem
+
+The ``year 2038 problem'' denotes unpredictable behaviour of programs
+that will likely occur in the year 2038, for programs that use a 32-bit
+@samp{time_t} type.  See @url{https://en.wikipedia.org/wiki/Year_2038_problem}
+for details.
+
+The gnulib module @samp{year2038} attempts to avoid this problem, by
+ensuring that @code{time_t} is a 64-bit type.

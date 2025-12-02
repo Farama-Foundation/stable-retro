@@ -1,0 +1,11 @@
+Files:
+tests/test-noreturn.c
+
+Depends-on:
+noreturn-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-noreturn
+check_PROGRAMS += test-noreturn

@@ -1,0 +1,13 @@
+Files:
+tests/unistr/test-u32-mblen.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-mblen
+check_PROGRAMS += test-u32-mblen
+test_u32_mblen_SOURCES = unistr/test-u32-mblen.c
+test_u32_mblen_LDADD = $(LDADD) $(LIBUNISTRING)

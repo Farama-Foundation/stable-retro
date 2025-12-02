@@ -1,0 +1,34 @@
+Description:
+Condition variables for multithreading.
+
+Files:
+lib/glthread/cond.h
+lib/glthread/cond.c
+m4/cond.m4
+
+Depends-on:
+threadlib
+lock
+errno
+extern-inline
+stdbool
+time
+windows-cond    [test $gl_threads_api = windows]
+
+configure.ac:
+gl_COND
+
+Makefile.am:
+lib_SOURCES += glthread/cond.h glthread/cond.c
+
+Include:
+"glthread/cond.h"
+
+Link:
+$(LIBTHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+Yoann Vandoorselaere

@@ -1,0 +1,16 @@
+@node timespec_get
+@subsection @code{timespec_get}
+@findex timespec_get
+
+Gnulib module: timespec_get
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on many platforms:
+glibc 2.15, macOS 10.13, FreeBSD 6.4, NetBSD 7.1, OpenBSD 6.0, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

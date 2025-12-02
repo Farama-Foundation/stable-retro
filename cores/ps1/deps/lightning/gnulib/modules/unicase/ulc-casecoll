@@ -1,0 +1,28 @@
+Description:
+Locale dependent, case and normalization insensitive comparison of strings.
+
+Files:
+lib/unicase/ulc-casecoll.c
+lib/unicase/u-casecoll.h
+
+Depends-on:
+unicase/base
+unicase/ulc-casexfrm
+memcmp2
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/ulc-casecoll])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_ULC_CASECOLL
+lib_SOURCES += unicase/ulc-casecoll.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

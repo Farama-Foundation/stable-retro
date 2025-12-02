@@ -1,0 +1,27 @@
+Description:
+Open a directory relative to another directory.
+
+Files:
+lib/opendirat.c
+lib/opendirat.h
+
+Depends-on:
+c99
+dirent
+fcntl-h
+fdopendir
+openat-safer
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += opendirat.c
+
+Include:
+"opendirat.h"
+
+License:
+GPL
+
+Maintainer:
+all

@@ -1,0 +1,13 @@
+Files:
+tests/test-getumask.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getumask
+check_PROGRAMS += test-getumask
+test_getumask_LDADD = $(LDADD) $(LIB_CLOCK_GETTIME) $(LIB_GETRANDOM) $(LIBINTL) $(LIBTHREAD)

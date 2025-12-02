@@ -1,0 +1,12 @@
+Files:
+tests/test-rbtree_omap.c
+tests/macros.h
+
+Depends-on:
+array-omap
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-rbtree_omap
+check_PROGRAMS += test-rbtree_omap

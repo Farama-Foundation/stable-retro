@@ -1,0 +1,11 @@
+Files:
+tests/test-monetary.c
+
+Depends-on:
+monetary-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-monetary
+check_PROGRAMS += test-monetary

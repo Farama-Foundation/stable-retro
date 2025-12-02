@@ -1,0 +1,29 @@
+Description:
+Test whether a Unicode character is "bidi whitespace".
+
+Files:
+lib/unictype/pr_bidi_whitespace.c
+lib/unictype/pr_bidi_whitespace.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+unictype/bidiclass-of
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-bidi-whitespace])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_BIDI_WHITESPACE
+lib_SOURCES += unictype/pr_bidi_whitespace.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

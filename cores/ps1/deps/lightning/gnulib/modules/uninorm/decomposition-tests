@@ -1,0 +1,13 @@
+Files:
+tests/uninorm/test-decomposition.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-decomposition
+check_PROGRAMS += test-decomposition
+test_decomposition_SOURCES = uninorm/test-decomposition.c
+test_decomposition_LDADD = $(LDADD) $(LIBUNISTRING)

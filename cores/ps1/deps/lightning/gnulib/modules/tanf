@@ -1,0 +1,32 @@
+Description:
+tanf() function: tangent function.
+
+Files:
+lib/tanf.c
+m4/tanf.m4
+
+Depends-on:
+math
+extensions
+tan             [test $HAVE_TANF = 0]
+
+configure.ac:
+gl_FUNC_TANF
+if test $HAVE_TANF = 0; then
+  AC_LIBOBJ([tanf])
+fi
+gl_MATH_MODULE_INDICATOR([tanf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(TANF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

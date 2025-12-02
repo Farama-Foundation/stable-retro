@@ -1,0 +1,18 @@
+@node recvmmsg
+@subsection @code{recvmmsg}
+@findex recvmmsg
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/recvmmsg.2.html,,man recvmmsg}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+glibc 2.11, macOS 11.1, FreeBSD 6.4, NetBSD 5.0, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3, Cygwin 2.9, mingw, MSVC 14, Android 4.4.
+@end itemize

@@ -1,0 +1,27 @@
+Description:
+Convert double to accurate string in C locale.
+
+Files:
+lib/ftoastr.h
+lib/ftoastr.c
+lib/c-dtoastr.c
+
+Depends-on:
+extensions
+intprops
+c-snprintf
+c-strtod
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += c-dtoastr.c
+
+Include:
+"ftoastr.h"
+
+License:
+GPL
+
+Maintainer:
+Marc Nieper-Wisskirchen

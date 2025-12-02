@@ -1,0 +1,39 @@
+@node fchmodat
+@section @code{fchmodat}
+@findex fchmodat
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fchmodat.html}
+
+Gnulib module: fchmodat
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.3.6, Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8,
+AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14.
+But the replacement function is not safe to be used in libraries and is not multithread-safe.
+@item
+This function does not fail when the file name argument ends in a slash
+and (without the slash) names a non-directory, on some platforms:
+AIX 7.2.
+@item
+When given the @code{AT_SYMLINK_NOFOLLOW} flag,
+this function fails with @code{errno} set to @code{ENOTSUP},
+even when the file is not a symbolic link:
+GNU/Linux with glibc 2.31, Cygwin 2.9.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Some platforms do not allow changing the access bits on symbolic
+links.
+
+@item
+If the @code{AT_SYMLINK_NOFOLLOW} flag is specified,
+this function can fail with @code{errno} set to @code{EMFILE} or @code{ENFILE},
+and it fails with @code{errno} set to @code{EOPNOTSUPP} if the
+@file{/proc} file system is not mounted:
+GNU/Linux with glibc 2.33.
+@end itemize

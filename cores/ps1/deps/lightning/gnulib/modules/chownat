@@ -1,0 +1,23 @@
+Description:
+chownat and lchownat functions: Change owner of a file at a directory.
+
+Files:
+lib/chownat.c
+
+Depends-on:
+fchownat
+
+configure.ac:
+gl_MODULE_INDICATOR([chownat]) dnl for lib/openat.h
+
+Makefile.am:
+lib_SOURCES += chownat.c
+
+Include:
+"openat.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake, Paul Eggert

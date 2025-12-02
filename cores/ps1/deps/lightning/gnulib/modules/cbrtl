@@ -1,0 +1,37 @@
+Description:
+cbrtl() function: cube root.
+
+Files:
+lib/cbrtl.c
+m4/cbrtl.m4
+m4/cbrt.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+cbrt            [{ test $HAVE_CBRTL = 0 || test $REPLACE_CBRTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+isfinite        [{ test $HAVE_CBRTL = 0 || test $REPLACE_CBRTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+frexpl          [{ test $HAVE_CBRTL = 0 || test $REPLACE_CBRTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+ldexpl          [{ test $HAVE_CBRTL = 0 || test $REPLACE_CBRTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+gl_FUNC_CBRTL
+if test $HAVE_CBRTL = 0 || test $REPLACE_CBRTL = 1; then
+  AC_LIBOBJ([cbrtl])
+fi
+gl_MATH_MODULE_INDICATOR([cbrtl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(CBRTL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

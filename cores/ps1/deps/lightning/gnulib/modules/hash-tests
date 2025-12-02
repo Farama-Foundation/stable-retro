@@ -1,0 +1,14 @@
+Files:
+tests/test-hash.c
+tests/macros.h
+
+Depends-on:
+hash-pjw
+inttostr
+stdbool
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-hash
+check_PROGRAMS += test-hash

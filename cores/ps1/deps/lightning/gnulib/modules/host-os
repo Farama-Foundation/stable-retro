@@ -1,0 +1,20 @@
+Description:
+Define HOST_OPERATING_SYSTEM to a name for the host operating system.
+
+Files:
+m4/host-os.m4
+
+Depends-on:
+
+configure.ac:
+gl_HOST_OS
+
+Makefile.am:
+
+Include:
+
+License:
+LGPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

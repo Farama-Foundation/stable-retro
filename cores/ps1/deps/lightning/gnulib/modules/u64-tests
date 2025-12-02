@@ -1,0 +1,6 @@
+Files:
+tests/test-u64.c
+
+Makefile.am:
+TESTS += test-u64
+check_PROGRAMS += test-u64

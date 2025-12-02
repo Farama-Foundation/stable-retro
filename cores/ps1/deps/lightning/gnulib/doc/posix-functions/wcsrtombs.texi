@@ -1,0 +1,30 @@
+@node wcsrtombs
+@section @code{wcsrtombs}
+@findex wcsrtombs
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/wcsrtombs.html}
+
+Gnulib module: wcsrtombs
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, HP-UX 11.00, IRIX 6.5, mingw.
+@item
+This function does not ignore the length argument if the destination argument is NULL on some platforms:
+mingw.
+@item
+This function updates the source pointer also if the destination argument is NULL on some platforms:
+HP-UX 11.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and
+therefore cannot accommodate all Unicode characters.
+However, the Gnulib function @code{c32srtombs}, provided by Gnulib module
+@code{c32srtombs}, operates on 32-bit wide characters and therefore does not
+have this limitation.
+@end itemize

@@ -1,0 +1,29 @@
+Description:
+strdup() function: duplicate a string.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete. But you may want to use the strdup-posix module.
+
+Files:
+m4/strdup.m4
+
+Depends-on:
+string
+
+configure.ac:
+gl_FUNC_STRDUP
+gl_STRING_MODULE_INDICATOR([strdup])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

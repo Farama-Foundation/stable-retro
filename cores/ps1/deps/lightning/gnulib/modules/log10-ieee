@@ -1,0 +1,26 @@
+Description:
+log10() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/log10-ieee.m4
+
+Depends-on:
+log10
+fpieee
+
+configure.ac:
+gl_FUNC_LOG10_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOG10_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

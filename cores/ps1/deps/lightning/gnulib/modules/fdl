@@ -1,0 +1,22 @@
+Description:
+Provide the GNU Free Documentation License in Texinfo format.
+
+Notice:
+Don't use this module! Instead, copy the referenced license file into your version control repository.
+
+Files:
+doc/fdl.texi
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+unmodifiable license text
+
+Maintainer:
+all

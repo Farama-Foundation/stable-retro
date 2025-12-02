@@ -1,0 +1,34 @@
+@node canonicalize_file_name
+@subsection @code{canonicalize_file_name}
+@findex canonicalize_file_name
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Symbolic Links,,Symbolic Links,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Symbolic-Links.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/canonicalize_file_name.3.html,,man canonicalize_file_name}.
+@end itemize
+
+Gnulib module: canonicalize-lgpl
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11,
+IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14, Android 9.0.
+@item
+This function fails to detect trailing slashes on non-directories on
+some platforms:
+glibc 2.3.5.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

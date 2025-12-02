@@ -1,0 +1,36 @@
+@node Out of memory handling
+@section Out of memory handling
+
+@cindex Out of Memory handling
+@cindex Memory allocation failure
+The gnulib API does not have a standard error code for the out of memory
+error condition.  Instead of adding a non-standard error code, gnulib
+has chosen to adopt a different strategy.  Out of memory handling
+happens in rare situations, but performing the out of memory error
+handling after almost all API function invocations pollute your source
+code and might make it harder to spot more serious problems.  The
+strategy chosen improves code readability and robustness.
+
+@cindex Aborting execution
+For most applications, aborting the application with an error message
+when the out of memory situation occurs is the best that can be wished
+for.  This is how the library behaves by default (using
+the @samp{xalloc-die} module).
+
+@vindex xalloc_die
+However, we realize that some applications may not want to abort
+execution in any situation.  Gnulib supports a hook to let the
+application regain control and perform its own cleanups when an out of
+memory situation has occurred.  The application can define a function
+(having a @code{void} prototype, i.e., no return value and no
+parameters) and set the library variable
+@code{xalloc_die} to that function.  The variable should be
+declared as follows.
+
+@example
+extern void (*xalloc_die) (void);
+@end example
+
+Gnulib will invoke this function if an out of memory error occurs.  Note
+that the function should not return.  Of course, care must be taken to
+not allocate more memory, as that will likely also fail.

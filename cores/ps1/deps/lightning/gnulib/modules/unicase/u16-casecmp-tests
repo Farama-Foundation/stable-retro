@@ -1,0 +1,15 @@
+Files:
+tests/unicase/test-u16-casecmp.c
+tests/unicase/test-casecmp.h
+tests/macros.h
+
+Depends-on:
+uninorm/nfd
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-casecmp
+check_PROGRAMS += test-u16-casecmp
+test_u16_casecmp_SOURCES = unicase/test-u16-casecmp.c
+test_u16_casecmp_LDADD = $(LDADD) $(LIBUNISTRING)

@@ -1,0 +1,46 @@
+Description:
+Character set conversion of strings with error handling, uses iconv.
+
+Files:
+lib/striconveh.h
+lib/striconveh.c
+lib/iconveh.h
+
+Depends-on:
+stdbool
+iconv
+iconv_open
+unistr/u8-prev
+unistr/u8-mbtouc-unsafe
+unistr/u8-mbtouc
+unistr/u8-mbtoucr
+unistr/u8-uctomb
+free-posix
+strdup
+c-strcase
+c-strcaseeq
+memmove
+
+configure.ac:
+if test $gl_cond_libtool = false; then
+  gl_ltlibdeps="$gl_ltlibdeps $LTLIBICONV"
+  gl_libdeps="$gl_libdeps $LIBICONV"
+fi
+
+Makefile.am:
+lib_SOURCES += striconveh.h striconveh.c
+if GL_COND_LIBTOOL
+lib_LDFLAGS += $(LTLIBICONV)
+endif
+
+Include:
+"striconveh.h"
+
+Link:
+$(LTLIBICONV) when linking with libtool, $(LIBICONV) otherwise
+
+License:
+LGPLv2+
+
+Maintainer:
+all

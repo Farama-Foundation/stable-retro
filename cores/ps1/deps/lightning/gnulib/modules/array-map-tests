@@ -1,0 +1,15 @@
+Files:
+tests/test-array_map.c
+tests/macros.h
+
+Depends-on:
+xlist
+array-list
+xalloc
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-array_map
+check_PROGRAMS += test-array_map
+test_array_map_LDADD = $(LDADD) @LIBINTL@

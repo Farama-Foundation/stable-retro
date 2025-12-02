@@ -1,0 +1,29 @@
+Description:
+Formatted output to a fixed-length UTF-32 string.
+
+Files:
+lib/unistdio/u32-vsnprintf.c
+lib/unistdio/u-vsnprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/u32-vasnprintf
+unistr/u32-cpy
+errno
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistdio/u32-vsnprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_U32_VSNPRINTF
+lib_SOURCES += unistdio/u32-vsnprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

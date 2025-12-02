@@ -1,0 +1,20 @@
+Description:
+Complete API for scripts of Unicode characters.
+
+Files:
+
+Depends-on:
+unictype/scripts
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

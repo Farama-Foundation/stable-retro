@@ -1,0 +1,18 @@
+@node sbrk
+@subsection @code{sbrk}
+@findex sbrk
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/sbrk.2.html,,man sbrk}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 12.2/arm64, AIX 5.1, mingw, MSVC 14.
+@end itemize

@@ -1,0 +1,28 @@
+Description:
+Lowercase mapping for UTF-8 substrings (locale dependent).
+
+Files:
+lib/unicase/u8-ct-tolower.c
+
+Depends-on:
+unicase/base
+unicase/u8-casemap
+unicase/special-casing
+unicase/toupper
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u8-ct-tolower])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U8_CT_TOLOWER
+lib_SOURCES += unicase/u8-ct-tolower.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

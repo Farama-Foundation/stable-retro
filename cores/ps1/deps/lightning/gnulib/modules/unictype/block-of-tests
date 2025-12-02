@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-block_of.c
+tests/macros.h
+
+Depends-on:
+unictype/block-list
+unictype/block-test
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-block_of
+check_PROGRAMS += test-block_of
+test_block_of_SOURCES = unictype/test-block_of.c
+test_block_of_LDADD = $(LDADD) $(LIBUNISTRING)

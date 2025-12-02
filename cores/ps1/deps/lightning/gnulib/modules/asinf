@@ -1,0 +1,32 @@
+Description:
+asinf() function: inverse sine function.
+
+Files:
+lib/asinf.c
+m4/asinf.m4
+
+Depends-on:
+math
+extensions
+asin            [test $HAVE_ASINF = 0]
+
+configure.ac:
+gl_FUNC_ASINF
+if test $HAVE_ASINF = 0; then
+  AC_LIBOBJ([asinf])
+fi
+gl_MATH_MODULE_INDICATOR([asinf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ASINF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

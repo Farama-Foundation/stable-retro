@@ -1,0 +1,38 @@
+Description:
+fseeko() function: Reposition a FILE stream.
+
+Files:
+lib/fseeko.c
+lib/stdio-impl.h
+m4/fseeko.m4
+
+Depends-on:
+extensions
+largefile
+lseek
+stdio
+sys_types
+# Just to guarantee consistency between fseek() and fseeko().
+fseek
+
+configure.ac-early:
+AC_REQUIRE([gl_SET_LARGEFILE_SOURCE])
+
+configure.ac:
+gl_FUNC_FSEEKO
+if test $HAVE_FSEEKO = 0 || test $REPLACE_FSEEKO = 1; then
+  AC_LIBOBJ([fseeko])
+  gl_PREREQ_FSEEKO
+fi
+gl_STDIO_MODULE_INDICATOR([fseeko])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

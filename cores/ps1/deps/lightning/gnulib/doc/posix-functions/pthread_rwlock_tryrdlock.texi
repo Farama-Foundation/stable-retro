@@ -1,0 +1,27 @@
+@node pthread_rwlock_tryrdlock
+@section @code{pthread_rwlock_tryrdlock}
+@findex pthread_rwlock_tryrdlock
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_rwlock_tryrdlock.html}
+
+Gnulib module: pthread-rwlock
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 14, Android 4.3.
+But the provided replacement is just a dummy on some of these platforms:
+Minix 3.1.8.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function prefers readers to writers (meaning, when this function is
+called on an rwlock that is already taken by one or more readers, and
+another writer is already waiting to take it, this function may return
+successfully immediately) -- a behaviour that may lead to writer starvation --
+on some platforms:
+glibc 2.28.
+@end itemize

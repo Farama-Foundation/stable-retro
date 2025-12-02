@@ -1,0 +1,32 @@
+Description:
+expf() function: exponential function.
+
+Files:
+lib/expf.c
+m4/expf.m4
+
+Depends-on:
+math
+extensions
+exp             [test $HAVE_EXPF = 0]
+
+configure.ac:
+gl_FUNC_EXPF
+if test $HAVE_EXPF = 0; then
+  AC_LIBOBJ([expf])
+fi
+gl_MATH_MODULE_INDICATOR([expf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(EXPF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,14 @@
+Files:
+tests/unistdio/test-u32-vasprintf1.c
+tests/unistdio/test-u32-printf1.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-vasprintf1
+check_PROGRAMS += test-u32-vasprintf1
+test_u32_vasprintf1_SOURCES = unistdio/test-u32-vasprintf1.c
+test_u32_vasprintf1_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@

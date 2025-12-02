@@ -1,0 +1,30 @@
+Description:
+strtoll() function: convert string to 'long long'.
+
+Files:
+lib/strtol.c
+lib/strtoll.c
+m4/strtoll.m4
+
+Depends-on:
+limits-h
+stdlib
+
+configure.ac:
+gl_FUNC_STRTOLL
+if test $HAVE_STRTOLL = 0; then
+  AC_LIBOBJ([strtoll])
+  gl_PREREQ_STRTOLL
+fi
+gl_STDLIB_MODULE_INDICATOR([strtoll])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPL
+
+Maintainer:
+glibc

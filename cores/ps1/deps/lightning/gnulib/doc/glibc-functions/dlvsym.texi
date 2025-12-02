@@ -1,0 +1,20 @@
+@node dlvsym
+@subsection @code{dlvsym}
+@findex dlvsym
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-dlvsym-1.html}
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/dlvsym.3.html,,man dlvsym}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 5.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 6.0.
+@end itemize

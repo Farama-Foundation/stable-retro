@@ -1,0 +1,27 @@
+Description:
+Formatted output to a fixed-length string.
+
+Files:
+lib/unistdio/ulc-snprintf.c
+lib/unistdio/u-snprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/ulc-vsnprintf
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unistdio/ulc-snprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_ULC_SNPRINTF
+lib_SOURCES += unistdio/ulc-snprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

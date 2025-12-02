@@ -1,0 +1,32 @@
+Description:
+sinhf() function: hyperbolic sine function.
+
+Files:
+lib/sinhf.c
+m4/sinhf.m4
+
+Depends-on:
+math
+extensions
+sinh            [test $HAVE_SINHF = 0]
+
+configure.ac:
+gl_FUNC_SINHF
+if test $HAVE_SINHF = 0; then
+  AC_LIBOBJ([sinhf])
+fi
+gl_MATH_MODULE_INDICATOR([sinhf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(SINHF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

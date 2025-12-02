@@ -1,0 +1,24 @@
+@node tmpfile
+@section @code{tmpfile}
+@findex tmpfile
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/tmpfile.html}
+
+Gnulib module: tmpfile
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function always fails on some platforms:
+Android 4.3.
+@item
+This function often fails for trivial reasons on some platforms:
+mingw, MSVC 14.
+@item
+On platforms where @code{off_t} is a 32-bit type, @code{tmpfile} may not work
+correctly to create files larger than 2 GB@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

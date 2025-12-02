@@ -1,0 +1,69 @@
+# Common portion of all rpath-2?b? tests.
+
+tmpfiles=""
+trap 'rm -fr $tmpfiles' 1 2 3 15
+
+builddir=`pwd`
+global_top_auxdir=`cd "$top_srcdir"/build-aux && pwd`
+export global_top_auxdir
+
+tstdir='tst/dir'
+test -d $tstdir || { mkdir tst && mkdir $tstdir; }
+
+tmpfiles="$tmpfiles $rp-prefix1"
+rm -rf $rp-prefix1
+mkdir $rp-prefix1
+
+tmpfiles="$tmpfiles $rp-prefix2"
+rm -rf $rp-prefix2
+mkdir $rp-prefix2
+
+tmpfiles="$tmpfiles $rp-prefix"
+rm -rf $rp-prefix
+mkdir $rp-prefix
+
+tmpfiles="$tmpfiles $tstdir/$rp-build1"
+rm -rf $tstdir/$rp-build1
+mkdir $tstdir/$rp-build1
+(cd $srcdir/rpathx && tar cf - *) | (cd $tstdir/$rp-build1 && tar xf -)
+(cd $tstdir/$rp-build1
+ ${CONFIG_SHELL-/bin/sh} ./configure $build1_configure_flags --prefix=$builddir/$rp-prefix1 --libdir=$builddir/$rp-prefix1/$LIBDIRSTEM > configure.log 2>&1
+ make > make.log 2>&1
+ make install > install.log 2>&1
+)
+if test $remove_la = yes; then
+  rm -f $rp-prefix1/lib/librpathx.la
+fi
+
+tmpfiles="$tmpfiles $tstdir/$rp-build2"
+rm -rf $tstdir/$rp-build2
+mkdir $tstdir/$rp-build2
+(cd $srcdir/rpathy && tar cf - *) | (cd $tstdir/$rp-build2 && tar xf -)
+(cd $tstdir/$rp-build2
+ ${CONFIG_SHELL-/bin/sh} ./configure $build2_configure_flags --prefix=$builddir/$rp-prefix2 --libdir=$builddir/$rp-prefix2/$LIBDIRSTEM --with-librpathx-prefix=$builddir/$rp-prefix1 > configure.log 2>&1
+ make > make.log 2>&1
+ make install > install.log 2>&1
+)
+if test $remove_la = yes; then
+  rm -f $rp-prefix2/lib/librpathy.la
+fi
+
+tmpfiles="$tmpfiles $tstdir/$rp-build3"
+rm -rf $tstdir/$rp-build3
+mkdir $tstdir/$rp-build3
+(cd $srcdir/$build3_package && tar cf - *) | (cd $tstdir/$rp-build3 && tar xf -)
+(cd $tstdir/$rp-build3
+ if test $remove_la = yes; then
+   build3_configure_flags=--with-librpathx-prefix=$builddir/$rp-prefix1
+ else
+   build3_configure_flags=
+ fi
+ ${CONFIG_SHELL-/bin/sh} ./configure --prefix=$builddir/$rp-prefix --libdir=$builddir/$rp-prefix/$LIBDIRSTEM --with-librpathy-prefix=$builddir/$rp-prefix2 $build3_configure_flags > configure.log 2>&1
+ make > make.log 2>&1
+ make check >> make.log
+)
+result=$?
+
+rm -rf $tmpfiles
+
+exit $result

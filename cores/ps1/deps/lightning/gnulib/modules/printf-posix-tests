@@ -1,0 +1,20 @@
+Files:
+tests/test-printf-posix.sh
+tests/test-printf-posix.c
+tests/test-printf-posix.h
+tests/test-printf-posix.output
+tests/test-printf-posix2.sh
+tests/test-printf-posix2.c
+tests/infinity.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+stdint
+
+configure.ac:
+AC_CHECK_FUNCS_ONCE([getrlimit setrlimit])
+
+Makefile.am:
+TESTS += test-printf-posix.sh test-printf-posix2.sh
+check_PROGRAMS += test-printf-posix test-printf-posix2

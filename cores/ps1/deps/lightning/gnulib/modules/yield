@@ -1,0 +1,30 @@
+Description:
+Yielding the processor to other threads.
+
+Files:
+lib/glthread/yield.h
+m4/yield.m4
+
+Depends-on:
+threadlib
+sched_yield
+
+configure.ac:
+AC_REQUIRE([gl_YIELD])
+
+Makefile.am:
+lib_SOURCES += glthread/yield.h
+
+Include:
+"glthread/yield.h"
+
+Link:
+$(LIBTHREAD)
+$(YIELD_LIB)
+
+License:
+LGPLv2+
+
+Maintainer:
+Yoann Vandoorselaere
+

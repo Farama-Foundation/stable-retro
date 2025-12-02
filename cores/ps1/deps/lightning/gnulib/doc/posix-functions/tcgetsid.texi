@@ -1,0 +1,28 @@
+@node tcgetsid
+@section @code{tcgetsid}
+@findex tcgetsid
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/tcgetsid.html}
+
+Gnulib module: tcgetsid
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 6.0, OpenBSD 4.5, Minix 3.1.8, Cygwin 1.7.9, mingw, MSVC 14, Android 4.4.
+@item
+The declaration of this function in C++ compilation units has C++ linkage, not
+C linkage, on some platforms:
+HP-UX 11.00.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function always fails on some platforms:
+FreeBSD 6.0, Cygwin 1.7.8, mingw, MSVC 14.
+@item
+This function returns int instead of pid_t on some platforms:
+Cygwin 1.7.11.
+@end itemize

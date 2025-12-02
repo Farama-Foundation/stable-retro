@@ -1,0 +1,30 @@
+Description:
+mbssep() function: split string into tokens, thread safe.
+
+Files:
+lib/mbssep.c
+
+Depends-on:
+mbuiter
+string
+mbspbrk
+strsep
+
+configure.ac:
+gl_STRING_MODULE_INDICATOR([mbssep])
+
+Makefile.am:
+lib_SOURCES += mbssep.c
+
+Include:
+<string.h>
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+$(LIB_MBRTOWC)
+
+License:
+LGPL
+
+Maintainer:
+all

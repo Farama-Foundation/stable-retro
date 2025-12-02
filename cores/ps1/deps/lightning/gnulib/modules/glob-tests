@@ -1,0 +1,14 @@
+Files:
+tests/test-glob.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-glob
+check_PROGRAMS += test-glob
+test_glob_LDADD = $(LDADD) $(LIB_MBRTOWC)

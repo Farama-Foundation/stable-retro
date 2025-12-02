@@ -1,0 +1,18 @@
+@node atoll
+@section @code{atoll}
+@findex atoll
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/atoll.html}
+
+Gnulib module: atoll
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, HP-UX 11.23, MSVC 9.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

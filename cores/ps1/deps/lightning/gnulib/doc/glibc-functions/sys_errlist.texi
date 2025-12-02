@@ -1,0 +1,18 @@
+@node sys_errlist
+@subsection @code{sys_errlist}
+@findex sys_errlist
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/sys_errlist.3.html,,man sys_errlist}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This variable is missing on some platforms:
+Minix 3.1.8, macOS 10.13, IRIX 6.5, Cygwin 2.9, mingw, Android 9.0.
+@end itemize

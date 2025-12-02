@@ -1,0 +1,38 @@
+Description:
+Reentrant time zone functions: localtime_rz, mktime_z, etc.
+
+Files:
+lib/time-internal.h
+lib/time_rz.c
+m4/time_rz.m4
+
+Depends-on:
+c99
+extensions
+time
+flexmember     [test $HAVE_TIMEZONE_T = 0]
+idx            [test $HAVE_TIMEZONE_T = 0]
+setenv         [test $HAVE_TIMEZONE_T = 0]
+stdbool        [test $HAVE_TIMEZONE_T = 0]
+time_r         [test $HAVE_TIMEZONE_T = 0]
+timegm         [test $HAVE_TIMEZONE_T = 0]
+tzset          [test $HAVE_TIMEZONE_T = 0]
+unsetenv       [test $HAVE_TIMEZONE_T = 0]
+
+configure.ac:
+gl_TIME_RZ
+if test $HAVE_TIMEZONE_T = 0; then
+  AC_LIBOBJ([time_rz])
+fi
+gl_TIME_MODULE_INDICATOR([time_rz])
+
+Makefile.am:
+
+Include:
+<time.h>
+
+License:
+LGPL
+
+Maintainer:
+Paul Eggert

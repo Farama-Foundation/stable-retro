@@ -1,0 +1,36 @@
+Description:
+Sequential list data type implemented by a hash table with a binary tree.
+
+Files:
+lib/gl_avltreehash_list.h
+lib/gl_avltreehash_list.c
+lib/gl_anyhash1.h
+lib/gl_anyhash2.h
+lib/gl_anyhash_primes.h
+lib/gl_anyavltree_list1.h
+lib/gl_anyavltree_list2.h
+lib/gl_anytree_list1.h
+lib/gl_anytree_list2.h
+lib/gl_anytreehash_list1.h
+lib/gl_anytreehash_list2.h
+
+Depends-on:
+builtin-expect
+list
+avltree-oset
+stdint
+xsize
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_avltreehash_list.h gl_avltreehash_list.c gl_anyhash1.h gl_anyhash2.h gl_anyhash_primes.h gl_anyavltree_list1.h gl_anyavltree_list2.h gl_anytree_list1.h gl_anytree_list2.h gl_anytreehash_list1.h gl_anytreehash_list2.h
+
+Include:
+"gl_avltreehash_list.h"
+
+License:
+GPL
+
+Maintainer:
+all

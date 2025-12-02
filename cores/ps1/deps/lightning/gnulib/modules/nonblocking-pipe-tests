@@ -1,0 +1,35 @@
+Files:
+tests/test-nonblocking-pipe.sh
+tests/test-nonblocking-pipe-main.c
+tests/test-nonblocking-pipe-child.c
+tests/test-nonblocking-pipe.h
+tests/test-nonblocking-writer.h
+tests/test-nonblocking-reader.h
+tests/test-nonblocking-misc.h
+tests/macros.h
+
+Depends-on:
+stdbool
+unistd
+nonblocking
+wait-process
+pipe-posix
+dup2
+environ
+posix_spawnp
+binary-io
+gettimeofday
+snprintf
+vsnprintf
+strerror
+ssize_t
+usleep
+read
+write
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-nonblocking-pipe.sh
+check_PROGRAMS += test-nonblocking-pipe-main test-nonblocking-pipe-child
+test_nonblocking_pipe_main_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD)

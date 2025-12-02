@@ -1,0 +1,33 @@
+Description:
+c32rtomb() function: convert 32-bit wide character to multibyte character.
+
+Files:
+lib/c32rtomb.c
+m4/c32rtomb.m4
+m4/mbrtoc32.m4
+
+Depends-on:
+uchar
+attribute       [test $HAVE_C32RTOMB = 0 || test $REPLACE_C32RTOMB = 1]
+wchar           [test $HAVE_C32RTOMB = 0 || test $REPLACE_C32RTOMB = 1]
+wcrtomb         [test $HAVE_C32RTOMB = 0 || test $REPLACE_C32RTOMB = 1]
+localcharset    [{ test $HAVE_C32RTOMB = 0 || test $REPLACE_C32RTOMB = 1; } && test $SMALL_WCHAR_T = 1]
+streq           [{ test $HAVE_C32RTOMB = 0 || test $REPLACE_C32RTOMB = 1; } && test $SMALL_WCHAR_T = 1]
+
+configure.ac:
+gl_FUNC_C32RTOMB
+if test $HAVE_C32RTOMB = 0 || test $REPLACE_C32RTOMB = 1; then
+  AC_LIBOBJ([c32rtomb])
+fi
+gl_UCHAR_MODULE_INDICATOR([c32rtomb])
+
+Makefile.am:
+
+Include:
+<uchar.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Bruno Haible

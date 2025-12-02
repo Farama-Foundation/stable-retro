@@ -1,0 +1,21 @@
+@node exp2f
+@section @code{exp2f}
+@findex exp2f
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/exp2f.html}
+
+Gnulib module: exp2f
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 5.2.1, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, older IRIX 6.5, Solaris 9, MSVC 9.
+@item
+This function is not declared on some platforms:
+IRIX 6.5.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

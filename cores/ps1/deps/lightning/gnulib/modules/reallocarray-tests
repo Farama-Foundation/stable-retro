@@ -1,0 +1,11 @@
+Files:
+tests/test-reallocarray.c
+tests/signature.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-reallocarray
+check_PROGRAMS += test-reallocarray

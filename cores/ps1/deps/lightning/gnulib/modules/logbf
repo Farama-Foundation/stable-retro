@@ -1,0 +1,36 @@
+Description:
+logbf() function: get exponent.
+
+Files:
+lib/logbf.c
+lib/logb.c
+m4/logbf.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+isfinite        [test $HAVE_LOGBF = 0 || test $REPLACE_LOGBF = 1]
+frexpf          [test $HAVE_LOGBF = 0 || test $REPLACE_LOGBF = 1]
+isnanf          [test $HAVE_LOGBF = 0 || test $REPLACE_LOGBF = 1]
+
+configure.ac:
+gl_FUNC_LOGBF
+if test $HAVE_LOGBF = 0 || test $REPLACE_LOGBF = 1; then
+  AC_LIBOBJ([logbf])
+fi
+gl_MATH_MODULE_INDICATOR([logbf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOGBF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

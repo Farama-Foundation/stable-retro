@@ -1,0 +1,27 @@
+@node recvfrom
+@section @code{recvfrom}
+@findex recvfrom
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/recvfrom.html}
+
+Gnulib module: recvfrom
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), error codes from this function
+are not placed in @code{errno}, and @code{WSAGetLastError} must be used
+instead.
+@item
+On HP-UX 11, in 64-bit mode, when the macro @code{_HPUX_ALT_XOPEN_SOCKET_API}
+is not defined, this function behaves incorrectly because it is declared
+to take a pointer to a 64-bit wide @code{socklen_t} entity but in fact
+considers it as a pointer to a 32-bit wide @code{unsigned int} entity.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Some platforms don't have a @code{socklen_t} type; in this case this function's
+sixth argument type is @samp{int *}.
+@end itemize

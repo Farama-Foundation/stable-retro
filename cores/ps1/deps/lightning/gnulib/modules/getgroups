@@ -1,0 +1,30 @@
+Description:
+getgroups() function: return the supplementary group IDs of the current process.
+
+Files:
+lib/getgroups.c
+m4/getgroups.m4
+
+Depends-on:
+unistd
+free-posix      [test $HAVE_GETGROUPS = 0 || test $REPLACE_GETGROUPS = 1]
+malloc-posix    [test $HAVE_GETGROUPS = 0 || test $REPLACE_GETGROUPS = 1]
+stdint          [test $HAVE_GETGROUPS = 0 || test $REPLACE_GETGROUPS = 1]
+
+configure.ac:
+gl_FUNC_GETGROUPS
+if test $HAVE_GETGROUPS = 0 || test $REPLACE_GETGROUPS = 1; then
+  AC_LIBOBJ([getgroups])
+fi
+gl_UNISTD_MODULE_INDICATOR([getgroups])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering, Eric Blake

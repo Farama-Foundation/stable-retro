@@ -1,0 +1,29 @@
+Description:
+_Exit() function: terminate current process.
+
+Files:
+lib/_Exit.c
+m4/_Exit.m4
+
+Depends-on:
+stdlib
+unistd
+
+configure.ac:
+gl_FUNC__EXIT
+if test $HAVE__EXIT = 0; then
+  AC_LIBOBJ([_Exit])
+  gl_PREREQ__EXIT
+fi
+gl_STDLIB_MODULE_INDICATOR([_Exit])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPL
+
+Maintainer:
+all

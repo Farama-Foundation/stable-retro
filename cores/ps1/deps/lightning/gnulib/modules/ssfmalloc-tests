@@ -1,0 +1,14 @@
+Files:
+tests/test-ssfmalloc.c
+tests/macros.h
+m4/mmap-anon.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_MMAP_ANON
+
+Makefile.am:
+TESTS += test-ssfmalloc
+check_PROGRAMS += test-ssfmalloc
+test_ssfmalloc_LDADD = $(LDADD) $(LIBTHREAD)

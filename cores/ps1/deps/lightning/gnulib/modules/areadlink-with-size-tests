@@ -1,0 +1,15 @@
+Files:
+tests/test-areadlink.h
+tests/test-areadlink-with-size.c
+tests/macros.h
+
+Depends-on:
+ignore-value
+stdbool
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-areadlink-with-size
+check_PROGRAMS += test-areadlink-with-size

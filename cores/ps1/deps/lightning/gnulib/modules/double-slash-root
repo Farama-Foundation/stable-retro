@@ -1,0 +1,20 @@
+Description:
+Check whether // is distinct from /.
+
+Files:
+m4/double-slash-root.m4
+
+Depends-on:
+
+configure.ac:
+gl_DOUBLE_SLASH_ROOT
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake, Paul Eggert, Jim Meyering

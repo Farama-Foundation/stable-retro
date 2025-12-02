@@ -1,0 +1,21 @@
+@node getgrgid_r
+@section @code{getgrgid_r}
+@findex getgrgid_r
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/getgrgid_r.html}
+
+Gnulib module: extensions
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function has an incompatible declaration on some platforms:
+Solaris 11.3 (when @code{_POSIX_PTHREAD_SEMANTICS} is not defined).
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 14, Android 6.0.
+@end itemize

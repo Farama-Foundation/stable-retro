@@ -1,0 +1,12 @@
+Files:
+tests/test-xstdopen.c
+tests/test-xstdopen.sh
+tests/macros.h
+
+Depends-on:
+test-framework-sh
+
+Makefile.am:
+TESTS += test-xstdopen.sh
+check_PROGRAMS += test-xstdopen
+test_xstdopen_LDADD = $(LDADD) @LIBINTL@

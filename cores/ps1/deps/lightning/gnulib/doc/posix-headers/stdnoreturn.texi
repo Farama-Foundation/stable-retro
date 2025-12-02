@@ -1,0 +1,47 @@
+@node stdnoreturn.h
+@section @file{stdnoreturn.h}
+
+POSIX specification:@* Not in POSIX yet, but we expect it will be.
+ISO C11 (latest free draft
+@url{http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf})
+sections 7.23.
+
+Gnulib module: stdnoreturn
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on many platforms:
+FreeBSD 6.4, NetBSD 7.1, OpenBSD 6.7, Minix 3.3.0, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3, Cygwin 2.9.0, mingw, MSVC 14, Android 9.0.
+@item
+This file conflicts with some system header files, such as @code{<stdlib.h>} and
+@code{<process.h>}, on some platforms:
+MSVC/clang.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+@code{<stdnoreturn.h>} should be #included before @samp{_Noreturn} is used.
+@item
+You cannot assume that @code{_Noreturn} is a reserved word;
+it might be a macro.
+@item
+When the macro @code{lint} is defined, standard headers define
+@code{_Noreturn} (and therefore @code{noreturn}) to be a macro that
+expands to the empty token sequence on some platforms:
+Cygwin 2.5.1, FreeBSD 10.3.
+@item
+On Cygwin 1.7.30 and MSVC 14, @code{noreturn} expands to the empty token
+sequence, to avoid problems with standard headers that use @code{noreturn}
+in combination with @code{__attribute__} or @code{__declspec}.  Although
+the resulting code operates correctly, the compiler is not informed whether
+@code{noreturn} functions do not return, so it may generate incorrect
+warnings at compile-time, or code that is slightly less optimized.  This
+problem does not occur with @code{_Noreturn}.
+@item
+Circa 2012 bleeding-edge GCC with @code{-Werror=old-style-declaration}
+requires @code{_Noreturn} or @code{noreturn} before the returned type
+in a declaration, and therefore rejects valid but unusually-worded
+declarations such as @code{void _Noreturn foo (void);}.
+@end itemize

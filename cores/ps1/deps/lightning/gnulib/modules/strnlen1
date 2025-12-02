@@ -1,0 +1,23 @@
+Description:
+Quick string length estimation.
+
+Files:
+lib/strnlen1.h
+lib/strnlen1.c
+
+Depends-on:
+memchr
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += strnlen1.h strnlen1.c
+
+Include:
+"strnlen1.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

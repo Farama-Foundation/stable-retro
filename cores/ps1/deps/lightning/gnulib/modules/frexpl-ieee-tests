@@ -1,0 +1,19 @@
+Files:
+tests/test-frexpl-ieee.c
+tests/test-frexp-ieee.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnanl-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-frexpl-ieee
+check_PROGRAMS += test-frexpl-ieee
+test_frexpl_ieee_LDADD = $(LDADD) @FREXPL_LIBM@

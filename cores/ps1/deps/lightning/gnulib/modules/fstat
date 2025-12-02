@@ -1,0 +1,42 @@
+Description:
+fstat() function: return information about an open file.
+
+Files:
+lib/fstat.c
+lib/stat-w32.h
+lib/stat-w32.c
+m4/fstat.m4
+
+Depends-on:
+sys_stat
+largefile
+pathmax         [test $REPLACE_FSTAT = 1]
+stat            [test $REPLACE_FSTAT = 1]
+stat-time       [test $REPLACE_FSTAT = 1]
+unistd          [test $REPLACE_FSTAT = 1]
+verify          [test $REPLACE_FSTAT = 1]
+msvc-nothrow    [test $REPLACE_FSTAT = 1]
+
+configure.ac:
+gl_FUNC_FSTAT
+if test $REPLACE_FSTAT = 1; then
+  AC_LIBOBJ([fstat])
+  case "$host_os" in
+    mingw*)
+      AC_LIBOBJ([stat-w32])
+      ;;
+  esac
+  gl_PREREQ_FSTAT
+fi
+gl_SYS_STAT_MODULE_INDICATOR([fstat])
+
+Makefile.am:
+
+Include:
+<sys/stat.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

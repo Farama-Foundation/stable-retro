@@ -1,0 +1,23 @@
+Description:
+Hook for making file descriptor functions (close(), ioctl()) extensible.
+
+Files:
+lib/fd-hook.h
+lib/fd-hook.c
+
+Depends-on:
+unistd
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += fd-hook.c
+
+Include:
+"fd-hook.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

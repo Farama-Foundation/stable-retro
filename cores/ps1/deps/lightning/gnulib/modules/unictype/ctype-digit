@@ -1,0 +1,29 @@
+Description:
+Generalization of the <ctype.h> isdigit() function and the
+<wctype.h> iswdigit() function.
+
+Files:
+lib/unictype/ctype_digit.c
+lib/unictype/ctype_digit.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/ctype-digit])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CTYPE_DIGIT
+lib_SOURCES += unictype/ctype_digit.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

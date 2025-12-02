@@ -1,0 +1,13 @@
+Files:
+tests/unictype/test-bidi_of.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-bidi_of
+check_PROGRAMS += test-bidi_of
+test_bidi_of_SOURCES = unictype/test-bidi_of.c
+test_bidi_of_LDADD = $(LDADD) $(LIBUNISTRING)

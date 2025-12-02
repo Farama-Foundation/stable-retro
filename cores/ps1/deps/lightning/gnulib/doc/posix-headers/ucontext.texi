@@ -1,0 +1,17 @@
+@node ucontext.h
+@section @file{ucontext.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/009695399/basedefs/ucontext.h.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+OpenBSD 6.7, Cygwin 1.7.35, mingw, MSVC 14.
+@end itemize

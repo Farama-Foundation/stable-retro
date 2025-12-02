@@ -1,0 +1,12 @@
+Files:
+tests/test-math.c
+tests/macros.h
+
+Depends-on:
+math-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-math
+check_PROGRAMS += test-math

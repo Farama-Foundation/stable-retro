@@ -1,0 +1,14 @@
+Files:
+tests/unistr/test-u8-mbtouc-unsafe.c
+tests/unistr/test-u8-mbtouc.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-mbtouc-unsafe
+check_PROGRAMS += test-u8-mbtouc-unsafe
+test_u8_mbtouc_unsafe_SOURCES = unistr/test-u8-mbtouc-unsafe.c
+test_u8_mbtouc_unsafe_LDADD = $(LDADD) $(LIBUNISTRING)

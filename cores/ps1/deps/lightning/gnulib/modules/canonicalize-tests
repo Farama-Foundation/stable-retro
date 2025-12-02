@@ -1,0 +1,16 @@
+Files:
+tests/test-canonicalize.c
+tests/null-ptr.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+same-inode
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-canonicalize
+check_PROGRAMS += test-canonicalize
+test_canonicalize_LDADD = $(LDADD) @LIBINTL@

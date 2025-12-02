@@ -1,0 +1,22 @@
+Files:
+tests/test-sha256.c
+tests/test-digest.h
+tests/bench-sha224.c
+tests/bench-sha256.c
+tests/bench-digest.h
+tests/macros.h
+
+Depends-on:
+c99
+getrusage
+gettimeofday
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sha256
+check_PROGRAMS += test-sha256
+noinst_PROGRAMS += bench-sha224 bench-sha256
+test_sha256_LDADD = $(LDADD) @LIB_CRYPTO@
+bench_sha224_LDADD = $(LDADD) @LIB_CRYPTO@
+bench_sha256_LDADD = $(LDADD) @LIB_CRYPTO@

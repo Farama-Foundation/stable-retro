@@ -1,0 +1,176 @@
+The following packages are needed by maintainers for using
+'gnulib-tool'.  In general, Gnulib prefers the latest stable
+version of each package, but in some cases it also supports
+older versions; this caters to commonly-used software
+distributions that may lag behind the latest stable package.
+Support for older versions is not guaranteed, though, and
+the version numbers in the following list may be incremented
+at any time.
+
+* A C runtime, compiler, linker, etc.
+  + Mandatory. Using the platform's native 'cc' gives good portability
+    exposure, but you can also use GCC 3.1 or newer.
+  + GCC Homepage:
+    https://gcc.gnu.org/
+  + Download:
+    https://ftp.gnu.org/gnu/gcc/
+
+* A 'make' utility.
+  + Mandatory. Using the platform's native 'make' gives good portability
+    exposure for in-tree builds, but VPATH builds require GNU Make 3.79.1 or
+    newer.
+  + GNU Make Homepage:
+    https://www.gnu.org/software/make/
+  + Download:
+    https://ftp.gnu.org/gnu/make/
+
+* GNU M4 1.4.5 or newer.
+  + Mandatory.
+    1.4.5 or newer is mandatory, but 1.4.9 or newer is recommended.
+    If you want to build it from source, use the tarball from
+    https://gitlab.com/gnu-m4/ci-distcheck/-/jobs/artifacts/master/raw/m4-snapshot.tar?job=check-optimized
+  + Homepage:
+    https://www.gnu.org/software/m4/
+  + Download:
+    https://ftp.gnu.org/gnu/m4/
+
+* Autoconf 2.64 or newer.
+  + Mandatory.
+  + Homepage:
+    https://www.gnu.org/software/autoconf/
+  + Download:
+    https://ftp.gnu.org/gnu/autoconf/
+
+* Automake 1.11.1 or newer.
+  + Mandatory.
+  + Homepage:
+    https://www.gnu.org/software/automake/
+  + Download:
+    https://ftp.gnu.org/gnu/automake/
+
+* A shell
+  + Mandatory. Using the platform's native 'sh' gives good portability
+    exposure, but you can also use Bash.
+  + Homepage:
+    https://www.gnu.org/software/bash/
+  + Download:
+    https://ftp.gnu.org/gnu/bash/
+
+* Core POSIX utilities, including:
+    [ basename cat chgrp chmod chown cp dd echo expand expr
+    false hostname install kill ln ls md5sum mkdir mkfifo
+    mknod mv printenv pwd rm rmdir sleep sort tee test touch
+    true uname
+  + Mandatory. Using the platform's native utilities gives good portability
+    exposure, but you can also use GNU coreutils.
+  + Homepage:
+    https://www.gnu.org/software/coreutils/
+  + Download:
+    https://ftp.gnu.org/gnu/coreutils/
+
+* The comparison utilities 'cmp' and 'diff'.
+  + Mandatory. Using the platform's native utilities gives good portability
+    exposure, but you can also use GNU diffutils.
+  + Homepage:
+    https://www.gnu.org/software/diffutils/
+  + Download:
+    https://ftp.gnu.org/gnu/diffutils/
+
+* The patch utility 'patch'.
+  + Mandatory if you use gnulib-local diffs. Using the platform's native
+    utilities gives good portability exposure, but you can also use GNU
+    patch.
+  + Homepage:
+    https://www.gnu.org/software/patch/
+  + Download:
+    https://ftp.gnu.org/gnu/patch/
+
+* Grep.
+  + Mandatory. Using the platform's native grep gives good portability
+    exposure, but you can also use GNU grep.
+  + Homepage:
+    https://www.gnu.org/software/grep/
+  + Download:
+    https://ftp.gnu.org/gnu/grep/
+
+* Awk.
+  + Mandatory.
+    Using the platform's native awk, mawk, or nawk gives good portability
+    exposure, but you can also use GNU awk.
+  + Homepage:
+    https://www.gnu.org/software/gawk/
+  + Download:
+    https://ftp.gnu.org/gnu/gawk/
+
+* GNU gettext.
+  + If your project wants to follow GNU Coding Standards:
+    + Always use the newest available gettext release, see
+      <https://www.gnu.org/software/gnulib/manual/html_node/gettextize-and-autopoint.html>.
+    + Use the 'gettext' module.
+  + If your project cares more about ease of development on older platforms:
+    + gettext 0.17 or newer.
+    + Use the 'gettext-h' module.
+  + Recommended.
+    Needed if you use modules that use internationalization (many do).
+  + Homepage:
+    https://www.gnu.org/software/gettext/
+  + Download:
+    https://ftp.gnu.org/gnu/gettext/
+  + Pre-built package name:
+    - On Debian and Debian-based systems: gettext,
+    - On Red Hat distributions: gettext.
+    - Other: https://repology.org/project/gettext/versions
+
+* Bison 2.0 or newer.
+  + Recommended.
+    Needed if you use the 'parse-datetime' module.
+  + Homepage:
+    https://www.gnu.org/software/bison/
+  + Download:
+    https://ftp.gnu.org/gnu/bison/
+  + Pre-built package name:
+    - On Debian and Debian-based systems: bison,
+    - On Red Hat distributions: bison.
+    - Other: https://repology.org/project/bison/versions
+
+* GNU gperf 3.0.1 or newer.
+  + 3.0.1 or newer is mandatory, but 3.1 or newer is recommended.
+    Needed if you use the 'iconv_open' module.
+  + Homepage:
+    https://www.gnu.org/software/gperf/
+  + Download:
+    https://ftp.gnu.org/gnu/gperf/
+  + Pre-built package name:
+    - On Debian and Debian-based systems: gperf,
+    - On Red Hat distributions: gperf.
+    - Other: https://repology.org/project/gperf/versions
+
+* Texinfo 4.6 or newer.
+  + Recommended.
+    Needed if you use modules that include documentation.
+  + Homepage:
+    https://www.gnu.org/software/texinfo/
+  + Download:
+    https://ftp.gnu.org/gnu/texinfo/
+  + Pre-built package name:
+    - On Debian and Debian-based systems: texinfo,
+    - On Red Hat distributions: texinfo.
+    - Other: https://repology.org/project/texinfo/versions
+
+* GNU sed.
+  + Recommended.
+    Needed on platforms where the vendor's 'sed' program is too buggy.
+  + Homepage:
+    https://www.gnu.org/software/sed/
+  + Download:
+    https://ftp.gnu.org/gnu/sed/
+
+* GNU libtool 1.5.22 or newer.
+  + Optional.
+    Needed if you want to invoke gnulib-tool with option --libtool.
+    libtool 2.2.x or newer is needed if you want to invoke gnulib-tool
+    with options --create-testdir/--test  and --libtool.
+  + Homepage:
+    https://www.gnu.org/software/libtool/
+  + Download:
+    https://ftp.gnu.org/gnu/libtool/

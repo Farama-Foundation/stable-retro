@@ -1,0 +1,20 @@
+Description:
+Basic filename support macros.
+
+Files:
+lib/filename.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"filename.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

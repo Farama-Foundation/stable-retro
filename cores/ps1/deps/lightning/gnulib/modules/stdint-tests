@@ -1,0 +1,19 @@
+Files:
+tests/test-stdint.c
+m4/wchar_t.m4
+m4/wint_t.m4
+
+Depends-on:
+extensions
+verify
+intprops
+wchar
+stdint-c++-tests
+
+configure.ac:
+AC_REQUIRE([gt_TYPE_WCHAR_T])
+AC_REQUIRE([gt_TYPE_WINT_T])
+
+Makefile.am:
+TESTS += test-stdint
+check_PROGRAMS += test-stdint

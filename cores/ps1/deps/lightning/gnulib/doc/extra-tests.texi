@@ -1,0 +1,73 @@
+@node Extra tests modules
+@section Extra tests modules
+
+@cindex Extra tests modules
+@cindex C++ tests modules
+@cindex tests modules, C++
+@cindex long-running tests modules
+@cindex tests modules, long-running
+@cindex privileged tests modules
+@cindex tests modules, privileged
+@cindex unportable tests modules
+@cindex tests modules, unportable
+Test modules can be marked with some special status attributes.  When a
+test module has such an attribute, @code{gnulib-tool --import} will not
+include it by default.
+
+The supported status attributes are:
+
+@table @code
+@item c++-test
+Indicates that the test is testing C++ interoperability.  Such a test is
+useful in a C++ or mixed C/C++ package, but is useless in a C package.
+
+@item longrunning-test
+Indicates that the test takes a long time to compile or execute (more
+than five minutes or so).  Such a test is better avoided in a release
+that is made for the general public.
+
+@item privileged-test
+Indicates that the test will request special privileges, for example,
+ask for the superuser password.  Such a test may hang when run
+non-interactively and is therefore better avoided in a release that is
+made for the general public.
+
+@item unportable-test
+Indicates that the test is known to fail on some systems, and that
+there is no workaround about it.  Such a test is better avoided in a
+release that is made for the general public.
+@end table
+
+@code{gnulib-tool --import --with-tests} will not include tests marked with
+these attributes by default.  When @code{gnulib-tool} is invoked with one
+of the options @code{--with-c++-tests}, @code{--with-longrunning-tests},
+@code{--with-privileged-tests}, @code{--with-unportable-tests}, it
+will include tests despite the corresponding special status attribute.
+When @code{gnulib-tool} receives the option @code{--with-all-tests},
+it will include all tests regardless of their status attributes.
+
+@code{gnulib-tool --create-testdir --with-tests} and
+@code{gnulib-tool --create-megatestdir --with-tests} by default include all
+tests of modules specified on the command line, regardless of their status
+attributes.  Tests of modules occurring as dependencies are not included
+by default if they have one of these status attributes.  The options
+@code{--with-c++-tests}, @code{--with-longrunning-tests},
+@code{--with-privileged-tests}, @code{--with-unportable-tests} are
+recognized here as well.  Additionally, @code{gnulib-tool} also
+understands the options @code{--without-c++-tests},
+@code{--without-longrunning-tests}, @code{--without-privileged-tests},
+@code{--without-unportable-tests}.
+
+In order to mark a module with a status attribute, you need to add it
+to the module description, like this:
+
+@example
+Status:
+longrunning-test
+@end example
+
+If only a part of a test deserves a particular status attribute, you
+can split the module into a primary and a secondary test module,
+say @code{foo-tests} and @code{foo-extra-tests}.  Then add a dependency
+from @code{foo-tests} to @code{foo-extra-tests}, and mark the
+@code{foo-extra-tests} with the particular status attribute.

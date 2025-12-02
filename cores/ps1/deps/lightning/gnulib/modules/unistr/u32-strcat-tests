@@ -1,0 +1,14 @@
+Files:
+tests/unistr/test-u32-strcat.c
+tests/unistr/test-strcat.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-strcat
+check_PROGRAMS += test-u32-strcat
+test_u32_strcat_SOURCES = unistr/test-u32-strcat.c
+test_u32_strcat_LDADD = $(LDADD) $(LIBUNISTRING)

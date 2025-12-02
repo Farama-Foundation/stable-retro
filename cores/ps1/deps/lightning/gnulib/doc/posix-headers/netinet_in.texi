@@ -1,0 +1,21 @@
+@node netinet/in.h
+@section @file{netinet/in.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/netinet_in.h.html}
+
+Gnulib module: netinet_in
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+mingw, MSVC 14.
+@item
+This header file is not self-contained on some platforms (it requires
+@code{<sys/types.h>} to be included first):
+OpenBSD 4.6.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

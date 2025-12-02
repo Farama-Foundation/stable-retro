@@ -1,0 +1,38 @@
+Description:
+exp2l() function: exponential base 2 function with long double argument.
+
+Files:
+lib/exp2l.c
+lib/expl-table.c
+m4/exp2l.m4
+
+Depends-on:
+math
+extensions
+exp2            [{ test $HAVE_EXP2L = 0 || test $REPLACE_EXP2L = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+float           [{ test $HAVE_EXP2L = 0 || test $REPLACE_EXP2L = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+isnanl          [{ test $HAVE_EXP2L = 0 || test $REPLACE_EXP2L = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+roundl          [{ test $HAVE_EXP2L = 0 || test $REPLACE_EXP2L = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+ldexpl          [{ test $HAVE_EXP2L = 0 || test $REPLACE_EXP2L = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+gl_FUNC_EXP2L
+if test $HAVE_EXP2L = 0 || test $REPLACE_EXP2L = 1; then
+  AC_LIBOBJ([exp2l])
+  AC_LIBOBJ([expl-table])
+fi
+gl_MATH_MODULE_INDICATOR([exp2l])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(EXP2L_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

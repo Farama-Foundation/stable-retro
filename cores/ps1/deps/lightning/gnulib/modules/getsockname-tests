@@ -1,0 +1,23 @@
+Files:
+tests/test-getsockname.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+netinet_in
+arpa_inet
+inet_pton
+errno
+perror
+sockets
+socket
+setsockopt
+bind
+listen
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getsockname
+check_PROGRAMS += test-getsockname
+test_getsockname_LDADD = $(LDADD) @LIBSOCKET@ $(INET_PTON_LIB)

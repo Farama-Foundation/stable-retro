@@ -1,0 +1,11 @@
+Files:
+tests/test-fcntl-h.c
+
+Depends-on:
+fcntl-h-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fcntl-h
+check_PROGRAMS += test-fcntl-h

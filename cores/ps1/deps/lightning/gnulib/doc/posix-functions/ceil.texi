@@ -1,0 +1,23 @@
+@node ceil
+@section @code{ceil}
+@findex ceil
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/ceil.html}
+
+Gnulib module: ceil or ceil-ieee
+
+Portability problems fixed by either Gnulib module @code{ceil} or @code{ceil-ieee}:
+@itemize
+@end itemize
+
+Portability problems fixed by Gnulib module @code{ceil-ieee}:
+@itemize
+@item
+This function returns a positive zero for an argument between @minus{}1 and 0
+on some platforms:
+AIX 7.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

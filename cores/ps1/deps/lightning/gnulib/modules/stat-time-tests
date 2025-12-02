@@ -1,0 +1,17 @@
+Files:
+tests/test-stat-time.c
+tests/macros.h
+tests/nap.h
+
+Depends-on:
+intprops
+nanosleep
+time
+unistd
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-stat-time
+check_PROGRAMS += test-stat-time
+test_stat_time_LDADD = $(LDADD) $(LIB_NANOSLEEP)

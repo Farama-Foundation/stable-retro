@@ -1,0 +1,51 @@
+Description:
+Return the current working directory.
+
+Files:
+lib/getcwd.c
+m4/getcwd-abort-bug.m4
+m4/getcwd-path-max.m4
+m4/getcwd.m4
+m4/getpagesize.m4
+m4/pathmax.m4
+
+Depends-on:
+unistd
+extensions
+pathmax         [test $REPLACE_GETCWD = 1]
+msvc-inval      [test $REPLACE_GETCWD = 1]
+mempcpy         [test $REPLACE_GETCWD = 1]
+d-ino           [test $REPLACE_GETCWD = 1]
+memmove         [test $REPLACE_GETCWD = 1]
+openat          [test $REPLACE_GETCWD = 1]
+fcntl-h         [test $REPLACE_GETCWD = 1]
+fdopendir       [test $REPLACE_GETCWD = 1]
+fstat           [test $REPLACE_GETCWD = 1]
+fstatat         [test $REPLACE_GETCWD = 1]
+opendir         [test $REPLACE_GETCWD = 1]
+readdir         [test $REPLACE_GETCWD = 1]
+rewinddir       [test $REPLACE_GETCWD = 1]
+closedir        [test $REPLACE_GETCWD = 1]
+stdbool         [test $REPLACE_GETCWD = 1]
+malloc-posix    [test $REPLACE_GETCWD = 1]
+strdup-posix    [test $REPLACE_GETCWD = 1]
+
+configure.ac:
+gl_FUNC_GETCWD
+if test $REPLACE_GETCWD = 1; then
+  AC_LIBOBJ([getcwd])
+  gl_PREREQ_GETCWD
+fi
+gl_MODULE_INDICATOR([getcwd])
+gl_UNISTD_MODULE_INDICATOR([getcwd])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+GPL
+
+Maintainer:
+all, glibc

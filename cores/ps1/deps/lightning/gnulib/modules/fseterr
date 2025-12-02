@@ -1,0 +1,27 @@
+Description:
+Set the error indicator of a stream.
+
+Files:
+lib/fseterr.h
+lib/fseterr.c
+lib/stdio-impl.h
+m4/fseterr.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_FSETERR
+if test $ac_cv_func___fseterr = no; then
+  AC_LIBOBJ([fseterr])
+fi
+
+Makefile.am:
+
+Include:
+"fseterr.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

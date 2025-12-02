@@ -1,0 +1,39 @@
+Description:
+Core files for generic crypto package
+
+Files:
+lib/gc.h
+lib/gc-libgcrypt.c
+lib/gc-gnulib.c
+m4/gc.m4
+m4/libgcrypt.m4
+
+Depends-on:
+havelib
+open
+
+configure.ac:
+gl_GC
+if test "$ac_cv_libgcrypt" = yes; then
+  AC_LIBOBJ([gc-libgcrypt])
+else
+  AC_LIBOBJ([gc-gnulib])
+fi
+if test $gl_cond_libtool = false; then
+  gl_ltlibdeps="$gl_ltlibdeps $LTLIBGCRYPT"
+  gl_libdeps="$gl_libdeps $LIBGCRYPT"
+fi
+
+Makefile.am:
+if GL_COND_LIBTOOL
+lib_LDFLAGS += $(LTLIBGCRYPT)
+endif
+
+Include:
+"gc.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

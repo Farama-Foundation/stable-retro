@@ -1,0 +1,29 @@
+Description:
+wcsncasecmp() function: compare two wide strings ignoring case.
+
+Files:
+lib/wcsncasecmp.c
+lib/wcsncasecmp-impl.h
+m4/wcsncasecmp.m4
+
+Depends-on:
+wchar
+wctype-h        [test $HAVE_WCSNCASECMP = 0]
+
+configure.ac:
+gl_FUNC_WCSNCASECMP
+if test $HAVE_WCSNCASECMP = 0; then
+  AC_LIBOBJ([wcsncasecmp])
+fi
+gl_WCHAR_MODULE_INDICATOR([wcsncasecmp])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPL
+
+Maintainer:
+all

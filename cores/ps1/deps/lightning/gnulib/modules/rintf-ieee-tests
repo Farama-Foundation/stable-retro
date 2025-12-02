@@ -1,0 +1,19 @@
+Files:
+tests/test-rintf-ieee.c
+tests/test-rint-ieee.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnanf-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-rintf-ieee
+check_PROGRAMS += test-rintf-ieee
+test_rintf_ieee_LDADD = $(LDADD) @RINTF_LIBM@

@@ -1,0 +1,28 @@
+Description:
+vasprintf and asprintf with POSIX compatible format string interpretation and
+with out-of-memory checking.  Also see xalloc-die.
+
+Comment:
+This module should not be used as a dependency from a test module,
+otherwise when this module occurs as a tests-related module, it will
+have side effects on the compilation of the 'vasnprintf' module, if
+that module occurs among the main modules in lib/.
+
+Files:
+
+Depends-on:
+xvasprintf
+vasprintf-posix
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"xvasprintf.h"
+
+License:
+GPL
+
+Maintainer:
+all

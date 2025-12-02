@@ -1,0 +1,6 @@
+Files:
+tests/test-sys_times.c
+
+Makefile.am:
+TESTS += test-sys_times
+check_PROGRAMS += test-sys_times

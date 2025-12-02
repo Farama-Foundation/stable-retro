@@ -1,0 +1,20 @@
+Files:
+tests/macros.h
+tests/signature.h
+tests/test-getopt-posix.c
+tests/test-getopt-main.h
+tests/test-getopt.h
+
+Depends-on:
+dup2
+setenv
+stdbool
+unistd
+unsetenv
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getopt-posix
+check_PROGRAMS += test-getopt-posix
+test_getopt_posix_LDADD = $(LDADD) $(LIBINTL)

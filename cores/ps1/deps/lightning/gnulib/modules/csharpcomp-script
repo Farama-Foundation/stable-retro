@@ -1,0 +1,21 @@
+Description:
+Script to compile a C# program.
+
+Files:
+build-aux/csharpcomp.sh.in
+m4/csharpcomp.m4
+m4/csharp.m4
+
+Depends-on:
+
+configure.ac:
+AC_REQUIRE([gt_CSHARPCOMP])
+AC_CONFIG_FILES([csharpcomp.sh:build-aux/csharpcomp.sh.in])
+
+Makefile.am:
+
+License:
+GPLed build tool
+
+Maintainer:
+all

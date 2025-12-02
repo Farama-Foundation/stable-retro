@@ -1,0 +1,28 @@
+Description:
+Detect the number of processors
+
+Files:
+lib/nproc.h
+lib/nproc.c
+m4/nproc.m4
+
+Depends-on:
+c-ctype
+extensions
+minmax
+unistd
+
+configure.ac:
+gl_NPROC
+
+Makefile.am:
+lib_SOURCES += nproc.c
+
+Include:
+"nproc.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Glen Lenker and Paul Eggert

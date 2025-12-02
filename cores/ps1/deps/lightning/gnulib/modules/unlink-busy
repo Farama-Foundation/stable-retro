@@ -1,0 +1,20 @@
+Description:
+Test whether a running program can be unlinked.
+
+Files:
+m4/unlink-busy.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_UNLINK_BUSY_TEXT
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

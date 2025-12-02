@@ -1,0 +1,30 @@
+Description:
+Grapheme cluster breaks in locale-encoded string.
+
+Files:
+lib/unigbrk/ulc-grapheme-breaks.c
+
+Depends-on:
+unigbrk/base
+unigbrk/u8-grapheme-breaks
+uniconv/u8-conv-from-enc
+c-ctype
+localcharset
+
+configure.ac:
+gl_MODULE_INDICATOR([unigbrk/ulc-grapheme-breaks])
+gl_LIBUNISTRING_MODULE([0.9.8], [unigbrk/ulc-grapheme-breaks])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNIGBRK_ULC_GRAPHEME_BREAKS
+lib_SOURCES += unigbrk/ulc-grapheme-breaks.c
+endif
+
+Include:
+"unigbrk.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+Ben Pfaff, Daiki Ueno

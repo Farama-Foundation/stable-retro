@@ -1,0 +1,33 @@
+Description:
+a more convenient interface to nanosleep
+
+Files:
+lib/xnanosleep.h
+lib/xnanosleep.c
+m4/xnanosleep.m4
+
+Depends-on:
+c99
+dtotimespec
+intprops
+nanosleep
+time
+unistd
+
+configure.ac:
+gl_XNANOSLEEP
+
+Makefile.am:
+lib_SOURCES += xnanosleep.c
+
+Include:
+"xnanosleep.h"
+
+Link:
+$(LIB_NANOSLEEP)
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

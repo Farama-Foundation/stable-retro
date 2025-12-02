@@ -1,0 +1,28 @@
+@node posix_fallocate
+@section @code{posix_fallocate}
+@findex posix_fallocate
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_fallocate.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 5.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14, Android 4.4.
+@item
+POSIX specifies that EINVAL should be returned when the file system doesn't
+support the allocation operation directly.  glibc however emulates the file system
+allocation with writes where unsupported, and apps have depended on
+that long term implementation.  This is both inefficient, and as of
+glibc 2.21 at least, buggy on certain NFS setups.
+@item
+On platforms where @code{off_t} is a 32-bit type, this function may not
+work correctly across the entire data range of files larger than 2 GB.
+The fix is to use the @code{AC_SYS_LARGEFILE} macro.
+@end itemize

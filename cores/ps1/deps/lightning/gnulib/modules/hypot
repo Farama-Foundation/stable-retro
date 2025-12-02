@@ -1,0 +1,38 @@
+Description:
+hypot() function: length of a vector in the plane.
+
+Files:
+lib/hypot.c
+m4/hypot.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+isfinite        [test $REPLACE_HYPOT = 1]
+fabs            [test $REPLACE_HYPOT = 1]
+frexp           [test $REPLACE_HYPOT = 1]
+ldexp           [test $REPLACE_HYPOT = 1]
+sqrt            [test $REPLACE_HYPOT = 1]
+isinf           [test $REPLACE_HYPOT = 1]
+
+configure.ac:
+gl_FUNC_HYPOT
+if test $REPLACE_HYPOT = 1; then
+  AC_LIBOBJ([hypot])
+fi
+gl_MATH_MODULE_INDICATOR([hypot])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(HYPOT_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

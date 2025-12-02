@@ -1,0 +1,15 @@
+Files:
+tests/unicase/test-u32-totitle.c
+tests/macros.h
+
+Depends-on:
+unistr/u32-cmp
+uninorm/nfc
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-totitle
+check_PROGRAMS += test-u32-totitle
+test_u32_totitle_SOURCES = unicase/test-u32-totitle.c
+test_u32_totitle_LDADD = $(LDADD) $(LIBUNISTRING)

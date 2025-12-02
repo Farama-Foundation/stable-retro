@@ -1,0 +1,15 @@
+Files:
+tests/test-pthread-tss.c
+tests/macros.h
+
+Depends-on:
+pthread-thread
+pthread-mutex
+sched_yield
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pthread-tss
+check_PROGRAMS += test-pthread-tss
+test_pthread_tss_LDADD = $(LDADD) @LIBPMULTITHREAD@ @LIB_SCHED_YIELD@

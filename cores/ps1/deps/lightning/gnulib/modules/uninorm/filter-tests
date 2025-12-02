@@ -1,0 +1,15 @@
+Files:
+tests/uninorm/test-uninorm-filter-nfc.c
+tests/macros.h
+
+Depends-on:
+unistr/u32-cmp
+uninorm/nfc
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-uninorm-filter-nfc
+check_PROGRAMS += test-uninorm-filter-nfc
+test_uninorm_filter_nfc_SOURCES = uninorm/test-uninorm-filter-nfc.c
+test_uninorm_filter_nfc_LDADD = $(LDADD) $(LIBUNISTRING)

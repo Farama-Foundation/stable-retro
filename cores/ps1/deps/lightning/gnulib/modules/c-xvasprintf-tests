@@ -1,0 +1,19 @@
+Files:
+tests/test-c-xvasprintf.c
+tests/test-c-xvasprintf.sh
+m4/locale-fr.m4
+tests/macros.h
+
+Depends-on:
+setlocale
+snprintf
+xalloc
+
+configure.ac:
+gt_LOCALE_FR
+
+Makefile.am:
+TESTS += test-c-xvasprintf.sh
+TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@'
+check_PROGRAMS += test-c-xvasprintf
+test_c_xvasprintf_LDADD = $(LDADD) $(LIB_SETLOCALE) @LIBINTL@

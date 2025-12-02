@@ -1,0 +1,39 @@
+@node getgroups
+@section @code{getgroups}
+@findex getgroups
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/getgroups.html}
+
+Gnulib module: getgroups
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+On some platforms, this function fails to reject a negative count,
+even though that is less than the size that would be returned:
+macOS 11.1, FreeBSD 7.2.
+@item
+On NeXTstep 3.2, @code{getgroups (0, NULL)} always fails.  See macro
+@samp{AC_FUNC_GETGROUPS}.
+@item
+On very old systems, this function operated on an array of @samp{int},
+even though that was a different size than an array of @samp{gid_t}.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is unsafe to call between @code{fork} and @code{exec} if
+the parent process is multi-threaded.
+@item
+It is unspecified whether the effective group id will be included in
+the returned list, nor whether the list will be sorted in any
+particular order.  For that matter, some platforms include the
+effective group id twice, if it is also a member of the current
+supplemental group ids.
+@end itemize
+
+The Gnulib module @code{mgetgroups} provides a similar API.

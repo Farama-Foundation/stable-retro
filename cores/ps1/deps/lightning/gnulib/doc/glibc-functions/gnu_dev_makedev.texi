@@ -1,0 +1,23 @@
+@node gnu_dev_makedev
+@subsection @code{gnu_dev_makedev}
+@findex gnu_dev_makedev
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/gnu_dev_makedev.3.html,,man gnu_dev_makedev}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+The @code{AC_HEADER_MAJOR} macro in Autoconf 2.69 and earlier fails to
+set @code{MAJOR_IN_SYSMACROS} when it detects namespace pollution in
+@file{sys/types.h}; which in turn provokes deprecation warnings in
+glibc 2.25.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on all non-glibc platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

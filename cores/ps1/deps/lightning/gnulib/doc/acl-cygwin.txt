@@ -1,0 +1,137 @@
+$ getfacl --help
+Usage: getfacl [-adn] FILE [FILE2...]
+Display file and directory access control lists (ACLs).
+
+  -a, --all      display the filename, the owner, the group, and
+                 the ACL of the file
+  -d, --dir      display the filename, the owner, the group, and
+                 the default ACL of the directory, if it exists
+  -h, --help     output usage information and exit
+  -n, --noname   display user and group IDs instead of names
+  -v, --version  output version information and exit
+
+When multiple files are specified on the command line, a blank
+line separates the ACLs for each file.
+For each argument that is a regular file, special file or
+directory, getfacl displays the owner, the group, and the ACL.
+For directories getfacl displays additionally the default ACL.
+
+With no options specified, getfacl displays the filename, the
+owner, the group, and both the ACL and the default ACL, if it
+exists.
+
+The format for ACL output is as follows:
+     # file: filename
+     # owner: name or uid
+     # group: name or uid
+     user::perm
+     user:name or uid:perm
+     group::perm
+     group:name or gid:perm
+     mask:perm
+     other:perm
+     default:user::perm
+     default:user:name or uid:perm
+     default:group::perm
+     default:group:name or gid:perm
+     default:mask:perm
+     default:other:perm
+
+
+
+$ setfacl --help
+Usage: setfacl [-r] (-f ACL_FILE | -s acl_entries) FILE...
+       setfacl [-r] ([-d acl_entries] [-m acl_entries]) FILE...
+Modify file and directory access control lists (ACLs)
+
+  -d, --delete     delete one or more specified ACL entries
+  -f, --file       set ACL entries for FILE to ACL entries read
+                   from a ACL_FILE
+  -m, --modify     modify one or more specified ACL entries
+  -r, --replace    replace mask entry with maximum permissions
+                   needed for the file group class
+  -s, --substitute substitute specified ACL entries for the
+                   ACL of FILE
+  -h, --help       output usage information and exit
+  -v, --version    output version information and exit
+
+At least one of (-d, -f, -m, -s) must be specified
+
+     Acl_entries are one or more comma-separated ACL entries
+     from the following list:
+
+         u[ser]::perm
+         u[ser]:uid:perm
+         g[roup]::perm
+         g[roup]:gid:perm
+         m[ask]:perm
+         o[ther]:perm
+
+     Default entries are like the above with the additional
+     default identifier. For example:
+
+         d[efault]:u[ser]:uid:perm
+
+     'perm' is either a 3-char permissions string in the form
+     "rwx" with the character - for no permission
+     or it is the octal representation of the permissions, a
+     value from 0 (equivalent to "---") to 7 ("rwx").
+     'uid' is a user name or a numerical uid.
+     'gid' is a group name or a numerical gid.
+
+
+For each file given as parameter, setfacl will either replace its
+complete ACL (-s, -f), or it will add, modify, or delete ACL
+entries.
+
+The following options are supported:
+
+-d   Delete one or more specified entries from the file's ACL.
+     The owner, group and others entries must not be deleted.
+     Acl_entries to be deleted should be specified without
+     permissions, as in the following list:
+
+         u[ser]:uid
+         g[roup]:gid
+         d[efault]:u[ser]:uid
+         d[efault]:g[roup]:gid
+         d[efault]:m[ask]:
+         d[efault]:o[ther]:
+
+-f   Take the Acl_entries from ACL_FILE one per line. Whitespace
+     characters are ignored, and the character "#" may be used
+     to start a comment.  The special filename "-" indicates
+     reading from stdin.
+     Required entries are
+     - One user entry for the owner of the file.
+     - One group entry for the group of the file.
+     - One other entry.
+     If additional user and group entries are given:
+     - A mask entry for the file group class of the file.
+     - No duplicate user or group entries with the same uid/gid.
+     If it is a directory:
+     - One default user entry for the owner of the file.
+     - One default group entry for the group of the file.
+     - One default mask entry for the file group class.
+     - One default other entry.
+
+-m   Add or modify one or more specified ACL entries.
+     Acl_entries is a comma-separated list of entries from the
+     same list as above.
+
+-r   Causes the permissions specified in the mask entry to be
+     ignored and replaced by the maximum permissions needed for
+     the file group class.
+
+-s   Like -f, but substitute the file's ACL with Acl_entries
+     specified in a comma-separated list on the command line.
+
+While the -d and -m options may be used in the same command, the
+-f and -s options may be used only exclusively.
+
+Directories may contain default ACL entries.  Files created
+in a directory that contains default ACL entries will have
+permissions according to the combination of the current umask,
+the explicit permissions requested and the default ACL entries
+Note: Under Cygwin, the default ACL entries are not taken into
+account currently.

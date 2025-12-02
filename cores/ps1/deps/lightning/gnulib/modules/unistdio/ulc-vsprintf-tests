@@ -1,0 +1,15 @@
+Files:
+tests/unistdio/test-ulc-vsprintf1.c
+tests/unistdio/test-ulc-printf1.h
+tests/macros.h
+
+Depends-on:
+xalloc
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ulc-vsprintf1
+check_PROGRAMS += test-ulc-vsprintf1
+test_ulc_vsprintf1_SOURCES = unistdio/test-ulc-vsprintf1.c
+test_ulc_vsprintf1_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@ @LIBICONV@ $(LIB_MBRTOWC)

@@ -1,0 +1,11 @@
+Files:
+tests/test-memcoll.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-memcoll
+check_PROGRAMS += test-memcoll

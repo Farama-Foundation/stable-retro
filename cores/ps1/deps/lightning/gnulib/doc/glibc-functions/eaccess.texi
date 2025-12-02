@@ -1,0 +1,7 @@
+@node eaccess
+@subsection @code{eaccess}
+@findex eaccess
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/eaccess.3.html,,man eaccess}
+
+This function is an alias of @code{euidaccess}. See @ref{euidaccess}.

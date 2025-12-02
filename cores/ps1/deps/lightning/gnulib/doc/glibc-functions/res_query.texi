@@ -1,0 +1,18 @@
+@node res_query
+@subsection @code{res_query}
+@findex res_query
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/res_query.3.html,,man res_query}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Cygwin 1.5.x, mingw, MSVC 14.
+@end itemize

@@ -1,0 +1,11 @@
+Files:
+tests/test-bitrotate.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-bitrotate
+check_PROGRAMS += test-bitrotate

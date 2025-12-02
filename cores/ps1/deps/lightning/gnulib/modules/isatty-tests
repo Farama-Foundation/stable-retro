@@ -1,0 +1,14 @@
+Files:
+tests/test-isatty.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+unistd
+pipe-posix
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-isatty
+check_PROGRAMS += test-isatty

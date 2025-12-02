@@ -1,0 +1,16 @@
+Files:
+tests/test-log1p.c
+tests/test-log1p.h
+tests/signature.h
+tests/macros.h
+tests/randomd.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-log1p
+check_PROGRAMS += test-log1p
+test_log1p_SOURCES = test-log1p.c randomd.c
+test_log1p_LDADD = $(LDADD) @LOG1P_LIBM@

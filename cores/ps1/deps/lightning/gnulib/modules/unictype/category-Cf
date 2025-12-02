@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character is of general category Cf.
+
+Files:
+lib/unictype/categ_Cf.c
+lib/unictype/categ_Cf.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-Cf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_CF
+lib_SOURCES += unictype/categ_Cf.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

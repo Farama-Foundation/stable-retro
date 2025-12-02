@@ -1,0 +1,27 @@
+Description:
+Duplicate a bounded initial segment of a string, with out-of-memory checking.
+
+Files:
+lib/xstrndup.h
+lib/xstrndup.c
+m4/xstrndup.m4
+
+Depends-on:
+strndup
+xalloc
+
+configure.ac:
+gl_XSTRNDUP
+
+Makefile.am:
+lib_SOURCES += xstrndup.h xstrndup.c
+
+Include:
+"xstrndup.h"
+
+License:
+GPL
+
+Maintainer:
+Simon Josefsson
+

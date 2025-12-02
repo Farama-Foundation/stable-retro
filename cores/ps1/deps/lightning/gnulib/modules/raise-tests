@@ -1,0 +1,13 @@
+Files:
+tests/test-raise.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+unistd
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-raise
+check_PROGRAMS += test-raise

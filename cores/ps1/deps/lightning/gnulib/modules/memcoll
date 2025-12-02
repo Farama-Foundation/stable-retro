@@ -1,0 +1,25 @@
+Description:
+Locale dependent memory area comparison.
+
+Files:
+lib/memcoll.h
+lib/memcoll.c
+m4/memcoll.m4
+
+Depends-on:
+memcmp
+
+configure.ac:
+gl_MEMCOLL
+
+Makefile.am:
+lib_SOURCES += memcoll.c
+
+Include:
+"memcoll.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

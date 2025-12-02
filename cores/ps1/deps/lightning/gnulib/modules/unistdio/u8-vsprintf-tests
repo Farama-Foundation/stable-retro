@@ -1,0 +1,15 @@
+Files:
+tests/unistdio/test-u8-vsprintf1.c
+tests/unistdio/test-u8-printf1.h
+tests/macros.h
+
+Depends-on:
+xalloc
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-vsprintf1
+check_PROGRAMS += test-u8-vsprintf1
+test_u8_vsprintf1_SOURCES = unistdio/test-u8-vsprintf1.c
+test_u8_vsprintf1_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@ @LIBICONV@

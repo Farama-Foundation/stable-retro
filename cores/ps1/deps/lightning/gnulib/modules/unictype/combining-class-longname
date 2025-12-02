@@ -1,0 +1,25 @@
+Description:
+Name of Unicode character canonical combining class.
+
+Files:
+lib/unictype/combiningclass_longname.c
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/combining-class-longname])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_COMBINING_CLASS_LONGNAME
+lib_SOURCES += unictype/combiningclass_longname.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

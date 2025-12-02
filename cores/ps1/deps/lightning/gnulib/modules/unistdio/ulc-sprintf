@@ -1,0 +1,27 @@
+Description:
+Formatted output to a string.
+
+Files:
+lib/unistdio/ulc-sprintf.c
+lib/unistdio/u-sprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/ulc-vsprintf
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unistdio/ulc-sprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_ULC_SPRINTF
+lib_SOURCES += unistdio/ulc-sprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

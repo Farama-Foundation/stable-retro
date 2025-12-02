@@ -1,0 +1,18 @@
+@node res_querydomain
+@subsection @code{res_querydomain}
+@findex res_querydomain
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/res_querydomain.3.html,,man res_querydomain}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Cygwin 1.5.x, mingw, MSVC 14, Android 9.0.
+@end itemize

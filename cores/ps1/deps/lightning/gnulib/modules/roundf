@@ -1,0 +1,37 @@
+Description:
+roundf() function: round toward nearest, breaking ties away from zero.
+
+Files:
+lib/round.c
+lib/roundf.c
+m4/check-math-lib.m4
+m4/roundf.m4
+m4/floorf.m4
+m4/ceilf.m4
+
+Depends-on:
+math
+extensions
+float           [test $HAVE_ROUNDF = 0 || test $REPLACE_ROUNDF = 1]
+
+configure.ac:
+gl_FUNC_ROUNDF
+if test $HAVE_ROUNDF = 0 || test $REPLACE_ROUNDF = 1; then
+  AC_LIBOBJ([roundf])
+fi
+gl_MATH_MODULE_INDICATOR([roundf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ROUNDF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+Ben Pfaff
+

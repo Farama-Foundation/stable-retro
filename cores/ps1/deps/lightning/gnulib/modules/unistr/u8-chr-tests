@@ -1,0 +1,25 @@
+Files:
+tests/unistr/test-u8-chr.c
+tests/unistr/test-chr.h
+tests/zerosize-ptr.h
+tests/macros.h
+m4/mmap-anon.m4
+
+Depends-on:
+c99
+extensions
+getpagesize
+unistr/u8-set
+unistr/u32-set
+unistr/u32-to-u8
+
+configure.ac:
+gl_FUNC_MMAP_ANON
+AC_CHECK_HEADERS_ONCE([sys/mman.h])
+AC_CHECK_FUNCS_ONCE([mprotect])
+
+Makefile.am:
+TESTS += test-u8-chr
+check_PROGRAMS += test-u8-chr
+test_u8_chr_SOURCES = unistr/test-u8-chr.c
+test_u8_chr_LDADD = $(LDADD) $(LIBUNISTRING)

@@ -1,0 +1,33 @@
+@node ctime
+@section @code{ctime}
+@findex ctime
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/ctime.html}
+
+Gnulib module: ctime
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On native Windows platforms (mingw, MSVC), this function works incorrectly
+when the environment variable @code{TZ} has been set by Cygwin.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function may overflow its internal buffer if an invalid year is passed.
+@item
+The @code{ctime} function need not be reentrant, and consequently is
+not required to be thread safe.  Implementations of @code{ctime}
+typically write the timestamp into static buffer.  If two threads
+call @code{ctime} at roughly the same time, you might end up with the
+wrong date in one of the threads, or some undefined string.  There is
+a re-entrant interface @code{ctime_r}.
+@item
+Native Windows platforms (mingw, MSVC) support only a subset of time
+zones supported by GNU or specified by POSIX@.  @xref{tzset}.
+@end itemize
+
+A more flexible function is @code{strftime}.  However, note that it is
+locale dependent.

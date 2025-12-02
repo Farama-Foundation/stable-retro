@@ -1,0 +1,27 @@
+Description:
+Checked size_t computations.
+
+Files:
+lib/xsize.h
+lib/xsize.c
+m4/xsize.m4
+
+Depends-on:
+attribute
+extern-inline
+size_max
+
+configure.ac:
+gl_XSIZE
+
+Makefile.am:
+lib_SOURCES += xsize.h xsize.c
+
+Include:
+"xsize.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,29 @@
+Description:
+openat function that avoids clobbering std{in,out,err}.
+
+Files:
+lib/fcntl--.h
+lib/fcntl-safer.h
+lib/openat-safer.c
+m4/fcntl-safer.m4
+
+Depends-on:
+fcntl-safer
+openat
+unistd-safer
+
+configure.ac:
+gl_OPENAT_SAFER
+gl_MODULE_INDICATOR([openat-safer])
+
+Makefile.am:
+lib_SOURCES += openat-safer.c
+
+Include:
+"fcntl-safer.h"
+
+License:
+GPL
+
+Maintainer:
+Eric Blake

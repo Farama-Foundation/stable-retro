@@ -1,0 +1,54 @@
+@node fopen
+@section @code{fopen}
+@findex fopen
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fopen.html}
+
+Gnulib module: fopen or fopen-gnu
+
+Portability problems fixed by either Gnulib module @code{fopen} or @code{fopen-gnu}:
+@itemize
+@item
+This function does not fail when the file name argument ends in a slash
+and (without the slash) names a nonexistent file or a file that is not a
+directory, on some platforms:
+HP-UX 11.00, AIX 7.1, Solaris 9.
+@item
+On platforms where @code{off_t} is a 32-bit type, @code{fopen} may not work
+correctly with files larger than 2 GB@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@item
+On Windows platforms (excluding Cygwin), this function does usually not
+recognize the @file{/dev/null} filename.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{fopen-gnu}:
+@itemize
+@item
+This function does not support the mode character
+@samp{x} (corresponding to @code{O_EXCL}), introduced in ISO C11,
+on some platforms:
+FreeBSD 8.2, NetBSD 6.1, OpenBSD 5.6, Minix 3.2, AIX 6.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3, Cygwin 1.7.16 (2012), mingw, MSVC 14.
+@item
+This function does not support the mode character
+@samp{e} (corresponding to @code{O_CLOEXEC}),
+introduced into a future POSIX revision through
+@url{https://www.austingroupbugs.net/view.php?id=411}, on some platforms:
+glibc 2.6, macOS 11.1, FreeBSD 9.0, NetBSD 5.1, OpenBSD 5.6, Minix 3.2, AIX 7.2, HP-UX 11.31, IRIX 6.5, Solaris 11.3, Cygwin 1.7.16 (2012), mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), this function does not set @code{errno}
+upon failure.
+@item
+On Windows, this function returns a file stream in ``text'' mode by default;
+this means that it translates @code{'\n'} to CR/LF by default.  Use the
+@code{"b"} flag if you need reliable binary I/O.
+@item
+On Windows platforms (excluding Cygwin), this function fails to open
+directories for reading.  Such streams have implementation-defined
+semantics on other platforms.  To avoid directory streams with a
+consistent error message, use @code{fstat} after @code{open} and
+@code{fdopen}, rather than @code{fopen} and @code{fileno}.
+@end itemize

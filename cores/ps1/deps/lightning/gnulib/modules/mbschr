@@ -1,0 +1,28 @@
+Description:
+mbschr() function: search a string for a character.
+
+Files:
+lib/mbschr.c
+
+Depends-on:
+mbuiter
+string
+
+configure.ac:
+gl_STRING_MODULE_INDICATOR([mbschr])
+
+Makefile.am:
+lib_SOURCES += mbschr.c
+
+Include:
+<string.h>
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+$(LIB_MBRTOWC)
+
+License:
+LGPL
+
+Maintainer:
+all

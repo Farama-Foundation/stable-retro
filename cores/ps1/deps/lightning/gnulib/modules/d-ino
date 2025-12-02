@@ -1,0 +1,20 @@
+Description:
+Check whether struct dirent has a member named d_ino.
+
+Files:
+m4/d-ino.m4
+
+Depends-on:
+
+configure.ac:
+gl_CHECK_TYPE_STRUCT_DIRENT_D_INO
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

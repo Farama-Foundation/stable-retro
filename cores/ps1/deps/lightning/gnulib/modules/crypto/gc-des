@@ -1,0 +1,24 @@
+Description:
+Generic crypto wrappers for DES block cipher.
+
+Files:
+m4/gc-des.m4
+
+Depends-on:
+crypto/gc
+crypto/des [test "$ac_cv_libgcrypt" != yes]
+
+configure.ac:
+gl_GC_DES
+gl_MODULE_INDICATOR([gc-des])
+
+Makefile.am:
+
+Include:
+"gc.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

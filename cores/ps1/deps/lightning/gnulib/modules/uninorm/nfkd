@@ -1,0 +1,27 @@
+Description:
+Compatibility decomposition of Unicode strings.
+
+Files:
+lib/uninorm/nfkd.c
+lib/uninorm/normalize-internal.h
+
+Depends-on:
+uninorm/base
+uninorm/compat-decomposition
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uninorm/nfkd])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINORM_NFKD
+lib_SOURCES += uninorm/nfkd.c
+endif
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,26 @@
+Description:
+strcasestr() function: efficient case-insensitive search for unibyte substring.
+
+Files:
+lib/strcasestr.c
+
+Depends-on:
+strcasestr-simple
+
+configure.ac:
+gl_FUNC_STRCASESTR
+if test $HAVE_STRCASESTR = 0 || test $REPLACE_STRCASESTR = 1; then
+  AC_LIBOBJ([strcasestr])
+  gl_PREREQ_STRCASESTR
+fi
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

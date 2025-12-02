@@ -1,0 +1,20 @@
+@node raise
+@section @code{raise}
+@findex raise
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/raise.html}
+
+Gnulib module: raise
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some old platforms.
+@item
+This function crashes when invoked with invalid arguments on some platforms:
+MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

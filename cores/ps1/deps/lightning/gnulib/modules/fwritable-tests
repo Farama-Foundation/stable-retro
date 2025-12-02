@@ -1,0 +1,13 @@
+Files:
+tests/test-fwritable.c
+tests/macros.h
+
+Depends-on:
+fflush
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fwritable
+check_PROGRAMS += test-fwritable
+MOSTLYCLEANFILES += t-fwritable.tmp

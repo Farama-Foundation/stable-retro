@@ -1,0 +1,27 @@
+Description:
+Handle page faults in user mode.
+
+Files:
+m4/libsigsegv.m4
+
+Depends-on:
+havelib
+
+configure.ac:
+gl_LIBSIGSEGV
+
+Makefile.am:
+
+Include:
+#if HAVE_LIBSIGSEGV
+# include <sigsegv.h>
+#endif
+
+Link:
+$(LTLIBSIGSEGV) when linking with libtool, $(LIBSIGSEGV) otherwise
+
+License:
+GPL
+
+Maintainer:
+all

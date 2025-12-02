@@ -1,0 +1,62 @@
+@node utimensat
+@section @code{utimensat}
+@findex utimensat
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/utimensat.html}
+
+Gnulib module: utimensat
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.5, Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14, Android 3.0.
+However, the replacement function may end up truncating timestamps to
+worse resolution than supported by the file system.  Furthermore, the
+replacement function is not safe to be used in libraries and is not
+multithread-safe.
+@item
+This function returns a bogus value instead of failing with
+@code{ENOSYS} on some platforms:
+Linux kernel 2.6.21.
+@item
+This function fails with @code{ENOSYS} if passed the flag
+@code{AT_SYMLINK_NOFOLLOW} on a regular file:
+Linux kernel 2.6.22.
+@item
+When using @code{UTIME_OMIT} or @code{UTIME_NOW}, some systems require
+the @code{tv_sec} argument to be 0, and don't necessarily handle all
+file permissions in the manner required by POSIX:
+Linux kernel 2.6.25.
+@item
+When using @code{UTIME_OMIT} for the modification time, but specifying
+an access time, some systems fail to update the change time:
+Linux kernel 2.6.32, macOS 11.1, NetBSD 9.0, Solaris 11.1.
+@item
+Out-of-range values of @code{tv_nsec} do not lead to a failure on some
+platforms:
+Linux kernel 2.6.22.19 on hppa.
+@item
+On some platforms, this function mis-handles a trailing slash:
+AIX 7.2.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On some platforms, timestamps of symbolic links cannot be modified, so
+the replacement fails with @code{ENOSYS} if passed the flag
+@code{AT_SYMLINK_NOFOLLOW} on a symlink.
+@item
+The mere act of using @code{lstat} modifies the access time of
+symlinks on some platforms, so @code{utimensat} with
+@code{AT_SYMLINK_NOFOLLOW} can only effectively change modification time:
+Cygwin.
+@item
+The mere act of using @code{stat} modifies the access time of
+directories on some platforms, so @code{utimensat} can only
+effectively change directory modification time:
+Cygwin 1.5.x.
+@end itemize
+
+The gnulib module @code{fdutimensat} provides a similar interface.

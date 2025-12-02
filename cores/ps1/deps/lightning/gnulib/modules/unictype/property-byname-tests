@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_byname.c
+tests/macros.h
+
+Depends-on:
+unictype/property-test
+unictype/property-composite
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_byname
+check_PROGRAMS += test-pr_byname
+test_pr_byname_SOURCES = unictype/test-pr_byname.c
+test_pr_byname_LDADD = $(LDADD) $(LIBUNISTRING)

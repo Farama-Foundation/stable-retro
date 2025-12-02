@@ -1,0 +1,12 @@
+Files:
+tests/test-count-one-bits.c
+tests/macros.h
+
+Depends-on:
+limits-h
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-count-one-bits
+check_PROGRAMS += test-count-one-bits

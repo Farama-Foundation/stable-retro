@@ -1,0 +1,8 @@
+*.orig
+*.rej
+*~
+.#*
+\#*#
+allsnippets.tmp
+amsnippet.tmp
+testdir*

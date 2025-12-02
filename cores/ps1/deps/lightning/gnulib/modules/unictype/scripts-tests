@@ -1,0 +1,13 @@
+Files:
+tests/unictype/test-scripts.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-scripts
+check_PROGRAMS += test-scripts
+test_scripts_SOURCES = unictype/test-scripts.c
+test_scripts_LDADD = $(LDADD) $(LIBUNISTRING)

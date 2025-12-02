@@ -1,0 +1,43 @@
+Description:
+Set file access and modification times.
+
+Files:
+lib/utimens.c
+lib/utimens.h
+m4/utimens.m4
+m4/utimes.m4
+
+Depends-on:
+errno
+extern-inline
+fcntl-h
+fstat
+lstat
+gettime
+msvc-nothrow
+stat
+stat-time
+stdbool
+sys_stat
+sys_time
+time
+utime
+utime-h
+
+configure.ac:
+gl_UTIMENS
+
+Makefile.am:
+lib_SOURCES += utimens.c
+
+Include:
+"utimens.h"
+
+Link:
+$(LIB_CLOCK_GETTIME)
+
+License:
+LGPL
+
+Maintainer:
+Paul Eggert, Jim Meyering, Eric Blake

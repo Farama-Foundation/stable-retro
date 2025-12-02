@@ -1,0 +1,22 @@
+Files:
+tests/test-memmem.c
+tests/signature.h
+tests/zerosize-ptr.h
+tests/macros.h
+m4/mmap-anon.m4
+
+Depends-on:
+c99
+extensions
+getpagesize
+
+configure.ac:
+gl_FUNC_MMAP_ANON
+AC_CHECK_HEADERS_ONCE([sys/mman.h])
+AC_CHECK_FUNCS_ONCE([mprotect])
+AC_CHECK_DECLS_ONCE([alarm])
+
+Makefile.am:
+TESTS += test-memmem
+check_PROGRAMS += test-memmem
+

@@ -1,0 +1,28 @@
+Description:
+mbsnlen() function: Determine the number of multibyte characters in a string.
+
+Files:
+lib/mbsnlen.c
+
+Depends-on:
+mbiter
+string
+
+configure.ac:
+gl_STRING_MODULE_INDICATOR([mbsnlen])
+
+Makefile.am:
+lib_SOURCES += mbsnlen.c
+
+Include:
+<string.h>
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+$(LIB_MBRTOWC)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

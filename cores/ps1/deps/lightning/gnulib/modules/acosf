@@ -1,0 +1,32 @@
+Description:
+acosf() function: inverse cosine function.
+
+Files:
+lib/acosf.c
+m4/acosf.m4
+
+Depends-on:
+math
+extensions
+acos            [test $HAVE_ACOSF = 0]
+
+configure.ac:
+gl_FUNC_ACOSF
+if test $HAVE_ACOSF = 0; then
+  AC_LIBOBJ([acosf])
+fi
+gl_MATH_MODULE_INDICATOR([acosf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ACOSF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,19 @@
+Description:
+Macro that avoids crashes in configure tests.
+
+Files:
+m4/nocrash.m4
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+Paolo Bonzini

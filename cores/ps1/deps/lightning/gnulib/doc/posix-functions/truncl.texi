@@ -1,0 +1,25 @@
+@node truncl
+@section @code{truncl}
+@findex truncl
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/truncl.html}
+
+Gnulib module: truncl or truncl-ieee
+
+Portability problems fixed by either Gnulib module @code{truncl} or @code{truncl-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 5.2.1, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 9, Cygwin 1.7.x, MSVC 9.
+@item
+This function is not declared (without @code{-D_GNU_SOURCE}) on some platforms:
+glibc 2.8.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{truncl-ieee}:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

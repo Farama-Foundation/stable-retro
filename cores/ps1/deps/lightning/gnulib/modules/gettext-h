@@ -1,0 +1,26 @@
+Description:
+Translate messages to user's native language if GNU gettext is also used.
+
+Files:
+lib/gettext.h
+
+Depends-on:
+
+configure.ac:
+AC_SUBST([LIBINTL])
+AC_SUBST([LTLIBINTL])
+
+Makefile.am:
+lib_SOURCES += gettext.h
+
+Include:
+"gettext.h"
+
+Link:
+$(LTLIBINTL) when linking with libtool, $(LIBINTL) otherwise
+
+License:
+LGPLv2+
+
+Maintainer:
+all

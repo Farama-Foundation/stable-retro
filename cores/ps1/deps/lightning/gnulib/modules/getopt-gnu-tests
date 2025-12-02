@@ -1,0 +1,21 @@
+Files:
+tests/macros.h
+tests/signature.h
+tests/test-getopt-gnu.c
+tests/test-getopt-main.h
+tests/test-getopt.h
+tests/test-getopt_long.h
+
+Depends-on:
+dup2
+setenv
+stdbool
+unistd
+unsetenv
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getopt-gnu
+check_PROGRAMS += test-getopt-gnu
+test_getopt_gnu_LDADD = $(LDADD) $(LIBINTL)

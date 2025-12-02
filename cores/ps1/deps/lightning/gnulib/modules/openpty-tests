@@ -1,0 +1,12 @@
+Files:
+tests/test-openpty.c
+tests/signature.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-openpty
+check_PROGRAMS += test-openpty
+test_openpty_LDADD = $(LDADD) @PTY_LIB@

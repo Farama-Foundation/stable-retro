@@ -1,0 +1,17 @@
+@node sys/timeb.h
+@section @file{sys/timeb.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/009695399/basedefs/sys/timeb.h.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+OpenBSD 6.7, Android 9.0.
+@end itemize

@@ -1,0 +1,18 @@
+Files:
+tests/test-expl.c
+tests/test-exp.h
+tests/signature.h
+tests/macros.h
+tests/randoml.c
+
+Depends-on:
+fpucw
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-expl
+check_PROGRAMS += test-expl
+test_expl_SOURCES = test-expl.c randoml.c
+test_expl_LDADD = $(LDADD) @EXPL_LIBM@

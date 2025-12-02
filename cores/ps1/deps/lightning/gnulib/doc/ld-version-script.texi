@@ -1,0 +1,77 @@
+@node LD Version Scripts
+@section LD Version Scripts
+
+The @code{lib-symbol-versions} module can be used to add shared
+library versioning support.  Currently, only GNU LD and the Solaris
+linker supports this.
+
+Version scripts provides information that can be used by GNU/Linux
+distribution packaging tools.  For example, Debian has a tool
+@code{dpkg-shlibdeps} that can determine the minimal required version
+of each dependency (by looking at the symbol list) and stuff the
+information into the Debian specific packaging files.
+
+For more information and other uses of version scripts, see Ulrich
+Drepper's paper @url{https://www.akkadia.org/drepper/dsohowto.pdf}
+
+You use the module by importing it to your library, and then add the
+following lines to the @code{Makefile.am} that builds the library:
+
+@smallexample
+if HAVE_LD_VERSION_SCRIPT
+libfoo_la_LDFLAGS += -Wl,--version-script=$(srcdir)/libfoo.map
+endif
+@end smallexample
+
+The version script file format is documented in the GNU LD manual, but
+a small example would be:
+
+@smallexample
+LIBFOO_1.0 @{
+  global:
+    libfoo_init; libfoo_doit; libfoo_done;
+
+  local:
+    *;
+@};
+@end smallexample
+
+If you target platforms that do not support linker scripts (i.e., all
+platforms that doesn't use GNU LD) you may want to consider a more
+portable but less powerful alternative: libtool
+@code{-export-symbols}.  It will hide internal symbols from your
+library, but will not add ELF versioning symbols.  Your usage would
+then be something like:
+
+@smallexample
+if HAVE_LD_VERSION_SCRIPT
+libfoo_la_LDFLAGS += -Wl,--version-script=$(srcdir)/libfoo.map
+else
+libfoo_la_LDFLAGS += -export-symbols $(srcdir)/libfoo.sym
+endif
+@end smallexample
+
+See the Libtool manual for the file syntax, but a small example would
+be:
+
+@smallexample
+libfoo_init
+libfoo_doit
+libfoo_done
+@end smallexample
+
+To avoid the need for a @code{*.sym} file if your symbols are easily
+expressed using a regular expression, you may use
+@code{-export-symbols-regex}:
+
+@smallexample
+if HAVE_LD_VERSION_SCRIPT
+libfoo_la_LDFLAGS += -Wl,--version-script=$(srcdir)/libfoo.map
+else
+libfoo_la_LDFLAGS += -export-symbols-regex '^libfoo_.*'
+endif
+@end smallexample
+
+For more discussions about symbol visibility, rather than shared
+library versioning, see the @code{visibility} module
+(@pxref{Exported Symbols of Shared Libraries}).

@@ -1,0 +1,28 @@
+Description:
+access() function: test the access rights of a file.
+
+Files:
+lib/access.c
+m4/access.m4
+
+Depends-on:
+unistd
+fcntl
+
+configure.ac:
+gl_FUNC_ACCESS
+if test $REPLACE_ACCESS = 1; then
+  AC_LIBOBJ([access])
+fi
+gl_UNISTD_MODULE_INDICATOR([access])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

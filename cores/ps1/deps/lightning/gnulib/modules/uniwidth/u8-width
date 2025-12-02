@@ -1,0 +1,27 @@
+Description:
+Determine display width of UTF-8 string.
+
+Files:
+lib/uniwidth/u8-width.c
+
+Depends-on:
+uniwidth/base
+uniwidth/width
+unistr/u8-mbtouc-unsafe
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uniwidth/u8-width])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNIWIDTH_U8_WIDTH
+lib_SOURCES += uniwidth/u8-width.c
+endif
+
+Include:
+"uniwidth.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

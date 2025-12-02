@@ -1,0 +1,38 @@
+@node fchownat
+@section @code{fchownat}
+@findex fchownat
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fchownat.html}
+
+Gnulib module: fchownat
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.3.6, Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8,
+AIX 5.1, HP-UX 11, IRIX 6.5, Cygwin 1.5.x, mingw, MSVC 14.
+But the replacement function is not safe to be used in libraries and
+is not multithread-safe.  Also, the replacement may fail to change
+symlinks if @code{lchown} is unsupported, or fail altogether if
+@code{chown} is unsupported.
+@item
+This function is declared in @code{<sys/stat.h>}, not in @code{<unistd.h>},
+on some platforms:
+Android 4.3.
+@item
+Some platforms fail to detect trailing slash on non-directories, as in
+@code{fchown(dir,"link-to-file/",uid,gid,flag)}:
+Solaris 9.
+@item
+Some platforms mistakenly dereference symlinks when using
+@code{AT_SYMLINK_NOFOLLOW}:
+Linux kernel 2.6.17.
+@item
+This function does not fail for an empty filename on some platforms:
+Linux with glibc < 2.11.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,29 @@
+@node malloc.h
+@section @file{malloc.h}
+
+Declares the function @code{memalign} and functions for customizing the
+@code{malloc} behavior.
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Unconstrained Allocation,,,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Unconstrained-Allocation.html}.
+@end ifnotinfo
+@end itemize
+
+Gnulib module: malloc-h
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+macOS 11.1, OpenBSD 6.7.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

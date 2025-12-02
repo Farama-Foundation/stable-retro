@@ -1,0 +1,18 @@
+Files:
+tests/test-readlink.h
+tests/test-readlinkat.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+openat
+symlinkat
+unlinkat
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-readlinkat
+check_PROGRAMS += test-readlinkat
+test_readlinkat_LDADD = $(LDADD) @LIBINTL@

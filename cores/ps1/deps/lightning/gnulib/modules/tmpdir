@@ -1,0 +1,29 @@
+Description:
+Determine a temporary directory.
+
+Files:
+lib/tmpdir.h
+lib/tmpdir.c
+m4/tmpdir.m4
+
+Depends-on:
+secure_getenv
+stat
+stdbool
+sys_stat
+pathmax
+
+configure.ac:
+gt_TMPDIR
+
+Makefile.am:
+lib_SOURCES += tmpdir.h tmpdir.c
+
+Include:
+"tmpdir.h"
+
+License:
+LGPL
+
+Maintainer:
+all

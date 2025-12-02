@@ -1,0 +1,19 @@
+Files:
+tests/test-fmodf-ieee.c
+tests/test-fmod-ieee.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnanf-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fmodf-ieee
+check_PROGRAMS += test-fmodf-ieee
+test_fmodf_ieee_LDADD = $(LDADD) @FMODF_LIBM@

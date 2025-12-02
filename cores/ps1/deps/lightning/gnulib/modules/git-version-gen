@@ -1,0 +1,19 @@
+Description:
+Compute a version string from a git repository.
+
+Files:
+build-aux/git-version-gen
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+coreutils

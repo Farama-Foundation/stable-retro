@@ -1,0 +1,22 @@
+Description:
+Macros to print information about the build, useful for the autobuild parser.
+
+Files:
+m4/autobuild.m4
+
+Depends-on:
+
+configure.ac-early:
+AB_INIT
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+Simon Josefsson

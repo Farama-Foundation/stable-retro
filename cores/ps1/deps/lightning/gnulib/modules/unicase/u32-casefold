@@ -1,0 +1,29 @@
+Description:
+Casefolding mapping for UTF-32 strings (locale dependent).
+
+Files:
+lib/unicase/u32-casefold.c
+lib/unicase/u-casefold.h
+
+Depends-on:
+unicase/base
+unicase/u32-ct-casefold
+unicase/empty-prefix-context
+unicase/empty-suffix-context
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u32-casefold])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U32_CASEFOLD
+lib_SOURCES += unicase/u32-casefold.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,29 @@
+Description:
+memrchr() function: scan memory for a byte, from the right end.
+
+Files:
+lib/memrchr.c
+m4/memrchr.m4
+
+Depends-on:
+extensions
+string
+
+configure.ac:
+gl_FUNC_MEMRCHR
+if test $ac_cv_func_memrchr = no; then
+  AC_LIBOBJ([memrchr])
+  gl_PREREQ_MEMRCHR
+fi
+gl_STRING_MODULE_INDICATOR([memrchr])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPL
+
+Maintainer:
+Jim Meyering, glibc

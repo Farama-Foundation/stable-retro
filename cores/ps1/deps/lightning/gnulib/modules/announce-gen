@@ -1,0 +1,19 @@
+Description:
+Generate a release announcement message.  See also readme-release.
+
+Files:
+build-aux/announce-gen
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+coreutils

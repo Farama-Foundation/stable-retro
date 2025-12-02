@@ -1,0 +1,33 @@
+Description:
+POSIX compatible signal blocking for threads.
+
+Files:
+lib/pthread_sigmask.c
+m4/pthread_sigmask.m4
+
+Depends-on:
+signal-h
+threadlib
+sigprocmask     [test $HAVE_PTHREAD_SIGMASK = 0 || test $REPLACE_PTHREAD_SIGMASK = 1]
+
+configure.ac:
+gl_FUNC_PTHREAD_SIGMASK
+if test $HAVE_PTHREAD_SIGMASK = 0 || test $REPLACE_PTHREAD_SIGMASK = 1; then
+  AC_LIBOBJ([pthread_sigmask])
+  gl_PREREQ_PTHREAD_SIGMASK
+fi
+gl_SIGNAL_MODULE_INDICATOR([pthread_sigmask])
+
+Makefile.am:
+
+Include:
+<signal.h>
+
+Link:
+$(LIB_PTHREAD_SIGMASK)
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert, Jim Meyering

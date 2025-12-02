@@ -1,0 +1,28 @@
+Description:
+Test whether a Unicode character is "zero width".
+
+Files:
+lib/unictype/pr_zero_width.c
+lib/unictype/pr_zero_width.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-zero-width])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_ZERO_WIDTH
+lib_SOURCES += unictype/pr_zero_width.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

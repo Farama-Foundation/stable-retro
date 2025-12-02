@@ -1,0 +1,27 @@
+Description:
+Finds the index of the least-significant set bit.
+
+Files:
+lib/ffs.c
+m4/ffs.m4
+
+Depends-on:
+strings
+
+configure.ac:
+gl_FUNC_FFS
+if test $HAVE_FFS = 0; then
+  AC_LIBOBJ([ffs])
+fi
+gl_STRINGS_MODULE_INDICATOR([ffs])
+
+Makefile.am:
+
+Include:
+<strings.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

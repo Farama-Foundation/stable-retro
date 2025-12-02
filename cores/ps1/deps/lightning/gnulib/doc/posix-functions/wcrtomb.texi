@@ -1,0 +1,33 @@
+@node wcrtomb
+@section @code{wcrtomb}
+@findex wcrtomb
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/wcrtomb.html}
+
+Gnulib module: wcrtomb
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, HP-UX 11.00, IRIX 6.5, mingw.
+@item
+This function produces wrong characters in the C locale on some platforms:
+Android 4.3.
+@item
+This function returns 0 when the first argument is NULL in some locales on some platforms:
+Solaris 11.3.
+@item
+This function does not ignore the second argument when the first argument is NULL on some platforms:
+MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and
+therefore cannot accommodate all Unicode characters.
+However, the ISO C11 function @code{c32rtomb}, provided by Gnulib module
+@code{c32rtomb}, operates on 32-bit wide characters and therefore does not have
+this limitation.
+@end itemize

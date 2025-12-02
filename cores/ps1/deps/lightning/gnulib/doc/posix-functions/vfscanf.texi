@@ -1,0 +1,31 @@
+@node vfscanf
+@section @code{vfscanf}
+@findex vfscanf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/vfscanf.html}
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-vfscanf.html}
+
+Gnulib module: vfscanf, nonblocking
+
+Portability problems fixed by Gnulib module @code{vfscanf}, together with module @code{nonblocking}:
+@itemize
+@item
+When reading from a non-blocking pipe whose buffer is empty, this function
+fails with @code{errno} being set to @code{EINVAL} instead of @code{EAGAIN} on
+some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, IRIX 6.5.
+@item
+On Windows platforms (excluding Cygwin), this function does not set @code{errno}
+upon failure.
+@item
+On Windows, this function doesn't support the @code{hh}, @code{ll}, @code{j},
+@code{t}, @code{z} size specifiers.
+@end itemize

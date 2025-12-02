@@ -1,0 +1,35 @@
+Description:
+Convert a string representation of time to a tm structure.
+
+Files:
+lib/strptime.c
+m4/strptime.m4
+m4/tm_gmtoff.m4
+
+Depends-on:
+time
+extensions
+sys_time        [test $HAVE_STRPTIME = 0]
+string          [test $HAVE_STRPTIME = 0]
+strcase         [test $HAVE_STRPTIME = 0]
+stdbool         [test $HAVE_STRPTIME = 0]
+time_r          [test $HAVE_STRPTIME = 0]
+
+configure.ac:
+gl_FUNC_STRPTIME
+if test $HAVE_STRPTIME = 0; then
+  AC_LIBOBJ([strptime])
+  gl_PREREQ_STRPTIME
+fi
+gl_TIME_MODULE_INDICATOR([strptime])
+
+Makefile.am:
+
+Include:
+<time.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+glibc

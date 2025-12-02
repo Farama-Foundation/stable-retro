@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Test config.rpath and AC_LIB_LINKFLAGS macro.
+# With dependencies: a static library depending on a shared library,
+# and a shared library depending on both.
+# Each library installed with a different prefix.
+
+rp=rp3abf
+build1_configure_flags=
+build2_configure_flags=--disable-shared
+build3_configure_flags=
+build4_package=rpathlz
+remove_la=no
+
+. $srcdir/rpath-3_b

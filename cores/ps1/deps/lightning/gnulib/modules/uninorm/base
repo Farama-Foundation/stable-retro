@@ -1,0 +1,32 @@
+Description:
+Base layer for normalization forms of Unicode strings.
+
+Files:
+lib/uninorm.in.h
+m4/libunistring-base.m4
+
+Depends-on:
+unitypes
+
+configure.ac:
+gl_LIBUNISTRING_LIBHEADER([0.9.4], [uninorm.h])
+
+Makefile.am:
+BUILT_SOURCES += $(LIBUNISTRING_UNINORM_H)
+
+uninorm.h: uninorm.in.h
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  cat $(srcdir)/uninorm.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+MOSTLYCLEANFILES += uninorm.h uninorm.h-t
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

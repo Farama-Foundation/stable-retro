@@ -1,0 +1,33 @@
+@node mbsnrtowcs
+@section @code{mbsnrtowcs}
+@findex mbsnrtowcs
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/mbsnrtowcs.html}
+
+Gnulib module: mbsnrtowcs
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 5.2.1, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, HP-UX 11, IRIX 6.5, Solaris 11.3, Cygwin 1.5.x, mingw, MSVC 14, Android 4.4.
+@item
+This function produces invalid wide characters on some platforms:
+Solaris 11.4.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and
+therefore cannot accommodate all Unicode characters.
+However, the Gnulib function @code{mbsnrtoc32s}, provided by Gnulib module
+@code{mbsnrtoc32s}, operates on 32-bit wide characters and therefore does not
+have this limitation.
+@item
+The specification is not clear about whether this function should update the
+conversion state when the first argument (the destination pointer) is NULL.
+The glibc, Mac OS X, FreeBSD implementations do update the state in this case.
+For portability, when passing a NULL destination argument, it is best to pass
+a pointer to a temporary copy of the conversion state.
+@end itemize

@@ -1,0 +1,12 @@
+Files:
+tests/test-count-trailing-zeros.c
+tests/macros.h
+
+Depends-on:
+limits-h
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-count-trailing-zeros
+check_PROGRAMS += test-count-trailing-zeros

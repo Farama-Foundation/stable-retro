@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-ctype_blank.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ctype_blank
+check_PROGRAMS += test-ctype_blank
+test_ctype_blank_SOURCES = unictype/test-ctype_blank.c
+test_ctype_blank_LDADD = $(LDADD) $(LIBUNISTRING)

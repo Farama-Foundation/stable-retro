@@ -1,0 +1,19 @@
+Files:
+tests/test-dirent-c++.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-dirent-c++
+check_PROGRAMS += test-dirent-c++
+test_dirent_c___SOURCES = test-dirent-c++.cc
+test_dirent_c___LDADD = $(LDADD) $(LIBINTL) $(LIB_NANOSLEEP)
+endif

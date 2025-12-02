@@ -1,0 +1,29 @@
+@node setdomainname
+@subsection @code{setdomainname}
+@findex setdomainname
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Host Identification,,Host Identification,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Host-Identification.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/setdomainname.2.html,,man setdomainname}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, Cygwin 2.9, mingw, MSVC 14, Android 7.1.
+@end itemize

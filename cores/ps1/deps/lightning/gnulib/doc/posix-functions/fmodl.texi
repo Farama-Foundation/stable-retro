@@ -1,0 +1,32 @@
+@node fmodl
+@section @code{fmodl}
+@findex fmodl
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fmodl.html}
+
+Gnulib module: fmodl or fmodl-ieee
+
+Portability problems fixed by either Gnulib module @code{fmodl} or @code{fmodl-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, HP-UX 11, IRIX 6.5, Solaris 9, Cygwin 1.7.x, Android 4.4.
+@item
+This function is only defined as a macro with arguments on some platforms:
+MSVC 14.
+@item
+This function is not declared and does not work on some platforms:
+AIX 5.1.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{fmodl-ieee}:
+@itemize
+@item
+This function has problems when the first argument is minus zero on some
+platforms:
+MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,50 @@
+@node dirent.h
+@section @file{dirent.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/dirent.h.html}
+
+Gnulib module: dirent
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+MSVC 14.
+
+@item
+The type @code{ino_t} is missing on some platforms:
+glibc 2.23 and others.
+
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Although many systems define a @code{struct dirent} member named
+@code{d_type} and directory entry type macros like @code{DT_DIR} and
+@code{DT_LNK}, some do not:
+Minix 3.1.8, AIX 7.2, HP-UX 11, IRIX 6.5, Solaris 11.4, mingw.
+
+@item
+On systems with @code{d_type}, not every filesystem supports
+@code{d_type}, and those lacking support will set it to @code{DT_UNKNOWN}.
+
+@item
+Some systems define a @code{struct dirent} member named @code{d_namlen}
+containing the string length of @code{d_name}, but others do not:
+glibc 2.23 on Linux, Minix 3.1.8, Solaris 11.4, Cygwin.
+All of these, except Cygwin, have a member @code{d_reclen} instead,
+that has a different semantics.
+
+@item
+Some systems define a @code{struct dirent} member named @code{d_off}
+containing a magic cookie suitable as an argument to @code{seekdir},
+but others do not:
+glibc 2.23 on Hurd, macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, AIX 5.1, HP-UX 11, Cygwin, mingw.
+
+@item
+Some systems define a @code{struct dirent} member named
+@code{d_reclen} containing the number of bytes in the directory entry
+record, but others do not.  This member has limited utility, as it is
+an implementation detail.
+@end itemize

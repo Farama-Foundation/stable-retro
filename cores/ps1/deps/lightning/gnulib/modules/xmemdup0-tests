@@ -1,0 +1,12 @@
+Files:
+tests/test-xmemdup0.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-xmemdup0
+check_PROGRAMS += test-xmemdup0
+test_xmemdup0_LDADD = $(LDADD) @LIBINTL@

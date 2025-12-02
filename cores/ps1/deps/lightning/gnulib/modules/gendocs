@@ -1,0 +1,22 @@
+Description:
+Generate manuals in several formats from Texinfo sources.
+Can be used for https://www.gnu.org/software/PKG/manual/ directories.
+
+Files:
+build-aux/gendocs.sh
+doc/gendocs_template
+doc/gendocs_template_min
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+all

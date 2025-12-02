@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_other_lowercase.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_other_lowercase
+check_PROGRAMS += test-pr_other_lowercase
+test_pr_other_lowercase_SOURCES = unictype/test-pr_other_lowercase.c
+test_pr_other_lowercase_LDADD = $(LDADD) $(LIBUNISTRING)

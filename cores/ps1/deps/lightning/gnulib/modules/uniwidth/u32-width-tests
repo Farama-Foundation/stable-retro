@@ -1,0 +1,13 @@
+Files:
+tests/uniwidth/test-u32-width.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-width
+check_PROGRAMS += test-u32-width
+test_u32_width_SOURCES = uniwidth/test-u32-width.c
+test_u32_width_LDADD = $(LDADD) $(LIBUNISTRING)

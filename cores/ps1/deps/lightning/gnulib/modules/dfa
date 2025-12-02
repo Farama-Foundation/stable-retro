@@ -1,0 +1,47 @@
+Description:
+DFA matcher that was initially used by GNU grep, gawk and diffutils
+
+Files:
+lib/dfa.c
+lib/dfa.h
+lib/localeinfo.c
+lib/localeinfo.h
+
+Depends-on:
+assert
+c99
+ctype
+flexmember
+idx
+locale
+regex
+stdbool
+stddef
+stdint
+stdio
+stdlib
+string
+verify
+wchar
+wctype-h
+xalloc
+xalloc-die
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+
+Makefile.am:
+lib_SOURCES += dfa.c localeinfo.c
+
+Include:
+"dfa.h"
+"localeinfo.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Paul Eggert

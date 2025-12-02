@@ -1,0 +1,25 @@
+Description:
+Test whether a Unicode character is whitespace in the Java language syntax.
+
+Files:
+lib/unictype/sy_java_whitespace.c
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/syntax-java-whitespace])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_SYNTAX_JAVA_WHITESPACE
+lib_SOURCES += unictype/sy_java_whitespace.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

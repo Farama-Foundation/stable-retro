@@ -1,0 +1,38 @@
+Description:
+Locale dependent classification of a response as matching "yes" or "no".
+
+Files:
+lib/rpmatch.c
+m4/rpmatch.m4
+
+Depends-on:
+stdlib
+extensions
+stdbool         [test $HAVE_RPMATCH = 0]
+gettext-h       [test $HAVE_RPMATCH = 0]
+regex           [test $HAVE_RPMATCH = 0]
+strdup          [test $HAVE_RPMATCH = 0]
+
+configure.ac:
+gl_FUNC_RPMATCH
+if test $HAVE_RPMATCH = 0; then
+  AC_LIBOBJ([rpmatch])
+  gl_PREREQ_RPMATCH
+fi
+gl_STDLIB_MODULE_INDICATOR([rpmatch])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+Link:
+$(LIB_MBRTOWC)
+$(LTLIBINTL) when linking with libtool, $(LIBINTL) otherwise
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering
+

@@ -1,0 +1,11 @@
+Files:
+tests/test-iconv-h.c
+
+Depends-on:
+iconv-h-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-iconv-h
+check_PROGRAMS += test-iconv-h

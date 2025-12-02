@@ -1,0 +1,29 @@
+Description:
+Ensure the existence of the ancestor directories of a file.
+
+Files:
+lib/mkancesdirs.c
+lib/mkancesdirs.h
+m4/mkancesdirs.m4
+
+Depends-on:
+fcntl-h
+filename
+savewd
+stat-macros
+sys_stat
+
+configure.ac:
+gl_MKANCESDIRS
+
+Makefile.am:
+lib_SOURCES += mkancesdirs.c
+
+Include:
+"mkancesdirs.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

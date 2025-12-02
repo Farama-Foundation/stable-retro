@@ -1,0 +1,30 @@
+Description:
+Implement the most essential subset of the pthreads library.
+
+Files:
+
+Depends-on:
+pthread-h
+pthread-thread
+pthread-once
+pthread-mutex
+pthread-rwlock
+pthread-cond
+pthread-tss
+pthread-spin
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<pthread.h>
+
+Link:
+$(LIBPMULTITHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert

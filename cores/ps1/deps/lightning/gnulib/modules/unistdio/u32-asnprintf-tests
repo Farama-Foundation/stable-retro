@@ -1,0 +1,15 @@
+Files:
+tests/unistdio/test-u32-asnprintf1.c
+tests/unistdio/test-u32-asnprintf1.h
+tests/unistdio/test-u32-printf1.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-asnprintf1
+check_PROGRAMS += test-u32-asnprintf1
+test_u32_asnprintf1_SOURCES = unistdio/test-u32-asnprintf1.c
+test_u32_asnprintf1_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@

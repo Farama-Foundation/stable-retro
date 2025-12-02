@@ -1,0 +1,32 @@
+Description:
+fopen() function: open a stream to a file.
+
+Files:
+lib/fopen.c
+m4/fopen.m4
+
+Depends-on:
+stdio
+largefile
+stdbool         [test $REPLACE_FOPEN = 1]
+unistd          [test $REPLACE_FOPEN = 1]
+fstat           [test $REPLACE_FOPEN = 1]
+
+configure.ac:
+gl_FUNC_FOPEN
+if test $REPLACE_FOPEN = 1; then
+  AC_LIBOBJ([fopen])
+  gl_PREREQ_FOPEN
+fi
+gl_STDIO_MODULE_INDICATOR([fopen])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

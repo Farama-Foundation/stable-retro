@@ -1,0 +1,15 @@
+Files:
+tests/test-vc-list-files-git.sh
+tests/test-vc-list-files-cvs.sh
+
+Depends-on:
+test-framework-sh
+
+configure.ac:
+abs_aux_dir=`cd "$ac_aux_dir"; pwd`
+AC_SUBST([abs_aux_dir])
+
+Makefile.am:
+TESTS += test-vc-list-files-git.sh
+TESTS += test-vc-list-files-cvs.sh
+TESTS_ENVIRONMENT += abs_aux_dir='$(abs_aux_dir)'

@@ -1,0 +1,29 @@
+Description:
+Word breaks in UTF-8 strings.
+
+Files:
+lib/uniwbrk/u8-wordbreaks.c
+lib/uniwbrk/u-wordbreaks.h
+
+Depends-on:
+uniwbrk/base
+uniwbrk/wordbreak-property
+uniwbrk/table
+unistr/u8-mbtouc-unsafe
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uniwbrk/u8-wordbreaks])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNIWBRK_U8_WORDBREAKS
+lib_SOURCES += uniwbrk/u8-wordbreaks.c
+endif
+
+Include:
+"uniwbrk.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

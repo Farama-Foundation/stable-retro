@@ -1,0 +1,19 @@
+Files:
+tests/test-truncl-ieee.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+fpucw
+isnanl-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-truncl-ieee
+check_PROGRAMS += test-truncl-ieee
+test_truncl_ieee_LDADD = $(LDADD) @TRUNCL_LIBM@

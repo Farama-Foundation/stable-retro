@@ -1,0 +1,24 @@
+@node cnd_destroy
+@section @code{cnd_destroy}
+@findex cnd_destroy
+
+Documentation:@*
+@ifinfo
+@ref{ISO C Condition Variables,,Condition Variables,libc}.
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/ISO-C-Condition-Variables.html}.
+@end ifnotinfo
+
+Gnulib module: cnd
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on many platforms:
+glibc 2.27, macOS 11.1, FreeBSD 9.3, NetBSD 8.0, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,26 @@
+@node putw
+@subsection @code{putw}
+@findex putw
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Simple Output,,Simple Output by Characters or Lines,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Simple-Output.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/putw.3.html,,man putw}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

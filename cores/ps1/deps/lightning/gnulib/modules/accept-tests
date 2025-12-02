@@ -1,0 +1,15 @@
+Files:
+tests/test-accept.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+netinet_in
+sockets
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-accept
+check_PROGRAMS += test-accept
+test_accept_LDADD = $(LDADD) @LIBSOCKET@

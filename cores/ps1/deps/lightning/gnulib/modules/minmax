@@ -1,0 +1,23 @@
+Description:
+MIN, MAX macros.
+
+Files:
+lib/minmax.h
+m4/minmax.m4
+
+Depends-on:
+
+configure.ac:
+gl_MINMAX
+
+Makefile.am:
+lib_SOURCES += minmax.h
+
+Include:
+"minmax.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

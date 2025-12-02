@@ -1,0 +1,18 @@
+Files:
+tests/test-remainderl.c
+tests/test-remainder.h
+tests/signature.h
+tests/macros.h
+tests/randoml.c
+
+Depends-on:
+fpucw
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-remainderl
+check_PROGRAMS += test-remainderl
+test_remainderl_SOURCES = test-remainderl.c randoml.c
+test_remainderl_LDADD = $(LDADD) @REMAINDERL_LIBM@

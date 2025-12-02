@@ -1,0 +1,17 @@
+Files:
+tests/test-c-stack.c
+tests/test-c-stack.sh
+tests/test-c-stack2.sh
+tests/macros.h
+
+Depends-on:
+exitfail
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-c-stack.sh test-c-stack2.sh
+TESTS_ENVIRONMENT += LIBSIGSEGV='@LIBSIGSEGV@'
+check_PROGRAMS += test-c-stack
+test_c_stack_LDADD = $(LDADD) $(LIBCSTACK) @LIBINTL@
+MOSTLYCLEANFILES += t-c-stack.tmp t-c-stack2.tmp

@@ -1,0 +1,1023 @@
+Important general notes
+-----------------------
+
+Date        Modules         Changes
+
+2020-08-16  (all)           Automake >= 1.11 and Autoconf >= 2.64 are required.
+
+2019-12-11  Support for     These modules are now supported in C++ mode as well.
+            ISO C or POSIX  This means, while the autoconfiguration uses the C
+            functions       compiler, the resulting header files and function
+                            substitutes can be used with a matching C++ compiler
+                            as well.
+
+2019-02-14  gnulib-tool     If you use multiple --local-dir options at once:
+                            The first one now has the highest priority, not the
+                            last one.
+
+2019-01-04  (all)           The meaning of the 'Link' section in the module
+                            descriptions has been clarified: It overrides the
+                            combined 'Link' sections from the dependencies.
+
+2018-10-22  (all)           Automake >= 1.11 and Autoconf >= 2.63 are required.
+
+2016-09-05  progname        There is now an alternate module 'getprogname'. It
+                            defines a getprogname() function; use it to obtain
+                            the name of the current program.
+                            Recommended use:
+                            - In a program's main() function, and associated
+                              usage() and help() functions, use 'progname'.
+                            - In library code, or more generally any code that
+                              is not near the main() function, use
+                              'getprogname'.
+
+2013-04-24  gettext         If your project uses 'gettextize --intl' it is now
+                            your responsibility to put -I$(top_builddir)/intl
+                            into the Makefile.am for gnulib.
+
+2012-06-27  elisp-comp      The module 'elisp-comp' is removed; the script is
+                            not independently useful outside of automake.
+
+2012-06-21  gnulib-tool     The option --with-tests is now implied by the
+                            options --create-testdir, --test,
+                            --create-megatestdir, --megatest.
+
+2012-01-07  quotearg        In the C locale, the function will no longer use
+                            the grave accent character to begin a quoted
+                            string (`like this').  It will use apostrophes
+                            'like these' or, in Unicode locales, single quotes
+                            ‘like these’.  You may want to adjust any error
+                            messages that hard code the quoting characters.
+
+2010-09-04  gnulib-tool     The option '--import' is no longer cumulative; it
+                            now expects the complete list of modules and other
+                            options on the command line. If you want to
+                            augment (not set) the list of modules, use the
+                            new option '--add-import' instead of '--import'.
+
+User visible incompatible changes
+---------------------------------
+
+Date        Modules         Changes
+
+2021-03-21  fatal-signal    The function at_fatal_signal now returns an error
+                            indicator.
+
+2021-03-21  diacrit         This deprecated module is removed.
+
+2021-03-07  mbrtowc         For single-locale optimizations, you now need to
+            mbrtoc32        define GNULIB_WCHAR_SINGLE_LOCALE instead of
+            wcwidth         GNULIB_WCHAR_SINGLE.
+
+2021-02-28  parse-datetime  The parse_datetime2 function has been moved
+                            to the new parse-datetime2 module, so that
+                            programs that need just parse_datetime need
+                            not build the fancier function.
+
+2020-12-23  execute         These functions no longer execute scripts without
+            spawn-pipe      '#!' marker through /bin/sh. To execute such a
+            posix_spawn     script as a shell script, either add a '#!/bin/sh'
+            posix_spawnp    marker in the first line, or specify "/bin/sh" as
+                            the program to execute and the script as its first
+                            argument.
+
+2020-12-18  free            This module, obsoleted in 2008, is gone.
+
+2020-12-14  findprog-in     The function 'find_in_given_path' now takes a 3rd
+                            argument 'const char *directory'. To maintain the
+                            previous behaviour, insert NULL as additional 3rd
+                            argument.
+
+2020-12-11  sh-quote        The argv argument of the 'shell_quote_argv' function
+                            is now of type 'const char * const *'.  You no
+                            longer need to cast read-only strings to 'char *'
+                            when constructing this argument.
+            execute         The prog_argv argument of the 'execute' function
+                            is now of type 'const char * const *'.  You no
+                            longer need to cast read-only strings to 'char *'
+                            when constructing this argument.
+            spawn-pipe      The prog_argv argument of the functions
+                            'create_pipe_out', 'create_pipe_in',
+                            'create_pipe_bidi' is now of type
+                            'const char * const *'.  You no longer need to cast
+                            read-only strings to 'char *' when constructing this
+                            argument.
+            pipe-filter-gi  The prog_argv argument of the
+                            'pipe_filter_gi_create' function is now of type
+                            'const char * const *'.  You no longer need to cast
+                            read-only strings to 'char *' when constructing this
+                            argument.
+            pipe-filter-ii  The prog_argv argument of the
+                            'pipe_filter_ii_execute' function is now of type
+                            'const char * const *'.  You no longer need to cast
+                            read-only strings to 'char *' when constructing this
+                            argument.
+            javaexec        The prog_argv argument of the 'execute_fn' function
+                            type is now of type 'const char * const *'.  Update
+                            the signature of all your implementations of this
+                            type.
+            csharpexec      The prog_argv argument of the 'execute_fn' function
+                            type is now of type 'const char * const *'.  Update
+                            the signature of all your implementations of this
+                            type.
+
+2020-12-02  spawn-pipe      The functions 'create_pipe_out', 'create_pipe_in',
+                            'create_pipe_bidi' now take a 4th argument
+                            'const char *directory'. To maintain the previous
+                            behaviour, insert NULL as additional 4th argument.
+
+2020-12-02  execute         The function 'execute' now takes a 4th argument
+                            'const char *directory'. To maintain the previous
+                            behaviour, insert NULL as additional 4th argument.
+
+2020-10-16  hash            This module deprecates the 'hash_delete' function
+                            using gcc's "deprecated" attribute.  Use the better-
+                            named 'hash_remove' equivalent.
+
+2020-08-24  diffseq         If you do not define NOTE_ORDERED to true,
+                            the NOTE_DELETE and NOTE_INSERT actions might
+                            not be done in order, to help cut down worst-case
+                            recursion stack space from O(N) to O(log N).
+
+2020-08-01  libtextstyle-optional  You now need to invoke
+                                   gl_LIBTEXTSTYLE_OPTIONAL explicitly, because
+                                   this macro now takes an optional
+                                   MINIMUM-VERSION argument.
+
+2020-08-01  libtextstyle    You now need to invoke gl_LIBTEXTSTYLE explicitly,
+                            because this macro now takes an optional
+                            MINIMUM-VERSION argument.
+
+2020-06-27  clean-temp      The functions open_temp, fopen_temp now take a
+                            'bool delete_on_close' argument. If in doubt, pass
+                            false.
+
+2020-06-27  tempname        The link requirements of these modules are changed
+            mkdtemp         from empty to $(LIB_GETRANDOM).
+            mkstemp
+            mkstemps
+            mkostemp
+            mkostemps
+            tmpfile
+            stdlib-safer
+            tmpfile-safer
+            clean-temp
+            javacomp        $(LIB_GETRANDOM) was added to the link requirements
+                            of this module.
+
+2020-05-27  read-file       The functions provided by this module now take an
+                            'int flags' argument to modify the file reading
+                            behavior.  The read_binary_file function has been
+                            removed as it is no longer necessary.
+
+2020-04-27  getdate         This deprecated module is removed. Use the module
+                            'parse-datetime' instead. Instead of
+                              #include "getdate.h"
+                            write
+                              #include "parse-datetime.h"
+                            The function get_date is renamed to parse_datetime.
+
+2020-04-27  realloc         This deprecated module is removed. Use the module
+                            'realloc-gnu' instead.
+
+2020-04-27  calloc          This deprecated module is removed. Use the module
+                            'calloc-gnu' instead.
+
+2020-04-27  malloc          This deprecated module is removed. Use the module
+                            'malloc-gnu' instead.
+
+2020-04-27  fnmatch-posix   This deprecated module is removed. Use the module
+                            'fnmatch' instead.
+
+2020-04-27  pipe            This deprecated module is removed. Use the module
+                            'spawn-pipe' instead. Instead of
+                              #include "pipe.h"
+                            write
+                              #include "spawn-pipe.h"
+
+2020-04-27  getopt          This deprecated module is removed. Please choose
+                            among getopt-posix and getopt-gnu. getopt-gnu
+                            provides "long options" and "options with optional
+                            arguments", getopt-posix doesn't.
+
+2020-04-27  rename-dest-slash  This deprecated module is removed. Use the
+                               module 'rename' instead.
+
+2020-04-27  unictype/bidicategory-*  These deprecated modules are removed. Use
+                                     the modules unictype/bidiclass-* instead.
+
+2020-03-28  dosname         On native Windows, OS/2, DOS,
+                            IS_RELATIVE_FILE_NAME("c:") now returns false.
+
+2020-03-28  filename        The macro IS_ABSOLUTE_PATH is deprecated. Use
+                            IS_ABSOLUTE_FILE_NAME instead.
+                            The macro IS_PATH_WITH_DIR is deprecated. Use
+                            IS_FILE_NAME_WITH_DIR instead.
+
+2020-02-22  fchownat        This module no longer defines the functions
+                            'chownat' and 'lchownat'.  Program that need these
+                            functions should add the module 'chownat' to the
+                            list of imported modules.
+
+2020-02-22  fchmodat        This module no longer defines the functions
+                            'chmodat' and 'lchmodat'.  Program that need these
+                            functions should add the module 'chmodat' to the
+                            list of imported modules.
+
+2020-02-07  fchmodat        When applied to non-symlinks, these now act like
+            lchmod          chmod (the BSD behavior, which POSIX requires for
+                            fchmodat + AT_SYMLINK_NOFOLLOW), instead of failing
+                            (the GNU/Linux behavior through glibc 2.31).
+                            Future versions of GNU/Linux are planned to act as
+                            per POSIX and BSD.
+
+2020-01-15  gc-pbkdf2-sha1  This module is deprecated.  Use gc-pbkdf2 instead.
+
+2019-12-12  dfa             Its API now uses ptrdiff_t instead of size_t.
+
+2019-12-11  dfa             To call dfamust, one must now call dfaparse
+                            without yet calling dfacomp.  This fixes a bug
+                            introduced on 2018-10-22 that broke dfamust.
+
+2019-12-07  xstrtol         This module no longer defines the function
+            xstrtoll        'xstrtol_fatal'.  Program that need this function
+            xstrtoimax      should add the module 'xstrtol-error' to the list
+            xstrtoumax      of imported modules.
+
+2019-05-90  verify          verify_true (deprecated 2011-06-15) is removed.
+
+2019-03-16  fatal-signal    The function that you pass to at_fatal_signal now
+                            takes the signal as argument.
+
+2019-02-02  c-strtod        This and related modules no longer define
+                            the HAVE_C99_STRTOLD macro.  Programs requiring
+                            standard strtold should use the strtold module.
+
+2019-01-21  diacrit         This module is deprecated. Please use the module
+                            uninorm/canonical-decomposition instead.
+
+2018-10-23  backupfile      backup_file_rename and find_backup_file_name
+                            now take an additional directory file descriptor
+                            argument.  Pass AT_FDCWD to get the old behavior.
+
+2018-08-18  getpass         The include file is changed from "getpass.h" to
+            getpass-gnu     <unistd.h>.
+
+2018-07-17  hard-locale     m4/hard-locale.m4 and gl_HARD_LOCALE are removed.
+
+2018-07-05  renameat2       This module is renamed to 'renameatu' and all
+                            its include files and functions are renamed
+                            accordingly.
+
+2017-12-30  chdir-safer     This module is removed.  It was deprecated
+                            on 2006-07-17.
+
+2017-11-24  posixtm         Previously, callers had to specify either
+                            PDS_LEADING_YEAR or PDS_TRAILING_YEAR (but
+                            not both).  Now, callers should specify
+                            only PDS_TRAILING_YEAR; leading years are
+                            requested by not specifying PDS_TRAILING_YEAR.
+
+2017-08-14  fcntl-h         This module now defaults O_CLOEXEC to a nonzero
+                            value instead of to 0, as the 'open' and
+                            'openat' modules now emulate O_CLOEXEC.
+
+2017-07-23  strftime        This module is renamed to 'nstrftime'.
+
+2017-05-19  closeout        close_stdout longer closes stderr when addresses
+                            are being sanitized, as the sanitizer outputs to
+                            stderr afterwards.
+
+2017-02-16  binary-io       On MS-DOS and OS/2, set_binary_mode now fails
+                            on ttys, and sets errno == EINVAL.
+
+2017-01-20  parse-datetime  The parse_datetime2 function now takes two
+                            more arguments TZ and TZSTRING, for the
+                            time zone and its name.
+
+2017-01-16  host-cpu-c-abi  On ARM platforms, HOST_CPU_C_ABI is now set to
+                            'arm' or 'armhf' instead of 'armel'.
+
+2017-01-15  localeinfo      Change case_folded_counterparts's first arg's type
+                            from wchar_t to wint_t, so it now accepts WEOF.
+
+2016-12-17  getlogin        The link requirements of these modules are changed
+            getlogin_r      from empty to $(LIB_GETLOGIN).
+
+2016-12-13  dfa             Remove DFA_CASE_FOLD flag. Now based on RE_ICASE.
+
+2016-11-17  unistr/u32-strmblen   The function u32_strmblen can now return -1.
+2016-11-17  unistr/u32-strmbtouc  The function u32_strmbtouc can now return -1.
+
+2016-08-17  stdbool         This no longer supports _Bool for C++.
+                            Programs intended to be portable to C++
+                            compilers should use plain 'bool' instead.
+
+2016-04-12  intprops        The following macros were removed:
+                            TYPE_TWOS_COMPLEMENT  TYPE_ONES_COMPLEMENT
+                            TYPE_SIGNED_MAGNITUDE
+
+2015-09-25  c-ctype         The following macros were removed:
+                            C_CTYPE_CONSECUTIVE_DIGITS
+                            C_CTYPE_CONSECUTIVE_LOWERCASE
+                            C_CTYPE_CONSECUTIVE_UPPERCASE
+
+2015-09-22  savewd          SAVEWD_CHDIR_READABLE constant removed.
+
+2015-07-24  fprintftime     Exported functions' time zone arguments are now of
+            strftime        type timezone_t (with NULL denoting UTC) instead of
+                            type int (with nonzero denoting UTC).  These
+                            modules now depend on time_rz.
+
+2015-04-24  acl             This module no longer defines file_has_acl.
+                            Use the new file-has-acl module for that.
+                            Using only the latter module makes for fewer
+                            link-time dependencies on GNU/Linux.
+
+2015-04-15  acl             If your project only uses the file_has_acl()
+                            detection routine, then the requirements are
+                            potentially reduced by using $LIB_HAS_ACL rather
+                            than $LIB_ACL.
+
+2015-04-03  hash            hash_insert0 function removed (deprecated in 2011).
+
+2014-10-29  obstack         The obstack functions are no longer limited to
+                            int sizes; size values are now of type size_t.
+                            This changes both the ABI and the API.
+                            obstack_blank no longer accepts a negative size to
+                            shrink the current object; callers must now use
+                            obstack_blank_fast with a "negative" (actually,
+                            large positive) size for that.
+
+2014-02-23  diffseq         The members too_expensive, lo_minimal and hi_minimal
+                            were removed from public structures, and the
+                            find_minimal argument was removed from diag
+                            and compareseq.
+
+2014-02-11  savedir         The savedir and streamsavedir functions have a
+                            new argument specifying how to sort the result.
+                            The fdsavedir function is removed.
+
+2013-05-04  gnulib-tool     CVS checkout of gnulib are no longer supported.
+
+2013-02-08  careadlinkat    This module no longer provides the careadlinkatcwd
+                            function.
+
+2012-06-26  getopt-posix    This module no longer guarantees that option
+                            processing is resettable.  If your code uses
+                            'optreset' or 'optind = 0;', rewrite it to make
+                            only one pass over the argument array.
+
+2012-02-24  streq           This module no longer provides the STREQ macro.
+                            Use STREQ_OPT instead.
+
+2012-01-10  ignore-value    This module no longer provides the ignore_ptr
+                            function.  It was deprecated a year ago, but existed
+                            so briefly before then that it never came into use.
+                            Now, the ignore_value function does its job.
+
+2011-11-18  hash            This module deprecates the hash_insert0 function
+                            using gcc's "deprecated" attribute.  Use the better-
+                            named hash_insert_if_absent equivalent.
+
+2011-11-04  openat          This module no longer provides the mkdirat()
+                            function. If you need this function, you now need
+                            to request the 'mkdirat' module.
+
+2011-11-04  openat          This module no longer provides the fstatat()
+                            function. If you need this function, you now need
+                            to request the 'fstatat' module.
+
+2011-11-03  openat          This module no longer provides the unlinkat()
+                            function. If you need this function, you now need
+                            to request the 'unlinkat' module.
+
+2011-11-02  openat          This module no longer provides the fchmodat()
+                            function. If you need this function, you now need
+                            to request the 'fchmodat' module.
+
+2011-11-01  alignof         This module no longer provides the alignof() macro.
+                            Use either alignof_slot() or alignof_type() instead.
+
+2011-11-01  openat          This module no longer provides the fchownat()
+                            function. If you need this function, you now need
+                            to request the 'fchownat' module.
+
+2011-10-03  poll            The link requirements of this module are changed
+                            from empty to $(LIB_POLL).
+
+2011-09-25  sys_stat        This module no longer provides the fstat()
+                            function. If you need this function, you now need
+                            to request the 'fstat' module.
+
+2011-09-23  signal          This module is renamed to 'signal-h'.
+
+2011-09-22  select          The link requirements of this module are changed
+                            from $(LIBSOCKET) to $(LIB_SELECT).
+
+2011-09-12  fchdir          This module no longer overrides the functions
+                            opendir() and closedir(), unless the modules
+                            'opendir' and 'closedir' are in use, respectively.
+                            If you use opendir(), please use module 'opendir'.
+                            If you use closedir(), please use module 'closedir'.
+
+2011-08-04  pathmax         The header file "pathmax.h" no longer defines
+                            PATH_MAX on GNU/Hurd. Please use one of the methods
+                            listed in pathmax.h to ensure your package is
+                            portable to GNU/Hurd.
+
+2011-07-24  close           This module no longer pulls in the 'fclose' module.
+                            If your code creates a socket descriptor using
+                            socket() or accept(), then a FILE stream referring
+                            to it using fdopen(), then in order to close this
+                            stream, you need the 'fclose' module.
+
+2011-07-12  arg-nonnull     Renamed to snippet/arg-nonnull.
+            c++defs         Renamed to snippet/c++defs.
+            link-warning    Renamed to snippet/link-warning.
+            unused-parameter Renamed to snippet/unused-parameter.
+            warn-on-use     Renamed to snippet/warn-on-use.
+
+2011-06-15  verify          verify_true (V) is deprecated; please use
+                            verify_expr (V, 1) instead.
+
+2011-06-05  ansi-c++-opt    When a C++ compiler is not found, the variable CXX
+                            is now set to "no", not to ":".
+
+2011-05-11  group-member    The include file is changed from "group-member.h"
+                            to <unistd.h>.
+
+2011-05-02  exit            The module is removed.  It was deprecated
+                            on 2010-03-05.  Use 'stdlib' directly instead.
+
+2011-04-27  mgetgroups      The 'xgetgroups' function has been split into
+                            a new 'xgetgroups' module.
+
+2011-04-27  save-cwd        This module pulls in fewer dependencies by
+                            default; to retain robust handling of directories
+                            with an absolute name longer than PATH_MAX, you
+                            must now explicitly include the 'getcwd' module.
+
+2011-04-19  close-hook      This module has been renamed to 'fd-hook' and
+                            generalized.
+
+2011-03-08  regex-quote     The last argument is no longer an 'int cflags'
+                            but instead a pointer to a previously constructed
+                            'struct regex_quote_spec'.
+
+2011-02-25  dirname         These modules no longer put #defines for the
+            dirname-lgpl    following symbols into <config.h>: ISSLASH,
+            backupfile      FILE_SYSTEM_ACCEPTS_DRIVE_LETTER_PREFIX,
+            lstat           FILE_SYSTEM_BACKSLASH_IS_FILE_NAME_SEPARATOR,
+            openat          FILE_SYSTEM_DRIVE_PREFIX_CAN_BE_RELATIVE.
+            remove          Applications that need ISSLASH can include the new
+            rmdir           header dosname.h.
+            savewd
+            stat
+            unlink
+
+2011-02-14  getloadavg      This module no longer #defines C_GETLOADAVG or
+                            HAVE_GETLOADAVG, as the application no longer needs
+                            to worry about how getloadavg is defined.  It no
+                            longer defines the obsolete symbol NLIST_NAME_UNION
+                            (which should have been internal to the module
+                            anyway).  Also, support for setgid use has been
+                            removed, as nobody seems to be using it; thus
+                            GETLOADAVG_PRIVILEGED is no longer #defined and
+                            KMEM_GROUP and NEED_SETGID are no longer
+                            substituted for.
+
+2011-02-08  stdlib          Unless the random_r module is also used, this
+                            module no longer guarantees that the following are
+                            defined: struct random_data, RAND_MAX, random_r,
+                            srandom_r, initstate_r, setstate_r.
+
+2011-02-08  wctype-h        This module no longer provides the iswblank()
+                            function. If you need this function, you now need
+                            to request the 'iswblank' module.
+
+2011-02-07  wctype          This module is renamed to wctype-h.
+
+2011-01-18  multiarch       This no longer #defines AA_APPLE_UNIVERSAL_BUILD;
+                            instead, use the shell var APPLE_UNIVERSAL_BUILD.
+
+2010-12-10  pipe            This module is renamed to spawn-pipe. The include
+                            file is renamed to "spawn-pipe.h".
+
+2010-10-05  getdate         This module is deprecated. Please use the new
+                            parse-datetime module for the replacement
+                            function parse_datetime(), or help us write
+                            getdate-posix for getdate(). Also, the header
+                            "getdate.h" has been renamed "parse-datetime.h",
+                            and doc/getdate.texi to doc/parse-datetime.texi.
+
+2010-09-29  sys_wait        This module no longer provides the waitpid()
+                            function. If you need this function, you now need
+                            to request the 'waitpid' module.
+
+2010-09-17  utimens         The function gl_futimens is removed, and its
+                            signature has been migrated to fdutimens.  Callers
+                            of gl_futimens should change function name, and
+                            callers of fdutimens should swap parameter order.
+
+2010-09-17  fdutimensat     This function has a new signature: the fd now comes
+                            first instead of the dir/name pair, and a new
+                            atflag parameter is added at the end.  Old code
+                            should rearrange parameters, and pass 0 for atflag.
+
+2010-09-13  regex           The module is not guaranteeing anymore support for
+                            64-bit regoff_t on 64-bit systems.  The size of
+                            regoff_t will always be 32-bit unless the program
+                            is being configured --with-included-regex.  This
+                            may change again in the future once glibc provides
+                            this feature as well.
+
+2010-09-12  savedir         The fdsavedir function is now deprecated.
+
+2010-09-10  fcntl-h         This module now defaults O_CLOEXEC to 0, and
+                            it defaults O_EXEC and O_SEARCH to O_RDONLY.
+                            Use "#if O_CLOEXEC" instead of "#ifdef O_CLOEXEC".
+
+2010-08-28  realloc         This module is deprecated. Use 'realloc-gnu'
+                            instead. It will be removed 2012-01-01.
+
+2010-08-28  calloc          This module is deprecated. Use 'calloc-gnu'
+                            instead. It will be removed 2012-01-01.
+
+2010-08-28  malloc          This module is deprecated. Use 'malloc-gnu'
+                            instead. It will be removed 2012-01-01.
+
+2010-08-14  memxfrm         This module is renamed to amemxfrm. The include
+                            file is renamed to "amemxfrm.h". The function is
+                            renamed to amemxfrm.
+
+2010-08-09  symlinkat       This module now only provides symlinkat; use the
+                            new module 'readlinkat' if needed.
+
+2010-07-31  ansi-c++-opt    If Autoconf >= 2.66 is used, the 'configure'
+                            option is now called --disable-c++ rather than
+                            --disable-cxx.
+
+2010-04-02  maintainer-makefile
+                            The macro _prohibit_regexp has been revamped into
+                            a new macro _sc_search_regexp; custom syntax
+                            checks in your cfg.mk will need to be rewritten.
+
+2010-03-28  lib-ignore      This module now provides a variable
+                            IGNORE_UNUSED_LIBRARIES_CFLAGS that you should
+                            add to LDFLAGS (when linking C programs only) or
+                            CFLAGS yourself. It is no longer added to LDFLAGS
+                            automatically.
+
+2010-03-18  pty             This module now only declares the pty.h header.
+                            Use the new modules 'forkpty' or 'openpty' to
+                            get the functions that were previously provided.
+
+2010-03-05  exit            This module is deprecated, use 'stdlib' directly
+                            instead.  It will be removed 2011-01-01.
+
+2009-12-13  sublist         The module does not define functions any more that
+                            call xalloc_die() in out-of-memory situations. Use
+                            module 'xsublist' and include file "gl_xsublist.h"
+                            instead.
+
+2009-12-13  list            The module does not define functions any more that
+                            call xalloc_die() in out-of-memory situations.
+                            Use module 'xlist' and include file "gl_xlist.h"
+                            instead.
+
+2009-12-13  oset            The module does not define functions any more that
+                            call xalloc_die() in out-of-memory situations.
+                            Use module 'xoset' and include file "gl_xoset.h"
+                            instead.
+
+2009-12-10  *               Most source code files have been converted to
+                            indentation by spaces (rather than tabs). Patches
+                            of gnulib source code needs to be updated.
+
+2009-12-09  link-warning    The Makefile rules that use $(LINK_WARNING_H) now
+                            must contain an explicit dependency on
+                            $(LINK_WARNING_H).
+
+2009-11-12  getgroups       These functions now use a signature of gid_t,
+            getugroups      rather than GETGROUPS_T.  This probably has no
+                            effect except on very old platforms.
+
+2009-11-04  tempname        The gen_tempname function takes an additional
+                            'suffixlen' argument. You can safely pass 0.
+
+2009-11-04  nproc           The num_processors function now takes an argument.
+
+2009-11-02  inet_pton       The use of this module now requires linking with
+                            $(INET_PTON_LIB).
+
+2009-11-02  inet_ntop       The use of this module now requires linking with
+                            $(INET_NTOP_LIB).
+
+2009-10-10  utimens         The use of this module now requires linking with
+                            $(LIB_CLOCK_GETTIME).
+
+2009-09-16  canonicalize-lgpl
+                            The include file is changed from "canonicalize.h"
+                            to <stdlib.h>.
+
+2009-09-04  link-follow     The macro LINK_FOLLOWS_SYMLINK is now tri-state,
+                            rather than only defined to 1.
+
+2009-09-03  openat          The include files are standardized to POSIX 2008.
+                            For openat, include <fcntl.h>; for
+                            fchmodat, fstatat, and mkdirat, include
+                            <sys/stat.h>; for fchownat and unlinkat,
+                            include <unistd.h>.  For all other
+                            functions provided by this module,
+                            continue to include "openat.h".
+
+2009-08-30  striconveh      The functions mem_cd_iconveh and str_cd_iconveh
+                            now take an 'iconveh_t *' argument instead of three
+                            iconv_t arguments.
+
+2009-08-23  tempname        The gen_tempname function takes an additional
+                            'flags' argument. You can safely pass 0.
+
+2009-08-12  getopt          This module is deprecated. Please choose among
+                            getopt-posix and getopt-gnu. getopt-gnu provides
+                            "long options" and "options with optional
+                            arguments", getopt-posix doesn't.
+
+2009-06-25  fpurge          The include file is changed from "fpurge.h" to
+                            <stdio.h>.
+
+2009-04-26  modules/uniconv/u8-conv-from-enc
+            modules/uniconv/u16-conv-from-enc
+            modules/uniconv/u32-conv-from-enc
+                            The calling convention of the functions
+                            u*_conv_from_encoding is changed.
+
+2009-04-26  modules/uniconv/u8-conv-to-enc
+            modules/uniconv/u16-conv-to-enc
+            modules/uniconv/u32-conv-to-enc
+                            The calling convention of the functions
+                            u*_conv_to_encoding is changed.
+
+2009-04-24  maintainer-makefile
+                            The maint.mk file was copied from
+                            coreutils, and the old
+                            coverage/gettext/indent rules were
+                            re-added.  If you used 'make syntax-check'
+                            this will add several new checks.  If some
+                            new check is annoying, add the name of the
+                            checks to 'local-checks-to-skip' in your
+                            cfg.mk.
+
+2009-04-01  visibility      Renamed to lib-symbol-visibility.
+
+2009-04-01  ld-version-script  Renamed to lib-symbol-versions.
+
+2009-03-20  close           The substituted variable LIB_CLOSE is removed.
+
+2009-03-05  filevercmp      Move hidden files up in ordering.
+
+2009-01-22  c-strtod        This function no longer calls xalloc_die(). If
+            c-strtold       you want to exit the program in case of out-of-
+                            memory, the calling function needs to arrange
+                            for it, like this:
+                                errno = 0;
+                                val = c_strtod (...);
+                                if (val == 0 && errno == ENOMEM)
+                                  xalloc_die ();
+
+2009-01-17  relocatable-prog  In the Makefile.am or Makefile.in, you now also
+                            need to set RELOCATABLE_STRIP = :.
+
+2008-12-22  getaddrinfo     When using this module, you now need to link with
+            canon-host      $(GETADDRINFO_LIB).
+
+2008-12-21  mbiter          The header files "mbiter.h", "mbuiter.h",
+            mbuiter         "mbfile.h" can now be included without checking
+            mbfile          HAVE_MBRTOWC. The macro HAVE_MBRTOWC will no
+                            longer be defined by these modules in a year. If
+                            you want to continue to use it, you need to invoke
+                            AC_FUNC_MBRTOWC yourself.
+
+2008-11-11  warnings        This module subsumes the file m4/warning.m4 which
+                            was removed.
+
+2008-10-20  lstat           The include file is changed from "lstat.h" to
+                            <sys/stat.h>.
+
+2008-10-20  getaddrinfo     The include file is changed from "getaddrinfo.h"
+                            to <netdb.h>.
+
+2008-10-19  isnanf          The include file is changed from "isnanf.h" to
+                            <math.h>.
+            isnand          The include file is changed from "isnand.h" to
+                            <math.h>.
+            isnanl          The include file is changed from "isnanl.h" to
+                            <math.h>.
+
+2008-10-18  lchmod          The include file is changed from "lchmod.h" to
+                            <sys/stat.h>.
+
+2008-10-18  dirfd           The include file is changed from "dirfd.h" to
+                            <dirent.h>.
+
+2008-10-18  euidaccess      The include file is changed from "euidaccess.h"
+                            to <unistd.h>.
+
+2008-10-18  getdomainname   The include file is changed from "getdomainname.h"
+                            to <unistd.h>.
+
+2008-09-28  sockets         When using this module, you now need to link with
+                            $(LIBSOCKET).
+
+2008-09-24  sys_select      The limitation on 'select', introduced 2008-09-23,
+                            was removed.  sys_select now includes a select
+                            wrapper for Winsock.  The wrapper expects socket
+                            and file descriptors to be compatible as arranged
+                            by the sys_socket on MinGW.
+
+2008-09-23  sys_socket      Under Windows (MinGW), the module now adds
+                            wrappers around Winsock functions, so that
+                            socket descriptors are now compatible with
+                            file descriptors.  In general, this change
+                            will simply improve your code's portability
+                            between POSIX platforms and Windows.  In
+                            particular, you will be able to use ioctl and
+                            close instead of ioctlsocket and closesocket,
+                            and test errno instead of WSAGetLastError ().
+                            On the other hand, you have to audit your code to
+                            remove usage of these Winsock-specific functions.
+
+                            This change does not remove the need to call
+                            the gl_sockets_startup function from the sockets
+                            gnulib module.  Also, for now select is disabled
+                            when you include the sys_socket module; while
+                            the functionality will be restored soon, for
+                            efficiency it is suggested to use the poll system
+                            poll system call and gnulib module instead.
+
+2008-09-13  EOVERFLOW       The module is removed. Use module errno instead.
+
+2008-09-01  filename        The module does not define the function
+                            concatenated_filename any more. To get an
+                            equivalent function, use function
+                            xconcatenated_filename from module
+                            'xconcat-filename'.
+
+2008-08-31  havelib         On Solaris, when searching for 64-bit mode
+                            libraries the directory $prefix/lib is now ignored.
+                            Instead the directory $prefix/lib/64 is searched.
+                            You may need to create a symbolic link for
+                            $prefix/lib/64 if you have 64-bit libraries
+                            installed in $prefix/lib.
+
+2008-08-19  strverscmp      The include file is changed from "strverscmp.h"
+                            to <string.h>.
+
+2008-08-14  lock            The include file is changed from "lock.h"
+                            to "glthread/lock.h".
+            tls             The include file is changed from "tls.h"
+                            to "glthread/tls.h".
+
+2008-07-17  c-stack         The module now requires the addition of
+                            $(LIBCSTACK) or $(LTLIBCSTACK) in Makefile.am,
+                            since it may depend on linking with libsigsegv.
+
+2008-07-07  isnanf-nolibm   The include file is changed from "isnanf.h"
+                            to "isnanf-nolibm.h".
+            isnand-nolibm   The include file is changed from "isnand.h"
+                            to "isnand-nolibm.h".
+
+2008-06-10  execute         The execute function takes an additional termsigp
+                            argument. Passing termsigp = NULL is ok.
+            wait-process    The wait_subprocess function takes an additional
+                            termsigp argument. Passing termsigp = NULL is ok.
+
+2008-05-10  linebreak       The module is split into several modules unilbrk/*.
+                            The include file is changed from "linebreak.h" to
+                            "unilbrk.h". Two functions are renamed:
+                            mbs_possible_linebreaks -> ulc_possible_linebreaks
+                            mbs_width_linebreaks -> ulc_width_linebreaks
+
+2008-04-28  rpmatch         The include file is now <stdlib.h>.
+
+2008-04-28  inet_ntop       The include file is changed from "inet_ntop.h"
+                            to <arpa/inet.h>.
+
+2008-04-28  inet_pton       The include file is changed from "inet_pton.h"
+                            to <arpa/inet.h>.
+
+2008-03-06  freadahead      The return value's computation has changed. It
+                            now increases by 1 after ungetc.
+
+2008-01-26  isnan-nolibm    The module name is changed from isnan-nolibm to
+                            isnand-nolibm. The include file is changed from
+                            "isnan.h" to "isnand.h". The function that it
+                            defines is changed from isnan() to isnand().
+
+2008-01-14  strcasestr      This module now replaces worst-case inefficient
+                            implementations; clients that use controlled
+                            needles and thus do not care about worst-case
+                            efficiency should use the new strcasestr-simple
+                            module instead for smaller code size.
+
+2008-01-09  alloca-opt      Now defines HAVE_ALLOCA_H only when the system
+                            supplies an <alloca.h>.  Gnulib-using code is now
+                            expected to include <alloca.h> unconditionally.
+                            Non-gnulib-using code can continue to include
+                            <alloca.h> only if HAVE_ALLOCA_H is defined.
+
+2008-01-08  memmem          This module now replaces worst-case inefficient
+                            implementations; clients that use controlled
+                            needles and thus do not care about worst-case
+                            efficiency should use the new memmem-simple
+                            module instead for smaller code size.
+
+2007-12-24  setenv          The include file is changed from "setenv.h" to
+                            <stdlib.h>. Also, the unsetenv function is no
+                            longer declared in this module; use the 'unsetenv'
+                            module if you need it.
+
+2007-12-03  getpagesize     The include file is changed from "getpagesize.h"
+                            to <unistd.h>.
+
+2007-12-03  strcase         The include file is changed from <string.h> to
+                            <strings.h>.
+
+2007-10-07  most modules    The license for most modules has changed from
+                            GPLv2+ to GPLv3+, and from LGPLv2+ to LGPLv3+.
+                            A few modules are still under LGPLv2+; see the
+                            module description for the applicable license.
+
+2007-09-01  linebreak       "linebreak.h" no longer declares the functions
+                            locale_charset, uc_width, u{8,16,32}_width. Use
+                            "uniwidth.h" to get these functions declared.
+
+2007-08-28  areadlink-with-size
+                            Renamed from mreadlink-with-size.
+                            Function renamed: mreadlink_with_size ->
+                            areadlink_with_size.
+
+2007-08-22  getdelim, getline
+                            The include file is changed from "getdelim.h"
+                            and "getline.h" to the POSIX 200x <stdio.h>.
+
+2007-08-18  idcache         Now provides prototypes in "idcache.h".
+
+2007-08-10  xstrtol         The STRTOL_FATAL_ERROR macro is removed.
+                            Use the new xstrtol_fatal function instead.
+
+2007-08-04  human           The function human_options no longer reports an
+                            error to standard error; that is now the
+                            caller's responsibility.  It returns an
+                            error code of type enum strtol_error
+                            instead of the integer option value, and stores
+                            the option value via a new int * argument.
+            xstrtol         The first two arguments of STRTOL_FATAL_ERROR
+                            are now an option name and option argument
+                            instead of an option argument and a type string,
+                            STRTOL_FAIL_WARN is removed.
+
+2007-07-14  gpl, lgpl       New Texinfo versions with no sectioning commands.
+
+2007-07-10  version-etc     Output now mentions GPLv3+, not GPLv2+.  Use
+                            gnulib-tool --local-dir to override this.
+
+2007-07-07  wcwidth         The include file is changed from "wcwidth.h" to
+                            <wchar.h>.
+
+2007-07-02  gpl, lgpl       Renamed to gpl-2.0 and lgpl-2.1 respectively.
+                            (There is also a new module gpl-3.0.)
+
+2007-06-16  lchown          The include file is changed from "lchown.h" to
+                            <unistd.h>.
+
+2007-06-09  xallocsa        Renamed to xmalloca. The include file "xallocsa.h"
+                            was renamed to "xmalloca.h". The function was
+                            renamed:
+                              xallocsa -> xmalloca
+
+2007-06-09  allocsa         Renamed to malloca. The include file "allocsa.h"
+                            was renamed to "malloca.h". The function-like
+                            macros were renamed:
+                              allocsa -> malloca
+                              freesa -> freea
+
+2007-05-20  utimens         Renamed futimens to gl_futimens, to avoid
+                            conflict with the glibc-2.6-introduced function
+                            that has a different signature.
+
+2007-05-01  sigprocmask     The module now depends on signal, so replace
+                              #include "sigprocmask.h"
+                            with
+                              #include <signal.h>
+
+2007-04-06  gettext         The macro HAVE_LONG_DOUBLE is no longer set.
+                            You can replace all its uses with 1, i.e. assume
+                            'long double' as a type exists.
+
+2007-04-01  arcfour         Renamed to crypto/arcfour.
+            arctwo          Renamed to crypto/arctwo.
+            des             Renamed to crypto/des.
+            gc              Renamed to crypto/gc.
+            gc-arcfour      Renamed to crypto/gc-arcfour.
+            gc-arctwo       Renamed to crypto/gc-arctwo.
+            gc-des          Renamed to crypto/gc-des.
+            gc-hmac-md5     Renamed to crypto/gc-hmac-md5.
+            gc-hmac-sha1    Renamed to crypto/gc-hmac-sha1.
+            gc-md2          Renamed to crypto/gc-md2.
+            gc-md4          Renamed to crypto/gc-md4.
+            gc-md5          Renamed to crypto/gc-md5.
+            gc-pbkdf2-sha1  Renamed to crypto/gc-pbkdf2-sha1.
+            gc-random       Renamed to crypto/gc-random.
+            gc-rijndael     Renamed to crypto/gc-rijndael.
+            gc-sha1         Renamed to crypto/gc-sha1.
+            hmac-md5        Renamed to crypto/hmac-md5.
+            hmac-sha1       Renamed to crypto/hmac-sha1.
+            md2             Renamed to crypto/md2.
+            md4             Renamed to crypto/md4.
+            md5             Renamed to crypto/md5.
+            rijndael        Renamed to crypto/rijndael.
+            sha1            Renamed to crypto/sha1.
+
+2007-03-27  vasprintf       The module now depends on stdio, so replace
+                               #include "vasprintf.h"
+                            with
+                               #include <stdio.h>
+
+2007-03-24  tsearch         The include file is changed from "tsearch.h" to
+                            <search.h>.
+
+2007-03-24  utf8-ucs4       The include file is changed from "utf8-ucs4.h"
+                            to "unistr.h".
+            utf8-ucs4-unsafe  The include file is changed from
+                            "utf8-ucs4-unsafe.h" to "unistr.h".
+            utf16-ucs4      The include file is changed from "utf16-ucs4.h"
+                            to "unistr.h".
+            utf16-ucs4-unsafe  The include file is changed from
+                            "utf16-ucs4-unsafe.h" to "unistr.h".
+            ucs4-utf8       The include file is changed from "ucs4-utf8.h"
+                            to "unistr.h".
+            ucs4-utf16      The include file is changed from "ucs4-utf16.h"
+                            to "unistr.h".
+
+2007-03-19  iconvme         The module is removed. Use module striconv instead:
+                            iconv_string -> str_iconv
+                            iconv_alloc -> str_cd_iconv (with reversed
+                                           arguments)
+
+2007-03-15  list            The functions gl_list_create_empty and
+            array-list      gl_list_create now take an extra fourth argument.
+            carray-list     You can pass NULL.
+            linked-list
+            linkedhash-list
+            avltree-list
+            rbtree-list
+            avltreehash-list
+            rbtreehash-list
+
+2007-03-15  oset            The function gl_oset_create_empty now takes a
+            array-oset      third argument. You can pass NULL.
+            avltree-oset
+            rbtree-oset
+
+2007-03-12  des             The types and functions in lib/des.h have been
+            gc-des          renamed:
+
+                            des_ctx -> gl_des_ctx, tripledes_ctx -> gl_3des_ctx,
+                            des_is_weak_key -> gl_des_is_weak_key,
+                            des_setkey -> gl_des_setkey,
+                            des_makekey -> gl_des_makekey,
+                            des_ecb_crypt -> gl_des_ecb_crypt,
+                            des_ecb_encrypt -> gl_des_ecb_encrypt,
+                            des_ecb_decrypt -> gl_des_ecb_decrypt,
+                            tripledes_set2keys -> gl_3des_set2keys,
+                            tripledes_set3keys -> gl_3des_set3keys,
+                            tripledes_makekey -> gl_3des_makekey,
+                            tripledes_ecb_crypt -> gl_3des_ecb_crypt.
+
+                            Also consider using the "gc-des" buffer instead of
+                            using the "des" module directly.
+
+2007-02-28  xreadlink       The module xreadlink was renamed to
+                            xreadlink-with-size. The function was renamed:
+                            xreadlink -> xreadlink_with_size.
+
+2007-02-18  exit            The modules now depend on stdlib, so replace
+            mkdtemp           #include "exit.h"
+            mkstemp           #include "mkdtemp.h"
+                              #include "mkstemp.h"
+                            with
+                              #include <stdlib.h>
+
+2007-01-26  strdup          The module now depends on string, so replace
+                              #include "strdup.h"
+                            with
+                              #include <string.h>
+
+# This is for Emacs.
+# Local Variables:
+# coding: utf-8
+# indent-tabs-mode: nil
+# whitespace-check-buffer-indent: nil
+# End:

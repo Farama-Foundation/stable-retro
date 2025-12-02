@@ -1,0 +1,28 @@
+Description:
+towctrans() function: convert a wide character using a case mapping.
+
+Files:
+lib/towctrans.c
+lib/towctrans-impl.h
+m4/towctrans.m4
+
+Depends-on:
+wctype-h
+
+configure.ac:
+gl_FUNC_TOWCTRANS
+if test $HAVE_TOWCTRANS = 0; then
+  AC_LIBOBJ([towctrans])
+fi
+gl_WCTYPE_MODULE_INDICATOR([towctrans])
+
+Makefile.am:
+
+Include:
+<wctype.h>
+
+License:
+LGPL
+
+Maintainer:
+all

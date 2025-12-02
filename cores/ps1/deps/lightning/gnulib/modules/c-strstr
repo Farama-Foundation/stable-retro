@@ -1,0 +1,23 @@
+Description:
+Search for a substring in a string in C locale.
+
+Files:
+lib/c-strstr.h
+lib/c-strstr.c
+
+Depends-on:
+strstr
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += c-strstr.h c-strstr.c
+
+Include:
+"c-strstr.h"
+
+License:
+LGPL
+
+Maintainer:
+all

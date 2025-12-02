@@ -1,0 +1,25 @@
+Description:
+fbufmode() function: Determine the buffering mode of a FILE stream.
+
+Files:
+lib/fbufmode.h
+lib/fbufmode.c
+lib/stdio-impl.h
+m4/fbufmode.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_FBUFMODE
+
+Makefile.am:
+lib_SOURCES += fbufmode.c
+
+Include:
+"fbufmode.h"
+
+License:
+LGPL
+
+Maintainer:
+Eric Blake

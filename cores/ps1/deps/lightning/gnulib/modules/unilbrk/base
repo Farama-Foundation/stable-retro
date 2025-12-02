@@ -1,0 +1,33 @@
+Description:
+Base layer for line breaking.
+
+Files:
+lib/unilbrk.in.h
+m4/libunistring-base.m4
+
+Depends-on:
+unitypes
+localcharset
+
+configure.ac:
+gl_LIBUNISTRING_LIBHEADER([0.9.4], [unilbrk.h])
+
+Makefile.am:
+BUILT_SOURCES += $(LIBUNISTRING_UNILBRK_H)
+
+unilbrk.h: unilbrk.in.h
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  cat $(srcdir)/unilbrk.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+MOSTLYCLEANFILES += unilbrk.h unilbrk.h-t
+
+Include:
+"unilbrk.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

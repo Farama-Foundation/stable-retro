@@ -1,0 +1,21 @@
+Description:
+Ensures that the *printf() functions provided by the *printf-posix modules
+recognize non-IEEE-754 values of 'long double' arguments and display them as
+NaN (rather than producing undefined behavior).
+
+Files:
+
+Depends-on:
+
+configure.ac:
+m4_divert_text([INIT_PREPARE], [gl_printf_safe=yes])
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

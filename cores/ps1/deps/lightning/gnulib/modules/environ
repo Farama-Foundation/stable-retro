@@ -1,0 +1,24 @@
+Description:
+environ variable: storage of environment variables.
+
+Files:
+m4/environ.m4
+
+Depends-on:
+unistd
+extensions
+
+configure.ac:
+gl_ENVIRON
+gl_UNISTD_MODULE_INDICATOR([environ])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

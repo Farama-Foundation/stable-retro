@@ -1,0 +1,12 @@
+Files:
+tests/test-getdtablesize.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getdtablesize
+check_PROGRAMS += test-getdtablesize

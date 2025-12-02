@@ -1,0 +1,22 @@
+Status:
+privileged-test
+
+Notice:
+The 'idpriv-drop-tests' module asks the user for the root password.  It is
+therefore not suitable for all environments. To disable it, pass option
+'--avoid=idpriv-drop-tests' to gnulib-tool.
+
+Files:
+tests/test-idpriv-drop.sh
+tests/test-idpriv-drop.su.sh
+tests/test-idpriv-drop.c
+tests/macros.h
+
+Depends-on:
+stdbool
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-idpriv-drop.sh
+check_PROGRAMS += test-idpriv-drop

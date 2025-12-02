@@ -1,0 +1,27 @@
+Description:
+mbmemcasecmp() function: case-insensitive memory area comparison.
+
+Files:
+lib/mbmemcasecmp.h
+lib/mbmemcasecmp.c
+
+Depends-on:
+mbiter
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += mbmemcasecmp.c
+
+Include:
+"mbmemcasecmp.h"
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+$(LIB_MBRTOWC)
+
+License:
+LGPL
+
+Maintainer:
+all

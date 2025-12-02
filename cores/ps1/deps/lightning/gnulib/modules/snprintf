@@ -1,0 +1,28 @@
+Description:
+snprintf() function: print formatted output to a fixed length string
+
+Files:
+lib/snprintf.c
+m4/snprintf.m4
+m4/printf.m4
+
+Depends-on:
+stdio
+vasnprintf      [test $ac_cv_func_snprintf = no || test $REPLACE_SNPRINTF = 1]
+errno           [test $ac_cv_func_snprintf = no || test $REPLACE_SNPRINTF = 1]
+
+configure.ac:
+gl_FUNC_SNPRINTF
+gl_STDIO_MODULE_INDICATOR([snprintf])
+gl_MODULE_INDICATOR([snprintf])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson, Paul Eggert

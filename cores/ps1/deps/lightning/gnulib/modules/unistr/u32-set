@@ -1,0 +1,26 @@
+Description:
+Fill UTF-32 string.
+
+Files:
+lib/unistr/u32-set.c
+lib/unistr/u-set.h
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u32-set])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_SET
+lib_SOURCES += unistr/u32-set.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

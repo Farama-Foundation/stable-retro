@@ -1,0 +1,22 @@
+Description:
+An <inttypes.h> that nearly conforms to C99.
+
+Files:
+
+Depends-on:
+inttypes-incomplete
+extensions
+
+configure.ac:
+gl_INTTYPES_H
+
+Makefile.am:
+
+Include:
+<inttypes.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

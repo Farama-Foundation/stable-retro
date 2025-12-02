@@ -1,0 +1,25 @@
+@node sigprocmask
+@section @code{sigprocmask}
+@findex sigprocmask
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/sigprocmask.html}
+
+Gnulib module: sigprocmask
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize
+
+Note: Although @code{sigprocmask} officially has undefined behaviour in
+multi-threaded programs, in practice it is essentially equivalent to
+@code{pthread_sigmask}, with only a difference regarding the error
+return convention.  It's simpler to use @code{sigprocmask}, since it does
+not require linking with @code{-lpthread} on some platforms:
+glibc, NetBSD, OpenBSD, AIX, IRIX.

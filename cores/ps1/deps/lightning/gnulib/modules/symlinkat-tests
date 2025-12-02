@@ -1,0 +1,16 @@
+Files:
+tests/test-symlink.h
+tests/test-symlinkat.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+openat
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-symlinkat
+check_PROGRAMS += test-symlinkat
+test_symlinkat_LDADD = $(LDADD) @LIBINTL@

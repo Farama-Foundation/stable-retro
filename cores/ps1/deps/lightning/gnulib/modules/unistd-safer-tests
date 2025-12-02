@@ -1,0 +1,19 @@
+Files:
+tests/test-dup-safer.c
+tests/macros.h
+
+Depends-on:
+binary-io
+cloexec
+close
+dup
+fd-safer-flag
+getdtablesize
+msvc-nothrow
+stdbool
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-dup-safer
+check_PROGRAMS += test-dup-safer

@@ -1,0 +1,21 @@
+@node tempnam
+@section @code{tempnam}
+@findex tempnam
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/tempnam.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8.
+@item
+This function is not appropriate for creating temporary files.  (It has
+security risks.)  Better use @code{mkstemp} instead.
+@end itemize

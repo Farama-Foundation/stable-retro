@@ -1,0 +1,26 @@
+Description:
+Mirrored Unicode characters.
+
+Files:
+lib/unictype/mirror.c
+lib/unictype/mirror.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/mirror])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_MIRROR
+lib_SOURCES += unictype/mirror.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

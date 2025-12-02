@@ -1,0 +1,39 @@
+@node shadow.h
+@section @file{shadow.h}
+
+Defines the type @code{struct spwd} and declares the functions
+@code{setspent}, @code{endspent},
+@code{getspent}, @code{getspent_r},
+@code{getspnam}, @code{getspnam_r},
+@code{sgetspent}, @code{sgetspent_r},
+@code{fgetspent}, @code{fgetspent_r},
+@code{putspent},
+@code{lckpwdf}, @code{ulckpwdf}.
+
+Documentation:
+@itemize
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/setspent.3.html,,man setspent}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, Cygwin, mingw, MSVC 14, Android 9.0.
+@item
+The functions @code{getspent_r}, @code{getspnam_r}, @code{sgetspent_r},
+@code{fgetspent}, @code{fgetspent_r}, @code{putspent} are missing on some
+platforms:
+HP-UX 11.
+@item
+The functions @code{sgetspent}, @code{sgetspent_r} are missing on some
+platforms:
+HP-UX 11, IRIX 6.5, Solaris 11.4.
+@end itemize

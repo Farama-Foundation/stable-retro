@@ -1,0 +1,31 @@
+Description:
+putenv() function: change or add an environment variable.
+
+Files:
+lib/putenv.c
+m4/putenv.m4
+
+Depends-on:
+stdlib
+environ         [test $REPLACE_PUTENV = 1]
+free-posix      [test $REPLACE_PUTENV = 1]
+malloc-posix    [test $REPLACE_PUTENV = 1]
+
+configure.ac:
+gl_FUNC_PUTENV
+if test $REPLACE_PUTENV = 1; then
+  AC_LIBOBJ([putenv])
+  gl_PREREQ_PUTENV
+fi
+gl_STDLIB_MODULE_INDICATOR([putenv])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPL
+
+Maintainer:
+Jim Meyering, glibc

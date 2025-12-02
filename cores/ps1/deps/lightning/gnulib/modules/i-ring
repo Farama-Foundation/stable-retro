@@ -1,0 +1,26 @@
+Description:
+a simple ring buffer
+
+Files:
+lib/i-ring.h
+lib/i-ring.c
+m4/i-ring.m4
+
+Depends-on:
+stdbool
+verify
+
+configure.ac:
+gl_I_RING
+
+Makefile.am:
+lib_SOURCES += i-ring.c
+
+Include:
+"i-ring.h"
+
+License:
+LGPL
+
+Maintainer:
+Jim Meyering

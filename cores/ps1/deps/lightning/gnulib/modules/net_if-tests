@@ -1,0 +1,21 @@
+Files:
+tests/test-net_if.c
+tests/signature.h
+
+Depends-on:
+
+configure.ac:
+NET_IF_LIB=
+gl_saved_libs="$LIBS"
+AC_SEARCH_LIBS([if_nameindex], [socket],
+  [AC_DEFINE([HAVE_IF_NAMEINDEX], [1], [Define if you have if_nameindex.])
+   if test "$ac_cv_search_if_nameindex" != "none required"; then
+     NET_IF_LIB="$ac_cv_search_if_nameindex"
+   fi])
+LIBS="$gl_saved_libs"
+AC_SUBST([NET_IF_LIB])
+
+Makefile.am:
+TESTS += test-net_if
+check_PROGRAMS += test-net_if
+test_net_if_LDADD = $(LDADD) @NET_IF_LIB@

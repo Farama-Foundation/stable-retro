@@ -1,0 +1,33 @@
+Description:
+Conversion from UTF-16 to legacy encodings.
+
+Files:
+lib/uniconv/u16-conv-to-enc.c
+lib/uniconv/u-conv-to-enc.h
+
+Depends-on:
+uniconv/base
+striconveha
+uniconv/u8-conv-to-enc
+unistr/u16-mbtoucr
+unistr/u8-uctomb
+unistr/u16-mblen
+unistr/u8-mblen
+
+configure.ac:
+AC_REQUIRE([gl_BIGENDIAN])
+gl_LIBUNISTRING_MODULE([0.9], [uniconv/u16-conv-to-enc])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICONV_U16_CONV_TO_ENC
+lib_SOURCES += uniconv/u16-conv-to-enc.c
+endif
+
+Include:
+"uniconv.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

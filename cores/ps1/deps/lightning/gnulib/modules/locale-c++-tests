@@ -1,0 +1,20 @@
+Files:
+tests/test-locale-c++.cc
+tests/test-locale-c++2.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-locale-c++
+check_PROGRAMS += test-locale-c++
+test_locale_c___SOURCES = test-locale-c++.cc test-locale-c++2.cc
+test_locale_c___LDADD = $(LDADD) $(LIB_SETLOCALE)
+endif

@@ -1,0 +1,29 @@
+@node sys/resource.h
+@section @file{sys/resource.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_resource.h.html}
+
+Gnulib module: sys_resource
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+mingw, MSVC 14.
+@item
+On some platforms, this header file requires that <sys/types.h> and
+<sys/time.h> already be included:
+FreeBSD 5.0.
+@item
+On some platforms, this header file does not define the @code{RUSAGE_SELF} and
+@code{RUSAGE_CHILDREN} constants:
+OpenVMS.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On some platforms, this header does not define some or all of the
+symbolic constants required by POSIX@.  For example, OpenVMS and Android do
+not define @code{RLIM_SAVED_CUR} or @code{RLIM_SAVED_MAX}.
+@end itemize

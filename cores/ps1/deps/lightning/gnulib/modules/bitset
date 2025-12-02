@@ -1,0 +1,43 @@
+Description:
+A common interface to several implementations of bitsets.
+
+Files:
+lib/bitset.c
+lib/bitset.h
+lib/bitset/array.c
+lib/bitset/array.h
+lib/bitset/base.h
+lib/bitset/list.c
+lib/bitset/list.h
+lib/bitset/stats.c
+lib/bitset/stats.h
+lib/bitset/table.c
+lib/bitset/table.h
+lib/bitset/vector.c
+lib/bitset/vector.h
+
+Depends-on:
+attribute
+c99
+ffsl
+fopen-gnu
+gettext-h
+integer_length_l
+obstack
+xalloc
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+
+Makefile.am:
+lib_SOURCES += bitset.c bitset/array.c bitset/stats.c \
+  bitset/table.c bitset/list.c bitset/vector.c
+
+Include:
+"bitset.h"
+
+License:
+GPLv3+
+
+Maintainer:
+Akim Demaille <akim.demaille@gmail.com>

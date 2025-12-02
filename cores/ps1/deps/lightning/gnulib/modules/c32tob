@@ -1,0 +1,27 @@
+Description:
+c32tob() function: convert 32-bit wide character to unibyte character.
+
+Files:
+lib/c32tob.c
+m4/mbrtoc32.m4
+
+Depends-on:
+uchar
+c32rtomb
+wctob
+
+configure.ac:
+AC_REQUIRE([gl_MBRTOC32_SANITYCHECK])
+gl_UCHAR_MODULE_INDICATOR([c32tob])
+
+Makefile.am:
+lib_SOURCES += c32tob.c
+
+Include:
+<uchar.h>
+
+License:
+LGPL
+
+Maintainer:
+Bruno Haible

@@ -1,0 +1,31 @@
+Description:
+posix_spawn_file_actions_adddup2() function: augment a child process actions
+specification.
+
+Files:
+lib/spawn_faction_adddup2.c
+lib/spawn_int.h
+m4/posix_spawn.m4
+
+Depends-on:
+spawn
+getdtablesize                 [test $HAVE_POSIX_SPAWN = 0 || test $REPLACE_POSIX_SPAWN = 1 || test $REPLACE_POSIX_SPAWN_FILE_ACTIONS_ADDDUP2 = 1]
+posix_spawn_file_actions_init [test $HAVE_POSIX_SPAWN = 0 || test $REPLACE_POSIX_SPAWN = 1 || test $REPLACE_POSIX_SPAWN_FILE_ACTIONS_ADDDUP2 = 1]
+
+configure.ac:
+gl_FUNC_POSIX_SPAWN_FILE_ACTIONS_ADDDUP2
+if test $HAVE_POSIX_SPAWN = 0 || test $REPLACE_POSIX_SPAWN = 1 || test $REPLACE_POSIX_SPAWN_FILE_ACTIONS_ADDDUP2 = 1; then
+  AC_LIBOBJ([spawn_faction_adddup2])
+fi
+gl_SPAWN_MODULE_INDICATOR([posix_spawn_file_actions_adddup2])
+
+Makefile.am:
+
+Include:
+<spawn.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+glibc

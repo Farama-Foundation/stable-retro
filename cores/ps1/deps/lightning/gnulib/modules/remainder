@@ -1,0 +1,37 @@
+Description:
+remainder() function: floating-point remainder function.
+
+Files:
+lib/remainder.c
+m4/remainder.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+isfinite        [test $HAVE_REMAINDER = 0 || test $REPLACE_REMAINDER = 1]
+signbit         [test $HAVE_REMAINDER = 0 || test $REPLACE_REMAINDER = 1]
+fabs            [test $HAVE_REMAINDER = 0 || test $REPLACE_REMAINDER = 1]
+fmod            [test $HAVE_REMAINDER = 0 || test $REPLACE_REMAINDER = 1]
+isnand          [test $HAVE_REMAINDER = 0 || test $REPLACE_REMAINDER = 1]
+isinf           [test $HAVE_REMAINDER = 0 || test $REPLACE_REMAINDER = 1]
+
+configure.ac:
+gl_FUNC_REMAINDER
+if test $HAVE_REMAINDER = 0 || test $REPLACE_REMAINDER = 1; then
+  AC_LIBOBJ([remainder])
+fi
+gl_MATH_MODULE_INDICATOR([remainder])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(REMAINDER_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

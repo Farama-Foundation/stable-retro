@@ -1,0 +1,91 @@
+@node Running self-tests under valgrind
+@section Running self-tests under valgrind
+
+@cindex valgrind
+
+For projects written in C or similar languages, running the self-tests
+under Valgrind can reveal hard to find memory issues.  Gnulib supports
+two ways to make use of Valgrind: one that enables use of Valgrind at
+configure time, when @code{configure} found it to be present; and one
+at the discretion of the developer.
+
+@menu
+* Using valgrind automatically::
+* Using valgrind manually::
+* Valgrind and shell scripts::
+@end menu
+
+@node Using valgrind automatically
+@subsection Using valgrind without developer intervention
+
+The @code{valgrind-tests} module searches for Valgrind at configure time
+and declares the @code{VALGRIND} automake variable for use with automake's
+@code{TESTS_ENVIRONMENT}.
+
+After importing the @code{valgrind-tests} module to your project, you
+use it by adding the following to the @code{Makefile.am} that runs the
+self-tests:
+
+@smallexample
+TESTS_ENVIRONMENT = $(VALGRIND)
+@end smallexample
+
+This will run all self-checks under valgrind.
+
+@node Using valgrind manually
+@subsection Using valgrind at the developer's discretion
+
+In this approach, you define a @code{Makefile.am} variable @samp{VALGRIND}
+(or, more abstractly, @samp{CHECKER}), that is usually set to empty.
+When you have configured and built the package and you decide that you want
+to run the tests with valgrind, you do so by modifying the definition of
+@samp{VALGRIND} in the Makefile.
+
+@node Valgrind and shell scripts
+@subsection How to use Valgrind with shell scripts
+
+It is not desirable to apply valgrind to shell scripts or other non-binaries,
+because
+@itemize @bullet
+@item
+It is wasteful, and you usually don't want to look for memory leaks in bash.
+@item
+On a bi-arch system, you may get an error message such as
+"valgrind: wrong executable class (eg. 32-bit instead of 64-bit)".
+@end itemize
+
+There are two ways to avoid this:
+
+@itemize @bullet
+@item
+You can make use of the @code{build-aux/run-test} script from Gnulib.
+Add these lines to your @code{Makefile.am}:
+
+@smallexample
+# This must be the last thing that gets added to TESTS_ENVIRONMENT.
+TESTS_ENVIRONMENT += $(SHELL) $(top_srcdir)/build-aux/run-test '$(VALGRIND)'
+@end smallexample
+
+@item
+Using the Automake parallel-tests feature, you can use the following instead:
+
+@smallexample
+AUTOMAKE_OPTIONS = parallel-tests
+TEST_EXTENSIONS = .pl .sh
+LOG_COMPILER = $(VALGRIND)
+@end smallexample
+
+Then valgrind will only be used for the non-.sh and non-.pl tests.
+@end itemize
+
+However, with this measure in place, binaries invoked through scripts will
+not be invoked under valgrind.  This can be solved by defining environment
+variables in the @code{TESTS_ENVIRONMENT} variable that are then used by the
+shell scripts.  For example, add the following:
+
+@smallexample
+TESTS_ENVIRONMENT = VALGRIND='$(VALGRIND)'
+@end smallexample
+
+And then modify the shell scripts to invoke the binary prefixed with
+@code{$VALGRIND}.

@@ -1,0 +1,38 @@
+Description:
+Swap bytes of 16, 32 and 64 bit values.
+
+Files:
+lib/byteswap.in.h
+m4/byteswap.m4
+
+Depends-on:
+
+configure.ac:
+gl_BYTESWAP
+
+Makefile.am:
+BUILT_SOURCES += $(BYTESWAP_H)
+
+# We need the following in order to create <byteswap.h> when the system
+# doesn't have one.
+if GL_GENERATE_BYTESWAP_H
+byteswap.h: byteswap.in.h $(top_builddir)/config.status
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  cat $(srcdir)/byteswap.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+else
+byteswap.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += byteswap.h byteswap.h-t
+
+Include:
+<byteswap.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Oskar Liljeblad

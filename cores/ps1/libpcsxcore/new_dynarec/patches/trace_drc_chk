@@ -1,0 +1,268 @@
+diff --git a/libpcsxcore/new_dynarec/new_dynarec.c b/libpcsxcore/new_dynarec/new_dynarec.c
+index 300a84c8..e4343533 100644
+--- a/libpcsxcore/new_dynarec/new_dynarec.c
++++ b/libpcsxcore/new_dynarec/new_dynarec.c
+@@ -345,7 +345,7 @@ static struct compile_info
+   #define stat_clear(s)
+ #endif
+ 
+-  #define HACK_ENABLED(x) ((ndrc_g.hacks | ndrc_g.hacks_pergame) & (x))
++  #define HACK_ENABLED(x) ((NDHACK_NO_STALLS|NDHACK_NO_COMPAT_HACKS) & (x))
+ 
+   /* registers that may be allocated */
+   /* 1-31 gpr */
+@@ -626,6 +626,7 @@ static int cycle_multiplier_active;
+ 
+ static int CLOCK_ADJUST(int x)
+ {
++  return x * 2;
+   int m = cycle_multiplier_active;
+   int s = (x >> 31) | 1;
+   return (x * m + s * 50) / 100;
+@@ -837,6 +838,9 @@ static noinline u_int generate_exception(u_int pc)
+ static void noinline *get_addr(struct ht_entry *ht, const u_int vaddr,
+   enum ndrc_compile_mode compile_mode)
+ {
++#ifdef DRC_DBG
++printf("get_addr %08x, pc=%08x\n", vaddr, psxRegs.pc);
++#endif
+   u_int start_page = get_page_prev(vaddr);
+   u_int i, page, end_page = get_page(vaddr);
+   void *found_clean = NULL;
+@@ -7421,7 +7425,7 @@ static noinline void pass2b_unneeded_regs(int istart, int iend, int r)
+     // R0 is always unneeded
+     u|=1;
+     // Save it
+-    unneeded_reg[i]=u;
++    unneeded_reg[i]=1;//u;
+     gte_unneeded[i]=gte_u;
+     /*
+     printf("ur (%d,%d) %x: ",istart,iend,start+i*4);
+@@ -8574,6 +8578,7 @@ static noinline void pass5a_preallocate1(void)
+ // to use, which can avoid a load-use penalty on certain CPUs.
+ static noinline void pass5b_preallocate2(void)
+ {
++ return;
+   int i, hr, limit = min(slen - 1, MAXBLOCK - 2);
+   for (i = 0; i < limit; i++)
+   {
+@@ -9602,6 +9607,10 @@ static int noinline new_recompile_block(u_int addr)
+ 
+ #ifdef ASSEM_PRINT
+   fflush(stdout);
++#endif
++#ifdef DRC_DBG
++printf("new_recompile_block done\n");
++fflush(stdout);
+ #endif
+   stat_inc(stat_bc_direct);
+   return 0;
+diff --git a/libpcsxcore/new_dynarec/pcsxmem.c b/libpcsxcore/new_dynarec/pcsxmem.c
+index 98e2c6be..edba031e 100644
+--- a/libpcsxcore/new_dynarec/pcsxmem.c
++++ b/libpcsxcore/new_dynarec/pcsxmem.c
+@@ -238,6 +238,8 @@ static void write_biu(u32 value)
+ 		return;
+ 	}
+ 
++extern u32 handler_cycle;
++handler_cycle = psxRegs.cycle;
+ 	memprintf("write_biu %08x @%08x %u\n", value, psxRegs.pc, psxRegs.cycle);
+ 	psxRegs.biuReg = value;
+ }
+diff --git a/libpcsxcore/psxcounters.c b/libpcsxcore/psxcounters.c
+index 064c06b6..07e2afb5 100644
+--- a/libpcsxcore/psxcounters.c
++++ b/libpcsxcore/psxcounters.c
+@@ -455,9 +455,12 @@ void psxRcntUpdate()
+ 
+ /******************************************************************************/
+ 
++extern u32 handler_cycle;
++
+ void psxRcntWcount( u32 index, u32 value )
+ {
+     verboseLog( 2, "[RCNT %i] wcount: %x\n", index, value );
++handler_cycle = psxRegs.cycle;
+ 
+     _psxRcntWcount( index, value );
+     psxRcntSet();
+@@ -466,6 +469,7 @@ void psxRcntWcount( u32 index, u32 value )
+ void psxRcntWmode( u32 index, u32 value )
+ {
+     verboseLog( 1, "[RCNT %i] wmode: %x\n", index, value );
++handler_cycle = psxRegs.cycle;
+ 
+     _psxRcntWmode( index, value );
+     _psxRcntWcount( index, 0 );
+@@ -477,6 +481,7 @@ void psxRcntWmode( u32 index, u32 value )
+ void psxRcntWtarget( u32 index, u32 value )
+ {
+     verboseLog( 1, "[RCNT %i] wtarget: %x\n", index, value );
++handler_cycle = psxRegs.cycle;
+ 
+     rcnts[index].target = value;
+ 
+@@ -490,6 +495,7 @@ u32 psxRcntRcount0()
+ {
+     u32 index = 0;
+     u32 count;
++handler_cycle = psxRegs.cycle;
+ 
+     if ((rcnts[0].mode & 7) == (RcSyncModeEnable | Rc01UnblankReset) ||
+         (rcnts[0].mode & 7) == (RcSyncModeEnable | Rc01UnblankReset2))
+diff --git a/libpcsxcore/psxevents.c b/libpcsxcore/psxevents.c
+index 1e2d01f6..0ee15974 100644
+--- a/libpcsxcore/psxevents.c
++++ b/libpcsxcore/psxevents.c
+@@ -77,11 +77,13 @@ void irq_test(psxCP0Regs *cp0)
+ 		}
+ 	}
+ 
+-	cp0->n.Cause &= ~0x400;
++	u32 c2 = cp0->n.Cause & ~0x400;
+ 	if (psxHu32(0x1070) & psxHu32(0x1074))
+-		cp0->n.Cause |= 0x400;
+-	if (((cp0->n.Cause | 1) & cp0->n.SR & 0x401) == 0x401)
++		c2 |= 0x400;
++	if (((c2 | 1) & cp0->n.SR & 0x401) == 0x401) {
++		cp0->n.Cause = c2;
+ 		psxException(0, 0, cp0);
++	}
+ }
+ 
+ void gen_interupt(psxCP0Regs *cp0)
+diff --git a/libpcsxcore/psxinterpreter.c b/libpcsxcore/psxinterpreter.c
+index 68d79321..50a38f8d 100644
+--- a/libpcsxcore/psxinterpreter.c
++++ b/libpcsxcore/psxinterpreter.c
+@@ -243,7 +243,7 @@ static inline void addCycle(psxRegisters *regs)
+ {
+ 	assert(regs->subCycleStep >= 0x10000);
+ 	regs->subCycle += regs->subCycleStep;
+-	regs->cycle += regs->subCycle >> 16;
++	regs->cycle += 2; //regs->subCycle >> 16;
+ 	regs->subCycle &= 0xffff;
+ }
+ 
+@@ -440,7 +440,9 @@ static void doBranch(psxRegisters *regs, u32 tar, enum R3000Abdt taken) {
+ 		regs->CP0.n.Target = pc_final;
+ 	regs->branching = 0;
+ 
++	psxRegs.cycle += 2;
+ 	psxBranchTest();
++	psxRegs.cycle -= 2;
+ }
+ 
+ static void doBranchReg(psxRegisters *regs, u32 tar) {
+@@ -973,7 +975,7 @@ void MTC0(psxRegisters *regs_, int reg, u32 val) {
+ 	}
+ }
+ 
+-OP(psxMTC0) { MTC0(regs_, _Rd_, _u32(_rRt_)); }
++OP(psxMTC0) { MTC0(regs_, _Rd_, _u32(_rRt_)); psxBranchTest(); }
+ 
+ // no exception
+ static inline void psxNULLne(psxRegisters *regs) {
+@@ -1132,6 +1134,7 @@ OP(psxHLE) {
+ 	dloadFlush(regs_);
+ 	psxHLEt[hleCode]();
+ 	regs_->branchSeen = 1;
++	regs_->cycle -= 2;
+ }
+ 
+ static void (INT_ATTR *psxBSC[64])(psxRegisters *regs_, u32 code) = {
+@@ -1182,18 +1185,20 @@ static void intReset() {
+ static inline void execI_(u8 **memRLUT, psxRegisters *regs) {
+ 	u32 pc = regs->pc;
+ 
+-	addCycle(regs);
++	//addCycle(regs);
+ 	dloadStep(regs);
+ 
+ 	regs->pc += 4;
+ 	regs->code = fetch(regs, memRLUT, pc);
+ 	psxBSC[regs->code >> 26](regs, regs->code);
++	psxRegs.cycle += 2;
++	fetchNoCache(regs, memRLUT, regs->pc); // bus err check
+ }
+ 
+ static inline void execIbp(u8 **memRLUT, psxRegisters *regs) {
+ 	u32 pc = regs->pc;
+ 
+-	addCycle(regs);
++	//addCycle(regs);
+ 	dloadStep(regs);
+ 
+ 	if (execBreakCheck(regs, pc))
+@@ -1202,6 +1207,8 @@ static inline void execIbp(u8 **memRLUT, psxRegisters *regs) {
+ 	regs->pc += 4;
+ 	regs->code = fetch(regs, memRLUT, pc);
+ 	psxBSC[regs->code >> 26](regs, regs->code);
++	psxRegs.cycle += 2;
++	fetchNoCache(regs, memRLUT, regs->pc); // bus err check
+ }
+ 
+ static void intExecute(psxRegisters *regs) {
+@@ -1218,20 +1225,28 @@ static void intExecuteBp(psxRegisters *regs) {
+ 		execIbp(memRLUT, regs);
+ }
+ 
++ extern int last_count;
++ void do_insn_cmp(void);
+ static void intExecuteBlock(psxRegisters *regs, enum blockExecCaller caller) {
+ 	u8 **memRLUT = psxMemRLUT;
+ 
++ last_count = 0;
+ 	regs->branchSeen = 0;
+-	while (!regs->branchSeen)
++	while (!regs->branchSeen || (regs->dloadReg[0] || regs->dloadReg[1])) {
++		do_insn_cmp();
+ 		execI_(memRLUT, regs);
++	}
+ }
+ 
+ static void intExecuteBlockBp(psxRegisters *regs, enum blockExecCaller caller) {
+ 	u8 **memRLUT = psxMemRLUT;
+ 
++ last_count = 0;
+ 	regs->branchSeen = 0;
+-	while (!regs->branchSeen)
++	while (!regs->branchSeen || (regs->dloadReg[0] || regs->dloadReg[1])) {
++		do_insn_cmp();
+ 		execIbp(memRLUT, regs);
++	}
+ }
+ 
+ static void intClear(u32 Addr, u32 Size) {
+@@ -1263,7 +1278,7 @@ static void setupCop(u32 sr)
+ 	else
+ 		psxBSC[17] = psxCOPd;
+ 	if (sr & (1u << 30))
+-		psxBSC[18] = Config.DisableStalls ? psxCOP2 : psxCOP2_stall;
++		psxBSC[18] = psxCOP2;
+ 	else
+ 		psxBSC[18] = psxCOPd;
+ 	if (sr & (1u << 31))
+@@ -1282,7 +1297,7 @@ void intApplyConfig() {
+ 	assert(psxSPC[26] == psxDIV   || psxSPC[26] == psxDIV_stall);
+ 	assert(psxSPC[27] == psxDIVU  || psxSPC[27] == psxDIVU_stall);
+ 
+-	if (Config.DisableStalls) {
++	if (1) {
+ 		psxBSC[18] = psxCOP2;
+ 		psxBSC[50] = gteLWC2;
+ 		psxBSC[58] = gteSWC2;
+@@ -1365,8 +1380,12 @@ static void intShutdown() {
+ // single step (may do several ops in case of a branch or load delay)
+ // called by asm/dynarec
+ void execI(psxRegisters *regs) {
++ printf("execI %08x c %u, ni %u\n", regs->pc, regs->cycle, regs->next_interupt);
++ last_count = 0;
+ 	do {
+ 		execIbp(psxMemRLUT, regs);
++		if (regs->dloadReg[0] || regs->dloadReg[1])
++			do_insn_cmp();
+ 	} while (regs->dloadReg[0] || regs->dloadReg[1]);
+ }
+ 

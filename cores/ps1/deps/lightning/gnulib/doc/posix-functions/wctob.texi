@@ -1,0 +1,33 @@
+@node wctob
+@section @code{wctob}
+@findex wctob
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/wctob.html}
+
+Gnulib module: wctob
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, HP-UX 11.00, mingw.
+@item
+This function clobbers caller-owned registers on some platforms:
+Cygwin 1.7.5.
+@item
+This function does not work on some platforms:
+Solaris 9.
+@item
+This function is missing a declaration on some platforms:
+IRIX 6.5.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and
+therefore cannot accommodate all Unicode characters.
+However, the Gnulib function @code{c32tob}, provided by Gnulib module
+@code{c32tob}, operates on 32-bit wide characters and therefore does not have
+this limitation.
+@end itemize

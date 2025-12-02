@@ -1,0 +1,28 @@
+Description:
+Extract specific portions of filenames.
+
+Files:
+lib/dirname.h
+lib/dirname-lgpl.c
+lib/stripslash.c
+
+Depends-on:
+basename-lgpl
+double-slash-root
+filename
+malloc-posix
+stdbool
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += dirname-lgpl.c stripslash.c
+
+Include:
+"dirname.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering, Eric Blake

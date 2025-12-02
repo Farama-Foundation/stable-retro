@@ -1,0 +1,98 @@
+Description:
+SELinux-related headers for systems that lack them.
+
+Files:
+lib/getfilecon.c
+lib/se-context.in.h
+lib/se-label.in.h
+lib/se-selinux.in.h
+lib/se-context.c
+lib/se-label.c
+lib/se-selinux.c
+m4/selinux-context-h.m4
+m4/selinux-label-h.m4
+m4/selinux-selinux-h.m4
+
+Depends-on:
+errno
+extern-inline
+snippet/unused-parameter
+
+configure.ac:
+gl_HEADERS_SELINUX_SELINUX_H
+gl_HEADERS_SELINUX_CONTEXT_H
+gl_HEADERS_SELINUX_LABEL_H
+if test "$with_selinux" != no && test "$ac_cv_header_selinux_selinux_h" = yes; then
+  AC_LIBOBJ([getfilecon])
+fi
+
+Makefile.am:
+lib_SOURCES += se-context.in.h se-label.in.h se-selinux.in.h \
+  se-context.c se-label.c se-selinux.c
+
+BUILT_SOURCES += selinux/selinux.h
+selinux/selinux.h: se-selinux.in.h $(top_builddir)/config.status $(UNUSED_PARAMETER_H)
+	$(AM_V_at)$(MKDIR_P) selinux
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_SELINUX_SELINUX_H''@|$(NEXT_SELINUX_SELINUX_H)|g' \
+	      -e '/definition of _GL_UNUSED_PARAMETER/r $(UNUSED_PARAMETER_H)' \
+	      < $(srcdir)/se-selinux.in.h; \
+	} > $@-t && \
+	chmod a-x $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += selinux/selinux.h selinux/selinux.h-t
+
+BUILT_SOURCES += $(SELINUX_CONTEXT_H)
+if GL_GENERATE_SELINUX_CONTEXT_H
+selinux/context.h: se-context.in.h $(top_builddir)/config.status $(UNUSED_PARAMETER_H)
+	$(AM_V_at)$(MKDIR_P) selinux
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+	  sed -e '/definition of _GL_UNUSED_PARAMETER/r $(UNUSED_PARAMETER_H)' \
+	      < $(srcdir)/se-context.in.h; \
+	} > $@-t && \
+	chmod a-x $@-t && \
+	mv $@-t $@
+else
+selinux/context.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += selinux/context.h selinux/context.h-t
+
+BUILT_SOURCES += $(SELINUX_LABEL_H)
+if GL_GENERATE_SELINUX_LABEL_H
+selinux/label.h: se-label.in.h $(top_builddir)/config.status $(UNUSED_PARAMETER_H)
+	$(AM_V_at)$(MKDIR_P) selinux
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+	  sed -e '/definition of _GL_UNUSED_PARAMETER/r $(UNUSED_PARAMETER_H)' \
+	      < $(srcdir)/se-label.in.h; \
+	} > $@-t && \
+	chmod a-x $@-t && \
+	mv $@-t $@
+else
+selinux/label.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += selinux/label.h selinux/label.h-t
+
+MOSTLYCLEANDIRS += selinux
+
+Include:
+<selinux/selinux.h>
+<selinux/context.h>
+<selinux/label.h>
+
+Link:
+$(LIB_SELINUX)
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

@@ -1,0 +1,28 @@
+Description:
+Handle --help and --version options.
+
+Files:
+lib/long-options.h
+lib/long-options.c
+
+Depends-on:
+c99
+exitfail
+getopt-gnu
+stdbool
+stdlib
+version-etc
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += long-options.c
+
+Include:
+"long-options.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

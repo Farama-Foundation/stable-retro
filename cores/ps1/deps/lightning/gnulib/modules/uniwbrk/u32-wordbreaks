@@ -1,0 +1,29 @@
+Description:
+Word breaks in UTF-32 strings.
+
+Files:
+lib/uniwbrk/u32-wordbreaks.c
+lib/uniwbrk/u-wordbreaks.h
+
+Depends-on:
+uniwbrk/base
+uniwbrk/wordbreak-property
+uniwbrk/table
+unistr/u32-mbtouc-unsafe
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uniwbrk/u32-wordbreaks])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNIWBRK_U32_WORDBREAKS
+lib_SOURCES += uniwbrk/u32-wordbreaks.c
+endif
+
+Include:
+"uniwbrk.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

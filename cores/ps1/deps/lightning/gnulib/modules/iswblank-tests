@@ -1,0 +1,12 @@
+Files:
+tests/test-iswblank.c
+tests/macros.h
+
+Depends-on:
+wctype-h-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-iswblank
+check_PROGRAMS += test-iswblank

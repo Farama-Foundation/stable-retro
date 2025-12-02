@@ -1,0 +1,24 @@
+Description:
+Return a string describing the type of a file.
+
+Files:
+lib/file-type.h
+lib/file-type.c
+
+Depends-on:
+gettext-h
+sys_stat
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += file-type.c
+
+Include:
+"file-type.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

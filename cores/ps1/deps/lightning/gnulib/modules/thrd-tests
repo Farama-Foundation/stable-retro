@@ -1,0 +1,14 @@
+Files:
+tests/test-thrd_current.c
+tests/test-thrd_create.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-thrd_current test-thrd_create
+check_PROGRAMS += test-thrd_current test-thrd_create
+test_thrd_current_LDADD = $(LDADD) @LIBSTDTHREAD@
+test_thrd_create_LDADD = $(LDADD) @LIBSTDTHREAD@

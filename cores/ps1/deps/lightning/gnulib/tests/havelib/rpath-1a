@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Test config.rpath and AC_LIB_LINKFLAGS macro.
+# Simple case: a static library.
+
+rp=rp1a
+build1_configure_flags=--disable-shared
+
+. $srcdir/rpath-1

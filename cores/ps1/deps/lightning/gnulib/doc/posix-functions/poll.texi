@@ -1,0 +1,30 @@
+@node poll
+@section @code{poll}
+@findex poll
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/poll.html}
+
+Gnulib module: poll
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14, HP NonStop.
+@item
+This function doesn't work on special files like @file{/dev/null} and ttys like
+@file{/dev/tty} on some platforms:
+AIX 5.3.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Under Windows, when passing a pipe, Gnulib's @code{poll} replacement might
+return 0 even before the timeout has passed.  Programs using it with pipes can
+thus busy wait.
+@item
+On some platforms, file descriptors other than sockets do not support
+POLLHUP; they will return a "readable" or "writable" status instead:
+AIX 7.2, HP NonStop.
+@end itemize

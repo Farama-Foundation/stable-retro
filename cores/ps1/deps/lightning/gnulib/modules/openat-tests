@@ -1,0 +1,16 @@
+Files:
+tests/test-openat.c
+tests/test-open.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+fcntl
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-openat
+check_PROGRAMS += test-openat
+test_openat_LDADD = $(LDADD) @LIBINTL@

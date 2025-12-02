@@ -1,0 +1,20 @@
+Description:
+Script to compile a Java program.
+
+Files:
+build-aux/javacomp.sh.in
+m4/javacomp.m4
+
+Depends-on:
+
+configure.ac:
+# You need to invoke gt_JAVACOMP yourself, possibly with arguments.
+AC_CONFIG_FILES([javacomp.sh:build-aux/javacomp.sh.in])
+
+Makefile.am:
+
+License:
+GPLed build tool
+
+Maintainer:
+all

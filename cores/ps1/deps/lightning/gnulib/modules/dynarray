@@ -1,0 +1,37 @@
+Description:
+Type-safe arrays which grow dynamically.
+
+Files:
+lib/dynarray.h
+lib/malloc/dynarray-skeleton.c
+lib/malloc/dynarray.h
+lib/malloc/dynarray_at_failure.c
+lib/malloc/dynarray_emplace_enlarge.c
+lib/malloc/dynarray_finalize.c
+lib/malloc/dynarray_resize.c
+lib/malloc/dynarray_resize_clear.c
+
+Depends-on:
+c99
+libc-config
+stdbool
+stddef
+intprops
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += malloc/dynarray_at_failure.c \
+               malloc/dynarray_emplace_enlarge.c \
+               malloc/dynarray_finalize.c \
+               malloc/dynarray_resize.c \
+               malloc/dynarray_resize_clear.c
+
+Include:
+"dynarray.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

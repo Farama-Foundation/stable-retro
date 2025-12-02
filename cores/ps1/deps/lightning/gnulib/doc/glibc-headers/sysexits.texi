@@ -1,0 +1,24 @@
+@node sysexits.h
+@section @file{sysexits.h}
+
+Defines the @code{EX_*} macros, including @code{EX_OK}.
+
+Gnulib module: sysexits
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+mingw, MSVC 14.
+@item
+This header file defines no @code{EX_*} macros if @code{_BSD_SOURCE} is not
+defined on some platforms:
+Haiku.
+@item
+The macro @code{EX_CONFIG} is missing on some platforms:
+HP-UX 11.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

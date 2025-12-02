@@ -1,0 +1,12 @@
+Files:
+tests/test-dprintf.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-dprintf
+check_PROGRAMS += test-dprintf

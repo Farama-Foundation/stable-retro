@@ -1,0 +1,27 @@
+Description:
+Formatted output to a fixed-length UTF-16 string.
+
+Files:
+lib/unistdio/u16-snprintf.c
+lib/unistdio/u-snprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/u16-vsnprintf
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistdio/u16-snprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_U16_SNPRINTF
+lib_SOURCES += unistdio/u16-snprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

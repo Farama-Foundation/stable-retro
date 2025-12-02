@@ -1,0 +1,27 @@
+Description:
+Formatted output to a string, with automatic memory allocation.
+
+Files:
+lib/unistdio/ulc-asprintf.c
+lib/unistdio/u-asprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/ulc-vasprintf
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unistdio/ulc-asprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_ULC_ASPRINTF
+lib_SOURCES += unistdio/ulc-asprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

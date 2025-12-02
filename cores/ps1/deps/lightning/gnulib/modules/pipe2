@@ -1,0 +1,29 @@
+Description:
+pipe2() function: create a pipe, with specific opening flags.
+
+Files:
+lib/pipe2.c
+m4/pipe2.m4
+
+Depends-on:
+unistd
+fcntl-h
+binary-io
+extensions
+verify
+
+configure.ac:
+gl_FUNC_PIPE2
+gl_UNISTD_MODULE_INDICATOR([pipe2])
+
+Makefile.am:
+lib_SOURCES += pipe2.c
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

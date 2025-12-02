@@ -1,0 +1,27 @@
+Description:
+floor() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/floor-ieee.m4
+m4/minus-zero.m4
+m4/signbit.m4
+
+Depends-on:
+floor
+
+configure.ac:
+gl_FUNC_FLOOR_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FLOOR_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

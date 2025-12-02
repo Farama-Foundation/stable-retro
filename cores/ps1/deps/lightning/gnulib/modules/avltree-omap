@@ -1,0 +1,25 @@
+Description:
+Ordered map data type implemented by a binary tree.
+
+Files:
+lib/gl_avltree_omap.h
+lib/gl_avltree_omap.c
+lib/gl_avltree_ordered.h
+lib/gl_anytree_omap.h
+
+Depends-on:
+omap
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_avltree_omap.h gl_avltree_omap.c gl_avltree_ordered.h gl_anytree_omap.h
+
+Include:
+"gl_avltree_omap.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

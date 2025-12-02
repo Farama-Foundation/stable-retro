@@ -1,0 +1,29 @@
+Description:
+remove() function: remove a file or directory
+
+Files:
+lib/remove.c
+m4/remove.m4
+
+Depends-on:
+stdio
+rmdir           [test $REPLACE_REMOVE = 1]
+unlink          [test $REPLACE_REMOVE = 1]
+
+configure.ac:
+gl_FUNC_REMOVE
+if test $REPLACE_REMOVE = 1; then
+  AC_LIBOBJ([remove])
+fi
+gl_STDIO_MODULE_INDICATOR([remove])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPL
+
+Maintainer:
+Eric Blake

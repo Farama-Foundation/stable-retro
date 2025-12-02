@@ -1,0 +1,16 @@
+Files:
+tests/test-exp.c
+tests/test-exp.h
+tests/signature.h
+tests/macros.h
+tests/randomd.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-exp
+check_PROGRAMS += test-exp
+test_exp_SOURCES = test-exp.c randomd.c
+test_exp_LDADD = $(LDADD) @EXP_LIBM@

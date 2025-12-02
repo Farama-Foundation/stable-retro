@@ -1,0 +1,14 @@
+Files:
+tests/test-float.c
+tests/macros.h
+
+Depends-on:
+fpieee
+fpucw
+float-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-float
+check_PROGRAMS += test-float

@@ -1,0 +1,19 @@
+Files:
+tests/test-sys_ioctl-c++.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-sys_ioctl-c++
+check_PROGRAMS += test-sys_ioctl-c++
+test_sys_ioctl_c___SOURCES = test-sys_ioctl-c++.cc
+test_sys_ioctl_c___LDADD = $(LDADD) $(LIBINTL) $(LIBSOCKET) $(LIB_CLOCK_GETTIME) $(LIB_EACCESS)
+endif

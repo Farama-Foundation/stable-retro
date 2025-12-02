@@ -1,0 +1,29 @@
+Description:
+Normalization insensitive comparison of UTF-8 strings.
+
+Files:
+lib/uninorm/u8-normcmp.c
+lib/uninorm/u-normcmp.h
+
+Depends-on:
+uninorm/base
+uninorm/u8-normalize
+unistr/u8-cmp2
+minmax
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uninorm/u8-normcmp])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINORM_U8_NORMCMP
+lib_SOURCES += uninorm/u8-normcmp.c
+endif
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

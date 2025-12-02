@@ -1,0 +1,12 @@
+Files:
+tests/test-strtoimax.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-strtoimax
+check_PROGRAMS += test-strtoimax

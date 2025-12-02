@@ -1,0 +1,25 @@
+@node fstatfs
+@subsection @code{fstatfs}
+@findex fstatfs
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-fstatfs-2.html}
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/fstatfs.2.html,,man fstatfs}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+AIX 5.1, mingw, MSVC 14.
+@item
+On platforms where @code{f_blocks} in @samp{struct statfs} is a 32-bit
+value, this function may not work correctly on files systems larger than
+4 TiB@.  The fix is to use the @code{AC_SYS_LARGEFILE} macro.  This affects
+Mac OS X.
+@end itemize

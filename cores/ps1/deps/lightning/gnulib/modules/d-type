@@ -1,0 +1,20 @@
+Description:
+Check whether struct dirent has a member named d_type.
+
+Files:
+m4/d-type.m4
+
+Depends-on:
+
+configure.ac:
+gl_CHECK_TYPE_STRUCT_DIRENT_D_TYPE
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

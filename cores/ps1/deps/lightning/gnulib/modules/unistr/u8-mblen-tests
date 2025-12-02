@@ -1,0 +1,13 @@
+Files:
+tests/unistr/test-u8-mblen.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-mblen
+check_PROGRAMS += test-u8-mblen
+test_u8_mblen_SOURCES = unistr/test-u8-mblen.c
+test_u8_mblen_LDADD = $(LDADD) $(LIBUNISTRING)

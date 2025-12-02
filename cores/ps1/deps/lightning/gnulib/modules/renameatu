@@ -1,0 +1,44 @@
+Description:
+renameatu() function: rename a file, relative to two dirs, with unsigned flag
+
+Files:
+lib/at-func2.c
+lib/renameatu.c
+lib/renameatu.h
+m4/renameat.m4
+
+Depends-on:
+stdio
+extensions
+fcntl-h
+filenamecat-lgpl [test $HAVE_RENAMEAT = 0 || test $REPLACE_RENAMEAT = 1]
+openat-h         [test $HAVE_RENAMEAT = 0 || test $REPLACE_RENAMEAT = 1]
+statat           [test $REPLACE_RENAMEAT = 1]
+stdbool          [test $REPLACE_RENAMEAT = 1]
+at-internal      [test $HAVE_RENAMEAT = 0]
+filename         [test $HAVE_RENAMEAT = 0]
+fstat            [test $HAVE_RENAMEAT = 0]
+getcwd-lgpl      [test $HAVE_RENAMEAT = 0]
+openat-die       [test $HAVE_RENAMEAT = 0]
+rename           [test $HAVE_RENAMEAT = 0]
+same-inode       [test $HAVE_RENAMEAT = 0]
+save-cwd         [test $HAVE_RENAMEAT = 0]
+stat             [test $HAVE_RENAMEAT = 0]
+
+configure.ac:
+gl_FUNC_RENAMEAT
+if test $HAVE_RENAMEAT = 0; then
+  AC_LIBOBJ([at-func2])
+fi
+
+Makefile.am:
+lib_SOURCES += renameatu.c
+
+Include:
+"renameatu.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake

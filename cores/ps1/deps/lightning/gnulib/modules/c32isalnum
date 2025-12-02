@@ -1,0 +1,36 @@
+Description:
+c32isalnum() function: test 32-bit wide character for being alphanumeric.
+
+Files:
+lib/c32isalnum.c
+lib/c32is-impl.h
+m4/mbrtoc32.m4
+
+Depends-on:
+uchar
+wchar
+wctype-h
+localcharset    [test $REPLACE_MBSTATE_T = 1]
+streq           [test $REPLACE_MBSTATE_T = 1]
+unictype/ctype-alnum
+verify
+
+configure.ac:
+AC_REQUIRE([gl_UCHAR_H])
+AC_REQUIRE([gl_MBRTOC32_SANITYCHECK])
+gl_UCHAR_MODULE_INDICATOR([c32isalnum])
+
+Makefile.am:
+lib_SOURCES += c32isalnum.c
+
+Include:
+<uchar.h>
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+Bruno Haible

@@ -1,0 +1,19 @@
+Files:
+tests/test-sqrtl-ieee.c
+tests/test-sqrt-ieee.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnanl-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sqrtl-ieee
+check_PROGRAMS += test-sqrtl-ieee
+test_sqrtl_ieee_LDADD = $(LDADD) @SQRTL_LIBM@

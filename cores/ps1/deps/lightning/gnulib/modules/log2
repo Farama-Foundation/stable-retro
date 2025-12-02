@@ -1,0 +1,35 @@
+Description:
+log2() function: base 2 logarithm.
+
+Files:
+lib/log2.c
+m4/log2.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+isnand          [test $HAVE_LOG2 = 0 || test $REPLACE_LOG2 = 1]
+frexp           [test $HAVE_LOG2 = 0 || test $REPLACE_LOG2 = 1]
+log             [test $HAVE_LOG2 = 0 || test $REPLACE_LOG2 = 1]
+
+configure.ac:
+gl_FUNC_LOG2
+if test $HAVE_LOG2 = 0 || test $REPLACE_LOG2 = 1; then
+  AC_LIBOBJ([log2])
+fi
+gl_MATH_MODULE_INDICATOR([log2])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOG2_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

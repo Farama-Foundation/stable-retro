@@ -1,0 +1,35 @@
+Description:
+log2f() function: base 2 logarithm.
+
+Files:
+lib/log2f.c
+m4/log2f.m4
+
+Depends-on:
+math
+extensions
+log2            [test $HAVE_LOG2F = 0 || test $REPLACE_LOG2F = 1]
+isnanf          [test $HAVE_LOG2F = 0 || test $REPLACE_LOG2F = 1]
+frexpf          [test $HAVE_LOG2F = 0 || test $REPLACE_LOG2F = 1]
+logf            [test $HAVE_LOG2F = 0 || test $REPLACE_LOG2F = 1]
+
+configure.ac:
+gl_FUNC_LOG2F
+if test $HAVE_LOG2F = 0 || test $REPLACE_LOG2F = 1; then
+  AC_LIBOBJ([log2f])
+fi
+gl_MATH_MODULE_INDICATOR([log2f])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOG2F_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

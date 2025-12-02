@@ -1,0 +1,12 @@
+Files:
+tests/test-getloadavg.c
+tests/signature.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getloadavg
+check_PROGRAMS += test-getloadavg
+test_getloadavg_LDADD = $(LDADD) @GETLOADAVG_LIBS@

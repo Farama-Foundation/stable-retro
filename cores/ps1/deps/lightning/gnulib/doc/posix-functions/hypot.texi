@@ -1,0 +1,23 @@
+@node hypot
+@section @code{hypot}
+@findex hypot
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/hypot.html}
+
+Gnulib module: hypot or hypot-ieee
+
+Portability problems fixed by either Gnulib module @code{hypot} or @code{hypot-ieee}:
+@itemize
+@end itemize
+
+Portability problems fixed by Gnulib module @code{hypot-ieee}:
+@itemize
+@item
+When the arguments are mixed NaN and Infinity, this function returns a wrong
+value on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

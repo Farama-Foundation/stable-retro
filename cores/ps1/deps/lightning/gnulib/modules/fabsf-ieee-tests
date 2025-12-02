@@ -1,0 +1,19 @@
+Files:
+tests/test-fabsf-ieee.c
+tests/test-fabs-ieee.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnanf-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fabsf-ieee
+check_PROGRAMS += test-fabsf-ieee
+test_fabsf_ieee_LDADD = $(LDADD) @FABSF_LIBM@

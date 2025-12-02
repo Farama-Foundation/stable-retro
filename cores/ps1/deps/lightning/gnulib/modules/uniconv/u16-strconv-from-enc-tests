@@ -1,0 +1,16 @@
+Files:
+tests/uniconv/test-u16-strconv-from-enc.c
+tests/iconvsupport.c
+tests/macros.h
+
+Depends-on:
+unistr/u16-strcmp
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-strconv-from-enc
+check_PROGRAMS += test-u16-strconv-from-enc
+test_u16_strconv_from_enc_SOURCES = uniconv/test-u16-strconv-from-enc.c iconvsupport.c
+test_u16_strconv_from_enc_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@
+

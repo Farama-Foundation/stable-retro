@@ -1,0 +1,35 @@
+Description:
+Base layer for conversion from/to legacy encodings.
+
+Files:
+lib/uniconv.in.h
+lib/iconveh.h
+lib/striconveha.h
+lib/localcharset.h
+m4/libunistring-base.m4
+
+Depends-on:
+unitypes
+
+configure.ac:
+gl_LIBUNISTRING_LIBHEADER([0.9.4], [uniconv.h])
+
+Makefile.am:
+BUILT_SOURCES += $(LIBUNISTRING_UNICONV_H)
+
+uniconv.h: uniconv.in.h
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  cat $(srcdir)/uniconv.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+MOSTLYCLEANFILES += uniconv.h uniconv.h-t
+
+Include:
+"uniconv.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

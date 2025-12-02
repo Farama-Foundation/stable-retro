@@ -1,0 +1,13 @@
+Files:
+tests/test-getdelim.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getdelim
+check_PROGRAMS += test-getdelim
+MOSTLYCLEANFILES += test-getdelim.txt

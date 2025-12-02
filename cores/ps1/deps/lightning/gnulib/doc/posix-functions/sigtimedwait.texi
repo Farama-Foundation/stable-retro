@@ -1,0 +1,21 @@
+@node sigtimedwait
+@section @code{sigtimedwait}
+@findex sigtimedwait
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/sigtimedwait.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, OpenBSD 6.7, Minix 3.1.8, Cygwin 2.9, mingw, MSVC 14, Android 5.1.
+@item
+Linux implements the meaning of NULL timeout by doing what @code{sigwaitinfo}
+does; other platforms may not do the same.
+@end itemize

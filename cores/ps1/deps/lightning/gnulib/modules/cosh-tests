@@ -1,0 +1,13 @@
+Files:
+tests/test-cosh.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-cosh
+check_PROGRAMS += test-cosh
+test_cosh_LDADD = $(LDADD) @COSH_LIBM@

@@ -1,0 +1,19 @@
+Files:
+tests/test-ilogb.c
+tests/test-ilogb.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+tests/randomd.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ilogb
+check_PROGRAMS += test-ilogb
+test_ilogb_SOURCES = test-ilogb.c randomd.c
+test_ilogb_LDADD = $(LDADD) @ILOGB_LIBM@

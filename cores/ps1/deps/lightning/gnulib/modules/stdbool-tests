@@ -1,0 +1,11 @@
+Files:
+tests/test-stdbool.c
+
+Depends-on:
+stdbool-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-stdbool
+check_PROGRAMS += test-stdbool

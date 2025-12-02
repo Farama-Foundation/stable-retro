@@ -1,0 +1,43 @@
+Files:
+tests/test-uchar-c++.cc
+tests/test-uchar-c++2.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+AC_REQUIRE([gl_ANSI_CXX])
+if test "$CXX" != no; then
+  dnl On FreeBSD 12, 'c++' defines __cplusplus to 201402, although it does not
+  dnl have the <cuchar> header file from C++11.
+  AC_CACHE_CHECK([whether the C++ compiler has <cuchar>],
+    [gl_cv_cxxheader_cuchar],
+    [AC_LANG_PUSH([C++])
+     AC_COMPILE_IFELSE(
+       [AC_LANG_PROGRAM(
+          [[#include <cuchar>]],
+          [[]])
+       ],
+       [gl_cv_cxxheader_cuchar=yes],
+       [gl_cv_cxxheader_cuchar=no])
+     AC_LANG_POP([C++])
+    ])
+else
+  gl_cv_cxxheader_cuchar=no
+fi
+AM_CONDITIONAL([CXX_HAVE_CUCHAR], [test $gl_cv_cxxheader_cuchar != no])
+
+Makefile.am:
+if ANSICXX
+TESTS += test-uchar-c++
+check_PROGRAMS += test-uchar-c++
+test_uchar_c___SOURCES = test-uchar-c++.cc
+if CXX_HAVE_CUCHAR
+test_uchar_c___SOURCES += test-uchar-c++2.cc
+endif
+test_uchar_c___LDADD = $(LDADD) $(LIB_MBRTOWC)
+endif

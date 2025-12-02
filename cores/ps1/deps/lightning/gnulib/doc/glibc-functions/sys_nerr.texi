@@ -1,0 +1,18 @@
+@node sys_nerr
+@subsection @code{sys_nerr}
+@findex sys_nerr
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/sys_nerr.3.html,,man sys_nerr}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This variable is missing on some platforms:
+macOS 10.13, Minix 3.1.8, IRIX 6.5, Cygwin 2.9, mingw, Android 9.0.
+@end itemize

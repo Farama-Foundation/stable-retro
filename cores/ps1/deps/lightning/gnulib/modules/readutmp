@@ -1,0 +1,32 @@
+Description:
+Read entire utmp file into memory.
+
+Files:
+lib/readutmp.h
+lib/readutmp.c
+m4/readutmp.m4
+
+Depends-on:
+extensions
+xalloc
+stdbool
+stdint
+fopen-gnu
+unlocked-io-internal
+
+configure.ac:
+gl_READUTMP
+if test $ac_cv_header_utmp_h = yes || test $ac_cv_header_utmpx_h = yes; then
+  AC_LIBOBJ([readutmp])
+fi
+
+Makefile.am:
+
+Include:
+"readutmp.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering & Paul Eggert

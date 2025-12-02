@@ -1,0 +1,36 @@
+Description:
+Composition of Unicode characters.
+
+Files:
+lib/uninorm/composition.c
+lib/uninorm/composition-table.gperf
+
+Depends-on:
+uninorm/base
+gperf
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uninorm/composition])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINORM_COMPOSITION
+lib_SOURCES += uninorm/composition.c
+endif
+
+$(srcdir)/uninorm/composition-table.h: $(srcdir)/uninorm/composition-table.gperf
+	$(V_GPERF)$(GPERF) -m 1 $(srcdir)/uninorm/composition-table.gperf > $(srcdir)/uninorm/composition-table.h-t1 \
+	&& sed -e 's/^const/static const/' < $(srcdir)/uninorm/composition-table.h-t1 > $(srcdir)/uninorm/composition-table.h-t2 \
+	&& mv $(srcdir)/uninorm/composition-table.h-t2 $(srcdir)/uninorm/composition-table.h
+BUILT_SOURCES        += uninorm/composition-table.h
+MOSTLYCLEANFILES     += uninorm/composition-table.h-t1 uninorm/composition-table.h-t2
+MAINTAINERCLEANFILES += uninorm/composition-table.h
+EXTRA_DIST           += uninorm/composition-table.h
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

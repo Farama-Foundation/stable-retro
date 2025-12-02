@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Test config.rpath and AC_LIB_LINKFLAGS macro.
+# Simple case: a shared library.
+
+rp=rp1b
+build1_configure_flags=
+
+. $srcdir/rpath-1

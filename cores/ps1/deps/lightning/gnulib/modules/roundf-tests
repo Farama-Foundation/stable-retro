@@ -1,0 +1,25 @@
+Files:
+tests/test-roundf1.c
+tests/test-round2.c
+tests/test-roundf2.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ceilf
+floorf
+isnanf-nolibm
+stdbool
+stdint
+verify
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-roundf1 test-roundf2
+check_PROGRAMS += test-roundf1 test-roundf2
+test_roundf1_LDADD = $(LDADD) @ROUNDF_LIBM@
+test_roundf2_LDADD = $(LDADD) @ROUNDF_LIBM@

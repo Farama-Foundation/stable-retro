@@ -1,0 +1,39 @@
+Description:
+fmod() function: floating-point remainder function.
+
+Files:
+lib/fmod.c
+m4/fmod.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+isfinite        [test $REPLACE_FMOD = 1]
+signbit         [test $REPLACE_FMOD = 1]
+fabs            [test $REPLACE_FMOD = 1]
+frexp           [test $REPLACE_FMOD = 1]
+trunc           [test $REPLACE_FMOD = 1]
+ldexp           [test $REPLACE_FMOD = 1]
+isnand          [test $REPLACE_FMOD = 1]
+isinf           [test $REPLACE_FMOD = 1]
+
+configure.ac:
+gl_FUNC_FMOD
+if test $REPLACE_FMOD = 1; then
+  AC_LIBOBJ([fmod])
+fi
+gl_MATH_MODULE_INDICATOR([fmod])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FMOD_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

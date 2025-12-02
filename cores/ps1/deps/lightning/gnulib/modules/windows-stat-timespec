@@ -1,0 +1,28 @@
+Description:
+On native Windows platforms, ensure that 'struct stat' contains
+st_atim, st_mtim, st_ctim fields of type 'struct timespec', providing
+100 ns resolution for the timestamps of files.
+
+Comment:
+This module should not be used as a dependency from a test module,
+otherwise when this module occurs as a tests-related module, it will
+have side effects on the compilation of the main modules in lib/.
+
+Files:
+m4/windows-stat-timespec.m4
+
+Depends-on:
+windows-stat-override
+
+configure.ac:
+AC_REQUIRE([gl_WINDOWS_STAT_TIMESPEC])
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+Bruno Haible

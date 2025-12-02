@@ -1,0 +1,38 @@
+@node perror
+@section @code{perror}
+@findex perror
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/perror.html}
+
+Gnulib module: perror
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function does not support the error values that are specified by POSIX
+but not defined by the system, on some platforms:
+OpenBSD 4.0, Cygwin 1.5.x, mingw, MSVC 14.
+@item
+This function treats @code{errno} of 0 like failure, although POSIX
+requires that the message declare it as a success, on some platforms:
+FreeBSD 8.2, OpenBSD 4.7, macOS 11.1.
+@item
+This function clobbers the @code{strerror} buffer on some platforms:
+Cygwin 1.7.9.
+@item
+This function fails to print a useful a string for out-of-range integers on
+some platforms:
+HP-UX 11, IRIX 6.5.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+POSIX requires that this function set the stream error bit (detected
+by @code{ferror}) on write failure, but not all platforms do this:
+glibc 2.13, cygwin 1.7.9.
+@item
+POSIX requires that this function not alter stream orientation, but
+the gnulib replacement locks in byte orientation and fails on wide
+character streams.
+@end itemize

@@ -1,0 +1,32 @@
+Description:
+strcspn() function: search a string for any of a set of characters.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+lib/strcspn.c
+m4/strcspn.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_STRCSPN
+if test $ac_cv_func_strcspn = no; then
+  AC_LIBOBJ([strcspn])
+  gl_PREREQ_STRCSPN
+fi
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPL
+
+Maintainer:
+glibc

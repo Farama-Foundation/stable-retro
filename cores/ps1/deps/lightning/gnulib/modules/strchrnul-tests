@@ -1,0 +1,12 @@
+Files:
+tests/test-strchrnul.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-strchrnul
+check_PROGRAMS += test-strchrnul

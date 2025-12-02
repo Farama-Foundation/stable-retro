@@ -1,0 +1,50 @@
+Description:
+A <sys/times.h> for systems lacking it.
+
+Files:
+lib/sys_times.in.h
+m4/sys_times_h.m4
+
+Depends-on:
+include_next
+snippet/arg-nonnull
+snippet/warn-on-use
+
+configure.ac:
+gl_SYS_TIMES_H
+AC_PROG_MKDIR_P
+
+Makefile.am:
+BUILT_SOURCES += sys/times.h
+
+# We need the following in order to create <sys/times.h> when the system
+# doesn't have one that works with the given compiler.
+sys/times.h: sys_times.in.h $(top_builddir)/config.status $(WARN_ON_USE_H) $(ARG_NONNULL_H)
+	$(AM_V_at)$(MKDIR_P) sys
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's/@''HAVE_SYS_TIMES_H''@/$(HAVE_SYS_TIMES_H)/g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_SYS_TIMES_H''@|$(NEXT_SYS_TIMES_H)|g' \
+	      -e 's/@''GNULIB_TIMES''@/$(GNULIB_TIMES)/g' \
+	      -e 's|@''HAVE_STRUCT_TMS''@|$(HAVE_STRUCT_TMS)|g' \
+	      -e 's|@''HAVE_TIMES''@|$(HAVE_TIMES)|g' \
+	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/sys_times.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += sys/times.h sys/times.h-t
+MOSTLYCLEANDIRS += sys
+
+Include:
+<sys/times.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

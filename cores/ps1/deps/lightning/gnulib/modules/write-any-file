@@ -1,0 +1,27 @@
+Description:
+Determine whether we can write any file.
+
+Files:
+lib/write-any-file.h
+lib/write-any-file.c
+m4/write-any-file.m4
+
+Depends-on:
+stdbool
+priv-set
+root-uid
+
+configure.ac:
+gl_WRITE_ANY_FILE
+
+Makefile.am:
+lib_SOURCES += write-any-file.c
+
+Include:
+"write-any-file.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

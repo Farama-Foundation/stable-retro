@@ -1,0 +1,24 @@
+Files:
+tests/test-nl_langinfo.sh
+tests/test-nl_langinfo.c
+tests/test-nl_langinfo-mt.c
+tests/signature.h
+tests/macros.h
+m4/locale-fr.m4
+
+Depends-on:
+c-strcase
+setlocale
+thread
+nanosleep
+
+configure.ac:
+gt_LOCALE_FR
+gt_LOCALE_FR_UTF8
+
+Makefile.am:
+TESTS += test-nl_langinfo.sh test-nl_langinfo-mt
+TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@' LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
+check_PROGRAMS += test-nl_langinfo test-nl_langinfo-mt
+test_nl_langinfo_LDADD = $(LDADD) $(LIB_SETLOCALE)
+test_nl_langinfo_mt_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBMULTITHREAD) $(LIB_NANOSLEEP)

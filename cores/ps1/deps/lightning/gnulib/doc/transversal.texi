@@ -1,0 +1,69 @@
+@node Modules that modify the way other modules work
+@section Modules that modify the way other modules work
+
+The normal way to design modules is that each module has its own code,
+and the module dependencies provide the facilities on which this code
+can rely.  But sometimes it is necessary to use more advanced
+techniques.  For example:
+@itemize
+@item
+You may want to have optional module dependencies: Let module A use
+facilities provided by module B, if module B is present, but without
+requiring that module B is present.
+@item
+A module can indicate support for particular behaviours.  For example,
+Gnulib has a module @samp{sigpipe} that requests POSIX compatible
+SIGPIPE behaviour from all other modules -- something that is not
+enabled by default.  Or consider the @samp{nonblocking} module, that is
+an indicator that all I/O functions should handle non-blocking file
+descriptors -- something that, equally, is not enabled by default.
+@item
+A module can indicate to other modules that they can rely on certain
+guarantees, and thus omit specific code.  For example, when Gnulib's
+@samp{malloc-gnu} module is present, you can omit code that test
+@code{n} against zero when you call @code{malloc (n)}.
+@end itemize
+
+Be aware that these advanced techniques likely cause breakage in the
+situation of multiple @code{gnulib-tool} invocations in the scope of a
+single @code{configure} file.  This is because the question ``is module
+B present?'' does not have a unique answer in such situations.
+@code{gnulib-tool} has support for these techniques in the situation of
+@code{--create-testdir --single-configure}, which basically has two
+@code{gnulib-tool} invocations, one for a set of modules that end up in
+@code{gllib}, and one for the set of modules that end up in
+@code{gltests}.  But you should be aware that this does not cover the
+general situation.
+
+Which technique to use, depends on the answer to the question: ``If my
+module occurs among the modules of @code{gltests}, should it have an
+effect on the modules in @code{gllib}?''
+
+If the answer is ``no'', your module description should invoke the
+Autoconf macro @code{gl_MODULE_INDICATOR}.  This Autoconf macro takes
+one argument: the name of your module.  The effect of
+@code{gl_MODULE_INDICATOR([@var{my-module}])} is to define, in
+@code{config.h}, a C macro @code{GNULIB_@var{MY_MODULE}} that indicates
+whether your macro is considered to be present.  This works even when
+your macro is used in @code{gltests}: @code{GNULIB_@var{MY_MODULE}}
+will then evaluate to 1 in @code{gltests} but to 0 in @code{gllib}.
+
+If the answer is ``yes'', you have two techniques available.  The first
+one is to invoke a similar Autoconf macro, named
+@code{gl_MODULE_INDICATOR_FOR_TESTS}.  It works similarly.  However,
+when your macro is used in @code{gltests}, @code{GNULIB_@var{MY_MODULE}}
+will evaluate to 1 both in @code{gltests} and in @code{gllib}.
+
+The second one is to define a shell variable in the @code{configure}
+file that tells whether your module is present, through use of
+@code{m4_divert_text}.  The Autoconf macros of a dependency module will
+initialize this shell variable, through
+@samp{m4_divert_text([DEFAULTS], [@var{my_shell_var}=no])}.  The
+Autoconf macros of your module will override this value, through
+@samp{m4_divert_text([INIT_PREPARE], [@var{my_shell_var}=yes])}.  Then
+you can use @code{@var{my_shell_var}} in the Autoconf macros of both
+modules.  You can find more details about this technique in the Gnulib
+module @code{getopt-gnu}.
+
+Reminder: These techniques are advanced.  They have the potential to
+cause lots of headaches if you apply them incorrectly.

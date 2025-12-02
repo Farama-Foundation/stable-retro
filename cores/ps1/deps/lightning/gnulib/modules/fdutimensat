@@ -1,0 +1,26 @@
+Description:
+Set file access and modification times, relative to a directory.
+
+Files:
+lib/fdutimensat.c
+lib/utimens.h
+
+Depends-on:
+futimens
+utimensat
+
+configure.ac:
+gl_MODULE_INDICATOR([fdutimensat])
+
+Makefile.am:
+lib_SOURCES += fdutimensat.c
+
+Include:
+<fcntl.h>
+"utimens.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering, Eric Blake

@@ -1,0 +1,28 @@
+Description:
+posix_spawnattr_getsigmask() function: get the set of initially blocked signals
+specified for child process.
+
+Files:
+lib/spawnattr_getsigmask.c
+m4/posix_spawn.m4
+
+Depends-on:
+spawn
+
+configure.ac:
+gl_POSIX_SPAWN
+if test $HAVE_POSIX_SPAWN = 0 || test $REPLACE_POSIX_SPAWN = 1; then
+  AC_LIBOBJ([spawnattr_getsigmask])
+fi
+gl_SPAWN_MODULE_INDICATOR([posix_spawnattr_getsigmask])
+
+Makefile.am:
+
+Include:
+<spawn.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+glibc

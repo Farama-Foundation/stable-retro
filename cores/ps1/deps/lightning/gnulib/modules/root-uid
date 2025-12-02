@@ -1,0 +1,20 @@
+Description:
+ROOT_UID macro: superuser's user ID
+
+Files:
+lib/root-uid.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"root-uid.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

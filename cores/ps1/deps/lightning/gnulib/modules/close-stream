@@ -1,0 +1,25 @@
+Description:
+Close a stream, with nicer error checking than fclose's.
+
+Files:
+lib/close-stream.h
+lib/close-stream.c
+
+Depends-on:
+fpending
+stdbool
+
+configure.ac:
+gl_MODULE_INDICATOR([close-stream])
+
+Makefile.am:
+lib_SOURCES += close-stream.c
+
+Include:
+"close-stream.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

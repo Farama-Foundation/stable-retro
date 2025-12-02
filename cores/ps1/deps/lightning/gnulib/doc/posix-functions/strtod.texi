@@ -1,0 +1,96 @@
+@node strtod
+@section @code{strtod}
+@findex strtod
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strtod.html}
+
+Gnulib module: strtod or strtod-obsolete
+
+Portability problems fixed by either Gnulib module @code{strtod} or @code{strtod-obsolete}:
+@itemize
+@item
+This function mis-parses strings with leading @samp{+} on some old platforms:
+Old versions of Linux.
+
+@item
+This function returns a wrong end pointer on some old platforms.
+
+@item
+This function consumes whitespace even when there is nothing that should
+be parsed on some platforms:
+IRIX 6.5.
+
+@item
+This function allows whitespace between @samp{e} and the exponent on
+some platforms:
+HP-UX 11.11, IRIX 6.5.
+
+@item
+This function returns the wrong end pointer for @samp{-0x} on some
+platforms:
+glibc 2.4, Mac OS X 10.5, FreeBSD 6.2, AIX 7.1, Cygwin < 1.5.25-11.
+
+@item
+This function returns +0.0 (not @minus{}0.0) for @samp{-0} on some platforms:
+IRIX 6.5.
+
+@item
+This function fails to parse Infinities and plain NaNs on some platforms:
+OpenBSD 4.0, HP-UX 11.11, IRIX 6.5, Solaris 9, mingw, MSVC 14.
+
+@item
+This function fails to parse @samp{NaN()} on some platforms:
+glibc-2.3.6, Mac OS X 10.5, FreeBSD 6.2, OpenBSD 4.0, AIX 7.1, HP-UX 11.11, IRIX 6.5, Cygwin < 1.5.25-11, mingw, MSVC 14.
+
+@item
+This function fails to parse @samp{NaN(@var{n-char-sequence})} on some
+platforms:
+OpenBSD 4.0, HP-UX 11.11, IRIX 6.5, mingw, MSVC 14.
+
+@item
+This function parses @samp{NaN(@var{n-char-sequence})}, but returns
+the wrong end pointer on some platforms:
+glibc-2.4, AIX 7.1.
+
+@item
+This function fails to parse C99 hexadecimal floating point on some
+platforms:
+NetBSD 5.0, OpenBSD 4.0, AIX 5.1, HP-UX 11.11, IRIX 6.5, Solaris 11.4, mingw, MSVC 14.
+
+@item
+In hexadecimal floats, this function allows whitespace between @samp{p}
+and the exponent on some platforms:
+HP-UX 11.31/ia64.
+
+@item
+This function returns the wrong end pointer for @samp{0x1p} on some
+platforms:
+AIX 7.1.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{strtod-obsolete}:
+@itemize
+@item
+This function is missing on some old platforms.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function returns +0.0 (not @minus{}0.0) for negative underflow on some
+platforms:
+glibc 2.7, Cygwin 1.5.x, mingw, MSVC 14.
+
+@item
+This function cannot distinguish between ``nan'' and ``-nan'' on some
+platforms:
+glibc 2.7, IRIX 6.5, mingw, MSVC 14.
+
+@item
+This function fails to correctly parse very long strings on some
+platforms:
+Mac OS X 10.5, FreeBSD 6.2, NetBSD 5.0, OpenBSD 4.0, IRIX 6.5, Cygwin, mingw, MSVC 14.
+
+@item
+The replacement function does not always return correctly rounded results.
+@end itemize

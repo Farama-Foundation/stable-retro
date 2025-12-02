@@ -1,0 +1,28 @@
+Description:
+Compare pieces of UTF-8 strings with possibly different lengths.
+
+Files:
+lib/unistr/u8-cmp2.c
+lib/unistr/u-cmp2.h
+
+Depends-on:
+unistr/base
+unistr/u8-cmp
+minmax
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-cmp2])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_CMP2
+lib_SOURCES += unistr/u8-cmp2.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

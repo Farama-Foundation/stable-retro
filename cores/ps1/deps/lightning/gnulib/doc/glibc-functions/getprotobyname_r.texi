@@ -1,0 +1,20 @@
+@node getprotobyname_r
+@subsection @code{getprotobyname_r}
+@findex getprotobyname_r
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-getprotobyname-r.html}
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/getprotobyname_r.3.html,,man getprotobyname_r}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, FreeBSD 6.0, Minix 3.1.8, HP-UX 11, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

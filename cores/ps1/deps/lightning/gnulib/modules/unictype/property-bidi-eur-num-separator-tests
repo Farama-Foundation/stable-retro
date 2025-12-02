@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_bidi_eur_num_separator.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_bidi_eur_num_separator
+check_PROGRAMS += test-pr_bidi_eur_num_separator
+test_pr_bidi_eur_num_separator_SOURCES = unictype/test-pr_bidi_eur_num_separator.c
+test_pr_bidi_eur_num_separator_LDADD = $(LDADD) $(LIBUNISTRING)

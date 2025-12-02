@@ -1,0 +1,35 @@
+Files:
+tests/uninorm/test-nfc.c
+tests/uninorm/test-u8-nfc.c
+tests/uninorm/test-u16-nfc.c
+tests/uninorm/test-u32-nfc.c
+tests/uninorm/test-u32-nfc-big.sh
+tests/uninorm/test-u32-nfc-big.c
+tests/uninorm/test-u32-normalize-big.h
+tests/uninorm/test-u32-normalize-big.c
+tests/uninorm/NormalizationTest.txt
+tests/macros.h
+
+Depends-on:
+unistr/u8-cmp
+unistr/u16-cmp
+unistr/u32-cmp
+unistr/u32-strlen
+xalloc
+
+configure.ac:
+AC_CHECK_DECLS_ONCE([alarm])
+
+Makefile.am:
+TESTS += test-nfc uninorm/test-u32-nfc-big.sh
+check_PROGRAMS += test-nfc test-u32-nfc-big
+test_nfc_SOURCES = \
+  uninorm/test-nfc.c \
+  uninorm/test-u8-nfc.c \
+  uninorm/test-u16-nfc.c \
+  uninorm/test-u32-nfc.c
+test_nfc_LDADD = $(LDADD) $(LIBUNISTRING)
+test_u32_nfc_big_SOURCES = \
+  uninorm/test-u32-nfc-big.c \
+  uninorm/test-u32-normalize-big.c
+test_u32_nfc_big_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@

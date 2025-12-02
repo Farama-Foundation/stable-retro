@@ -1,0 +1,28 @@
+Description:
+Allocate memory with indefinite extent and specified alignment.
+
+Files:
+lib/posix_memalign.c
+m4/posix_memalign.m4
+
+Depends-on:
+extensions
+stdlib
+
+configure.ac:
+gl_FUNC_POSIX_MEMALIGN
+if test $REPLACE_POSIX_MEMALIGN = 1; then
+  AC_LIBOBJ([posix_memalign])
+fi
+gl_STDLIB_MODULE_INDICATOR([posix_memalign])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

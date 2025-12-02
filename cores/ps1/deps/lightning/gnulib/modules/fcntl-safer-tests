@@ -1,0 +1,15 @@
+Files:
+tests/test-open.h
+tests/test-fcntl-safer.c
+tests/macros.h
+
+Depends-on:
+stdbool
+fcntl
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fcntl-safer
+check_PROGRAMS += test-fcntl-safer

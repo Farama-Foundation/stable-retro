@@ -1,0 +1,23 @@
+Description:
+Compute cyclic redundancy codes.
+
+Files:
+lib/crc.h
+lib/crc.c
+
+Depends-on:
+stdint
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += crc.c
+
+Include:
+"crc.h"
+
+License:
+LGPL
+
+Maintainer:
+Simon Josefsson

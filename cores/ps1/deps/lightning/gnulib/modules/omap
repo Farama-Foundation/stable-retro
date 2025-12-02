@@ -1,0 +1,24 @@
+Description:
+Abstract ordered map data type.
+
+Files:
+lib/gl_omap.h
+lib/gl_omap.c
+
+Depends-on:
+extern-inline
+stdbool
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_omap.h gl_omap.c
+
+Include:
+"gl_omap.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

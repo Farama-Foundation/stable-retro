@@ -1,0 +1,52 @@
+@node nl_langinfo
+@section @code{nl_langinfo}
+@findex nl_langinfo
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/nl_langinfo.html}
+
+Gnulib module: nl_langinfo
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 14, Android 7.1.
+@item
+The constant @code{CODESET} is not supported on some platforms:
+OpenBSD 3.8.
+@item
+The constants @code{ALTMON_1} to @code{ALTMON_12} are not defined on some
+platforms:
+glibc 2.26, musl libc, macOS 11.1, NetBSD 8.0, OpenBSD 6.7, AIX 7.2, HP-UX 11.31, IRIX 6.5, Solaris 11.4, Haiku, Cygwin 2.9.
+@item
+The constants @code{ERA}, @code{ERA_D_FMT}, @code{ERA_D_T_FMT},
+@code{ERA_T_FMT}, @code{ALT_DIGITS} are not supported on some platforms:
+OpenBSD 6.7.
+@item
+The constants @code{YESEXPR} and @code{NOEXPR} do not return a valid
+string on some platforms:
+IRIX 6.5.
+@item
+This function is not multithread-safe on some platforms:
+Solaris 11.3.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Cygwin 1.5.x, which doesn't have locales, @code{nl_langinfo(CODESET)} always
+returns @code{"US-ASCII"}.
+
+@item
+On Cygwin 1.7.0, only the charset portion of a locale designation is honored.
+
+@item
+On NetBSD 5.0, in some locales, @code{nl_langinfo(CRNCYSTR)} returns the
+empty string, although the local currency symbol, as returned by
+@code{localeconv()->currency_symbol}, is non-empty.
+
+@item
+On NetBSD 5.1, in the "C" locale, the results of
+@code{nl_langinfo(ABMON_1)} ... @code{nl_langinfo(ABMON_12)} are full month
+names, not abbreviated month names.
+@end itemize

@@ -1,0 +1,30 @@
+Description:
+rewinddir() function: restart reading the entries of a directory from the
+beginning
+
+Files:
+lib/rewinddir.c
+lib/dirent-private.h
+m4/rewinddir.m4
+
+Depends-on:
+dirent
+largefile
+
+configure.ac:
+gl_FUNC_REWINDDIR
+if test $HAVE_REWINDDIR = 0; then
+  AC_LIBOBJ([rewinddir])
+fi
+gl_DIRENT_MODULE_INDICATOR([rewinddir])
+
+Makefile.am:
+
+Include:
+<dirent.h>
+
+License:
+LGPL
+
+Maintainer:
+all

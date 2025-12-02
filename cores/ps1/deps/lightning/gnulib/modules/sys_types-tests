@@ -1,0 +1,11 @@
+Files:
+tests/test-sys_types.c
+
+Depends-on:
+sys_types-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sys_types
+check_PROGRAMS += test-sys_types

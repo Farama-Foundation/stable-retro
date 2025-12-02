@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character is of general category Co.
+
+Files:
+lib/unictype/categ_Co.c
+lib/unictype/categ_Co.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-Co])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_CO
+lib_SOURCES += unictype/categ_Co.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

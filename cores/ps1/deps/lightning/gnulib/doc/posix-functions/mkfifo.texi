@@ -1,0 +1,26 @@
+@node mkfifo
+@section @code{mkfifo}
+@findex mkfifo
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/mkfifo.html}
+
+Gnulib module: mkfifo
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function mishandles trailing slash on some platforms:
+FreeBSD 7.2, Solaris 9.
+@item
+This function is missing on some platforms; however, the replacement
+always fails with @code{ENOSYS}:
+mingw, MSVC 14, Android 4.4.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+If the argument exists and is a directory, this function fails with
+@code{EISDIR} instead of the correct @code{EEXIST}:
+HP-UX 11.11.
+@end itemize

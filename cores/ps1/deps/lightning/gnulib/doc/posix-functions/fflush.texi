@@ -1,0 +1,44 @@
+@node fflush
+@section @code{fflush}
+@findex fflush
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fflush.html}
+
+Gnulib module: fflush
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+@code{fflush} followed by @code{fseek} or @code{fseeko}, applied to an input
+stream, should have the effect of positioning the underlying file descriptor.
+It doesn't do this on some platforms:
+glibc 2.33 and others.
+@item
+@code{fflush} on an input stream changes the position of the stream to the
+end of the previous buffer, on some platforms: mingw, MSVC 14.
+@item
+@code{fflush} on an input stream right after @code{ungetc} does not discard
+the @code{ungetc} buffer, on some platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Cygwin 1.5.25-10.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+@code{fflush}, @code{ftell}, @code{ftello}, @code{fgetpos} behave incorrectly
+on input streams that are opened in @code{O_TEXT} mode and whose contents
+contains Unix line terminators (LF), on some platforms: mingw, MSVC 14.
+@item
+On Windows platforms (excluding Cygwin), this function does not set @code{errno}
+upon failure.
+@item
+This function crashes if the stream's file descriptor has already been
+closed, if @code{MSVC_INVALID_PARAMETER_HANDLING} is
+@code{HAIRY_LIBRARY_HANDLING} or @code{SANE_LIBRARY_HANDLING},
+on some platforms:
+MSVC 14.
+@item
+@code{fflush} on an input stream right after @code{ungetc} does not discard
+the @code{ungetc} buffer, on some platforms:
+AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11 2010-11, mingw, MSVC 14.
+@end itemize

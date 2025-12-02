@@ -1,0 +1,43 @@
+Files:
+tests/test-c32rtomb.sh
+tests/test-c32rtomb.c
+tests/test-c32rtomb-w32-1.sh
+tests/test-c32rtomb-w32-2.sh
+tests/test-c32rtomb-w32-3.sh
+tests/test-c32rtomb-w32-4.sh
+tests/test-c32rtomb-w32-5.sh
+tests/test-c32rtomb-w32-6.sh
+tests/test-c32rtomb-w32-7.sh
+tests/test-c32rtomb-w32.c
+tests/signature.h
+tests/macros.h
+m4/locale-fr.m4
+m4/locale-ja.m4
+m4/locale-zh.m4
+m4/codeset.m4
+
+Depends-on:
+btoc32
+mbrtoc32
+setlocale
+localcharset
+
+configure.ac:
+gt_LOCALE_FR
+gt_LOCALE_FR_UTF8
+gt_LOCALE_JA
+gt_LOCALE_ZH_CN
+
+Makefile.am:
+TESTS += \
+  test-c32rtomb.sh \
+  test-c32rtomb-w32-1.sh test-c32rtomb-w32-2.sh test-c32rtomb-w32-3.sh \
+  test-c32rtomb-w32-4.sh test-c32rtomb-w32-5.sh test-c32rtomb-w32-6.sh \
+  test-c32rtomb-w32-7.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-c32rtomb test-c32rtomb-w32
+test_c32rtomb_LDADD = $(LDADD) $(LIB_SETLOCALE)

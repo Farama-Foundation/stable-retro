@@ -1,0 +1,27 @@
+Description:
+Canonical decomposition of Unicode strings.
+
+Files:
+lib/uninorm/nfd.c
+lib/uninorm/normalize-internal.h
+
+Depends-on:
+uninorm/base
+uninorm/canonical-decomposition
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uninorm/nfd])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINORM_NFD
+lib_SOURCES += uninorm/nfd.c
+endif
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

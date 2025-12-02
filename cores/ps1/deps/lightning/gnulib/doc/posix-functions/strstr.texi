@@ -1,0 +1,38 @@
+@node strstr
+@section @code{strstr}
+@findex strstr
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strstr.html}
+
+Gnulib module: strstr or strstr-simple
+
+Portability problems fixed by either Gnulib module @code{strstr-simple}
+or @code{strstr}:
+@itemize
+@item
+This function can trigger memchr bugs on some platforms:
+glibc 2.10.
+@item
+This function can trigger false positives for long periodic needles on
+some platforms:
+glibc 2.12, Cygwin 1.7.7.
+@item
+This function may fail to find matches on some platforms:
+glibc 2.28.
+@end itemize
+
+Portability problems fixed by Gnulib @code{strstr}:
+@itemize
+@item
+This function has quadratic instead of linear worst-case complexity on some
+platforms:
+glibc 2.8, macOS 11.1, FreeBSD 6.2, NetBSD 9.0, OpenBSD 4.0, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 1.5.x, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function cannot work correctly on character strings in most multibyte
+locales.  Gnulib provides an alternative function @code{mbsstr} that works
+on character strings in all locales.
+@end itemize

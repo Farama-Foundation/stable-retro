@@ -1,0 +1,13 @@
+Files:
+tests/test-usleep.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+time
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-usleep
+check_PROGRAMS += test-usleep

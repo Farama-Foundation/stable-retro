@@ -1,0 +1,18 @@
+Files:
+tests/test-threads.c
+tests/test-thread_local.c
+tests/macros.h
+
+Depends-on:
+threads-h-c++-tests
+thrd
+stdint
+
+configure.ac:
+AC_CHECK_DECLS_ONCE([alarm])
+
+Makefile.am:
+TESTS += test-threads test-thread_local
+check_PROGRAMS += test-threads test-thread_local
+test_threads_LDADD = $(LDADD) @LIBSTDTHREAD@
+test_thread_local_LDADD = $(LDADD) @LIBSTDTHREAD@ @LIBTHREADLOCAL@

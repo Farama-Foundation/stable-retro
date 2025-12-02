@@ -1,0 +1,10 @@
+Files:
+tests/test-pathmax.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pathmax
+check_PROGRAMS += test-pathmax

@@ -1,0 +1,32 @@
+Description:
+Creating and controlling threads.
+
+Files:
+lib/glthread/thread.h
+lib/glthread/thread.c
+m4/thread.m4
+
+Depends-on:
+threadlib
+extern-inline
+lock
+windows-thread  [test $gl_threads_api = windows]
+pthread_sigmask [test $gl_threads_api = posix]
+
+configure.ac:
+gl_THREAD
+
+Makefile.am:
+lib_SOURCES += glthread/thread.h glthread/thread.c
+
+Include:
+"glthread/thread.h"
+
+Link:
+$(LIBMULTITHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+Yoann Vandoorselaere

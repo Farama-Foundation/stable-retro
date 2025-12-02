@@ -1,0 +1,13 @@
+Files:
+tests/test-parse-datetime.c
+tests/macros.h
+
+Depends-on:
+setenv
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-parse-datetime
+check_PROGRAMS += test-parse-datetime
+test_parse_datetime_LDADD = $(LDADD) @LIBINTL@ $(LIB_CLOCK_GETTIME)

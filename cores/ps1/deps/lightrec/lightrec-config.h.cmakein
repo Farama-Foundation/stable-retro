@@ -1,0 +1,31 @@
+/* SPDX-License-Identifier: LGPL-2.1-or-later */
+/*
+ * Copyright (C) 2019-2021 Paul Cercueil <paul@crapouillou.net>
+ */
+
+#ifndef __LIGHTREC_CONFIG_H__
+#define __LIGHTREC_CONFIG_H__
+
+#cmakedefine01 ENABLE_THREADED_COMPILER
+#cmakedefine01 ENABLE_FIRST_PASS
+#cmakedefine01 ENABLE_DISASSEMBLER
+#cmakedefine01 ENABLE_CODE_BUFFER
+
+#cmakedefine01 HAS_DEFAULT_ELM
+
+#cmakedefine01 OPT_REMOVE_DIV_BY_ZERO_SEQ
+#cmakedefine01 OPT_REPLACE_MEMSET
+#cmakedefine01 OPT_DETECT_IMPOSSIBLE_BRANCHES
+#cmakedefine01 OPT_HANDLE_LOAD_DELAYS
+#cmakedefine01 OPT_TRANSFORM_OPS
+#cmakedefine01 OPT_LOCAL_BRANCHES
+#cmakedefine01 OPT_SWITCH_DELAY_SLOTS
+#cmakedefine01 OPT_FLAG_IO
+#cmakedefine01 OPT_FLAG_MULT_DIV
+#cmakedefine01 OPT_EARLY_UNLOAD
+#cmakedefine01 OPT_PRELOAD_PC
+
+#cmakedefine01 OPT_SH4_USE_GBR
+
+#endif /* __LIGHTREC_CONFIG_H__ */
+

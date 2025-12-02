@@ -1,0 +1,31 @@
+@node error
+@subsection @code{error}
+@findex error
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-error-n.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Error Messages,,Error Messages,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Error-Messages.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/error.3.html,,man error}.
+@end itemize
+
+Gnulib module: error
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 1.7.9, mingw, MSVC 14, Android 5.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

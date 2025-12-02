@@ -1,0 +1,32 @@
+Description:
+Parsing an UTF-16 format string.
+
+Files:
+lib/unistdio/u-printf-parse.h
+lib/unistdio/u16-printf-parse.c
+lib/printf-parse.h
+lib/printf-parse.c
+m4/vasnprintf.m4
+m4/intmax_t.m4
+m4/stdint_h.m4
+m4/inttypes_h.m4
+
+Depends-on:
+unistdio/u-printf-args
+stdint
+xsize
+
+configure.ac:
+gl_PREREQ_PRINTF_PARSE
+
+Makefile.am:
+lib_SOURCES += unistdio/u16-printf-parse.c
+
+Include:
+"unistdio/u-printf-parse.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

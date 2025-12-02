@@ -1,0 +1,23 @@
+@node pthread_mutexattr_setrobust_np
+@subsection @code{pthread_mutexattr_setrobust_np}
+@findex pthread_mutexattr_setrobust_np
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-pthread-mutexattr-getrobust-np-1.html}
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/pthread_mutexattr_setrobust_np.3.html,,man pthread_mutexattr_setrobust_np}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+glibc 2.3.6, macOS 11.1, FreeBSD 6.4, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize
+
+This function has now been standardized by POSIX under the name
+@code{pthread_mutexattr_setrobust}.

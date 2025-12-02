@@ -1,0 +1,14 @@
+Files:
+tests/test-stack.c
+tests/macros.h
+
+Depends-on:
+string
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-stack
+check_PROGRAMS += test-stack
+test_stack_SOURCES = test-stack.c
+test_stack_LDADD = $(LDADD) $(LIBINTL)

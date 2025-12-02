@@ -1,0 +1,25 @@
+@node dirname
+@section @code{dirname}
+@findex dirname
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/dirname.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+IRIX 6.5, mingw, MSVC 14.
+@item
+@code{dirname} assumes file names in POSIX syntax; it does not work with file
+names in Windows syntax.
+@end itemize
+
+The Gnulib module @code{dirname} provides similar API, with functions
+@code{dir_name} and @code{mdir_name}, that also works with Windows
+file names.

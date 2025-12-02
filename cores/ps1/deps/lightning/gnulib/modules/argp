@@ -1,0 +1,64 @@
+Description:
+Hierarchical processing of command line arguments.
+
+Notice:
+If you are using GNU gettext version 0.16.1 or older, add the following options
+to XGETTEXT_OPTIONS in your po/Makevars:
+  --flag=argp_error:2:c-format --flag=argp_failure:4:c-format
+
+Files:
+lib/argp.h
+lib/argp-ba.c
+lib/argp-eexst.c
+lib/argp-fmtstream.c
+lib/argp-fmtstream.h
+lib/argp-fs-xinl.c
+lib/argp-help.c
+lib/argp-namefrob.h
+lib/argp-parse.c
+lib/argp-pin.c
+lib/argp-pv.c
+lib/argp-pvh.c
+lib/argp-xinl.c
+m4/argp.m4
+
+Depends-on:
+alloca
+basename-lgpl
+extern-inline
+getopt-gnu
+strchrnul
+sysexits
+malloc-gnu
+mempcpy
+strndup
+strcase
+extensions
+vsnprintf
+sleep
+stdalign
+stdio
+strerror
+memchr
+memmove
+
+configure.ac:
+gl_ARGP
+m4_ifdef([AM_XGETTEXT_OPTION],
+  [AM_][XGETTEXT_OPTION([--flag=argp_error:2:c-format])
+   AM_][XGETTEXT_OPTION([--flag=argp_failure:4:c-format])])
+
+Makefile.am:
+lib_SOURCES += argp.h argp-ba.c argp-eexst.c \
+           argp-fmtstream.c argp-fmtstream.h argp-fs-xinl.c argp-help.c \
+           argp-namefrob.h argp-parse.c argp-pin.c argp-pv.c argp-pvh.c \
+           argp-xinl.c
+
+Include:
+"argp.h"
+
+License:
+LGPL
+
+Maintainer:
+Sergey Poznyakoff, glibc

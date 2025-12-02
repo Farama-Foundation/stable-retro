@@ -1,0 +1,20 @@
+Description:
+'extern inline' a la ISO C99.
+
+Files:
+m4/extern-inline.m4
+
+Depends-on:
+
+configure.ac:
+AC_REQUIRE([gl_EXTERN_INLINE])
+
+Makefile.am:
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+all

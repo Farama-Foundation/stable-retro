@@ -1,0 +1,16 @@
+@node yp_get_default_domain
+@subsection @code{yp_get_default_domain}
+@findex yp_get_default_domain
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, HP-UX 11, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

@@ -1,0 +1,12 @@
+Files:
+tests/test-imaxabs.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-imaxabs
+check_PROGRAMS += test-imaxabs

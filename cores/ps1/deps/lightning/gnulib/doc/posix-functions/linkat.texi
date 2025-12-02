@@ -1,0 +1,29 @@
+@node linkat
+@section @code{linkat}
+@findex linkat
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/linkat.html}
+
+Gnulib module: linkat
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.3.6, Mac OS X 10.9, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14, Android 4.4.
+But the replacement function is not safe to be used in libraries and is not multithread-safe.
+@item
+This function fails to directly hardlink symlinks on some platforms:
+Mac OS X 10.10.
+@item
+This function fails to reject trailing slashes on non-directories on
+some platforms:
+macOS 11.1, AIX 7.1, Solaris 11.3.
+@item
+This functions does not support @code{AT_SYMLINK_FOLLOW} on some platforms:
+Linux kernel 2.6.17.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

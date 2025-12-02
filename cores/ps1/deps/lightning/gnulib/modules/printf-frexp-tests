@@ -1,0 +1,11 @@
+Files:
+tests/test-printf-frexp.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-printf-frexp
+check_PROGRAMS += test-printf-frexp

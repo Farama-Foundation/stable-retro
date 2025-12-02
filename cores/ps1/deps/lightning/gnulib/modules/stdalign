@@ -1,0 +1,38 @@
+Description:
+A <stdalign.h> that nearly conforms to ISO C11 and C++11.
+
+Files:
+lib/stdalign.in.h
+m4/stdalign.m4
+
+Depends-on:
+
+configure.ac:
+gl_STDALIGN_H
+
+Makefile.am:
+BUILT_SOURCES += $(STDALIGN_H)
+
+# We need the following in order to create <stdalign.h> when the system
+# doesn't have one that works.
+if GL_GENERATE_STDALIGN_H
+stdalign.h: stdalign.in.h $(top_builddir)/config.status
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  cat $(srcdir)/stdalign.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+else
+stdalign.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += stdalign.h stdalign.h-t
+
+Include:
+<stdalign.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert

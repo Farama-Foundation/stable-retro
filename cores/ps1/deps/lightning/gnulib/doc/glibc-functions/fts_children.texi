@@ -1,0 +1,25 @@
+@node fts_children
+@subsection @code{fts_children}
+@findex fts_children
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/fts_children.3.html,,man fts_children}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.3, mingw, MSVC 14.
+@item
+On platforms where @code{off_t} is a 32-bit type, this function may not
+correctly report the size of files or block devices larger than 2 GB and
+may not work correctly on huge directories larger than 2 GB@.  Also, on
+platforms where @code{ino_t} is a 32-bit type, this function may report
+inode numbers incorrectly.  The fix is to use the @code{AC_SYS_LARGEFILE}
+macro (only on Mac OS X systems).
+@end itemize

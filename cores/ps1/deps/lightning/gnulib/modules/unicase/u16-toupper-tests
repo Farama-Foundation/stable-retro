@@ -1,0 +1,15 @@
+Files:
+tests/unicase/test-u16-toupper.c
+tests/macros.h
+
+Depends-on:
+unistr/u16-cmp
+uninorm/nfc
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-toupper
+check_PROGRAMS += test-u16-toupper
+test_u16_toupper_SOURCES = unicase/test-u16-toupper.c
+test_u16_toupper_LDADD = $(LDADD) $(LIBUNISTRING)

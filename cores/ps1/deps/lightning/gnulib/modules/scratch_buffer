@@ -1,0 +1,36 @@
+Description:
+Variable-sized buffer with on-stack default allocation.
+
+Files:
+lib/scratch_buffer.h
+lib/malloc/scratch_buffer.h
+lib/malloc/scratch_buffer_dupfree.c
+lib/malloc/scratch_buffer_grow.c
+lib/malloc/scratch_buffer_grow_preserve.c
+lib/malloc/scratch_buffer_set_array_size.c
+
+Depends-on:
+c99
+libc-config
+stdbool
+stddef
+malloc-posix
+realloc-posix
+free-posix
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += malloc/scratch_buffer_dupfree.c \
+               malloc/scratch_buffer_grow.c \
+               malloc/scratch_buffer_grow_preserve.c \
+               malloc/scratch_buffer_set_array_size.c
+
+Include:
+<scratch_buffer.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

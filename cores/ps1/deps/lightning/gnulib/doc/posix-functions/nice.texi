@@ -1,0 +1,20 @@
+@node nice
+@section @code{nice}
+@findex nice
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/nice.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+In glibc before glibc 2.2.4, @code{nice} returned 0 upon success.
+@end itemize

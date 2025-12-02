@@ -1,0 +1,185 @@
+#!/bin/sh
+# Check for files in directory $1 being up to date, according to the
+# list on stdin.  Don't actually make any changes, just show the diffs.
+#
+# Empty (or only whitespace) input lines are ignored.
+# Lines beginning with # are ignored.
+# Lines with just one word are ignored.
+# Otherwise, the line has two or more whitespace-separated words:
+#   the first word is the source directory, which can be a top-level
+#   directory of source archive,
+#   the second word is the source file name relative to the source
+#   directory, and
+#   the third word is the destination, other optional words are
+#   options.
+# The possible options are "gpl" (to replace the license with the GPL)
+#   and "doclicense" (to replace @include doclicense.texi with fdl.texi)
+#   and "strip-trailing-space" (to strip trailing white space from lines)
+#   and "release" (to use the release version instead of the
+#   development version).
+#   Unrecognized options are ignored.
+# $VARIABLE expansions are done (with sh eval).
+#
+# This script is used in gnulib and texinfo; the input files are named
+# srclist.txt.
+#
+# Copyright (C) 2002-2003, 2005, 2007-2021 Free Software Foundation, Inc.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# Originally written by Karl Berry.
+
+
+if test -n "$1"; then
+  cd "$1" || exit 1
+fi
+
+verbose=false
+#chicken="echo (would)"
+
+: ${TMPDIR=/tmp}
+dsttmp=$TMPDIR/srclist.dst
+
+# Source `dirname $0`/srclistvars.sh first, if it exists.
+mydir=`dirname $0`
+test -r $mydir/srclistvars.sh && . $mydir/srclistvars.sh
+
+
+# 
+# sed command to fix the license to be GPL.
+fixlicense='
+  /^[[:space:]]*#[[:space:]]*Th[ei][ s].* is free software/,/^[[:space:]]*#.*USA\./c\
+#   This program is free software: you can redistribute it and/or modify\
+#   it under the terms of the GNU General Public License as published by\
+#   the Free Software Foundation; either version 3 of the License, or\
+#   (at your option) any later version.\
+#\
+#   This program is distributed in the hope that it will be useful,\
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of\
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\
+#   GNU General Public License for more details.\
+#\
+#   You should have received a copy of the GNU General Public License\
+#   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+  /Th[ei][ s].* is free software/,/\*\//c\
+   This program is free software: you can redistribute it and/or modify\
+   it under the terms of the GNU General Public License as published by\
+   the Free Software Foundation; either version 3 of the License, or\
+   (at your option) any later version.\
+\
+   This program is distributed in the hope that it will be useful,\
+   but WITHOUT ANY WARRANTY; without even the implied warranty of\
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\
+   GNU General Public License for more details.\
+\
+   You should have received a copy of the GNU General Public License\
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
+'
+
+# sed command to remove lines containing $Id lines.
+# Quote the $ so that CVS does not expand it in this script.
+remove_id_lines='/[$]Id:.*[$]/d'
+
+# $1 is input file, $2 is output.
+# Remove $Id lines, since they'll differ between source
+# locations.  If $options contains "gpl", change the license to be the
+# standard GPL.  We use this for libc files, et al.
+#
+fixfile() \
+{
+  sed_command="$remove_id_lines"
+
+  case " $options " in
+  *' strip-trailing-space '*)
+    sed_command="$sed_command; s/[[:space:]]*\$//";;
+  esac
+
+  case " $options " in
+  *' gpl '*)
+    sed_command="$sed_command; $fixlicense";;
+
+  *' doclicense '*)
+    sed_command="$sed_command; s/@include doclicense.texi/@include fdl.texi/";;
+  esac
+
+  sed "$sed_command" $1 >$2-t && mv $2-t $2
+}
+
+
+# 
+cat | while read top src dst options; do
+  #echo "top=$top, src=$src, dst=$dst, options=$options" >&2
+  case $top:$src:$dst in
+    *: ) continue;;    # skip lines without last element
+    '#'* ) continue;;  # skip comment-only lines
+  esac
+
+  release=false
+  case " $options " in
+    *' release '*)
+      release=true
+      ;;
+  esac
+
+  eval top=$top
+  if $release && test ! -d $top/.git; then
+    echo "$0: 'release' option only works with git checkout"
+    release=false
+  fi
+
+  # Expand variables and make sure we have an input file.
+  src1=$src
+  eval src=$top/$src
+  if test ! -r $src; then
+    echo "$0: cannot read $src" >&2
+    continue
+  fi
+
+  # Ignore subdirs in src dir.  E.g., if input spec is
+  #   src/subdir/foo.c dst
+  # then write destination file dst/foo.c.
+  eval dst=$dst
+  test -d $dst && dst=$dst/`basename $src`
+
+  if $release; then
+    rev=$(git --git-dir=$top/.git describe --abbrev=0)
+    reltmp=$TMPDIR/`basename $src1`:$rev
+    git --git-dir=$top/.git show $rev:$src1 > $reltmp
+    fixfile $reltmp $reltmp
+  fi
+
+  # Fix files in both src and dst, for the sake
+  # of a clean comparison.
+  srctmp=$TMPDIR/`basename $src`
+  fixfile $src $srctmp
+  test -r $dst && fixfile $dst $dsttmp
+
+  # if src was executable, make dst executable, to placate git.
+  test -x $src && chmod a+x $dst
+
+  if test ! -e $dst; then
+    echo "## $srctmp $dst  # new"
+    $chicken cp -p $srctmp $dst
+  elif $release && cmp -s $reltmp $dsttmp; then
+    $verbose && echo "## $reltmp $dst  # unchanged"
+  elif cmp -s $srctmp $dsttmp; then
+    $verbose && echo "## $srctmp $dst  # unchanged"
+  else
+    echo "## $srctmp $dst  # changes"
+    diff -C 2 $dst $srctmp
+  fi
+done
+
+rm -f $dsttmp

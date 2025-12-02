@@ -1,0 +1,31 @@
+Description:
+log10() function: base 10 logarithmic function.
+
+Files:
+lib/log10.c
+m4/log10.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+
+configure.ac:
+gl_FUNC_LOG10
+if test $REPLACE_LOG10 = 1; then
+  AC_LIBOBJ([log10])
+fi
+gl_MATH_MODULE_INDICATOR([log10])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOG10_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

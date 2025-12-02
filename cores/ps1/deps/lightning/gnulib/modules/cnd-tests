@@ -1,0 +1,16 @@
+Files:
+tests/test-cnd.c
+tests/macros.h
+
+Depends-on:
+mtx
+thrd
+gettimeofday
+
+configure.ac:
+AC_CHECK_DECLS_ONCE([alarm])
+
+Makefile.am:
+TESTS += test-cnd
+check_PROGRAMS += test-cnd
+test_cnd_LDADD = $(LDADD) @LIBSTDTHREAD@

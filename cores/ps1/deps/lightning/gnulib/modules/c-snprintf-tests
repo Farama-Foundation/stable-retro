@@ -1,0 +1,18 @@
+Files:
+tests/test-c-snprintf.c
+tests/test-c-snprintf.sh
+m4/locale-fr.m4
+tests/macros.h
+
+Depends-on:
+setlocale
+snprintf
+
+configure.ac:
+gt_LOCALE_FR
+
+Makefile.am:
+TESTS += test-c-snprintf.sh
+TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@'
+check_PROGRAMS += test-c-snprintf
+test_c_snprintf_LDADD = $(LDADD) $(LIB_SETLOCALE)

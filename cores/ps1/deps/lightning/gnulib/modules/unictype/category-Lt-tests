@@ -1,0 +1,16 @@
+Files:
+tests/unictype/test-categ_Lt.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+unictype/category-test
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-categ_Lt
+check_PROGRAMS += test-categ_Lt
+test_categ_Lt_SOURCES = unictype/test-categ_Lt.c
+test_categ_Lt_LDADD = $(LDADD) $(LIBUNISTRING)

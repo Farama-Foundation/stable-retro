@@ -1,0 +1,31 @@
+@node symlinkat
+@section @code{symlinkat}
+@findex symlinkat
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/symlinkat.html}
+
+Gnulib module: symlinkat
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.3.6, Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14, Android 4.4.
+But the replacement function is not safe to be used in libraries and is not multithread-safe.
+@item
+Some platforms declare this function in @code{stdio.h} instead of
+@code{unistd.h}:
+Cygwin 1.7.1.
+@item
+On some systems, @code{symlinkat(value, fd, "name/")} mistakenly creates a
+symlink:
+macOS 11.1, AIX 7.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function always fails with @samp{ENOSYS} on platforms that don't
+support symlinks:
+mingw, MSVC 14.
+@end itemize

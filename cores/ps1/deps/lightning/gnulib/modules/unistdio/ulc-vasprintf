@@ -1,0 +1,31 @@
+Description:
+Formatted output to a string, with automatic memory allocation.
+
+Files:
+lib/unistdio/ulc-vasprintf.c
+lib/unistdio/u-vasprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/ulc-vasnprintf
+errno
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unistdio/ulc-vasprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_ULC_VASPRINTF
+lib_SOURCES += unistdio/ulc-vasprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

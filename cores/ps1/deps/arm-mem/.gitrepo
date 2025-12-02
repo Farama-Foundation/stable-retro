@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/bavison/arm-mem
+	branch = master
+	commit = ee8ac1d56adb7ceef4d39a5cc21a502e41982685
+	parent = 6fb01036deffd69da0af72ad1f5cf2b5fedd04d2
+	method = merge
+	cmdver = 0.4.9

@@ -1,0 +1,20 @@
+Description:
+Macros for declaring functions as non-returning.
+
+Files:
+lib/noreturn.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<noreturn.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Bruno Haible

@@ -1,0 +1,18 @@
+Files:
+tests/test-roundf-ieee.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnanf-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-roundf-ieee
+check_PROGRAMS += test-roundf-ieee
+test_roundf_ieee_LDADD = $(LDADD) @ROUNDF_LIBM@

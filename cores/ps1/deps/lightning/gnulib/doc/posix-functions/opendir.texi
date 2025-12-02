@@ -1,0 +1,23 @@
+@node opendir
+@section @code{opendir}
+@findex opendir
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/opendir.html}
+
+Gnulib module: opendir
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+MSVC 14.
+@item
+On platforms where @code{off_t} is a 32-bit type, this function may not
+work correctly on huge directories larger than 2 GB@.  Also, on platforms
+where @code{ino_t} is a 32-bit type, this function may report inode numbers
+incorrectly.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

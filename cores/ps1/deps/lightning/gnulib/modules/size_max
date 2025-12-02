@@ -1,0 +1,24 @@
+Description:
+Provide SIZE_MAX, for cases when the 'stdint' module cannot be used.
+
+Files:
+m4/size_max.m4
+lib/size_max.h
+
+Depends-on:
+
+configure.ac:
+gl_SIZE_MAX
+
+Makefile.am:
+lib_SOURCES += size_max.h
+
+Include:
+"size_max.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson
+all

@@ -1,0 +1,72 @@
+Description:
+Character set conversion.
+
+Files:
+lib/iconv_open.c
+lib/iconv_open-aix.gperf
+lib/iconv_open-hpux.gperf
+lib/iconv_open-irix.gperf
+lib/iconv_open-osf.gperf
+lib/iconv_open-solaris.gperf
+lib/iconv_open-zos.gperf
+lib/iconv.c
+lib/iconv_close.c
+m4/iconv_open.m4
+
+Depends-on:
+gperf
+iconv-h
+iconv
+c-ctype           [test $REPLACE_ICONV_OPEN = 1]
+c-strcase         [test $REPLACE_ICONV_OPEN = 1]
+stdint            [test $REPLACE_ICONV_UTF = 1]
+unistr/u8-mbtoucr [test $REPLACE_ICONV_UTF = 1]
+unistr/u8-uctomb  [test $REPLACE_ICONV_UTF = 1]
+
+configure.ac:
+gl_FUNC_ICONV_OPEN
+if test $REPLACE_ICONV_OPEN = 1; then
+  AC_LIBOBJ([iconv_open])
+fi
+if test $REPLACE_ICONV = 1; then
+  AC_LIBOBJ([iconv])
+  AC_LIBOBJ([iconv_close])
+fi
+
+Makefile.am:
+$(srcdir)/iconv_open-aix.h: $(srcdir)/iconv_open-aix.gperf
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/iconv_open-aix.gperf > $(srcdir)/iconv_open-aix.h-t && \
+	mv $(srcdir)/iconv_open-aix.h-t $(srcdir)/iconv_open-aix.h
+$(srcdir)/iconv_open-hpux.h: $(srcdir)/iconv_open-hpux.gperf
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/iconv_open-hpux.gperf > $(srcdir)/iconv_open-hpux.h-t && \
+	mv $(srcdir)/iconv_open-hpux.h-t $(srcdir)/iconv_open-hpux.h
+$(srcdir)/iconv_open-irix.h: $(srcdir)/iconv_open-irix.gperf
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/iconv_open-irix.gperf > $(srcdir)/iconv_open-irix.h-t && \
+	mv $(srcdir)/iconv_open-irix.h-t $(srcdir)/iconv_open-irix.h
+$(srcdir)/iconv_open-osf.h: $(srcdir)/iconv_open-osf.gperf
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/iconv_open-osf.gperf > $(srcdir)/iconv_open-osf.h-t && \
+	mv $(srcdir)/iconv_open-osf.h-t $(srcdir)/iconv_open-osf.h
+$(srcdir)/iconv_open-solaris.h: $(srcdir)/iconv_open-solaris.gperf
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/iconv_open-solaris.gperf > $(srcdir)/iconv_open-solaris.h-t && \
+	mv $(srcdir)/iconv_open-solaris.h-t $(srcdir)/iconv_open-solaris.h
+$(srcdir)/iconv_open-zos.h: $(srcdir)/iconv_open-zos.gperf
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/iconv_open-zos.gperf > $(srcdir)/iconv_open-zos.h-t && \
+	mv $(srcdir)/iconv_open-zos.h-t $(srcdir)/iconv_open-zos.h
+BUILT_SOURCES        += iconv_open-aix.h iconv_open-hpux.h iconv_open-irix.h iconv_open-osf.h iconv_open-solaris.h iconv_open-zos.h
+MOSTLYCLEANFILES     += iconv_open-aix.h-t iconv_open-hpux.h-t iconv_open-irix.h-t iconv_open-osf.h-t iconv_open-solaris.h-t iconv_open-zos.h-t
+MAINTAINERCLEANFILES += iconv_open-aix.h iconv_open-hpux.h iconv_open-irix.h iconv_open-osf.h iconv_open-solaris.h iconv_open-zos.h
+EXTRA_DIST           += iconv_open-aix.h iconv_open-hpux.h iconv_open-irix.h iconv_open-osf.h iconv_open-solaris.h iconv_open-zos.h
+
+Include:
+#if HAVE_ICONV
+# include <iconv.h>
+#endif
+
+Link:
+$(LTLIBICONV) when linking with libtool, $(LIBICONV) otherwise
+
+License:
+LGPLv2+
+
+Maintainer:
+all

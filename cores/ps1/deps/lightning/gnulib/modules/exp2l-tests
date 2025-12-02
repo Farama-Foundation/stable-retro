@@ -1,0 +1,18 @@
+Files:
+tests/test-exp2l.c
+tests/test-exp2.h
+tests/signature.h
+tests/macros.h
+tests/randoml.c
+
+Depends-on:
+fpucw
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-exp2l
+check_PROGRAMS += test-exp2l
+test_exp2l_SOURCES = test-exp2l.c randoml.c
+test_exp2l_LDADD = $(LDADD) @EXP2L_LIBM@

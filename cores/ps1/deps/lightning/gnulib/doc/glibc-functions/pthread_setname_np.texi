@@ -1,0 +1,23 @@
+@node pthread_setname_np
+@subsection @code{pthread_setname_np}
+@findex pthread_setname_np
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/pthread_setname_np.3.html,,man pthread_setname_np}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+glibc 2.11, Mac OS X 10.5, FreeBSD 6.4, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.0, Cygwin 1.7.x, mingw, MSVC 14.
+@item
+This function has a different signature on some platforms:
+NetBSD 9.0.
+On NetBSD the second argument is interpreted as a @code{printf} format string,
+with the third argument as parameter.
+@end itemize

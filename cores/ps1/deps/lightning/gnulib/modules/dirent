@@ -1,0 +1,69 @@
+Description:
+A GNU-like <dirent.h>.
+
+Files:
+lib/dirent.in.h
+m4/dirent_h.m4
+m4/unistd_h.m4
+m4/pid_t.m4
+
+Depends-on:
+include_next
+snippet/arg-nonnull
+snippet/c++defs
+snippet/warn-on-use
+
+configure.ac:
+gl_DIRENT_H
+
+Makefile.am:
+BUILT_SOURCES += dirent.h
+
+# We need the following in order to create <dirent.h> when the system
+# doesn't have one that works with the given compiler.
+dirent.h: dirent.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's|@''HAVE_DIRENT_H''@|$(HAVE_DIRENT_H)|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_DIRENT_H''@|$(NEXT_DIRENT_H)|g' \
+	      -e 's/@''GNULIB_OPENDIR''@/$(GNULIB_OPENDIR)/g' \
+	      -e 's/@''GNULIB_READDIR''@/$(GNULIB_READDIR)/g' \
+	      -e 's/@''GNULIB_REWINDDIR''@/$(GNULIB_REWINDDIR)/g' \
+	      -e 's/@''GNULIB_CLOSEDIR''@/$(GNULIB_CLOSEDIR)/g' \
+	      -e 's/@''GNULIB_DIRFD''@/$(GNULIB_DIRFD)/g' \
+	      -e 's/@''GNULIB_FDOPENDIR''@/$(GNULIB_FDOPENDIR)/g' \
+	      -e 's/@''GNULIB_SCANDIR''@/$(GNULIB_SCANDIR)/g' \
+	      -e 's/@''GNULIB_ALPHASORT''@/$(GNULIB_ALPHASORT)/g' \
+	      -e 's/@''HAVE_OPENDIR''@/$(HAVE_OPENDIR)/g' \
+	      -e 's/@''HAVE_READDIR''@/$(HAVE_READDIR)/g' \
+	      -e 's/@''HAVE_REWINDDIR''@/$(HAVE_REWINDDIR)/g' \
+	      -e 's/@''HAVE_CLOSEDIR''@/$(HAVE_CLOSEDIR)/g' \
+	      -e 's|@''HAVE_DECL_DIRFD''@|$(HAVE_DECL_DIRFD)|g' \
+	      -e 's|@''HAVE_DECL_FDOPENDIR''@|$(HAVE_DECL_FDOPENDIR)|g' \
+	      -e 's|@''HAVE_FDOPENDIR''@|$(HAVE_FDOPENDIR)|g' \
+	      -e 's|@''HAVE_SCANDIR''@|$(HAVE_SCANDIR)|g' \
+	      -e 's|@''HAVE_ALPHASORT''@|$(HAVE_ALPHASORT)|g' \
+	      -e 's|@''REPLACE_OPENDIR''@|$(REPLACE_OPENDIR)|g' \
+	      -e 's|@''REPLACE_CLOSEDIR''@|$(REPLACE_CLOSEDIR)|g' \
+	      -e 's|@''REPLACE_DIRFD''@|$(REPLACE_DIRFD)|g' \
+	      -e 's|@''REPLACE_FDOPENDIR''@|$(REPLACE_FDOPENDIR)|g' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
+	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/dirent.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += dirent.h dirent.h-t
+
+Include:
+<dirent.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,20 @@
+Files:
+tests/test-xprintf-posix.sh
+tests/test-xfprintf-posix.c
+tests/test-xprintf-posix.c
+tests/test-fprintf-posix.h
+tests/test-printf-posix.h
+tests/test-printf-posix.output
+tests/infinity.h
+tests/macros.h
+
+Depends-on:
+stdint
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-xprintf-posix.sh
+check_PROGRAMS += test-xfprintf-posix test-xprintf-posix
+test_xfprintf_posix_LDADD = $(LDADD) @LIBINTL@
+test_xprintf_posix_LDADD = $(LDADD) @LIBINTL@

@@ -1,0 +1,17 @@
+Files:
+tests/test-link.h
+tests/test-link.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+errno
+stdbool
+sys_stat
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-link
+check_PROGRAMS += test-link

@@ -1,0 +1,54 @@
+Description:
+A <fnmatch.h> that conforms to POSIX.
+
+Files:
+lib/fnmatch.in.h
+m4/fnmatch_h.m4
+
+Depends-on:
+extensions
+include_next
+snippet/arg-nonnull
+snippet/c++defs
+snippet/warn-on-use
+
+configure.ac:
+gl_FNMATCH_H
+
+Makefile.am:
+BUILT_SOURCES += $(FNMATCH_H)
+
+# We need the following in order to create <fnmatch.h>.
+if GL_GENERATE_FNMATCH_H
+fnmatch.h: fnmatch.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's|@''HAVE_FNMATCH_H''@|$(HAVE_FNMATCH_H)|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_FNMATCH_H''@|$(NEXT_FNMATCH_H)|g' \
+	      -e 's/@''GNULIB_FNMATCH''@/$(GNULIB_FNMATCH)/g' \
+	      -e 's|@''HAVE_FNMATCH''@|$(HAVE_FNMATCH)|g' \
+	      -e 's|@''REPLACE_FNMATCH''@|$(REPLACE_FNMATCH)|g' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
+	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/fnmatch.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+else
+fnmatch.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += fnmatch.h fnmatch.h-t
+
+Include:
+<fnmatch.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

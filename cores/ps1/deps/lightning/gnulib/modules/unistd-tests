@@ -1,0 +1,12 @@
+Files:
+tests/test-unistd.c
+
+Depends-on:
+verify
+unistd-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-unistd
+check_PROGRAMS += test-unistd

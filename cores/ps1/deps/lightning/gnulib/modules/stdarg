@@ -1,0 +1,49 @@
+Description:
+An <stdarg.h> that conforms to C99.
+
+Files:
+lib/stdarg.in.h
+m4/stdarg.m4
+
+Depends-on:
+include_next
+
+configure.ac-early:
+dnl Some compilers (e.g., AIX 5.3 cc) need to be in c99 mode
+dnl for the builtin va_copy to work.  gl_PROG_CC_C99 arranges for this.
+gl_PROG_CC_C99
+
+configure.ac:
+gl_STDARG_H
+
+Makefile.am:
+BUILT_SOURCES += $(STDARG_H)
+
+# We need the following in order to create <stdarg.h> when the system
+# doesn't have one that works with the given compiler.
+if GL_GENERATE_STDARG_H
+stdarg.h: stdarg.in.h $(top_builddir)/config.status
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_STDARG_H''@|$(NEXT_STDARG_H)|g' \
+	      < $(srcdir)/stdarg.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+else
+stdarg.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += stdarg.h stdarg.h-t
+
+Include:
+<stdarg.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_iso_control.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_iso_control
+check_PROGRAMS += test-pr_iso_control
+test_pr_iso_control_SOURCES = unictype/test-pr_iso_control.c
+test_pr_iso_control_LDADD = $(LDADD) $(LIBUNISTRING)

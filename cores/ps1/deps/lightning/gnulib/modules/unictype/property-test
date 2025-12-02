@@ -1,0 +1,25 @@
+Description:
+Test whether a Unicode character has a given property.
+
+Files:
+lib/unictype/pr_test.c
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-test])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_TEST
+lib_SOURCES += unictype/pr_test.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,43 @@
+Description:
+Ensure that a directory and its parents exist.
+
+Files:
+lib/dirchownmod.c
+lib/dirchownmod.h
+lib/mkdir-p.c
+lib/mkdir-p.h
+m4/mkdir-p.m4
+
+Depends-on:
+error
+fcntl-h
+fstat
+gettext-h
+lchmod
+lchown
+mkancesdirs
+mkdir
+quote
+savewd
+stat
+stat-macros
+stdbool
+sys_stat
+
+configure.ac:
+gl_MKDIR_PARENTS
+
+Makefile.am:
+lib_SOURCES += dirchownmod.c mkdir-p.c
+
+Include:
+"mkdir-p.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

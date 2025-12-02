@@ -1,0 +1,48 @@
+Description:
+POSIX compatible vfprintf() function: print formatted output to a stream
+
+Comment:
+This module should not be used as a dependency from a test module,
+otherwise when this module occurs as a tests-related module, it will
+have side effects on the compilation of the 'vasnprintf' module, if
+that module occurs among the main modules in lib/.
+
+Files:
+lib/vfprintf.c
+m4/vfprintf-posix.m4
+m4/printf.m4
+m4/math_h.m4
+
+Depends-on:
+stdio
+nocrash
+printf-safe
+multiarch
+free-posix      [test $REPLACE_VFPRINTF = 1]
+fseterr         [test $REPLACE_VFPRINTF = 1]
+vasnprintf      [test $REPLACE_VFPRINTF = 1]
+isnand-nolibm   [test $REPLACE_VFPRINTF = 1]
+isnanl-nolibm   [test $REPLACE_VFPRINTF = 1]
+frexp-nolibm    [test $REPLACE_VFPRINTF = 1]
+frexpl-nolibm   [test $REPLACE_VFPRINTF = 1]
+printf-frexp    [test $REPLACE_VFPRINTF = 1]
+printf-frexpl   [test $REPLACE_VFPRINTF = 1]
+signbit         [test $REPLACE_VFPRINTF = 1]
+fpucw           [test $REPLACE_VFPRINTF = 1]
+errno           [test $REPLACE_VFPRINTF = 1]
+
+configure.ac:
+gl_FUNC_VFPRINTF_POSIX
+gl_STDIO_MODULE_INDICATOR([vfprintf-posix])
+gl_MODULE_INDICATOR([vfprintf-posix])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPL
+
+Maintainer:
+all

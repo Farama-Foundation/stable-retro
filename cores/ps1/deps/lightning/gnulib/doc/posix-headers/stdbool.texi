@@ -1,0 +1,40 @@
+@node stdbool.h
+@section @file{stdbool.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/stdbool.h.html}
+
+Gnulib module: stdbool
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+AIX 5.1, HP-UX 11, IRIX 6.5.
+@item
+This header file is not usable in C++ mode with the vendor compiler
+on Solaris 10.
+@item
+Some compilers have bugs relating to @samp{bool}.
+@item
+This header file defines @code{true} incorrectly on some platforms:
+OpenBSD 4.7 with gcc 2.95.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+@samp{_Bool} cannot be used before @code{<stdbool.h>} is included, or if
+the program is intended to be compiled by a C++ compiler.
+@item
+You cannot assume that @code{_Bool} is a typedef; it might be a macro.
+@item
+Bit-fields of type @samp{bool} are not supported.  Portable code
+should use @samp{unsigned int foo : 1;} rather than @samp{bool foo : 1;}.
+@item
+Casts and automatic conversions to @samp{bool} don't test against the
+zero value or the null pointer, as they should.  Such casts should only
+be used if the value is known to be equal to 0 or 1.
+@item
+You cannot assume that casting a floating point literal to @samp{bool} will
+result in a constant expression.
+@end itemize

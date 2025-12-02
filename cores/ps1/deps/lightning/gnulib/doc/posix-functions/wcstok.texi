@@ -1,0 +1,29 @@
+@node wcstok
+@section @code{wcstok}
+@findex wcstok
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/wcstok.html}
+
+Gnulib module: wcstok
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Cygwin 1.5.x.
+@item
+This function takes only two arguments on some platforms:
+mingw, older MSVC.
+@item
+This function may use hidden state, ignoring the third argument, and thus
+exhibit a bug when two or more @code{wcstok} iteration loops are being performed
+in the same thread, on some platforms:
+HP-UX 11.31.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and therefore cannot
+accommodate all Unicode characters.
+@end itemize

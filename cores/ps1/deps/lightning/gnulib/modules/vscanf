@@ -1,0 +1,22 @@
+Description:
+vscanf() function: parse formatted text from standard input
+
+Files:
+
+Depends-on:
+stdio
+
+configure.ac:
+gl_STDIO_MODULE_INDICATOR([vscanf])
+gl_MODULE_INDICATOR([vscanf])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPL
+
+Maintainer:
+all

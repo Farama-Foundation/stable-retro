@@ -1,0 +1,15 @@
+@node va_start
+@section @code{va_start}
+@findex va_start
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/va_start.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,27 @@
+Description:
+ceilf() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/ceilf-ieee.m4
+m4/minus-zero.m4
+m4/signbit.m4
+
+Depends-on:
+ceilf
+
+configure.ac:
+gl_FUNC_CEILF_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(CEILF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

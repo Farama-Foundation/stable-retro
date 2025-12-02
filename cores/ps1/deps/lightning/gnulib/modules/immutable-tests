@@ -1,0 +1,15 @@
+Files:
+tests/test-immutable.sh
+tests/test-immutable.c
+tests/macros.h
+
+Depends-on:
+stdbool
+_Exit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-immutable.sh
+check_PROGRAMS += test-immutable
+test_immutable_LDADD = $(LDADD) $(LIBTHREAD)

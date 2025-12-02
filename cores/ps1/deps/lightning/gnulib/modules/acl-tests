@@ -1,0 +1,30 @@
+Files:
+tests/test-set-mode-acl.sh
+tests/test-set-mode-acl-1.sh
+tests/test-set-mode-acl-2.sh
+tests/test-copy-acl.sh
+tests/test-copy-acl-1.sh
+tests/test-copy-acl-2.sh
+tests/test-set-mode-acl.c
+tests/test-copy-acl.c
+tests/test-sameacls.c
+tests/macros.h
+
+Depends-on:
+file-has-acl-tests
+read-file
+unistd
+xalloc
+test-framework-sh
+
+configure.ac:
+
+Makefile.am:
+TESTS += \
+  test-set-mode-acl.sh test-set-mode-acl-1.sh test-set-mode-acl-2.sh \
+  test-copy-acl.sh test-copy-acl-1.sh test-copy-acl-2.sh
+TESTS_ENVIRONMENT += USE_ACL=$(USE_ACL)
+check_PROGRAMS += test-set-mode-acl test-copy-acl test-sameacls
+test_set_mode_acl_LDADD = $(LDADD) $(LIB_ACL) @LIBINTL@ $(LIB_MBRTOWC)
+test_copy_acl_LDADD = $(LDADD) $(LIB_ACL) @LIBINTL@ $(LIB_MBRTOWC)
+test_sameacls_LDADD = $(LDADD) $(LIB_ACL) @LIBINTL@ $(LIB_MBRTOWC)

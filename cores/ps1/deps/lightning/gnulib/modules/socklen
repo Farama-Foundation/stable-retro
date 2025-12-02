@@ -1,0 +1,26 @@
+Description:
+Declare socklen_t in config.h if the system doesn't have it.
+
+Files:
+m4/socklen.m4
+
+Depends-on:
+
+configure.ac:
+gl_TYPE_SOCKLEN_T
+
+Makefile.am:
+
+Include:
+#include <sys/types.h>
+#if HAVE_SYS_SOCKET_H
+# include <sys/socket.h>
+#elif HAVE_WS2TCPIP_H
+# include <ws2tcpip.h>
+#endif
+
+License:
+unlimited
+
+Maintainer:
+Simon Josefsson

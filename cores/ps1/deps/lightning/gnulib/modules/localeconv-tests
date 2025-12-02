@@ -1,0 +1,12 @@
+Files:
+tests/test-localeconv.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-localeconv
+check_PROGRAMS += test-localeconv

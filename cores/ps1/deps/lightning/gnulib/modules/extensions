@@ -1,0 +1,19 @@
+Description:
+Enable extensions in standard headers
+
+Files:
+m4/extensions.m4
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert and Jim Meyering

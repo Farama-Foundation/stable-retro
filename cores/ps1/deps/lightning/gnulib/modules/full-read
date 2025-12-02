@@ -1,0 +1,24 @@
+Description:
+An interface to the read() function that reads all it is asked to read.
+
+Files:
+lib/full-read.h
+lib/full-read.c
+lib/full-write.c
+
+Depends-on:
+safe-read
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += full-read.h full-read.c
+
+Include:
+"full-read.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

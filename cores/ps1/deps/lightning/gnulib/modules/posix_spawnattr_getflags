@@ -1,0 +1,28 @@
+Description:
+posix_spawnattr_getflags() function: get bitmask of attributes specified for
+child process.
+
+Files:
+lib/spawnattr_getflags.c
+m4/posix_spawn.m4
+
+Depends-on:
+spawn
+
+configure.ac:
+gl_POSIX_SPAWN
+if test $HAVE_POSIX_SPAWN = 0 || test $REPLACE_POSIX_SPAWN = 1; then
+  AC_LIBOBJ([spawnattr_getflags])
+fi
+gl_SPAWN_MODULE_INDICATOR([posix_spawnattr_getflags])
+
+Makefile.am:
+
+Include:
+<spawn.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+glibc

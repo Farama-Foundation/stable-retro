@@ -1,0 +1,34 @@
+@node isascii
+@section @code{isascii}
+@findex isascii
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/isascii.html}
+
+Gnulib module: ctype
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function cannot be called from plain inline or extern inline functions
+on some platforms:
+OS X 10.8.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize
+
+Note: This function's behaviour depends on the locale, but requires special
+handling for the multibyte characters that occur in strings in locales with
+@code{MB_CUR_MAX > 1} (this includes all the common UTF-8 locales).
+There are two alternative APIs:
+
+@table @code
+@item c_isascii
+This function operates in a locale independent way and returns true only for
+ASCII characters.  It is provided by the Gnulib module @samp{c-ctype}.
+
+@item mb_isascii
+This function operates in a locale dependent way, on multibyte characters.
+It is provided by the Gnulib module @samp{mbchar}.
+@end table

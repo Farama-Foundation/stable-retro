@@ -1,0 +1,15 @@
+@node FD_SET
+@section @code{FD_SET}
+@findex FD_SET
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/FD_SET.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

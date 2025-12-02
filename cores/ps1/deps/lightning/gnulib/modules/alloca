@@ -1,0 +1,21 @@
+Description:
+Memory allocation on the stack.
+
+Files:
+lib/alloca.c
+
+Depends-on:
+alloca-opt
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<alloca.h>
+
+License:
+public domain
+
+Maintainer:
+bug-gnulib@gnu.org

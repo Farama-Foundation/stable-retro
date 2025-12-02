@@ -1,0 +1,20 @@
+Description:
+ignore a value to quiet a compiler warning
+
+Files:
+lib/ignore-value.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"ignore-value.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

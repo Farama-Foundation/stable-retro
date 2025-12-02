@@ -1,0 +1,8 @@
+@node Native Windows Support without MSVC Support
+@section Native Windows Support without MSVC Support
+
+If your package does not desire to have MSVC support, that is, if MinGW
+shall be the only native Windows platform that you wish to get support
+for from Gnulib, and you wish to minimize the number of files imported
+from Gnulib accordingly, you can do so by passing the options
+@samp{--avoid=msvc-inval --avoid=msvc-nothrow} to @code{gnulib-tool}.

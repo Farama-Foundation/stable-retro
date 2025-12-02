@@ -1,0 +1,27 @@
+Description:
+Error reporting function for xstrto* functions.
+
+Files:
+lib/xstrtol-error.c
+lib/xstrtol-error.h
+
+Depends-on:
+xstrtol
+error
+exitfail
+getopt-gnu
+gettext-h
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += xstrtol-error.c
+
+Include:
+"xstrtol-error.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

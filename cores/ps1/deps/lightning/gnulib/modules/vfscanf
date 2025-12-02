@@ -1,0 +1,22 @@
+Description:
+vfscanf() function: parse formatted text from a stream
+
+Files:
+
+Depends-on:
+stdio
+
+configure.ac:
+gl_STDIO_MODULE_INDICATOR([vfscanf])
+gl_MODULE_INDICATOR([vfscanf])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPL
+
+Maintainer:
+all

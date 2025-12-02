@@ -1,0 +1,24 @@
+Description:
+nextafter() function: next representable 'double' number.
+
+Files:
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_MATHFUNC([nextafter], [double], [(double, double)])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(NEXTAFTER_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

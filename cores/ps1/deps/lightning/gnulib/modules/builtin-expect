@@ -1,0 +1,20 @@
+Description:
+Check for __builtin_expect.
+
+Files:
+m4/builtin-expect.m4
+
+Depends-on:
+
+configure.ac:
+gl___BUILTIN_EXPECT
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

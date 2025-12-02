@@ -1,0 +1,14 @@
+Files:
+tests/unistr/test-u16-cpy-alloc.c
+tests/unistr/test-cpy-alloc.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-cpy-alloc
+check_PROGRAMS += test-u16-cpy-alloc
+test_u16_cpy_alloc_SOURCES = unistr/test-u16-cpy-alloc.c
+test_u16_cpy_alloc_LDADD = $(LDADD) $(LIBUNISTRING)

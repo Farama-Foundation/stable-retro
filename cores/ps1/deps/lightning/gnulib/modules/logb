@@ -1,0 +1,35 @@
+Description:
+logb() function: get exponent.
+
+Files:
+lib/logb.c
+m4/logb.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+isfinite        [test $HAVE_LOGB = 0 || test $REPLACE_LOGB = 1]
+frexp           [test $HAVE_LOGB = 0 || test $REPLACE_LOGB = 1]
+isnand          [test $HAVE_LOGB = 0 || test $REPLACE_LOGB = 1]
+
+configure.ac:
+gl_FUNC_LOGB
+if test $HAVE_LOGB = 0 || test $REPLACE_LOGB = 1; then
+  AC_LIBOBJ([logb])
+fi
+gl_MATH_MODULE_INDICATOR([logb])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOGB_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

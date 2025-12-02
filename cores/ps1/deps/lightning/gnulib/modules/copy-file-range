@@ -1,0 +1,28 @@
+Description:
+Copy parts of files
+
+Files:
+lib/copy-file-range.c
+m4/copy-file-range.m4
+
+Depends-on:
+largefile
+unistd
+
+configure.ac:
+gl_FUNC_COPY_FILE_RANGE
+if test $HAVE_COPY_FILE_RANGE = 0; then
+  AC_LIBOBJ([copy-file-range])
+fi
+gl_UNISTD_MODULE_INDICATOR([copy-file-range])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

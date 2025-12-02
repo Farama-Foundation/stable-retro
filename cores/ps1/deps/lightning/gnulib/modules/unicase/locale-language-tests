@@ -1,0 +1,26 @@
+Files:
+tests/unicase/test-locale-language.sh
+tests/unicase/test-locale-language.c
+tests/macros.h
+m4/locale-fr.m4
+m4/locale-ja.m4
+m4/locale-tr.m4
+m4/locale-zh.m4
+m4/codeset.m4
+
+Depends-on:
+setlocale
+
+configure.ac:
+gt_LOCALE_FR
+gt_LOCALE_FR_UTF8
+gt_LOCALE_JA
+gt_LOCALE_TR_UTF8
+gt_LOCALE_ZH_CN
+
+Makefile.am:
+TESTS += unicase/test-locale-language.sh
+TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@' LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' LOCALE_JA='@LOCALE_JA@' LOCALE_TR_UTF8='@LOCALE_TR_UTF8@' LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-locale-language
+test_locale_language_SOURCES = unicase/test-locale-language.c
+test_locale_language_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBUNISTRING) @INTL_MACOSX_LIBS@ $(LIBTHREAD)

@@ -1,0 +1,47 @@
+Description:
+Try to use system libtextstyle for output of styled text.
+
+Files:
+lib/textstyle.in.h
+m4/libtextstyle-optional.m4
+
+Depends-on:
+libtextstyle
+stdbool
+stdio
+unistd
+fsync
+vasprintf-posix
+
+configure.ac:
+# You need to invoke gl_LIBTEXTSTYLE_OPTIONAL yourself, possibly with arguments.
+
+Makefile.am:
+BUILT_SOURCES += $(TEXTSTYLE_H)
+
+# We need the following in order to create a dummy placeholder for
+# <textstyle.h> when the system doesn't have one.
+if GL_GENERATE_TEXTSTYLE_H
+textstyle.h: textstyle.in.h $(top_builddir)/config.status
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  cat $(srcdir)/textstyle.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+else
+textstyle.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += textstyle.h textstyle.h-t
+
+Include:
+#include <textstyle.h>
+
+Link:
+$(LTLIBTEXTSTYLE) when linking with libtool, $(LIBTEXTSTYLE) otherwise
+
+License:
+GPL
+
+Maintainer:
+Bruno Haible, Akim Demaille

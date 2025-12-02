@@ -1,0 +1,35 @@
+Description:
+log1p() function: natural logarithm of 1 plus argument.
+
+Files:
+lib/log1p.c
+m4/log1p.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+isnand          [test $HAVE_LOG1P = 0 || test $REPLACE_LOG1P = 1]
+log             [test $HAVE_LOG1P = 0 || test $REPLACE_LOG1P = 1]
+round           [test $HAVE_LOG1P = 0 || test $REPLACE_LOG1P = 1]
+
+configure.ac:
+gl_FUNC_LOG1P
+if test $HAVE_LOG1P = 0 || test $REPLACE_LOG1P = 1; then
+  AC_LIBOBJ([log1p])
+fi
+gl_MATH_MODULE_INDICATOR([log1p])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOG1P_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,25 @@
+Description:
+Convert double to accurate string.
+
+Files:
+lib/ftoastr.h
+lib/ftoastr.c
+lib/dtoastr.c
+
+Depends-on:
+extensions
+intprops
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += dtoastr.c
+
+Include:
+"ftoastr.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert

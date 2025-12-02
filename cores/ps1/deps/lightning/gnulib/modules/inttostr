@@ -1,0 +1,36 @@
+Description:
+Convert integers to printable strings.
+
+Files:
+lib/anytostr.c
+lib/imaxtostr.c
+lib/inttostr.c
+lib/inttostr.h
+lib/offtostr.c
+lib/umaxtostr.c
+lib/uinttostr.c
+m4/inttostr.m4
+
+Depends-on:
+intprops
+stdint
+
+configure.ac:
+gl_INTTOSTR
+
+Makefile.am:
+lib_SOURCES += \
+  imaxtostr.c \
+  inttostr.c \
+  offtostr.c \
+  uinttostr.c \
+  umaxtostr.c
+
+Include:
+"inttostr.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert

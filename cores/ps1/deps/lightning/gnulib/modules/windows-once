@@ -1,0 +1,27 @@
+Description:
+Once-only control (native Windows implementation).
+
+Files:
+lib/windows-once.h
+lib/windows-once.c
+
+Depends-on:
+
+configure.ac:
+AC_REQUIRE([AC_CANONICAL_HOST])
+case "$host_os" in
+  mingw*)
+    AC_LIBOBJ([windows-once])
+    ;;
+esac
+
+Makefile.am:
+
+Include:
+"windows-once.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

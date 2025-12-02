@@ -1,0 +1,35 @@
+@node log2
+@section @code{log2}
+@findex log2
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/log2.html}
+
+Gnulib module: log2 or log2-ieee
+
+Portability problems fixed by either Gnulib module @code{log2} or @code{log2-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 6.0, NetBSD 3.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, older IRIX 6.5,
+Solaris 9, MSVC 9, Android 4.2.
+@item
+This function is not declared on some platforms:
+IRIX 6.5.
+@item
+This function is only provided as a macro on some platforms:
+Cygwin 1.5.x.
+@item
+This function returns slightly wrong values for exact powers of 2 on some platforms:
+Cygwin 1.7.9.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{log2-ieee}:
+@itemize
+@item
+This function returns a wrong value for a negative argument on some platforms:
+NetBSD 5.1, Solaris 10/x86_64.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,28 @@
+Description:
+wmemset() function: fill wide character array.
+
+Files:
+lib/wmemset.c
+lib/wmemset-impl.h
+m4/wmemset.m4
+
+Depends-on:
+wchar
+
+configure.ac:
+gl_FUNC_WMEMSET
+if test $HAVE_WMEMSET = 0; then
+  AC_LIBOBJ([wmemset])
+fi
+gl_WCHAR_MODULE_INDICATOR([wmemset])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPL
+
+Maintainer:
+all

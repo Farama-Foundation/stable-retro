@@ -1,0 +1,18 @@
+Files:
+tests/test-isnand.c
+tests/test-isnand.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+gl_DOUBLE_EXPONENT_LOCATION
+
+Makefile.am:
+TESTS += test-isnand
+check_PROGRAMS += test-isnand
+test_isnand_LDADD = $(LDADD) @ISNAND_LIBM@
+

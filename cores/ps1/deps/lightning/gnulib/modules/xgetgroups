@@ -1,0 +1,25 @@
+Description:
+Return the group IDs of a user or current process in malloc'd storage, with
+out-of-memory checking.
+
+Files:
+lib/xgetgroups.c
+
+Depends-on:
+mgetgroups
+xalloc
+
+configure.ac:
+gl_MODULE_INDICATOR([xgetgroups])
+
+Makefile.am:
+lib_SOURCES += xgetgroups.c
+
+Include:
+"mgetgroups.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake

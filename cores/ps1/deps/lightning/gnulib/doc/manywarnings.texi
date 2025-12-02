@@ -1,0 +1,46 @@
+@node manywarnings
+@section manywarnings
+
+The @code{manywarnings} module allows you to enable as many GCC warnings as
+possible for your package. The purpose is to protect against introducing new
+code that triggers warnings that weren't already triggered by the existing code
+base.
+
+An example use of the module is as follows:
+
+@smallexample
+gl_MANYWARN_ALL_GCC([warnings])
+# Set up the list of the pointless, undesired warnings.
+nw=
+nw="$nw -Winline"           # It's OK to not inline.
+nw="$nw -Wstrict-overflow"  # It's OK to optimize strictly.
+nw="$nw -Wsystem-headers"   # Don't let system headers trigger warnings.
+# Enable all GCC warnings not in this list.
+gl_MANYWARN_COMPLEMENT([warnings], [$warnings], [$nw])
+for w in $warnings; do
+  gl_WARN_ADD([$w])
+done
+@end smallexample
+
+This module is meant to be used by developers who are not very experienced
+regarding the various GCC warning options. In the beginning you will set the
+list of undesired warnings (@samp{nw} in the example above) to empty, and
+compile the package with all possible warnings enabled. The GCC option
+@code{-fdiagnostics-show-option}, available in GCC 4.1 or newer, helps
+understanding which warnings originated from which option. Then you will
+go through the list of warnings. You will likely deactivate warnings that
+occur often and don't point to mistakes in the code, by adding them to the
+@samp{nw} variable, then reconfiguring and recompiling. When warnings point
+to real mistakes and bugs in the code, you will of course not disable
+them.
+
+There are also many GCC warning options which usually don't point to mistakes
+in the code; these warnings enforce a certain programming style. It is a
+project management decision whether you want your code to follow any of these
+styles. Note that some of these programming styles are conflicting. You
+cannot have them all; you have to choose among them.
+
+When a new version of GCC is released, you can add the new warning options
+that it introduces into the @code{gl_MANYWARN_ALL_GCC} macro (and submit your
+modification to the Gnulib maintainers :-)), and enjoy the benefits of the
+new warnings, while adding the undesired ones to the @samp{nw} variable.

@@ -1,0 +1,14 @@
+Files:
+tests/unicase/test-u32-is-cased.c
+tests/unicase/test-is-cased.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-is-cased
+check_PROGRAMS += test-u32-is-cased
+test_u32_is_cased_SOURCES = unicase/test-u32-is-cased.c
+test_u32_is_cased_LDADD = $(LDADD) $(LIBUNISTRING)

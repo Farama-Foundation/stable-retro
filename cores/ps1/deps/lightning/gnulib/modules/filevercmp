@@ -1,0 +1,25 @@
+Description:
+compare version strings and version-containing file names
+
+Files:
+lib/filevercmp.h
+lib/filevercmp.c
+
+Depends-on:
+c-ctype
+stdbool
+string
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += filevercmp.c
+
+Include:
+"filevercmp.h"
+
+License:
+LGPL
+
+Maintainer:
+all

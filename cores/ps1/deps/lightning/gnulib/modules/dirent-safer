@@ -1,0 +1,31 @@
+Description:
+Directory functions that avoid clobbering STD{IN,OUT,ERR}_FILENO.
+
+Files:
+lib/dirent--.h
+lib/dirent-safer.h
+lib/opendir-safer.c
+m4/dirent-safer.m4
+
+Depends-on:
+dirent
+closedir
+dirfd
+fcntl
+opendir
+
+configure.ac:
+gl_DIRENT_SAFER
+gl_MODULE_INDICATOR([dirent-safer])
+
+Makefile.am:
+lib_SOURCES += opendir-safer.c
+
+Include:
+"dirent-safer.h"
+
+License:
+GPL
+
+Maintainer:
+Eric Blake

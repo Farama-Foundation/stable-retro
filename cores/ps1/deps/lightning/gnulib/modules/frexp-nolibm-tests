@@ -1,0 +1,20 @@
+Files:
+tests/test-frexp.c
+tests/test-frexp.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+tests/randomd.c
+
+Depends-on:
+isnand-nolibm
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-frexp-nolibm
+check_PROGRAMS += test-frexp-nolibm
+test_frexp_nolibm_SOURCES = test-frexp.c randomd.c

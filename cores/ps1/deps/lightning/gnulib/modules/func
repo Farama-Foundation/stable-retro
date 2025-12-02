@@ -1,0 +1,20 @@
+Description:
+Make sure __func__ is usable even on non-C99 platforms.
+
+Files:
+m4/func.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC
+
+Makefile.am:
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+Simon Josefsson

@@ -1,0 +1,18 @@
+Files:
+tests/test-floorf-ieee.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnanf-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-floorf-ieee
+check_PROGRAMS += test-floorf-ieee
+test_floorf_ieee_LDADD = $(LDADD) @FLOORF_LIBM@

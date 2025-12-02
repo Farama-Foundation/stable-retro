@@ -1,0 +1,21 @@
+Description:
+Run-time assert-like macros.
+
+Files:
+lib/assure.h
+
+Depends-on:
+verify
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"assure.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert, Jim Meyering

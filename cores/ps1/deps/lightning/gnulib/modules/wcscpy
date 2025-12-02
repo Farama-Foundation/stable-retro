@@ -1,0 +1,34 @@
+Description:
+wcscpy() function: copy a wide string.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+lib/wcscpy.c
+lib/wcscpy-impl.h
+m4/wcscpy.m4
+
+Depends-on:
+wchar
+
+configure.ac:
+gl_FUNC_WCSCPY
+if test $HAVE_WCSCPY = 0; then
+  AC_LIBOBJ([wcscpy])
+fi
+gl_WCHAR_MODULE_INDICATOR([wcscpy])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPL
+
+Maintainer:
+all

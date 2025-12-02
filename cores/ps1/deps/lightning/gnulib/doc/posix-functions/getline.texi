@@ -1,0 +1,31 @@
+@node getline
+@section @code{getline}
+@findex getline
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/getline.html}
+
+Gnulib module: getline
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, mingw, MSVC 14, Android 4.2.
+@item
+This function is missing a declaration on some platforms:
+AIX 7.1.
+@item
+Some platforms provide a function by this name but with the wrong
+signature, for example in -linet.
+@item
+This function crashes when passed a pointer to a NULL buffer together with a
+pointer to a non-zero buffer size on some platforms:
+FreeBSD 8.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function has quadratic running time for long lines on some platforms:
+uClibc 0.9.31.
+@end itemize

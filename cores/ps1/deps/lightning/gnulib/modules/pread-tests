@@ -1,0 +1,14 @@
+Files:
+tests/test-pread.c
+tests/test-pread.sh
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+test-framework-sh
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pread.sh
+check_PROGRAMS += test-pread

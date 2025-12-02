@@ -1,0 +1,29 @@
+Description:
+Test whether a Unicode character is "bidi segment separator".
+
+Files:
+lib/unictype/pr_bidi_segment_separator.c
+lib/unictype/pr_bidi_segment_separator.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+unictype/bidiclass-of
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-bidi-segment-separator])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_BIDI_SEGMENT_SEPARATOR
+lib_SOURCES += unictype/pr_bidi_segment_separator.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,29 @@
+@node sleep
+@section @code{sleep}
+@findex sleep
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/sleep.html}
+
+Gnulib module: sleep
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw (2005 or newer), MSVC 14.
+@item
+This function takes milliseconds as argument and returns @code{void} on some
+platforms:
+mingw (2005 and older).
+@item
+This function cannot sleep longer than 49.7 days on some platforms:
+Cygwin 1.5.x.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+According to POSIX, the @code{sleep} function may interfere with the program's
+use of the @code{SIGALRM} signal.  On Linux, it doesn't; on other platforms,
+it may.
+@end itemize

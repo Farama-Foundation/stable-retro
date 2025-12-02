@@ -1,0 +1,26 @@
+Description:
+Determine length of UTF-32 string.
+
+Files:
+lib/unistr/u32-strlen.c
+lib/unistr/u-strlen.h
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u32-strlen])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_STRLEN
+lib_SOURCES += unistr/u32-strlen.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

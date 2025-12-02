@@ -1,0 +1,25 @@
+Description:
+exp() function: exponential function.
+
+Files:
+m4/exp.m4
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_EXP
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(EXP_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

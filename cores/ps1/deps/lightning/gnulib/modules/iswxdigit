@@ -1,0 +1,35 @@
+Description:
+iswxdigit() function: test wide character for being a hexadecimal digit.
+
+Files:
+lib/iswxdigit.c
+m4/iswxdigit.m4
+m4/locale-fr.m4
+m4/locale-ja.m4
+m4/locale-zh.m4
+m4/codeset.m4
+
+Depends-on:
+wctype-h
+
+configure.ac:
+gl_FUNC_ISWXDIGIT
+if test $HAVE_ISWCNTRL = 0 || test $REPLACE_ISWCNTRL = 1; then
+  :
+else
+  if test $REPLACE_ISWXDIGIT = 1; then
+    AC_LIBOBJ([iswxdigit])
+  fi
+fi
+gl_WCTYPE_MODULE_INDICATOR([iswxdigit])
+
+Makefile.am:
+
+Include:
+<wctype.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Bruno Haible

@@ -1,0 +1,22 @@
+@node setcontext
+@section @code{setcontext}
+@findex setcontext
+
+POSIX specification: @url{https://pubs.opengroup.org/onlinepubs/009695399/functions/setcontext.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 6.7, Cygwin 1.7.x, mingw, MSVC 14, Android 9.0.
+@item
+The effects of this call are system and compiler optimization dependent,
+since it restores the contents of register-allocated variables but not
+the contents of stack-allocated variables.
+@end itemize

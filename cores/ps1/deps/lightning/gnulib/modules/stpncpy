@@ -1,0 +1,29 @@
+Description:
+stpncpy() function: copy a size-bounded string, returning a pointer to its end.
+
+Files:
+lib/stpncpy.c
+m4/stpncpy.m4
+
+Depends-on:
+extensions
+string
+
+configure.ac:
+gl_FUNC_STPNCPY
+if test $HAVE_STPNCPY = 0 || test $REPLACE_STPNCPY = 1; then
+  AC_LIBOBJ([stpncpy])
+  gl_PREREQ_STPNCPY
+fi
+gl_STRING_MODULE_INDICATOR([stpncpy])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+glibc

@@ -1,0 +1,16 @@
+Files:
+tests/test-pthread-cond.c
+tests/macros.h
+
+Depends-on:
+pthread-thread
+pthread-mutex
+nanosleep
+sched_yield
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pthread-cond
+check_PROGRAMS += test-pthread-cond
+test_pthread_cond_LDADD = $(LDADD) @LIBPMULTITHREAD@ @LIB_SCHED_YIELD@

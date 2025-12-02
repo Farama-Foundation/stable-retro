@@ -1,0 +1,20 @@
+Description:
+Find a new-enough version of Perl.
+
+Files:
+m4/perl.m4
+
+Depends-on:
+
+configure.ac:
+gl_PERL
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

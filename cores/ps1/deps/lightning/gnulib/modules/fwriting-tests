@@ -1,0 +1,13 @@
+Files:
+tests/test-fwriting.c
+tests/macros.h
+
+Depends-on:
+fflush
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fwriting
+check_PROGRAMS += test-fwriting
+MOSTLYCLEANFILES += t-fwriting.tmp

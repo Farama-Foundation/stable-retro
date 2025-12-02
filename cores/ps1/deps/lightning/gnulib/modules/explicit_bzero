@@ -1,0 +1,29 @@
+Description:
+Erase sensitive data from a buffer.
+
+Files:
+lib/explicit_bzero.c
+m4/explicit_bzero.m4
+
+Depends-on:
+extensions
+string
+
+configure.ac:
+gl_FUNC_EXPLICIT_BZERO
+if test $HAVE_EXPLICIT_BZERO = 0; then
+  AC_LIBOBJ([explicit_bzero])
+  gl_PREREQ_EXPLICIT_BZERO
+fi
+gl_STRING_MODULE_INDICATOR([explicit_bzero])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

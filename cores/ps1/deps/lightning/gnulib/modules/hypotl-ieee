@@ -1,0 +1,27 @@
+Description:
+hypotl() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/hypotl-ieee.m4
+
+Depends-on:
+hypotl
+fpieee
+hypot-ieee      [{ test $HAVE_HYPOTL = 0 || test $REPLACE_HYPOTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+
+configure.ac:
+gl_FUNC_HYPOTL_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(HYPOTL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

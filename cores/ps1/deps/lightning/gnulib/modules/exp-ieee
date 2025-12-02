@@ -1,0 +1,24 @@
+Description:
+exp() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+exp
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(EXP_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

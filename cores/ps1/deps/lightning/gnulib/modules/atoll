@@ -1,0 +1,29 @@
+Description:
+atoll() function: convert decimal string to 'long long'.
+
+Files:
+lib/atoll.c
+m4/atoll.m4
+
+Depends-on:
+strtoll         [test $HAVE_ATOLL = 0]
+
+configure.ac:
+gl_FUNC_ATOLL
+if test $HAVE_ATOLL = 0; then
+  AC_LIBOBJ([atoll])
+  gl_PREREQ_ATOLL
+fi
+gl_STDLIB_MODULE_INDICATOR([atoll])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPL
+
+Maintainer:
+all, glibc
+

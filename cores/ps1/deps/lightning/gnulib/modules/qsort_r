@@ -1,0 +1,33 @@
+Description:
+Reentrant sort function with GNU signature
+
+Files:
+lib/qsort.c
+lib/qsort_r.c
+m4/qsort_r.m4
+
+Depends-on:
+extensions
+stdlib
+
+configure.ac:
+gl_FUNC_QSORT_R
+if test $HAVE_QSORT_R = 0; then
+  # The function is missing from the system or has an unknown signature.
+  AC_LIBOBJ([qsort])
+elif test $REPLACE_QSORT_R = 1; then
+  # The function exists, but it has the BSD signature.
+  AC_LIBOBJ([qsort_r])
+fi
+gl_STDLIB_MODULE_INDICATOR([qsort_r])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert

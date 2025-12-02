@@ -1,0 +1,42 @@
+Description:
+Unicode string functions.
+
+Files:
+m4/libunistring.m4
+m4/absolute-header.m4
+lib/libunistring.valgrind
+
+Depends-on:
+havelib
+iconv
+
+configure.ac:
+gl_LIBUNISTRING
+
+Makefile.am:
+
+Include:
+#if HAVE_LIBUNISTRING
+# include <unitypes.h>
+# include <unistr.h>
+# include <uniconv.h>
+# include <unistdio.h>
+# include <uniname.h>
+# include <unictype.h>
+# include <uniwidth.h>
+# include <uniwbrk.h>
+# include <unilbrk.h>
+# include <uninorm.h>
+# include <unicase.h>
+# include <uniregex.h>
+# include <unistring/version.h>
+#endif
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

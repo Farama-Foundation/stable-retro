@@ -1,0 +1,28 @@
+@node strftime
+@section @code{strftime}
+@findex strftime
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strftime.html}
+
+Gnulib module: strftime-fixes
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On native Windows platforms (mingw, MSVC), this function works incorrectly
+when the environment variable @code{TZ} has been set by Cygwin.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The Windows C runtime library (which is used by MinGW) does not
+support the %e specifier (and possibly the other more recent SUS
+specifiers too, i.e., %C, %D, %h, %n, %r, %R, %t, and %T).
+@item
+Native Windows platforms (mingw, MSVC) support only a subset of time
+zones supported by GNU or specified by POSIX@.  @xref{tzset}.
+@end itemize
+
+Extension: Gnulib offers a module @samp{nstrftime} that provides an
+@code{nstrftime} function with various GNU extensions.

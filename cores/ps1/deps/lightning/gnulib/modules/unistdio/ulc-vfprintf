@@ -1,0 +1,31 @@
+Description:
+Print formatted output to a stream.
+
+Files:
+lib/unistdio/ulc-vfprintf.c
+
+Depends-on:
+unistdio/base
+unistdio/ulc-vasnprintf
+fseterr
+errno
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unistdio/ulc-vfprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_ULC_VFPRINTF
+lib_SOURCES += unistdio/ulc-vfprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

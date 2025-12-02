@@ -1,0 +1,25 @@
+Description:
+Complete API for Unicode character bidi categories.
+
+Files:
+
+Depends-on:
+unictype/base
+unictype/bidiclass-byname
+unictype/bidiclass-longname
+unictype/bidiclass-name
+unictype/bidiclass-of
+unictype/bidiclass-test
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

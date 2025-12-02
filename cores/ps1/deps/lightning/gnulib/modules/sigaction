@@ -1,0 +1,33 @@
+Description:
+POSIX compatible signal handlers.
+
+Files:
+lib/sigaction.c
+lib/sig-handler.h
+lib/sig-handler.c
+m4/sigaction.m4
+
+Depends-on:
+extern-inline
+signal-h
+sigprocmask     [test $HAVE_SIGACTION = 0]
+
+configure.ac:
+gl_SIGACTION
+if test $HAVE_SIGACTION = 0; then
+  AC_LIBOBJ([sigaction])
+  gl_PREREQ_SIGACTION
+fi
+gl_SIGNAL_MODULE_INDICATOR([sigaction])
+
+Makefile.am:
+lib_SOURCES += sig-handler.c
+
+Include:
+<signal.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

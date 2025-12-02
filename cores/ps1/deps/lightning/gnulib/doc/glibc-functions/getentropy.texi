@@ -1,0 +1,47 @@
+@node getentropy
+@subsection @code{getentropy}
+@findex getentropy
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Unpredictable Bytes,,Generating Unpredictable Bytes,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Unpredictable-Bytes.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/getentropy.3.html,,man getentropy}.
+@end itemize
+
+Gnulib module: getentropy
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.24, Mac OS X 10.11, FreeBSD 11.0, NetBSD 9.0, OpenBSD 5.5, Minix 3.3, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.0, Cygwin 1.7.x, mingw, MSVC 14, Android 9.0.
+@item
+This function is declared in @code{<sys/random.h>}, not in @code{<unistd.h>},
+on some platforms:
+macOS 11.1, Solaris 11.4, Android 9.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize
+
+@noindent
+Although this function is intended to produce random data, the data's
+security properties may not be appropriate for your application.
+For example, identical ``random'' data streams might be produced by
+rebooted virtual machines.  If this is of concern you may need to use
+additional techniques such as hedging.@footnote{Ristenpart T, Yilek
+S@. @url{http://pages.cs.wisc.edu/~rist/papers/sslhedge.pdf, When good
+randomness goes bad: virtual machine vulnerabilities and hedging
+deployed cryptography}. NDSS 2010.}
+
+Related modules include @code{getrandom}, which has a more-flexible
+but more-complex API, and @code{crypto/gc-random}, which is likely a
+better match for code already using the other @code{crypto} APIs.

@@ -1,0 +1,33 @@
+Description:
+strtod() function: convert string to 'double'.
+
+Files:
+lib/strtod.c
+m4/strtod.m4
+m4/ldexp.m4
+
+Depends-on:
+stdlib
+strtod-obsolete
+c-ctype         [test $HAVE_STRTOD = 0 || test $REPLACE_STRTOD = 1]
+math            [test $HAVE_STRTOD = 0 || test $REPLACE_STRTOD = 1]
+stdbool         [test $HAVE_STRTOD = 0 || test $REPLACE_STRTOD = 1]
+
+configure.ac:
+gl_FUNC_STRTOD
+if test $HAVE_STRTOD = 0 || test $REPLACE_STRTOD = 1; then
+  AC_LIBOBJ([strtod])
+  gl_PREREQ_STRTOD
+fi
+gl_STDLIB_MODULE_INDICATOR([strtod])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,26 @@
+@node gmtime_r
+@section @code{gmtime_r}
+@findex gmtime_r
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/gmtime_r.html}
+
+Gnulib module: time_r
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+This function is not declared unless @code{_REENTRANT} is defined,
+on some platforms:
+HP-UX 11.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On some platforms, this function yields incorrect values for
+timestamps before the year 1:
+MacOS X 10.5, Solaris 11.3.
+@end itemize

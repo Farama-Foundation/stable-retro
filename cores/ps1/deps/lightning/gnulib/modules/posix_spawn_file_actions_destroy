@@ -1,0 +1,28 @@
+Description:
+posix_spawn_file_actions_destroy() function: free a child process actions
+specification.
+
+Files:
+lib/spawn_faction_destroy.c
+m4/posix_spawn.m4
+
+Depends-on:
+spawn
+
+configure.ac:
+gl_POSIX_SPAWN
+if test $HAVE_POSIX_SPAWN = 0 || test $REPLACE_POSIX_SPAWN = 1; then
+  AC_LIBOBJ([spawn_faction_destroy])
+fi
+gl_SPAWN_MODULE_INDICATOR([posix_spawn_file_actions_destroy])
+
+Makefile.am:
+
+Include:
+<spawn.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+glibc

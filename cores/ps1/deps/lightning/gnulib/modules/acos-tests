@@ -1,0 +1,13 @@
+Files:
+tests/test-acos.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-acos
+check_PROGRAMS += test-acos
+test_acos_LDADD = $(LDADD) @ACOS_LIBM@

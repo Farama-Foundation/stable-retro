@@ -1,0 +1,28 @@
+Description:
+dprintf() function: print formatted output to a file descriptor
+
+Files:
+lib/dprintf.c
+m4/dprintf.m4
+
+Depends-on:
+stdio
+vasnprintf      [test $ac_cv_func_dprintf = no || test $REPLACE_DPRINTF = 1]
+free-posix      [test $ac_cv_func_dprintf = no || test $REPLACE_DPRINTF = 1]
+full-write      [test $ac_cv_func_dprintf = no || test $REPLACE_DPRINTF = 1]
+errno           [test $ac_cv_func_dprintf = no || test $REPLACE_DPRINTF = 1]
+
+configure.ac:
+gl_FUNC_DPRINTF
+gl_STDIO_MODULE_INDICATOR([dprintf])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,29 @@
+Description:
+Test whether a Unicode character is "bidi eur num terminator".
+
+Files:
+lib/unictype/pr_bidi_eur_num_terminator.c
+lib/unictype/pr_bidi_eur_num_terminator.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+unictype/bidiclass-of
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-bidi-eur-num-terminator])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_BIDI_EUR_NUM_TERMINATOR
+lib_SOURCES += unictype/pr_bidi_eur_num_terminator.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

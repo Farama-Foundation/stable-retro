@@ -1,0 +1,23 @@
+Files:
+tests/test-fma1.c
+tests/test-fma1.h
+tests/test-fma2.c
+tests/test-fma2.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+lib/float+.h
+
+Depends-on:
+float
+isnand-nolibm
+ldexp
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fma1 test-fma2
+check_PROGRAMS += test-fma1 test-fma2
+test_fma1_LDADD = $(LDADD) @FMA_LIBM@
+test_fma2_LDADD = $(LDADD) @FMA_LIBM@ @LDEXP_LIBM@

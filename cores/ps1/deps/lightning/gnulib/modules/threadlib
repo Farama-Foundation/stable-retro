@@ -1,0 +1,28 @@
+Description:
+Access to multithreading primitives.
+
+Files:
+lib/glthread/threadlib.c
+m4/threadlib.m4
+
+Depends-on:
+
+configure.ac-early:
+gl_THREADLIB_EARLY
+
+configure.ac:
+AC_REQUIRE([gl_THREADLIB])
+
+Makefile.am:
+lib_SOURCES += glthread/threadlib.c
+
+Include:
+
+Link:
+$(LIBTHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

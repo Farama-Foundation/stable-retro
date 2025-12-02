@@ -1,0 +1,28 @@
+Description:
+Character set conversion of strings with error handling and autodetection,
+uses iconv.
+
+Files:
+lib/striconveha.h
+lib/striconveha.c
+
+Depends-on:
+stdbool
+striconveh
+malloca
+strdup
+c-strcase
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += striconveha.h striconveha.c
+
+Include:
+"striconveha.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

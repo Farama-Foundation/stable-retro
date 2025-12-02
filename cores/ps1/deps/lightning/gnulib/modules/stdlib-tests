@@ -1,0 +1,13 @@
+Files:
+tests/test-stdlib.c
+tests/test-sys_wait.h
+
+Depends-on:
+verify
+stdlib-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-stdlib
+check_PROGRAMS += test-stdlib

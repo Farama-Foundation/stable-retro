@@ -1,0 +1,21 @@
+@node siginterrupt
+@section @code{siginterrupt}
+@findex siginterrupt
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/siginterrupt.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 14.
+@end itemize
+
+Note: POSIX recommends using @code{sigaction} with SA_RESTART instead of
+@code{siginterrupt (sig, 0)}.

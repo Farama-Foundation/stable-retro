@@ -1,0 +1,29 @@
+Description:
+strncat() function: append part of a string to a string.
+
+Files:
+lib/strncat.c
+m4/strncat.m4
+m4/mmap-anon.m4
+
+Depends-on:
+string
+
+configure.ac:
+gl_FUNC_STRNCAT
+if test $REPLACE_STRNCAT = 1; then
+  AC_LIBOBJ([strncat])
+  gl_PREREQ_STRNCAT
+fi
+gl_STRING_MODULE_INDICATOR([strncat])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

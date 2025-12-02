@@ -1,0 +1,26 @@
+Description:
+Iterate over next character in UTF-32 string.
+
+Files:
+lib/unistr/u32-next.c
+
+Depends-on:
+unistr/base
+unistr/u32-strmbtouc
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u32-next])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_NEXT
+lib_SOURCES += unistr/u32-next.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

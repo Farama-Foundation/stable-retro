@@ -1,0 +1,37 @@
+Description:
+mkostemp() function: create a private temporary file, with specific opening
+flags.
+
+Files:
+lib/mkostemp.c
+m4/mkostemp.m4
+
+Depends-on:
+stdlib
+extensions
+largefile
+tempname        [test $HAVE_MKOSTEMP = 0]
+
+configure.ac:
+gl_FUNC_MKOSTEMP
+if test $HAVE_MKOSTEMP = 0; then
+  AC_LIBOBJ([mkostemp])
+  gl_PREREQ_MKOSTEMP
+fi
+gl_MODULE_INDICATOR([mkostemp])
+gl_STDLIB_MODULE_INDICATOR([mkostemp])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+Link:
+$(LIB_GETRANDOM)
+$(LIB_CLOCK_GETTIME)
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

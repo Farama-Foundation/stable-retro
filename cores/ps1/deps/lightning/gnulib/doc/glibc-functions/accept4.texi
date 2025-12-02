@@ -1,0 +1,23 @@
+@node accept4
+@subsection @code{accept4}
+@findex accept4
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/accept4.2.html,,man accept4}
+
+Gnulib module: accept4
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+glibc 2.9, macOS 11.1, FreeBSD 6.0, NetBSD 7.1, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.3, Cygwin 1.7.1, mingw, MSVC 14, Android 4.4.
+But the replacement function is not atomic; this matters in multi-threaded
+programs that spawn child processes.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+SOCK_CLOEXEC and SOCK_NONBLOCK may not be defined
+as they're also significant to the socket() function.
+@end itemize

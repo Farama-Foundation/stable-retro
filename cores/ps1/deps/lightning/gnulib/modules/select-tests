@@ -1,0 +1,42 @@
+Files:
+tests/macros.h
+tests/signature.h
+tests/test-select.c
+tests/test-select.h
+tests/test-select-fd.c
+tests/test-select-in.sh
+tests/test-select-out.sh
+tests/test-select-stdin.c
+
+Depends-on:
+stdbool
+sys_socket
+netinet_in
+arpa_inet
+unistd
+sys_ioctl
+extensions
+inet_pton
+errno
+perror
+pipe-posix
+socket
+bind
+setsockopt
+listen
+connect
+accept
+ioctl
+close
+gettimeofday
+
+configure.ac:
+AC_CHECK_HEADERS_ONCE([sys/wait.h])
+
+Makefile.am:
+TESTS += test-select test-select-in.sh test-select-out.sh
+# test-select-stdin has to be run by hand.
+check_PROGRAMS += test-select test-select-fd test-select-stdin
+test_select_LDADD = $(LDADD) @LIB_SELECT@ @LIBSOCKET@ $(INET_PTON_LIB)
+test_select_fd_LDADD = $(LDADD) @LIB_SELECT@
+test_select_stdin_LDADD = $(LDADD) @LIB_SELECT@

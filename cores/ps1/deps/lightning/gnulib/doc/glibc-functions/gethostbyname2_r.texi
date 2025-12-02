@@ -1,0 +1,31 @@
+@node gethostbyname2_r
+@subsection @code{gethostbyname2_r}
+@findex gethostbyname2_r
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-gethostbyname2-r-3.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Host Names,,Host Names,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Host-Names.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/gethostbyname2_r.3.html,,man gethostbyname2_r}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 5.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 5.1.
+@end itemize

@@ -1,0 +1,13 @@
+Files:
+tests/uniwidth/test-u16-strwidth.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-strwidth
+check_PROGRAMS += test-u16-strwidth
+test_u16_strwidth_SOURCES = uniwidth/test-u16-strwidth.c
+test_u16_strwidth_LDADD = $(LDADD) $(LIBUNISTRING)

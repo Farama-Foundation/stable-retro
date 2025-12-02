@@ -1,0 +1,15 @@
+Files:
+tests/unistdio/test-ulc-asnprintf1.c
+tests/unistdio/test-ulc-asnprintf1.h
+tests/unistdio/test-ulc-printf1.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ulc-asnprintf1
+check_PROGRAMS += test-ulc-asnprintf1
+test_ulc_asnprintf1_SOURCES = unistdio/test-ulc-asnprintf1.c
+test_ulc_asnprintf1_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@ $(LIB_MBRTOWC)

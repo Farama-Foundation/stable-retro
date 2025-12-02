@@ -1,0 +1,30 @@
+Description:
+Close all standard streams, resetting seekable stdin if needed, and exiting with a diagnostic on error.
+
+Files:
+lib/closein.h
+lib/closein.c
+
+Depends-on:
+closeout
+freadahead
+fflush
+stdbool
+unistd
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += closein.c
+
+Include:
+"closein.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+Eric Blake

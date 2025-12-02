@@ -1,0 +1,25 @@
+@node fts.h
+@section @file{fts.h}
+
+Defines the types @code{FTS}, @code{FTSENT} and the macros @code{FTS_*},
+and declares the functions @code{fts_open}, @code{fts_read},
+@code{fts_children}, @code{fts_set}, @code{fts_close}.
+
+Documentation:
+@itemize
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/fts.3.html,,man fts}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.3, mingw, MSVC 14.
+@end itemize

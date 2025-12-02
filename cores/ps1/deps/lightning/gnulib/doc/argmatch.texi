@@ -1,0 +1,137 @@
+@node Recognizing Option Arguments
+@section Recognizing Option Arguments
+
+The module @samp{argmatch} provides a simple textual user interface to a
+finite choice.  It is for example well suited to recognize arguments of
+options or values of environment variables that accept a fixed set of valid
+choices.
+
+These choices may be denoted by synonyms, such as `none' and `off' below.
+
+@smallexample
+$ @kbd{my_cp --backup=none foo bar}
+$ @kbd{my_cp --backup=non foo bar}
+$ @kbd{my_cp --backup=no foo bar}
+$ @kbd{my_cp --backup=n foo bar}
+my_cp: ambiguous argument 'n' for 'backup type'
+Valid arguments are:
+  - 'no', 'none', 'off'
+  - 'numbered', 't', 'newstyle'
+  - 'existing', 'nil', 'numbered-existing'
+  - 'simple', 'never', 'single'
+Try 'my_cp --help' for more information.
+$ @kbd{my_cp --backup=num foo bar}
+$ @kbd{my_cp --backup=true foo bar}
+my_cp: invalid argument 'true' for 'backup type'
+Valid arguments are:
+  - 'no', 'none', 'off'
+  - 'numbered', 't', 'newstyle'
+  - 'existing', 'nil', 'numbered-existing'
+  - 'simple', 'never', 'single'
+Try 'my_cp --help' for more information.
+@end smallexample
+
+To set up @code{argmatch}, first call @samp{ARGMATCH_DEFINE_GROUP
+(@var{name}, @var{type})} with the name of the argmatch group name, and the
+value type.  For instance:
+
+@smallexample
+enum backup_type
+@{
+  no_backups,
+  simple_backups,
+  numbered_existing_backups,
+  numbered_backups
+@};
+
+ARGMATCH_DEFINE_GROUP (backup, enum backup_type);
+@end smallexample
+
+@noindent
+This defines a few types and functions named @code{argmatch_@var{name}_*}.
+Introduce the array that defines the mapping from user-input to actual
+value, with a terminator:
+
+@example
+static const argmatch_backup_arg argmatch_backup_args[] =
+@{
+  @{ "no",                no_backups @},
+  @{ "none",              no_backups @},
+  @{ "off",               no_backups @},
+  @{ "simple",            simple_backups @},
+  @{ "never",             simple_backups @},
+  @{ "single",            simple_backups @},
+  @{ "existing",          numbered_existing_backups @},
+  @{ "nil",               numbered_existing_backups @},
+  @{ "numbered-existing", numbered_existing_backups @},
+  @{ "numbered",          numbered_backups @},
+  @{ "t",                 numbered_backups @},
+  @{ "newstyle",          numbered_backups @},
+  @{ NULL, no_backups @}
+@};
+@end example
+
+@noindent
+Then introduce the array that defines the values, also with a terminator.
+Document only once per group of synonyms:
+
+@example
+static const argmatch_backup_doc argmatch_backup_docs[] =
+@{
+  @{ "no",       N_("never make backups (even if --backup is given)") @},
+  @{ "numbered", N_("make numbered backups") @},
+  @{ "existing", N_("numbered if numbered backups exist, simple otherwise") @},
+  @{ "simple",   N_("always make simple backups") @},
+  @{ NULL, NULL @}
+@};
+@end example
+
+@noindent
+Finally, define the argmatch group:
+
+@example
+const argmatch_backup_group_type argmatch_backup_group =
+@{
+  argmatch_backup_args,
+  argmatch_backup_docs,
+  N_("\
+The backup suffix is '~', unless set with --suffix or SIMPLE_BACKUP_SUFFIX.\n\
+The version control method may be selected via the --backup option or through\n\
+the VERSION_CONTROL environment variable.  Here are the values:\n"),
+  NULL
+@};
+@end example
+
+@sp 1
+
+To use the argmatch group:
+
+@smallexample
+ptrdiff_t i = argmatch_backup_choice ("--backup", "none");
+// argmatch_backup_group.args[i].arg is "none", so its value
+// is argmatch_backup_group.args[i].val.
+// Return -1 on invalid argument, and -2 on ambiguity.
+
+enum backup_type val = *argmatch_backup_value ("--backup", "none");
+// Returns a pointer to the value, and exit on errors.
+// So argmatch_backup_group.args[i].val == val.
+
+const char *arg = argmatch_backup_argument (&no_backups);
+// arg is "no".
+
+// Print the documentation on stdout.
+argmatch_backup_usage (stdout);
+// Gives:
+//
+// The backup suffix is '~', unless set with --suffix or SIMPLE_BACKUP_SUFFIX.
+// The version control method may be selected via the --backup option or through
+// the VERSION_CONTROL environment variable.  Here are the values:
+//
+//   no, none, off  never make backups (even if --backup is given)
+//   numbered, t, newstyle
+//                  make numbered backups
+//   existing, nil, numbered-existing
+//                  numbered if numbered backups exist, simple otherwise
+//   simple, never, single
+//                  always make simple backups
+@end smallexample

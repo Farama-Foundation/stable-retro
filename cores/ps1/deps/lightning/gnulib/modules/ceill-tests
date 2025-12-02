@@ -1,0 +1,19 @@
+Files:
+tests/test-ceill.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+fpucw
+isnanl-nolibm
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ceill
+check_PROGRAMS += test-ceill
+test_ceill_LDADD = $(LDADD) @CEILL_LIBM@

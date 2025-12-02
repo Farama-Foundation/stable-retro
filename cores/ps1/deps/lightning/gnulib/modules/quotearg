@@ -1,0 +1,45 @@
+Description:
+Quote arguments for use in error messages.
+
+Files:
+lib/quotearg.h
+lib/quotearg.c
+lib/quote.h
+m4/mbstate_t.m4
+m4/mbrtowc.m4
+m4/quotearg.m4
+
+Depends-on:
+attribute
+c-strcaseeq
+extensions
+gettext-h
+mbrtowc
+mbsinit
+memcmp
+minmax
+quotearg-simple
+localcharset
+stdbool
+stdint
+wchar
+wctype-h
+xalloc
+
+configure.ac:
+gl_QUOTEARG
+
+Makefile.am:
+lib_SOURCES += quotearg.c
+
+Include:
+"quotearg.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert

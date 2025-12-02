@@ -1,0 +1,21 @@
+Files:
+tests/test-math-c++.cc
+tests/test-math-c++2.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-math-c++
+check_PROGRAMS += test-math-c++
+test_math_c___SOURCES = test-math-c++.cc test-math-c++2.cc
+# These link dependencies are needed on IRIX 6.5 with cc.
+test_math_c___LDADD = $(LDADD) $(COPYSIGNL_LIBM) $(RINT_LIBM) $(RINTL_LIBM)
+endif

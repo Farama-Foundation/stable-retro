@@ -1,0 +1,28 @@
+Description:
+Find start of next grapheme cluster in UTF-16 string.
+
+Files:
+lib/unigbrk/u16-grapheme-next.c
+tests/macros.h
+
+Depends-on:
+unigbrk/uc-is-grapheme-break
+unistr/u16-mbtouc
+
+configure.ac:
+gl_MODULE_INDICATOR([unigbrk/u16-grapheme-next])
+gl_LIBUNISTRING_MODULE([0.9.8], [unigbrk/u16-grapheme-next])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNIGBRK_U16_GRAPHEME_NEXT
+lib_SOURCES += unigbrk/u16-grapheme-next.c
+endif
+
+Include:
+"unigbrk.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+Ben Pfaff, Daiki Ueno

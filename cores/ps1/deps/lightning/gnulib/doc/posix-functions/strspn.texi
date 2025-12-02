@@ -1,0 +1,19 @@
+@node strspn
+@section @code{strspn}
+@findex strspn
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strspn.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function cannot work correctly on character strings in multibyte locales.
+Gnulib provides an alternative function @code{mbsspn} that works on character
+strings in all locales.
+@end itemize

@@ -1,0 +1,33 @@
+@node isnan
+@section @code{isnan}
+@findex isnan
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/isnan.html}
+
+Gnulib module: isnan
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This macro is missing on some platforms:
+MSVC 9.
+@item
+@code{isnan} was introduced with C99 and is thus commonly not present
+on pre-C99 systems.
+@item
+@code{isnan} is not a macro on some platforms:
+IRIX 6.5, Solaris 11.4.
+@item
+This macro does not work on some platforms:
+MSVC 14.
+@item
+On IRIX 6.5 with @code{cc}, @code{isnan} does not recognize some NaNs.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This macro returns an unspecified result when given noncanonical values
+such as unnormalized numbers, pseudo-denormals, pseudo-NaNs,
+pseudo-Infinities, and pseudo-zeroes.
+@end itemize

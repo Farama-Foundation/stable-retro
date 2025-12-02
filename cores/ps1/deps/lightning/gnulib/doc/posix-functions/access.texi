@@ -1,0 +1,47 @@
+@node access
+@section @code{access}
+@findex access
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/access.html}
+
+Gnulib module: access
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function does not support the @code{X_OK} mode on some platforms:
+MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function uses the effective id instead of the real id on some
+platforms:
+Cygwin 1.5.x.
+@end itemize
+
+Other problems of this function:
+@itemize
+@item
+There is an inherent race between calling this function and performing
+some action based on the results; you should think twice before trusting
+this function, especially in a set-uid or set-gid program.
+@item
+This function does not have an option for not following symbolic links
+(like @code{stat} versus @code{lstat}).  If you need this option, use
+the Gnulib module @code{faccessat} with the @code{AT_EACCESS} flag.
+@item
+On native Windows, files whose basename does not contain a @samp{.}
+cannot be executed through @code{execlp} or @code{execvp}.  Nevertheless,
+this function may return true for such files.
+@item
+On Windows, different facilities for executing a program have different
+ways of finding an executable file, by trying various suffixes.  For
+example, @code{execlp} and @code{execvp} search for files with the
+suffixes @code{.com}, @code{.exe}, @code{.bat}, @code{.cmd}, when the
+file with the given file name does not exist.  Whereas @code{cmd.exe}
+searches according to the @code{PATHEXT} environment variable.  This
+function does not perform any search; it merely looks at the file with
+the given file name.
+@end itemize

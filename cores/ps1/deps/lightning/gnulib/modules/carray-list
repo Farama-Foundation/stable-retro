@@ -1,0 +1,25 @@
+Description:
+Sequential list data type implemented by a circular array.
+
+Files:
+lib/gl_carray_list.h
+lib/gl_carray_list.c
+
+Depends-on:
+list
+stdint
+xsize
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_carray_list.h gl_carray_list.c
+
+Include:
+"gl_carray_list.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

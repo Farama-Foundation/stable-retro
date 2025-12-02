@@ -1,0 +1,13 @@
+Files:
+tests/test-uname.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-uname
+check_PROGRAMS += test-uname
+test_uname_LDADD = $(LDADD) @GETHOSTNAME_LIB@

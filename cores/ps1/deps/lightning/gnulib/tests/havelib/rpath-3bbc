@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Test config.rpath and AC_LIB_LINKFLAGS macro.
+# With dependencies: a shared library depending on a static library,
+# and a static library depending on both.
+# No libtool *.la files are assumed, dependencies given as AC_LIB_LINKFLAGS
+# argument instead.
+# Each library installed with a different prefix.
+
+rp=rp3bbc
+build1_configure_flags=--disable-shared
+build2_configure_flags=
+build3_configure_flags=--disable-shared
+build4_package=rpathlzyx
+remove_la=yes
+
+. $srcdir/rpath-3_b

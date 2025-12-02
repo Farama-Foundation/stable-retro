@@ -1,0 +1,31 @@
+@node mknodat
+@section @code{mknodat}
+@findex mknodat
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/mknodat.html}
+
+Gnulib module: mkfifoat
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.3.6, macOS 11.1, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14, Android 4.4.
+But the replacement function is not safe to be used in libraries and is not multithread-safe.
+@item
+This function does not fail when the file name argument ends in a slash
+and (without the slash) names a nonexistent file, on some platforms:
+AIX 7.2.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The gnulib replacement function always fails with @samp{ENOSYS} on
+some platforms:
+mingw, MSVC 14.
+@item
+If the argument exists and is a directory, the gnulib replacement
+function fails with @code{EISDIR} instead of the correct
+@code{EEXIST}: HP-UX 11.11.
+@end itemize

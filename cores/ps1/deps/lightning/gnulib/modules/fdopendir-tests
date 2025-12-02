@@ -1,0 +1,16 @@
+Files:
+tests/test-fdopendir.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+open
+opendir
+closedir
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fdopendir
+check_PROGRAMS += test-fdopendir
+test_fdopendir_LDADD = $(LDADD) @LIBINTL@

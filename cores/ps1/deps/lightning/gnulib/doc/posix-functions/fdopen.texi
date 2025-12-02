@@ -1,0 +1,21 @@
+@node fdopen
+@section @code{fdopen}
+@findex fdopen
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fdopen.html}
+
+Gnulib module: fdopen
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function crashes when invoked with invalid arguments on some platforms:
+MSVC 14.
+@item
+On Windows platforms (excluding Cygwin), this function does not set @code{errno}
+upon failure.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

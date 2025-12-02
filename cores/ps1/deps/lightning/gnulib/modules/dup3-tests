@@ -1,0 +1,16 @@
+Files:
+tests/test-dup3.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+getdtablesize
+msvc-nothrow
+open
+close
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-dup3
+check_PROGRAMS += test-dup3

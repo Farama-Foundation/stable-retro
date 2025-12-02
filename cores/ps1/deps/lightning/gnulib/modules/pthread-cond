@@ -1,0 +1,32 @@
+Description:
+POSIX condition variables.
+
+Files:
+lib/pthread-cond.c
+m4/pthread-cond.m4
+
+Depends-on:
+pthread-h
+windows-cond    [test $gl_threads_api = windows]
+pthread-mutex   [test $gl_threads_api = windows]
+
+configure.ac:
+gl_PTHREAD_COND
+if test $HAVE_PTHREAD_COND_INIT = 0 || test $REPLACE_PTHREAD_COND_INIT = 1; then
+  AC_LIBOBJ([pthread-cond])
+fi
+gl_PTHREAD_MODULE_INDICATOR([pthread-cond])
+
+Makefile.am:
+
+Include:
+<pthread.h>
+
+Link:
+$(LIBPMULTITHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_not_a_character.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_not_a_character
+check_PROGRAMS += test-pr_not_a_character
+test_pr_not_a_character_SOURCES = unictype/test-pr_not_a_character.c
+test_pr_not_a_character_LDADD = $(LDADD) $(LIBUNISTRING)

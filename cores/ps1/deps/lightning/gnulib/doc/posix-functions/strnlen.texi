@@ -1,0 +1,18 @@
+@node strnlen
+@section @code{strnlen}
+@findex strnlen
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strnlen.html}
+
+Gnulib module: strnlen
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, HP-UX 11, IRIX 6.5, Solaris 10, mingw.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

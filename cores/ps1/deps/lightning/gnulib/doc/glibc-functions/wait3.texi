@@ -1,0 +1,29 @@
+@node wait3
+@subsection @code{wait3}
+@findex wait3
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{BSD Wait Functions,,BSD Process Wait Function,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/BSD-Wait-Functions.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/wait3.2.html,,man wait3}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 14, Android 9.0.
+@end itemize

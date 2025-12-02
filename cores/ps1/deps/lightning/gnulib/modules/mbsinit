@@ -1,0 +1,35 @@
+Description:
+mbsinit() function: test for initial conversion state.
+
+Files:
+lib/mbsinit.c
+m4/mbsinit.m4
+m4/mbstate_t.m4
+
+Depends-on:
+wchar
+extensions
+mbrtowc         [test $HAVE_MBSINIT = 0 || test $REPLACE_MBSINIT = 1]
+verify          [test $HAVE_MBSINIT = 0 || test $REPLACE_MBSINIT = 1]
+
+configure.ac:
+gl_FUNC_MBSINIT
+if test $HAVE_MBSINIT = 0 || test $REPLACE_MBSINIT = 1; then
+  AC_LIBOBJ([mbsinit])
+  gl_PREREQ_MBSINIT
+fi
+gl_WCHAR_MODULE_INDICATOR([mbsinit])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

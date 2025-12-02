@@ -1,0 +1,25 @@
+Description:
+pow() function: power function.
+
+Files:
+m4/pow.m4
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_POW
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(POW_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

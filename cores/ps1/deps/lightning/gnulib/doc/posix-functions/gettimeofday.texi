@@ -1,0 +1,36 @@
+@node gettimeofday
+@section @code{gettimeofday}
+@findex gettimeofday
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/gettimeofday.html}
+
+Gnulib module: gettimeofday
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+MSVC 14.
+@item
+This function is declared with a nonstandard function prototype (only one
+argument, or ``...'' after the first argument) on some platforms.
+@item
+On some platforms, the second argument has type @code{struct
+timezone*} rather than @code{void *}, making it an error to redeclare
+the function with the POSIX signature:
+glibc.
+However, rather than penalize these systems with a replacement
+function, gnulib defines @code{GETTIMEOFDAY_TIMEZONE} to the
+appropriate type for use in avoiding a compiler warning if assigning
+@code{gettimeofday} to a function pointer.
+@item
+This function has only a precision of 15.6 milliseconds on some platforms:
+mingw.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Behavior is non-portable if the second argument to @code{gettimeofday}
+is not @code{NULL}.
+@end itemize

@@ -1,0 +1,26 @@
+@node putc_unlocked
+@section @code{putc_unlocked}
+@findex putc_unlocked
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/putc_unlocked.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function cannot be called from plain inline or extern inline functions
+on some platforms:
+OS X 10.8.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, mingw, MSVC 14.
+@item
+On some platforms, this function does not set @code{errno} or the
+stream error indicator on attempts to write to a read-only stream:
+Cygwin 1.7.9.
+@end itemize

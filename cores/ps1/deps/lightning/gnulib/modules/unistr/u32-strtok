@@ -1,0 +1,29 @@
+Description:
+Tokenize UTF-32 string.
+
+Files:
+lib/unistr/u32-strtok.c
+lib/unistr/u-strtok.h
+
+Depends-on:
+unistr/base
+unistr/u32-strspn
+unistr/u32-strpbrk
+unistr/u32-strmblen
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.6], [unistr/u32-strtok])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_STRTOK
+lib_SOURCES += unistr/u32-strtok.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

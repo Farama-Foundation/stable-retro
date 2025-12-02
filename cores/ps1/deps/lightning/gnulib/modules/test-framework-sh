@@ -1,0 +1,19 @@
+Description:
+Bourne-shell-based testing framework
+
+Files:
+tests/init.sh
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

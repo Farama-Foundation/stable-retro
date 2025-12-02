@@ -1,0 +1,10 @@
+Files:
+tests/test-ieee754-h.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ieee754-h
+check_PROGRAMS += test-ieee754-h

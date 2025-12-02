@@ -1,0 +1,40 @@
+Description:
+Titlecase mapping for UTF-8 substrings (locale dependent).
+
+Files:
+lib/unicase/u8-ct-totitle.c
+lib/unicase/u-ct-totitle.h
+lib/unicase/context.h
+
+Depends-on:
+unicase/base
+unicase/cased
+unicase/ignorable
+unicase/special-casing
+unicase/totitle
+unicase/tolower
+uniwbrk/u8-wordbreaks
+unictype/combining-class
+unictype/property-soft-dotted
+unistr/u8-mbtouc-unsafe
+unistr/u8-uctomb
+unistr/u8-cpy
+uninorm/u8-normalize
+stdbool
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u8-ct-totitle])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U8_CT_TOTITLE
+lib_SOURCES += unicase/u8-ct-totitle.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

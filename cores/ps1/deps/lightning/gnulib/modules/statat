@@ -1,0 +1,23 @@
+Description:
+statat() and lstatat() functions: Return info about a file at a directory.
+
+Files:
+lib/statat.c
+
+Depends-on:
+fstatat
+
+configure.ac:
+gl_MODULE_INDICATOR([statat]) dnl for lib/openat.h
+
+Makefile.am:
+lib_SOURCES += statat.c
+
+Include:
+"openat.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake, Paul Eggert

@@ -1,0 +1,13 @@
+Files:
+tests/test-fstrcmp.c
+tests/macros.h
+
+Depends-on:
+stdbool
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fstrcmp
+check_PROGRAMS += test-fstrcmp
+test_fstrcmp_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD)

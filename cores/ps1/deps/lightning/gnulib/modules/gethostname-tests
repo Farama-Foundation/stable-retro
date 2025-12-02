@@ -1,0 +1,12 @@
+Files:
+tests/signature.h
+tests/test-gethostname.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-gethostname
+check_PROGRAMS += test-gethostname
+test_gethostname_LDADD = $(LDADD) @GETHOSTNAME_LIB@

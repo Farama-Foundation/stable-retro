@@ -1,0 +1,27 @@
+Description:
+Formatted output to an UTF-16 string.
+
+Files:
+lib/unistdio/u16-sprintf.c
+lib/unistdio/u-sprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/u16-vsprintf
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistdio/u16-sprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_U16_SPRINTF
+lib_SOURCES += unistdio/u16-sprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

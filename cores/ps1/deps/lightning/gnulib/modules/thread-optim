@@ -1,0 +1,21 @@
+Description:
+Optimization of multithreaded code.
+
+Files:
+lib/thread-optim.h
+
+Depends-on:
+
+configure.ac:
+AC_CHECK_HEADERS([sys/single_threaded.h])
+
+Makefile.am:
+
+Include:
+"thread-optim.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

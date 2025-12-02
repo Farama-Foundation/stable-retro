@@ -1,0 +1,21 @@
+Description:
+Test whether use of TIOCGWINSZ requires termios.h.
+
+Files:
+m4/jm-winsz1.m4
+
+Depends-on:
+
+configure.ac:
+gl_HEADER_TIOCGWINSZ_IN_TERMIOS_H
+gl_WINSIZE_IN_PTEM
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

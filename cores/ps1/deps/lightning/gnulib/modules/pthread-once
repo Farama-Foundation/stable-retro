@@ -1,0 +1,31 @@
+Description:
+POSIX once-only control.
+
+Files:
+lib/pthread-once.c
+m4/pthread-once.m4
+
+Depends-on:
+pthread-h
+windows-once    [test $gl_threads_api = windows]
+
+configure.ac:
+gl_PTHREAD_ONCE
+if test $HAVE_PTHREAD_ONCE = 0 || test $REPLACE_PTHREAD_ONCE = 1; then
+  AC_LIBOBJ([pthread-once])
+fi
+gl_PTHREAD_MODULE_INDICATOR([pthread-once])
+
+Makefile.am:
+
+Include:
+<pthread.h>
+
+Link:
+$(LIBPMULTITHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

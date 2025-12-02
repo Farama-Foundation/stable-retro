@@ -1,0 +1,18 @@
+Files:
+tests/test-float-c++.cc
+tests/test-float-c++2.cc
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-float-c++
+check_PROGRAMS += test-float-c++
+test_float_c___SOURCES = test-float-c++.cc test-float-c++2.cc
+endif

@@ -1,0 +1,46 @@
+Description:
+Emulation of POSIX compatible SIGPIPE behaviour.
+
+Comment:
+This module should not be used as a dependency from a test module,
+otherwise when this module occurs as a tests-related module, it will
+have side effects on the compilation of the main modules in lib/.
+
+Files:
+m4/sigpipe.m4
+lib/stdio-write.c
+m4/asm-underscore.m4
+
+Depends-on:
+msvc-nothrow
+raise
+signal-h
+sigprocmask
+stdio
+unistd
+
+configure.ac:
+gl_SIGNAL_SIGPIPE
+dnl Define the C macro GNULIB_SIGPIPE to 1.
+gl_MODULE_INDICATOR([sigpipe])
+dnl Define the substituted variable GNULIB_SIGNAL_H_SIGPIPE to 1.
+AC_REQUIRE([gl_SIGNAL_H_DEFAULTS])
+GNULIB_SIGNAL_H_SIGPIPE=1
+dnl Define the substituted variable GNULIB_STDIO_H_SIGPIPE to 1.
+AC_REQUIRE([gl_STDIO_H_DEFAULTS])
+AC_REQUIRE([gl_ASM_SYMBOL_PREFIX])
+GNULIB_STDIO_H_SIGPIPE=1
+dnl Define the substituted variable GNULIB_UNISTD_H_SIGPIPE to 1.
+AC_REQUIRE([gl_UNISTD_H_DEFAULTS])
+GNULIB_UNISTD_H_SIGPIPE=1
+
+Makefile.am:
+
+Include:
+<signal.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

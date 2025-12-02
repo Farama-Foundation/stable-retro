@@ -1,0 +1,22 @@
+@node log10
+@section @code{log10}
+@findex log10
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/log10.html}
+
+Gnulib module: log10 or log10-ieee
+
+Portability problems fixed by either Gnulib module @code{log10} or @code{log10-ieee}:
+@itemize
+@end itemize
+
+Portability problems fixed by Gnulib module @code{log10-ieee}:
+@itemize
+@item
+This function returns a wrong value for a negative argument on some platforms:
+NetBSD 5.1, Solaris 11.4.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

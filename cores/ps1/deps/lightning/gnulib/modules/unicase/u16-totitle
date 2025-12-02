@@ -1,0 +1,29 @@
+Description:
+Titlecase mapping for UTF-16 strings (locale dependent).
+
+Files:
+lib/unicase/u16-totitle.c
+lib/unicase/u-totitle.h
+
+Depends-on:
+unicase/base
+unicase/u16-ct-totitle
+unicase/empty-prefix-context
+unicase/empty-suffix-context
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u16-totitle])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U16_TOTITLE
+lib_SOURCES += unicase/u16-totitle.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

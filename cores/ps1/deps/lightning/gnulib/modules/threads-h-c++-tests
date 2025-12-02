@@ -1,0 +1,19 @@
+Files:
+tests/test-threads-c++.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-threads-c++
+check_PROGRAMS += test-threads-c++
+test_threads_c___SOURCES = test-threads-c++.cc
+test_threads_c___LDADD = $(LDADD) @LIBSTDTHREAD@
+endif

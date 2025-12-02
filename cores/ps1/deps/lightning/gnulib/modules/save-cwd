@@ -1,0 +1,31 @@
+Description:
+Save and restore the current working directory.
+
+Files:
+lib/save-cwd.h
+lib/save-cwd.c
+m4/save-cwd.m4
+
+Depends-on:
+chdir-long
+fchdir
+fd-safer-flag
+getcwd-lgpl
+open
+stdbool
+unistd-safer
+
+configure.ac:
+gl_SAVE_CWD
+
+Makefile.am:
+lib_SOURCES += save-cwd.c
+
+Include:
+"save-cwd.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

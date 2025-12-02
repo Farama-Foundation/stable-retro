@@ -1,0 +1,76 @@
+@node strtold
+@section @code{strtold}
+@findex strtold
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strtold.html}
+
+Gnulib module: strtold
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+NetBSD 3.0, OpenBSD 3.8, Minix 3.1.8, older IRIX 6.5, Solaris 9, older Cygwin 1.7.x, MSVC 9, Android 4.4.
+
+@item
+This function returns a struct, not a @code{long double}, on some platforms:
+HP-UX 11.31/hppa.
+
+@item
+This function consumes whitespace even when there is nothing that should
+be parsed on some platforms:
+IRIX 6.5.
+
+@item
+This function allows whitespace between @samp{e} and the exponent on
+some platforms:
+HP-UX 11.31/ia64, IRIX 6.5.
+
+@item
+This function returns the wrong end pointer for @samp{-0x} on some
+platforms:
+glibc-2.3.2, Mac OS X 10.5, Haiku.
+
+@item
+This function returns +0.0 (not @minus{}0.0) for @samp{-0} on some platforms:
+IRIX 6.5.
+
+@item
+This function fails to parse Infinities and plain NaNs on some platforms:
+HP-UX 11.31/ia64, IRIX 6.5.
+
+@item
+This function fails to parse @samp{NaN()} on some platforms:
+glibc-2.3.2, IRIX 6.5, mingw, Haiku.
+
+@item
+This function fails to parse @samp{NaN(@var{n-char-sequence})} on some
+platforms:
+IRIX 6.5.
+
+@item
+This function parses @samp{NaN(@var{n-char-sequence})}, but returns
+the wrong end pointer on some platforms:
+glibc-2.3.2, mingw, Haiku.
+
+@item
+This function fails to parse C99 hexadecimal floating point on some
+platforms:
+IRIX 6.5, mingw.
+
+@item
+In hexadecimal floats, this function allows whitespace between @samp{p}
+and the exponent on some platforms:
+HP-UX 11.31/ia64.
+
+@item
+This function fails to set @code{errno} upon underflow on some platforms:
+@c https://cygwin.com/ml/cygwin/2019-12/msg00072.html
+Cygwin 2.9.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The replacement function does not always return correctly rounded results.
+@end itemize

@@ -1,0 +1,11 @@
+Files:
+tests/test-i-ring.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-i-ring
+check_PROGRAMS += test-i-ring

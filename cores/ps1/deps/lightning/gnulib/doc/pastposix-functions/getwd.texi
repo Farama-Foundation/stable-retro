@@ -1,0 +1,23 @@
+@node getwd
+@section @code{getwd}
+@findex getwd
+
+POSIX specification: @url{https://pubs.opengroup.org/onlinepubs/009695399/functions/getwd.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14, Android 9.0.
+@item
+The size of the buffer required for this function is not a compile-time
+constant.  Also, the function truncates a result that would be larger than
+the minimum buffer size.  For these reasons, this function is marked as
+``legacy'' in POSIX@.  Better use the @code{getcwd} function instead.
+@end itemize

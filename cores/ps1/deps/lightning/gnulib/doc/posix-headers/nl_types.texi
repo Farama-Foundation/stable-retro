@@ -1,0 +1,17 @@
+@node nl_types.h
+@section @file{nl_types.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/nl_types.h.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+Minix 3.1.8, Cygwin, mingw, MSVC 14, Android 9.0.
+@end itemize

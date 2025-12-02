@@ -1,0 +1,26 @@
+Description:
+Convert UTF-32 string to UTF-16 string.
+
+Files:
+lib/unistr/u32-to-u16.c
+
+Depends-on:
+unistr/base
+unistr/u16-uctomb
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u32-to-u16])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_TO_U16
+lib_SOURCES += unistr/u32-to-u16.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

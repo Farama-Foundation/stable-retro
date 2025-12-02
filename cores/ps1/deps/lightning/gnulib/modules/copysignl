@@ -1,0 +1,34 @@
+Description:
+copysignl() function: copy sign into another 'long double' number.
+
+Files:
+lib/copysignl.c
+m4/copysignl.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+copysign        [test $HAVE_COPYSIGNL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+signbit         [test $HAVE_COPYSIGNL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+gl_FUNC_COPYSIGNL
+if test $HAVE_COPYSIGNL = 0; then
+  AC_LIBOBJ([copysignl])
+fi
+gl_MATH_MODULE_INDICATOR([copysignl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(COPYSIGNL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,39 @@
+Description:
+isnanf() function: test for NaN.
+
+Files:
+lib/isnanf.c
+lib/isnan.c
+lib/float+.h
+m4/exponentf.m4
+m4/isnanf.m4
+
+Depends-on:
+math
+fpieee
+memcmp
+
+configure.ac:
+gl_FUNC_ISNANF
+m4_ifdef([gl_ISNAN], [
+  AC_REQUIRE([gl_ISNAN])
+])
+if test $HAVE_ISNANF = 0 || test $REPLACE_ISNAN = 1; then
+  AC_LIBOBJ([isnanf])
+  gl_PREREQ_ISNANF
+fi
+gl_MATH_MODULE_INDICATOR([isnanf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ISNANF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

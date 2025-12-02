@@ -1,0 +1,29 @@
+@node madvise
+@subsection @code{madvise}
+@findex madvise
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Memory-mapped I/O,,Memory-mapped I/O,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Memory_002dmapped-I_002fO.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/madvise.2.html,,man madvise}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, Cygwin 1.7.7, mingw, MSVC 14.
+@end itemize

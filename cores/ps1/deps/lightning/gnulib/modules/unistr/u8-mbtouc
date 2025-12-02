@@ -1,0 +1,27 @@
+Description:
+Look at first character in UTF-8 string.
+
+Files:
+lib/unistr/u8-mbtouc.c
+lib/unistr/u8-mbtouc-aux.c
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_MODULE_INDICATOR([unistr/u8-mbtouc])
+gl_LIBUNISTRING_MODULE([0.9.4], [unistr/u8-mbtouc])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_MBTOUC
+lib_SOURCES += unistr/u8-mbtouc.c unistr/u8-mbtouc-aux.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

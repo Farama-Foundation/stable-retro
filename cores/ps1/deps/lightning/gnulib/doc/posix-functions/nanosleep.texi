@@ -1,0 +1,25 @@
+@node nanosleep
+@section @code{nanosleep}
+@findex nanosleep
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/nanosleep.html}
+
+Gnulib module: nanosleep
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+This function mishandles large arguments when interrupted by a signal on some
+platforms:
+Linux 64-bit, Solaris 64-bit.
+@item
+This function cannot sleep longer than 49.7 days on some platforms:
+Cygwin 1.5.x.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

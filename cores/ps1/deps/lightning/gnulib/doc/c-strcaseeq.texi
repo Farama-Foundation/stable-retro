@@ -1,0 +1,27 @@
+@c Documentation of gnulib module 'c-strcaseeq'.
+
+@c Copyright (C) 2008--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+The @code{c-strcaseeq} module contains an optimized case-insensitive
+string comparison function operating on single-byte character strings, that
+operate as if the locale encoding was ASCII.
+(The "C" locale on many systems has the locale encoding "ASCII".)
+
+The functions is actually implemented as a macro:
+@smallexample
+extern int STRCASEEQ (const char *s1, const char *s2,
+                      int s20, int s21, int s22, int s23, int s24, int s25,
+                      int s26, int s27, int s28);
+@end smallexample
+
+@var{s2} should be a short literal ASCII string, and @var{s20}, @var{s21}, ...
+the individual characters of @var{s2}.
+
+For case conversion here, only ASCII characters are considered to be
+upper case or lower case.

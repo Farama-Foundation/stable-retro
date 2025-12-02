@@ -1,0 +1,22 @@
+Files:
+tests/test-rintl.c
+tests/test-rint.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+tests/randoml.c
+
+Depends-on:
+fpucw
+isnanl-nolibm
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-rintl
+check_PROGRAMS += test-rintl
+test_rintl_SOURCES = test-rintl.c randoml.c
+test_rintl_LDADD = $(LDADD) @RINTL_LIBM@

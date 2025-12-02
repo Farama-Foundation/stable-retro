@@ -1,0 +1,20 @@
+Description:
+Conversion UTF-8 to UCS-4.
+
+Files:
+
+Depends-on:
+unistr/u8-mbtouc-unsafe
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"unistr.h"
+
+License:
+LGPL
+
+Maintainer:
+all

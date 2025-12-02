@@ -1,0 +1,19 @@
+Files:
+tests/test-sys_random-c++.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-sys_random-c++
+check_PROGRAMS += test-sys_random-c++
+test_sys_random_c___SOURCES = test-sys_random-c++.cc
+test_sys_random_c___LDADD = $(LDADD) $(LIB_GETRANDOM)
+endif

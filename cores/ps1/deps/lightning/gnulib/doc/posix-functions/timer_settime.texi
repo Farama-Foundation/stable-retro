@@ -1,0 +1,21 @@
+@node timer_settime
+@section @code{timer_settime}
+@findex timer_settime
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/timer_settime.html}
+
+Gnulib module: timer-time
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Mac OS X 10.11, FreeBSD 6.4, Minix 3.1.8, mingw, MSVC 14.
+@item
+This function fails with @code{ENOSYS} on some platforms:
+OpenBSD 4.9.
+@end itemize

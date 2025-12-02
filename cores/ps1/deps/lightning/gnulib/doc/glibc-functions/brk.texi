@@ -1,0 +1,29 @@
+@node brk
+@subsection @code{brk}
+@findex brk
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Resizing the Data Segment,,Resizing the Data Segment,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Resizing-the-Data-Segment.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/brk.2.html,,man brk}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 12.2/arm64, AIX 5.1, Cygwin 2.9, mingw, MSVC 14.
+@end itemize

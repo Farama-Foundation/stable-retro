@@ -1,0 +1,54 @@
+@node atof
+@section @code{atof}
+@findex atof
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/atof.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Android 4.4.
+
+@item
+This function mis-parses strings with leading @samp{+} on some old platforms:
+Old versions of Linux.
+
+@item
+This function returns a positive value for negative underflow on some
+platforms:
+glibc 2.4, Mingw, Cygwin.
+
+@item
+This function fails to do a valid parse of @samp{-0x} on some
+platforms:
+glibc 2.4, Cygwin < 1.5.25-11.
+
+@item
+This function fails to parse Infinities and plain NaNs on some platforms:
+Mingw, OpenBSD 4.0.
+
+@item
+This function fails to parse NaN() on some platforms:
+Mingw, OpenBSD 4.0, Cygwin < 1.5.25-11.
+
+@item
+This function fails to parse NaN(n-char-sequence) on some platforms:
+Mingw, OpenBSD 4.0.
+
+@item
+This function fails to parse C99 hexadecimal floating point on some
+platforms:
+Mingw, OpenBSD 4.0.
+
+@item
+This function fails to correctly parse very long strings on some
+platforms:
+Mingw, Cygwin.
+@end itemize

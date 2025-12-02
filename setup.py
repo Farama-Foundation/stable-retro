@@ -77,6 +77,7 @@ platform_globs = [
         "GbAdvance",
         "32x",
         "Saturn",
+        "Ps1",
     ]
 ]
 

@@ -1,0 +1,36 @@
+@node fstab.h
+@section @file{fstab.h}
+
+Defines the type @code{struct fstab}, the macros @code{FSTAB_*},
+@code{_PATH_FSTAB}, and declares the functions
+@code{setfsent}, @code{endfsent},
+@code{getfsent}, @code{getfsspec}, @code{getfsfile}.
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{fstab,,The `fstab' file,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/fstab.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/setfsent.3.html,,man setfsent}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+Minix 3.1.8, IRIX 6.5, Solaris 11.4, Cygwin, mingw, MSVC 14, Android 9.0.
+@item
+The macro @code{_PATH_FSTAB} is missing on some platforms:
+AIX 5.1, HP-UX 11.
+@end itemize

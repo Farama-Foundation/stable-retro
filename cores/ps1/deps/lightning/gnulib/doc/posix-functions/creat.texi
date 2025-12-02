@@ -1,0 +1,30 @@
+@node creat
+@section @code{creat}
+@findex creat
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/creat.html}
+
+Gnulib module: creat
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function does not support modes with execution bits (such as 0700)
+on some platforms:
+MSVC 14.
+@item
+On platforms where @code{off_t} is a 32-bit type, @code{creat} may not work
+correctly with files larger than 2 GB@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@item
+This function does not fail when the file name argument ends in a slash
+and (without the slash) names a nonexistent file, on some platforms:
+FreeBSD 7.2, AIX 7.1, HP-UX 11.31, Solaris 9.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows, this function returns a file handle in @code{O_TEXT} mode.  If you
+need a file handle in @code{O_BINARY} mode, you need to use the function
+@code{open} instead.
+@end itemize

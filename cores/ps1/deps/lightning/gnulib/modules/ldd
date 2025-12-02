@@ -1,0 +1,22 @@
+Description:
+Command to determine the dynamically linked dependencies of a program.
+
+Files:
+build-aux/ldd.sh.in
+m4/ldd.m4
+
+Depends-on:
+
+configure.ac:
+gl_LDD
+AC_CONFIG_FILES([ldd.sh:build-aux/ldd.sh.in])
+
+Makefile.am:
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+all

@@ -1,0 +1,22 @@
+@node a.out.h
+@section @file{a.out.h}
+
+Describes the structure of executables (and object files?) in the old
+@code{a.out} format.
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+macOS 11.1, Solaris 11.4, mingw, MSVC 14, Android 9.0.
+@item
+This header file is useless because most executables and object files are
+in ELF format on some platforms:
+glibc 2.3.6, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7.
+@end itemize

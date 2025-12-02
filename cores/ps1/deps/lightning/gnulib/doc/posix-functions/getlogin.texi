@@ -1,0 +1,25 @@
+@node getlogin
+@section @code{getlogin}
+@findex getlogin
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/getlogin.html}
+
+Gnulib module: getlogin
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+older mingw, MSVC 14.
+@item
+This function is not declared unless @code{_POSIX} is defined on some platforms:
+mingw.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function returns an empty string even when standard input is a tty
+on some platforms:
+HP-UX 11.11.
+@end itemize

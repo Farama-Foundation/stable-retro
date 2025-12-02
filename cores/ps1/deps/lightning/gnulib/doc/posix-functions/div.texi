@@ -1,0 +1,15 @@
+@node div
+@section @code{div}
+@findex div
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/div.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,12 @@
+Files:
+tests/test-strverscmp.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-strverscmp
+check_PROGRAMS += test-strverscmp

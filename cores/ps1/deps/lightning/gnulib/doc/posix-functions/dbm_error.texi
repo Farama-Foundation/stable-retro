@@ -1,0 +1,18 @@
+@node dbm_error
+@section @code{dbm_error}
+@findex dbm_error
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/dbm_error.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.3.6, HP-UX 11.11, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

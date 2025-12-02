@@ -1,0 +1,34 @@
+Description:
+floorl() function: round towards negative infinity.
+
+Files:
+lib/floorl.c
+lib/floor.c
+m4/floorl.m4
+
+Depends-on:
+math
+extensions
+floor           [{ test $HAVE_DECL_FLOORL = 0 || test $REPLACE_FLOORL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+float           [{ test $HAVE_DECL_FLOORL = 0 || test $REPLACE_FLOORL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+AC_REQUIRE([gl_FUNC_FLOORL])
+if test $HAVE_DECL_FLOORL = 0 || test $REPLACE_FLOORL = 1; then
+  AC_LIBOBJ([floorl])
+fi
+gl_MATH_MODULE_INDICATOR([floorl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FLOORL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

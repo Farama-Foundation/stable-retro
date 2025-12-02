@@ -1,0 +1,45 @@
+@node getopt.h
+@section @file{getopt.h}
+
+Defines the type @code{struct option} and declares the variables
+@code{optarg}, @code{optind}, @code{opterr}, @code{optopt}
+and the functions @code{getopt}, @code{getopt_long}, @code{getopt_long_only}.
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Getopt,,Parsing program options using `getopt',libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Getopt.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/getopt.3.html,,man getopt}.
+@end itemize
+
+Gnulib module: getopt-gnu
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+AIX 5.1, HP-UX 11, MSVC 14.
+@item
+The function @code{getopt_long} is missing on some platforms:
+IRIX 6.5, Solaris 9.
+@item
+The function @code{getopt_long_only} is missing on some platforms:
+FreeBSD 5.2.1, NetBSD 9.0, IRIX 6.5, Solaris 9, mingw.
+@item
+The method to reset options is incompatible on some platforms:
+FreeBSD 6.0, NetBSD 9.0(?), OpenBSD 6.7, Cygwin 1.5.x, mingw.
+@item
+The function @code{getopt} does not handle a leading @samp{+} character in
+the options string on some platforms:
+Solaris 11 2010-11.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,32 @@
+Description:
+uname() function: enquire system information.
+
+Files:
+lib/uname.c
+m4/uname.m4
+
+Depends-on:
+sys_utsname
+gethostname     [test $HAVE_UNAME = 0]
+
+configure.ac:
+gl_FUNC_UNAME
+if test $HAVE_UNAME = 0; then
+  AC_LIBOBJ([uname])
+  gl_PREREQ_UNAME
+fi
+gl_SYS_UTSNAME_MODULE_INDICATOR([uname])
+
+Makefile.am:
+
+Include:
+<sys/utsname.h>
+
+Link:
+$(GETHOSTNAME_LIB)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

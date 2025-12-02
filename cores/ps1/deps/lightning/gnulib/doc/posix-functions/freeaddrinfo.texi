@@ -1,0 +1,24 @@
+@node freeaddrinfo
+@section @code{freeaddrinfo}
+@findex freeaddrinfo
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/freeaddrinfo.html}
+
+Gnulib module: getaddrinfo
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+HP-UX 11.11, IRIX 6.5, Cygwin 1.5.x, mingw, MSVC 14.
+@item
+On Windows, this function is declared in @code{<ws2tcpip.h>} rather than in
+@code{<netdb.h>}.
+@item
+On Windows, in 32-bit mode, this function is defined with a calling convention
+that is different from @code{cdecl}.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

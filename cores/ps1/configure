@@ -1,0 +1,685 @@
+#!/bin/sh
+# some elements originated from qemu configure
+set -e
+
+TMPC="/tmp/pcsx-conf-${RANDOM}-$$-${RANDOM}.c"
+TMPO="/tmp/pcsx-conf-${RANDOM}-$$-${RANDOM}.o"
+TMPB="/tmp/pcsx-conf-${RANDOM}-$$-${RANDOM}"
+trap "rm -f $TMPC $TMPO $TMPB" EXIT INT QUIT TERM
+rm -f config.log
+
+compile_object()
+{
+  c="$CC $CFLAGS -c $TMPC -o $TMPO $@"
+  echo $c >> config.log
+  $c >> config.log 2>&1
+}
+
+compile_binary()
+{
+  c="$CC $CFLAGS $TMPC -o $TMPB $LDFLAGS $MAIN_LDLIBS $@"
+  echo $c >> config.log
+  $c >> config.log 2>&1
+}
+
+check_define()
+{
+  $CC -E -dD $CFLAGS include/arm_features.h | grep -v '#undef' | grep -q "$1" || return 1
+  return 0
+}
+
+check_define_val()
+{
+  $CC -E -dD $CFLAGS include/arm_features.h | grep -v '#undef' | grep "$1" | awk '{print $3}'
+  return 0
+}
+
+# setting options to "yes" or "no" will make that choice default,
+# "" means "autodetect".
+
+platform_list="generic pandora maemo caanoo"
+platform="generic"
+builtin_gpu_list="neon peops unai"
+dynarec_list="ari64 lightrec none"
+builtin_gpu=""
+sound_driver_list="oss alsa pulseaudio sdl"
+sound_drivers=""
+plugins=""
+drc_cache_base="no"
+have_armv5=""
+have_armv6=""
+have_armv7=""
+have_arm_neon=""
+have_arm_neon_asm=""
+have_neon_gpu=""
+have_tslib=""
+have_evdev=""
+have_gles=""
+have_c64x_dsp=""
+have_fsections="yes"
+have_dynamic="yes"
+gnu_linker="yes"
+dynarec=""
+multithreading="yes"
+need_sdl="no"
+need_xlib="no"
+need_libpicofe="yes"
+need_warm="no"
+CFLAGS_GLES=""
+LDLIBS_GLES=""
+# these are for known platforms
+optimize_cortexa8="no"
+optimize_arm926ej="no"
+
+# hardcoded stuff
+case "${OSTYPE}" in
+  *BSD*|*darwin*)
+    CC="clang"
+    CXX="clang++"
+    if test -d /opt/local/include; then
+      # MacPorts
+      CFLAGS="$CFLAGS -I/opt/local/include"
+      LDFLAGS="$LDFLAGS -L/opt/local/lib"
+    fi
+    if test -d /opt/local/include; then
+      CFLAGS="$CFLAGS -I/usr/local/include"
+      LDFLAGS="$LDFLAGS -L/usr/local/lib"
+    fi
+    MAKE=gmake
+    gnu_linker="no"
+    ;;
+  *)
+    CC="${CC-${CROSS_COMPILE}gcc}"
+    CXX="${CXX-${CROSS_COMPILE}g++}"
+    ;;
+esac
+AS="${AS-${CROSS_COMPILE}as}"
+AR="${AS-${CROSS_COMPILE}ar}"
+MAIN_LDLIBS="$LDLIBS -ldl -lm -lpthread"
+config_mak="config.mak"
+
+case "${OSTYPE}" in
+  *BSD*|*darwin*)
+    SYSROOT="$sysroot"
+    [ "x${SDL_CONFIG}" = "x" ] && SDL_CONFIG="${SYSROOT}/usr/local/bin/sdl-config"
+    ;;
+  *)
+    SYSROOT="$(${CC} --print-sysroot 2> /dev/null || true)"
+    [ "x${SDL_CONFIG}" = "x" ] && SDL_CONFIG="${SYSROOT}/usr/bin/sdl-config"
+    ;;
+esac
+
+fail()
+{
+  echo "$@"
+  if test -n "$DUMP_CONFIG_LOG"; then cat config.log; fi
+  exit 1
+}
+
+# call during arg parsing, so that cmd line can override platform defaults
+set_platform()
+{
+  platform=$1
+  case "$platform" in
+  generic)
+    ;;
+  pandora)
+    sound_drivers="oss alsa"
+    drc_cache_base="yes"
+    optimize_cortexa8="yes"
+    have_arm_neon="yes"
+    have_neon_gpu="yes"
+    need_xlib="yes"
+    multithreading="no"
+    ;;
+  maemo)
+    drc_cache_base="yes"
+    optimize_cortexa8="yes"
+    have_arm_neon="yes"
+    have_neon_gpu="yes"
+    multithreading="no"
+    ;;
+  caanoo)
+    sound_drivers="oss"
+    drc_cache_base="yes"
+    optimize_arm926ej="yes"
+    need_warm="yes"
+    multithreading="no"
+    ;;
+  *)
+    fail "unsupported platform: $platform"
+    ;;
+  esac
+}
+
+for opt do
+  optarg=`expr "x$opt" : 'x[^=]*=\(.*\)'` || true
+  case "$opt" in
+  --help|-h) show_help="yes"
+  ;;
+  --platform=*) set_platform "$optarg"
+  ;;
+  --gpu=*) builtin_gpu="$optarg"
+  ;;
+  --sound-drivers=*) sound_drivers="$optarg"
+  ;;
+  --enable-neon) have_arm_neon="yes"
+  ;;
+  --disable-neon) have_arm_neon="no"
+  ;;
+  --enable-threads) multithreading="yes"
+  ;;
+  --disable-threads) multithreading="no"
+  ;;
+  --enable-dynamic) have_dynamic="yes"
+  ;;
+  --disable-dynamic) have_dynamic="no"
+  ;;
+  --dynarec=*) dynarec="$optarg"
+  ;;
+  --disable-dynarec) dynarec="no"
+  ;;
+  *) echo "ERROR: unknown option $opt"; show_help="yes"
+  ;;
+  esac
+done
+
+if [ "$show_help" = "yes" ]; then
+  echo "options:"
+  echo "  --help                   print this message"
+  echo "  --platform=NAME          target platform [$platform]"
+  echo "                           available: $platform_list"
+  echo "  --gpu=NAME               builtin gpu plugin [guessed]"
+  echo "                           available: $builtin_gpu_list"
+  echo "  --sound-drivers=LIST     sound output drivers [guessed]"
+  echo "                           available: $sound_driver_list"
+  echo "  --enable-neon"
+  echo "  --disable-neon           enable/disable ARM NEON optimizations [guessed]"
+  echo "  --enable-threads"
+  echo "  --disable-threads        enable/disable multithreaded features [guessed]"
+  echo "  --enable-dynamic"
+  echo "  --disable-dynamic        enable/disable dynamic loading obj. eg.plugins [guessed]"
+  echo "  --dynarec=NAME           select dynamic recompiler [guessed]"
+  echo "                           available: $dynarec_list"
+  echo "influential environment variables:"
+  echo "  CROSS_COMPILE CC CXX AS AR CFLAGS ASFLAGS LDFLAGS LDLIBS"
+  exit 1
+fi
+
+# validate selections
+if [ "x$builtin_gpu" != "x" ]; then
+  if ! echo $builtin_gpu_list | grep -q "\<$builtin_gpu\>"; then
+    fail "unsupported builtin gpu plugin: $builtin_gpu"
+  fi
+fi
+
+if [ "x$sound_drivers" != "x" ]; then
+  for d in $sound_drivers; do
+    if ! echo $sound_driver_list | grep -q "\<$d\>"; then
+      fail "unsupported sound driver: $sound_driver"
+    fi
+  done
+fi
+
+if [ "$need_libpicofe" = "yes" ]; then
+  if ! test -f "frontend/libpicofe/README"; then
+    fail "libpicofe is missing, please run 'git submodule init && git submodule update'"
+  fi
+fi
+
+if [ "$need_warm" = "yes" ]; then
+  if ! test -f "frontend/warm/README"; then
+    fail "wARM is missing, please run 'git submodule init && git submodule update'"
+  fi
+fi
+
+# basic compiler test
+cat > $TMPC <<EOF
+#include <zlib.h>
+int main(void) { return 0; }
+EOF
+if ! compile_binary; then
+  fail "compiler test failed, please check config.log"
+fi
+
+if [ -z "$ARCH" ]; then
+  ARCH=`$CC -dumpmachine | awk -F '-' '{print $1}'`
+fi
+
+case "$ARCH" in
+aarch64|arm64)
+  have_arm_neon="yes"
+  have_neon_gpu="yes"
+  have_arm_neon_asm="no"
+  if [ "x$dynarec" = "x" ]; then
+    dynarec="ari64"
+  fi
+  ;;
+arm*)
+  # ARM stuff
+  ARCH="arm"
+
+  if [ "$optimize_cortexa8" = "yes" ]; then
+    CFLAGS="$CFLAGS -mcpu=cortex-a8 -mtune=cortex-a8"
+    ASFLAGS="$ASFLAGS -mcpu=cortex-a8"
+  fi
+  if [ "$optimize_arm926ej" = "yes" ]; then
+    CFLAGS="$CFLAGS -mcpu=arm926ej-s -mtune=arm926ej-s"
+    ASFLAGS="$ASFLAGS -mcpu=arm926ej-s -mfloat-abi=softfp"
+  fi
+
+  if [ "x$have_arm_neon" = "x" ]; then
+    # detect NEON from user-supplied cflags to enable neon code
+    have_arm_neon=`check_define __ARM_NEON__ && echo yes` || true
+  fi
+  if [ "x$have_armv7" = "x" ]; then
+    if check_define HAVE_ARMV7; then
+      have_armv7="yes"
+      have_armv6="yes"
+      have_armv5="yes"
+    fi
+  fi
+  if [ "x$have_armv6" = "x" ]; then
+    if check_define HAVE_ARMV6; then
+      have_armv6="yes"
+      have_armv5="yes"
+    fi
+  fi
+  if [ "x$have_armv5" = "x" ]; then
+    have_armv5=`check_define HAVE_ARMV5 && echo yes` || true
+  fi
+
+  if [ "x$dynarec" = "x" ]; then
+    dynarec="ari64"
+  fi
+
+  if [ "$have_arm_neon" = "yes" ]; then
+    have_neon_gpu="yes"
+    fpu="neon"
+  elif [ "$have_armv6" = "yes" ]; then
+    fpu="vfp"
+  fi
+  # automatically set mfpu and mfloat-abi if they are not set
+  if [ "x$fpu" != "x" ]; then
+    echo "$CFLAGS" | grep -q -- '-mfpu=' || CFLAGS="$CFLAGS -mfpu=$fpu"
+    echo "$ASFLAGS" | grep -q -- '-mfpu=' || ASFLAGS="$ASFLAGS -mfpu=$fpu"
+    floatabi_set_by_gcc=`$CC -v 2>&1 | grep -q -- --with-float= && echo yes` || true
+    if [ "$floatabi_set_by_gcc" != "yes" ]; then
+      echo "$CFLAGS" | grep -q -- '-mfloat-abi=' || CFLAGS="$CFLAGS -mfloat-abi=softfp"
+      echo "$ASFLAGS" | grep -q -- '-mfloat-abi=' || ASFLAGS="$ASFLAGS -mfloat-abi=softfp"
+    fi
+  fi
+
+  # must disable thumb as recompiler can't handle it
+  if check_define __thumb__; then
+    CFLAGS="$CFLAGS -marm"
+  fi
+
+  # warn about common mistakes
+  if [ "$have_armv5" != "yes" ]; then
+    if ! echo "$CFLAGS" | grep -q -- '-mcpu=\|-march='; then
+      echo "Warning: compiling for ARMv4, is that really what you want?"
+      echo "You probably should specify -mcpu= or -march= like this:"
+      echo "  CFLAGS=-march=armv6 ./configure ..."
+    fi
+  fi
+  if [ "$have_arm_neon" = "yes" -a "$have_armv7" != "yes" ]; then
+    echo "Warning: compiling for NEON, but not ARMv7?"
+    echo "You probably want to specify -mcpu= or -march= like this:"
+    echo "  CFLAGS=-march=armv7-a ./configure ..."
+  fi
+  have_arm_neon_asm=$have_arm_neon
+  ;;
+x86_64)
+  if [ "x$dynarec" = "x" ]; then
+    dynarec="lightrec"
+  fi
+  have_neon_gpu="yes"
+  ;;
+*)
+  if [ "x$dynarec" = "x" ]; then
+    dynarec="lightrec"
+  fi
+  ;;
+esac
+
+if [ "x$builtin_gpu" = "x" ]; then
+  if [ "$have_neon_gpu" = "yes" ]; then
+    builtin_gpu="neon"
+  elif [ "$ARCH" = "arm" -a "$have_armv7" != "yes" ]; then
+    # pre-ARMv7 hardware is usually not fast enough for peops
+    builtin_gpu="unai"
+  else
+    builtin_gpu="peops"
+  fi
+fi
+
+# supposedly we can avoid -fPIC on armv5 for slightly better performace?
+if [ "$ARCH" != "arm" -o "$have_armv6" = "yes" ]; then
+  PLUGIN_CFLAGS="$PLUGIN_CFLAGS -fPIC"
+else
+  PLUGIN_CFLAGS="$PLUGIN_CFLAGS -fno-PIC"
+fi
+
+case "$platform" in
+generic)
+  need_sdl="yes"
+  ;;
+maemo)
+  CFLAGS="$CFLAGS -DMAEMO -DMAEMO_CHANGES"
+  ;;
+esac
+
+# header/library presence tests
+check_zlib()
+{
+  cat > $TMPC <<EOF
+  #include <zlib.h>
+  int main(void) { uncompress(0, 0, 0, 0); }
+EOF
+  compile_binary
+}
+
+check_libpng()
+{
+  cat > $TMPC <<EOF
+  #include <png.h>
+  void main() { png_init_io(0, 0); }
+EOF
+  compile_binary
+}
+
+check_oss()
+{
+  cat > $TMPC <<EOF
+  #include <sys/soundcard.h>
+  #include <sys/ioctl.h>
+  void main() { int a=0; ioctl(0, SNDCTL_DSP_SETFMT, &a); }
+EOF
+  compile_binary
+}
+
+check_alsa()
+{
+  cat > $TMPC <<EOF
+  #include <alsa/asoundlib.h>
+  void main() { snd_pcm_open(0, 0, 0, 0); }
+EOF
+  compile_binary "$@"
+}
+
+check_pulseaudio()
+{
+  cat > $TMPC <<EOF
+  #include <pulse/pulseaudio.h>
+  void main() { pa_threaded_mainloop_new(); }
+EOF
+  compile_binary "$@"
+}
+
+check_sdl()
+{
+  cat > $TMPC <<EOF
+  #include <SDL.h>
+  int main(int argc, char *argv[]) { SDL_OpenAudio(0, 0); }
+EOF
+  compile_binary "$@"
+}
+
+check_xlib_headers()
+{
+  cat > $TMPC <<EOF
+  #include <X11/Xlib.h>
+  void *f() { return XOpenDisplay(0); }
+EOF
+  compile_object "$@"
+}
+
+# see if we have c64_tools for TI C64x DSP
+check_c64_tools()
+{
+  cat > $TMPC <<EOF
+  #include <inc_libc64_mini.h>
+  int f() { return dsp_open(); }
+EOF
+  compile_object "$@"
+}
+
+MAIN_LDLIBS="$MAIN_LDLIBS -lz"
+check_zlib || fail "please install zlib (libz-dev)"
+
+MAIN_LDLIBS="-lpng $MAIN_LDLIBS"
+check_libpng || fail "please install libpng (libpng-dev)"
+
+# find what audio support we can compile
+if [ "x$sound_drivers" = "x" ]; then
+  if check_oss; then sound_drivers="$sound_drivers oss"; fi
+  if check_alsa -lasound; then
+    sound_drivers="$sound_drivers alsa"
+    MAIN_LDLIBS="-lasound $MAIN_LDLIBS"
+  fi
+  if check_pulseaudio -lpulse; then
+    sound_drivers="$sound_drivers pulseaudio"
+    MAIN_LDLIBS="-lpulse $MAIN_LDLIBS"
+  fi
+  if [ "$need_sdl" = "yes" ] || check_sdl `${SDL_CONFIG} --cflags --libs`; then
+    sound_drivers="$sound_drivers sdl"
+    need_sdl="yes"
+  fi
+else
+  if echo $sound_drivers | grep -q "\<oss\>"; then
+    check_oss || fail "oss support is missing"
+  fi
+  if echo $sound_drivers | grep -q "\<alsa\>"; then
+    MAIN_LDLIBS="-lasound $MAIN_LDLIBS"
+    check_alsa || fail "please install libasound2-dev"
+  fi
+  if echo $sound_drivers | grep -q "\<pulseaudio\>"; then
+    MAIN_LDLIBS="-lpulse $MAIN_LDLIBS"
+    check_pulseaudio || fail "pulseaudio support is missing"
+  fi
+fi
+
+if [ "$need_sdl" = "yes" ]; then
+  which ${SDL_CONFIG} > /dev/null || \
+    fail "sdl-config is missing; please install libsdl (libsdl1.2-dev)"
+  CFLAGS="$CFLAGS `${SDL_CONFIG} --cflags`"
+  MAIN_LDLIBS="`${SDL_CONFIG} --libs` $MAIN_LDLIBS"
+  check_sdl || fail "please install libsdl (libsdl1.2-dev)"
+fi
+
+# check for tslib (only headers needed)
+if [ "x$have_tslib" = "x" ]; then
+  cat > $TMPC <<EOF
+  #include <tslib.h>
+  void test(struct ts_sample sample) {}
+EOF
+  if compile_object; then
+    have_tslib="yes"
+  else
+    have_tslib="no"
+  fi
+fi
+
+# evdev
+if [ "x$have_evdev" = "x" ]; then
+  cat > $TMPC <<EOF
+  #include <linux/input.h>
+EOF
+  have_evdev="no"
+  if compile_object; then
+    have_evdev="yes"
+  else
+    cat > $TMPC <<EOF
+    #include <dev/evdev/input.h>
+EOF
+    if compile_object; then
+      have_evdev="yes"
+    fi
+  fi
+fi
+
+# check for GLES headers
+cat > $TMPC <<EOF
+#include <GLES/gl.h>
+#include <EGL/egl.h>
+int main(void) {
+  return (int)eglGetDisplay( (EGLNativeDisplayType)0 );
+}
+EOF
+if compile_binary $CFLAGS_GLES -lEGL -lGLES_CM $LDLIBS_GLES; then
+  have_gles="yes"
+  LDLIBS_GLES="-lEGL -lGLES_CM $LDLIBS_GLES"
+elif compile_binary $CFLAGS_GLES -lEGL -lGLESv1_CM $LDLIBS_GLES; then
+  have_gles="yes"
+  LDLIBS_GLES="-lEGL -lGLESv1_CM $LDLIBS_GLES"
+elif compile_object $CFLAGS_GLES; then
+  have_gles="yes"
+fi
+
+if check_c64_tools; then
+  have_c64x_dsp="yes"
+fi
+
+# declare available dynamic plugins
+if [ "$have_dynamic" = "yes" ]; then
+  plugins="plugins/spunull/spunull.so"
+
+  if [ "$builtin_gpu" != "peops" ]; then
+    plugins="$plugins plugins/dfxvideo/gpu_peops.so"
+  fi
+  if [ "$builtin_gpu" != "unai" ]; then
+    plugins="$plugins plugins/gpu_unai/gpu_unai.so"
+  fi
+  if [ "$have_gles" = "yes" -a "x$LDLIBS_GLES" != "x" ]; then
+    plugins="$plugins plugins/gpu-gles/gpu_gles.so"
+  fi
+  if [ "$have_neon_gpu" = "yes" -a "$builtin_gpu" != "neon" ]; then
+    plugins="$plugins plugins/gpu_neon/gpu_neon.so"
+  fi
+else
+  have_dynamic="no"
+  CFLAGS="$CFLAGS -DNO_DYLIB"
+fi
+
+# check for xlib (only headers needed)
+if [ "x$need_xlib" = "xyes" ]; then
+  check_xlib_headers || fail "please install libx11-dev"
+fi
+
+sizeof_long=`check_define_val __SIZEOF_LONG__`
+if [ "x$sizeof_long" = "x4" ]; then
+  CFLAGS="$CFLAGS -D_FILE_OFFSET_BITS=64"
+fi
+
+cat > $TMPC <<EOF
+void test(void *f, void *d) { fread(d, 1, 1, f); }
+EOF
+if compile_object -Wno-unused-result; then
+  CFLAGS="$CFLAGS -Wno-unused-result"
+fi
+
+# short plugin list for display
+for p in $plugins; do
+  p1=`basename $p`
+  plugins_short="$p1 $plugins_short"
+done
+
+# set things that failed to autodetect to "no"
+test "x$have_armv6" != "x" || have_armv6="no"
+test "x$have_armv7" != "x" || have_armv7="no"
+test "x$have_arm_neon" != "x" || have_arm_neon="no"
+test "x$have_arm_neon_asm" != "x" || have_arm_neon_asm="no"
+test "x$have_gles" != "x" || have_gles="no"
+test "x$have_c64x_dsp" != "x" || have_c64x_dsp="no"
+
+echo "architecture        $ARCH"
+echo "platform            $platform"
+echo "built-in GPU        $builtin_gpu"
+echo "sound drivers       $sound_drivers"
+echo "plugins             $plugins_short"
+echo "C compiler          $CC"
+echo "C compiler flags    $CFLAGS"
+echo "libraries           $MAIN_LDLIBS"
+echo "linker flags        $LDFLAGS$MAIN_LDFLAGS"
+echo "dynarec             $dynarec"
+if [ "$ARCH" = "arm" -o "$ARCH" = "aarch64" ]; then
+  echo "enable ARM NEON     $have_arm_neon"
+fi
+if [ "$ARCH" = "arm" ]; then
+  echo "ARMv7 optimizations $have_armv7"
+  echo "TI C64x DSP support $have_c64x_dsp"
+fi
+if [ "$have_dynamic" = "yes" ]; then
+  echo "tslib support       $have_tslib"
+else
+  echo "tslib does NOT support staticly linked build"
+fi
+if [ "$platform" = "generic" ]; then
+  echo "OpenGL ES output    $have_gles"
+fi
+echo "multithreading      $multithreading"
+
+echo "# Automatically generated by configure" > $config_mak
+printf "# Configured with:" >> $config_mak
+printf " '%s'" "$0" "$@" >> $config_mak
+echo >> $config_mak
+
+echo "CC = $CC" >> $config_mak
+echo "CXX = $CXX" >> $config_mak
+echo "AS = $AS" >> $config_mak
+echo "CFLAGS += $CFLAGS" >> $config_mak
+echo "ASFLAGS += $ASFLAGS" >> $config_mak
+echo "LDFLAGS += $LDFLAGS" >> $config_mak
+echo "MAIN_LDFLAGS += $MAIN_LDFLAGS" >> $config_mak
+echo "MAIN_LDLIBS += $MAIN_LDLIBS" >> $config_mak
+echo "PLUGIN_CFLAGS += $PLUGIN_CFLAGS" >> $config_mak
+echo >> $config_mak
+
+echo "ARCH = $ARCH" >> $config_mak
+echo "PLATFORM = $platform" >> $config_mak
+echo "BUILTIN_GPU = $builtin_gpu" >> $config_mak
+echo "SOUND_DRIVERS = $sound_drivers" >> $config_mak
+echo "PLUGINS = $plugins" >> $config_mak
+if [ "$have_neon_gpu" = "yes" ]; then
+  echo "HAVE_NEON_GPU = 1" >> $config_mak
+fi
+if [ "$have_arm_neon" = "yes" ]; then
+  echo "HAVE_NEON = 1" >> $config_mak
+fi
+if [ "$have_arm_neon_asm" = "yes" ]; then
+  echo "HAVE_NEON_ASM = 1" >> $config_mak
+fi
+if [ "$have_tslib" = "yes" -a "$have_dynamic" = "yes" ]; then
+  echo "HAVE_TSLIB = 1" >> $config_mak
+fi
+if [ "$have_evdev" = "yes" ]; then
+  echo "HAVE_EVDEV = 1" >> $config_mak
+fi
+if [ "$have_gles" = "yes" ]; then
+  echo "HAVE_GLES = 1" >> $config_mak
+  echo "CFLAGS_GLES = $CFLAGS_GLES" >> $config_mak
+  echo "LDLIBS_GLES = $LDLIBS_GLES" >> $config_mak
+fi
+if [ "$have_fsections" = "no" ]; then
+  echo "NO_FSECTIONS = 1" >> $config_mak
+fi
+if [ "$gnu_linker" = "yes" ]; then
+  echo "GNU_LINKER = 1" >> $config_mak
+fi
+echo "DYNAREC = $dynarec" >> $config_mak
+if [ "$drc_cache_base" = "yes" ]; then
+  echo "BASE_ADDR_DYNAMIC = 1" >> $config_mak
+fi
+if [ "$have_c64x_dsp" = "yes" ]; then
+  echo "HAVE_C64_TOOLS = 1" >> $config_mak
+fi
+if [ "$multithreading" = "yes" ]; then
+  echo "USE_ASYNC_CDROM = 1" >> $config_mak
+  echo "NDRC_THREAD = 1" >> $config_mak
+fi
+
+# use pandora's skin (for now)
+test -e skin || ln -s frontend/pandora/skin skin
+
+# vim:shiftwidth=2:expandtab

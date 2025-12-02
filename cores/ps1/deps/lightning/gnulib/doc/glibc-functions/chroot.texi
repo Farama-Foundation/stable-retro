@@ -1,0 +1,18 @@
+@node chroot
+@subsection @code{chroot}
+@findex chroot
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/chroot.2.html,,man chroot}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+AIX 5.1, mingw, MSVC 14.
+@end itemize

@@ -1,0 +1,31 @@
+Description:
+Return file system space usage info.
+
+Files:
+lib/fsusage.h
+lib/fsusage.c
+m4/fsusage.m4
+
+Depends-on:
+c99
+largefile
+stdbool
+stdint
+
+configure.ac:
+gl_FSUSAGE
+if test $gl_cv_fs_space = yes; then
+  AC_LIBOBJ([fsusage])
+  gl_PREREQ_FSUSAGE_EXTRA
+fi
+
+Makefile.am:
+
+Include:
+"fsusage.h"
+
+License:
+LGPL
+
+Maintainer:
+Jim Meyering

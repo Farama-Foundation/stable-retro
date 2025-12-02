@@ -1,0 +1,13 @@
+Files:
+tests/test-timespec_get.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-timespec_get
+check_PROGRAMS += test-timespec_get
+test_timespec_get_LDADD = $(LDADD) @LIB_CLOCK_GETTIME@

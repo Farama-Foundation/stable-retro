@@ -1,0 +1,29 @@
+Description:
+Adjust a gnulib-generated gnulib.mk file and configure script so
+that they are usable in a non-recursive make framework.
+
+Files:
+build-aux/prefix-gnulib-mk
+m4/non-recursive-gnulib-prefix-hack.m4
+
+Depends-on:
+
+configure.ac:
+dnl Run our hack near the end, just before config.status creation.
+dnl It must happen late, i.e., after gl_LIBOBJS has been finalized.
+AC_CONFIG_COMMANDS_PRE([
+  dnl Note we can't currently pass $gl_source_base instead of 'lib',
+  dnl because $gl_source_base is unset or the wrong value in the references
+  dnl generated in m4/non-recursive-gnulib-prefix-hack.m4
+  gl_NON_RECURSIVE_GNULIB_PREFIX_HACK([lib])
+  ])
+
+Makefile.am:
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+Jim Meyering

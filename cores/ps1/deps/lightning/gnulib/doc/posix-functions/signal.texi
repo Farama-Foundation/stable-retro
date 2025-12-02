@@ -1,0 +1,28 @@
+@node signal
+@section @code{signal}
+@findex signal
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/signal.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function crashes when invoked with invalid arguments on some platforms:
+MSVC 14.
+@item
+On System V platforms, when the signal is triggered, the kernel uninstalls the
+handler (i.e.@: resets the signal's action to SIG_DFL) before invoking the
+handler.  This opens the door to race conditions: undesired things happen
+if the signal is triggered twice and the signal handler was not quick enough
+reinstalling itself as a handler.  On BSD platforms and glibc platforms, on the
+other hand, when the signal is triggered, the kernel blocks the signal
+before invoking the handler.  This is saner, but POSIX still allows either
+behavior.  To avoid this problem, use @code{sigaction} instead of
+@code{signal}.
+@end itemize

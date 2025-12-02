@@ -1,0 +1,18 @@
+@node ttyslot
+@subsection @code{ttyslot}
+@findex ttyslot
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/ttyslot.3.html,,man ttyslot}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14, Android 9.0.
+@end itemize

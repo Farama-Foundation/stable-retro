@@ -1,0 +1,22 @@
+Description:
+Compute a hash value for a NUL-terminated string.
+
+Files:
+lib/hash-pjw.h
+lib/hash-pjw.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += hash-pjw.h hash-pjw.c
+
+Include:
+"hash-pjw.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

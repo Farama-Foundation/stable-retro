@@ -1,0 +1,31 @@
+Description:
+Return current time, with nanosecond resolution.
+
+Files:
+lib/gettime.c
+m4/gettime.m4
+
+Depends-on:
+clock-time
+gettimeofday
+sys_time
+timespec
+extensions
+
+configure.ac:
+gl_GETTIME
+
+Makefile.am:
+lib_SOURCES += gettime.c
+
+Include:
+"timespec.h"
+
+Link:
+$(LIB_CLOCK_GETTIME)
+
+License:
+LGPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

@@ -1,0 +1,13 @@
+Files:
+tests/test-erf.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-erf
+check_PROGRAMS += test-erf
+test_erf_LDADD = $(LDADD) @ERF_LIBM@

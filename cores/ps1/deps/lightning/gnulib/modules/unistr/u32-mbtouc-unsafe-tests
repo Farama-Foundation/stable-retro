@@ -1,0 +1,14 @@
+Files:
+tests/unistr/test-u32-mbtouc-unsafe.c
+tests/unistr/test-u32-mbtouc.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-mbtouc-unsafe
+check_PROGRAMS += test-u32-mbtouc-unsafe
+test_u32_mbtouc_unsafe_SOURCES = unistr/test-u32-mbtouc-unsafe.c
+test_u32_mbtouc_unsafe_LDADD = $(LDADD) $(LIBUNISTRING)

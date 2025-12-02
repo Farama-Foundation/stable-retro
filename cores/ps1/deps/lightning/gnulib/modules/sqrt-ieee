@@ -1,0 +1,24 @@
+Description:
+sqrt() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+sqrt
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(SQRT_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

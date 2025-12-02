@@ -1,0 +1,32 @@
+Description:
+Locale dependent memory area comparison, with error checking.
+
+Files:
+lib/xmemcoll.h
+lib/xmemcoll.c
+
+Depends-on:
+memcoll
+gettext-h
+error
+quotearg
+exitfail
+
+configure.ac:
+AC_REQUIRE([AC_C_RESTRICT])
+
+Makefile.am:
+lib_SOURCES += xmemcoll.h xmemcoll.c
+
+Include:
+"xmemcoll.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering
+

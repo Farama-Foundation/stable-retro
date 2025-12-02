@@ -1,0 +1,31 @@
+Description:
+Fetching a printf argument list.
+
+Files:
+lib/unistdio/u-printf-args.h
+lib/unistdio/u-printf-args.c
+lib/printf-args.h
+lib/printf-args.c
+m4/vasnprintf.m4
+m4/intmax_t.m4
+m4/stdint_h.m4
+m4/inttypes_h.m4
+
+Depends-on:
+unitypes
+wchar
+
+configure.ac:
+gl_PREREQ_PRINTF_ARGS
+
+Makefile.am:
+lib_SOURCES += unistdio/u-printf-args.c
+
+Include:
+"unistdio/u-printf-args.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

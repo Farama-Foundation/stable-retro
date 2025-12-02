@@ -1,0 +1,12 @@
+Files:
+tests/unigbrk/test-u16-grapheme-next.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-grapheme-next
+check_PROGRAMS += test-u16-grapheme-next
+test_u16_grapheme_next_SOURCES = unigbrk/test-u16-grapheme-next.c
+test_u16_grapheme_next_LDADD = $(LDADD) $(LIBUNISTRING)

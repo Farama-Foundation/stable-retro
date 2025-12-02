@@ -1,0 +1,29 @@
+@node hypotf
+@section @code{hypotf}
+@findex hypotf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/hypotf.html}
+
+Gnulib module: hypotf or hypotf-ieee
+
+Portability problems fixed by either Gnulib module @code{hypotf} or @code{hypotf-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, HP-UX 11, Solaris 9, MSVC 14.
+@item
+This function produces wrong values on some platforms:
+NetBSD 5.1, OpenBSD 4.9.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{hypot-ieee}:
+@itemize
+@item
+When the arguments are mixed NaN and Infinity, this function returns a wrong
+value on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

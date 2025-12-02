@@ -1,0 +1,16 @@
+Files:
+tests/test-stdio.c
+
+Depends-on:
+verify
+stdio-c++-tests
+fgetc-tests
+fputc-tests
+fread-tests
+fwrite-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-stdio
+check_PROGRAMS += test-stdio

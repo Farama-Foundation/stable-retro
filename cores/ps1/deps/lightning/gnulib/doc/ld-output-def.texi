@@ -1,0 +1,69 @@
+@node Visual Studio Compatibility
+@section Visual Studio Compatibility
+@cindex DEF files
+@cindex LD DEF files
+
+The @code{lib-msvc-compat} module detects whether the linker supports
+@code{--output-def} when building a library.  That parameter is used
+to generate a DEF file for a shared library (DLL).  DEF files are
+useful for developers that use Visual Studio to develop programs that
+links to your library.  See the GNU LD manual for more information.
+
+There are other ways to create a DEF file, but we believe they are all
+sub-optimal to using @code{--output-def} during the build process.
+The variants we have considered include:
+
+@itemize @bullet
+@item Use DUMPBIN /EXPORTS.
+This is explained in
+@url{https://docs.microsoft.com/en-us/cpp/build/reference/dash-exports}.
+The tool does not generate DEF files directly, so its output needs to
+be post processed manually:
+@smallexample
+$ @{ echo EXPORTS; \
+    dumpbin /EXPORTS libfoo-0.dll | tail -n+20 | awk '@{ print $4 @}'; \
+  @} > libfoo-0.def
+$ lib /def:libfoo-0.def
+@end smallexample
+
+@item Use IMPDEF.
+There is a tool called IMPDEF
+that can generate DEF files.  However, it is not part of a standard
+Visual Studio installation.  Further, it is documented as being an
+unreliable process.
+
+@item Use DLLTOOL.
+The dlltool is part of the MinGW suite, and thus not part of a
+standard Visual Studio installation.  The documentation for the IMPDEF
+tool claims that DLLTOOL is the wrong tool for this job.  Finally,
+DLLTOOL does not generate DEF files directly, so it requires
+post-processing of the output.
+
+@end itemize
+
+If you are using libtool to build your shared library, here is how to
+use this module.  Import @code{lib-msvc-compat} to your project, and
+then add the following lines to the @code{Makefile.am} that builds the
+library:
+
+@smallexample
+if HAVE_LD_OUTPUT_DEF
+libfoo_la_LDFLAGS += -Wl,--output-def,libfoo-$(DLL_VERSION).def
+libfoo-$(DLL_VERSION).def: libfoo.la
+defexecdir = $(libdir)
+defexec_DATA = libfoo-$(DLL_VERSION).def
+DISTCLEANFILES += $(defexec_DATA)
+endif
+@end smallexample
+
+The @code{DLL_VERSION} variable needs to be defined.  It should be the
+shared library version number used in the DLL filename.  For Windows
+targets you compute this value from the values you pass to Libtool's
+@code{-version-info}.  Assuming you have variables @code{LT_CURRENT}
+and @code{LT_AGE} defined for the @code{CURRENT} and @code{AGE}
+libtool version integers, you compute @code{DLL_VERSION} as follows:
+
+@smallexample
+DLL_VERSION=`expr $@{LT_CURRENT@} - $@{LT_AGE@}`
+AC_SUBST(DLL_VERSION)
+@end smallexample

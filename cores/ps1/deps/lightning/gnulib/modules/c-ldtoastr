@@ -1,0 +1,27 @@
+Description:
+Convert long double to accurate string in C locale.
+
+Files:
+lib/ftoastr.h
+lib/ftoastr.c
+lib/c-ldtoastr.c
+
+Depends-on:
+extensions
+intprops
+c-snprintf
+c-strtold
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += c-ldtoastr.c
+
+Include:
+"ftoastr.h"
+
+License:
+GPL
+
+Maintainer:
+Marc Nieper-Wisskirchen

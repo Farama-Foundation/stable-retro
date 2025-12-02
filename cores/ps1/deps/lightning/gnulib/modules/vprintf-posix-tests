@@ -1,0 +1,17 @@
+Files:
+tests/test-vprintf-posix.sh
+tests/test-vprintf-posix.c
+tests/test-printf-posix.h
+tests/test-printf-posix.output
+tests/infinity.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+stdint
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-vprintf-posix.sh
+check_PROGRAMS += test-vprintf-posix

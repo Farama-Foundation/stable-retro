@@ -1,0 +1,29 @@
+Description:
+Return the group IDs of a user or current process in malloc'd storage.
+
+Files:
+lib/mgetgroups.c
+lib/mgetgroups.h
+m4/mgetgroups.m4
+
+Depends-on:
+free-posix
+getgroups
+getugroups
+realloc-posix
+xalloc-oversized
+
+configure.ac:
+gl_MGETGROUPS
+
+Makefile.am:
+lib_SOURCES += mgetgroups.c
+
+Include:
+"mgetgroups.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering, Eric Blake

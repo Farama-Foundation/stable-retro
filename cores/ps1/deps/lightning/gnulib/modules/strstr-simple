@@ -1,0 +1,32 @@
+Description:
+strstr() function: locate first substring in a buffer.
+
+Files:
+lib/str-two-way.h
+lib/strstr.c
+m4/strstr.m4
+
+Depends-on:
+string
+builtin-expect  [test $REPLACE_STRSTR = 1]
+stdbool         [test $REPLACE_STRSTR = 1]
+memchr          [test $REPLACE_STRSTR = 1]
+memcmp          [test $REPLACE_STRSTR = 1]
+
+configure.ac:
+gl_FUNC_STRSTR_SIMPLE
+if test $REPLACE_STRSTR = 1; then
+  AC_LIBOBJ([strstr])
+fi
+gl_STRING_MODULE_INDICATOR([strstr])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all, Eric Blake

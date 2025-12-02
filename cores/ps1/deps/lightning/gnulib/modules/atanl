@@ -1,0 +1,33 @@
+Description:
+atanl() function: inverse tangent function with long double argument.
+
+Files:
+lib/atanl.c
+m4/atanl.m4
+
+Depends-on:
+math
+extensions
+atan            [test $HAVE_ATANL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+isnanl          [test $HAVE_ATANL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+gl_FUNC_ATANL
+if test $HAVE_ATANL = 0; then
+  AC_LIBOBJ([atanl])
+fi
+gl_MATH_MODULE_INDICATOR([atanl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ATANL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+Paolo Bonzini

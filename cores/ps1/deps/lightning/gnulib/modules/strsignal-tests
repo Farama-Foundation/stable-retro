@@ -1,0 +1,13 @@
+Files:
+tests/test-strsignal.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-strsignal
+check_PROGRAMS += test-strsignal
+test_strsignal_LDADD = $(LDADD) @LIBINTL@ $(LIBTHREAD)

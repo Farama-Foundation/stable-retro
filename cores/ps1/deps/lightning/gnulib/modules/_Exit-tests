@@ -1,0 +1,11 @@
+Files:
+tests/test-_Exit.sh
+tests/test-_Exit.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-_Exit.sh
+check_PROGRAMS += test-_Exit

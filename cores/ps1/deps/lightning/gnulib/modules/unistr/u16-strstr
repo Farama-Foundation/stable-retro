@@ -1,0 +1,33 @@
+Description:
+Substring test for UTF-16 strings.
+
+Files:
+lib/unistr/u16-strstr.c
+lib/unistr/u-strstr.h
+lib/str-kmp.h
+
+Depends-on:
+unistr/base
+unistr/u16-strchr
+unistr/u16-strmbtouc
+unistr/u16-strlen
+unistr/u16-strnlen
+stdbool
+malloca
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.4], [unistr/u16-strstr])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U16_STRSTR
+lib_SOURCES += unistr/u16-strstr.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

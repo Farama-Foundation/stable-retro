@@ -1,0 +1,28 @@
+@node strncpy
+@section @code{strncpy}
+@findex strncpy
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strncpy.html}
+
+Gnulib module: string
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function cannot be called from plain inline or extern inline functions
+on some platforms:
+OS X 10.8.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize
+
+Note: This function was designed for the use-case of filling a fixed-size
+record with a string, before writing it to a file.  This function is
+@strong{not} appropriate for copying a string into a bounded memory area,
+because you have no guarantee that the result will be NUL-terminated.
+Even if you add the NUL byte at the end yourself, this function is
+inefficient (as it spends time clearing unused memory) and will allow
+silent truncation to occur, which is not a good behavior for GNU programs.
+For more details, see @url{https://meyering.net/crusade-to-eliminate-strncpy/}.

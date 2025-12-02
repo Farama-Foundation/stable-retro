@@ -1,0 +1,37 @@
+Description:
+ilogbl() function: get exponent as integer.
+
+Files:
+lib/ilogbl.c
+lib/ilogb.c
+m4/ilogbl.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+ilogb           [{ test $HAVE_ILOGBL = 0 || test $REPLACE_ILOGBL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+isfinite        [{ test $HAVE_ILOGBL = 0 || test $REPLACE_ILOGBL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+frexpl          [{ test $HAVE_ILOGBL = 0 || test $REPLACE_ILOGBL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+isnanl          [{ test $HAVE_ILOGBL = 0 || test $REPLACE_ILOGBL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+gl_FUNC_ILOGBL
+if test $HAVE_ILOGBL = 0 || test $REPLACE_ILOGBL = 1; then
+  AC_LIBOBJ([ilogbl])
+fi
+gl_MATH_MODULE_INDICATOR([ilogbl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ILOGBL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

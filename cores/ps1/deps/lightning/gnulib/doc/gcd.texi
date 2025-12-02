@@ -1,0 +1,53 @@
+@node gcd
+@section gcd: greatest common divisor
+@findex gcd
+
+@c Copyright (C) 2006, 2009--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+The @code{gcd} function returns the greatest common divisor of two numbers
+@code{a > 0} and @code{b > 0}.  It is the caller's responsibility to ensure
+that the arguments are non-zero.
+
+If you need a gcd function for an integer type larger than
+@samp{unsigned long}, you can include the @file{gcd.c} implementation file
+with parametrization.  The parameters are:
+
+@itemize @bullet
+@item WORD_T
+Define this to the unsigned integer type that you need this function for.
+
+@item GCD
+Define this to the name of the function to be created.
+@end itemize
+
+The created function has the prototype
+@smallexample
+WORD_T GCD (WORD_T a, WORD_T b);
+@end smallexample
+
+If you need the least common multiple of two numbers, it can be computed
+like this: @code{lcm(a,b) = (a / gcd(a,b)) * b} or
+@code{lcm(a,b) = a * (b / gcd(a,b))}.
+Avoid the formula @code{lcm(a,b) = (a * b) / gcd(a,b)} because---although
+mathematically correct---it can yield a wrong result, due to integer overflow.
+
+In some applications it is useful to have a function taking the gcd of two
+signed numbers. In this case, the gcd function result is usually normalized
+to be non-negative (so that two gcd results can be compared in magnitude
+or compared against 1, etc.). Note that in this case the prototype of the
+function has to be
+@smallexample
+unsigned long gcd (long a, long b);
+@end smallexample
+and not
+@smallexample
+long gcd (long a, long b);
+@end smallexample
+because @code{gcd(LONG_MIN,LONG_MIN) = -LONG_MIN = LONG_MAX + 1} does not
+fit into a signed @samp{long}.

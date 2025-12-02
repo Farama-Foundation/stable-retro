@@ -1,0 +1,21 @@
+Description:
+Upload PGP signed files to gnu.org.
+See https://www.gnu.org/prep/maintain/html_node/Automated-FTP-Uploads.html
+for more information.
+
+Files:
+build-aux/gnupload
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+coreutils

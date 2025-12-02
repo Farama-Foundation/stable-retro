@@ -1,0 +1,12 @@
+Files:
+tests/unigbrk/test-u32-grapheme-prev.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-grapheme-prev
+check_PROGRAMS += test-u32-grapheme-prev
+test_u32_grapheme_prev_SOURCES = unigbrk/test-u32-grapheme-prev.c
+test_u32_grapheme_prev_LDADD = $(LDADD) $(LIBUNISTRING)

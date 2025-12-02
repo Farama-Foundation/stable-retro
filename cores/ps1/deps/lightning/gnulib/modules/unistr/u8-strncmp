@@ -1,0 +1,25 @@
+Description:
+Compare UTF-8 strings.
+
+Files:
+lib/unistr/u8-strncmp.c
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-strncmp])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_STRNCMP
+lib_SOURCES += unistr/u8-strncmp.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

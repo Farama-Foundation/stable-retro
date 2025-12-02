@@ -1,0 +1,14 @@
+@node ctype.h
+@section @file{ctype.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/ctype.h.html}
+
+Gnulib module: ctype
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

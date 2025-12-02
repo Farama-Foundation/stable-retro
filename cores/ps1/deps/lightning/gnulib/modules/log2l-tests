@@ -1,0 +1,19 @@
+Files:
+tests/test-log2l.c
+tests/test-log2.h
+tests/minus-zero.h
+tests/signature.h
+tests/macros.h
+tests/randoml.c
+
+Depends-on:
+fpucw
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-log2l
+check_PROGRAMS += test-log2l
+test_log2l_SOURCES = test-log2l.c randoml.c
+test_log2l_LDADD = $(LDADD) @LOG2L_LIBM@

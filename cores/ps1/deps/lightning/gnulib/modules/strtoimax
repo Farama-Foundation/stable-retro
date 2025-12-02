@@ -1,0 +1,31 @@
+Description:
+strtoimax() function: convert string to 'intmax_t'.
+
+Files:
+lib/strtoimax.c
+m4/strtoimax.m4
+
+Depends-on:
+inttypes-incomplete
+verify          [test $HAVE_DECL_STRTOIMAX = 0 || test $REPLACE_STRTOIMAX = 1]
+stdint          [test $HAVE_DECL_STRTOIMAX = 0 || test $REPLACE_STRTOIMAX = 1]
+strtoll         [{ test $HAVE_DECL_STRTOIMAX = 0 || test $REPLACE_STRTOIMAX = 1; } && test $ac_cv_type_long_long_int = yes]
+
+configure.ac:
+gl_FUNC_STRTOIMAX
+if test $HAVE_DECL_STRTOIMAX = 0 || test $REPLACE_STRTOIMAX = 1; then
+  AC_LIBOBJ([strtoimax])
+  gl_PREREQ_STRTOIMAX
+fi
+gl_INTTYPES_MODULE_INDICATOR([strtoimax])
+
+Makefile.am:
+
+Include:
+<inttypes.h>
+
+License:
+LGPL
+
+Maintainer:
+Paul Eggert

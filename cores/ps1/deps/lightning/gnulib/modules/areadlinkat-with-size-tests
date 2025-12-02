@@ -1,0 +1,15 @@
+Files:
+tests/test-areadlink.h
+tests/test-areadlinkat-with-size.c
+tests/macros.h
+
+Depends-on:
+ignore-value
+stdbool
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-areadlinkat-with-size
+check_PROGRAMS += test-areadlinkat-with-size
+test_areadlinkat_with_size_LDADD = $(LDADD) @LIBINTL@

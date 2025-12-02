@@ -1,0 +1,32 @@
+Description:
+Case-mapping context of prefix UTF-16 string.
+
+Files:
+lib/unicase/u16-prefix-context.c
+lib/unicase/u-prefix-context.h
+lib/unicase/context.h
+
+Depends-on:
+unicase/base
+unicase/empty-prefix-context
+unicase/ignorable
+unictype/combining-class
+unistr/u16-mbtouc-unsafe
+unistr/u16-prev
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.10], [unicase/u16-prefix-context])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U16_PREFIX_CONTEXT
+lib_SOURCES += unicase/u16-prefix-context.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

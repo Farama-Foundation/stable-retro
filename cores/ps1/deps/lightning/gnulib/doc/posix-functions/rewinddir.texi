@@ -1,0 +1,22 @@
+@node rewinddir
+@section @code{rewinddir}
+@findex rewinddir
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/rewinddir.html}
+
+Gnulib module: rewinddir
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+MSVC 14.
+@item
+On Mac OS X platforms where @code{long int} is a 32-bit type, this function may
+not work correctly on huge directories larger than 2 GB.
+(Cf. @code{AC_SYS_LARGEFILE}.)
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

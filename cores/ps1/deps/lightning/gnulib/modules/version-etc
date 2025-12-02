@@ -1,0 +1,26 @@
+Description:
+Print --version and bug-reporting information in a consistent format.
+
+Files:
+lib/version-etc.h
+lib/version-etc.c
+m4/version-etc.m4
+
+Depends-on:
+gettext-h
+stdarg
+
+configure.ac:
+gl_VERSION_ETC
+
+Makefile.am:
+lib_SOURCES += version-etc.h version-etc.c
+
+Include:
+"version-etc.h"
+
+License:
+LGPL
+
+Maintainer:
+Jim Meyering

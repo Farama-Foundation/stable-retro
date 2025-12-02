@@ -1,0 +1,22 @@
+Description:
+Compute a hash value for a buffer of known size.
+
+Files:
+lib/hash-pjw-bare.h
+lib/hash-pjw-bare.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += hash-pjw-bare.h hash-pjw-bare.c
+
+Include:
+"hash-pjw-bare.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

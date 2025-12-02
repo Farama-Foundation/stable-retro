@@ -1,0 +1,27 @@
+Description:
+Formatted output to an UTF-32 string.
+
+Files:
+lib/unistdio/u32-sprintf.c
+lib/unistdio/u-sprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/u32-vsprintf
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistdio/u32-sprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_U32_SPRINTF
+lib_SOURCES += unistdio/u32-sprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

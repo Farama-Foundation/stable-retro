@@ -1,0 +1,20 @@
+Description:
+Test whether /proc/uptime might exist.
+
+Files:
+m4/uptime.m4
+
+Depends-on:
+
+configure.ac:
+gl_SYS_PROC_UPTIME
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

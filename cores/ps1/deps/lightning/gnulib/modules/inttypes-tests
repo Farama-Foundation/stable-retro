@@ -1,0 +1,11 @@
+Files:
+tests/test-inttypes.c
+
+Depends-on:
+inttypes-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-inttypes
+check_PROGRAMS += test-inttypes

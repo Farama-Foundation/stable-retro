@@ -1,0 +1,24 @@
+Description:
+y1() function: Bessel function of the second kind of order 1.
+
+Files:
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_COMMON_DOUBLE_MATHFUNC([y1])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(Y1_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

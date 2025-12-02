@@ -1,0 +1,25 @@
+Description:
+btoc32() function: convert unibyte character to 32-bit wide character.
+
+Files:
+lib/btoc32.c
+
+Depends-on:
+uchar
+mbrtoc32
+btowc
+
+configure.ac:
+gl_UCHAR_MODULE_INDICATOR([btoc32])
+
+Makefile.am:
+lib_SOURCES += btoc32.c
+
+Include:
+<uchar.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Bruno Haible

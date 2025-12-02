@@ -1,0 +1,18 @@
+@node pthread_mutexattr_setprioceiling
+@section @code{pthread_mutexattr_setprioceiling}
+@findex pthread_mutexattr_setprioceiling
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_mutexattr_setprioceiling.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.3.6, NetBSD 7.1, Minix 3.1.8, mingw, MSVC 14, Android 9.0.
+@end itemize

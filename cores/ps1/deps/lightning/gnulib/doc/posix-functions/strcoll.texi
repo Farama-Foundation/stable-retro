@@ -1,0 +1,19 @@
+@node strcoll
+@section @code{strcoll}
+@findex strcoll
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strcoll.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function fails, setting @code{errno} to @code{EILSEQ}, on Solaris 10, in
+UTF-8 locales, when at least one of the strings contains a Unicode character
+in a block that was not assigned in Unicode 4.0.
+@end itemize

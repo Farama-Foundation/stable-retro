@@ -1,0 +1,24 @@
+Description:
+Generic crypto wrappers for HMAC-MD5 functions.
+
+Files:
+m4/gc-hmac-md5.m4
+
+Depends-on:
+crypto/gc
+crypto/hmac-md5 [test "$ac_cv_libgcrypt" != yes]
+
+configure.ac:
+gl_GC_HMAC_MD5
+gl_MODULE_INDICATOR([gc-hmac-md5])
+
+Makefile.am:
+
+Include:
+"gc.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

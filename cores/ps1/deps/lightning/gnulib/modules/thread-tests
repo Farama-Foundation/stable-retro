@@ -1,0 +1,14 @@
+Files:
+tests/test-thread_self.c
+tests/test-thread_create.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-thread_self test-thread_create
+check_PROGRAMS += test-thread_self test-thread_create
+test_thread_self_LDADD = $(LDADD) @LIBTHREAD@
+test_thread_create_LDADD = $(LDADD) @LIBMULTITHREAD@

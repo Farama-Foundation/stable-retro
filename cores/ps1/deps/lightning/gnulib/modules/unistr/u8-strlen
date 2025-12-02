@@ -1,0 +1,25 @@
+Description:
+Determine length of UTF-8 string.
+
+Files:
+lib/unistr/u8-strlen.c
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-strlen])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_STRLEN
+lib_SOURCES += unistr/u8-strlen.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

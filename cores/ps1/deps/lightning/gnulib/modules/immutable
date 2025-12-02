@@ -1,0 +1,30 @@
+Description:
+Immutable data.
+
+Files:
+lib/immutable.h
+lib/immutable.c
+m4/immutable.m4
+m4/mprotect.m4
+m4/mmap-anon.m4
+m4/nocrash.m4
+
+Depends-on:
+stdint
+open
+ssfmalloc
+
+configure.ac:
+gl_IMMUTABLE
+
+Makefile.am:
+lib_SOURCES += immutable.c
+
+Include:
+"immutable.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Bruno Haible

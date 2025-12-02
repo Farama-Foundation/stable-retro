@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_other_default_ignorable_code_point.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_other_default_ignorable_code_point
+check_PROGRAMS += test-pr_other_default_ignorable_code_point
+test_pr_other_default_ignorable_code_point_SOURCES = unictype/test-pr_other_default_ignorable_code_point.c
+test_pr_other_default_ignorable_code_point_LDADD = $(LDADD) $(LIBUNISTRING)

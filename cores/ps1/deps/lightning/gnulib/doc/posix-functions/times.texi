@@ -1,0 +1,22 @@
+@node times
+@section @code{times}
+@findex times
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/times.html}
+
+Gnulib module: times
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+There is no function on Windows to measure consumed process child
+times, thus the @code{tms_cutime} and @code{tms_cstime} will always be
+0 when the module is used.
+@end itemize

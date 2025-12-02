@@ -1,0 +1,15 @@
+Files:
+tests/test-closein.sh
+tests/test-closein.c
+
+Depends-on:
+binary-io
+ignore-value
+test-framework-sh
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-closein.sh
+check_PROGRAMS += test-closein
+test_closein_LDADD = $(LDADD) @LIBINTL@ $(LIB_MBRTOWC)

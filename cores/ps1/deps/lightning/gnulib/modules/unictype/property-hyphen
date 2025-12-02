@@ -1,0 +1,28 @@
+Description:
+Test whether a Unicode character is "hyphen".
+
+Files:
+lib/unictype/pr_hyphen.c
+lib/unictype/pr_hyphen.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-hyphen])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_HYPHEN
+lib_SOURCES += unictype/pr_hyphen.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

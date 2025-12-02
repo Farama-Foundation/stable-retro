@@ -1,0 +1,22 @@
+@node aio_read
+@section @code{aio_read}
+@findex aio_read
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/aio_read.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+NetBSD 3.0, OpenBSD 6.7, Minix 3.1.8, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@item
+On platforms where @code{off_t} is a 32-bit type, this function may not
+work correctly on files larger than 2 GB@.  The fix is to use the
+@code{AC_SYS_LARGEFILE} macro.
+@end itemize

@@ -1,0 +1,41 @@
+Description:
+git "merge" driver for GNU style ChangeLog files
+
+Files:
+lib/git-merge-changelog.c
+
+Depends-on:
+c99
+getopt-gnu
+stdbool
+stdlib
+error
+read-file
+xlist
+array-list
+linkedhash-list
+linked-list
+rbtreehash-list
+xalloc
+xmalloca
+fstrcmp
+minmax
+c-strstr
+fwriteerror
+memchr
+memcmp
+getprogname
+
+configure.ac:
+
+Makefile.am:
+bin_PROGRAMS = git-merge-changelog
+git_merge_changelog_LDADD = libgnu.a @LIBINTL@ $(LIBTHREAD)
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+all

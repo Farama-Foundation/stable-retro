@@ -1,0 +1,23 @@
+Description:
+Support for files larger than 2 GB.
+
+Files:
+m4/largefile.m4
+
+Depends-on:
+
+configure.ac-early:
+AC_REQUIRE([AC_SYS_LARGEFILE])
+
+configure.ac:
+AC_REQUIRE([gl_LARGEFILE])
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

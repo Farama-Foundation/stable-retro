@@ -1,0 +1,18 @@
+@node assert
+@section @code{assert}
+@findex assert
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/assert.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize
+
+Extension: Gnulib offers a module @samp{assert} that allows the installer to
+disable assertions through a @samp{configure} option: @samp{--disable-assert}.

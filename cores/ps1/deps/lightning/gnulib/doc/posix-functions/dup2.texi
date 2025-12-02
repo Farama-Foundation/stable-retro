@@ -1,0 +1,58 @@
+@node dup2
+@section @code{dup2}
+@findex dup2
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/dup2.html}
+
+Gnulib module: dup2
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is declared in a different header file (namely, @code{<io.h>})
+on some platforms:
+MSVC 14.
+
+@item
+This function always returns 0 for success on some platforms:
+mingw, MSVC 14.
+
+@item
+This function can hang when duplicating an fd to itself on some platforms:
+mingw, MSVC 14.
+
+@item
+This function crashes when invoked with invalid arguments on some platforms:
+Cygwin 1.7.17, MSVC 14.
+
+@item
+This function crashes when invoked with valid arguments on some platforms:
+Cygwin 1.7.25.
+
+@item
+This function fails with @code{EINVAL} when duplicating an fd to itself:
+Android.
+
+@item
+This function resets the @code{FD_CLOEXEC} flag when duplicating an fd
+to itself on some platforms:
+Haiku.
+
+@item
+This function returns 0 for @code{dup2 (1, 1)} on some platforms:
+Cygwin 1.5.x.
+
+@item
+This function may return @code{-EBADF} instead of @code{-1} on some platforms:
+Linux releases between July 2008 and May 2009 (versions 2.6.27 to 2.6.29).
+
+@item
+This function returns @code{EMFILE} instead of @code{EBADF} for
+large targets, which interferes with using
+@code{dup2(fd,fd)==fd)} as the minimal @code{EBADF} filter:
+AIX 7.1, FreeBSD 6.1, Cygwin 1.5.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

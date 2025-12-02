@@ -1,0 +1,25 @@
+Description:
+fabs() function: absolute value.
+
+Files:
+m4/fabs.m4
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_FABS
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FABS_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

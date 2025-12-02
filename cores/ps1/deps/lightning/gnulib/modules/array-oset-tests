@@ -1,0 +1,16 @@
+Files:
+tests/test-array_oset.c
+tests/test-oset-update.h
+tests/macros.h
+
+Depends-on:
+xlist
+array-list
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-array_oset
+check_PROGRAMS += test-array_oset
+test_array_oset_LDADD = $(LDADD) @LIBINTL@
+

@@ -1,0 +1,38 @@
+@node random_r
+@subsection @code{random_r}
+@findex random_r
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-random-r-1.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{BSD Random,,BSD Random Number Functions,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/BSD-Random.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/random_r.3.html,,man random_r}.
+@end itemize
+
+Gnulib module: random_r
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@item
+This function has an incompatible declaration on some platforms:
+AIX 7.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function has a slightly different (but compatible) declaration on some
+platforms:
+Haiku 2017.
+@end itemize

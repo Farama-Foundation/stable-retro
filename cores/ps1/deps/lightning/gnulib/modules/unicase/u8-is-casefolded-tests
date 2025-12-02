@@ -1,0 +1,14 @@
+Files:
+tests/unicase/test-u8-is-casefolded.c
+tests/unicase/test-is-casefolded.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-is-casefolded
+check_PROGRAMS += test-u8-is-casefolded
+test_u8_is_casefolded_SOURCES = unicase/test-u8-is-casefolded.c
+test_u8_is_casefolded_LDADD = $(LDADD) $(LIBUNISTRING)

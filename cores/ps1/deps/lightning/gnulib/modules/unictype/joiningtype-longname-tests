@@ -1,0 +1,13 @@
+Files:
+tests/unictype/test-joiningtype_longname.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-joiningtype_longname
+check_PROGRAMS += test-joiningtype_longname
+test_joiningtype_longname_SOURCES = unictype/test-joiningtype_longname.c
+test_joiningtype_longname_LDADD = $(LDADD) $(LIBUNISTRING)

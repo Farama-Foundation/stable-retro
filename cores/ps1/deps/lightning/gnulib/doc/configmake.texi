@@ -1,0 +1,31 @@
+@node configmake
+@section configmake
+
+@findex configmake @r{module}
+@cindex @file{configmake.h}, module for updating
+
+The @code{configmake} module builds a C include file named
+@file{configmake.h} containing the usual installation directory
+values; for example, those specified by @code{--prefix} or
+@code{--libdir} to configure.  Each variable is given a @code{#define}
+with an all-uppercase macro name, such as @code{PREFIX} and
+@code{LIBDIR}.  (Automake cannot create this file directly because the
+user might override directory values at @code{make} time.)
+
+Specifically, the module retrieves values of the variables through
+@code{configure} followed by @code{make}, not directly through
+@code{configure}, so that a user who sets some of these variables
+consistently on the @code{make} command line gets correct results.
+
+One advantage of this approach, compared to the classical approach of
+adding @code{-DLIBDIR=\"$(libdir)\"} etc.@: to @code{AM_CPPFLAGS}, is
+that it protects against the use of undefined variables.  That is, if,
+say, @code{$(libdir)} is not set in the Makefile, @code{LIBDIR} is not
+defined by this module, and code using @code{LIBDIR} gives a
+compilation error.
+
+Another advantage is that @code{make} output is shorter.
+
+For the complete list of variables which are @code{#define}d this way,
+see the file @file{gnulib/modules/configmake}, or inspect your
+resulting gnulib Makefile.

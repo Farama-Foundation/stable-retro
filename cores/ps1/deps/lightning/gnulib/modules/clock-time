@@ -1,0 +1,24 @@
+Description:
+Check for clock_gettime and clock_settime.
+
+Files:
+m4/clock_time.m4
+
+Depends-on:
+extensions
+
+configure.ac:
+gl_CLOCK_TIME
+
+Makefile.am:
+
+Include:
+
+Link:
+$(LIB_CLOCK_GETTIME)
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert, Jim Meyering

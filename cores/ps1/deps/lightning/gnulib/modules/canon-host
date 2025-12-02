@@ -1,0 +1,27 @@
+Description:
+Canonicalize a host name: return a name other hosts can understand, i.e.
+usually the host name including FQDN.
+
+Files:
+lib/canon-host.c
+lib/canon-host.h
+m4/canon-host.m4
+
+Depends-on:
+getaddrinfo
+strdup
+
+configure.ac:
+gl_PREREQ_CANON_HOST
+
+Makefile.am:
+lib_SOURCES += canon-host.c
+
+Include:
+"canon-host.h"
+
+License:
+LGPL
+
+Maintainer:
+Jim Meyering

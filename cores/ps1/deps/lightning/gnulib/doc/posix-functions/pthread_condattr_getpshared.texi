@@ -1,0 +1,18 @@
+@node pthread_condattr_getpshared
+@section @code{pthread_condattr_getpshared}
+@findex pthread_condattr_getpshared
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_condattr_getpshared.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, mingw, MSVC 14.
+@end itemize

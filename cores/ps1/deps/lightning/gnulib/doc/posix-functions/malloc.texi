@@ -1,0 +1,25 @@
+@node malloc
+@section @code{malloc}
+@findex malloc
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/malloc.html}
+
+Gnulib module: malloc-posix
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+Upon failure, the function does not set @code{errno} to @code{ENOMEM} on
+some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item @code{malloc (0)} always returns a NULL pointer on some platforms:
+AIX 5.1.
+@end itemize
+
+Extension: Gnulib provides a module @samp{malloc-gnu} that substitutes a
+@code{malloc} implementation that behaves more like the glibc implementation,
+regarding the result of @code{malloc (0)}.

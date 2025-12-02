@@ -1,0 +1,39 @@
+@node select
+@section @code{select}
+@findex select
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/select.html}
+
+Gnulib module: select
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), @code{select} can only be
+called on descriptors created by the @code{socket} function, not on regular
+file descriptors.
+@item
+On Windows platforms (excluding Cygwin), error codes from this function
+are not placed in @code{errno}, and @code{WSAGetLastError} must be used
+instead.
+@item
+On some platforms, this function fails to detect invalid fds with
+EBADF, but only if they lie beyond the current maximum open fd:
+FreeBSD 8.2.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+When you call @code{select} with a timeout, some implementations modify the
+timeout parameter so that upon return from the function, it contains the
+amount of time not slept.  Other implementations leave the timeout parameter
+unmodified.
+@item
+Under Windows, when passing a pipe, Gnulib's @code{select} replacement might
+return 0 even before the timeout has passed.  Programs using it with pipes can
+thus busy wait.
+@item
+On Linux, when some file descriptor refers to a regular file, @code{select}
+may fail, setting @code{errno} to @code{EBADF}.
+@end itemize

@@ -1,0 +1,21 @@
+@node Libtool and Windows
+@section Libtool and Windows
+
+If you want it to be possible to compile your program for a native Windows
+platform and you use Libtool, you need to use the @code{win32-dll} option of
+@code{LT_INIT}. In other words, put:
+
+@example
+LT_INIT([win32-dll])
+@end example
+
+in your @file{configure.ac}.  This sets the correct names for the
+@code{OBJDUMP}, @code{DLLTOOL}, and @code{AS} tools for the build.
+
+If you are building a library, you will also need to pass
+@code{-no-undefined} to make sure Libtool produces a DLL for your
+library.  From a @file{Makefile.am}:
+
+@example
+libgsasl_la_LDFLAGS += -no-undefined
+@end example

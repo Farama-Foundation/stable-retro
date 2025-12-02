@@ -1,0 +1,11 @@
+Files:
+tests/test-read-file.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-read-file
+check_PROGRAMS += test-read-file

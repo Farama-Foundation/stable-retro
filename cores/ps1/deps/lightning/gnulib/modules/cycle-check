@@ -1,0 +1,29 @@
+Description:
+help detect directory cycles efficiently
+
+Files:
+lib/cycle-check.c
+lib/cycle-check.h
+m4/cycle-check.m4
+
+Depends-on:
+assure
+dev-ino
+same-inode
+stdbool
+stdint
+
+configure.ac:
+gl_CYCLE_CHECK
+
+Makefile.am:
+lib_SOURCES += cycle-check.c
+
+Include:
+"cycle-check.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

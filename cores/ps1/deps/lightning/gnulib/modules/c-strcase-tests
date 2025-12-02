@@ -1,0 +1,23 @@
+Files:
+tests/test-c-strcase.sh
+tests/test-c-strcasecmp.c
+tests/test-c-strncasecmp.c
+tests/macros.h
+m4/locale-fr.m4
+m4/locale-tr.m4
+m4/codeset.m4
+
+Depends-on:
+c-ctype
+setlocale
+
+configure.ac:
+gt_LOCALE_FR
+gt_LOCALE_TR_UTF8
+
+Makefile.am:
+TESTS += test-c-strcase.sh
+TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@' LOCALE_TR_UTF8='@LOCALE_TR_UTF8@'
+check_PROGRAMS += test-c-strcasecmp test-c-strncasecmp
+test_c_strcasecmp_LDADD = $(LDADD) $(LIB_SETLOCALE)
+test_c_strncasecmp_LDADD = $(LDADD) $(LIB_SETLOCALE)

@@ -1,0 +1,20 @@
+Description:
+Support for compiling in C mode when CC is set to a C++ compiler.
+
+Files:
+m4/no-c++.m4
+
+Depends-on:
+
+configure.ac:
+gt_NO_CXX
+
+Makefile.am:
+
+Include:
+
+License:
+LGPL
+
+Maintainer:
+all

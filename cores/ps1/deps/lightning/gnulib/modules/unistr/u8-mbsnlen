@@ -1,0 +1,27 @@
+Description:
+Count characters in UTF-8 string.
+
+Files:
+lib/unistr/u8-mbsnlen.c
+
+Depends-on:
+unistr/base
+unistr/u8-mbtoucr
+unistr/u8-mbtouc
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.4], [unistr/u8-mbsnlen])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_MBSNLEN
+lib_SOURCES += unistr/u8-mbsnlen.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Test config.rpath and AC_LIB_LINKFLAGS macro.
+# With dependencies: a static library depending on a static library.
+# No libtool *.la files are assumed, dependencies given as AC_LIB_LINKFLAGS
+# argument instead.
+# Each library installed with a different prefix.
+
+rp=rp2bba
+build1_configure_flags=--disable-shared
+build2_configure_flags=--disable-shared
+build3_package=rpathlyx
+remove_la=yes
+
+. $srcdir/rpath-2_b

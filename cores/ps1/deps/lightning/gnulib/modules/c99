@@ -1,0 +1,19 @@
+Description:
+Enable at least C99 if available.
+
+Files:
+
+Depends-on:
+std-gnu11
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+all

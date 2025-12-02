@@ -1,0 +1,32 @@
+Description:
+trunc() function: round towards zero.
+
+Files:
+lib/trunc.c
+m4/trunc.m4
+
+Depends-on:
+math
+extensions
+float           [test $HAVE_DECL_TRUNC = 0 || test $REPLACE_TRUNC = 1]
+
+configure.ac:
+gl_FUNC_TRUNC
+if test $HAVE_DECL_TRUNC = 0 || test $REPLACE_TRUNC = 1; then
+  AC_LIBOBJ([trunc])
+fi
+gl_MATH_MODULE_INDICATOR([trunc])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(TRUNC_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

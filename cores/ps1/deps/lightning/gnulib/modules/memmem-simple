@@ -1,0 +1,33 @@
+Description:
+memmem() function: locate first substring in a buffer.
+
+Files:
+lib/str-two-way.h
+lib/memmem.c
+m4/memmem.m4
+
+Depends-on:
+builtin-expect
+extensions
+string
+stdint
+memchr
+memcmp
+
+configure.ac:
+gl_FUNC_MEMMEM_SIMPLE
+if test $HAVE_MEMMEM = 0 || test $REPLACE_MEMMEM = 1; then
+  AC_LIBOBJ([memmem])
+fi
+gl_STRING_MODULE_INDICATOR([memmem])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+libc, Eric Blake, Simon Josefsson

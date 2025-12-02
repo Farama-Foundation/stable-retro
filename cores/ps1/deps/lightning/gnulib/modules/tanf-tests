@@ -1,0 +1,13 @@
+Files:
+tests/test-tanf.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-tanf
+check_PROGRAMS += test-tanf
+test_tanf_LDADD = $(LDADD) @TANF_LIBM@

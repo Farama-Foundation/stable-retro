@@ -1,0 +1,32 @@
+@node progname and getprogname
+@section progname and getprogname
+
+@c Copyright (C) 2007, 2009--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+Gnulib has two modules for retrieving the name of the currently executing
+program: @code{progname} and @code{getprogname}.
+
+@findex progname
+@vindex program_name
+The @code{progname} module defines a variable @code{program_name}.
+It contains the name of the currently executing program, on all platforms.
+But it cannot be used implicitly:  It requires that every @code{main}
+function be modified to invoke @code{set_program_name (argv[0])} as one
+of its first actions.
+
+@findex getprogname
+The @code{getprogname} module defines a function @code{getprogname()}.
+It returns the name of the currently executing program, on most platforms.
+The advantage of this module is that it can be used without prior
+initializations.  But it has limitations:  In some rare situations, it
+cannot determine the name; then it returns @code{"?"} instead.  And on
+some platforms, it returns a truncated program name.
+
+@findex error
+The @code{error} function uses the @code{getprogname} module.

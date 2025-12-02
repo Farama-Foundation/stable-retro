@@ -1,0 +1,19 @@
+@node paths.h
+@section @file{paths.h}
+
+Defines the macros @code{_PATH_*}.
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+Minix 3.1.8, HP-UX 11, Solaris 11 2010-11, mingw, MSVC 14.
+@item
+The set of @code{_PATH_*} macros is platform dependent.
+@end itemize

@@ -1,0 +1,53 @@
+@node getcwd
+@section @code{getcwd}
+@findex getcwd
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/getcwd.html}
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-getcwd.html}
+
+Gnulib module: getcwd or getcwd-lgpl
+
+Portability problems fixed by either Gnulib module @code{getcwd} or
+@code{getcwd-lgpl}:
+@itemize
+@item
+This function is declared in different header files (namely, @code{<io.h>} or
+@code{<direct.h>}) on some platforms:
+mingw, MSVC 14.
+@item
+On glibc and Solaris 11.4 platforms,
+@code{getcwd (NULL, n)} allocates memory for the result.
+On some other platforms, this call is not allowed.
+@item
+On some platforms, the prototype for @code{getcwd} uses @code{int}
+instead of @code{size_t} for the size argument when using non-standard
+headers, and the declaration is missing from @code{<unistd.h>}:
+mingw, MSVC 14.
+@item
+On some platforms, @code{getcwd (buf, 0)} crashes:
+MSVC 14.
+@item
+On some platforms, @code{getcwd (buf, 0)} fails with @code{ERANGE}
+instead of the required @code{EINVAL}:
+mingw.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{getcwd}:
+@itemize
+@item
+This function does not handle long file names (greater than @code{PATH_MAX})
+correctly on some platforms:
+glibc on Linux 2.4.20, musl libc 1.2.2/powerpc64le, macOS 11.1, FreeBSD 6.4, NetBSD 9.0, OpenBSD 6.7, AIX 7.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+When using @code{getcwd(NULL, nonzero)}, some platforms, such as glibc
+or cygwin, allocate exactly @code{nonzero} bytes and fail with
+@code{ERANGE} if it was not big enough, while other platforms, such as
+FreeBSD, mingw, or MSVC 14, ignore the size argument and allocate whatever size
+is necessary.  If this call succeeds, an application cannot portably
+access beyond the string length of the result.
+@end itemize

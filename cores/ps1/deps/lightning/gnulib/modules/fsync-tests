@@ -1,0 +1,13 @@
+Files:
+tests/test-fsync.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+errno
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fsync
+check_PROGRAMS += test-fsync

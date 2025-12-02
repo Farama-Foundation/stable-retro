@@ -1,0 +1,22 @@
+Files:
+tests/test-ftello.c
+tests/test-ftello.sh
+tests/test-ftello2.sh
+tests/test-ftello3.c
+tests/test-ftello4.c
+tests/test-ftello4.sh
+tests/signature.h
+tests/macros.h
+m4/ungetc.m4
+
+Depends-on:
+binary-io
+fdopen
+
+configure.ac:
+gl_FUNC_UNGETC_WORKS
+
+Makefile.am:
+TESTS += test-ftello.sh test-ftello2.sh test-ftello3 test-ftello4.sh
+check_PROGRAMS += test-ftello test-ftello3 test-ftello4
+MOSTLYCLEANFILES += t-ftello3.tmp

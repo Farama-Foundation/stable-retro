@@ -1,0 +1,24 @@
+@node fcvt
+@section @code{fcvt}
+@findex fcvt
+
+POSIX specification: @url{https://pubs.opengroup.org/onlinepubs/009695399/functions/fcvt.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 6.0, NetBSD 9.0, Android 9.0.
+@item
+This function is not declared on some platforms:
+Cygwin 2.9.
+@item
+This function is marked as ``legacy'' in POSIX@.  Better use @code{sprintf}
+instead.
+@end itemize

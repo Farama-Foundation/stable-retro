@@ -1,0 +1,33 @@
+@node reallocarray
+@subsection @code{reallocarray}
+@findex reallocarray
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Changing Block Size,,Changing the Size of a Block,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Changing-Block-Size.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/reallocarray.3.html,,man reallocarray}.
+@end itemize
+
+Gnulib module: reallocarray
+
+Allocate multiple memory locations of a fixed size with integer overflow
+protection.
+Glibc Manual: @url{https://www.gnu.org/software/libc/manual/html_node/Changing-Block-Size.html#Changing-Block-Size}
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on many platforms:
+glibc 2.25, macOS 11.1, FreeBSD 10, NetBSD 7, OpenBSD 5.5, Minix 3.3.0, AIX 7.2, HP-UX 11, IRIX, Solaris 11.4, Cygwin 1.7.x, mingw, MSVC 14, Android 9.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,26 @@
+Description:
+Ordered set data type implemented by a binary tree.
+
+Files:
+lib/gl_avltree_oset.h
+lib/gl_avltree_oset.c
+lib/gl_avltree_ordered.h
+lib/gl_anytree_oset.h
+
+Depends-on:
+oset
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+
+Makefile.am:
+lib_SOURCES += gl_avltree_oset.h gl_avltree_oset.c gl_avltree_ordered.h gl_anytree_oset.h
+
+Include:
+"gl_avltree_oset.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,27 @@
+Description:
+Output of styled text.
+
+Files:
+m4/libtextstyle.m4
+
+Depends-on:
+havelib
+
+configure.ac:
+# You need to invoke gl_LIBTEXTSTYLE yourself, possibly with arguments.
+
+Makefile.am:
+
+Include:
+#if HAVE_LIBTEXTSTYLE
+# include <textstyle.h>
+#endif
+
+Link:
+$(LTLIBTEXTSTYLE) when linking with libtool, $(LIBTEXTSTYLE) otherwise
+
+License:
+GPL
+
+Maintainer:
+all

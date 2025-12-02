@@ -1,0 +1,16 @@
+Files:
+tests/test-fma-ieee.c
+tests/test-fma-ieee.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnand-nolibm
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fma-ieee
+check_PROGRAMS += test-fma-ieee
+test_fma_ieee_LDADD = $(LDADD) @FMA_LIBM@

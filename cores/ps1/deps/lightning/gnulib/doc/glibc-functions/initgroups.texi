@@ -1,0 +1,36 @@
+@node initgroups
+@subsection @code{initgroups}
+@findex initgroups
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-initgroups-3.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Setting Groups,,Setting the Group IDs,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Setting-Groups.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/initgroups.3.html,,man initgroups}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is unsafe to call between @code{fork} and @code{exec} if
+the parent process is multi-threaded.  Instead, use @code{getgroups} or
+@code{getgrouplist} (or use the gnulib module @code{mgetgroups})
+before forking, and @code{setgroups} in the child.
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@end itemize

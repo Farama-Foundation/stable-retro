@@ -1,0 +1,19 @@
+@node memmove
+@section @code{memmove}
+@findex memmove
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/memmove.html}
+
+Gnulib module: memmove
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function cannot be called from plain inline or extern inline functions
+on some platforms:
+OS X 10.8.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

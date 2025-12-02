@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character is of general category Mn.
+
+Files:
+lib/unictype/categ_Mn.c
+lib/unictype/categ_Mn.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-Mn])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_MN
+lib_SOURCES += unictype/categ_Mn.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,12 @@
+Files:
+tests/test-getndelim2.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getndelim2
+check_PROGRAMS += test-getndelim2
+MOSTLYCLEANFILES += test-getndelim2.txt

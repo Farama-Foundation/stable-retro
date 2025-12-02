@@ -1,0 +1,31 @@
+Description:
+getdomainname() function: Return machine's NIS domain name.
+
+Files:
+lib/getdomainname.c
+m4/getdomainname.m4
+
+Depends-on:
+unistd
+extensions
+netdb           [test $HAVE_DECL_GETDOMAINNAME = 0 || test $REPLACE_GETDOMAINNAME = 1]
+sys_socket      [test $HAVE_DECL_GETDOMAINNAME = 0 || test $REPLACE_GETDOMAINNAME = 1]
+
+configure.ac:
+gl_FUNC_GETDOMAINNAME
+if test $HAVE_DECL_GETDOMAINNAME = 0 || test $REPLACE_GETDOMAINNAME = 1; then
+  AC_LIBOBJ([getdomainname])
+  gl_PREREQ_GETDOMAINNAME
+fi
+gl_UNISTD_MODULE_INDICATOR([getdomainname])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+GPL
+
+Maintainer:
+all

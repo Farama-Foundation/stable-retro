@@ -1,0 +1,12 @@
+Files:
+tests/test-truncate.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-truncate
+check_PROGRAMS += test-truncate

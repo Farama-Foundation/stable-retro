@@ -1,0 +1,24 @@
+Description:
+ldexpl() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+ldexpl
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LDEXPL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

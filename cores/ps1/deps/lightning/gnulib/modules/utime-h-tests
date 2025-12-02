@@ -1,0 +1,11 @@
+Files:
+tests/test-utime-h.c
+
+Depends-on:
+utime-h-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-utime-h
+check_PROGRAMS += test-utime-h

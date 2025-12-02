@@ -1,0 +1,13 @@
+Files:
+tests/test-powf.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-powf
+check_PROGRAMS += test-powf
+test_powf_LDADD = $(LDADD) @POWF_LIBM@

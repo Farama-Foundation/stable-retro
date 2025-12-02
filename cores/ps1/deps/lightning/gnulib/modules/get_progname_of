@@ -1,0 +1,25 @@
+Description:
+Determine the program name of a given process.
+
+Files:
+lib/get_progname_of.h
+lib/get_progname_of.c
+
+Depends-on:
+extensions
+unistd
+open
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += get_progname_of.h get_progname_of.c
+
+Include:
+"get_progname_of.h"
+
+License:
+LGPL
+
+Maintainer:
+all

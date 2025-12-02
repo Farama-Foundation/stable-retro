@@ -1,0 +1,14 @@
+Files:
+tests/unicase/test-u8-is-lowercase.c
+tests/unicase/test-is-lowercase.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-is-lowercase
+check_PROGRAMS += test-u8-is-lowercase
+test_u8_is_lowercase_SOURCES = unicase/test-u8-is-lowercase.c
+test_u8_is_lowercase_LDADD = $(LDADD) $(LIBUNISTRING)

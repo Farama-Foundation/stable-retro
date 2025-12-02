@@ -1,0 +1,12 @@
+Files:
+tests/test-userspec.c
+
+Depends-on:
+xalloc
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-userspec
+check_PROGRAMS += test-userspec
+test_userspec_LDADD = $(LDADD) @LIBINTL@

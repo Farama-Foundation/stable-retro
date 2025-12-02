@@ -1,0 +1,31 @@
+Description:
+Help make libraries relocatable, that is, to allow them to function
+properly when copied to an arbitrary directory.
+
+Files:
+doc/relocatable.texi
+lib/relocatable.h
+lib/relocatable.c
+lib/relocatable.valgrind
+m4/relocatable-lib.m4
+
+Depends-on:
+strdup
+
+configure.ac:
+gl_RELOCATABLE_LIBRARY
+if test $RELOCATABLE = yes; then
+  AC_LIBOBJ([relocatable])
+fi
+
+Makefile.am:
+DEFS += -DNO_XMALLOC
+
+Include:
+"relocatable.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Ben Pfaff

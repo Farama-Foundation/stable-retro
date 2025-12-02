@@ -1,0 +1,33 @@
+Description:
+read_file() function: read the contents of a file into a string
+
+Files:
+lib/read-file.h
+lib/read-file.c
+m4/read-file.m4
+
+Depends-on:
+explicit_bzero
+fopen-gnu
+free-posix
+fstat
+ftello
+malloc-posix
+realloc-posix
+stdint
+sys_stat
+
+configure.ac:
+gl_PREREQ_READ_FILE
+
+Makefile.am:
+lib_SOURCES += read-file.c
+
+Include:
+"read-file.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

@@ -1,0 +1,29 @@
+Description:
+isblank() function: test whether a single-byte character is a blank.
+
+Files:
+lib/isblank.c
+m4/isblank.m4
+
+Depends-on:
+extensions
+ctype
+
+configure.ac:
+gl_FUNC_ISBLANK
+if test $HAVE_ISBLANK = 0; then
+  AC_LIBOBJ([isblank])
+fi
+gl_MODULE_INDICATOR([isblank])
+gl_CTYPE_MODULE_INDICATOR([isblank])
+
+Makefile.am:
+
+Include:
+<ctype.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

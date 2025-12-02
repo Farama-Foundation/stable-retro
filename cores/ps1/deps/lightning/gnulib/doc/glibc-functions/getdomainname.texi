@@ -1,0 +1,38 @@
+@node getdomainname
+@subsection @code{getdomainname}
+@findex getdomainname
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-getdomainname.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Host Identification,,Host Identification,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Host-Identification.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/getdomainname.2.html,,man getdomainname}.
+@end itemize
+
+Gnulib module: getdomainname
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Solaris 11.3, mingw, MSVC 14, Android 7.1.
+@item
+This function is declared in @code{netdb.h}, not in @code{unistd.h}, on
+some platforms:
+AIX 7.1.
+@item
+The second argument is of type @code{int}, not @code{size_t}, on some platforms:
+macOS 11.1, FreeBSD 6.4, AIX 7.1, IRIX 6.5.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

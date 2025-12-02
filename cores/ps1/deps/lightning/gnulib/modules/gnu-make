@@ -1,0 +1,28 @@
+Description:
+Determine whether recent-enough GNU Make is being used.
+
+Files:
+m4/gnu-make.m4
+
+Depends-on:
+
+configure.ac:
+gl_GNU_MAKE
+
+Makefile.am:
+##Sample usage of gnu-make module:
+#if GNU_MAKE
+#	[nicer features that work only with GNU Make]
+#else
+#	[fallback features that work in any 'make' implementation; see
+#	https://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html
+#	for the POSIX specification]
+#endif
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+Paul Eggert

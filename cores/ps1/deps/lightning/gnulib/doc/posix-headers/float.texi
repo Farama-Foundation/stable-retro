@@ -1,0 +1,32 @@
+@node float.h
+@section @file{float.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/float.h.html}
+
+Gnulib module: float
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+The conversion from @code{int} to @code{long double} in incorrect on some
+platforms:
+glibc 2.7 on Linux/SPARC64.
+@item
+The values of @code{LDBL_*} macros are incorrect on some platforms:
+On OpenBSD 4.0 and MirBSD 10, they are the same as the values of the
+@code{DBL_*} macros, although @samp{long double} is a larger type than
+@samp{double}.
+On FreeBSD/x86 6.4, they represent the incorrect 53-bit precision assumptions
+in the compiler, not the real 64-bit precision at runtime.
+On Linux/PowerPC with GCC 4.4, on AIX 7.1 with GCC 4.2, and on IRIX 6.5,
+they don't reflect the ``double double'' representation of @code{long double}
+correctly.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The macro @code{FLT_ROUNDS} is a constant expression and does not represent
+the current rounding mode on some platforms:
+glibc 2.11, HP-UX 11, mingw.
+@end itemize

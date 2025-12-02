@@ -1,0 +1,22 @@
+@node remainder
+@section @code{remainder}
+@findex remainder
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/remainder.html}
+
+Gnulib module: remainder or remainder-ieee
+
+Portability problems fixed by either Gnulib module @code{remainder} or @code{remainder-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+MSVC 9.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{remainder-ieee}:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

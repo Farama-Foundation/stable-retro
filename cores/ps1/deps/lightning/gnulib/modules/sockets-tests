@@ -1,0 +1,11 @@
+Files:
+tests/test-sockets.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sockets
+check_PROGRAMS += test-sockets
+test_sockets_LDADD = $(LDADD) @LIBSOCKET@

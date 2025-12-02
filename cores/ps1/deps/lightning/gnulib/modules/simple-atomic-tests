@@ -1,0 +1,14 @@
+Files:
+tests/test-simple-atomic.c
+tests/macros.h
+
+Depends-on:
+thread
+yield
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-simple-atomic
+check_PROGRAMS += test-simple-atomic
+test_simple_atomic_LDADD = $(LDADD) @LIBMULTITHREAD@ @YIELD_LIB@

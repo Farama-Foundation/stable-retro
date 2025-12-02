@@ -1,0 +1,32 @@
+Description:
+Return the entries of a directory (just the names) as an argz string.
+
+Files:
+lib/savedir.h
+lib/savedir.c
+m4/savedir.m4
+
+Depends-on:
+closedir
+dirent-safer
+fdopendir
+free-posix
+opendir
+readdir
+stpcpy
+xalloc
+
+configure.ac:
+gl_SAVEDIR
+
+Makefile.am:
+lib_SOURCES += savedir.c
+
+Include:
+"savedir.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

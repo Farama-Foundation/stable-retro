@@ -1,0 +1,33 @@
+Description:
+mbmemcasecoll() function: locale dependent case-insensitive memory area
+comparison.
+
+Files:
+lib/mbmemcasecoll.h
+lib/mbmemcasecoll.c
+
+Depends-on:
+stdbool
+malloca
+mbrtowc
+wcrtomb
+memcmp2
+memcoll
+wchar
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += mbmemcasecoll.c
+
+Include:
+"mbmemcasecoll.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+all

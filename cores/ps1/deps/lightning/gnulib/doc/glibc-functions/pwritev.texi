@@ -1,0 +1,33 @@
+@node pwritev
+@subsection @code{pwritev}
+@findex pwritev
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Scatter-Gather,,Fast Scatter-Gather I/O,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Scatter_002dGather.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/pwritev.2.html,,man pwritev}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.9, macOS 10.13, FreeBSD 5.2.1, Minix 3.1.8, AIX 5.2, HP-UX 11.31, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 6.0.
+@item
+On platforms where @code{off_t} is a 32-bit type, this function may not
+work correctly on files larger than 2 GB@.  The fix is to use the
+@code{AC_SYS_LARGEFILE} macro.
+@end itemize

@@ -1,0 +1,136 @@
+Legal Issues about Contributing Code to GNU	last updated 14 July 2015
+
+Project GNU has to be careful to obey copyright laws, even though
+these laws are wrong when they stop people from sharing generally
+useful published information such as software, because we are in the
+public eye.  We also use copyright to defend users' freedom, by means
+of copyleft (though this does not excuse copyright law for helping
+to make software proprietary).
+
+This means that if you want to contribute software to GNU, you have to
+do something to give us legal permission to use it.  There are three
+ways this can be done:
+
+* Assign the copyright to the Free Software Foundation.
+This allows the FSF to act to stop violations of the GPL.
+
+* Keep the copyright and release the program yourself under the GNU
+GPL.  (This alternative is too impractical for contributions to a
+preexisting FSF-copyrighted GNU program.)
+
+* Put the code in the public domain.  Then there is nothing to stop
+hoarding of modified versions, but we can still use the program in GNU.
+
+Most of these alternatives require a signed piece of paper, or in some
+cases a digital signature, to make it happen.
+
+* Assigning copyright.
+
+Assigning the copyright means signing a contract that makes the Free
+Software Foundation the "owner" of the program according to the law.
+As the copyright holder, the Foundation can sue anyone who tries to
+distribute the program as a proprietary product.  We are willing to
+keep your name on the program as the author for as long as the program
+remains recognizably distinct.  ("Owner" is in quotes to show that we
+don't really believe in this kind of ownership.)
+
+The assignment contract commits the foundation to setting distribution
+terms that permit free redistribution.
+
+Often we don't want to do the work of starting to distribute a program
+right away.  There are many things which we will need in order to have
+a complete system but which aren't really useful until the rest of the
+system is done.  But signing the assignment does not stop you from
+distributing the program yourself--as long as you do so under the GNU
+terms.  You don't have to wait for us to start distributing.  You can
+start distributing as soon as you attach our standard copyleft to the
+files.  (Ask for our advice on how to do this.)
+
+The assignment contract we normally use has a clause that permits you
+to use your code in proprietary programs, on 30 days' notice.  (The 30
+days' notice is there because, through a legal technicality, it would
+improve our position in a suit against a hoarder.)  Although we
+believe that proprietary software is wrong, we include this clause
+because it would serve no purpose to ask you to promise not to do it.
+You're giving us a gift in the first place.
+
+You don't need to invoke this clause in order to distribute copies as
+free software under the GNU GPL, since everyone is allowed to do that.
+
+* Releasing it yourself.
+
+You can release a program yourself under copyleft distribution terms
+such as the GNU GPL.  (In order to accept the program as GNU software,
+we would have to be happy with your choice of terms.)  This does not
+require a contract between you and the FSF, but we would appreciate
+having a signed piece of paper to confirm your decision.
+
+If someone violates your terms--for example, if someone gets a copy
+from us, and uses it as a basis for a proprietary product in violation
+of the terms--we cannot sue him.  You would have to sue, or he gets
+away with it.
+
+* Public domain.
+
+If you put the program in the public domain, we prefer to have a signed
+piece of paper--a disclaimer of rights--from you confirming this.  If the
+program is not very important, we can do without one; the worst that could
+happen is that we might some day be forced to stop using it.
+
+The law says that anyone can copyright a modified version of the public
+domain work.  (This doesn't restrict the original, which remains in the
+public domain; only the changes are copyrighted.)  If we make extensive
+changes, we will probably do this and add our usual copyleft.  If we make
+small changes, we will leave the version we distribute in the public
+domain.
+
+* What about your employer?
+
+If you are employed to do programming, or have made an agreement with your
+employer that says it owns programs you write, we need a signed piece of
+paper from your employer disclaiming rights to the program.  It should be
+signed by a vice president or general manager of the company.  If you
+can't get at them, it is almost as good to find someone who signs licenses
+for software that is purchased.  Here is a sample wording:
+
+  Digital Simulation Corporation hereby disclaims all copyright interest
+  in the program "sample.el" (a program to direct assemblers to make passes
+  at compilers under GNU Emacs) written by Hugh Hacker.
+
+  <signature of Mo Ghoul>, 1 April 1987
+  Mo Ghoul, President of Vice, Digital Simulation Corp.
+
+The description of what the program does is just to make it clearer
+what the disclaimer covers.
+
+If what you did was change an existing program, it should say this:
+
+  ...in the changes and enhancements made by Hugh Hacker to the
+  program "sample.el".
+
+* Did anyone else contribute?
+
+If someone else contributed more than a few lines here or there to the
+program, then that person too is an author, and that person too needs to
+sign papers just as you do.  So may that person's employer.  However, if
+his contribution is just a fraction of the whole work, it is satisfactory
+if he disclaims his own rights, even if you are assigning yours.  (If just
+the minor contributors' work goes in the public domain, that doesn't leave
+much of a loophole for hoarders.)
+
+If you incorporated packages which you found floating around as "public
+domain", we might still want to track down their authors, to get
+disclaimers to reassure us that they really are in the public domain.  So
+keep track of what these packages are and who wrote them.
+
+* A reminder:
+
+In working on a project for GNU, DO NOT study and follow any Unix
+sources or other non-free software that might have any bearing on the
+project.  Don't refer to them at all, unless you are forced to for
+non-GNU reasons.
+
+It is not considered a serious problem if you have read Unix sources
+or other non-free source code in the past for other purposes, provided
+you don't copy anything in particular from them.  However, referring
+to them while you do the work could cause us legal problems later.

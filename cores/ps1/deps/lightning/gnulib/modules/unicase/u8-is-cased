@@ -1,0 +1,32 @@
+Description:
+Test whether case matters for an UTF-8 string.
+
+Files:
+lib/unicase/u8-is-cased.c
+lib/unicase/u-is-cased.h
+
+Depends-on:
+unicase/base
+unicase/u8-toupper
+unicase/u8-tolower
+unicase/u8-totitle
+uninorm/u8-normalize
+uninorm/nfd
+unistr/u8-cmp
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u8-is-cased])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U8_IS_CASED
+lib_SOURCES += unicase/u8-is-cased.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

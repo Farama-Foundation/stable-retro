@@ -1,0 +1,44 @@
+Description:
+fchmodat() function: Change access permissions of a file at a directory.
+
+Files:
+lib/fchmodat.c
+lib/at-func.c
+m4/fchmodat.m4
+
+Depends-on:
+sys_stat
+extensions
+errno           [test $HAVE_FCHMODAT = 0 || test $REPLACE_FCHMODAT = 1]
+fcntl-h         [test $HAVE_FCHMODAT = 0 || test $REPLACE_FCHMODAT = 1]
+unistd          [test $HAVE_FCHMODAT = 0 || test $REPLACE_FCHMODAT = 1]
+intprops        [test $HAVE_FCHMODAT = 0 || test $REPLACE_FCHMODAT = 1]
+c99             [test $REPLACE_FCHMODAT = 1]
+fstatat         [test $REPLACE_FCHMODAT = 1]
+at-internal     [test $HAVE_FCHMODAT = 0]
+extern-inline   [test $HAVE_FCHMODAT = 0]
+fchdir          [test $HAVE_FCHMODAT = 0]
+filename        [test $HAVE_FCHMODAT = 0]
+lchmod          [test $HAVE_FCHMODAT = 0]
+openat-die      [test $HAVE_FCHMODAT = 0]
+openat-h        [test $HAVE_FCHMODAT = 0]
+save-cwd        [test $HAVE_FCHMODAT = 0]
+
+configure.ac:
+gl_FUNC_FCHMODAT
+if test $HAVE_FCHMODAT = 0 || test $REPLACE_FCHMODAT = 1; then
+  AC_LIBOBJ([fchmodat])
+  gl_PREREQ_FCHMODAT
+fi
+gl_SYS_STAT_MODULE_INDICATOR([fchmodat])
+
+Makefile.am:
+
+Include:
+<sys/stat.h>
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake, Paul Eggert

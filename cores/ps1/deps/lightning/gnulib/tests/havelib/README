@@ -1,0 +1,77 @@
+Tests for config.rpath and lib-link.m4.
+
+rpath-1 w
+        |
+        +---- a = static, b = shared
+
+rpath-2 u v w
+        | | |
+        | | +---- a = static/static, b = static/shared,
+        | |       c = shared/static, d = shared/shared.
+        | |
+        | +------ a = all libraries and the program have the same prefix,
+        |         b = the libraries are in different directories.
+        |
+        +-------- a = all shared libraries use the libtool *.la files for
+                  resolving dependencies, b = dependencies are given as
+                  AC_LIB_LINKFLAGS argument instead.
+
+rpath-3 u v w
+        | | |
+        | | +---- a = static/static/static, b = static/static/shared,
+        | |       c = static/shared/static, d = static/shared/shared,
+        | |       e = shared/static/static, f = shared/static/shared,
+        | |       g = shared/shared/static, h = shared/shared/shared.
+        | |
+        | +------ a = all libraries and the program have the same prefix,
+        |         b = the libraries are in different directories.
+        |
+        +-------- a = all shared libraries use the libtool *.la files for
+                  resolving dependencies, b = dependencies are given as
+                  AC_LIB_LINKFLAGS argument instead.
+
+The rpath-2* tests are sensitive to
+  - incomplete shared library support in the system,
+  - bugs in libtool that creates the shared libraries,
+  - bugs in lib-link.m4.
+
+The rpath-3* tests are sensitive to
+  - incomplete shared library support in the system,
+  - bugs in libtool that creates the shared libraries.
+
+Known failures:
+
+* On all platforms supporting shared libraries,
+    rpath-3aae rpath-3aag
+    rpath-3abe rpath-3abg
+  fail. This is a libtool 1.4.2 bug: When a shared library depends on a
+  static library indirectly through two different dependency paths,
+  libtool attempts to link together invalid sets of object files.
+
+* OSF/1 4.0: the tests
+    rpath-2bbd
+    rpath-3bbd rpath-3bbf rpath-3bbg rpath-3bbh
+  fail, because -rpath options are not cumulative:
+  The last -rpath option overrides all previous ones. One would need to
+  pass all directories, separated by colons, in a single -rpath option.
+
+* On Linux/x86_64: the tests
+    rpath-2aac rpath-2abc rpath-2bac rpath-2bbc
+    rpath-3aac rpath-3aaf rpath-3abc rpath-3abf
+    rpath-3bac rpath-3bae rpath-3baf rpath-3bag
+    rpath-3bbc rpath-3bbe rpath-3bbf rpath-3bbg
+  fail, because code from static libraries not compiled with -fPIC cannot
+  be integrated into shared libraries: linker error about relocations.
+
+* Solaris: the tests
+    rpath-3bae rpath-3bbe
+    rpath-3aaf rpath-3abf
+    rpath-3baf rpath-3bbf
+  fail, because code from static libraries not compiled with -fPIC cannot
+  be integrated into shared libraries: linker error "Text relocation remains".
+
+* Cygwin: The tests
+    rpath-2aac rpath-2abc
+    rpath-3aac rpath-3aaf
+    rpath-3abc rpath-3abf
+  fail.

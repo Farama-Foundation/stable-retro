@@ -1,0 +1,24 @@
+Description:
+sqrtf() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+sqrtf
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(SQRTF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

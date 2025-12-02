@@ -1,0 +1,26 @@
+Description:
+Copy UTF-8 string.
+
+Files:
+lib/unistr/u8-strdup.c
+
+Depends-on:
+unistr/base
+
+configure.ac:
+AC_CHECK_FUNCS_ONCE([strdup])
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-strdup])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_STRDUP
+lib_SOURCES += unistr/u8-strdup.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

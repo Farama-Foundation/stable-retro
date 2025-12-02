@@ -1,0 +1,15 @@
+@node qsort
+@section @code{qsort}
+@findex qsort
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/qsort.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

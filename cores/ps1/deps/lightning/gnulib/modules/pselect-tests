@@ -1,0 +1,33 @@
+Files:
+tests/test-pselect.c
+tests/test-select.h
+tests/macros.h
+tests/signature.h
+
+Depends-on:
+stdbool
+netinet_in
+arpa_inet
+unistd
+sys_ioctl
+extensions
+inet_pton
+errno
+perror
+pipe-posix
+socket
+bind
+setsockopt
+listen
+connect
+accept
+ioctl
+close
+
+configure.ac:
+AC_CHECK_HEADERS_ONCE([sys/wait.h])
+
+Makefile.am:
+TESTS += test-pselect
+check_PROGRAMS += test-pselect
+test_pselect_LDADD = $(LDADD) @LIB_SELECT@ @LIBSOCKET@ @LIB_PTHREAD_SIGMASK@ $(INET_PTON_LIB)

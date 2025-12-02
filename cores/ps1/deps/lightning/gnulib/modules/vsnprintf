@@ -1,0 +1,28 @@
+Description:
+vsnprintf() function: print formatted output from an stdarg argument list
+to a fixed length string
+
+Files:
+lib/vsnprintf.c
+m4/vsnprintf.m4
+m4/printf.m4
+
+Depends-on:
+stdio
+vasnprintf      [test $ac_cv_func_vsnprintf = no || test $REPLACE_VSNPRINTF = 1]
+errno           [test $ac_cv_func_vsnprintf = no || test $REPLACE_VSNPRINTF = 1]
+
+configure.ac:
+gl_FUNC_VSNPRINTF
+gl_STDIO_MODULE_INDICATOR([vsnprintf])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Yoann Vandoorselaere

@@ -1,0 +1,34 @@
+Description:
+wcsncat() function: append part of a wide string to a wide string.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+lib/wcsncat.c
+lib/wcsncat-impl.h
+m4/wcsncat.m4
+
+Depends-on:
+wchar
+
+configure.ac:
+gl_FUNC_WCSNCAT
+if test $HAVE_WCSNCAT = 0; then
+  AC_LIBOBJ([wcsncat])
+fi
+gl_WCHAR_MODULE_INDICATOR([wcsncat])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPL
+
+Maintainer:
+all

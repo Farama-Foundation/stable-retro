@@ -1,0 +1,46 @@
+Description:
+Determine the name of a backup file.
+
+Files:
+lib/backup-internal.h
+lib/backup-find.c
+lib/backupfile.c
+lib/backupfile.h
+m4/backupfile.m4
+
+Depends-on:
+argmatch
+attribute
+basename-lgpl
+c99
+closedir
+d-ino
+dirent-safer
+fcntl
+idx
+memcmp
+opendirat
+readdir
+renameatu
+stdbool
+stdint
+xalloc
+xalloc-oversized
+
+configure.ac:
+gl_BACKUPFILE
+
+Makefile.am:
+lib_SOURCES += backupfile.c backup-find.c
+
+Include:
+"backupfile.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

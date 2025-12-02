@@ -1,0 +1,11 @@
+Files:
+tests/test-sh-quote.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sh-quote
+check_PROGRAMS += test-sh-quote
+test_sh_quote_LDADD = $(LDADD) @LIBINTL@ $(LIB_MBRTOWC)

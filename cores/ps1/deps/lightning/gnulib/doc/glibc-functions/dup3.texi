@@ -1,0 +1,22 @@
+@node dup3
+@subsection @code{dup3}
+@findex dup3
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/dup3.2.html,,man dup3}
+
+Gnulib module: dup3
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+glibc 2.8, macOS 11.1, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.3, Cygwin 1.7.1, mingw, MSVC 14, Android 4.4.
+
+@item
+This function can crash on some platforms:
+Cygwin 1.7.25.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,36 @@
+Description:
+wcscspn() function: search a wide string for any of a set of wide characters.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+lib/wcscspn.c
+lib/wcscspn-impl.h
+m4/wcscspn.m4
+
+Depends-on:
+wchar
+wcslen          [test $HAVE_WCSCSPN = 0]
+wcschr          [test $HAVE_WCSCSPN = 0]
+
+configure.ac:
+gl_FUNC_WCSCSPN
+if test $HAVE_WCSCSPN = 0; then
+  AC_LIBOBJ([wcscspn])
+fi
+gl_WCHAR_MODULE_INDICATOR([wcscspn])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPL
+
+Maintainer:
+all

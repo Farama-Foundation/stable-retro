@@ -1,0 +1,19 @@
+@node posix_spawn_file_actions_addfchdir_np
+@subsection @code{posix_spawn_file_actions_addfchdir_np}
+@findex posix_spawn_file_actions_addfchdir_np
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on all non-glibc platforms:
+glibc 2.28, macOS 10.13, FreeBSD 12.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize
+
+Note: Gnulib has a module @code{posix_spawn_file_actions_addfchdir} that
+provides equivalent functionality, just without the suffix @code{_np}.

@@ -1,0 +1,31 @@
+@node mbrtoc32
+@section @code{mbrtoc32}
+@findex mbrtoc32
+
+Gnulib module: mbrtoc32
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on most non-glibc platforms:
+glibc 2.15, macOS 11.1, FreeBSD 6.4, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.3, Cygwin 2.9, mingw, MSVC 9, Android 4.4.
+@item
+In the C or POSIX locales, this function can return @code{(size_t) -1}
+and set @code{errno} to @code{EILSEQ}:
+glibc 2.23.
+@item
+This function returns 0 instead of @code{(size_t) -2} when the input
+is empty:
+glibc 2.19.
+@item
+This function does not recognize multibyte sequences that @code{mbrtowc}
+recognizes on some platforms:
+FreeBSD 12, Solaris 11.4, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is only defined as an inline function on some platforms:
+Haiku 2020.
+@end itemize

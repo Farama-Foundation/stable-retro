@@ -1,0 +1,18 @@
+Files:
+tests/test-c-vasprintf.c
+tests/test-c-vasprintf.sh
+m4/locale-fr.m4
+tests/macros.h
+
+Depends-on:
+setlocale
+snprintf
+
+configure.ac:
+gt_LOCALE_FR
+
+Makefile.am:
+TESTS += test-c-vasprintf.sh
+TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@'
+check_PROGRAMS += test-c-vasprintf
+test_c_vasprintf_LDADD = $(LDADD) $(LIB_SETLOCALE)

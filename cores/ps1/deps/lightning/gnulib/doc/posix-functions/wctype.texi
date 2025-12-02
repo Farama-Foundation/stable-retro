@@ -1,0 +1,25 @@
+@node wctype
+@section @code{wctype}
+@findex wctype
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/wctype.html}
+
+Gnulib module: wctype
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, MSVC 9.
+@item
+This function is declared in @code{<wchar.h>}, not in @code{<wctype.h>}, on
+some platforms:
+HP-UX 11.00.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and therefore cannot
+accommodate all Unicode characters.
+@end itemize

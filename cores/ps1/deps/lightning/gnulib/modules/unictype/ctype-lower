@@ -1,0 +1,29 @@
+Description:
+Generalization of the <ctype.h> islower() function and the
+<wctype.h> iswlower() function.
+
+Files:
+lib/unictype/ctype_lower.c
+lib/unictype/ctype_lower.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/ctype-lower])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CTYPE_LOWER
+lib_SOURCES += unictype/ctype_lower.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

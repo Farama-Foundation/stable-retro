@@ -1,0 +1,24 @@
+Description:
+logbf() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+logbf
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOGBF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

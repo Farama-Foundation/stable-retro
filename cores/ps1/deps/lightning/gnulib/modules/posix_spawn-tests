@@ -1,0 +1,39 @@
+Files:
+tests/test-posix_spawn-open1.c
+tests/test-posix_spawn-open2.c
+tests/test-posix_spawn-inherit0.c
+tests/test-posix_spawn-inherit1.c
+tests/test-posix_spawn-script.c
+tests/executable-script
+tests/executable-script.sh
+tests/executable-shell-script
+tests/signature.h
+
+Depends-on:
+posix_spawn_file_actions_init
+posix_spawn_file_actions_addopen
+posix_spawn_file_actions_destroy
+stdbool
+unistd
+sys_wait
+environ
+fflush
+freopen
+waitpid
+
+configure.ac:
+
+Makefile.am:
+TESTS += \
+  test-posix_spawn-open1 \
+  test-posix_spawn-open2 \
+  test-posix_spawn-inherit0 \
+  test-posix_spawn-inherit1 \
+  test-posix_spawn-script
+check_PROGRAMS += \
+  test-posix_spawn-open1 \
+  test-posix_spawn-open2 \
+  test-posix_spawn-inherit0 \
+  test-posix_spawn-inherit1 \
+  test-posix_spawn-script
+test_posix_spawn_script_CPPFLAGS = $(AM_CPPFLAGS) -DSRCDIR=\"$(srcdir)/\"

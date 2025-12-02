@@ -1,0 +1,29 @@
+Description:
+Control of symbols exported by shared libraries.
+
+Notice:
+The value of $(CFLAG_VISIBILITY) needs to be added to the CFLAGS for the
+compilation of all sources that make up the library.
+
+Files:
+m4/visibility.m4
+
+Depends-on:
+
+configure.ac:
+gl_VISIBILITY
+
+Makefile.am:
+# The value of $(CFLAG_VISIBILITY) needs to be added to the CFLAGS for the
+# compilation of all sources that make up the library. This line here does it
+# only for the gnulib part of it. The developer is responsible for adding
+# $(CFLAG_VISIBILITY) to the Makefile.ams of the other portions of the library.
+AM_CFLAGS += $(CFLAG_VISIBILITY)
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+all

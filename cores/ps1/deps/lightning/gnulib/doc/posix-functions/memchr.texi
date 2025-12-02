@@ -1,0 +1,22 @@
+@node memchr
+@section @code{memchr}
+@findex memchr
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/memchr.html}
+
+Gnulib module: memchr
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function dereferences too much memory on some platforms:
+glibc 2.10 on x86_64, IA-64; glibc 2.11 on Alpha, AIX 7.2.
+@item
+This function returns NULL if the character argument is not in the range
+of an @code{unsigned char} on some platforms:
+Android 5.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

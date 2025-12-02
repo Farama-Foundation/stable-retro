@@ -1,0 +1,15 @@
+Files:
+tests/test-recvfrom.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+netinet_in
+sockets
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-recvfrom
+check_PROGRAMS += test-recvfrom
+test_recvfrom_LDADD = $(LDADD) @LIBSOCKET@

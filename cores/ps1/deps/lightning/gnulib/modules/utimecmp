@@ -1,0 +1,34 @@
+Description:
+compare file timestamps
+
+Files:
+lib/utimecmp.h
+lib/utimecmp.c
+m4/utimecmp.m4
+
+Depends-on:
+dirname-lgpl
+fstatat
+hash
+stat-time
+time
+utimensat
+intprops
+stdbool
+stdint
+verify
+
+configure.ac:
+gl_UTIMECMP
+
+Makefile.am:
+lib_SOURCES += utimecmp.c
+
+Include:
+"utimecmp.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

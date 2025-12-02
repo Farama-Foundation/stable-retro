@@ -1,0 +1,27 @@
+Description:
+Concatenate UTF-16 strings.
+
+Files:
+lib/unistr/u16-strncat.c
+lib/unistr/u-strncat.h
+
+Depends-on:
+unistr/base
+unistr/u16-strlen
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u16-strncat])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U16_STRNCAT
+lib_SOURCES += unistr/u16-strncat.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

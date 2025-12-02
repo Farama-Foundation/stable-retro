@@ -1,0 +1,37 @@
+Description:
+rename() function: change the name or location of a file.
+
+Files:
+lib/rename.c
+m4/rename.m4
+
+Depends-on:
+stdio
+canonicalize-lgpl [test $REPLACE_RENAME = 1]
+chdir             [test $REPLACE_RENAME = 1]
+dirname-lgpl      [test $REPLACE_RENAME = 1]
+free-posix        [test $REPLACE_RENAME = 1]
+lstat             [test $REPLACE_RENAME = 1]
+rmdir             [test $REPLACE_RENAME = 1]
+same-inode        [test $REPLACE_RENAME = 1]
+stat              [test $REPLACE_RENAME = 1]
+stdbool           [test $REPLACE_RENAME = 1]
+strdup            [test $REPLACE_RENAME = 1]
+
+configure.ac:
+gl_FUNC_RENAME
+if test $REPLACE_RENAME = 1; then
+  AC_LIBOBJ([rename])
+fi
+gl_STDIO_MODULE_INDICATOR([rename])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

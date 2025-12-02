@@ -1,0 +1,22 @@
+Files:
+tests/nap.h
+tests/test-lutimens.h
+tests/test-utimens.h
+tests/test-utimens-common.h
+tests/test-utimensat.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+intprops
+nanosleep
+timespec
+utimecmp
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-utimensat
+check_PROGRAMS += test-utimensat
+test_utimensat_LDADD = $(LDADD) $(LIB_CLOCK_GETTIME) $(LIB_NANOSLEEP) @LIBINTL@

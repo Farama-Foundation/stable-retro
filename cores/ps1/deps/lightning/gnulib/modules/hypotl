@@ -1,0 +1,39 @@
+Description:
+hypotl() function: length of a vector in the plane.
+
+Files:
+lib/hypotl.c
+m4/hypotl.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+hypot           [{ test $HAVE_HYPOTL = 0 || test $REPLACE_HYPOTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+isfinite        [{ test $HAVE_HYPOTL = 0 || test $REPLACE_HYPOTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+fabsl           [{ test $HAVE_HYPOTL = 0 || test $REPLACE_HYPOTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+frexpl          [{ test $HAVE_HYPOTL = 0 || test $REPLACE_HYPOTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+ldexpl          [{ test $HAVE_HYPOTL = 0 || test $REPLACE_HYPOTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+sqrtl           [{ test $HAVE_HYPOTL = 0 || test $REPLACE_HYPOTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+isinf           [{ test $HAVE_HYPOTL = 0 || test $REPLACE_HYPOTL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+gl_FUNC_HYPOTL
+if test $HAVE_HYPOTL = 0 || test $REPLACE_HYPOTL = 1; then
+  AC_LIBOBJ([hypotl])
+fi
+gl_MATH_MODULE_INDICATOR([hypotl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(HYPOTL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

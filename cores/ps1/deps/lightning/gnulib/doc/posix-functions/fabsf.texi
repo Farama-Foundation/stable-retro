@@ -1,0 +1,21 @@
+@node fabsf
+@section @code{fabsf}
+@findex fabsf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fabsf.html}
+
+Gnulib module: fabsf
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+AIX 5.1, Solaris 9.
+@item
+This function is only defined as a macro with arguments on some platforms:
+MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

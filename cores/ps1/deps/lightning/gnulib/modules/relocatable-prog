@@ -1,0 +1,62 @@
+Description:
+Help make programs relocatable, that is, to allow them to function
+properly when copied to an arbitrary directory.
+
+Files:
+build-aux/config.libpath
+build-aux/reloc-ldflags
+build-aux/libtool-reloc
+doc/relocatable.texi
+lib/relocatable.h
+lib/relocatable.c
+lib/progreloc.c
+m4/relocatable.m4
+m4/relocatable-lib.m4
+m4/lib-ld.m4
+
+Depends-on:
+relocatable-prog-wrapper
+progname
+canonicalize-lgpl
+xalloc
+xreadlink
+open
+stdbool
+unistd
+memcmp
+strdup
+
+configure.ac:
+gl_RELOCATABLE([$gl_source_base])
+if test $RELOCATABLE = yes; then
+  AC_LIBOBJ([progreloc])
+  AC_LIBOBJ([relocatable])
+fi
+
+Makefile.am:
+DEFS += -DEXEEXT=\"@EXEEXT@\"
+if RELOCATABLE_VIA_WRAPPER
+uninstall-hook: uninstall-relocwrapper
+uninstall-relocwrapper:
+	if test $(RELOCATABLE) = yes; then \
+	  case '$(EXEEXT)' in \
+	    .bin*) ;; \
+	    *) cd $(top_builddir) && \
+	       $(MAKE) $(AM_MAKEFLAGS) EXEEXT=.bin$(EXEEXT) \
+		       AM_MAKEFLAGS='$(AM_MAKEFLAGS) EXEEXT=.bin$(EXEEXT)' \
+		       uninstall ;; \
+	  esac; \
+	fi
+endif
+## Automake warns about conditionally added dependencies to unconditionally defined targets.
+.PHONY: uninstall-relocwrapper
+
+Include:
+"relocatable.h"
+"progname.h"
+
+License:
+GPL
+
+Maintainer:
+Ben Pfaff

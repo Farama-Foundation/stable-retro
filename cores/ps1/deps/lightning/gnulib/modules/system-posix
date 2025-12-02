@@ -1,0 +1,22 @@
+Description:
+system() function: execute a shell command
+
+Files:
+
+Depends-on:
+stdlib
+sys_wait
+
+configure.ac:
+gl_STDLIB_MODULE_INDICATOR([system-posix])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPL
+
+Maintainer:
+all

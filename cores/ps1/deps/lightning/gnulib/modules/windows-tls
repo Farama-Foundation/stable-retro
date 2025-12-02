@@ -1,0 +1,28 @@
+Description:
+Thread-local storage (native Windows implementation).
+
+Files:
+lib/windows-tls.h
+lib/windows-tls.c
+
+Depends-on:
+windows-once
+
+configure.ac:
+AC_REQUIRE([AC_CANONICAL_HOST])
+case "$host_os" in
+  mingw*)
+    AC_LIBOBJ([windows-tls])
+    ;;
+esac
+
+Makefile.am:
+
+Include:
+"windows-tls.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

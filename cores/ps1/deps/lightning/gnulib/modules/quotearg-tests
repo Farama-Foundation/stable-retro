@@ -1,0 +1,32 @@
+Status:
+gettext-dependent-test
+
+Files:
+tests/test-quotearg.sh
+tests/test-quotearg.c
+tests/test-quotearg.h
+tests/macros.h
+tests/testlocale/fr/LC_MESSAGES/test-quotearg.po
+tests/testlocale/fr/LC_MESSAGES/test-quotearg.mo
+m4/locale-fr.m4
+m4/codeset.m4
+
+Depends-on:
+gettext
+stdint
+setenv
+unsetenv
+setlocale
+localcharset
+
+configure.ac:
+gt_LOCALE_FR
+gt_LOCALE_FR_UTF8
+
+Makefile.am:
+TESTS += test-quotearg.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_FR='@LOCALE_FR@' LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  host_os='@host_os@'
+check_PROGRAMS += test-quotearg
+test_quotearg_LDADD = $(LDADD) $(LIB_SETLOCALE) @LIBINTL@ $(LIB_MBRTOWC)

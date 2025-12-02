@@ -1,0 +1,31 @@
+Description:
+Determine whether the current process has the permissions of a given group ID.
+
+Files:
+lib/group-member.c
+m4/group-member.m4
+
+Depends-on:
+unistd
+extensions
+getgroups        [test $HAVE_GROUP_MEMBER = 0]
+xalloc-oversized [test $HAVE_GROUP_MEMBER = 0]
+
+configure.ac:
+gl_FUNC_GROUP_MEMBER
+if test $HAVE_GROUP_MEMBER = 0; then
+  AC_LIBOBJ([group-member])
+  gl_PREREQ_GROUP_MEMBER
+fi
+gl_UNISTD_MODULE_INDICATOR([group-member])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

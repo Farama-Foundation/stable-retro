@@ -1,0 +1,486 @@
+2008-05-06
+	- mdec: improvement for FF9, maybe other games run better, too
+	
+2008-05-04
+	- hdebug: supress multiple debugger-instances when using savestates, patch by Benoit Gschwind
+
+2008-05-02
+	- dfiso: cleanup, rewrite and relicensing
+	
+2008-03-16
+	- dfOpenGL: configuration for window-resolution added
+
+2008-03-09
+	- some uses of psxHu32() as an lvalue fixed
+	
+2008-03-07
+	- dfiso: several improvements of the new functions
+	
+2008-03-04
+	- dfiso: CDDA-playback and .toc-parsing implemented, minor source cleanups
+	
+2008-02-25
+	- HLE-Bios:	initheap, malloc, free rewritten
+	- HLE-Bios: experimental patch in EnterCriticalSection, this one replaces the one in OpenEvent
+	- Interpreter: bug fix for HLE-jumptable
+	
+2008-01-22
+	- HLE-Bios: SetMem(size) added
+	- HLE-Bios: bugfix in OpenEvent(), several games work now with HLE, others do not, needs more investigation
+	- dfbinimage: modifications for compilation with recent portaudio
+	- dfbinimage: cleanup directory
+	
+2008-01-17
+	- minor debugger improvement
+
+2008-01-16
+	- dfiso: conditional use of libnautilus for easy usage
+	- dfiso: additional default drives
+	- dfOpenGL included in autobuild-process
+	- HLE-Bios: bugfixes malloc() and free()
+	- HLE-Bios: bugfix for loading files, lots of games should start now with emulated Bios!
+	
+2008-01-12
+	- speed up for interpreter without debugger
+	- minor debugger improvements
+
+2008-01-11
+	- integrated game debugger
+
+2008-01-09
+	- dfiso: multiple bug fixes, not needed files removed
+	- dfiso: dependency to libnautilus deleted, instead function for cd-drive scanning in /sys/block
+
+2008-01-08
+	- libpcsxcore: segfault in loadcdrom() fixed
+	- gui: segfaults on closing memory-card-dialog fixed
+
+2007-12-13
+	- dfxvideo: bugfixes yuv-adaptor
+	
+Please consult the darcs changelog for the latest.
+
+Sun Apr 23 11:39:31 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * disable building of peops-video config
+
+Sun Apr 23 11:38:53 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add partial config file write/read to gpucfg (doesn't have fixes support yet)
+
+Sat Apr 22 23:22:49 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add the start of a peops-video reworking
+
+Sat Apr 22 23:21:08 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * save sound config on close
+
+Fri Apr 14 23:51:22 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * move plugins/sound to plugins/dfsound
+
+Fri Apr 14 23:50:28 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix segfault when a library changes between PCSX's startup and the loading of a CD
+
+Fri Apr 14 23:48:41 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * name tweaking on DFSound
+
+Fri Apr 14 23:31:39 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * update spu to use GTK2 with a new glade interface
+
+Fri Apr 14 22:54:37 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * cleanup binaries
+
+Fri Apr 14 22:47:35 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * reactivate autorepeat on dfinput PADclose
+
+Fri Apr 14 22:44:25 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix dfinput config program
+
+Fri Apr 14 22:14:12 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix dumbness in sound plugin that caused config file name to be prefixed with garbage
+
+Fri Apr 14 22:12:35 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * drop omnijoy
+
+Fri Apr 14 22:12:06 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * move padjoy to dfinput folder
+
+Fri Apr 14 22:11:07 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * move padjoy around and rename it to DFInput (Gamepad/Keyboard Input)
+
+Fri Apr 14 21:54:30 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add plugins which i apparently forgot about...
+
+Fri Apr 14 21:52:37 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add a tweaked padjoy, which will probably be the new default input; this one supports the keyboard and is gtk2
+
+Fri Apr 14 21:49:51 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * extend CheckPlugins testing and use it in more places; fixes segfault when a plugin symlink disappears
+
+Fri Apr 14 21:49:22 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix short path lengths for BiosDir and PluginsDir
+
+Fri Apr 14 14:46:31 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix nogui support
+
+Fri Apr 14 14:32:35 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * build mooby with debug
+
+Fri Apr 14 14:29:32 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * prevent segfault on Escape press in-game by forcing exit
+  This is a tragedy, but I see no way to restart the GUI without completely reworking PCSX
+  to use functions with actual return values (PCSX team sure loved void, even when the functions
+  can fail disastrously!). The explanation is in the source; basically the SysUpdate call
+  that catches Escape presses is deep within the emulation code itself, so it tries to StartGui
+  after closing the plugins and the psx core... then the emulation that was in progress tries to
+  continue, since it returns no indication of a stop!
+
+Fri Apr 14 14:29:03 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove some more path length limits
+
+Thu Apr  6 17:40:56 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  UNDO: remove redundant RunGui, SysRunGui functions for StartGui
+
+Thu Apr 13 19:17:56 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix save/load state functionality
+
+Wed Apr 12 21:00:11 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove files that shouldn't be in repo
+
+Wed Apr 12 20:57:46 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add AM_PO_SUBDIRS
+
+Wed Apr 12 20:49:01 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * docs and support files tinkering
+
+Wed Apr 12 20:17:01 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * update interface for PSX Input plugin
+
+Tue Apr 11 19:34:25 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * set window icon
+
+Tue Apr 11 19:23:52 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * move a bunch of files around in plugins/
+
+Tue Apr 11 19:22:55 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix segfault in PSX input, possibly breaking other things -- untested
+
+Tue Apr 11 16:02:45 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * heh, switch was more needed than i thought, revert that
+
+Tue Apr 11 15:57:16 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove unneeded switch to dotdir
+
+Tue Apr 11 15:56:51 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * some string fixes
+
+Tue Apr 11 15:54:44 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * make certain that plugin functions only happen when plugins are available, and prevent the emulator core from attempting to start without having all plugins loaded
+
+Fri Apr  7 17:41:33 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * choose default plugins if none are set when a new directory is scanned
+
+Thu Apr  6 17:40:56 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove redundant RunGui, SysRunGui functions for StartGui
+
+Thu Apr  6 17:37:40 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * autoconf bigendian check
+
+Thu Apr  6 17:24:50 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * merge Debian patch from Marcus Comstedt <marcus@mc.pp.se> to fix bigendian compiles
+
+Thu Apr  6 17:19:05 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * switch __MACOSX__ define to __BIGENDIAN__
+
+Tue Apr  4 06:24:39 EDT 2006  adb@iinet.net.au
+  * GStrings_and_MiscCleanups
+  Converted a number of C string utility functions to use the GLib string functions, miscellaneous clean ups of redundant code
+
+Fri Mar 24 05:24:14 EST 2006  adb@iinet.net.au
+  * BIOS_Path_and_CDROM_Plugin
+
+Sun Apr  2 13:35:39 EDT 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add new sound plugin, adapted from PEOpS OSS
+
+Tue Mar 28 15:19:34 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add plugins, some small changes in misc. places; plugins include a nicer omnijoy
+
+Wed Mar 22 16:17:10 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * autotools version note
+
+Wed Mar 22 16:11:37 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix manpage
+
+Sun Feb 26 14:33:38 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add keyboard accelerators for main interface
+
+Sat Jan 28 19:40:19 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * adjust main window size slightly
+
+Sun Jan 22 14:18:13 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add trivial autogen.sh script
+
+Sun Jan 22 14:14:39 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add support for instant autoconfiguration on first launch if plugins are available
+
+Sun Jan 22 14:13:37 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * split UpdatePluginsBIOS into two functions, one for GUI and one for not
+
+Sun Jan 22 14:12:40 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix splash install directory
+
+Sun Jan 22 13:51:03 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove some more Glade cruft
+
+Sun Jan 22 13:47:04 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * kill Glade in Makefile.am
+
+Sat Jan 21 18:29:22 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * beginnings of quiet autoconfiguration
+
+Sat Jan 21 18:28:31 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * build fix on non-x86 arches
+
+Sat Jan 21 05:09:54 EST 2006  adb@iinet.net.au
+  * Die-Glade-Generated-Code
+
+Fri Jan 20 23:31:02 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add desktop file
+
+Sun Jan 15 15:47:39 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * more woo for the po makefile :- )
+
+Wed Jan 11 20:56:41 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add a desktop file, add automagic for icons and desktop file
+
+Mon Jan  9 12:11:35 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add include/config.h.in *duh*
+
+Sun Jan  8 11:23:54 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add config.rpath to quiet an error in configure
+
+Sun Jan  8 11:03:04 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * minor changes to the style of the memcard dialog
+
+Sun Jan  8 10:52:14 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * merge fixes for patch conflicts
+
+Sun Jan  8 05:26:09 EST 2006  adb@iinet.net.au
+  * MemCards
+
+Sun Jan  8 02:53:13 EST 2006  adb@iinet.net.au
+  * Automake
+
+Sun Jan  8 02:31:03 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * replace crummy icon with more colorful one
+
+Sun Jan  8 02:10:12 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add fake rules to temp po/Makefile to stop senseless msgmerges
+
+Sun Jan  8 02:07:24 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add autoheader magic, cleanup autotools structure a little
+
+Sat Jan  7 02:14:42 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * fixes to automake/autoconf setup, update some docs
+
+Sat Jan  7 01:10:34 EST 2006  adb@iinet.net.au
+  * Automake2
+
+Fri Jan  6 21:20:47 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * automatically create default memcards during startup config
+
+Fri Jan  6 17:54:26 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add ScanPlugins to OnPluginsPath_Changed
+
+Thu Jan  5 22:38:30 EST 2006  adb@iinet.net.au
+  * Config
+
+Wed Jan  4 18:23:05 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add Swedish translation by Daniel Nylander <yeager@lidkoping.net> along with Makefile rules
+
+Tue Jan  3 19:55:34 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * slight tweak to icons, install the really ugly one only now
+
+Tue Jan  3 19:52:15 EST 2006  Ryan Schultz <schultz.ryan@gmail.com>
+  * add crappy preliminary icons and install rules for them
+
+Mon Jan  2 21:20:20 EST 2006  adb@iinet.net.au
+  * UseExistingDialogs
+
+Thu Dec 29 23:16:29 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * add little image to netplay dialog
+
+Thu Dec 29 23:12:02 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * add desktop file and associated install rules
+
+Thu Dec 29 23:05:56 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * add install/uninstall support to makefile
+
+Thu Dec 29 22:39:31 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * update some of the path variables to MAXPATHLEN
+
+Wed Dec 28 04:00:25 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * set current folder to home before calling file choosers
+
+Tue Dec 27 17:34:03 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix conflicts
+
+Tue Dec 27 17:15:17 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * try to get archives synced
+
+Tue Dec 27 17:09:43 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * touch up new configure, cpu, and net dialogs
+
+Tue Dec 27 17:14:19 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * merge fixes for PATCHConfDlg etc
+
+Mon Dec 26 18:11:48 EST 2005  adb@iinet.net.au
+  * PATCHConfDlgNetDlg
+
+Mon Dec 26 15:28:50 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove unnecessary signal
+
+Mon Dec 26 15:21:39 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * small modifications to CpuDlg patch
+
+Mon Dec 26 03:20:06 EST 2005  adb@iinet.net.au
+  * PATCHCpuDlg
+
+Sat Dec 24 01:19:32 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove window sensitivity switching, set children dialogs to die with parent
+
+Sat Dec 24 00:45:42 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * add broken symlink handling to scan code
+
+Fri Dec 23 23:38:26 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * make gtk2 check have teeth (error when not found)
+
+Fri Dec 23 23:15:04 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * pixmaps search change
+
+Fri Dec 23 23:12:51 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * add autoconf/makefile crossbreed... PCSX does not get along with automake
+
+Fri Dec 23 18:28:52 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix silly mistakes with file chooser
+
+Fri Dec 23 17:27:30 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * more glade updates
+
+Fri Dec 23 17:26:34 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * add new splash
+
+Fri Dec 23 16:07:44 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * more gui tweaking, move buttons around in glade
+
+Fri Dec 23 15:48:36 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * more cleanup, remove unneeded files and strings
+
+Fri Dec 23 15:08:34 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * update all file selectors to file choosers
+
+Fri Dec 23 14:33:07 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * modern GTK about dialog
+
+Fri Dec 23 13:24:08 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * revert CPU config dialog changes (the more advanced glade stuff)
+
+Fri Dec 23 12:46:08 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * completely rework how plugins are handled, initial commit, needs cleanup
+  The new plugin handling system uses symlinks to store plugins in ~/.pcsx/plugins, along with their config tools. This way, plugins can be in multiple directories. Config.PluginsDir is removed. The Plugins & BIOS configuring interface now has an option to choose the directory to scan. Much cleanup is needed, though, as FindPlugins vs ScanPlugins, etc. cruft abounds.
+
+Fri Dec 23 00:36:45 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * add start of unified makefile for plugins
+
+Fri Dec 23 00:21:04 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove some old/invalid docs
+
+Fri Dec 23 00:16:38 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * add stub README
+
+Fri Dec 23 00:14:41 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * add some common files (INSTALL, COPYING, AUTHORS, etc)
+
+Thu Dec 22 23:43:26 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * add file that were missed
+
+Thu Dec 22 23:21:29 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix NLS and gettext support!! WOO
+
+Thu Dec 22 23:20:36 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * some defines in the makefile for temporary prefix support
+
+Thu Dec 22 23:20:11 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove more
+
+Thu Dec 22 23:19:42 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove empty files
+
+Thu Dec 22 21:55:59 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * completely refactor directory layout, remove imaginary autotooling
+
+Thu Dec 22 21:37:49 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * more string cleanups, path to sane languages begins
+
+Thu Dec 22 21:14:32 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove broken lang support from base code
+
+Thu Dec 22 21:10:47 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove broken language support from GUI, GUI cleanup, fix pixmap location routine, revert pcsx.glade
+
+Thu Dec 22 20:28:29 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * turn off emuLog debug recording
+
+Thu Dec 22 20:24:21 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * incorporate free plugins into pcsx-df source
+  I think this is a good idea. It makes my life easier, for sure, and
+  will let me keep the PCSX-df modified plugins with pcsx-df.
+
+Thu Dec 22 11:53:46 EST 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * incorporate patches for file chooser, glade
+
+Sun Oct 16 16:30:40 EDT 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * change mind about splash, add install/uninstall routines
+
+Sun Oct 16 15:30:58 EDT 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * new splash screen, small changes towards release
+
+Sun Oct 16 14:37:30 EDT 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove dreamcast support, less retarded sed
+  I forgot to remove the sh4 dir for the Dreamcast. I also did the sed in the Makefile in a very dumb way. Small changelog update too.
+
+Sun Oct 16 14:19:09 EDT 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove hardcoded directories
+
+Sat Oct 15 22:16:32 EDT 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix dumb gcc4 mistake
+
+Sat Oct 15 21:17:48 EDT 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * gcc 4 compatibility!!
+  This patch adds gcc 4.0 compatibility at last! The fix was to mangle the lvalue casts into a form gcc would accept. It's ugly, but it works.
+  example:
+   (u8*)ptr = (u8*)(psxM + psxRu32(base));
+     becomes
+   *(u8*)&ptr = (u8*)(psxM + psxRu32(base));
+
+  gcc is perfectly fine with this. For now.
+  There are also some minor Makefile updates, removing gcc-3.4 specifics.
+
+Mon Oct  3 22:25:07 EDT 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * add slightly better install routine, temp hack until I reautotool
+
+Mon Oct  3 22:07:19 EDT 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * remove Gtk1 GUI code and support, rewrite makefiles and configure.in to use more user opts
+
+Sun Oct  2 21:26:31 EDT 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * fix potential crash (strcpy vs strncpy)
+
+Sun Oct  2 21:19:13 EDT 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * finish up dotfile support for everything but cfg
+  Dotfile support is now complete, except for running the cfg programs. This
+  is hardcoded into the plugins, and cannot be fixed in PCSX proper.
+
+Sun Oct  2 15:55:34 EDT 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * memcard note
+
+Sun Oct  2 14:18:40 EDT 2005  Ryan Schultz <schultz.ryan@gmail.com>
+  * intial revision
+
+From PCSX 1.6 beta

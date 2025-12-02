@@ -1,0 +1,24 @@
+Description:
+ldexp() function: multiply a 'double' by a power of 2.
+
+Files:
+m4/ldexp.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_LDEXP
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LDEXP_LIBM)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,26 @@
+Description:
+Decomposing variant of a normalization form.
+
+Files:
+lib/uninorm/decomposing-form.c
+lib/uninorm/normalize-internal.h
+
+Depends-on:
+uninorm/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.5], [uninorm/decomposing-form])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINORM_DECOMPOSING_FORM
+lib_SOURCES += uninorm/decomposing-form.c
+endif
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

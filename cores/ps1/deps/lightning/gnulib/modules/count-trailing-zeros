@@ -1,0 +1,23 @@
+Description:
+Counts the number of trailing 0-bits in a word.
+
+Files:
+lib/count-trailing-zeros.c
+lib/count-trailing-zeros.h
+
+Depends-on:
+extern-inline
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += count-trailing-zeros.c
+
+Include:
+"count-trailing-zeros.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

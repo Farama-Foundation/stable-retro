@@ -1,0 +1,28 @@
+Description:
+Test whether a Unicode character is "case ignorable".
+
+Files:
+lib/unictype/pr_case_ignorable.c
+lib/unictype/pr_case_ignorable.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-case-ignorable])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_CASE_IGNORABLE
+lib_SOURCES += unictype/pr_case_ignorable.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,25 @@
+Description:
+atan() function: inverse tangent function.
+
+Files:
+m4/atan.m4
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_ATAN
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ATAN_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

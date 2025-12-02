@@ -1,0 +1,34 @@
+Files:
+tests/test-mbsnrtoc32s-1.sh
+tests/test-mbsnrtoc32s-2.sh
+tests/test-mbsnrtoc32s-3.sh
+tests/test-mbsnrtoc32s-4.sh
+tests/test-mbsnrtoc32s.c
+tests/signature.h
+tests/macros.h
+m4/locale-fr.m4
+m4/locale-ja.m4
+m4/locale-zh.m4
+m4/codeset.m4
+
+Depends-on:
+mbrtoc32
+mbsinit
+c32tob
+setlocale
+
+configure.ac:
+gt_LOCALE_FR
+gt_LOCALE_FR_UTF8
+gt_LOCALE_JA
+gt_LOCALE_ZH_CN
+
+Makefile.am:
+TESTS += test-mbsnrtoc32s-1.sh test-mbsnrtoc32s-2.sh test-mbsnrtoc32s-3.sh test-mbsnrtoc32s-4.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-mbsnrtoc32s
+test_mbsnrtoc32s_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)

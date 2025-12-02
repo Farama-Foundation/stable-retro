@@ -1,0 +1,29 @@
+@node hypotl
+@section @code{hypotl}
+@findex hypotl
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/hypotl.html}
+
+Gnulib module: hypotl or hypotl-ieee
+
+Portability problems fixed by either Gnulib module @code{hypotl} or @code{hypotl-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 9, Cygwin 1.7.x, MSVC 14, Android 4.4.
+@item
+This function produces very imprecise results on some platforms:
+NetBSD 9.0, OpenBSD 5.1/SPARC.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{hypotl-ieee}:
+@itemize
+@item
+When the arguments are mixed NaN and Infinity, this function returns a wrong
+value on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

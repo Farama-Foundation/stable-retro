@@ -1,0 +1,19 @@
+Files:
+tests/test-sys_stat-c++.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-sys_stat-c++
+check_PROGRAMS += test-sys_stat-c++
+test_sys_stat_c___SOURCES = test-sys_stat-c++.cc
+test_sys_stat_c___LDADD = $(LDADD) $(LIBINTL) $(LIB_CLOCK_GETTIME)
+endif

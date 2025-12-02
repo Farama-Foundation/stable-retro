@@ -1,0 +1,20 @@
+@node link.h
+@section @file{link.h}
+
+Defines the type @code{struct dl_phdr_info}, and declares the function
+@code{dl_iterate_phdr}.
+
+Documentation: ---
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+macOS 11.1, AIX 7.1, HP-UX 11.31, IRIX 6.5, Cygwin 2.9.0, mingw, MSVC 14.
+@end itemize

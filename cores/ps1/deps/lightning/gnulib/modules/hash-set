@@ -1,0 +1,29 @@
+Description:
+Set data type implemented by a hash table.
+
+Files:
+lib/gl_hash_set.h
+lib/gl_hash_set.c
+lib/gl_anyhash1.h
+lib/gl_anyhash2.h
+lib/gl_anyhash_primes.h
+
+Depends-on:
+set
+stdint
+xsize
+c99
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_hash_set.h gl_hash_set.c gl_anyhash1.h gl_anyhash2.h gl_anyhash_primes.h
+
+Include:
+"gl_hash_set.h"
+
+License:
+GPL
+
+Maintainer:
+all

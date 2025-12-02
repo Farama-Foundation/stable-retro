@@ -1,0 +1,26 @@
+Description:
+Abstract set data type, with out-of-memory checking.
+
+Files:
+lib/gl_xset.h
+lib/gl_xset.c
+
+Depends-on:
+set
+extern-inline
+stdbool
+xalloc-die
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_xset.h gl_xset.c
+
+Include:
+"gl_xset.h"
+
+License:
+GPL
+
+Maintainer:
+all

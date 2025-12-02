@@ -1,0 +1,22 @@
+Description:
+Compute the difference between two sequences.
+
+Files:
+lib/diffseq.h
+
+Depends-on:
+c99
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += diffseq.h
+
+Include:
+"diffseq.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert

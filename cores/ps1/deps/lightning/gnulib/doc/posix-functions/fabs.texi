@@ -1,0 +1,15 @@
+@node fabs
+@section @code{fabs}
+@findex fabs
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fabs.html}
+
+Gnulib module: fabs
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

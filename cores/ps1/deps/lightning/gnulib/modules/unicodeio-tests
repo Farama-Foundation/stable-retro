@@ -1,0 +1,21 @@
+Files:
+tests/test-unicodeio1.sh
+tests/test-unicodeio2.sh
+tests/test-unicodeio3.sh
+tests/test-unicodeio.c
+tests/macros.h
+m4/locale-fr.m4
+m4/locale-zh.m4
+m4/codeset.m4
+
+Depends-on:
+setlocale
+
+configure.ac:
+gt_LOCALE_FR_UTF8
+gt_LOCALE_ZH_CN
+
+Makefile.am:
+TESTS += test-unicodeio1.sh test-unicodeio2.sh test-unicodeio3.sh
+check_PROGRAMS += test-unicodeio
+test_unicodeio_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBUNISTRING) $(LIBICONV) $(LIBINTL)

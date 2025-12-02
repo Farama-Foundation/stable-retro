@@ -1,0 +1,29 @@
+@node mount
+@subsection @code{mount}
+@findex mount
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Mount-Unmount-Remount,,Mount Unmount Remount,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Mount_002dUnmount_002dRemount.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/mount.2.html,,man mount}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@end itemize

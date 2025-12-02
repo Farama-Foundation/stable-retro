@@ -1,0 +1,18 @@
+@node string.h
+@section @file{string.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/string.h.html}
+
+Gnulib module: string
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+Some platforms provide a @code{NULL} macro that cannot be used in arbitrary
+expressions:
+NetBSD 5.0
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

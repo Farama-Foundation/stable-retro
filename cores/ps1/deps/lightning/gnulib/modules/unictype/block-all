@@ -1,0 +1,22 @@
+Description:
+Complete API for blocks of Unicode characters.
+
+Files:
+
+Depends-on:
+unictype/block-of
+unictype/block-test
+unictype/block-list
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

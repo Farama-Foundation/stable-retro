@@ -20,6 +20,7 @@ Currently added games on top of gym-retro:
 *	Virtua Fighter 2 - Genesis
 *	Virtua Fighter 2 - Saturn
 *	Mortal Kombat 1 - Sega CD
+* 	Metal SlugX - Playstation 1
 
 PvP games that support two models fighting each other:
 *	Samurai Showdown - Genesis
@@ -47,6 +48,8 @@ As well as additional states on already integrated games.
  	- 32x (via Picodrive)
   	- Saturn (via Beetle Saturn)
   	- Sega CD (via Genesis Plus GX)
+- Sony
+	- Playstation 1 (via pcsx_rearmed)
 
 **Experimental** (accessible in the fbneo branch)
 - Arcade Machines:

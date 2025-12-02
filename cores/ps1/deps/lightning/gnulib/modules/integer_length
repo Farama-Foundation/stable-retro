@@ -1,0 +1,26 @@
+Description:
+Finds the most significant bit in an 'unsigned int'.
+
+Files:
+lib/integer_length.h
+lib/integer_length.c
+lib/float+.h
+m4/exponentd.m4
+
+Depends-on:
+float
+
+configure.ac:
+AC_REQUIRE([gl_DOUBLE_EXPONENT_LOCATION])
+
+Makefile.am:
+lib_SOURCES += integer_length.c
+
+Include:
+"integer_length.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

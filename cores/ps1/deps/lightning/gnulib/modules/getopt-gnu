@@ -1,0 +1,26 @@
+Description:
+GNU-like getopt() function, getopt_long() function, getopt_long_only() function:
+process command line arguments.
+
+Files:
+
+Depends-on:
+nocrash
+getopt-posix
+
+configure.ac:
+gl_FUNC_GETOPT_GNU
+dnl Because of the way gl_FUNC_GETOPT_GNU is implemented (the gl_getopt_required
+dnl mechanism), there is no need to do any AC_LIBOBJ or AC_SUBST here; they are
+dnl done in the getopt-posix module.
+
+Makefile.am:
+
+Include:
+<getopt.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

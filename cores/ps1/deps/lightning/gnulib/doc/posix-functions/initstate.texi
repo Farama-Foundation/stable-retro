@@ -1,0 +1,28 @@
+@node initstate
+@section @code{initstate}
+@findex initstate
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/initstate.html}
+
+Gnulib module: random
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14, Android 4.4.
+@item
+This function is not declared on some platforms:
+Cygwin 1.5.25.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The first parameter is @code{unsigned long} instead of @code{unsigned int} on
+some platforms:
+MidnightBSD 2.0.
+@item
+The third parameter is @code{long} instead of @code{size_t} on some platforms:
+MidnightBSD 2.0.
+@end itemize

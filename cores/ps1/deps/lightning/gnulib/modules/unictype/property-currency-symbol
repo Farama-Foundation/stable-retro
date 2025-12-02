@@ -1,0 +1,30 @@
+Description:
+Test whether a Unicode character is "currency symbol".
+
+Files:
+lib/unictype/pr_currency_symbol.c
+lib/unictype/pr_currency_symbol.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+unictype/category-test
+unictype/category-Sc
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-currency-symbol])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_CURRENCY_SYMBOL
+lib_SOURCES += unictype/pr_currency_symbol.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

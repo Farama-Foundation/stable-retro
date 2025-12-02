@@ -1,0 +1,13 @@
+Files:
+tests/test-get-rusage-data.c
+tests/macros.h
+m4/musl.m4
+
+Depends-on:
+
+configure.ac:
+gl_MUSL_LIBC
+
+Makefile.am:
+TESTS += test-get-rusage-data
+check_PROGRAMS += test-get-rusage-data

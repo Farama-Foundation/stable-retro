@@ -1,0 +1,13 @@
+Files:
+tests/unistr/test-u16-uctomb.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-uctomb
+check_PROGRAMS += test-u16-uctomb
+test_u16_uctomb_SOURCES = unistr/test-u16-uctomb.c
+test_u16_uctomb_LDADD = $(LDADD) $(LIBUNISTRING)

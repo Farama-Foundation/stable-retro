@@ -1,0 +1,38 @@
+Description:
+signbit() macro: Determine the sign bit of a floating-point number.
+
+Files:
+lib/signbitf.c
+lib/signbitd.c
+lib/signbitl.c
+lib/float+.h
+m4/signbit.m4
+
+Depends-on:
+math
+float           [test $REPLACE_SIGNBIT = 1]
+isnanf-nolibm   [test $REPLACE_SIGNBIT = 1]
+isnand-nolibm   [test $REPLACE_SIGNBIT = 1]
+isnanl-nolibm   [test $REPLACE_SIGNBIT = 1]
+fpieee          [test $REPLACE_SIGNBIT = 1]
+memcmp          [test $REPLACE_SIGNBIT = 1]
+
+configure.ac:
+gl_SIGNBIT
+if test $REPLACE_SIGNBIT = 1; then
+  AC_LIBOBJ([signbitf])
+  AC_LIBOBJ([signbitd])
+  AC_LIBOBJ([signbitl])
+fi
+gl_MATH_MODULE_INDICATOR([signbit])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

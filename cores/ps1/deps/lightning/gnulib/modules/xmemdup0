@@ -1,0 +1,23 @@
+Description:
+Copy a block of arbitrary bytes, and append a trailing NUL.
+
+Files:
+lib/xmemdup0.h
+lib/xmemdup0.c
+
+Depends-on:
+xalloc
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += xmemdup0.h xmemdup0.c
+
+Include:
+"xmemdup0.h"
+
+License:
+GPL
+
+Maintainer:
+Eric Blake

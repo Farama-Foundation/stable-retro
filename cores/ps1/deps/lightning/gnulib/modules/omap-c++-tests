@@ -1,0 +1,17 @@
+Files:
+tests/test-omap-c++.cc
+tests/macros.h
+
+Depends-on:
+ansi-c++-opt
+array-omap
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-omap-c++
+check_PROGRAMS += test-omap-c++
+test_omap_c___SOURCES = test-omap-c++.cc
+test_omap_c___LDADD = $(LDADD) @LIBINTL@
+endif

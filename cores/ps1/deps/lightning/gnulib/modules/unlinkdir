@@ -1,0 +1,27 @@
+Description:
+Determine whether we can unlink directories.
+
+Files:
+lib/unlinkdir.h
+lib/unlinkdir.c
+m4/unlinkdir.m4
+
+Depends-on:
+stdbool
+priv-set
+root-uid
+
+configure.ac:
+gl_UNLINKDIR
+
+Makefile.am:
+lib_SOURCES += unlinkdir.c
+
+Include:
+"unlinkdir.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

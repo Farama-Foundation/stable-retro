@@ -1,0 +1,17 @@
+Files:
+tests/test-sys_types-c++.cc
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-sys_types-c++
+check_PROGRAMS += test-sys_types-c++
+test_sys_types_c___SOURCES = test-sys_types-c++.cc
+endif

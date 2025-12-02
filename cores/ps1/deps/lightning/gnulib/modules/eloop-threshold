@@ -1,0 +1,22 @@
+Description:
+Threshold for symbolic link loops and ELOOP
+
+Files:
+lib/eloop-threshold.h
+
+Depends-on:
+minmax
+unistd
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<eloop-threshold.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

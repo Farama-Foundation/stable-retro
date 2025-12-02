@@ -1,0 +1,24 @@
+Description:
+Safe automatic memory allocation with out of memory checking.
+
+Files:
+lib/xmalloca.h
+lib/xmalloca.c
+
+Depends-on:
+malloca
+xalloc
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += xmalloca.c
+
+Include:
+"xmalloca.h"
+
+License:
+GPL
+
+Maintainer:
+all

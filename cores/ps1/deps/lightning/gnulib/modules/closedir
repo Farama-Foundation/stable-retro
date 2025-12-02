@@ -1,0 +1,29 @@
+Description:
+closedir() function: stop reading the entries of a directory
+
+Files:
+lib/closedir.c
+lib/dirent-private.h
+m4/closedir.m4
+
+Depends-on:
+dirent
+dirfd           [test $HAVE_CLOSEDIR = 0 || test $REPLACE_CLOSEDIR = 1]
+
+configure.ac:
+gl_FUNC_CLOSEDIR
+if test $HAVE_CLOSEDIR = 0 || test $REPLACE_CLOSEDIR = 1; then
+  AC_LIBOBJ([closedir])
+fi
+gl_DIRENT_MODULE_INDICATOR([closedir])
+
+Makefile.am:
+
+Include:
+<dirent.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

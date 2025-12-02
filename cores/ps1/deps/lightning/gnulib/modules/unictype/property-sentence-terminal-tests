@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_sentence_terminal.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_sentence_terminal
+check_PROGRAMS += test-pr_sentence_terminal
+test_pr_sentence_terminal_SOURCES = unictype/test-pr_sentence_terminal.c
+test_pr_sentence_terminal_LDADD = $(LDADD) $(LIBUNISTRING)

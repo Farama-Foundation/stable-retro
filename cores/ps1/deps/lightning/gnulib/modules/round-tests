@@ -1,0 +1,22 @@
+Files:
+tests/test-round1.c
+tests/test-round2.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+isnand-nolibm
+stdbool
+stdint
+verify
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-round1 test-round2
+check_PROGRAMS += test-round1 test-round2
+test_round1_LDADD = $(LDADD) @ROUND_LIBM@
+test_round2_LDADD = $(LDADD) @ROUND_LIBM@

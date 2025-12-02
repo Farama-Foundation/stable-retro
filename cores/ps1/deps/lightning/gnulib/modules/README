@@ -1,0 +1,15 @@
+This directory contains metainformation about the gnulib modules, one or two
+files per module. These files are used by gnulib-tool.
+
+For every module,
+  - the file <module> is the metainformation about the library code of the
+    module,
+  - the file <module>-tests is the metainformation about the unit test of
+    the module (optional but recommended).
+
+All the files in this directory are distributed under the following copyright:
+
+  Copyright (C) 2002-2021 Free Software Foundation, Inc.
+  Copying and distribution of this file, with or without modification,
+  in any medium, are permitted without royalty provided the copyright
+  notice and this notice are preserved.

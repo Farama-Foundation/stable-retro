@@ -1,0 +1,12 @@
+Files:
+tests/test-pthread.c
+
+Depends-on:
+verify
+pthread-h-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pthread
+check_PROGRAMS += test-pthread

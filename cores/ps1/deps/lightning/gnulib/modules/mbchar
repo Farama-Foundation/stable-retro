@@ -1,0 +1,37 @@
+Description:
+Multibyte character data type.
+
+Files:
+lib/mbchar.h
+lib/mbchar.c
+m4/mbchar.m4
+
+Depends-on:
+extensions
+extern-inline
+stdbool
+wchar
+wctype-h
+iswblank
+iswdigit
+iswxdigit
+wcwidth
+memcmp
+
+configure.ac:
+gl_MBCHAR
+
+Makefile.am:
+lib_SOURCES += mbchar.c
+
+Include:
+"mbchar.h"
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,35 @@
+Description:
+exp2() function: exponential base 2 function.
+
+Files:
+lib/exp2.c
+m4/exp2.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+isnand          [test $HAVE_EXP2 = 0 || test $REPLACE_EXP2 = 1]
+round           [test $HAVE_EXP2 = 0 || test $REPLACE_EXP2 = 1]
+ldexp           [test $HAVE_EXP2 = 0 || test $REPLACE_EXP2 = 1]
+
+configure.ac:
+gl_FUNC_EXP2
+if test $HAVE_EXP2 = 0 || test $REPLACE_EXP2 = 1; then
+  AC_LIBOBJ([exp2])
+fi
+gl_MATH_MODULE_INDICATOR([exp2])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(EXP2_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

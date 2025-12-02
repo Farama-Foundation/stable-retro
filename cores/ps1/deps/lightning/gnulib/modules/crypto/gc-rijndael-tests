@@ -1,0 +1,11 @@
+Files:
+tests/test-gc-rijndael.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-gc-rijndael
+check_PROGRAMS += test-gc-rijndael
+test_gc_rijndael_LDADD = $(LDADD) @LIB_CRYPTO@

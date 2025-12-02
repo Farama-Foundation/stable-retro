@@ -1,0 +1,35 @@
+Description:
+select() function: synchronous I/O multiplexing.
+
+Files:
+lib/select.c
+m4/select.m4
+
+Depends-on:
+sys_select
+alloca          [test $REPLACE_SELECT = 1]
+dup2            [test $REPLACE_SELECT = 1]
+sockets         [test $REPLACE_SELECT = 1]
+sys_time        [test $REPLACE_SELECT = 1]
+msvc-nothrow    [test $REPLACE_SELECT = 1]
+
+configure.ac:
+gl_FUNC_SELECT
+if test $REPLACE_SELECT = 1; then
+  AC_LIBOBJ([select])
+fi
+gl_SYS_SELECT_MODULE_INDICATOR([select])
+
+Makefile.am:
+
+Include:
+<sys/select.h>
+
+Link:
+$(LIB_SELECT)
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

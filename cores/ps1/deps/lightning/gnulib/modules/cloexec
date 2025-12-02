@@ -1,0 +1,26 @@
+Description:
+Set or clear the close-on-exec descriptor flag.
+
+Files:
+lib/cloexec.c
+lib/cloexec.h
+
+Depends-on:
+dup2
+fcntl
+stdbool
+
+configure.ac:
+gl_MODULE_INDICATOR_FOR_TESTS([cloexec])
+
+Makefile.am:
+lib_SOURCES += cloexec.c
+
+Include:
+"cloexec.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering, Eric Blake

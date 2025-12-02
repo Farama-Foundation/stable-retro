@@ -1,0 +1,28 @@
+Description:
+Helper program for setting the owner of the slave side of a pseudo-terminal.
+
+Files:
+lib/pt_chown.c
+lib/pty-private.h
+
+Depends-on:
+ptsname
+root-uid
+stdlib
+configmake
+stat
+
+configure.ac:
+
+Makefile.am:
+# TODO: Add rules for installing as setuid root (chown root, chmod a=rx,u+s).
+pkglibexec_PROGRAMS = pt_chown
+pt_chown_LDADD = libgnu.a
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+glibc

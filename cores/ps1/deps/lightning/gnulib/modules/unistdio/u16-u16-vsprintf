@@ -1,0 +1,29 @@
+Description:
+Formatted output to an UTF-16 string.
+
+Files:
+lib/unistdio/u16-u16-vsprintf.c
+lib/unistdio/u-vsprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/u16-u16-vasnprintf
+stdint
+errno
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistdio/u16-u16-vsprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_U16_U16_VSPRINTF
+lib_SOURCES += unistdio/u16-u16-vsprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

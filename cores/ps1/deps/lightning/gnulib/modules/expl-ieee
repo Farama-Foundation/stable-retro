@@ -1,0 +1,24 @@
+Description:
+expl() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+expl
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(EXPL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

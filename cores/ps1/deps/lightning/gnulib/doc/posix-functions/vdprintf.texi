@@ -1,0 +1,62 @@
+@node vdprintf
+@section @code{vdprintf}
+@findex vdprintf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/vdprintf.html}
+
+Gnulib module: vdprintf or vdprintf-posix
+
+Portability problems fixed by either Gnulib module @code{vdprintf} or @code{vdprintf-posix}:
+@itemize
+@item
+This function is missing on some platforms:
+Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.3, Cygwin 1.5.x, mingw, MSVC 14.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{vdprintf-posix}:
+@itemize
+@item
+printf @code{"%f"}, @code{"%e"}, @code{"%g"} of Infinity and NaN yields an
+incorrect result on some platforms:
+Solaris 11.4.
+@item
+This function does not support the @samp{a} and @samp{A} directives on some
+platforms:
+glibc-2.3.6, Solaris 11.4.
+@item
+This function does not support the @samp{n} directive on some platforms:
+glibc when used with @code{_FORTIFY_SOURCE >= 2} (set by default on Ubuntu),
+macOS 11.1.
+@item
+This function does not support precisions in the @samp{ls} directive correctly
+on some platforms:
+Solaris 11.4.
+@item
+printf @code{"%010f"} of NaN and Infinity yields an incorrect result (padded
+with zeroes, or wrong capitalization) on some platforms:
+Solaris 11.4.
+@item
+This function does not support precisions larger than 512 or 1024 in integer,
+floating-point and pointer output on some platforms:
+AIX 7.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The @code{%m} directive is not portable, use @code{%s} mapped to an
+argument of @code{strerror(errno)} (or a version of @code{strerror_r})
+instead.
+@item
+Formatting noncanonical @samp{long double} numbers produces
+nonmeaningful results on some platforms:
+glibc and others, on x86, x86_64, IA-64 CPUs.
+@item
+When formatting an integer with grouping flag, this function inserts thousands
+separators even in the "C" locale on some platforms:
+NetBSD 5.1.
+@item
+On some platforms, this function does not set @code{errno} or the
+stream error indicator on attempts to write to a read-only stream:
+Cygwin 1.7.9.
+@end itemize

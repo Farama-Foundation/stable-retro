@@ -1,0 +1,27 @@
+Description:
+Function declaration macros with C++ support.
+
+Applicability:
+all
+
+Files:
+lib/c++defs.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+# Because this Makefile snippet defines a variable used by other
+# gnulib Makefile snippets, it must be present in all makefiles that
+# need it. This is ensured by the applicability 'all' defined above.
+
+CXXDEFS_H=$(srcdir)/c++defs.h
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

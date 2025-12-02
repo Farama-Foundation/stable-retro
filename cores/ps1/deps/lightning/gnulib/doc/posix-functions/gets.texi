@@ -1,0 +1,28 @@
+@node gets
+@section @code{gets}
+@findex gets
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/gets.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function should never be used, because it can overflow any given buffer.
+@item
+This function is missing on some platforms:
+OpenBSD 6.7, Solaris 11.4.
+@item
+When reading from a non-blocking pipe whose buffer is empty, this function
+fails with @code{errno} being set to @code{EINVAL} instead of @code{EAGAIN} on
+some platforms:
+mingw, MSVC 14.
+@item
+On Windows platforms (excluding Cygwin), this function does not set @code{errno}
+upon failure.
+@end itemize

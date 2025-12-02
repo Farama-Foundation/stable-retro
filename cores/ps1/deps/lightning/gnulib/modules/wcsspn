@@ -1,0 +1,35 @@
+Description:
+wcsspn() function: advance in a wide string, skipping any of a set of wide characters.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+lib/wcsspn.c
+lib/wcsspn-impl.h
+m4/wcsspn.m4
+
+Depends-on:
+wchar
+wcschr          [test $HAVE_WCSSPN = 0]
+
+configure.ac:
+gl_FUNC_WCSSPN
+if test $HAVE_WCSSPN = 0; then
+  AC_LIBOBJ([wcsspn])
+fi
+gl_WCHAR_MODULE_INDICATOR([wcsspn])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPL
+
+Maintainer:
+all

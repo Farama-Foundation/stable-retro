@@ -1,0 +1,35 @@
+Description:
+strsignal() function: return string describing signal.
+
+Files:
+lib/strsignal.c
+lib/siglist.h
+m4/strsignal.m4
+
+Depends-on:
+string
+extensions
+gettext-h       [test $HAVE_STRSIGNAL = 0 || test $REPLACE_STRSIGNAL = 1]
+lock            [test $HAVE_STRSIGNAL = 0 || test $REPLACE_STRSIGNAL = 1]
+tls             [test $HAVE_STRSIGNAL = 0 || test $REPLACE_STRSIGNAL = 1]
+snprintf        [test $HAVE_STRSIGNAL = 0 || test $REPLACE_STRSIGNAL = 1]
+memset          [test $HAVE_STRSIGNAL = 0 || test $REPLACE_STRSIGNAL = 1]
+
+configure.ac:
+gl_FUNC_STRSIGNAL
+if test $HAVE_STRSIGNAL = 0 || test $REPLACE_STRSIGNAL = 1; then
+  AC_LIBOBJ([strsignal])
+  gl_PREREQ_STRSIGNAL
+fi
+gl_STRING_MODULE_INDICATOR([strsignal])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Colin Watson, glibc

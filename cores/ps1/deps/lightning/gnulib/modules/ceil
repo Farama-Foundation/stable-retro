@@ -1,0 +1,31 @@
+Description:
+ceil() function: round towards positive infinity.
+
+Files:
+lib/ceil.c
+m4/ceil.m4
+
+Depends-on:
+math
+float           [test $REPLACE_CEIL = 1]
+
+configure.ac:
+gl_FUNC_CEIL
+if test $REPLACE_CEIL = 1; then
+  AC_LIBOBJ([ceil])
+fi
+gl_MATH_MODULE_INDICATOR([ceil])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(CEIL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

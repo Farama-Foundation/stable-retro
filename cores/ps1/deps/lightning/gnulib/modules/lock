@@ -1,0 +1,35 @@
+Description:
+Locking in multithreaded situations.
+
+Files:
+lib/glthread/lock.h
+lib/glthread/lock.c
+m4/lock.m4
+m4/pthread_rwlock_rdlock.m4
+
+Depends-on:
+extensions
+threadlib
+windows-mutex    [test $gl_threads_api = windows]
+windows-rwlock   [test $gl_threads_api = windows]
+windows-recmutex [test $gl_threads_api = windows]
+windows-once     [test $gl_threads_api = windows]
+
+configure.ac:
+gl_LOCK
+gl_MODULE_INDICATOR([lock])
+
+Makefile.am:
+lib_SOURCES += glthread/lock.h glthread/lock.c
+
+Include:
+"glthread/lock.h"
+
+Link:
+$(LIBTHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

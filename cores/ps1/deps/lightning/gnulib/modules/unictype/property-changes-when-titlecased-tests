@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_changes_when_titlecased.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_changes_when_titlecased
+check_PROGRAMS += test-pr_changes_when_titlecased
+test_pr_changes_when_titlecased_SOURCES = unictype/test-pr_changes_when_titlecased.c
+test_pr_changes_when_titlecased_LDADD = $(LDADD) $(LIBUNISTRING)

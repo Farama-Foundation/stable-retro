@@ -1,0 +1,19 @@
+Files:
+tests/test-log2-ieee.c
+tests/test-log2-ieee.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnand-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-log2-ieee
+check_PROGRAMS += test-log2-ieee
+test_log2_ieee_LDADD = $(LDADD) @LOG2_LIBM@

@@ -1,0 +1,18 @@
+@node xdr_array
+@subsection @code{xdr_array}
+@findex xdr_array
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/xdr_array.3.html,,man xdr_array}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, Cygwin 1.7.4, mingw, MSVC 14, Android 9.0.
+@end itemize

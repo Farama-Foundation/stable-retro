@@ -1,0 +1,25 @@
+Description:
+Set access control list of a file by specifying a mode.  (Unportable.)
+
+Files:
+lib/qset-acl.c
+
+Depends-on:
+acl-permissions
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += qset-acl.c
+
+Include:
+"acl.h"
+
+Link:
+$(LIB_ACL)
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

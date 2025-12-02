@@ -1,0 +1,29 @@
+Description:
+log1pl() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/log1pl-ieee.m4
+m4/minus-zero.m4
+m4/signbit.m4
+
+Depends-on:
+log1pl
+fpieee
+log1p-ieee      [{ test $HAVE_LOG1PL = 0 || test $REPLACE_LOG1PL = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+
+configure.ac:
+gl_FUNC_LOG1PL_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOG1PL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

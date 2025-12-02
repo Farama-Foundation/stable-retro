@@ -1,0 +1,25 @@
+Description:
+Java CLASSPATH handling.
+
+Files:
+lib/classpath.h
+lib/classpath.c
+
+Depends-on:
+stdbool
+xsetenv
+xalloc
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += classpath.h classpath.c
+
+Include:
+"classpath.h"
+
+License:
+GPL
+
+Maintainer:
+all

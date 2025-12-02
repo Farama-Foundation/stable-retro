@@ -1,0 +1,2178 @@
+@node Overview
+@chapter Overview
+
+A @dfn{regular expression} (or @dfn{regexp}, or @dfn{pattern}) is a text
+string that describes some (mathematical) set of strings.  A regexp
+@var{r} @dfn{matches} a string @var{s} if @var{s} is in the set of
+strings described by @var{r}.
+
+Using the Regex library, you can:
+
+@itemize @bullet
+
+@item
+see if a string matches a specified pattern as a whole, and
+
+@item
+search within a string for a substring matching a specified pattern.
+
+@end itemize
+
+Some regular expressions match only one string, i.e., the set they
+describe has only one member.  For example, the regular expression
+@samp{foo} matches the string @samp{foo} and no others.  Other regular
+expressions match more than one string, i.e., the set they describe has
+more than one member.  For example, the regular expression @samp{f*}
+matches the set of strings made up of any number (including zero) of
+@samp{f}s.  As you can see, some characters in regular expressions match
+themselves (such as @samp{f}) and some don't (such as @samp{*}); the
+ones that don't match themselves instead let you specify patterns that
+describe many different strings.
+
+To either match or search for a regular expression with the Regex
+library functions, you must first compile it with a Regex pattern
+compiling function.  A @dfn{compiled pattern} is a regular expression
+converted to the internal format used by the library functions.  Once
+you've compiled a pattern, you can use it for matching or searching any
+number of times.
+
+The Regex library is used by including @file{regex.h}.
+@pindex regex.h
+Regex provides three groups of functions with which you can operate on
+regular expressions.  One group---the GNU group---is more
+powerful but not completely compatible with the other two, namely the
+POSIX and Berkeley Unix groups; its interface was designed
+specifically for GNU.
+
+We wrote this chapter with programmers in mind, not users of
+programs---such as Emacs---that use Regex.  We describe the Regex
+library in its entirety, not how to write regular expressions that a
+particular program understands.
+
+
+@node Regular Expression Syntax
+@chapter Regular Expression Syntax
+
+@cindex regular expressions, syntax of
+@cindex syntax of regular expressions
+
+@dfn{Characters} are things you can type.  @dfn{Operators} are things in
+a regular expression that match one or more characters.  You compose
+regular expressions from operators, which in turn you specify using one
+or more characters.
+
+Most characters represent what we call the match-self operator, i.e.,
+they match themselves; we call these characters @dfn{ordinary}.  Other
+characters represent either all or parts of fancier operators; e.g.,
+@samp{.} represents what we call the match-any-character operator
+(which, no surprise, matches (almost) any character); we call these
+characters @dfn{special}.  Two different things determine what
+characters represent what operators:
+
+@enumerate
+@item
+the regular expression syntax your program has told the Regex library to
+recognize, and
+
+@item
+the context of the character in the regular expression.
+@end enumerate
+
+In the following sections, we describe these things in more detail.
+
+@menu
+* Syntax Bits::
+* Predefined Syntaxes::
+* Collating Elements vs. Characters::
+* The Backslash Character::
+@end menu
+
+
+@node Syntax Bits
+@section Syntax Bits
+
+@cindex syntax bits
+
+In any particular syntax for regular expressions, some characters are
+always special, others are sometimes special, and others are never
+special.  The particular syntax that Regex recognizes for a given
+regular expression depends on the current syntax (as set by
+@code{re_set_syntax}) when the pattern buffer of that regular expression
+was compiled.
+
+You get a pattern buffer by compiling a regular expression.  @xref{GNU
+Pattern Buffers}, for more information on pattern buffers.  @xref{GNU
+Regular Expression Compiling}, and @ref{BSD Regular Expression
+Compiling}, for more information on compiling.
+
+Regex considers the current syntax to be a collection of bits; we refer
+to these bits as @dfn{syntax bits}.  In most cases, they affect what
+characters represent what operators.  We describe the meanings of the
+operators to which we refer in @ref{Common Operators}, @ref{GNU
+Operators}, and @ref{GNU Emacs Operators}.
+
+For reference, here is the complete list of syntax bits, in alphabetical
+order:
+
+@table @code
+
+@cnindex RE_BACKSLASH_ESCAPE_IN_LIST
+@item RE_BACKSLASH_ESCAPE_IN_LISTS
+If this bit is set, then @samp{\} inside a list (@pxref{List Operators}
+quotes (makes ordinary, if it's special) the following character; if
+this bit isn't set, then @samp{\} is an ordinary character inside lists.
+(@xref{The Backslash Character}, for what @samp{\} does outside of lists.)
+
+@cnindex RE_BK_PLUS_QM
+@item RE_BK_PLUS_QM
+If this bit is set, then @samp{\+} represents the match-one-or-more
+operator and @samp{\?} represents the match-zero-or-more operator; if
+this bit isn't set, then @samp{+} represents the match-one-or-more
+operator and @samp{?} represents the match-zero-or-one operator.  This
+bit is irrelevant if @code{RE_LIMITED_OPS} is set.
+
+@cnindex RE_CHAR_CLASSES
+@item RE_CHAR_CLASSES
+If this bit is set, then you can use character classes in lists; if this
+bit isn't set, then you can't.
+
+@cnindex RE_CONTEXT_INDEP_ANCHORS
+@item RE_CONTEXT_INDEP_ANCHORS
+If this bit is set, then @samp{^} and @samp{$} are special anywhere outside
+a list; if this bit isn't set, then these characters are special only in
+certain contexts.  @xref{Match-beginning-of-line Operator}, and
+@ref{Match-end-of-line Operator}.
+
+@cnindex RE_CONTEXT_INDEP_OPS
+@item RE_CONTEXT_INDEP_OPS
+If this bit is set, then certain characters are special anywhere outside
+a list; if this bit isn't set, then those characters are special only in
+some contexts and are ordinary elsewhere.  Specifically, if this bit
+isn't set then @samp{*}, and (if the syntax bit @code{RE_LIMITED_OPS}
+isn't set) @samp{+} and @samp{?} (or @samp{\+} and @samp{\?}, depending
+on the syntax bit @code{RE_BK_PLUS_QM}) represent repetition operators
+only if they're not first in a regular expression or just after an
+open-group or alternation operator.  The same holds for @samp{@{} (or
+@samp{\@{}, depending on the syntax bit @code{RE_NO_BK_BRACES}) if
+it is the beginning of a valid interval and the syntax bit
+@code{RE_INTERVALS} is set.
+
+@cnindex RE_CONTEXT_INVALID_DUP
+@item RE_CONTEXT_INVALID_DUP
+If this bit is set, then an open-interval operator cannot occur at the
+start of a regular expression, or immediately after an alternation,
+open-group or close-interval operator.
+
+@cnindex RE_CONTEXT_INVALID_OPS
+@item RE_CONTEXT_INVALID_OPS
+If this bit is set, then repetition and alternation operators can't be
+in certain positions within a regular expression.  Specifically, the
+regular expression is invalid if it has:
+
+@itemize @bullet
+
+@item
+a repetition operator first in the regular expression or just after a
+match-beginning-of-line, open-group, or alternation operator; or
+
+@item
+an alternation operator first or last in the regular expression, just
+before a match-end-of-line operator, or just after an alternation or
+open-group operator.
+
+@end itemize
+
+If this bit isn't set, then you can put the characters representing the
+repetition and alternation characters anywhere in a regular expression.
+Whether or not they will in fact be operators in certain positions
+depends on other syntax bits.
+
+@cnindex RE_DEBUG
+@item RE_DEBUG
+If this bit is set, and the regex library was compiled with
+@code{-DDEBUG}, then internal debugging is turned on; if unset, then
+it is turned off.
+
+@cnindex RE_DOT_NEWLINE
+@item RE_DOT_NEWLINE
+If this bit is set, then the match-any-character operator matches
+a newline; if this bit isn't set, then it doesn't.
+
+@cnindex RE_DOT_NOT_NULL
+@item RE_DOT_NOT_NULL
+If this bit is set, then the match-any-character operator doesn't match
+a null character; if this bit isn't set, then it does.
+
+@cnindex RE_HAT_LISTS_NOT_NEWLINE
+@item RE_HAT_LISTS_NOT_NEWLINE
+If this bit is set, nonmatching lists @samp{[^...]} do not match
+newline; if not set, they do.
+
+@cnindex RE_ICASE
+@item RE_ICASE
+If this bit is set, then ignore case when matching; otherwise, case is
+significant.
+
+@cnindex RE_INTERVALS
+@item RE_INTERVALS
+If this bit is set, then Regex recognizes interval operators; if this bit
+isn't set, then it doesn't.
+
+@cnindex RE_INVALID_INTERVAL_ORD
+@item RE_INVALID_INTERVAL_ORD
+If this bit is set, a syntactically invalid interval is treated as a
+string of ordinary characters.  For example, the extended regular
+expression @samp{a@{1} is treated as @samp{a\@{1}.
+
+@cnindex RE_LIMITED_OPS
+@item RE_LIMITED_OPS
+If this bit is set, then Regex doesn't recognize the match-one-or-more,
+match-zero-or-one or alternation operators; if this bit isn't set, then
+it does.
+
+@cnindex RE_NEWLINE_ALT
+@item RE_NEWLINE_ALT
+If this bit is set, then newline represents the alternation operator; if
+this bit isn't set, then newline is ordinary.
+
+@cnindex RE_NO_BK_BRACES
+@item RE_NO_BK_BRACES
+If this bit is set, then @samp{@{} represents the open-interval operator
+and @samp{@}} represents the close-interval operator; if this bit isn't
+set, then @samp{\@{} represents the open-interval operator and
+@samp{\@}} represents the close-interval operator.  This bit is relevant
+only if @code{RE_INTERVALS} is set.
+
+@cnindex RE_NO_BK_PARENS
+@item RE_NO_BK_PARENS
+If this bit is set, then @samp{(} represents the open-group operator and
+@samp{)} represents the close-group operator; if this bit isn't set, then
+@samp{\(} represents the open-group operator and @samp{\)} represents
+the close-group operator.
+
+@cnindex RE_NO_BK_REFS
+@item RE_NO_BK_REFS
+If this bit is set, then Regex doesn't recognize @samp{\}@var{digit} as
+the back-reference operator; if this bit isn't set, then it does.
+
+@cnindex RE_NO_BK_VBAR
+@item RE_NO_BK_VBAR
+If this bit is set, then @samp{|} represents the alternation operator;
+if this bit isn't set, then @samp{\|} represents the alternation
+operator.  This bit is irrelevant if @code{RE_LIMITED_OPS} is set.
+
+@cnindex RE_NO_EMPTY_RANGES
+@item RE_NO_EMPTY_RANGES
+If this bit is set, then a regular expression with a range whose ending
+point collates lower than its starting point is invalid; if this bit
+isn't set, then Regex considers such a range to be empty.
+
+@cnindex RE_NO_GNU_OPS
+@item RE_NO_GNU_OPS
+If this bit is set, GNU regex operators are not recognized; otherwise,
+they are.
+
+@cnindex RE_NO_POSIX_BACKTRACKING
+@item RE_NO_POSIX_BACKTRACKING
+If this bit is set, succeed as soon as we match the whole pattern,
+without further backtracking.  This means that a match may not be
+the leftmost longest; @pxref{What Gets Matched?} for what this means.
+
+@cnindex RE_NO_SUB
+@item RE_NO_SUB
+If this bit is set, then @code{no_sub} will be set to one during
+@code{re_compile_pattern}.  This causes matching and searching routines
+not to record substring match information.
+
+@cnindex RE_UNMATCHED_RIGHT_PAREN_ORD
+@item RE_UNMATCHED_RIGHT_PAREN_ORD
+If this bit is set and the regular expression has no matching open-group
+operator, then Regex considers what would otherwise be a close-group
+operator (based on how @code{RE_NO_BK_PARENS} is set) to match @samp{)}.
+
+@end table
+
+
+@node Predefined Syntaxes
+@section Predefined Syntaxes
+
+If you're programming with Regex, you can set a pattern buffer's
+(@pxref{GNU Pattern Buffers})
+syntax either to an arbitrary combination of syntax bits
+(@pxref{Syntax Bits}) or else to the configurations defined by Regex.
+These configurations define the syntaxes used by certain
+programs---GNU Emacs,
+@cindex Emacs
+POSIX Awk,
+@cindex POSIX Awk
+traditional Awk,
+@cindex Awk
+Grep,
+@cindex Grep
+@cindex Egrep
+Egrep---in addition to syntaxes for POSIX basic and extended
+regular expressions.
+
+The predefined syntaxes---taken directly from @file{regex.h}---are:
+
+@smallexample
+#define RE_SYNTAX_EMACS 0
+
+#define RE_SYNTAX_AWK                                                   \
+  (RE_BACKSLASH_ESCAPE_IN_LISTS | RE_DOT_NOT_NULL                       \
+   | RE_NO_BK_PARENS            | RE_NO_BK_REFS                         \
+   | RE_NO_BK_VBAR               | RE_NO_EMPTY_RANGES                   \
+   | RE_UNMATCHED_RIGHT_PAREN_ORD)
+
+#define RE_SYNTAX_POSIX_AWK                                             \
+  (RE_SYNTAX_POSIX_EXTENDED | RE_BACKSLASH_ESCAPE_IN_LISTS)
+
+#define RE_SYNTAX_GREP                                                  \
+  (RE_BK_PLUS_QM              | RE_CHAR_CLASSES                         \
+   | RE_HAT_LISTS_NOT_NEWLINE | RE_INTERVALS                            \
+   | RE_NEWLINE_ALT)
+
+#define RE_SYNTAX_EGREP                                                 \
+  (RE_CHAR_CLASSES        | RE_CONTEXT_INDEP_ANCHORS                    \
+   | RE_CONTEXT_INDEP_OPS | RE_HAT_LISTS_NOT_NEWLINE                    \
+   | RE_NEWLINE_ALT       | RE_NO_BK_PARENS                             \
+   | RE_NO_BK_VBAR)
+
+#define RE_SYNTAX_POSIX_EGREP                                           \
+  (RE_SYNTAX_EGREP | RE_INTERVALS | RE_NO_BK_BRACES)
+
+/* P1003.2/D11.2, section 4.20.7.1, lines 5078ff.  */
+#define RE_SYNTAX_ED RE_SYNTAX_POSIX_BASIC
+
+#define RE_SYNTAX_SED RE_SYNTAX_POSIX_BASIC
+
+/* Syntax bits common to both basic and extended POSIX regex syntax.  */
+#define _RE_SYNTAX_POSIX_COMMON                                         \
+  (RE_CHAR_CLASSES | RE_DOT_NEWLINE      | RE_DOT_NOT_NULL              \
+   | RE_INTERVALS  | RE_NO_EMPTY_RANGES)
+
+#define RE_SYNTAX_POSIX_BASIC                                           \
+  (_RE_SYNTAX_POSIX_COMMON | RE_BK_PLUS_QM)
+
+/* Differs from ..._POSIX_BASIC only in that RE_BK_PLUS_QM becomes
+   RE_LIMITED_OPS, i.e., \? \+ \| are not recognized.  Actually, this
+   isn't minimal, since other operators, such as \`, aren't disabled.  */
+#define RE_SYNTAX_POSIX_MINIMAL_BASIC                                   \
+  (_RE_SYNTAX_POSIX_COMMON | RE_LIMITED_OPS)
+
+#define RE_SYNTAX_POSIX_EXTENDED                                        \
+  (_RE_SYNTAX_POSIX_COMMON | RE_CONTEXT_INDEP_ANCHORS                   \
+   | RE_CONTEXT_INDEP_OPS  | RE_NO_BK_BRACES                            \
+   | RE_NO_BK_PARENS       | RE_NO_BK_VBAR                              \
+   | RE_UNMATCHED_RIGHT_PAREN_ORD)
+
+/* Differs from ..._POSIX_EXTENDED in that RE_CONTEXT_INVALID_OPS
+   replaces RE_CONTEXT_INDEP_OPS and RE_NO_BK_REFS is added.  */
+#define RE_SYNTAX_POSIX_MINIMAL_EXTENDED                                \
+  (_RE_SYNTAX_POSIX_COMMON  | RE_CONTEXT_INDEP_ANCHORS                  \
+   | RE_CONTEXT_INVALID_OPS | RE_NO_BK_BRACES                           \
+   | RE_NO_BK_PARENS        | RE_NO_BK_REFS                             \
+   | RE_NO_BK_VBAR          | RE_UNMATCHED_RIGHT_PAREN_ORD)
+@end smallexample
+
+@node Collating Elements vs. Characters
+@section Collating Elements vs.@: Characters
+
+POSIX generalizes the notion of a character to that of a
+collating element.  It defines a @dfn{collating element} to be ``a
+sequence of one or more bytes defined in the current collating sequence
+as a unit of collation.''
+
+This generalizes the notion of a character in
+two ways.  First, a single character can map into two or more collating
+elements.  For example, the German
+@tex
+``\ss''
+@end tex
+@ifinfo
+``es-zet''
+@end ifinfo
+collates as the collating element @samp{s} followed by another collating
+element @samp{s}.  Second, two or more characters can map into one
+collating element.  For example, the Spanish @samp{ll} collates after
+@samp{l} and before @samp{m}.
+
+Since POSIX's ``collating element'' preserves the essential idea of
+a ``character,'' we use the latter, more familiar, term in this document.
+
+@node The Backslash Character
+@section The Backslash Character
+
+@cindex \
+The @samp{\} character has one of four different meanings, depending on
+the context in which you use it and what syntax bits are set
+(@pxref{Syntax Bits}).  It can: 1) stand for itself, 2) quote the next
+character, 3) introduce an operator, or 4) do nothing.
+
+@enumerate
+@item
+It stands for itself inside a list
+(@pxref{List Operators}) if the syntax bit
+@code{RE_BACKSLASH_ESCAPE_IN_LISTS} is not set.  For example, @samp{[\]}
+would match @samp{\}.
+
+@item
+It quotes (makes ordinary, if it's special) the next character when you
+use it either:
+
+@itemize @bullet
+@item
+outside a list,@footnote{Sometimes
+you don't have to explicitly quote special characters to make
+them ordinary.  For instance, most characters lose any special meaning
+inside a list (@pxref{List Operators}).  In addition, if the syntax bits
+@code{RE_CONTEXT_INVALID_OPS} and @code{RE_CONTEXT_INDEP_OPS}
+aren't set, then (for historical reasons) the matcher considers special
+characters ordinary if they are in contexts where the operations they
+represent make no sense; for example, then the match-zero-or-more
+operator (represented by @samp{*}) matches itself in the regular
+expression @samp{*foo} because there is no preceding expression on which
+it can operate.  It is poor practice, however, to depend on this
+behavior; if you want a special character to be ordinary outside a list,
+it's better to always quote it, regardless.} or
+
+@item
+inside a list and the syntax bit @code{RE_BACKSLASH_ESCAPE_IN_LISTS} is set.
+
+@end itemize
+
+@item
+It introduces an operator when followed by certain ordinary
+characters---sometimes only when certain syntax bits are set.  See the
+cases @code{RE_BK_PLUS_QM}, @code{RE_NO_BK_BRACES}, @code{RE_NO_BK_VAR},
+@code{RE_NO_BK_PARENS}, @code{RE_NO_BK_REF} in @ref{Syntax Bits}.  Also:
+
+@itemize @bullet
+@item
+@samp{\b} represents the match-word-boundary operator
+(@pxref{Match-word-boundary Operator}).
+
+@item
+@samp{\B} represents the match-within-word operator
+(@pxref{Match-within-word Operator}).
+
+@item
+@samp{\<} represents the match-beginning-of-word operator @*
+(@pxref{Match-beginning-of-word Operator}).
+
+@item
+@samp{\>} represents the match-end-of-word operator
+(@pxref{Match-end-of-word Operator}).
+
+@item
+@samp{\w} represents the match-word-constituent operator
+(@pxref{Match-word-constituent Operator}).
+
+@item
+@samp{\W} represents the match-non-word-constituent operator
+(@pxref{Match-non-word-constituent Operator}).
+
+@item
+@samp{\`} represents the match-beginning-of-buffer
+operator and @samp{\'} represents the match-end-of-buffer operator
+(@pxref{Buffer Operators}).
+
+@item
+If Regex was compiled with the C preprocessor symbol @code{emacs}
+defined, then @samp{\s@var{class}} represents the match-syntactic-class
+operator and @samp{\S@var{class}} represents the
+match-not-syntactic-class operator (@pxref{Syntactic Class Operators}).
+
+@end itemize
+
+@item
+In all other cases, Regex ignores @samp{\}.  For example,
+@samp{\n} matches @samp{n}.
+
+@end enumerate
+
+@node Common Operators
+@chapter Common Operators
+
+You compose regular expressions from operators.  In the following
+sections, we describe the regular expression operators specified by
+POSIX; GNU also uses these.  Most operators have more than one
+representation as characters.  @xref{Regular Expression Syntax}, for
+what characters represent what operators under what circumstances.
+
+For most operators that can be represented in two ways, one
+representation is a single character and the other is that character
+preceded by @samp{\}.  For example, either @samp{(} or @samp{\(}
+represents the open-group operator.  Which one does depends on the
+setting of a syntax bit, in this case @code{RE_NO_BK_PARENS}.  Why is
+this so?  Historical reasons dictate some of the varying
+representations, while POSIX dictates others.
+
+Finally, almost all characters lose any special meaning inside a list
+(@pxref{List Operators}).
+
+@menu
+* Match-self Operator::                 Ordinary characters.
+* Match-any-character Operator::        .
+* Concatenation Operator::              Juxtaposition.
+* Repetition Operators::                *  +  ? @{@}
+* Alternation Operator::                |
+* List Operators::                      [...]  [^...]
+* Grouping Operators::                  (...)
+* Back-reference Operator::             \digit
+* Anchoring Operators::                 ^  $
+@end menu
+
+@node Match-self Operator
+@section The Match-self Operator (@var{ordinary character})
+
+This operator matches the character itself.  All ordinary characters
+(@pxref{Regular Expression Syntax}) represent this operator.  For
+example, @samp{f} is always an ordinary character, so the regular
+expression @samp{f} matches only the string @samp{f}.  In
+particular, it does @emph{not} match the string @samp{ff}.
+
+@node Match-any-character Operator
+@section The Match-any-character Operator (@code{.})
+
+@cindex @samp{.}
+
+This operator matches any single printing or nonprinting character
+except it won't match a:
+
+@table @asis
+@item newline
+if the syntax bit @code{RE_DOT_NEWLINE} isn't set.
+
+@item null
+if the syntax bit @code{RE_DOT_NOT_NULL} is set.
+
+@end table
+
+The @samp{.} (period) character represents this operator.  For example,
+@samp{a.b} matches any three-character string beginning with @samp{a}
+and ending with @samp{b}.
+
+@node Concatenation Operator
+@section The Concatenation Operator
+
+This operator concatenates two regular expressions @var{a} and @var{b}.
+No character represents this operator; you simply put @var{b} after
+@var{a}.  The result is a regular expression that will match a string if
+@var{a} matches its first part and @var{b} matches the rest.  For
+example, @samp{xy} (two match-self operators) matches @samp{xy}.
+
+@node Repetition Operators
+@section Repetition Operators
+
+Repetition operators repeat the preceding regular expression a specified
+number of times.
+
+@menu
+* Match-zero-or-more Operator::  *
+* Match-one-or-more Operator::   +
+* Match-zero-or-one Operator::   ?
+* Interval Operators::           @{@}
+@end menu
+
+@node Match-zero-or-more Operator
+@subsection The Match-zero-or-more Operator (@code{*})
+
+@cindex @samp{*}
+
+This operator repeats the smallest possible preceding regular expression
+as many times as necessary (including zero) to match the pattern.
+@samp{*} represents this operator.  For example, @samp{o*}
+matches any string made up of zero or more @samp{o}s.  Since this
+operator operates on the smallest preceding regular expression,
+@samp{fo*} has a repeating @samp{o}, not a repeating @samp{fo}.  So,
+@samp{fo*} matches @samp{f}, @samp{fo}, @samp{foo}, and so on.
+
+Since the match-zero-or-more operator is a suffix operator, it may be
+useless as such when no regular expression precedes it.  This is the
+case when it:
+
+@itemize @bullet
+@item
+is first in a regular expression, or
+
+@item
+follows a match-beginning-of-line, open-group, or alternation
+operator.
+
+@end itemize
+
+@noindent
+Three different things can happen in these cases:
+
+@enumerate
+@item
+If the syntax bit @code{RE_CONTEXT_INVALID_OPS} is set, then the
+regular expression is invalid.
+
+@item
+If @code{RE_CONTEXT_INVALID_OPS} isn't set, but
+@code{RE_CONTEXT_INDEP_OPS} is, then @samp{*} represents the
+match-zero-or-more operator (which then operates on the empty string).
+
+@item
+Otherwise, @samp{*} is ordinary.
+
+@end enumerate
+
+@cindex backtracking
+The matcher processes a match-zero-or-more operator by first matching as
+many repetitions of the smallest preceding regular expression as it can.
+Then it continues to match the rest of the pattern.
+
+If it can't match the rest of the pattern, it backtracks (as many times
+as necessary), each time discarding one of the matches until it can
+either match the entire pattern or be certain that it cannot get a
+match.  For example, when matching @samp{ca*ar} against @samp{caaar},
+the matcher first matches all three @samp{a}s of the string with the
+@samp{a*} of the regular expression.  However, it cannot then match the
+final @samp{ar} of the regular expression against the final @samp{r} of
+the string.  So it backtracks, discarding the match of the last @samp{a}
+in the string.  It can then match the remaining @samp{ar}.
+
+
+@node Match-one-or-more Operator
+@subsection The Match-one-or-more Operator (@code{+} or @code{\+})
+
+@cindex @samp{+}
+
+If the syntax bit @code{RE_LIMITED_OPS} is set, then Regex doesn't recognize
+this operator.  Otherwise, if the syntax bit @code{RE_BK_PLUS_QM} isn't
+set, then @samp{+} represents this operator; if it is, then @samp{\+}
+does.
+
+This operator is similar to the match-zero-or-more operator except that
+it repeats the preceding regular expression at least once;
+@pxref{Match-zero-or-more Operator}, for what it operates on, how some
+syntax bits affect it, and how Regex backtracks to match it.
+
+For example, supposing that @samp{+} represents the match-one-or-more
+operator; then @samp{ca+r} matches, e.g., @samp{car} and
+@samp{caaaar}, but not @samp{cr}.
+
+@node Match-zero-or-one Operator
+@subsection The Match-zero-or-one Operator (@code{?} or @code{\?})
+@cindex @samp{?}
+
+If the syntax bit @code{RE_LIMITED_OPS} is set, then Regex doesn't
+recognize this operator.  Otherwise, if the syntax bit
+@code{RE_BK_PLUS_QM} isn't set, then @samp{?} represents this operator;
+if it is, then @samp{\?} does.
+
+This operator is similar to the match-zero-or-more operator except that
+it repeats the preceding regular expression once or not at all;
+@pxref{Match-zero-or-more Operator}, to see what it operates on, how
+some syntax bits affect it, and how Regex backtracks to match it.
+
+For example, supposing that @samp{?} represents the match-zero-or-one
+operator; then @samp{ca?r} matches both @samp{car} and @samp{cr}, but
+nothing else.
+
+@node Interval Operators
+@subsection Interval Operators (@code{@{} @dots{} @code{@}} or @code{\@{} @dots{} @code{\@}})
+
+@cindex interval expression
+@cindex @samp{@{}
+@cindex @samp{@}}
+@cindex @samp{\@{}
+@cindex @samp{\@}}
+
+If the syntax bit @code{RE_INTERVALS} is set, then Regex recognizes
+@dfn{interval expressions}.  They repeat the smallest possible preceding
+regular expression a specified number of times.
+
+If the syntax bit @code{RE_NO_BK_BRACES} is set, @samp{@{} represents
+the @dfn{open-interval operator} and @samp{@}} represents the
+@dfn{close-interval operator} ; otherwise, @samp{\@{} and @samp{\@}} do.
+
+Specifically, supposing that @samp{@{} and @samp{@}} represent the
+open-interval and close-interval operators; then:
+
+@table @code
+@item  @{@var{count}@}
+matches exactly @var{count} occurrences of the preceding regular
+expression.
+
+@item @{@var{min},@}
+matches @var{min} or more occurrences of the preceding regular
+expression.
+
+@item  @{@var{min}, @var{max}@}
+matches at least @var{min} but no more than @var{max} occurrences of
+the preceding regular expression.
+
+@end table
+
+The interval expression (but not necessarily the regular expression that
+contains it) is invalid if:
+
+@itemize @bullet
+@item
+@var{min} is greater than @var{max}, or
+
+@item
+any of @var{count}, @var{min}, or @var{max} are outside the range
+zero to @code{RE_DUP_MAX} (which symbol @file{regex.h}
+defines).
+
+@end itemize
+
+If the interval expression is invalid and the syntax bit
+@code{RE_NO_BK_BRACES} is set, then Regex considers all the
+characters in the would-be interval to be ordinary.  If that bit
+isn't set, then the regular expression is invalid.
+
+If the interval expression is valid but there is no preceding regular
+expression on which to operate, then if the syntax bit
+@code{RE_CONTEXT_INVALID_OPS} is set, the regular expression is invalid.
+If that bit isn't set, then Regex considers all the characters---other
+than backslashes, which it ignores---in the would-be interval to be
+ordinary.
+
+
+@node Alternation Operator
+@section The Alternation Operator (@code{|} or @code{\|})
+
+@kindex |
+@kindex \|
+@cindex alternation operator
+@cindex or operator
+
+If the syntax bit @code{RE_LIMITED_OPS} is set, then Regex doesn't
+recognize this operator.  Otherwise, if the syntax bit
+@code{RE_NO_BK_VBAR} is set, then @samp{|} represents this operator;
+otherwise, @samp{\|} does.
+
+Alternatives match one of a choice of regular expressions:
+if you put the character(s) representing the alternation operator between
+any two regular expressions @var{a} and @var{b}, the result matches
+the union of the strings that @var{a} and @var{b} match.  For
+example, supposing that @samp{|} is the alternation operator, then
+@samp{foo|bar|quux} would match any of @samp{foo}, @samp{bar} or
+@samp{quux}.
+
+The alternation operator operates on the @emph{largest} possible
+surrounding regular expressions.  (Put another way, it has the lowest
+precedence of any regular expression operator.)
+Thus, the only way you can
+delimit its arguments is to use grouping.  For example, if @samp{(} and
+@samp{)} are the open and close-group operators, then @samp{fo(o|b)ar}
+would match either @samp{fooar} or @samp{fobar}.  (@samp{foo|bar} would
+match @samp{foo} or @samp{bar}.)
+
+@cindex backtracking
+The matcher usually tries all combinations of alternatives so as to
+match the longest possible string.  For example, when matching
+@samp{(fooq|foo)*(qbarquux|bar)} against @samp{fooqbarquux}, it cannot
+take, say, the first (``depth-first'') combination it could match, since
+then it would be content to match just @samp{fooqbar}.
+
+Note that since the default behavior is to return the leftmost longest
+match, when more than one of a series of alternatives matches the actual
+match will be the longest matching alternative, not necessarily the
+first in the list.
+
+
+@node List Operators
+@section List Operators (@code{[} @dots{} @code{]} and @code{[^} @dots{} @code{]})
+
+@cindex matching list
+@cindex @samp{[}
+@cindex @samp{]}
+@cindex @samp{^}
+@cindex @samp{-}
+@cindex @samp{\}
+@cindex @samp{[^}
+@cindex nonmatching list
+@cindex matching newline
+@cindex bracket expression
+
+@dfn{Lists}, also called @dfn{bracket expressions}, are a set of one or
+more items.  An @dfn{item} is a character,
+a collating symbol, an equivalence class expression,
+a character class expression, or a range expression.  The syntax bits
+affect which kinds of items you can put in a list.  We explain the last
+four items in subsections below.  Empty lists are invalid.
+
+A @dfn{matching list} matches a single character represented by one of
+the list items.  You form a matching list by enclosing one or more items
+within an @dfn{open-matching-list operator} (represented by @samp{[})
+and a @dfn{close-list operator} (represented by @samp{]}).
+
+For example, @samp{[ab]} matches either @samp{a} or @samp{b}.
+@samp{[ad]*} matches the empty string and any string composed of just
+@samp{a}s and @samp{d}s in any order.  Regex considers invalid a regular
+expression with a @samp{[} but no matching
+@samp{]}.
+
+@dfn{Nonmatching lists} are similar to matching lists except that they
+match a single character @emph{not} represented by one of the list
+items.  You use an @dfn{open-nonmatching-list operator} (represented by
+@samp{[^}@footnote{Regex therefore doesn't consider the @samp{^} to be
+the first character in the list.  If you put a @samp{^} character first
+in (what you think is) a matching list, you'll turn it into a
+nonmatching list.}) instead of an open-matching-list operator to start a
+nonmatching list.
+
+For example, @samp{[^ab]} matches any character except @samp{a} or
+@samp{b}.
+
+If the syntax bit @code{RE_HAT_LISTS_NOT_NEWLINE} is set, then
+nonmatching lists do not match a newline.
+
+Most characters lose any special meaning inside a list.  The special
+characters inside a list follow.
+
+@table @samp
+@item ]
+ends the list if it's not the first list item.  So, if you want to make
+the @samp{]} character a list item, you must put it first.
+
+@item \
+quotes the next character if the syntax bit @code{RE_BACKSLASH_ESCAPE_IN_LISTS} is
+set.
+
+@item [.
+represents the open-collating-symbol operator (@pxref{Collating Symbol
+Operators}).
+
+@item .]
+represents the close-collating-symbol operator.
+
+@item [=
+represents the open-equivalence-class operator (@pxref{Equivalence Class
+Operators}).
+
+@item =]
+represents the close-equivalence-class operator.
+
+@item [:
+represents the open-character-class operator (@pxref{Character Class
+Operators}) if the syntax bit @code{RE_CHAR_CLASSES} is set and what
+follows is a valid character class expression.
+
+@item :]
+represents the close-character-class operator if the syntax bit
+@code{RE_CHAR_CLASSES} is set and what precedes it is an
+open-character-class operator followed by a valid character class name.
+
+@item -
+represents the range operator (@pxref{Range Operator}) if it's
+not first or last in a list or the ending point of a range.
+
+@end table
+
+@noindent
+All other characters are ordinary.  For example, @samp{[.*]} matches
+@samp{.} and @samp{*}.
+
+@menu
+* Collating Symbol Operators::  [.elem.]
+* Equivalence Class Operators:: [=class=]
+* Character Class Operators::   [:class:]
+* Range Operator::          start-end
+@end menu
+
+
+@node Collating Symbol Operators
+@subsection Collating Symbol Operators (@code{[.} @dots{} @code{.]})
+
+Collating symbols can be represented inside lists.
+You form a @dfn{collating symbol} by
+putting a collating element between an @dfn{open-collating-symbol
+operator} and a @dfn{close-collating-symbol operator}.  @samp{[.}
+represents the open-collating-symbol operator and @samp{.]} represents
+the close-collating-symbol operator.  For example, if @samp{ll} is a
+collating element, then @samp{[[.ll.]]} would match @samp{ll}.
+
+@node Equivalence Class Operators
+@subsection Equivalence Class Operators (@code{[=} @dots{} @code{=]})
+@cindex equivalence class expression in regex
+@cindex @samp{[=} in regex
+@cindex @samp{=]} in regex
+
+Regex recognizes equivalence class
+expressions inside lists.  A @dfn{equivalence class expression} is a set
+of collating elements which all belong to the same equivalence class.
+You form an equivalence class expression by putting a collating
+element between an @dfn{open-equivalence-class operator} and a
+@dfn{close-equivalence-class operator}.  @samp{[=} represents the
+open-equivalence-class operator and @samp{=]} represents the
+close-equivalence-class operator.  For example, if @samp{a} and @samp{A}
+were an equivalence class, then both @samp{[[=a=]]} and @samp{[[=A=]]}
+would match both @samp{a} and @samp{A}.  If the collating element in an
+equivalence class expression isn't part of an equivalence class, then
+the matcher considers the equivalence class expression to be a collating
+symbol.
+
+@node Character Class Operators
+@subsection Character Class Operators (@code{[:} @dots{} @code{:]})
+
+@cindex character classes
+@cindex @samp{[colon} in regex
+@cindex @samp{colon]} in regex
+
+If the syntax bit @code{RE_CHAR_CLASSES} is set, then Regex recognizes
+character class expressions inside lists.  A @dfn{character class
+expression} matches one character from a given class.  You form a
+character class expression by putting a character class name between
+an @dfn{open-character-class operator} (represented by @samp{[:}) and
+a @dfn{close-character-class operator} (represented by @samp{:]}).
+The character class names and their meanings are:
+
+@table @code
+
+@item alnum
+letters and digits
+
+@item alpha
+letters
+
+@item blank
+system-dependent; for GNU, a space or tab
+
+@item cntrl
+control characters (in the ASCII encoding, code 0177 and codes
+less than 040)
+
+@item digit
+digits
+
+@item graph
+same as @code{print} except omits space
+
+@item lower
+lowercase letters
+
+@item print
+printable characters (in the ASCII encoding, space
+tilde---codes 040 through 0176)
+
+@item punct
+neither control nor alphanumeric characters
+
+@item space
+space, carriage return, newline, vertical tab, and form feed
+
+@item upper
+uppercase letters
+
+@item xdigit
+hexadecimal digits: @code{0}--@code{9}, @code{a}--@code{f}, @code{A}--@code{F}
+
+@end table
+
+@noindent
+These correspond to the definitions in the C library's @file{<ctype.h>}
+facility.  For example, @samp{[:alpha:]} corresponds to the standard
+facility @code{isalpha}.  Regex recognizes character class expressions
+only inside of lists; so @samp{[[:alpha:]]} matches any letter, but
+@samp{[:alpha:]} outside of a bracket expression and not followed by a
+repetition operator matches just itself.
+
+@node Range Operator
+@subsection The Range Operator (@code{-})
+
+Regex recognizes @dfn{range expressions} inside a list. They represent
+those characters
+that fall between two elements in the current collating sequence.  You
+form a range expression by putting a @dfn{range operator} between two
+of any of the following: characters, collating elements, collating symbols,
+and equivalence class expressions.  The starting point of the range and
+the ending point of the range don't have to be the same kind of item,
+e.g., the starting point could be a collating element and the ending
+point could be an equivalence class expression.  If a range's ending
+point is an equivalence class, then all the collating elements in that
+class will be in the range.@footnote{You can't use a character class for the starting
+or ending point of a range, since a character class is not a single
+character.} @samp{-} represents the range operator.  For example,
+@samp{a-f} within a list represents all the characters from @samp{a}
+through @samp{f}
+inclusively.
+
+If the syntax bit @code{RE_NO_EMPTY_RANGES} is set, then if the range's
+ending point collates less than its starting point, the range (and the
+regular expression containing it) is invalid.  For example, the regular
+expression @samp{[z-a]} would be invalid.  If this bit isn't set, then
+Regex considers such a range to be empty.
+
+Since @samp{-} represents the range operator, if you want to make a
+@samp{-} character itself
+a list item, you must do one of the following:
+
+@itemize @bullet
+@item
+Put the @samp{-} either first or last in the list.
+
+@item
+Include a range whose starting point collates strictly lower than
+@samp{-} and whose ending point collates equal or higher.  Unless a
+range is the first item in a list, a @samp{-} can't be its starting
+point, but @emph{can} be its ending point.  That is because Regex
+considers @samp{-} to be the range operator unless it is preceded by
+another @samp{-}.  For example, in the ASCII encoding, @samp{)},
+@samp{*}, @samp{+}, @samp{,}, @samp{-}, @samp{.}, and @samp{/} are
+contiguous characters in the collating sequence.  You might think that
+@samp{[)-+--/]} has two ranges: @samp{)-+} and @samp{--/}.  Rather, it
+has the ranges @samp{)-+} and @samp{+--}, plus the character @samp{/}, so
+it matches, e.g., @samp{,}, not @samp{.}.
+
+@item
+Put a range whose starting point is @samp{-} first in the list.
+
+@end itemize
+
+For example, @samp{[-a-z]} matches a lowercase letter or a hyphen (in
+English, in ASCII).
+
+
+@node Grouping Operators
+@section Grouping Operators (@code{(} @dots{} @code{)} or @code{\(} @dots{} @code{\)})
+
+@kindex (
+@kindex )
+@kindex \(
+@kindex \)
+@cindex grouping
+@cindex subexpressions
+@cindex parenthesizing
+
+A @dfn{group}, also known as a @dfn{subexpression}, consists of an
+@dfn{open-group operator}, any number of other operators, and a
+@dfn{close-group operator}.  Regex treats this sequence as a unit, just
+as mathematics and programming languages treat a parenthesized
+expression as a unit.
+
+Therefore, using @dfn{groups}, you can:
+
+@itemize @bullet
+@item
+delimit the argument(s) to an alternation operator (@pxref{Alternation
+Operator}) or a repetition operator (@pxref{Repetition
+Operators}).
+
+@item
+keep track of the indices of the substring that matched a given group.
+@xref{Using Registers}, for a precise explanation.
+This lets you:
+
+@itemize @bullet
+@item
+use the back-reference operator (@pxref{Back-reference Operator}).
+
+@item
+use registers (@pxref{Using Registers}).
+
+@end itemize
+
+@end itemize
+
+If the syntax bit @code{RE_NO_BK_PARENS} is set, then @samp{(} represents
+the open-group operator and @samp{)} represents the
+close-group operator; otherwise, @samp{\(} and @samp{\)} do.
+
+If the syntax bit @code{RE_UNMATCHED_RIGHT_PAREN_ORD} is set and a
+close-group operator has no matching open-group operator, then Regex
+considers it to match @samp{)}.
+
+
+@node Back-reference Operator
+@section The Back-reference Operator (@dfn{\}@var{digit})
+
+@cindex back-references
+
+If the syntax bit @code{RE_NO_BK_REF} isn't set, then Regex recognizes
+back-references.  A back-reference matches a specified preceding group.
+The back-reference operator is represented by @samp{\@var{digit}}
+anywhere after the end of a regular expression's @w{@var{digit}-th}
+group (@pxref{Grouping Operators}).
+
+@var{digit} must be between @samp{1} and @samp{9}.  The matcher assigns
+numbers 1 through 9 to the first nine groups it encounters.  By using
+one of @samp{\1} through @samp{\9} after the corresponding group's
+close-group operator, you can match a substring identical to the
+one that the group does.
+
+Back-references match according to the following (in all examples below,
+@samp{(} represents the open-group, @samp{)} the close-group, @samp{@{}
+the open-interval and @samp{@}} the close-interval operator):
+
+@itemize @bullet
+@item
+If the group matches a substring, the back-reference matches an
+identical substring.  For example, @samp{(a)\1} matches @samp{aa} and
+@samp{(bana)na\1bo\1} matches @samp{bananabanabobana}.  Likewise,
+@samp{(.*)\1} matches any (newline-free if the syntax bit
+@code{RE_DOT_NEWLINE} isn't set) string that is composed of two
+identical halves; the @samp{(.*)} matches the first half and the
+@samp{\1} matches the second half.
+
+@item
+If the group matches more than once (as it might if followed
+by, e.g., a repetition operator), then the back-reference matches the
+substring the group @emph{last} matched.  For example,
+@samp{((a*)b)*\1\2} matches @samp{aabababa}; first @w{group 1} (the
+outer one) matches @samp{aab} and @w{group 2} (the inner one) matches
+@samp{aa}.  Then @w{group 1} matches @samp{ab} and @w{group 2} matches
+@samp{a}.  So, @samp{\1} matches @samp{ab} and @samp{\2} matches
+@samp{a}.
+
+@item
+If the group doesn't participate in a match, i.e., it is part of an
+alternative not taken or a repetition operator allows zero repetitions
+of it, then the back-reference makes the whole match fail.  For example,
+@samp{(one()|two())-and-(three\2|four\3)} matches @samp{one-and-three}
+and @samp{two-and-four}, but not @samp{one-and-four} or
+@samp{two-and-three}.  For example, if the pattern matches
+@samp{one-and-}, then its @w{group 2} matches the empty string and its
+@w{group 3} doesn't participate in the match.  So, if it then matches
+@samp{four}, then when it tries to back-reference @w{group 3}---which it
+will attempt to do because @samp{\3} follows the @samp{four}---the match
+will fail because @w{group 3} didn't participate in the match.
+
+@end itemize
+
+You can use a back-reference as an argument to a repetition operator.  For
+example, @samp{(a(b))\2*} matches @samp{a} followed by two or more
+@samp{b}s.  Similarly, @samp{(a(b))\2@{3@}} matches @samp{abbbb}.
+
+If there is no preceding @w{@var{digit}-th} subexpression, the regular
+expression is invalid.
+
+Back-references can greatly slow down matching, as they can generate
+exponentially many matching possibilities that can consume both time
+and memory to explore.  Also, the POSIX specification for
+back-references is at times unclear.  Furthermore, many regular
+expression implementations have back-reference bugs that can cause
+programs to return incorrect answers or even crash, and fixing these
+bugs has often been low-priority: for example, as of 2020 the
+@url{https://sourceware.org/bugzilla/,GNU C library bug database}
+contained back-reference bugs
+@url{https://sourceware.org/bugzilla/show_bug.cgi?id=52,,52},
+@url{https://sourceware.org/bugzilla/show_bug.cgi?id=10844,,10844},
+@url{https://sourceware.org/bugzilla/show_bug.cgi?id=11053,,11053},
+@url{https://sourceware.org/bugzilla/show_bug.cgi?id=24269,,24269}
+and @url{https://sourceware.org/bugzilla/show_bug.cgi?id=25322,,25322},
+with little sign of forthcoming fixes.  Luckily,
+back-references are rarely useful and it should be little trouble to
+avoid them in practical applications.
+
+
+@node Anchoring Operators
+@section Anchoring Operators
+
+@cindex anchoring
+@cindex regexp anchoring
+
+These operators can constrain a pattern to match only at the beginning or
+end of the entire string or at the beginning or end of a line.
+
+@menu
+* Match-beginning-of-line Operator::  ^
+* Match-end-of-line Operator::        $
+@end menu
+
+
+@node Match-beginning-of-line Operator
+@subsection The Match-beginning-of-line Operator (@code{^})
+
+@kindex ^
+@cindex beginning-of-line operator
+@cindex anchors
+
+This operator can match the empty string either at the beginning of the
+string or after a newline character.  Thus, it is said to @dfn{anchor}
+the pattern to the beginning of a line.
+
+In the cases following, @samp{^} represents this operator.  (Otherwise,
+@samp{^} is ordinary.)
+
+@itemize @bullet
+
+@item
+It (the @samp{^}) is first in the pattern, as in @samp{^foo}.
+
+@cnindex RE_CONTEXT_INDEP_ANCHORS @r{(and @samp{^})}
+@item
+The syntax bit @code{RE_CONTEXT_INDEP_ANCHORS} is set, and it is outside
+a bracket expression.
+
+@cindex open-group operator and @samp{^}
+@cindex alternation operator and @samp{^}
+@item
+It follows an open-group or alternation operator, as in @samp{a\(^b\)}
+and @samp{a\|^b}.  @xref{Grouping Operators}, and @ref{Alternation
+Operator}.
+
+@end itemize
+
+These rules imply that some valid patterns containing @samp{^} cannot be
+matched; for example, @samp{foo^bar} if @code{RE_CONTEXT_INDEP_ANCHORS}
+is set.
+
+@vindex not_bol @r{field in pattern buffer}
+If the @code{not_bol} field is set in the pattern buffer (@pxref{GNU
+Pattern Buffers}), then @samp{^} fails to match at the beginning of the
+string.  This lets you match against pieces of a line, as you would need to if,
+say, searching for repeated instances of a given pattern in a line; it
+would work correctly for patterns both with and without
+match-beginning-of-line operators.
+
+
+@node Match-end-of-line Operator
+@subsection The Match-end-of-line Operator (@code{$})
+
+@kindex $
+@cindex end-of-line operator
+@cindex anchors
+
+This operator can match the empty string either at the end of
+the string or before a newline character in the string.  Thus, it is
+said to @dfn{anchor} the pattern to the end of a line.
+
+It is always represented by @samp{$}.  For example, @samp{foo$} usually
+matches, e.g., @samp{foo} and, e.g., the first three characters of
+@samp{foo\nbar}.
+
+Its interaction with the syntax bits and pattern buffer fields is
+exactly the dual of @samp{^}'s; see the previous section.  (That is,
+``@samp{^}'' becomes ``@samp{$}'', ``beginning'' becomes ``end'',
+``next'' becomes ``previous'', ``after'' becomes ``before'', and
+``@code{not_bol}'' becomes ``@code{not_eol}''.)
+
+
+@node GNU Operators
+@chapter GNU Operators
+
+Following are operators that GNU defines (and POSIX doesn't).
+
+@menu
+* Word Operators::
+* Buffer Operators::
+@end menu
+
+@node Word Operators
+@section Word Operators
+
+The operators in this section require Regex to recognize parts of words.
+Regex uses a syntax table to determine whether or not a character is
+part of a word, i.e., whether or not it is @dfn{word-constituent}.
+
+@menu
+* Non-Emacs Syntax Tables::
+* Match-word-boundary Operator::        \b
+* Match-within-word Operator::          \B
+* Match-beginning-of-word Operator::    \<
+* Match-end-of-word Operator::          \>
+* Match-word-constituent Operator::     \w
+* Match-non-word-constituent Operator:: \W
+@end menu
+
+@node Non-Emacs Syntax Tables
+@subsection Non-Emacs Syntax Tables
+
+A @dfn{syntax table} is an array indexed by the characters in your
+character set.  In the ASCII encoding, therefore, a syntax table
+has 256 elements.  Regex always uses a @code{char *} variable
+@code{re_syntax_table} as its syntax table.  In some cases, it
+initializes this variable and in others it expects you to initialize it.
+
+@itemize @bullet
+@item
+If Regex is compiled with the preprocessor symbols @code{emacs} and
+@code{SYNTAX_TABLE} both undefined, then Regex allocates
+@code{re_syntax_table} and initializes an element @var{i} either to
+@code{Sword} (which it defines) if @var{i} is a letter, number, or
+@samp{_}, or to zero if it's not.
+
+@item
+If Regex is compiled with @code{emacs} undefined but @code{SYNTAX_TABLE}
+defined, then Regex expects you to define a @code{char *} variable
+@code{re_syntax_table} to be a valid syntax table.
+
+@item
+@xref{Emacs Syntax Tables}, for what happens when Regex is compiled with
+the preprocessor symbol @code{emacs} defined.
+
+@end itemize
+
+@node Match-word-boundary Operator
+@subsection The Match-word-boundary Operator (@code{\b})
+
+@cindex @samp{\b}
+@cindex word boundaries, matching
+
+This operator (represented by @samp{\b}) matches the empty string at
+either the beginning or the end of a word.  For example, @samp{\brat\b}
+matches the separate word @samp{rat}.
+
+@node Match-within-word Operator
+@subsection The Match-within-word Operator (@code{\B})
+
+@cindex @samp{\B}
+
+This operator (represented by @samp{\B}) matches the empty string within
+a word. For example, @samp{c\Brat\Be} matches @samp{crate}, but
+@samp{dirty \Brat} doesn't match @samp{dirty rat}.
+
+@node Match-beginning-of-word Operator
+@subsection The Match-beginning-of-word Operator (@code{\<})
+
+@cindex @samp{\<}
+
+This operator (represented by @samp{\<}) matches the empty string at the
+beginning of a word.
+
+@node Match-end-of-word Operator
+@subsection The Match-end-of-word Operator (@code{\>})
+
+@cindex @samp{\>}
+
+This operator (represented by @samp{\>}) matches the empty string at the
+end of a word.
+
+@node Match-word-constituent Operator
+@subsection The Match-word-constituent Operator (@code{\w})
+
+@cindex @samp{\w}
+
+This operator (represented by @samp{\w}) matches any word-constituent
+character.
+
+@node Match-non-word-constituent Operator
+@subsection The Match-non-word-constituent Operator (@code{\W})
+
+@cindex @samp{\W}
+
+This operator (represented by @samp{\W}) matches any character that is
+not word-constituent.
+
+
+@node Buffer Operators
+@section Buffer Operators
+
+Following are operators which work on buffers.  In Emacs, a @dfn{buffer}
+is, naturally, an Emacs buffer.  For other programs, Regex considers the
+entire string to be matched as the buffer.
+
+@menu
+* Match-beginning-of-buffer Operator::  \`
+* Match-end-of-buffer Operator::        \'
+@end menu
+
+
+@node Match-beginning-of-buffer Operator
+@subsection The Match-beginning-of-buffer Operator (@code{\`})
+
+@cindex @samp{\`}
+
+This operator (represented by @samp{\`}) matches the empty string at the
+beginning of the buffer.
+
+@node Match-end-of-buffer Operator
+@subsection The Match-end-of-buffer Operator (@code{\'})
+
+@cindex @samp{\'}
+
+This operator (represented by @samp{\'}) matches the empty string at the
+end of the buffer.
+
+
+@node GNU Emacs Operators
+@chapter GNU Emacs Operators
+
+Following are operators that GNU defines (and POSIX doesn't)
+that you can use only when Regex is compiled with the preprocessor
+symbol @code{emacs} defined.
+
+@menu
+* Syntactic Class Operators::
+@end menu
+
+
+@node Syntactic Class Operators
+@section Syntactic Class Operators
+
+The operators in this section require Regex to recognize the syntactic
+classes of characters.  Regex uses a syntax table to determine this.
+
+@menu
+* Emacs Syntax Tables::
+* Match-syntactic-class Operator::      \sCLASS
+* Match-not-syntactic-class Operator::  \SCLASS
+@end menu
+
+@node Emacs Syntax Tables
+@subsection Emacs Syntax Tables
+
+A @dfn{syntax table} is an array indexed by the characters in your
+character set.  In the ASCII encoding, therefore, a syntax table
+has 256 elements.
+
+If Regex is compiled with the preprocessor symbol @code{emacs} defined,
+then Regex expects you to define and initialize the variable
+@code{re_syntax_table} to be an Emacs syntax table.  Emacs' syntax
+tables are more complicated than Regex's own (@pxref{Non-Emacs Syntax
+Tables}).  @xref{Syntax, , Syntax, emacs, The GNU Emacs User's Manual},
+for a description of Emacs' syntax tables.
+
+@node Match-syntactic-class Operator
+@subsection The Match-syntactic-class Operator (@code{\s}@var{class})
+
+@cindex @samp{\s}
+
+This operator matches any character whose syntactic class is represented
+by a specified character.  @samp{\s@var{class}} represents this operator
+where @var{class} is the character representing the syntactic class you
+want.  For example, @samp{w} represents the syntactic
+class of word-constituent characters, so @samp{\sw} matches any
+word-constituent character.
+
+@node Match-not-syntactic-class Operator
+@subsection The Match-not-syntactic-class Operator (@code{\S}@var{class})
+
+@cindex @samp{\S}
+
+This operator is similar to the match-syntactic-class operator except
+that it matches any character whose syntactic class is @emph{not}
+represented by the specified character.  @samp{\S@var{class}} represents
+this operator.  For example, @samp{w} represents the syntactic class of
+word-constituent characters, so @samp{\Sw} matches any character that is
+not word-constituent.
+
+
+@node What Gets Matched?
+@chapter What Gets Matched?
+
+Regex usually matches strings according to the ``leftmost longest''
+rule; that is, it chooses the longest of the leftmost matches.  This
+does not mean that for a regular expression containing subexpressions
+that it simply chooses the longest match for each subexpression, left to
+right; the overall match must also be the longest possible one.
+
+For example, @samp{(ac*)(c*d[ac]*)\1} matches @samp{acdacaaa}, not
+@samp{acdac}, as it would if it were to choose the longest match for the
+first subexpression.
+
+
+@node Programming with Regex
+@chapter Programming with Regex
+
+Here we describe how you use the Regex data structures and functions in
+C programs.  Regex has three interfaces: one designed for GNU, one
+compatible with POSIX (as specified by POSIX, draft
+1003.2/D11.2), and one compatible with Berkeley Unix.  The
+POSIX interface is not documented here; see the documentation of
+GNU libc, or the POSIX man pages.  The Berkeley Unix interface is
+documented here for convenience, since its documentation is not
+otherwise readily available on GNU systems.
+
+@menu
+* GNU Regex Functions::
+* BSD Regex Functions::
+@end menu
+
+
+@node GNU Regex Functions
+@section GNU Regex Functions
+
+If you're writing code that doesn't need to be compatible with either
+POSIX or Berkeley Unix, you can use these functions.  They
+provide more options than the other interfaces.
+
+@menu
+* GNU Pattern Buffers::         The re_pattern_buffer type.
+* GNU Regular Expression Compiling::  re_compile_pattern ()
+* GNU Matching::                re_match ()
+* GNU Searching::               re_search ()
+* Matching/Searching with Split Data::  re_match_2 (), re_search_2 ()
+* Searching with Fastmaps::     re_compile_fastmap ()
+* GNU Translate Tables::        The @code{translate} field.
+* Using Registers::             The re_registers type and related fns.
+* Freeing GNU Pattern Buffers::  regfree ()
+@end menu
+
+
+@node GNU Pattern Buffers
+@subsection GNU Pattern Buffers
+
+@cindex pattern buffer, definition of
+@tindex re_pattern_buffer @r{definition}
+@tindex struct re_pattern_buffer @r{definition}
+
+To compile, match, or search for a given regular expression, you must
+supply a pattern buffer.  A @dfn{pattern buffer} holds one compiled
+regular expression.@footnote{Regular expressions are also referred to as
+``patterns,'' hence the name ``pattern buffer.''}
+
+You can have several different pattern buffers simultaneously, each
+holding a compiled pattern for a different regular expression.
+
+@file{regex.h} defines the pattern buffer @code{struct} with the
+following public fields:
+
+@example
+  unsigned char *buffer;
+  unsigned long allocated;
+  char *fastmap;
+  char *translate;
+  size_t re_nsub;
+  unsigned no_sub : 1;
+  unsigned not_bol : 1;
+  unsigned not_eol : 1;
+@end example
+
+
+@node GNU Regular Expression Compiling
+@subsection GNU Regular Expression Compiling
+
+In GNU, you can both match and search for a given regular
+expression.  To do either, you must first compile it in a pattern buffer
+(@pxref{GNU Pattern Buffers}).
+
+@cindex syntax initialization
+@vindex re_syntax_options @r{initialization}
+Regular expressions match according to the syntax with which they were
+compiled; with GNU, you indicate what syntax you want by setting
+the variable @code{re_syntax_options} (declared in @file{regex.h})
+before calling the compiling function, @code{re_compile_pattern} (see
+below).  @xref{Syntax Bits}, and @ref{Predefined Syntaxes}.
+
+You can change the value of @code{re_syntax_options} at any time.
+Usually, however, you set its value once and then never change it.
+
+@cindex pattern buffer initialization
+@code{re_compile_pattern} takes a pattern buffer as an argument.  You
+must initialize the following fields:
+
+@table @code
+
+@item translate @r{initialization}
+
+@item translate
+@vindex translate @r{initialization}
+Initialize this to point to a translate table if you want one, or to
+zero if you don't.  We explain translate tables in @ref{GNU Translate
+Tables}.
+
+@item fastmap
+@vindex fastmap @r{initialization}
+Initialize this to nonzero if you want a fastmap, or to zero if you
+don't.
+
+@item buffer
+@itemx allocated
+@vindex buffer @r{initialization}
+@vindex allocated @r{initialization}
+@findex malloc
+If you want @code{re_compile_pattern} to allocate memory for the
+compiled pattern, set both of these to zero.  If you have an existing
+block of memory (allocated with @code{malloc}) you want Regex to use,
+set @code{buffer} to its address and @code{allocated} to its size (in
+bytes).
+
+@code{re_compile_pattern} uses @code{realloc} to extend the space for
+the compiled pattern as necessary.
+
+@end table
+
+To compile a pattern buffer, use:
+
+@findex re_compile_pattern
+@example
+char *
+re_compile_pattern (const char *@var{regex}, const int @var{regex_size},
+                    struct re_pattern_buffer *@var{pattern_buffer})
+@end example
+
+@noindent
+@var{regex} is the regular expression's address, @var{regex_size} is its
+length, and @var{pattern_buffer} is the pattern buffer's address.
+
+If @code{re_compile_pattern} successfully compiles the regular
+expression, it returns zero and sets @code{*@var{pattern_buffer}} to the
+compiled pattern.  It sets the pattern buffer's fields as follows:
+
+@table @code
+@item buffer
+@vindex buffer @r{field, set by @code{re_compile_pattern}}
+to the compiled pattern.
+
+@item syntax
+@vindex syntax @r{field, set by @code{re_compile_pattern}}
+to the current value of @code{re_syntax_options}.
+
+@item re_nsub
+@vindex re_nsub @r{field, set by @code{re_compile_pattern}}
+to the number of subexpressions in @var{regex}.
+
+@end table
+
+If @code{re_compile_pattern} can't compile @var{regex}, it returns an
+error string corresponding to a POSIX error code.
+
+
+@node GNU Matching
+@subsection GNU Matching
+
+@cindex matching with GNU functions
+
+Matching the GNU way means trying to match as much of a string as
+possible starting at a position within it you specify.  Once you've compiled
+a pattern into a pattern buffer (@pxref{GNU Regular Expression
+Compiling}), you can ask the matcher to match that pattern against a
+string using:
+
+@findex re_match
+@example
+int
+re_match (struct re_pattern_buffer *@var{pattern_buffer},
+          const char *@var{string}, const int @var{size},
+          const int @var{start}, struct re_registers *@var{regs})
+@end example
+
+@noindent
+@var{pattern_buffer} is the address of a pattern buffer containing a
+compiled pattern.  @var{string} is the string you want to match; it can
+contain newline and null characters.  @var{size} is the length of that
+string.  @var{start} is the string index at which you want to
+begin matching; the first character of @var{string} is at index zero.
+@xref{Using Registers}, for an explanation of @var{regs}; you can safely
+pass zero.
+
+@code{re_match} matches the regular expression in @var{pattern_buffer}
+against the string @var{string} according to the syntax of
+@var{pattern_buffer}.  (@xref{GNU Regular Expression Compiling}, for how
+to set it.)  The function returns @math{-1} if the compiled pattern does
+not match any part of @var{string} and @math{-2} if an internal error
+happens; otherwise, it returns how many (possibly zero) characters of
+@var{string} the pattern matched.
+
+An example: suppose @var{pattern_buffer} points to a pattern buffer
+containing the compiled pattern for @samp{a*}, and @var{string} points
+to @samp{aaaaab} (whereupon @var{size} should be 6). Then if @var{start}
+is 2, @code{re_match} returns 3, i.e., @samp{a*} would have matched the
+last three @samp{a}s in @var{string}.  If @var{start} is 0,
+@code{re_match} returns 5, i.e., @samp{a*} would have matched all the
+@samp{a}s in @var{string}.  If @var{start} is either 5 or 6, it returns
+zero.
+
+If @var{start} is not between zero and @var{size}, then
+@code{re_match} returns @math{-1}.
+
+
+@node GNU Searching
+@subsection GNU Searching
+
+@cindex searching with GNU functions
+
+@dfn{Searching} means trying to match starting at successive positions
+within a string.  The function @code{re_search} does this.
+
+Before calling @code{re_search}, you must compile your regular
+expression.  @xref{GNU Regular Expression Compiling}.
+
+Here is the function declaration:
+
+@findex re_search
+@example
+int
+re_search (struct re_pattern_buffer *@var{pattern_buffer},
+           const char *@var{string}, const int @var{size},
+           const int @var{start}, const int @var{range},
+           struct re_registers *@var{regs})
+@end example
+
+@noindent
+@vindex start @r{argument to @code{re_search}}
+@vindex range @r{argument to @code{re_search}}
+whose arguments are the same as those to @code{re_match} (@pxref{GNU
+Matching}) except that the two arguments @var{start} and @var{range}
+replace @code{re_match}'s argument @var{start}.
+
+If @var{range} is positive, then @code{re_search} attempts a match
+starting first at index @var{start}, then at @math{@var{start} + 1} if
+that fails, and so on, up to @math{@var{start} + @var{range}}; if
+@var{range} is negative, then it attempts a match starting first at
+index @var{start}, then at @math{@var{start} -1} if that fails, and so
+on.
+
+If @var{start} is not between zero and @var{size}, then @code{re_search}
+returns @math{-1}.  When @var{range} is positive, @code{re_search}
+adjusts @var{range} so that @math{@var{start} + @var{range} - 1} is
+between zero and @var{size}, if necessary; that way it won't search
+outside of @var{string}.  Similarly, when @var{range} is negative,
+@code{re_search} adjusts @var{range} so that @math{@var{start} +
+@var{range} + 1} is between zero and @var{size}, if necessary.
+
+If the @code{fastmap} field of @var{pattern_buffer} is zero,
+@code{re_search} matches starting at consecutive positions; otherwise,
+it uses @code{fastmap} to make the search more efficient.
+@xref{Searching with Fastmaps}.
+
+If no match is found, @code{re_search} returns @math{-1}.  If
+a match is found, it returns the index where the match began.  If an
+internal error happens, it returns @math{-2}.
+
+
+@node Matching/Searching with Split Data
+@subsection Matching and Searching with Split Data
+
+Using the functions @code{re_match_2} and @code{re_search_2}, you can
+match or search in data that is divided into two strings.
+
+The function:
+
+@findex re_match_2
+@example
+int
+re_match_2 (struct re_pattern_buffer *@var{buffer},
+            const char *@var{string1}, const int @var{size1},
+            const char *@var{string2}, const int @var{size2},
+            const int @var{start},
+            struct re_registers *@var{regs},
+            const int @var{stop})
+@end example
+
+@noindent
+is similar to @code{re_match} (@pxref{GNU Matching}) except that you
+pass @emph{two} data strings and sizes, and an index @var{stop} beyond
+which you don't want the matcher to try matching.  As with
+@code{re_match}, if it succeeds, @code{re_match_2} returns how many
+characters of @var{string} it matched.  Regard @var{string1} and
+@var{string2} as concatenated when you set the arguments @var{start} and
+@var{stop} and use the contents of @var{regs}; @code{re_match_2} never
+returns a value larger than @math{@var{size1} + @var{size2}}.
+
+The function:
+
+@findex re_search_2
+@example
+int
+re_search_2 (struct re_pattern_buffer *@var{buffer},
+             const char *@var{string1}, const int @var{size1},
+             const char *@var{string2}, const int @var{size2},
+             const int @var{start}, const int @var{range},
+             struct re_registers *@var{regs},
+             const int @var{stop})
+@end example
+
+@noindent
+is similarly related to @code{re_search}.
+
+
+@node Searching with Fastmaps
+@subsection Searching with Fastmaps
+
+@cindex fastmaps
+If you're searching through a long string, you should use a fastmap.
+Without one, the searcher tries to match at consecutive positions in the
+string.  Generally, most of the characters in the string could not start
+a match.  It takes much longer to try matching at a given position in the
+string than it does to check in a table whether or not the character at
+that position could start a match.  A @dfn{fastmap} is such a table.
+
+More specifically, a fastmap is an array indexed by the characters in
+your character set.  Under the ASCII encoding, therefore, a fastmap
+has 256 elements.  If you want the searcher to use a fastmap with a
+given pattern buffer, you must allocate the array and assign the array's
+address to the pattern buffer's @code{fastmap} field.  You either can
+compile the fastmap yourself or have @code{re_search} do it for you;
+when @code{fastmap} is nonzero, it automatically compiles a fastmap the
+first time you search using a particular compiled pattern.
+
+By setting the buffer's @code{fastmap} field before calling
+@code{re_compile_pattern}, you can reuse a buffer data structure across
+multiple searches with different patterns, and allocate the fastmap only
+once.  Nonetheless, the fastmap must be recompiled each time the buffer
+has a new pattern compiled into it.
+
+To compile a fastmap yourself, use:
+
+@findex re_compile_fastmap
+@example
+int
+re_compile_fastmap (struct re_pattern_buffer *@var{pattern_buffer})
+@end example
+
+@noindent
+@var{pattern_buffer} is the address of a pattern buffer.  If the
+character @var{c} could start a match for the pattern,
+@code{re_compile_fastmap} makes
+@code{@var{pattern_buffer}->fastmap[@var{c}]} nonzero.  It returns
+@math{0} if it can compile a fastmap and @math{-2} if there is an
+internal error.  For example, if @samp{|} is the alternation operator
+and @var{pattern_buffer} holds the compiled pattern for @samp{a|b}, then
+@code{re_compile_fastmap} sets @code{fastmap['a']} and
+@code{fastmap['b']} (and no others).
+
+@code{re_search} uses a fastmap as it moves along in the string: it
+checks the string's characters until it finds one that's in the fastmap.
+Then it tries matching at that character.  If the match fails, it
+repeats the process.  So, by using a fastmap, @code{re_search} doesn't
+waste time trying to match at positions in the string that couldn't
+start a match.
+
+If you don't want @code{re_search} to use a fastmap,
+store zero in the @code{fastmap} field of the pattern buffer before
+calling @code{re_search}.
+
+Once you've initialized a pattern buffer's @code{fastmap} field, you
+need never do so again---even if you compile a new pattern in
+it---provided the way the field is set still reflects whether or not you
+want a fastmap.  @code{re_search} will still either do nothing if
+@code{fastmap} is null or, if it isn't, compile a new fastmap for the
+new pattern.
+
+@node GNU Translate Tables
+@subsection GNU Translate Tables
+
+If you set the @code{translate} field of a pattern buffer to a translate
+table, then the GNU Regex functions to which you've passed that
+pattern buffer use it to apply a simple transformation
+to all the regular expression and string characters at which they look.
+
+A @dfn{translate table} is an array indexed by the characters in your
+character set.  Under the ASCII encoding, therefore, a translate
+table has 256 elements.  The array's elements are also characters in
+your character set.  When the Regex functions see a character @var{c},
+they use @code{translate[@var{c}]} in its place, with one exception: the
+character after a @samp{\} is not translated.  (This ensures that, the
+operators, e.g., @samp{\B} and @samp{\b}, are always distinguishable.)
+
+For example, a table that maps all lowercase letters to the
+corresponding uppercase ones would cause the matcher to ignore
+differences in case.@footnote{A table that maps all uppercase letters to
+the corresponding lowercase ones would work just as well for this
+purpose.}  Such a table would map all characters except lowercase letters
+to themselves, and lowercase letters to the corresponding uppercase
+ones.  Under the ASCII encoding, here's how you could initialize
+such a table (we'll call it @code{case_fold}):
+
+@example
+for (i = 0; i < 256; i++)
+  case_fold[i] = i;
+for (i = 'a'; i <= 'z'; i++)
+  case_fold[i] = i - ('a' - 'A');
+@end example
+
+You tell Regex to use a translate table on a given pattern buffer by
+assigning that table's address to the @code{translate} field of that
+buffer.  If you don't want Regex to do any translation, put zero into
+this field.  You'll get weird results if you change the table's contents
+anytime between compiling the pattern buffer, compiling its fastmap, and
+matching or searching with the pattern buffer.
+
+@node Using Registers
+@subsection Using Registers
+
+A group in a regular expression can match a (possibly empty) substring
+of the string that regular expression as a whole matched.  The matcher
+remembers the beginning and end of the substring matched by
+each group.
+
+To find out what they matched, pass a nonzero @var{regs} argument to a
+GNU matching or searching function (@pxref{GNU Matching} and
+@ref{GNU Searching}), i.e., the address of a structure of this type, as
+defined in @file{regex.h}:
+
+@c We don't bother to include this directly from regex.h,
+@c since it changes so rarely.
+@example
+@tindex re_registers
+@vindex num_regs @r{in @code{struct re_registers}}
+@vindex start @r{in @code{struct re_registers}}
+@vindex end @r{in @code{struct re_registers}}
+struct re_registers
+@{
+  unsigned num_regs;
+  regoff_t *start;
+  regoff_t *end;
+@};
+@end example
+
+Except for (possibly) the @var{num_regs}'th element (see below), the
+@var{i}th element of the @code{start} and @code{end} arrays records
+information about the @var{i}th group in the pattern.  (They're declared
+as C pointers, but this is only because not all C compilers accept
+zero-length arrays; conceptually, it is simplest to think of them as
+arrays.)
+
+The @code{start} and @code{end} arrays are allocated in one of two ways.
+The simplest and perhaps most useful is to let the matcher (re)allocate
+enough space to record information for all the groups in the regular
+expression.  If @code{re_set_registers} is not called before searching
+or matching, then the matcher allocates two arrays each of @math{1 +
+@var{re_nsub}} elements (@var{re_nsub} is another field in the pattern
+buffer; @pxref{GNU Pattern Buffers}).  The extra element is set to
+@math{-1}.  Then on subsequent calls with the same pattern buffer and
+@var{regs} arguments, the matcher reallocates more space if necessary.
+
+The function:
+
+@findex re_set_registers
+@example
+void
+re_set_registers (struct re_pattern_buffer *@var{buffer},
+                  struct re_registers *@var{regs},
+                  size_t @var{num_regs},
+                  regoff_t *@var{starts}, regoff_t *@var{ends})
+@end example
+
+@noindent sets @var{regs} to hold @var{num_regs} registers, storing
+them in @var{starts} and @var{ends}.  Subsequent matches using
+@var{buffer} and @var{regs} will use this memory for recording
+register information.  @var{starts} and @var{ends} must be allocated
+with malloc, and must each be at least @math{@var{num_regs} *
+@code{sizeof (regoff_t)}} bytes long.
+
+If @var{num_regs} is zero, then subsequent matches should allocate
+their own register data.
+
+Unless this function is called, the first search or match using
+@var{buffer} will allocate its own register data, without freeing the
+old data.
+
+The following examples illustrate the information recorded in the
+@code{re_registers} structure.  (In all of them, @samp{(} represents the
+open-group and @samp{)} the close-group operator.  The first character
+in the string @var{string} is at index 0.)
+
+@itemize @bullet
+
+@item
+If the regular expression has an @w{@var{i}-th}
+group that matches a
+substring of @var{string}, then the function sets
+@code{@w{@var{regs}->}start[@var{i}]} to the index in @var{string} where
+the substring matched by the @w{@var{i}-th} group begins, and
+@code{@w{@var{regs}->}end[@var{i}]} to the index just beyond that
+substring's end.  The function sets @code{@w{@var{regs}->}start[0]} and
+@code{@w{@var{regs}->}end[0]} to analogous information about the entire
+pattern.
+
+For example, when you match @samp{((a)(b))} against @samp{ab}, you get:
+
+@itemize
+@item
+0 in @code{@w{@var{regs}->}start[0]} and 2 in @code{@w{@var{regs}->}end[0]}
+
+@item
+0 in @code{@w{@var{regs}->}start[1]} and 2 in @code{@w{@var{regs}->}end[1]}
+
+@item
+0 in @code{@w{@var{regs}->}start[2]} and 1 in @code{@w{@var{regs}->}end[2]}
+
+@item
+1 in @code{@w{@var{regs}->}start[3]} and 2 in @code{@w{@var{regs}->}end[3]}
+@end itemize
+
+@item
+If a group matches more than once (as it might if followed by,
+e.g., a repetition operator), then the function reports the information
+about what the group @emph{last} matched.
+
+For example, when you match the pattern @samp{(a)*} against the string
+@samp{aa}, you get:
+
+@itemize
+@item
+0 in @code{@w{@var{regs}->}start[0]} and 2 in @code{@w{@var{regs}->}end[0]}
+
+@item
+1 in @code{@w{@var{regs}->}start[1]} and 2 in @code{@w{@var{regs}->}end[1]}
+@end itemize
+
+@item
+If the @w{@var{i}-th} group does not participate in a
+successful match, e.g., it is an alternative not taken or a
+repetition operator allows zero repetitions of it, then the function
+sets @code{@w{@var{regs}->}start[@var{i}]} and
+@code{@w{@var{regs}->}end[@var{i}]} to @math{-1}.
+
+For example, when you match the pattern @samp{(a)*b} against
+the string @samp{b}, you get:
+
+@itemize
+@item
+0 in @code{@w{@var{regs}->}start[0]} and 1 in @code{@w{@var{regs}->}end[0]}
+
+@item
+@math{-1} in @code{@w{@var{regs}->}start[1]} and @math{-1} in @code{@w{@var{regs}->}end[1]}
+@end itemize
+
+@item
+If the @w{@var{i}-th} group matches a zero-length string, then the
+function sets @code{@w{@var{regs}->}start[@var{i}]} and
+@code{@w{@var{regs}->}end[@var{i}]} to the index just beyond that
+zero-length string.
+
+For example, when you match the pattern @samp{(a*)b} against the string
+@samp{b}, you get:
+
+@itemize
+@item
+0 in @code{@w{@var{regs}->}start[0]} and 1 in @code{@w{@var{regs}->}end[0]}
+
+@item
+0 in @code{@w{@var{regs}->}start[1]} and 0 in @code{@w{@var{regs}->}end[1]}
+@end itemize
+
+@item
+If an @w{@var{i}-th} group contains a @w{@var{j}-th} group
+in turn not contained within any other group within group @var{i} and
+the function reports a match of the @w{@var{i}-th} group, then it
+records in @code{@w{@var{regs}->}start[@var{j}]} and
+@code{@w{@var{regs}->}end[@var{j}]} the last match (if it matched) of
+the @w{@var{j}-th} group.
+
+For example, when you match the pattern @samp{((a*)b)*} against the
+string @samp{abb}, @w{group 2} last matches the empty string, so you
+get what it previously matched:
+
+@itemize
+@item
+0 in @code{@w{@var{regs}->}start[0]} and 3 in @code{@w{@var{regs}->}end[0]}
+
+@item
+2 in @code{@w{@var{regs}->}start[1]} and 3 in @code{@w{@var{regs}->}end[1]}
+
+@item
+2 in @code{@w{@var{regs}->}start[2]} and 2 in @code{@w{@var{regs}->}end[2]}
+@end itemize
+
+When you match the pattern @samp{((a)*b)*} against the string
+@samp{abb}, @w{group 2} doesn't participate in the last match, so you
+get:
+
+@itemize
+@item
+0 in @code{@w{@var{regs}->}start[0]} and 3 in @code{@w{@var{regs}->}end[0]}
+
+@item
+2 in @code{@w{@var{regs}->}start[1]} and 3 in @code{@w{@var{regs}->}end[1]}
+
+@item
+0 in @code{@w{@var{regs}->}start[2]} and 1 in @code{@w{@var{regs}->}end[2]}
+@end itemize
+
+@item
+If an @w{@var{i}-th} group contains a @w{@var{j}-th} group
+in turn not contained within any other group within group @var{i}
+and the function sets
+@code{@w{@var{regs}->}start[@var{i}]} and
+@code{@w{@var{regs}->}end[@var{i}]} to @math{-1}, then it also sets
+@code{@w{@var{regs}->}start[@var{j}]} and
+@code{@w{@var{regs}->}end[@var{j}]} to @math{-1}.
+
+For example, when you match the pattern @samp{((a)*b)*c} against the
+string @samp{c}, you get:
+
+@itemize
+@item
+0 in @code{@w{@var{regs}->}start[0]} and 1 in @code{@w{@var{regs}->}end[0]}
+
+@item
+@math{-1} in @code{@w{@var{regs}->}start[1]} and @math{-1} in @code{@w{@var{regs}->}end[1]}
+
+@item
+@math{-1} in @code{@w{@var{regs}->}start[2]} and @math{-1} in @code{@w{@var{regs}->}end[2]}
+@end itemize
+
+@end itemize
+
+@node Freeing GNU Pattern Buffers
+@subsection Freeing GNU Pattern Buffers
+
+To free any allocated fields of a pattern buffer, use the POSIX
+function @code{regfree}:
+
+@findex regfree
+@example
+void
+regfree (regex_t *@var{preg})
+@end example
+
+@noindent
+@var{preg} is the pattern buffer whose allocated fields you want freed;
+this works because since the type @code{regex_t}---the type for
+POSIX pattern buffers---is equivalent to the type
+@code{re_pattern_buffer}.
+
+@code{regfree} also sets @var{preg}'s @code{allocated} field to zero.
+After a buffer has been freed, it must have a regular expression
+compiled in it before passing it to a matching or searching function.
+
+
+@node BSD Regex Functions
+@section BSD Regex Functions
+
+If you're writing code that has to be Berkeley Unix compatible,
+you'll need to use these functions whose interfaces are the same as those
+in Berkeley Unix.
+
+@menu
+* BSD Regular Expression Compiling::    re_comp ()
+* BSD Searching::                       re_exec ()
+@end menu
+
+@node BSD Regular Expression Compiling
+@subsection  BSD Regular Expression Compiling
+
+With Berkeley Unix, you can only search for a given regular
+expression; you can't match one.  To search for it, you must first
+compile it.  Before you compile it, you must indicate the regular
+expression syntax you want it compiled according to by setting the
+variable @code{re_syntax_options} (declared in @file{regex.h} to some
+syntax (@pxref{Regular Expression Syntax}).
+
+To compile a regular expression use:
+
+@findex re_comp
+@example
+char *
+re_comp (char *@var{regex})
+@end example
+
+@noindent
+@var{regex} is the address of a null-terminated regular expression.
+@code{re_comp} uses an internal pattern buffer, so you can use only the
+most recently compiled pattern buffer.  This means that if you want to
+use a given regular expression that you've already compiled---but it
+isn't the latest one you've compiled---you'll have to recompile it.  If
+you call @code{re_comp} with the null string (@emph{not} the empty
+string) as the argument, it doesn't change the contents of the pattern
+buffer.
+
+If @code{re_comp} successfully compiles the regular expression, it
+returns zero.  If it can't compile the regular expression, it returns
+an error string.  @code{re_comp}'s error messages are identical to those
+of @code{re_compile_pattern} (@pxref{GNU Regular Expression
+Compiling}).
+
+@node BSD Searching
+@subsection BSD Searching
+
+Searching the Berkeley Unix way means searching in a string
+starting at its first character and trying successive positions within
+it to find a match.  Once you've compiled a pattern using @code{re_comp}
+(@pxref{BSD Regular Expression Compiling}), you can ask Regex
+to search for that pattern in a string using:
+
+@findex re_exec
+@example
+int
+re_exec (char *@var{string})
+@end example
+
+@noindent
+@var{string} is the address of the null-terminated string in which you
+want to search.
+
+@code{re_exec} returns either 1 for success or 0 for failure.  It
+automatically uses a GNU fastmap (@pxref{Searching with Fastmaps}).

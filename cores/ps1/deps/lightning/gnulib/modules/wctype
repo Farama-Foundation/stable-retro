@@ -1,0 +1,37 @@
+Description:
+wctype() function: get descriptor for a wide character property.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+lib/wctype.c
+lib/wctype-impl.h
+m4/wctype.m4
+
+Depends-on:
+wctype-h
+iswblank        [test $HAVE_WCTYPE = 0]
+iswdigit        [test $HAVE_WCTYPE = 0]
+iswxdigit       [test $HAVE_WCTYPE = 0]
+
+configure.ac:
+gl_FUNC_WCTYPE
+if test $HAVE_WCTYPE = 0; then
+  AC_LIBOBJ([wctype])
+fi
+gl_WCTYPE_MODULE_INDICATOR([wctype])
+
+Makefile.am:
+
+Include:
+<wctype.h>
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,28 @@
+Description:
+Shell quoting.
+
+Files:
+lib/sh-quote.h
+lib/sh-quote.c
+
+Depends-on:
+quotearg
+xalloc
+
+configure.ac:
+AC_REQUIRE([AC_C_RESTRICT])
+
+Makefile.am:
+lib_SOURCES += sh-quote.h sh-quote.c
+
+Include:
+"sh-quote.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+all

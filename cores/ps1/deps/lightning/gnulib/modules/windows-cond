@@ -1,0 +1,32 @@
+Description:
+Condition variables (native Windows implementation).
+
+Files:
+lib/windows-cond.h
+lib/windows-cond.c
+lib/windows-initguard.h
+
+Depends-on:
+stdbool
+errno
+time
+gettimeofday
+
+configure.ac:
+AC_REQUIRE([AC_CANONICAL_HOST])
+case "$host_os" in
+  mingw*)
+    AC_LIBOBJ([windows-cond])
+    ;;
+esac
+
+Makefile.am:
+
+Include:
+"windows-cond.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

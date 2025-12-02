@@ -1,0 +1,21 @@
+Files:
+tests/test-fseeko.c
+tests/test-fseeko.sh
+tests/test-fseeko2.sh
+tests/test-fseeko3.c
+tests/test-fseeko3.sh
+tests/test-fseeko4.c
+tests/test-fseeko4.sh
+tests/signature.h
+tests/macros.h
+m4/ungetc.m4
+
+Depends-on:
+fdopen
+
+configure.ac:
+gl_FUNC_UNGETC_WORKS
+
+Makefile.am:
+TESTS += test-fseeko.sh test-fseeko2.sh test-fseeko3.sh test-fseeko4.sh
+check_PROGRAMS += test-fseeko test-fseeko3 test-fseeko4

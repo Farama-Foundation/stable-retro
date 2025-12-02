@@ -1,0 +1,24 @@
+Description:
+expf() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+expf
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(EXPF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

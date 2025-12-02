@@ -1,0 +1,42 @@
+@node freopen
+@section @code{freopen}
+@findex freopen
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/freopen.html}
+
+Gnulib module: freopen
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On some platforms, if @code{stream} does not already have an open
+file descriptor, @code{freopen} returns the stream without opening
+the file: glibc 2.24.
+@item
+On platforms where @code{off_t} is a 32-bit type, @code{freopen} may not work
+correctly with files larger than 2 GB@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@item
+On Windows platforms (excluding Cygwin), this function does usually not
+recognize the @file{/dev/null} filename.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), this function does not set @code{errno}
+upon failure.
+@item
+This function does not support a @code{NULL} file name argument on some
+platforms:
+OpenBSD 4.9, AIX 7.1, HP-UX 11.23, IRIX 6.5, Solaris 10, mingw, MSVC 14.
+@item
+This function does not fail when the file name argument ends in a slash
+and (without the slash) names a nonexistent file or a file that is not a
+directory, on some platforms:
+HP-UX 11.00, Solaris 9.
+@item
+Applications should not assume that @code{fileno(f)} will be the same
+before and after a call to @code{freopen(name,mode,f)}.  However, the
+module @code{freopen-safer} can at least protect @code{stdin}, @code{stdout},
+and @code{stderr}.
+@end itemize

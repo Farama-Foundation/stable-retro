@@ -1,0 +1,13 @@
+Files:
+tests/uninorm/test-canonical-decomposition.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-canonical-decomposition
+check_PROGRAMS += test-canonical-decomposition
+test_canonical_decomposition_SOURCES = uninorm/test-canonical-decomposition.c
+test_canonical_decomposition_LDADD = $(LDADD) $(LIBUNISTRING)

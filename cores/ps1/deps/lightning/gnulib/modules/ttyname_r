@@ -1,0 +1,29 @@
+Description:
+ttyname_r() function: Determine name of a terminal.
+
+Files:
+lib/ttyname_r.c
+m4/ttyname_r.m4
+
+Depends-on:
+unistd
+extensions
+
+configure.ac:
+gl_FUNC_TTYNAME_R
+if test $HAVE_TTYNAME_R = 0 || test $REPLACE_TTYNAME_R = 1; then
+  AC_LIBOBJ([ttyname_r])
+  gl_PREREQ_TTYNAME_R
+fi
+gl_UNISTD_MODULE_INDICATOR([ttyname_r])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

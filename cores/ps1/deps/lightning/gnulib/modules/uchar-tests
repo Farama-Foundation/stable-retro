@@ -1,0 +1,12 @@
+Files:
+tests/test-uchar.c
+
+Depends-on:
+verify
+uchar-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-uchar
+check_PROGRAMS += test-uchar

@@ -1,0 +1,28 @@
+Description:
+Test whether a Unicode character is "not a character".
+
+Files:
+lib/unictype/pr_not_a_character.c
+lib/unictype/pr_not_a_character.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/property-not-a-character])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_PROPERTY_NOT_A_CHARACTER
+lib_SOURCES += unictype/pr_not_a_character.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

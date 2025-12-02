@@ -1,0 +1,46 @@
+@c Documentation of gnulib module 'c-ctype'.
+
+@c Copyright (C) 2008--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+The @code{c-ctype} module contains functions operating on single-byte
+characters, like the functions in @code{<ctype.h>}, that operate as if the
+locale encoding was ASCII@.  (The "C" locale on many systems has the locale
+encoding "ASCII".)
+
+The functions are:
+@smallexample
+extern bool c_isascii (int c);
+
+extern bool c_isalnum (int c);
+extern bool c_isalpha (int c);
+extern bool c_isblank (int c);
+extern bool c_iscntrl (int c);
+extern bool c_isdigit (int c);
+extern bool c_islower (int c);
+extern bool c_isgraph (int c);
+extern bool c_isprint (int c);
+extern bool c_ispunct (int c);
+extern bool c_isspace (int c);
+extern bool c_isupper (int c);
+extern bool c_isxdigit (int c);
+
+extern int c_tolower (int c);
+extern int c_toupper (int c);
+@end smallexample
+
+These functions assign properties only to ASCII characters.
+
+The @var{c} argument can be a @code{char} or @code{unsigned char} value,
+whereas the corresponding functions in @code{<ctype.h>} take an argument
+that is actually an @code{unsigned char} value.
+
+The @code{c_is*} functions return @samp{bool}, where the corresponding
+functions in @code{<ctype.h>} return @samp{int} for historical reasons.
+
+Note: The @code{<ctype.h>} functions support only unibyte locales.

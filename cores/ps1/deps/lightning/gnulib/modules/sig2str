@@ -1,0 +1,28 @@
+Description:
+Convert between signal names and signal numbers.
+
+Files:
+lib/sig2str.h
+lib/sig2str.c
+m4/sig2str.m4
+
+Depends-on:
+intprops
+
+configure.ac:
+gl_FUNC_SIG2STR
+if test $ac_cv_func_sig2str = no; then
+  AC_LIBOBJ([sig2str])
+  gl_PREREQ_SIG2STR
+fi
+
+Makefile.am:
+
+Include:
+"sig2str.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

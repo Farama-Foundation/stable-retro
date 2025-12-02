@@ -1,0 +1,22 @@
+@node getdirentries
+@subsection @code{getdirentries}
+@findex getdirentries
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/getdirentries.3.html,,man getdirentries}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 6.7, Minix 3.1.8, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@item
+On platforms where @code{off_t} is a 32-bit type, this function may not
+work correctly on huge directories larger than 2 GB@.  The fix is to use
+the @code{AC_SYS_LARGEFILE} macro.
+@end itemize

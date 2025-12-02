@@ -1,0 +1,23 @@
+Description:
+Counts the number of 1-bits in a word.
+
+Files:
+lib/count-one-bits.c
+lib/count-one-bits.h
+
+Depends-on:
+extern-inline
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += count-one-bits.c
+
+Include:
+"count-one-bits.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Ben Pfaff

@@ -1,0 +1,30 @@
+Description:
+Manipulation of mode changes specified by strings (e.g. as first argument of
+chmod utility).
+
+Files:
+lib/modechange.h
+lib/modechange.c
+m4/modechange.m4
+
+Depends-on:
+stat
+stat-macros
+stdbool
+sys_stat
+xalloc
+
+configure.ac:
+gl_MODECHANGE
+
+Makefile.am:
+lib_SOURCES += modechange.c
+
+Include:
+"modechange.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

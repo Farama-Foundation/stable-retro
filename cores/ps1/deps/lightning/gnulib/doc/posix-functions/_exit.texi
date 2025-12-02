@@ -1,0 +1,19 @@
+@node _exit
+@section @code{_exit}
+@findex _exit
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/_exit.html}
+
+Gnulib module: unistd
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is declared in a different header file (namely, @code{<stdlib.h>})
+on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

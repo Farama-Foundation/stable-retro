@@ -1,0 +1,18 @@
+@node signbit
+@section @code{signbit}
+@findex signbit
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/signbit.html}
+
+Gnulib module: signbit
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, OpenBSD 6.7, AIX 5.1, IRIX 6.5, Solaris 11.0, MSVC 9, Android 9.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

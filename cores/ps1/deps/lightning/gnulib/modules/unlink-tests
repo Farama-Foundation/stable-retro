@@ -1,0 +1,17 @@
+Files:
+tests/test-unlink.h
+tests/test-unlink.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+stdbool
+symlink
+unlinkdir
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-unlink
+check_PROGRAMS += test-unlink

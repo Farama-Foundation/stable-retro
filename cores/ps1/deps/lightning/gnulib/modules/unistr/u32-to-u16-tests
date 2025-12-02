@@ -1,0 +1,14 @@
+Files:
+tests/unistr/test-u32-to-u16.c
+tests/macros.h
+
+Depends-on:
+unistr/u16-cmp
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-to-u16
+check_PROGRAMS += test-u32-to-u16
+test_u32_to_u16_SOURCES = unistr/test-u32-to-u16.c
+test_u32_to_u16_LDADD = $(LDADD) $(LIBUNISTRING)

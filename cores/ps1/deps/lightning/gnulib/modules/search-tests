@@ -1,0 +1,11 @@
+Files:
+tests/test-search.c
+
+Depends-on:
+search-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-search
+check_PROGRAMS += test-search

@@ -1,0 +1,45 @@
+Description:
+Stack overflow handling, causing program exit.
+
+Files:
+lib/c-stack.h
+lib/c-stack.c
+m4/c-stack.m4
+m4/libsigsegv.m4
+
+Depends-on:
+c99
+errno
+exitfail
+getprogname
+gettext-h
+havelib
+idx
+ignore-value
+intprops
+inttypes
+mempcpy
+raise
+sigaction
+stdbool
+stddef
+unistd
+
+configure.ac:
+gl_C_STACK
+
+Makefile.am:
+lib_SOURCES += c-stack.h c-stack.c
+
+Include:
+"c-stack.h"
+
+Link:
+$(LTLIBCSTACK) when linking with libtool, $(LIBCSTACK) otherwise
+$(LTLIBINTL) when linking with libtool, $(LIBINTL) otherwise
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert

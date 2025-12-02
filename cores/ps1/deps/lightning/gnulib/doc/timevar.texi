@@ -1,0 +1,95 @@
+@node Profiling of program phases
+@section Profiling of program phases
+
+The module @samp{timevar} provides a simple self-profiling facility,
+based on timers.
+
+@smallexample
+Execution times (seconds)
+read                  :   0.09 (19%) usr   0.08 (80%) sys   0.09 (18%) wall
+read: scan            :   0.04 ( 9%) usr   0.08 (80%) sys   0.12 (26%) wall
+read: parse           :   0.05 (10%) usr   0.00 ( 0%) sys   0.05 (10%) wall
+work                  :   0.33 (70%) usr   0.00 ( 0%) sys   0.35 (71%) wall
+work: phase 1         :   0.30 (64%) usr   0.00 ( 0%) sys   0.30 (64%) wall
+work: phase 2         :   0.13 (28%) usr   0.00 ( 0%) sys   0.14 (29%) wall
+output                :   0.04 ( 9%) usr   0.02 (20%) sys   0.04 ( 8%) wall
+total time            :   0.47             0.10             0.49
+@end smallexample
+
+To set up @code{timevar}, copy the stub file
+@file{gnulib/lib/timevar.def} next to where @file{timevar.h} and
+@file{timevar.c} were imported in your project, and define your timers
+there.  For instance:
+
+@smallexample
+/* The total execution time.  Mandatory.  */
+DEFTIMEVAR (tv_total,      "total time")
+
+/* Examples.  */
+DEFTIMEVAR (tv_read,       "read")
+DEFTIMEVAR (tv_work,       "work")
+DEFTIMEVAR (tv_work_1,     "work: phase 1")
+DEFTIMEVAR (tv_work_2,     "work: phase 2")
+DEFTIMEVAR (tv_output,     "output")
+@end smallexample
+
+Do not remove @code{tv_total}, it is mandatory.  You may change its
+associated string.
+
+@sp 1
+
+Use @code{timevar_push}/@code{timevar_pop} to start/stop timers, as in
+the following example.
+
+@smallexample
+#include <config.h>
+#include "timevar.h"
+
+#include <stdio.h>
+#include "read.h"
+#include "work.h"
+#include "output.h"
+
+int
+main (void)
+@{
+  timevar_enabled = true;
+  timevar_init ();
+  timevar_start (tv_total);
+
+  timevar_push (tv_read);
+  reader ();
+  timevar_pop (tv_read);
+
+  timevar_push (tv_work);
+  work ();
+  timevar_pop (tv_work);
+
+  timevar_push (tv_output);
+  output ();
+  timevar_pop (tv_output);
+
+  timevar_stop (tv_total);
+  timevar_print (stderr);
+@}
+@end smallexample
+
+@noindent
+with, for instance, in @file{work.c}
+
+@smallexample
+#include <config.h>
+#include "work.h"
+
+void
+work (void)
+@{
+  timevar_push (tv_work_phase1);
+  work1 ();
+  timevar_pop (tv_work_phase1);
+
+  timevar_push (tv_work_phase2);
+  work2 ();
+  timevar_pop (tv_work_phase2);
+@}
+@end smallexample

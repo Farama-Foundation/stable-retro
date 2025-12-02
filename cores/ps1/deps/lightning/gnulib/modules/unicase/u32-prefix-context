@@ -1,0 +1,32 @@
+Description:
+Case-mapping context of prefix UTF-32 string.
+
+Files:
+lib/unicase/u32-prefix-context.c
+lib/unicase/u-prefix-context.h
+lib/unicase/context.h
+
+Depends-on:
+unicase/base
+unicase/empty-prefix-context
+unicase/ignorable
+unictype/combining-class
+unistr/u32-mbtouc-unsafe
+unistr/u32-prev
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.10], [unicase/u32-prefix-context])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U32_PREFIX_CONTEXT
+lib_SOURCES += unicase/u32-prefix-context.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

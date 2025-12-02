@@ -1,0 +1,12 @@
+Files:
+tests/test-sigdescr_np.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sigdescr_np
+check_PROGRAMS += test-sigdescr_np

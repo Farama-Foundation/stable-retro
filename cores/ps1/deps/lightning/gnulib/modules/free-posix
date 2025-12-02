@@ -1,0 +1,28 @@
+Description:
+Work around systems where free clobbers errno.
+
+Files:
+lib/free.c
+m4/free.m4
+
+Depends-on:
+stdlib
+
+configure.ac:
+gl_FUNC_FREE
+if test $REPLACE_FREE = 1; then
+  AC_LIBOBJ([free])
+  gl_PREREQ_FREE
+fi
+gl_STDLIB_MODULE_INDICATOR([free-posix])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert

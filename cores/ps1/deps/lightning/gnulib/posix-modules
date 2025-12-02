@@ -1,0 +1,302 @@
+#!/bin/sh
+#
+# Copyright (C) 2002-2008, 2010-2021 Free Software Foundation, Inc.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+progname=$0
+package=gnulib
+
+# func_usage
+# outputs to stdout the --help usage message.
+func_usage ()
+{
+  echo "\
+Usage: posix-modules [option]
+
+Lists the gnulib modules that implement POSIX interfaces.
+
+Options:
+
+      --for-mingw           list only modules that work on mingw
+      --for-msvc            list only modules that work on MSVC
+
+Report bugs to <bug-gnulib@gnu.org>."
+}
+
+# func_version
+# outputs to stdout the --version message.
+func_version ()
+{
+  func_gnulib_dir
+  if test -d "$gnulib_dir"/.git \
+     && (git --version) >/dev/null 2>/dev/null \
+     && (date --version) >/dev/null 2>/dev/null; then
+    # gnulib checked out from git.
+    sed_extract_first_date='/^Date/{
+s/^Date:[	 ]*//p
+q
+}'
+    date=`cd "$gnulib_dir" && git log ChangeLog | sed -n -e "$sed_extract_first_date"`
+    # Turn "Fri Mar 21 07:16:51 2008 -0600" into "Mar 21 2008 07:16:51 -0600".
+    sed_year_before_time='s/^[^ ]* \([^ ]*\) \([0-9]*\) \([0-9:]*\) \([0-9]*\) /\1 \2 \4 \3 /'
+    date=`echo "$date" | sed -e "$sed_year_before_time"`
+    # Use GNU date to compute the time in GMT.
+    date=`date -d "$date" -u +"%Y-%m-%d %H:%M:%S"`
+    version=' '`cd "$gnulib_dir" && ./build-aux/git-version-gen /dev/null | sed -e 's/-dirty/-modified/'`
+  else
+    # gnulib copy without versioning information.
+    date=`sed -e 's/ .*//;q' "$gnulib_dir"/ChangeLog`
+    version=
+  fi
+  year=`"$gnulib_dir"/build-aux/mdate-sh "$self_abspathname" | sed 's,^.* ,,'`
+  echo "\
+posix-modules (GNU $package $date)$version
+Copyright (C) $year Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Written by" "Bruno Haible"
+}
+
+# func_exit STATUS
+# exits with a given status.
+# This function needs to be used, rather than 'exit', when a 'trap' handler is
+# in effect that refers to $?.
+func_exit ()
+{
+  (exit $1); exit $1
+}
+
+# func_gnulib_dir
+# locates the directory where the gnulib repository lives
+# Input:
+# - progname                 name of this program
+# Sets variables
+# - self_abspathname         absolute pathname of this program
+# - gnulib_dir               absolute pathname of gnulib repository
+func_gnulib_dir ()
+{
+  case "$progname" in
+    /*) self_abspathname="$progname" ;;
+    */*) self_abspathname=`pwd`/"$progname" ;;
+    *)
+      # Look in $PATH.
+      # Iterate through the elements of $PATH.
+      # We use IFS=: instead of
+      #   for d in `echo ":$PATH:" | sed -e 's/:::*/:.:/g' | sed -e 's/:/ /g'`
+      # because the latter does not work when some PATH element contains spaces.
+      # We use a canonicalized $pathx instead of $PATH, because empty PATH
+      # elements are by definition equivalent to '.', however field splitting
+      # according to IFS=: loses empty fields in many shells:
+      #   - /bin/sh on OSF/1 and Solaris loses all empty fields (at the
+      #     beginning, at the end, and in the middle),
+      #   - /bin/sh on IRIX and /bin/ksh on IRIX and OSF/1 lose empty fields
+      #     at the beginning and at the end,
+      #   - GNU bash, /bin/sh on AIX and HP-UX, and /bin/ksh on AIX, HP-UX,
+      #     Solaris lose empty fields at the end.
+      # The 'case' statement is an optimization, to avoid evaluating the
+      # explicit canonicalization command when $PATH contains no empty fields.
+      self_abspathname=
+      if test "${PATH_SEPARATOR+set}" != set; then
+        # Determine PATH_SEPARATOR by trying to find /bin/sh in a PATH which
+        # contains only /bin. Note that ksh looks also at the FPATH variable,
+        # so we have to set that as well for the test.
+        PATH_SEPARATOR=:
+        (PATH='/bin;/bin'; FPATH=$PATH; sh -c :) >/dev/null 2>&1 \
+          && { (PATH='/bin:/bin'; FPATH=$PATH; sh -c :) >/dev/null 2>&1 \
+                 || PATH_SEPARATOR=';'
+             }
+      fi
+      if test "$PATH_SEPARATOR" = ";"; then
+        # On Windows, programs are searched in "." before $PATH.
+        pathx=".;$PATH"
+      else
+        # On Unix, we have to convert empty PATH elements to ".".
+        pathx="$PATH"
+        case :$PATH: in
+          *::*)
+            pathx=`echo ":$PATH:" | sed -e 's/:::*/:.:/g' -e 's/^://' -e 's/:\$//'`
+            ;;
+        esac
+      fi
+      save_IFS="$IFS"
+      IFS="$PATH_SEPARATOR"
+      for d in $pathx; do
+        IFS="$save_IFS"
+        test -z "$d" && d=.
+        if test -x "$d/$progname" && test ! -d "$d/$progname"; then
+          self_abspathname="$d/$progname"
+          break
+        fi
+      done
+      IFS="$save_IFS"
+      if test -z "$self_abspathname"; then
+        func_fatal_error "could not locate the posix-modules program - how did you invoke it?"
+      fi
+      ;;
+  esac
+  while test -h "$self_abspathname"; do
+    # Resolve symbolic link.
+    linkval=`func_readlink "$self_abspathname"`
+    test -n "$linkval" || break
+    case "$linkval" in
+      /* ) self_abspathname="$linkval" ;;
+      * ) self_abspathname=`echo "$self_abspathname" | sed -e 's,/[^/]*$,,'`/"$linkval" ;;
+    esac
+  done
+  gnulib_dir=`echo "$self_abspathname" | sed -e 's,/[^/]*$,,'`
+}
+
+# func_tmpdir
+# creates a temporary directory.
+# Input:
+# - progname                 name of this program
+# Sets variable
+# - tmp             pathname of freshly created temporary directory
+func_tmpdir ()
+{
+  # Use the environment variable TMPDIR, falling back to /tmp. This allows
+  # users to specify a different temporary directory, for example, if their
+  # /tmp is filled up or too small.
+  : ${TMPDIR=/tmp}
+  {
+    # Use the mktemp program if available. If not available, hide the error
+    # message.
+    tmp=`(umask 077 && mktemp -d "$TMPDIR/glXXXXXX") 2>/dev/null` &&
+    test -n "$tmp" && test -d "$tmp"
+  } ||
+  {
+    # Use a simple mkdir command. It is guaranteed to fail if the directory
+    # already exists.  $RANDOM is bash specific and expands to empty in shells
+    # other than bash, ksh and zsh.  Its use does not increase security;
+    # rather, it minimizes the probability of failure in a very cluttered /tmp
+    # directory.
+    tmp=$TMPDIR/gl$$-$RANDOM
+    (umask 077 && mkdir "$tmp")
+  } ||
+  {
+    echo "$progname: cannot create a temporary directory in $TMPDIR" >&2
+    func_exit 1
+  }
+}
+
+# func_fatal_error message
+# outputs to stderr a fatal error message, and terminates the program.
+# Input:
+# - progname                 name of this program
+func_fatal_error ()
+{
+  echo "$progname: *** $1" 1>&2
+  echo "$progname: *** Stop." 1>&2
+  func_exit 1
+}
+
+# func_readlink SYMLINK
+# outputs the target of the given symlink.
+if (type -p readlink) > /dev/null 2>&1; then
+  func_readlink ()
+  {
+    # Use the readlink program from GNU coreutils.
+    readlink "$1"
+  }
+else
+  func_readlink ()
+  {
+    # Use two sed invocations. A single sed -n -e 's,^.* -> \(.*\)$,\1,p'
+    # would do the wrong thing if the link target contains " -> ".
+    LC_ALL=C ls -l "$1" | sed -e 's, -> ,#%%#,' | sed -n -e 's,^.*#%%#\(.*\)$,\1,p'
+  }
+fi
+
+# Excludes for mingw.
+exclude_for_mingw=
+# <grp.h> does not exist.
+exclude_for_mingw="$exclude_for_mingw pt_chown grantpt posix_openpt-tests posix_openpt"
+# The functions getuid, getgid, geteuid, getegid don't exist.
+exclude_for_mingw="$exclude_for_mingw faccessat"
+exclude_for_mingw="$exclude_for_mingw fchownat-tests fchownat"
+
+# Excludes for MSVC.
+exclude_for_msvc="$exclude_for_mingw"
+
+# Command-line option processing.
+exclude=
+while test $# -gt 0; do
+  case "$1" in
+    --for-mingw | --for-ming | --for-min | --for-mi )
+      exclude="$exclude $exclude_for_mingw"
+      shift ;;
+    --for-msvc | --for-msv | --for-ms )
+      exclude="$exclude $exclude_for_msvc"
+      shift ;;
+    --help | --hel | --he | --h )
+      func_usage
+      exit $? ;;
+    --version | --versio | --versi | --vers | --ver | --ve | --v )
+      func_version
+      exit $? ;;
+    -* )
+      echo "posix-modules: unknown option $1" 1>&2
+      echo "Try 'posix-modules --help' for more information." 1>&2
+      exit 1 ;;
+    * )
+      echo "posix-modules: too many arguments" 1>&2
+      echo "Try 'posix-modules --help' for more information." 1>&2
+      exit 1 ;;
+  esac
+done
+
+func_gnulib_dir
+func_tmpdir
+trap 'exit_status=$?
+      if test "$signal" != 0; then
+        echo "caught signal $signal" >&2
+      fi
+      rm -rf "$tmp"
+      exit $exit_status' 0
+for signal in 1 2 3 13 15; do
+  trap '{ signal='$signal'; func_exit 1; }' $signal
+done
+signal=0
+
+(
+  # Get the header modules.
+  LC_ALL=C grep -h '^Gnulib module: ' "$gnulib_dir"/doc/posix-headers/*.texi 2>/dev/null \
+    | sed -e 's,^Gnulib module: ,,'
+  # Get the function modules.
+  LC_ALL=C grep -h '^Gnulib module: ' "$gnulib_dir"/doc/posix-functions/*.texi 2>/dev/null \
+    | sed -e 's,^Gnulib module: ,,'
+  # Then filter out the words "---", ",", "and", "or" and remove *-gnu modules.
+) | sed -e 's/,/ /g' | LC_ALL=C sort | LC_ALL=C uniq \
+  | { # Then filter out the words "---", "and", "or" and remove *-gnu modules.
+      tr ' ' '\012' | sed -e '/^---$/d' -e '/^and$/d' -e '/^or$/d' -e '/-gnu$/d'
+    } \
+  | LC_ALL=C sort | LC_ALL=C uniq \
+  | { # Then filter out the excludes.
+      if test -n "$exclude"; then
+        for m in $exclude; do echo $m; done | LC_ALL=C sort -u > "$tmp"/excludes
+        LC_ALL=C join -v 1 - "$tmp"/excludes
+        rm -f "$tmp"/excludes
+      else
+        cat
+      fi
+    }
+
+# Local Variables:
+# indent-tabs-mode: nil
+# whitespace-check-buffer-indent: nil
+# End:

@@ -1,0 +1,31 @@
+Description:
+Convert calendar time to simple time, inverse of mktime.
+
+Files:
+lib/mktime-internal.h
+lib/timegm.c
+m4/timegm.m4
+
+Depends-on:
+time
+mktime-internal [test $HAVE_TIMEGM = 0 || test $REPLACE_TIMEGM = 1]
+time_r          [test $HAVE_TIMEGM = 0 || test $REPLACE_TIMEGM = 1]
+
+configure.ac:
+gl_FUNC_TIMEGM
+if test $HAVE_TIMEGM = 0 || test $REPLACE_TIMEGM = 1; then
+  AC_LIBOBJ([timegm])
+  gl_PREREQ_TIMEGM
+fi
+gl_TIME_MODULE_INDICATOR([timegm])
+
+Makefile.am:
+
+Include:
+<time.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

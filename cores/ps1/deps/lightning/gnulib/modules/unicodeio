@@ -1,0 +1,36 @@
+Description:
+Unicode character output to streams with locale dependent encoding.
+
+Files:
+lib/unicodeio.h
+lib/unicodeio.c
+m4/unicodeio.m4
+m4/musl.m4
+
+Depends-on:
+unistr/u8-uctomb
+iconv
+iconv_open
+gettext-h
+localcharset
+error
+stdio
+
+configure.ac:
+gl_UNICODEIO
+
+Makefile.am:
+lib_SOURCES += unicodeio.h unicodeio.c
+
+Include:
+"unicodeio.h"
+
+Link:
+$(LTLIBICONV) when linking with libtool, $(LIBICONV) otherwise
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+
+License:
+GPL
+
+Maintainer:
+all

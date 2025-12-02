@@ -1,0 +1,12 @@
+Files:
+tests/test-malloca.c
+
+Depends-on:
+unsetenv
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-malloca
+check_PROGRAMS += test-malloca
+

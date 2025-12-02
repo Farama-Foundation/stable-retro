@@ -1,0 +1,12 @@
+Files:
+tests/test-sigabbrev_np.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sigabbrev_np
+check_PROGRAMS += test-sigabbrev_np

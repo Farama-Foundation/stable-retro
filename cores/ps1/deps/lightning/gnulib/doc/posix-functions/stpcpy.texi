@@ -1,0 +1,22 @@
+@node stpcpy
+@section @code{stpcpy}
+@findex stpcpy
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/stpcpy.html}
+
+Gnulib module: stpcpy
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14, Android 4.4.
+@item
+This function cannot be called from plain inline or extern inline functions
+on some platforms:
+OS X 10.8.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

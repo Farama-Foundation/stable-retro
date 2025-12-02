@@ -1,0 +1,29 @@
+Description:
+readdir() function: read the next entry of a directory
+
+Files:
+lib/readdir.c
+lib/dirent-private.h
+m4/readdir.m4
+
+Depends-on:
+dirent
+largefile
+
+configure.ac:
+gl_FUNC_READDIR
+if test $HAVE_READDIR = 0; then
+  AC_LIBOBJ([readdir])
+fi
+gl_DIRENT_MODULE_INDICATOR([readdir])
+
+Makefile.am:
+
+Include:
+<dirent.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

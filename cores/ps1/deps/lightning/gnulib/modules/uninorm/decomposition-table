@@ -1,0 +1,26 @@
+Description:
+Decomposition of Unicode characters.
+
+Files:
+lib/uninorm/decomposition-table.h
+lib/uninorm/decomposition-table.c
+lib/uninorm/decomposition-table1.h
+lib/uninorm/decomposition-table2.h
+
+Depends-on:
+uninorm/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+
+Makefile.am:
+lib_SOURCES += uninorm/decomposition-table.c
+
+Include:
+"uninorm/decomposition-table.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

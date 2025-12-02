@@ -1,0 +1,27 @@
+@node timezone
+@section @code{timezone}
+@findex timezone
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/timezone.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This variable is missing on some platforms:
+IRIX 6.5, mingw.
+@item
+The address of this variable is not a compile-time constant on some platforms:
+mingw.
+@item
+Native Windows platforms (mingw, MSVC) support only a subset of time
+zones supported by GNU or specified by POSIX@.  @xref{tzset}.
+@end itemize
+
+A more portable way of getting the UTC offset is to use
+@code{strftime} with the @code{%z} format.  @xref{strftime}.

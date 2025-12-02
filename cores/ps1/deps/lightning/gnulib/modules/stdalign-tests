@@ -1,0 +1,13 @@
+Files:
+tests/test-stdalign.c
+tests/macros.h
+
+Depends-on:
+verify
+stdint
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-stdalign
+check_PROGRAMS += test-stdalign

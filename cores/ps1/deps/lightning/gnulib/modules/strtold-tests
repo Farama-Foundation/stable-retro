@@ -1,0 +1,29 @@
+Files:
+tests/test-strtold.c
+tests/test-strtold1.sh
+tests/test-strtold1.c
+tests/signature.h
+tests/minus-zero.h
+tests/macros.h
+m4/locale-fr.m4
+m4/codeset.m4
+
+Depends-on:
+float
+isnanl-nolibm
+signbit
+
+configure.ac:
+gt_LOCALE_FR
+gt_LOCALE_FR_UTF8
+
+Makefile.am:
+TESTS += test-strtold
+check_PROGRAMS += test-strtold
+
+TESTS += test-strtold1.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
+check_PROGRAMS += test-strtold1
+test_strtold1_LDADD = $(LDADD) $(LIB_SETLOCALE)

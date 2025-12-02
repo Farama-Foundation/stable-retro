@@ -1,0 +1,29 @@
+@node addseverity
+@subsection @code{addseverity}
+@findex addseverity
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Adding Severity Classes,,Adding Severity Classes,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Adding-Severity-Classes.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/addseverity.3.html,,man addseverity}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

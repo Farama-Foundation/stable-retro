@@ -1,0 +1,12 @@
+Files:
+tests/test-glob-h.c
+tests/macros.h
+
+Depends-on:
+glob-h-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-glob-h
+check_PROGRAMS += test-glob-h

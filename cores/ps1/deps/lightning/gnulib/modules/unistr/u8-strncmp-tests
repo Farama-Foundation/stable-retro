@@ -1,0 +1,14 @@
+Files:
+tests/unistr/test-u8-strncmp.c
+tests/unistr/test-strncmp.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-strncmp
+check_PROGRAMS += test-u8-strncmp
+test_u8_strncmp_SOURCES = unistr/test-u8-strncmp.c
+test_u8_strncmp_LDADD = $(LDADD) $(LIBUNISTRING)

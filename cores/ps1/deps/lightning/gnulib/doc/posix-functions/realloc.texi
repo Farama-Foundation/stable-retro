@@ -1,0 +1,35 @@
+@node realloc
+@section @code{realloc}
+@findex realloc
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/realloc.html}
+
+Gnulib module: realloc-posix
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+Upon failure, the function does not set @code{errno} to @code{ENOMEM} on
+some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+It is not portable to call @code{realloc} with a size of 0.  With a
+NULL pointer argument, this is the same ambiguity as @code{malloc (0)}
+on whether a unique zero-size object is created.  With a non-NULL
+pointer argument, C99 requires that if @code{realloc (p, 0)} returns
+@code{NULL} then @code{p} is still valid.  Among implementations that
+obey C99, behavior varies on whether @code{realloc (p, 0)} always
+fails and leaves @code{p} valid, or usually succeeds and returns a
+unique zero-size object; either way, a program not suspecting these
+semantics will leak memory (either the still-valid @code{p}, or the
+non-NULL return value).  Meanwhile, several implementations violate
+C99, by always calling @code{free (p)} but returning NULL:
+glibc, Cygwin
+@end itemize
+
+Extension: Gnulib provides a module @samp{realloc-gnu} that substitutes a
+@code{realloc} implementation that behaves more like the glibc implementation.

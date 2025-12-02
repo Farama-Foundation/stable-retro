@@ -1,0 +1,18 @@
+Files:
+tests/test-ceilf-ieee.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnanf-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ceilf-ieee
+check_PROGRAMS += test-ceilf-ieee
+test_ceilf_ieee_LDADD = $(LDADD) @CEILF_LIBM@

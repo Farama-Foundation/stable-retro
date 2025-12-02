@@ -1,0 +1,29 @@
+Description:
+fdopen() function: open a stream with a given file descriptor.
+
+Files:
+lib/fdopen.c
+m4/fdopen.m4
+
+Depends-on:
+stdio
+msvc-inval      [test $REPLACE_FDOPEN = 1]
+
+configure.ac:
+gl_FUNC_FDOPEN
+if test $REPLACE_FDOPEN = 1; then
+  AC_LIBOBJ([fdopen])
+  gl_PREREQ_FDOPEN
+fi
+gl_STDIO_MODULE_INDICATOR([fdopen])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

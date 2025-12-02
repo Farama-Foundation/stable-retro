@@ -1,0 +1,14 @@
+Files:
+tests/test-acosl.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+fpucw
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-acosl
+check_PROGRAMS += test-acosl
+test_acosl_LDADD = $(LDADD) @ACOSL_LIBM@

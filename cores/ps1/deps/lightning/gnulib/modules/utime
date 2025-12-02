@@ -1,0 +1,32 @@
+Description:
+utime() function: set access and modification times of a file.
+
+Files:
+lib/utime.c
+m4/utime.m4
+
+Depends-on:
+utime-h
+time
+filename        [test $HAVE_UTIME = 0 || test $REPLACE_UTIME = 1]
+malloca         [test $HAVE_UTIME = 0 || test $REPLACE_UTIME = 1]
+stat            [test $HAVE_UTIME = 0 || test $REPLACE_UTIME = 1]
+
+configure.ac:
+gl_FUNC_UTIME
+if test $HAVE_UTIME = 0 || test $REPLACE_UTIME = 1; then
+  AC_LIBOBJ([utime])
+  gl_PREREQ_UTIME
+fi
+gl_UTIME_MODULE_INDICATOR([utime])
+
+Makefile.am:
+
+Include:
+<utime.h>
+
+License:
+LGPL
+
+Maintainer:
+Bruno Haible

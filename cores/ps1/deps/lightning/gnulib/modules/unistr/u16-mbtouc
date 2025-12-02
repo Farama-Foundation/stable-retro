@@ -1,0 +1,27 @@
+Description:
+Look at first character in UTF-16 string.
+
+Files:
+lib/unistr/u16-mbtouc.c
+lib/unistr/u16-mbtouc-aux.c
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_MODULE_INDICATOR([unistr/u16-mbtouc])
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u16-mbtouc])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U16_MBTOUC
+lib_SOURCES += unistr/u16-mbtouc.c unistr/u16-mbtouc-aux.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

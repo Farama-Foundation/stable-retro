@@ -1,0 +1,31 @@
+@node unistd.h
+@section @file{unistd.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/unistd.h.html}
+
+Gnulib module: unistd
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+MSVC 14.
+@item
+The SEEK_* macros are not defined in this file on some platforms:
+mingw.
+@item
+The *_FILENO macros are not defined in this file on some platforms:
+OS/2 EMX, mingw.
+@item
+The @code{_exit} function is not declared in this file on some platforms:
+mingw.
+
+@item
+Some platforms provide a @code{NULL} macro that cannot be used in arbitrary
+expressions:
+NetBSD 5.0
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

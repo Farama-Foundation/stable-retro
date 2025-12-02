@@ -1,0 +1,14 @@
+Description:
+Macros to test whether LD support --linker-script.
+
+Files:
+m4/ld-version-script.m4
+
+configure.ac:
+gl_LD_VERSION_SCRIPT
+
+License:
+unlimited
+
+Maintainer:
+Simon Josefsson

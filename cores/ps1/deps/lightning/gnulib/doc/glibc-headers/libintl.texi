@@ -1,0 +1,43 @@
+@node libintl.h
+@section @file{libintl.h}
+
+Defines the macros @code{__USE_GNU_GETTEXT},
+@code{__GNU_GETTEXT_SUPPORTED_REVISION}, and declares the functions
+@code{gettext}, @code{dgettext}, @code{dcgettext},
+@code{ngettext}, @code{dngettext}, @code{dcngettext},
+@code{textdomain}, @code{bindtextdomain}, @code{bind_textdomain_codeset}.
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Message catalogs with gettext,,The `gettext' family of functions,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Message-catalogs-with-gettext.html},
+@end ifnotinfo
+@item
+@ifinfo
+@ref{gettext,,,gettext},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/gettext/manual/html_node/gettext.html}.
+@end ifnotinfo
+@end itemize
+
+Gnulib module: gettext
+
+Portability problems fixed by Gnulib, if GNU gettext is installed:
+@itemize
+@item
+This header file is missing on some platforms:
+macOS 11.1, FreeBSD 6.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, mingw, MSVC 14, Android 9.0.
+@item
+The functions cannot deal with GNU .mo files with system-dependent strings
+(of major version 1 or of minor version 1) on some non-glibc platforms:
+NetBSD 3.0, Solaris 10.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

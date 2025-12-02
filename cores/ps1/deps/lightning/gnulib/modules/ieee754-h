@@ -1,0 +1,39 @@
+Description:
+An <ieee754.h> that is like GNU.
+
+Files:
+lib/ieee754.in.h
+m4/ieee754-h.m4
+
+Depends-on:
+
+configure.ac:
+gl_IEEE754_H
+
+Makefile.am:
+BUILT_SOURCES += $(IEEE754_H)
+
+# We need the following in order to create <ieee754.h> when the system
+# doesn't have one that works with the given compiler.
+if GL_GENERATE_IEEE754_H
+ieee754.h: ieee754.in.h $(top_builddir)/config.status
+	$(AM_V_GEN)rm -f $@-t && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  sed -e 's/ifndef _GL_GNULIB_HEADER/if 0/g' \
+	    $(srcdir)/ieee754.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+else
+ieee754.h: $(top_builddir)/config.status
+	rm -f $@
+endif
+MOSTLYCLEANFILES += ieee754.h ieee754.h-t
+
+Include:
+<ieee754.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

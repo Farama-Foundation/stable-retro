@@ -1,0 +1,31 @@
+Description:
+tmpfile function that avoids clobbering std{in,out,err}.
+
+Files:
+lib/stdio--.h
+lib/stdio-safer.h
+lib/tmpfile-safer.c
+
+Depends-on:
+binary-io
+tmpfile
+unistd-safer
+
+configure.ac:
+gl_MODULE_INDICATOR([tmpfile-safer])
+
+Makefile.am:
+lib_SOURCES += tmpfile-safer.c
+
+Include:
+"stdio-safer.h"
+
+Link:
+$(LIB_GETRANDOM)
+$(LIB_CLOCK_GETTIME)
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

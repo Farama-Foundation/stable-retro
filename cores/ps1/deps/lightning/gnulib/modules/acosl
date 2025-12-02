@@ -1,0 +1,34 @@
+Description:
+acosl() function: inverse cosine function with long double argument.
+
+Files:
+lib/acosl.c
+m4/acosl.m4
+
+Depends-on:
+math
+extensions
+acos            [test $HAVE_ACOSL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+asinl           [test $HAVE_ACOSL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+sqrtl           [test $HAVE_ACOSL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+gl_FUNC_ACOSL
+if test $HAVE_ACOSL = 0; then
+  AC_LIBOBJ([acosl])
+fi
+gl_MATH_MODULE_INDICATOR([acosl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ACOSL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+Paolo Bonzini

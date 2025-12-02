@@ -1,0 +1,25 @@
+Description:
+asprintf() and vasprintf() in C locale
+
+Files:
+lib/c-vasprintf.h
+lib/c-asprintf.c
+lib/c-vasprintf.c
+
+Depends-on:
+stdio
+c-vasnprintf
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += c-asprintf.c c-vasprintf.c
+
+Include:
+"c-vasprintf.h"
+
+License:
+GPL
+
+Maintainer:
+Ben Pfaff

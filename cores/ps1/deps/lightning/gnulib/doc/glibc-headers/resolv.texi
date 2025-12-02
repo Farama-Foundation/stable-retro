@@ -1,0 +1,34 @@
+@node resolv.h
+@section @file{resolv.h}
+
+Defines the types @code{res_sendhookact}, @code{res_send_qhook},
+@code{res_send_rhook}, @code{res_state}, @code{struct res_sym} and the
+macros @code{_PATH_RESCONF}, @code{RES_*}, and declares the functions
+@code{fp_nquery}, @code{fp_query},
+@code{hostalias},
+@code{p_query},
+@code{res_close}, @code{res_init}, @code{res_isourserver},
+@code{res_mkquery}, @code{res_query}, @code{res_querydomain},
+@code{res_search}, @code{res_send}.
+
+Documentation:
+@itemize
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/res_init.3.html,,man res_init}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+Cygwin 1.5.x, mingw, MSVC 14.
+@item
+The functions are missing on some platforms:
+HP-UX 11.
+@end itemize

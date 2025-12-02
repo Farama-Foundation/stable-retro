@@ -1,0 +1,17 @@
+Files:
+tests/uniwidth/test-uc_width.c
+tests/uniwidth/test-uc_width2.c
+tests/uniwidth/test-uc_width2.sh
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-uc_width uniwidth/test-uc_width2.sh
+check_PROGRAMS += test-uc_width test-uc_width2
+test_uc_width_SOURCES = uniwidth/test-uc_width.c
+test_uc_width_LDADD = $(LDADD) $(LIBUNISTRING)
+test_uc_width2_SOURCES = uniwidth/test-uc_width2.c
+test_uc_width2_LDADD = $(LDADD) $(LIBUNISTRING)

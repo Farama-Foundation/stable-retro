@@ -1,0 +1,82 @@
+@node sys/stat.h
+@section @file{sys/stat.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_stat.h.html}
+
+Gnulib module: sys_stat
+
+Portability problems fixed by Gnulib module @code{sys_stat}:
+@itemize
+@item
+The type @code{mode_t} is not defined on some platforms:
+MSVC 14.
+@item
+Some macros, such as @code{S_IFMT} or @code{S_IFIFO}, are missing on some
+platforms.
+@item
+The macros @code{S_ISBLK}, @code{S_ISCHR}, @code{S_ISDIR}, @code{S_ISFIFO},
+@code{S_ISLNK}, @code{S_ISREG}, @code{S_ISSOCK} are broken on some platforms.
+@item
+Some platforms define macros, such as @code{S_ISDOOR}, that are not defined
+on other platforms.
+@item
+The functions @code{lstat} and @code{mkdir} are not declared on some platforms:
+mingw, MSVC 14.
+@item
+The macros @code{UTIME_NOW} and @code{UTIME_OMIT} are missing on some
+platforms.
+@item
+On some platforms, @code{struct stat} does not include @code{st_atim},
+@code{st_mtim}, or @code{st_ctim} members.  Use the gnulib module
+@samp{stat-time} for accessors to portably get at subsecond resolution.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{sys_stat}, together with module @code{windows-stat-inodes}:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), @code{st_ino} is always 0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+@xref{time.h}, for general portability problems with the
+@code{time_t} components of @code{struct stat}.
+@item
+The macro @code{S_IFBLK} is missing on some platforms:
+MSVC 14.
+@item
+On OpenVMS, @code{st_ino} is an array of three @code{ino_t} values,
+not a single value.
+@item
+To partially work around the previous two problems, you can test for
+nonzero @code{st_ino} and use the Gnulib @code{same-inode} module to
+compare nonzero values.  For example, @code{SAME_INODE (a, b)}
+is true if the @code{struct stat} values @code{a} and
+@code{b} are known to represent the same file, @code{(a.st_ino &&
+!SAME_INODE (a, b))} is true if they are known to represent different
+files, and @code{!a.st_ino} is true if it is not known whether they
+represent different files.
+@item
+On some platforms, two different files may have the same @code{st_dev}
+and @code{st_ino} values, even when @code{st_ino} is nonzero:
+@itemize
+@item
+GNU/Linux NFS servers that export all local file systems as a single
+NFS file system, if a local @code{st_dev} exceeds 255, or if a local
+@code{st_ino} exceeds 16777215.
+@item
+Network Appliance NFS servers in snapshot directories; see Network
+Appliance bug #195.
+@item
+ClearCase MVFS; see bug id ATRia04618.
+@end itemize
+One partial workaround is to compare other file metadata such as
+@code{st_mode} and @code{st_mtime} to detect this bug, but this
+approach does not work on files whose metadata are being changed by
+other programs.
+@item
+On some file systems, @code{st_size} contains bogus information for
+symlinks; use the Gnulib module @code{areadlink-with-size} for a
+better way to get symlink contents.
+@end itemize

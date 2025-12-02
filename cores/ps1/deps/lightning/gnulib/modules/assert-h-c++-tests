@@ -1,0 +1,18 @@
+Files:
+tests/test-assert-h-c++.cc
+tests/test-assert-h-c++2.cc
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-assert-h-c++
+check_PROGRAMS += test-assert-h-c++
+test_assert_h_c___SOURCES = test-assert-h-c++.cc test-assert-h-c++2.cc
+endif

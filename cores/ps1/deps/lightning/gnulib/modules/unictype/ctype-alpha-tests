@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-ctype_alpha.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ctype_alpha
+check_PROGRAMS += test-ctype_alpha
+test_ctype_alpha_SOURCES = unictype/test-ctype_alpha.c
+test_ctype_alpha_LDADD = $(LDADD) $(LIBUNISTRING)

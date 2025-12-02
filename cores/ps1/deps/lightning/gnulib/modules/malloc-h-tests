@@ -1,0 +1,11 @@
+Files:
+tests/test-malloc-h.c
+
+Depends-on:
+malloc-h-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-malloc-h
+check_PROGRAMS += test-malloc-h

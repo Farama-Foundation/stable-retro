@@ -1,0 +1,24 @@
+@node flock
+@subsection @code{flock}
+@findex flock
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-flock-2.html}
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/flock.2.html,,man flock}
+
+Gnulib module: flock
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14
+@item
+This function is missing on some platforms:
+AIX 7.1, HP-UX 11.23, Solaris 11.4.
+But the replacement function does not really work; it exhibits test failures.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,6 @@
+# See lib/git-merge-changelog.c for making this useful.
+ChangeLog	merge=merge-changelog
+
+# Run this to make 'git diff' on texinfo files give nicer hunk context:
+#   git config diff.texinfo.funcname '^@node[	 ][	 ]*\\([^,][^,]*\\)'
+*.texi* diff=texinfo

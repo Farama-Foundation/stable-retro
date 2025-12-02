@@ -1,0 +1,33 @@
+@node round
+@section @code{round}
+@findex round
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/round.html}
+
+Gnulib module: round or round-ieee
+
+Portability problems fixed by either Gnulib module @code{round} or @code{round-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 5.2.1, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, older IRIX 6.5, Solaris 9, MSVC 9.
+@item
+This function is not declared on some platforms:
+glibc 2.8, IRIX 6.5.
+@item
+This functions returns a wrong result for @math{x = 1/2 - 2^-54}
+on some platforms:
+NetBSD 3.0, AIX 7.1.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{round-ieee}:
+@itemize
+@item
+This function returns a positive zero for an argument between @minus{}0.5 and 0
+on some platforms:
+AIX 7.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

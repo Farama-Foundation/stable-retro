@@ -1,0 +1,42 @@
+Description:
+fstatat() function: Return information about a file at a directory.
+
+Files:
+lib/fstatat.c
+lib/at-func.c
+m4/fstatat.m4
+m4/lstat.m4
+
+Depends-on:
+sys_stat
+extensions
+at-internal     [test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1]
+errno           [test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1]
+extern-inline   [test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1]
+fchdir          [test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1]
+fcntl-h         [test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1]
+filename        [test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1]
+lstat           [test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1]
+openat-die      [test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1]
+openat-h        [test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1]
+save-cwd        [test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1]
+stat            [test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1]
+stat-time       [test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1]
+
+configure.ac:
+gl_FUNC_FSTATAT
+if test $HAVE_FSTATAT = 0 || test $REPLACE_FSTATAT = 1; then
+  AC_LIBOBJ([fstatat])
+fi
+gl_SYS_STAT_MODULE_INDICATOR([fstatat])
+
+Makefile.am:
+
+Include:
+<sys/stat.h>
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake, Paul Eggert

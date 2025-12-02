@@ -1,0 +1,16 @@
+Files:
+tests/test-bind.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+netinet_in
+sockets
+inet_pton
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-bind
+check_PROGRAMS += test-bind
+test_bind_LDADD = $(LDADD) @LIBSOCKET@ $(INET_PTON_LIB)

@@ -1,0 +1,15 @@
+@node FD_CLR
+@section @code{FD_CLR}
+@findex FD_CLR
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/FD_CLR.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

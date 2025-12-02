@@ -1,0 +1,23 @@
+Description:
+Return maximum size of reasonable pathnames.  (Unportable: Hurd has no limit.)
+
+Files:
+lib/pathmax.h
+m4/pathmax.m4
+
+Depends-on:
+unistd
+
+configure.ac:
+gl_PATHMAX
+
+Makefile.am:
+
+Include:
+"pathmax.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

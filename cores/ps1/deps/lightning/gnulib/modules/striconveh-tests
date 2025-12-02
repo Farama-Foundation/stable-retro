@@ -1,0 +1,13 @@
+Files:
+tests/test-striconveh.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-striconveh
+check_PROGRAMS += test-striconveh
+test_striconveh_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@
+

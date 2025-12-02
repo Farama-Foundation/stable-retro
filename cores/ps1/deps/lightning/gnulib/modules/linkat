@@ -1,0 +1,53 @@
+Description:
+linkat() function: create a hard link, relative to two directories
+
+Files:
+lib/at-func2.c
+lib/linkat.c
+m4/linkat.m4
+
+Depends-on:
+unistd
+extensions
+areadlink        [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+at-internal      [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+dirname-lgpl     [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+eloop-threshold  [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+errno            [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+fcntl-h          [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+filenamecat-lgpl [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+filename         [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+free-posix       [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+fstat            [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+getcwd-lgpl      [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+link-follow      [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+link             [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+lstat            [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+openat-die       [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+openat-h         [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+same-inode       [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+save-cwd         [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+stat             [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+symlink          [test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1]
+areadlinkat      [test $REPLACE_LINKAT = 1]
+fstatat          [test $REPLACE_LINKAT = 1]
+
+configure.ac:
+gl_FUNC_LINKAT
+if test $HAVE_LINKAT = 0 || test $REPLACE_LINKAT = 1; then
+  AC_LIBOBJ([linkat])
+  AC_LIBOBJ([at-func2])
+fi
+gl_UNISTD_MODULE_INDICATOR([linkat])
+
+Makefile.am:
+
+Include:
+<fcntl.h>
+<unistd.h>
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake

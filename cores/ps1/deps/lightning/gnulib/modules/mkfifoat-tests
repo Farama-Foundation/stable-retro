@@ -1,0 +1,18 @@
+Files:
+tests/test-mkfifo.h
+tests/test-mkfifoat.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+fstatat
+ignore-value
+symlink
+unlinkat
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-mkfifoat
+check_PROGRAMS += test-mkfifoat
+test_mkfifoat_LDADD = $(LDADD) @LIBINTL@

@@ -1,0 +1,32 @@
+Description:
+Close standard output and standard error, exiting with a diagnostic on error.
+
+Files:
+lib/closeout.h
+lib/closeout.c
+
+Depends-on:
+close-stream
+gettext-h
+error
+quotearg
+exitfail
+stdbool
+unistd
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += closeout.c
+
+Include:
+"closeout.h"
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

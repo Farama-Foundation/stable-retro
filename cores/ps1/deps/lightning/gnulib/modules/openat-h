@@ -1,0 +1,25 @@
+Description:
+Declarations of functions related to accessing files relative to a directory.
+
+Files:
+lib/openat.h
+
+Depends-on:
+extern-inline
+fcntl-h
+stdbool
+sys_stat
+unistd
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"openat.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake

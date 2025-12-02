@@ -1,0 +1,25 @@
+@node truncf
+@section @code{truncf}
+@findex truncf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/truncf.html}
+
+Gnulib module: truncf or truncf-ieee
+
+Portability problems fixed by either Gnulib module @code{truncf} or @code{truncf-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 5.2.1, NetBSD 3.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, Solaris 9, MSVC 9.
+@item
+This function is not declared (without @code{-D_GNU_SOURCE}) on some platforms:
+glibc 2.8.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{truncf-ieee}:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

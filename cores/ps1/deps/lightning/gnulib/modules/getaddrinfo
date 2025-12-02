@@ -1,0 +1,45 @@
+Description:
+getaddrinfo() function: Get address information.
+
+Files:
+lib/getaddrinfo.c
+lib/gai_strerror.c
+m4/getaddrinfo.m4
+
+Depends-on:
+netdb
+sys_socket
+extensions
+gettext-h       [test $HAVE_GETADDRINFO = 0 || test $REPLACE_GETADDRINFO = 1 || test $HAVE_DECL_GAI_STRERROR = 0 || test $REPLACE_GAI_STRERROR = 1]
+inet_ntop       [test $HAVE_GETADDRINFO = 0 || test $REPLACE_GETADDRINFO = 1]
+snprintf        [test $HAVE_GETADDRINFO = 0 || test $REPLACE_GETADDRINFO = 1]
+stdbool         [test $HAVE_GETADDRINFO = 0 || test $REPLACE_GETADDRINFO = 1]
+strdup          [test $HAVE_GETADDRINFO = 0 || test $REPLACE_GETADDRINFO = 1]
+servent         [test $HAVE_GETADDRINFO = 0 || test $REPLACE_GETADDRINFO = 1]
+hostent         [test $HAVE_GETADDRINFO = 0 || test $REPLACE_GETADDRINFO = 1]
+sockets         [test $HAVE_GETADDRINFO = 0 || test $REPLACE_GETADDRINFO = 1]
+
+configure.ac:
+gl_GETADDRINFO
+if test $HAVE_GETADDRINFO = 0 || test $REPLACE_GETADDRINFO = 1; then
+  AC_LIBOBJ([getaddrinfo])
+fi
+if test $HAVE_DECL_GAI_STRERROR = 0 || test $REPLACE_GAI_STRERROR = 1; then
+  AC_LIBOBJ([gai_strerror])
+fi
+gl_NETDB_MODULE_INDICATOR([getaddrinfo])
+
+Makefile.am:
+
+Include:
+<netdb.h>
+
+Link:
+$(GETADDRINFO_LIB)
+$(LTLIBINTL) when linking with libtool, $(LIBINTL) otherwise
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

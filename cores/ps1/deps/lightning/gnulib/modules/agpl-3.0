@@ -1,0 +1,19 @@
+Description:
+Provide the GNU Affero General Public License version 3.0 in Texinfo format.
+
+Files:
+doc/agpl-3.0.texi
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+unmodifiable license text
+
+Maintainer:
+all

@@ -1,0 +1,26 @@
+Description:
+Read a line from a stream, with bounded memory allocation.
+
+Files:
+lib/getnline.h
+lib/getnline.c
+m4/getnline.m4
+
+Depends-on:
+getndelim2
+ssize_t
+
+configure.ac:
+gl_GETNLINE
+
+Makefile.am:
+lib_SOURCES += getnline.h getnline.c
+
+Include:
+"getnline.h"
+
+License:
+GPL
+
+Maintainer:
+all

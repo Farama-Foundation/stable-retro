@@ -1,0 +1,27 @@
+Files:
+tests/test-rwlock1.c
+tests/test-lock.c
+tests/test-once.c
+tests/atomic-int-gnulib.h
+m4/semaphore.m4
+
+Depends-on:
+thread
+stdint
+usleep
+yield
+
+configure.ac:
+AC_CHECK_HEADERS_ONCE([semaphore.h])
+AC_CHECK_DECLS_ONCE([alarm])
+AC_REQUIRE([gl_SEMAPHORE])
+
+Makefile.am:
+TESTS += test-rwlock1 test-lock test-once1 test-once2
+check_PROGRAMS += test-rwlock1 test-lock test-once1 test-once2
+test_rwlock1_LDADD = $(LDADD) @LIBMULTITHREAD@ @YIELD_LIB@
+test_lock_LDADD = $(LDADD) @LIBMULTITHREAD@ @YIELD_LIB@ @LIB_SEMAPHORE@
+test_once1_SOURCES = test-once.c
+test_once1_LDADD = $(LDADD) @LIBTHREAD@
+test_once2_SOURCES = test-once.c
+test_once2_LDADD = $(LDADD) @LIBMULTITHREAD@

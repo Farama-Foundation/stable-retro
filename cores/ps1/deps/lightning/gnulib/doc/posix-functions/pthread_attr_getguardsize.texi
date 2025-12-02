@@ -1,0 +1,18 @@
+@node pthread_attr_getguardsize
+@section @code{pthread_attr_getguardsize}
+@findex pthread_attr_getguardsize
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_attr_getguardsize.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 3.8, Minix 3.1.8, Cygwin 1.7.9, mingw, MSVC 14.
+@end itemize

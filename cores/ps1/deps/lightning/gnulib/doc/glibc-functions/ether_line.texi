@@ -1,0 +1,18 @@
+@node ether_line
+@subsection @code{ether_line}
+@findex ether_line
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/ether_line.3.html,,man ether_line}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+HP-UX 11, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

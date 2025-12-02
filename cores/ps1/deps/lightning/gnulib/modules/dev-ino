@@ -1,0 +1,20 @@
+Description:
+declare a simple (device, inode) struct
+
+Files:
+lib/dev-ino.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"dev-ino.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

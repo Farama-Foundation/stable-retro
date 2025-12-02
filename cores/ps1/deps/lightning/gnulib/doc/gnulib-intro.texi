@@ -1,0 +1,548 @@
+@node Benefits
+@section Benefits of using Gnulib
+
+Gnulib is useful to enhance various aspects of a package:
+
+@itemize @bullet
+@item
+Portability: With Gnulib, a package maintainer can program against the
+POSIX and GNU libc APIs and nevertheless expect good portability to
+platforms that don't implement POSIX.
+
+@item
+Maintainability: When a package uses modules from Gnulib instead of code
+written specifically for that package, the maintainer has less code to
+maintain.
+
+@item
+Security: Gnulib provides functions that are immune against vulnerabilities
+that plague the uses of the corresponding commonplace functions. For
+example, @code{asprintf}, @code{canonicalize_file_name} are not affected
+by buffer sizing problems that affect @code{sprintf}, @code{realpath}.
+@code{openat} does not have the race conditions that @code{open} has. Etc.
+
+@item
+Reliability: Gnulib provides functions that combine a call to a system
+function with a check of the result. Examples are @code{xalloc},
+@code{xprintf}, @code{xstrtod}, @code{xgetcwd}.
+
+@item
+Structure: Gnulib offers a way to structure code into modules, typically
+one include file, one source code file, and one autoconf macro for each
+functionality. Modularity helps maintainability.
+@end itemize
+
+@node Library vs Reusable Code
+@section Library vs. Reusable Code
+
+Classical libraries are installed as binary object code.  Gnulib is
+different: It is used as a source code library.  Each package that uses
+Gnulib thus ships with part of the Gnulib source code.  The used portion
+of Gnulib is tailored to the package: A build tool, called
+@code{gnulib-tool}, is provided that copies a tailored subset of Gnulib
+into the package.
+
+@node Portability and Application Code
+@section Portability and Application Code
+
+One of the goals of Gnulib is to make portable programming easy, on
+the basis of the standards relevant for GNU (and Unix).  The objective
+behind that is to avoid a fragmentation of the user community into
+disjoint user communities according to the operating system, and
+instead allow synergies between users on different operating systems.
+
+Another goal of Gnulib is to provide application code that can be shared
+between several applications.  Some people wonder: "What? glibc doesn't
+have a function to copy a file?"  Indeed, the scope of a system's libc is
+to implement the relevant standards (ISO C, POSIX) and to provide
+access functions to the kernel's system calls, and little more.
+
+There is no clear borderline between both areas.
+
+For example, Gnulib has a facility for generating the name of backup
+files.  While this task is entirely at the application level---no
+standard specifies an API for it---the na@"{@dotless{i}}ve code has
+some portability problems because on some platforms the length of file
+name components is limited to 30 characters or so.  Gnulib handles
+that.
+
+Similarly, Gnulib has a facility for executing a command in a
+subprocess.  It is at the same time a portability enhancement (it
+works on GNU, Unix, and Windows, compared to the classical
+@code{fork}/@code{exec} idiom which is not portable to Windows), as well
+as an application aid: it takes care of redirecting stdin and/or
+stdout if desired, and emits an error message if the subprocess
+failed.
+
+@node Target Platforms
+@section Target Platforms
+
+Gnulib supports a number of platforms that we call the ``reasonable
+portability targets''.  This class consists of widespread operating systems,
+for three years after their last availability, or---for proprietary
+operating systems---as long as the vendor provides commercial support for
+it.  Already existing Gnulib code for older operating systems is usually
+left in place for longer than these three years.  So it comes that programs
+that use Gnulib run pretty well also on these older operating systems.
+
+Some operating systems are not very widespread, but are Free Software and
+are actively developed.  Such platforms are also supported by Gnulib, if
+that OS's developers community keeps in touch with the Gnulib developers,
+by providing bug reports, analyses, or patches.  For such platforms, Gnulib
+supports only the versions of the last year or the last few months,
+depending on the maturity of said OS project, the number of its users, and
+how often these users upgrade.
+
+Niche operating systems are generally unsupported by Gnulib, unless some
+of their developers or users contribute support to Gnulib.
+
+The degree of support Gnulib guarantees for a platform depends on the
+amount of testing it gets from volunteers.  Platforms on which Gnulib
+is frequently tested are the best supported.  Then come platforms with
+occasional testing, then platforms which are rarely tested.  Usually,
+we fix bugs when they are reported.  Except that some rarely tested
+platforms are also low priority; bug fixes for these platforms can
+take longer.
+
+@menu
+* Supported Platforms::
+* Formerly Supported Platforms::
+* Unsupported Platforms::
+@end menu
+
+@node Supported Platforms
+@subsection Supported Platforms
+
+As of 2020, the list of supported platforms is the following:
+
+@itemize
+@item
+glibc systems.  With glibc 2.19 or newer, they are frequently tested.
+@c [Not very relevant in the long term.]
+@c The distributions Ubuntu, Fedora, RHEL, Arch Linux are frequently tested.
+@c CentOS is occasionally tested.
+@c Debian, gNewSense, Trisquel, OpenSUSE are rarely tested.
+About the kernels:
+@itemize
+@item
+glibc on Linux is frequently tested.
+@item
+glibc on kFreeBSD is rarely tested.
+@end itemize
+@item
+Mac OS X@.  In versions 10.13, it's occasionally tested.  In version
+10.5, it's rarely tested.
+@item
+FreeBSD 11.0 or newer is occasionally tested.
+@item
+OpenBSD 6.1 or newer is occasionally tested.
+@item
+NetBSD 7.0 or newer is occasionally tested.
+@item
+AIX 7.1 is occasionally tested.
+@item
+Solaris 10 and 11 are occasionally tested.  Solaris 9 is rarely
+tested and low priority.
+@item
+Cygwin 2.9 is occasionally tested.  Cygwin 1.7.x is rarely tested.
+@item
+mingw is occasionally tested.  But note that some modules are currently
+unsupported on mingw: @code{mgetgroups}, @code{getugroups}, @code{idcache},
+@code{userspec}, @code{openpty}, @code{login_tty}, @code{forkpty},
+@code{pt_chown}, @code{grantpt}, @code{pty}, @code{savewd},
+@code{mkancesdirs}, @code{mkdir-p}, @code{euidaccess}, @code{faccessat}.
+The versions of Windows that are supported are Windows XP and newer.
+Only the latest version of mingw is tested; older versions are not supported.
+@item
+GNU Hurd 0.7 is rarely tested.
+@item
+Native Windows, with MSVC as compiler, is rarely tested and low priority.
+The versions of MSVC that are supported are MSVC 14 (Visual Studio 2015) or
+newer.
+@item
+@c There is musl-gcc on Ubuntu, and Alpine Linux 3.3.3.
+musl libc is rarely tested.
+@item
+Minix 3.3.0 is rarely tested.
+@item
+@c IRIX 6.5 cc has no option for C99 support. You would need to use gcc instead.
+IRIX 6.5 is very rarely tested.
+@item
+Haiku is no longer tested.
+@item
+uClibc on Linux is no longer tested.
+@item
+QNX is no longer tested.
+@end itemize
+
+@node Formerly Supported Platforms
+@subsection Formerly Supported Platforms
+
+The following platforms were supported in the past, but are no longer
+supported:
+@itemize
+@item
+glibc versions 2.1.x and older.
+@item
+Mac OS X 10.4 and older.
+@item
+AIX 4 and older.
+@item
+HP-UX 11.31.
+@item
+IRIX 6.4 and older.
+@item
+OSF/1 5.1.
+@item
+Solaris 8 and older.
+@item
+Interix.
+@item
+BeOS.
+@end itemize
+
+Gnulib supports these operating systems only in an unvirtualized environment.
+When you run an OS inside a virtual machine, you have to be aware that the
+virtual machine can bring in bugs of its own.  For example, floating-point
+operations on Solaris can behave slightly differently in QEMU than on real
+hardware.  And Haiku's @command{bash} program misbehaves in VirtualBox 3,
+whereas it behaves fine in VirtualBox 4.
+
+Similarly, running native Windows binaries on GNU/Linux under WINE is
+rarely tested and low priority: WINE has a set of behaviours and bugs that
+is slightly different from native Windows.
+
+@node Unsupported Platforms
+@subsection Unsupported Platforms
+
+@cindex integer arithmetic portability
+@cindex portability, integer arithmetic
+
+Some platforms with C compilers are not supported by Gnulib because
+the platforms violate Gnulib's C portability assumptions.  @xref{Other
+portability assumptions}.
+
+These assumptions are not required by the C or POSIX standards but
+hold on almost all practical porting targets.  If you need to port
+Gnulib code to a platform where these assumptions are not true, we
+would appreciate hearing of any fixes.  We need fixes that do not
+increase runtime overhead on standard hosts and that are relatively
+easy to maintain.
+
+These platforms are listed below to illustrate problems that Gnulib
+and Gnulib-using code would have if it were intended to be portable to
+all practical POSIX or C platforms.
+
+@itemize @bullet
+@item
+The IBM i's pointers are 128 bits wide and it lacks the two types
+@code{intptr_t} and @code{uintptr_t}, which are optional in the C and
+POSIX standards.  However, these two types are required for the XSI
+extension to POSIX, and many Gnulib modules use them.  To work around
+this compatibility problem, Gnulib-using applications can be run on
+the IBM i's PASE emulation environment.  The IBM i's architecture
+descends from the System/38 (1978).
+
+@item
+The Unisys ClearPath Dorado's machine word is 36 bits.  Its signed
+integers use a ones'-complement representation.  On these machines,
+@code{CHAR_BIT == 9} and @code{INT_MIN == -INT_MAX}.  By default
+@code{UINT_MAX} is @math{2^{36} - 2}, which does not conform to the C
+requirement that it be one less than a power of two.  Although
+compiler options can raise @code{UINT_MAX} to be @math{2^{36} - 1},
+this can break system code that uses @math{-0} as a flag value.
+This platform's architecture descends from the UNIVAC 1107 (1962).
+
+@item
+The Unisys ClearPath Libra's machine word is 48 bits.  Its
+@code{unsigned int} uses the low-order 40 bits of the word, and
+@code{int} uses the low-order 41 bits of the word with a
+signed-magnitude representation.  On these machines, @code{INT_MAX ==
+UINT_MAX}, @code{INT_MIN == -INT_MAX}, and @code{sizeof (int) == 6}.
+This platform's architecture descends from the Burroughs B5000 (1961).
+@end itemize
+
+The following platforms are not supported by Gnulib.  The cost of
+supporting them would exceed the benefit because they are rarely used, or
+poorly documented, or have been supplanted by other platforms, or diverge
+too much from POSIX, or some combination of these and other factors.
+Please don't bother sending us patches for them.
+
+@itemize
+@item
+Windows 95/98/ME.
+@item
+DJGPP and EMX (the 32-bit operating systems running in DOS).
+@item
+MSDOS (the 16-bit operating system).
+@item
+Windows Mobile, Symbian OS, iOS.
+@end itemize
+
+@node Modules
+@section Modules
+
+Gnulib is divided into modules.  Every module implements a single
+facility.  Modules can depend on other modules.
+
+A module consists of a number of files and a module description.  The
+files are copied by @code{gnulib-tool} into the package that will use it,
+usually verbatim, without changes.  Source code files (.h, .c files)
+reside in the @file{lib/} subdirectory.  Autoconf macro files reside in
+the @file{m4/} subdirectory.  Build scripts reside in the
+@file{build-aux/} subdirectory.
+
+The module description contains the list of files; @code{gnulib-tool}
+copies these files.  It contains the module's
+dependencies; @code{gnulib-tool} installs them as well.  It also
+contains the autoconf macro invocation (usually a single line or
+nothing at all); @code{gnulib-tool} ensures this is invoked from the
+package's @file{configure.ac} file.  And also a @file{Makefile.am}
+snippet; @code{gnulib-tool} collects these into a @file{Makefile.am}
+for the tailored Gnulib part.  The module description and include file
+specification are for documentation purposes; they are combined into
+@file{MODULES.html}.
+
+The module system serves two purposes:
+
+@enumerate
+@item
+It ensures consistency of the used autoconf macros and @file{Makefile.am}
+rules with the source code.  For example, source code which uses the
+@code{getopt_long} function---this is a common way to implement parsing
+of command line options in a way that complies with the GNU standards---needs
+the source code (@file{lib/getopt.c} and others), the autoconf macro
+which detects whether the system's libc already has this function (in
+@file{m4/getopt.m4}), and a few @file{Makefile.am} lines that create the
+substitute @file{getopt.h} if not.  These three pieces belong together.
+They cannot be used without each other.  The module description and
+@code{gnulib-tool} ensure that they are copied altogether into the
+destination package.
+
+@item
+It allows for scalability.  It is well-known since the inception of the
+MODULA-2 language around 1978 that dissection into modules with
+dependencies allows for building large sets of code in a maintainable way.
+The maintainability comes from the facts that:
+
+@itemize @bullet
+@item
+Every module has a single purpose; you don't worry about other parts of
+the program while creating, reading or modifying the code of a module.
+
+@item
+The code you have to read in order to understand a module is limited to
+the source of the module and the .h files of the modules listed as
+dependencies.  It is for this reason also that we recommend to put the
+comments describing the functions exported by a module into its .h file.
+@end itemize
+
+In other words, the module is the elementary unit of code in Gnulib,
+comparable to a class in object-oriented languages like Java or C#.
+@end enumerate
+
+The module system is the basis of @code{gnulib-tool}.  When
+@code{gnulib-tool} copies a part of Gnulib into a package, it first
+compiles a module list, starting with the requested modules and adding all
+the dependencies, and then collects the files, @file{configure.ac}
+snippets and @file{Makefile.am} snippets.
+
+@node Various Kinds of Modules
+@section Various Kinds of Modules
+
+There are modules of various kinds in Gnulib.  For a complete list of the
+modules, see in @file{MODULES.html}.
+
+@subsection Support for ISO C or POSIX functions.
+
+When a function is not implemented by a system, the Gnulib module provides
+an implementation under the same name.  Examples are the @samp{snprintf}
+and @samp{readlink} modules.
+
+Similarly, when a function is not correctly implemented by a system,
+Gnulib provides a replacement.  For functions, we use the pattern
+
+@smallexample
+#if !HAVE_WORKING_FOO
+# define foo rpl_foo
+#endif
+@end smallexample
+
+@noindent
+and implement the @code{foo} function under the name @code{rpl_foo}.  This
+renaming is needed to avoid conflicts at compile time (in case the system
+header files declare @code{foo}) and at link/run time (because the code
+making use of @code{foo} could end up residing in a shared library, and
+the executable program using this library could be defining @code{foo}
+itself).
+
+For header files, such as @code{stdbool.h} or @code{stdint.h}, we provide
+the substitute only if the system doesn't provide a correct one.  The
+template of this replacement is distributed in a slightly different name,
+with @samp{.in} inserted before the @samp{.h} extension, so that on
+systems which do provide a correct
+header file the system's one is used.
+
+The modules in this category are supported in C++ mode as well.  This
+means, while the autoconfiguration uses the C compiler, the resulting
+header files and function substitutes can be used with a matching C++
+compiler as well.
+
+@subsection Enhancements of ISO C or POSIX functions
+
+These are sometimes POSIX functions with GNU extensions also found in
+glibc---examples: @samp{getopt}, @samp{fnmatch}---and often new
+APIs---for example, for all functions that allocate memory in one way
+or the other, we have variants which also include the error checking
+against the out-of-memory condition.
+
+@subsection Portable general use facilities
+
+Examples are a module for copying a file---the portability problems
+relate to the copying of the file's modification time, access rights,
+and extended attributes---or a module for extracting the tail
+component of a file name---here the portability to native Windows
+requires a different API than the classical POSIX @code{basename} function.
+
+@subsection Reusable application code
+
+Examples are an error reporting function, a module that allows output of
+numbers with K/M/G suffixes, or cryptographic facilities.
+
+@subsection Object oriented classes
+
+Examples are data structures like @samp{list}, or abstract output stream
+classes that work around the fact that an application cannot implement an
+stdio @code{FILE} with its logic.  Here, while staying in C, we use
+implementation techniques like tables of function pointers, known from the
+C++ language or from the Linux kernel.
+
+@subsection Interfaces to external libraries
+
+Examples are the @samp{iconv} module, which interfaces to the
+@code{iconv} facility, regardless whether it is contained in libc or in
+an external @code{libiconv}.  Or the @samp{readline} module, which
+interfaces to the GNU readline library.
+
+@subsection Build / maintenance infrastructure
+
+An example is the @samp{maintainer-makefile} module, which provides extra
+Makefile tags for maintaining a package.
+
+@node Collaborative Development
+@section Collaborative Development
+
+Gnulib is maintained collaboratively.  The mailing list is
+@code{<bug-gnulib at gnu dot org>}.  Be warned that some people on the
+list may be very active at some times and unresponsive at other times.
+
+Every module has one or more maintainers.  While issues are discussed
+collaboratively on the list, the maintainer of a module nevertheless has
+a veto right regarding changes in his module.
+
+All patches should be posted to the list, regardless whether they are
+proposed patches or whether they are committed immediately by the
+maintainer of the particular module.  The purpose is not only to inform
+the other users of the module, but mainly to allow peer review.  It is not
+uncommon that several people contribute comments or spot bugs after a
+patch was proposed.
+
+Conversely, if you are using Gnulib, and a patch is posted that affects
+one of the modules that your package uses, you have an interest in
+proofreading the patch.
+
+@node Copyright
+@section Copyright
+
+Most modules are under the GPL@.  Some, mostly modules which can
+reasonably be used in libraries, are under LGPL@.  The source files
+always say "GPL", but the real license specification is in the module
+description file.  If the module description file says "GPL", it means
+"GPLv3+" (GPLv3 or newer, at the licensee's choice); if it says "LGPL",
+it means "LGPLv3+" (LGPLv3 or newer, at the licensee's choice).
+
+More precisely, the license specification in the module description
+file applies to the files in @file{lib/} and @file{build-aux/}.  Different
+licenses apply to files in special directories:
+
+@table @file
+@item modules/
+Module description files are under this copyright:
+
+@quotation
+Copyright @copyright{} 20XX--20YY Free Software Foundation, Inc.@*
+Copying and distribution of this file, with or without modification,
+in any medium, are permitted without royalty provided the copyright
+notice and this notice are preserved.
+@end quotation
+
+@item m4/
+Autoconf macro files are under this copyright:
+
+@quotation
+Copyright @copyright{} 20XX--20YY Free Software Foundation, Inc.@*
+This file is free software; the Free Software Foundation
+gives unlimited permission to copy and/or distribute it,
+with or without modifications, as long as this notice is preserved.
+@end quotation
+
+@item tests/
+If a license statement is not present in a test module, the test files are
+under GPL@.  Even if the corresponding source module is under LGPL, this is
+not a problem, since compiled tests are not installed by ``make install''.
+
+@item doc/
+Documentation files are under this copyright:
+
+@quotation
+Copyright @copyright{} 2004--20YY Free Software Foundation, Inc.@*
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+copy of the license is at @url{https://www.gnu.org/licenses/fdl-1.3.en.html}.
+@end quotation
+@end table
+
+If you want to use some Gnulib modules under LGPL, you can do so by
+passing the option @samp{--lgpl} to @code{gnulib-tool}.  This will
+replace the GPL header with an LGPL header while copying the source
+files to your package.  Similarly, if you want some Gnulib modules
+under LGPLv2+ (Lesser GPL version 2.1 or newer), you can do so by
+passing the option @samp{--lgpl=2} to @code{gnulib-tool}.
+
+Keep in mind that when you submit patches to files in Gnulib, you should
+license them under a compatible license.  This means that sometimes the
+contribution will have to be LGPL, if the original file is available
+under LGPL@.  You can find out about it by looking for a "License: LGPL"
+information in the corresponding module description.
+
+@node Steady Development
+@section Steady Development
+
+Gnulib modules are continually adapted, to match new practices, to be
+consistent with newly added modules, or simply as a response to build
+failure reports.
+
+If you are willing to report an occasional regression, we recommend to
+use the newest version from git always, except in periods of major
+changes.  Most Gnulib users do this.
+
+@node Openness
+@section Openness
+
+Gnulib is open in the sense that we gladly accept contributions if they
+are generally useful, well engineered, and if the contributors have signed
+the obligatory papers with the FSF.
+
+The module system is open in the sense that a package using Gnulib can
+@enumerate
+@item
+locally patch or override files in Gnulib,
+@item
+locally add modules that are treated like Gnulib modules by
+@code{gnulib-tool}.
+@end enumerate
+
+This is achieved by the @samp{--local-dir} option of @code{gnulib-tool}
+(@pxref{Extending Gnulib}).

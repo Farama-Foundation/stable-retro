@@ -1,0 +1,18 @@
+Files:
+tests/test-limits-h-c++.cc
+tests/test-limits-h-c++2.cc
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-limits-h-c++
+check_PROGRAMS += test-limits-h-c++
+test_limits_h_c___SOURCES = test-limits-h-c++.cc test-limits-h-c++2.cc
+endif

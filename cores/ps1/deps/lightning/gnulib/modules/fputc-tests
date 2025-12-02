@@ -1,0 +1,15 @@
+Files:
+tests/test-fputc.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+unistd
+fdopen
+msvc-inval
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fputc
+check_PROGRAMS += test-fputc

@@ -1,0 +1,20 @@
+Files:
+tests/test-dprintf-posix.sh
+tests/test-dprintf-posix.c
+tests/test-printf-posix.output
+tests/test-dprintf-posix2.sh
+tests/test-dprintf-posix2.c
+tests/infinity.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+stdint
+get-rusage-as
+
+configure.ac:
+AC_CHECK_FUNCS_ONCE([getrlimit setrlimit])
+
+Makefile.am:
+TESTS += test-dprintf-posix.sh test-dprintf-posix2.sh
+check_PROGRAMS += test-dprintf-posix test-dprintf-posix2

@@ -1,0 +1,16 @@
+Files:
+tests/unicase/test-u8-casecoll.c
+tests/unicase/test-casecmp.h
+tests/macros.h
+
+Depends-on:
+uninorm/nfc
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-casecoll
+check_PROGRAMS += test-u8-casecoll
+test_u8_casecoll_SOURCES = unicase/test-u8-casecoll.c
+test_u8_casecoll_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@
+

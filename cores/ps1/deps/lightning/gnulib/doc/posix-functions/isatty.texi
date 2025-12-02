@@ -1,0 +1,27 @@
+@node isatty
+@section @code{isatty}
+@findex isatty
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/isatty.html}
+
+Gnulib module: isatty
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is declared in a different header file (namely, @code{<io.h>})
+on some platforms:
+MSVC 14.
+@item
+On native Windows, this function also returns true for character devices such
+as @file{NUL}.
+@item
+On native Windows, this function returns false for Cygwin consoles.
+@item
+This function crashes when invoked with invalid arguments on some platforms:
+MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

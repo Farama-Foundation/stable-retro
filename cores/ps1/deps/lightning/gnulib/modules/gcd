@@ -1,0 +1,22 @@
+Description:
+Greatest common divisor.
+
+Files:
+lib/gcd.h
+lib/gcd.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gcd.h gcd.c
+
+Include:
+"gcd.h"
+
+License:
+GPL
+
+Maintainer:
+all

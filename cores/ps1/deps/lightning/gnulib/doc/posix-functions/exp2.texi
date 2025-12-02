@@ -1,0 +1,24 @@
+@node exp2
+@section @code{exp2}
+@findex exp2
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/exp2.html}
+
+Gnulib module: exp2
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 5.2.1, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, older IRIX 6.5, Solaris 9, MSVC 9.
+@item
+This function is not declared on some platforms:
+IRIX 6.5.
+@item
+This function returns grossly wrong results on some platforms:
+OpenBSD 4.9.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

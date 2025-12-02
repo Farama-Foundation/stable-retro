@@ -1,0 +1,25 @@
+Description:
+like nstrftime, but output the formatted date to a FILE* stream
+
+Files:
+lib/fprintftime.h
+lib/fprintftime.c
+
+Depends-on:
+stdio
+nstrftime
+time_rz
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += fprintftime.c
+
+Include:
+"fprintftime.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

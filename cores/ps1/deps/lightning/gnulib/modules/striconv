@@ -1,0 +1,37 @@
+Description:
+Character set conversion of strings made easy, uses iconv.
+
+Files:
+lib/striconv.h
+lib/striconv.c
+
+Depends-on:
+iconv
+iconv_open
+free-posix
+strdup
+c-strcase
+
+configure.ac:
+if test $gl_cond_libtool = false; then
+  gl_ltlibdeps="$gl_ltlibdeps $LTLIBICONV"
+  gl_libdeps="$gl_libdeps $LIBICONV"
+fi
+
+Makefile.am:
+lib_SOURCES += striconv.h striconv.c
+if GL_COND_LIBTOOL
+lib_LDFLAGS += $(LTLIBICONV)
+endif
+
+Include:
+"striconv.h"
+
+Link:
+$(LTLIBICONV) when linking with libtool, $(LIBICONV) otherwise
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

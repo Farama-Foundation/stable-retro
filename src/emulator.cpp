@@ -410,7 +410,7 @@ bool Emulator::cbEnvironment(unsigned cmd, void* data) {
 	return false;
 }
 
-void Emulator::cbVideoRefresh(const void* data, unsigned, unsigned, size_t pitch) {
+void Emulator::cbVideoRefresh(const void* data, unsigned width, unsigned height, size_t pitch) {
 	assert(s_loadedEmulator);
 	if (data) {
 		s_loadedEmulator->m_imgData = data;
@@ -418,6 +418,9 @@ void Emulator::cbVideoRefresh(const void* data, unsigned, unsigned, size_t pitch
 	if (pitch) {
 		s_loadedEmulator->m_imgPitch = pitch;
 	}
+
+	s_loadedEmulator -> m_avInfo.geometry.base_width = width;
+	s_loadedEmulator -> m_avInfo.geometry.base_height = height;
 }
 
 void Emulator::cbAudioSample(int16_t left, int16_t right) {

@@ -1,0 +1,40 @@
+Description:
+Set file access and modification times of a file relative to a directory fd.
+
+Files:
+lib/utimensat.c
+lib/at-func.c
+m4/utimensat.m4
+
+Depends-on:
+sys_stat
+extensions
+at-internal     [test $HAVE_UTIMENSAT = 0 || test $REPLACE_UTIMENSAT = 1]
+errno           [test $HAVE_UTIMENSAT = 0 || test $REPLACE_UTIMENSAT = 1]
+fchdir          [test $HAVE_UTIMENSAT = 0 || test $REPLACE_UTIMENSAT = 1]
+fcntl-h         [test $HAVE_UTIMENSAT = 0 || test $REPLACE_UTIMENSAT = 1]
+filename        [test $HAVE_UTIMENSAT = 0 || test $REPLACE_UTIMENSAT = 1]
+openat-die      [test $HAVE_UTIMENSAT = 0 || test $REPLACE_UTIMENSAT = 1]
+openat-h        [test $HAVE_UTIMENSAT = 0 || test $REPLACE_UTIMENSAT = 1]
+save-cwd        [test $HAVE_UTIMENSAT = 0 || test $REPLACE_UTIMENSAT = 1]
+stat-time       [test $HAVE_UTIMENSAT = 0 || test $REPLACE_UTIMENSAT = 1]
+utimens         [test $HAVE_UTIMENSAT = 0 || test $REPLACE_UTIMENSAT = 1]
+fstatat         [test $REPLACE_UTIMENSAT = 1]
+
+configure.ac:
+gl_FUNC_UTIMENSAT
+if test $HAVE_UTIMENSAT = 0 || test $REPLACE_UTIMENSAT = 1; then
+  AC_LIBOBJ([utimensat])
+fi
+gl_SYS_STAT_MODULE_INDICATOR([utimensat])
+
+Makefile.am:
+
+Include:
+<sys/stat.h>
+
+License:
+GPL
+
+Maintainer:
+Eric Blake

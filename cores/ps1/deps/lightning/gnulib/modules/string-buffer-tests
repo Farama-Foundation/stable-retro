@@ -1,0 +1,11 @@
+Files:
+tests/test-string-buffer.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-string-buffer
+check_PROGRAMS += test-string-buffer

@@ -1,0 +1,14 @@
+Files:
+tests/test-tanl.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+fpucw
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-tanl
+check_PROGRAMS += test-tanl
+test_tanl_LDADD = $(LDADD) @TANL_LIBM@

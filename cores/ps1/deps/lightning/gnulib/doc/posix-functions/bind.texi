@@ -1,0 +1,19 @@
+@node bind
+@section @code{bind}
+@findex bind
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/bind.html}
+
+Gnulib module: bind
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), error codes from this function
+are not placed in @code{errno}, and @code{WSAGetLastError} must be used
+instead.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

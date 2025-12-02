@@ -1,0 +1,31 @@
+Description:
+Locale dependent transformation for case insensitive comparison of UTF-16
+strings.
+
+Files:
+lib/unicase/u16-casexfrm.c
+lib/unicase/u-casexfrm.h
+
+Depends-on:
+unicase/base
+unicase/u16-casefold
+uniconv/u16-conv-to-enc
+localcharset
+amemxfrm
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u16-casexfrm])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U16_CASEXFRM
+lib_SOURCES += unicase/u16-casexfrm.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

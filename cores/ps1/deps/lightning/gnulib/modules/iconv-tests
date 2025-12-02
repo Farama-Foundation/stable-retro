@@ -1,0 +1,15 @@
+Files:
+tests/test-iconv.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+iconv_open
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-iconv
+check_PROGRAMS += test-iconv
+test_iconv_LDADD = $(LDADD) @LIBICONV@
+

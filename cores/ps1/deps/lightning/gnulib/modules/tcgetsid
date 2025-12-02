@@ -1,0 +1,31 @@
+Description:
+tcgetsid() function: Determine the session ID of the controlling terminal of
+the current process.
+
+Files:
+lib/tcgetsid.c
+m4/tcgetsid.m4
+
+Depends-on:
+termios
+extensions
+sys_ioctl       [test $HAVE_TCGETSID = 0]
+
+configure.ac:
+gl_FUNC_TCGETSID
+if test $HAVE_TCGETSID = 0; then
+  AC_LIBOBJ([tcgetsid])
+  gl_PREREQ_TCGETSID
+fi
+gl_TERMIOS_MODULE_INDICATOR([tcgetsid])
+
+Makefile.am:
+
+Include:
+<termios.h>
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,18 @@
+Files:
+tests/test-lstat.h
+tests/test-lstat.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+errno
+same-inode
+stdbool
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-lstat
+check_PROGRAMS += test-lstat

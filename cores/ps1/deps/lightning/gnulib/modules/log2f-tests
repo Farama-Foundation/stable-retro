@@ -1,0 +1,17 @@
+Files:
+tests/test-log2f.c
+tests/test-log2.h
+tests/minus-zero.h
+tests/signature.h
+tests/macros.h
+tests/randomf.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-log2f
+check_PROGRAMS += test-log2f
+test_log2f_SOURCES = test-log2f.c randomf.c
+test_log2f_LDADD = $(LDADD) @LOG2F_LIBM@

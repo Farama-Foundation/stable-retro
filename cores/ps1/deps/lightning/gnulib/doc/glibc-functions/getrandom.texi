@@ -1,0 +1,55 @@
+@node getrandom
+@subsection @code{getrandom}
+@findex getrandom
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Unpredictable Bytes,,Generating Unpredictable Bytes,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Unpredictable-Bytes.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/getrandom.2.html,,man getrandom}.
+@end itemize
+
+Gnulib module: getrandom
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.24, macOS 11.1, FreeBSD 11.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.3, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.0, Cygwin 1.7.x, mingw, MSVC 14, Android 9.0.
+@item
+This function has a different return type on some platforms:
+Solaris 11.4.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The @code{GRND_INSECURE} flag is missing on some platforms:
+glibc 2.33, macOS 10.15, GNU/kFreeBSD, FreeBSD 12.0, OpenBSD 6.7,
+Minix 3.3, Haiku.
+
+@item
+The @code{GRND_RANDOM} flag has different effects on different platforms.
+Some platforms ignore the flag, or yield data that can fail to be
+random in some cases.
+@end itemize
+
+@noindent
+Although this function is intended to produce random data, the data's
+security properties may not be appropriate for your application.
+For example, identical ``random'' data streams might be produced by
+rebooted virtual machines.  If this is of concern you may need to use
+additional techniques such as hedging.@footnote{Ristenpart T, Yilek
+S@. @url{http://pages.cs.wisc.edu/~rist/papers/sslhedge.pdf, When good
+randomness goes bad: virtual machine vulnerabilities and hedging
+deployed cryptography}. NDSS 2010.}
+
+Related modules include @code{getentropy}, which has a simpler but
+more-limited API, and @code{crypto/gc-random}, which is likely a
+better match for code already using the other @code{crypto} APIs.

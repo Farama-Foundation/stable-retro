@@ -1,0 +1,40 @@
+Description:
+readlinkat() function: read symlinks relative to a directory
+
+Files:
+lib/readlinkat.c
+lib/at-func.c
+m4/readlinkat.m4
+
+Depends-on:
+unistd
+extensions
+at-internal     [test $HAVE_READLINKAT = 0 || test $REPLACE_READLINKAT = 1]
+errno           [test $HAVE_READLINKAT = 0 || test $REPLACE_READLINKAT = 1]
+fchdir          [test $HAVE_READLINKAT = 0 || test $REPLACE_READLINKAT = 1]
+fcntl-h         [test $HAVE_READLINKAT = 0 || test $REPLACE_READLINKAT = 1]
+filename        [test $HAVE_READLINKAT = 0 || test $REPLACE_READLINKAT = 1]
+fstatat         [test $HAVE_READLINKAT = 1 && test $REPLACE_READLINKAT = 1]
+openat-die      [test $HAVE_READLINKAT = 0 || test $REPLACE_READLINKAT = 1]
+openat-h        [test $HAVE_READLINKAT = 0 || test $REPLACE_READLINKAT = 1]
+save-cwd        [test $HAVE_READLINKAT = 0 || test $REPLACE_READLINKAT = 1]
+readlink        [test $HAVE_READLINKAT = 0 || test $REPLACE_READLINKAT = 1]
+
+configure.ac:
+gl_FUNC_READLINKAT
+if test $HAVE_READLINKAT = 0 || test $REPLACE_READLINKAT = 1; then
+  AC_LIBOBJ([readlinkat])
+fi
+gl_UNISTD_MODULE_INDICATOR([readlinkat])
+
+Makefile.am:
+
+Include:
+<fcntl.h>
+<unistd.h>
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake

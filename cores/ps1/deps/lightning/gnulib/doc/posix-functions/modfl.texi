@@ -1,0 +1,28 @@
+@node modfl
+@section @code{modfl}
+@findex modfl
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/modfl.html}
+
+Gnulib module: modfl or modfl-ieee
+
+Portability problems fixed by either Gnulib module @code{modfl} or @code{modfl-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, HP-UX 11, IRIX 6.5, Solaris 9, Cygwin 1.7.x, Android 4.4.
+@item
+This function is only defined as a macro with arguments on some platforms:
+MSVC 14.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{modfl-ieee}:
+@itemize
+@item
+This function has problems with infinite arguments on some platforms:
+IRIX 6.5, mingw.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,32 @@
+Description:
+fmodf() function: floating-point remainder function.
+
+Files:
+lib/fmodf.c
+m4/fmodf.m4
+
+Depends-on:
+math
+extensions
+fmod            [test $HAVE_FMODF = 0 || test $REPLACE_FMODF = 1]
+
+configure.ac:
+gl_FUNC_FMODF
+if test $HAVE_FMODF = 0 || test $REPLACE_FMODF = 1; then
+  AC_LIBOBJ([fmodf])
+fi
+gl_MATH_MODULE_INDICATOR([fmodf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FMODF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

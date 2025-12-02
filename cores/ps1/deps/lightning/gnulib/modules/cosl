@@ -1,0 +1,43 @@
+Description:
+cosl() function: cosine function with long double argument.
+
+Files:
+lib/cosl.c
+lib/trigl.h
+lib/sincosl.c
+lib/trigl.c
+m4/cosl.m4
+
+Depends-on:
+math
+extensions
+cos             [test $HAVE_COSL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+float           [test $HAVE_COSL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+isnanl          [test $HAVE_COSL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+floor           [test $HAVE_COSL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+floorl          [test $HAVE_COSL = 0 && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0]
+
+configure.ac:
+gl_FUNC_COSL
+if test $HAVE_COSL = 0; then
+  AC_LIBOBJ([cosl])
+  if test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 0; then
+    AC_LIBOBJ([sincosl])
+    AC_LIBOBJ([trigl])
+  fi
+fi
+gl_MATH_MODULE_INDICATOR([cosl])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(COSL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+Paolo Bonzini

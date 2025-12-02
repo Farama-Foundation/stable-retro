@@ -1,0 +1,63 @@
+(C) 1999-2003 PCSX Team
+	(c) 1998 Vision Thing
+	Linuzappz     <linuzappz@pcsx.net>
+	Shadow        <shadow@pcsx.net>
+	Pete Bernett  <psswitch@online.de>
+	NoComp        <NoComp@mailcity.com>
+	Nik3d
+	Akumax        <akumax@pcsx.net>
+
+(C) 2005-2009 PCSX-df Team
+	(c) Ryan Schultz <schultz.ryan@gmail.com>
+	(c) Andrew Burton <adb@iinet.net.au>
+	(c) Stephen Chao <schao@myrealbox.com>
+	(c) Marcus Comstedt <marcus@mc.pp.se>
+	Stefan Sikora <hoshy@schrauberstube.de>
+
+(C) 2009-2011 PCSX-Reloaded Team
+	edgbla (Root counters, various core/plugin fixes)
+	shalma (GTE Divider, many core improvements, sound plugin fixes)
+	Firnis (GTE code from PCSX-Revolution Project)
+	Gabriele Gorla (MDEC decoder)
+	Peter Collingbourne (Various core/psxbios fixes)
+	Dario, NeToU, siveritas (Various bugfixes)
+	Wei Mingzhi (Maintainer, input plugin, iso/cheat support, misc stuff)
+
+ARM NEON GPU plugin:
+	(C) 2011-2012 Exophase
+	(C) 2011-2012 notaz
+
+PCSX4ALL GPU plugin:
+	(C) 2010 PCSX4ALL Team
+	(C) 2010 Unai
+	Franxis <franxism@gmail.com>
+	Chui <sdl_gp32@yahoo.es>
+
+GLES plugin (psx4m project):
+	(C) 1999-2009 by Pete Bernert
+	EQ
+	Olli Hinkka
+	Proger
+	Pickle
+
+P.E.Op.S. GPU plugin:
+	(C) Pete Bernert and the P.E.Op.S. team
+
+P.E.Op.S. SPU plugin:
+	(C) Pete Bernert and the P.E.Op.S. team
+	(C) SPU2-X, gigaherz, Pcsx2 Development Team
+	shalma
+	notaz
+
+MIPS->ARM recompiler:
+	(C) 2009-2011 Ari64
+
+integration, optimization and frontend:
+	(C) 2010-2012 notaz
+
+Special thanks to Mednafen author, shalma/gretar and Rokas for
+various help and ideas while developing this emulator.
+
+some implementation ideas (and maybe code?) likely originated from
+MAME/smf/pSXauthor and were integrated by various people to PCSX.
+

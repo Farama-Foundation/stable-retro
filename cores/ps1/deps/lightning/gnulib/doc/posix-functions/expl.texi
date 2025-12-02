@@ -1,0 +1,31 @@
+@node expl
+@section @code{expl}
+@findex expl
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/expl.html}
+
+Gnulib module: expl
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, HP-UX 11, IRIX 6.5, Solaris 9, Cygwin 1.7.x, Android 4.4.
+@item
+This function returns 0.0 for all arguments on some platforms:
+Haiku 2017.
+@item
+This function returns NaN for small operands on some platforms:
+OpenBSD 5.4.
+@item
+This function is only defined as a macro with arguments on some platforms:
+MSVC 14.
+@item
+This function produces results which are accurate to only 16 digits on some
+platforms:
+musl libc 1.2.2/arm64, musl libc 1.2.2/s390x, NetBSD 9.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

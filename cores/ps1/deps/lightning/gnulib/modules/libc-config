@@ -1,0 +1,24 @@
+Description:
+System definitions for code taken from the GNU C Library
+
+Files:
+lib/cdefs.h
+lib/libc-config.h
+m4/__inline.m4
+
+Depends-on:
+c99
+
+configure.ac:
+gl___INLINE
+
+Makefile.am:
+
+Include:
+<libc-config.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,209 @@
+# Public domain.
+# Files for which we are not the source.  See ./srclistvars.sh for the
+# variable definitions.
+
+$GNUCONFIG config.guess		build-aux
+$GNUCONFIG config.sub		build-aux
+
+$AUTOMAKE lib/ar-lib		build-aux
+$AUTOMAKE lib/compile		build-aux
+$AUTOMAKE lib/depcomp		build-aux
+$AUTOMAKE lib/install-sh	build-aux
+$AUTOMAKE lib/mdate-sh		build-aux
+$AUTOMAKE lib/mkinstalldirs	build-aux
+
+$TEXINFOTEX texinfo.tex		build-aux strip-trailing-space
+
+# we generate INSTALL from this via a rule in doc/Makefile.
+$AUTOCONF doc/install.texi	doc
+
+$GMP mini-gmp/mini-gmp.c	lib
+$GMP mini-gmp/mini-gmp.h	lib
+
+$GNUSTANDARDS maintain.texi	doc strip-trailing-space
+$GNUSTANDARDS standards.texi	doc strip-trailing-space
+$GNUSTANDARDS make-stds.texi	doc
+$GNUSTANDARDS gnu-oids.texi	doc
+$GNUSTANDARDS fdl.texi		doc
+
+$GNUWWWLICENSES lgpl-3.0.txt			doc/COPYING.LESSERv3
+$GNUWWWLICENSES old-licenses/lgpl-2.1.txt	doc/COPYING.LESSERv2
+$GNUWWWLICENSES gpl-3.0.txt			doc/COPYINGv3
+$GNUWWWLICENSES old-licenses/gpl-2.0.txt	doc/COPYINGv2
+$GNUWWWLICENSES old-licenses/lgpl-2.1.texi	doc
+$GNUWWWLICENSES old-licenses/gpl-2.0.texi	doc
+# no longer modified and fails @acronym checks
+#$GNUWWWLICENSES old-licenses/fdl-1.2.texi	doc
+$GNUWWWLICENSES agpl-3.0.texi			doc
+$GNUWWWLICENSES fdl-1.3.texi			doc
+$GNUWWWLICENSES gpl-3.0.texi			doc
+$GNUWWWLICENSES lgpl-3.0.texi			doc
+
+# The official forms for contributors to fill out, mentioned in maintain.
+# We intentionally do not mirror assign.* or disclaim.* files; the
+# request-* files are sufficient to give the copyright clerk enough
+# information to tell the candidate of the right procedures to use.
+$GNUORG conditions.text				doc/Copyright
+$GNUORG Copyright/request-assign.changes	doc/Copyright
+$GNUORG Copyright/request-assign.future		doc/Copyright
+$GNUORG Copyright/request-assign.program	doc/Copyright
+$GNUORG Copyright/request-disclaim.changes	doc/Copyright
+
+$LIBCSRC include/filename.h		lib
+$LIBCSRC include/idx.h			lib
+#$LIBCSRC malloc/dynarray-skeleton.c	lib/malloc
+#$LIBCSRC malloc/dynarray.h		lib/malloc
+#$LIBCSRC malloc/dynarray_at_failure.c	lib/malloc
+#$LIBCSRC malloc/dynarray_emplace_enlarge.c	lib/malloc
+#$LIBCSRC malloc/dynarray_finalize.c	lib/malloc
+#$LIBCSRC malloc/dynarray_resize.c	lib/malloc
+#$LIBCSRC malloc/dynarray_resize_clear.c	lib/malloc
+$LIBCSRC include/scratch_buffer.h	lib/malloc
+$LIBCSRC malloc/scratch_buffer_dupfree.c	lib/malloc
+$LIBCSRC malloc/scratch_buffer_grow.c	lib/malloc
+$LIBCSRC malloc/scratch_buffer_grow_preserve.c	lib/malloc
+$LIBCSRC malloc/scratch_buffer_set_array_size.c	lib/malloc
+#$LIBCSRC include/intprops.h             lib
+#$LIBCSRC posix/regcomp.c		lib
+$LIBCSRC posix/regex.c			lib
+#$LIBCSRC posix/regex.h			lib
+#$LIBCSRC posix/regex_internal.c	lib
+#$LIBCSRC posix/regex_internal.h		lib
+#$LIBCSRC posix/regexec.c		lib
+#$LIBCSRC stdlib/canonicalize           lib/canonicalize-lgpl.c
+#$LIBCSRC sysdeps/generic/eloop-threshold.h	lib
+$LIBCSRC time/timegm.c			lib
+#$LIBCSRC time/mktime.c			lib
+$LIBCSRC time/mktime-internal.h		lib
+
+# 
+# All below here commented out in forlorn hope of future syncs.
+
+# new argp not in glibc yet --13feb06.
+#$LIBCSRC argp/argp-ba.c			lib gpl
+#$LIBCSRC argp/argp-eexst.c		lib gpl
+#$LIBCSRC argp/argp-fmtstream.c		lib gpl
+#$LIBCSRC argp/argp-fmtstream.h		lib gpl
+#$LIBCSRC argp/argp-fs-xinl.c		lib gpl
+#$LIBCSRC argp/argp-help.c		lib gpl
+#$LIBCSRC argp/argp-namefrob.h		lib gpl
+#$LIBCSRC argp/argp-parse.c		lib gpl
+#$LIBCSRC argp/argp-pv.c			lib gpl
+#$LIBCSRC argp/argp-pvh.c		lib gpl
+#$LIBCSRC argp/argp-xinl.c		lib gpl
+#$LIBCSRC argp/argp.h			lib gpl
+#$LIBCSRC misc/sys/cdefs.h		lib
+#$LIBCSRC stdlib/getsubopt.c		lib gpl
+#$LIBCSRC posix/getopt.c		lib gpl
+#$LIBCSRC posix/getopt.h		lib gpl (getopt.in.h in gnulib)
+#$LIBCSRC posix/getopt1.c		lib gpl
+#$LIBCSRC posix/getopt_int.h		lib gpl
+#
+# https://sourceware.org/bugzilla/show_bug.cgi?id=1293
+#$LIBCSRC libidn/iconvme.h		lib gpl
+#$LIBCSRC libidn/iconvme.c		lib gpl
+
+# c89 changes $LIBCSRC/string/strdup.c		lib gpl
+#tab changes $LIBCSRC/stdlib/strtoll.c		lib gpl
+#tab changes $LIBCSRC/stdlib/strtoul.c		lib gpl
+# (no more strtok_r.h) $LIBCSRC/string/strtok_r.c		lib gpl
+# (gnulib needs config.h?) $LIBCSRC/string/memmem.c		lib gpl
+
+#
+# https://sourceware.org/bugzilla/show_bug.cgi?id=1439
+#$LIBCSRC crypt/md5.c			lib gpl
+#$LIBCSRC crypt/md5.h			lib gpl
+# These are close, but ...
+#$LIBCSRC locale/programs/xmalloc.c	lib gpl
+#$LIBCSRC locale/programs/xstrdup.c	lib gpl
+#
+#$LIBCSRC login/forkpty.c		lib gpl
+#$LIBCSRC login/programs/pt_chown.c	lib gpl
+#
+# https://sourceware.org/bugzilla/show_bug.cgi?id=321
+#$LIBCSRC malloc/obstack.c		lib gpl
+#
+# https://sourceware.org/bugzilla/show_bug.cgi?id=321
+#$LIBCSRC malloc/obstack.h		lib gpl
+#$LIBCSRC misc/error.c			lib gpl
+#$LIBCSRC misc/error.h			lib gpl
+#$LIBCSRC misc/getpass.c		lib gpl
+#$LIBCSRC misc/mkstemp.c		lib gpl
+#$LIBCSRC posix/fnmatch.c		lib gpl
+#$LIBCSRC posix/fnmatch.h		lib gpl (fnmatch.in.h in gnulib)
+#$LIBCSRC posix/fnmatch_loop.c		lib gpl
+#
+# https://sourceware.org/bugzilla/show_bug.cgi?id=1060
+# https://sourceware.org/bugzilla/show_bug.cgi?id=1062
+#$LIBCSRC posix/glob.c			lib gpl
+#
+# https://sourceware.org/bugzilla/show_bug.cgi?id=1060
+#$LIBCSRC posix/glob.h			lib gpl (glob-libc.h in gnulib)
+#
+#$LIBCSRC stdlib/putenv.c		lib gpl
+#$LIBCSRC stdlib/random.c		lib gpl
+#$LIBCSRC stdlib/random_r.c		lib gpl
+#$LIBCSRC stdlib/rpmatch.c		lib gpl
+#$LIBCSRC stdlib/strtol.c		lib gpl
+#$LIBCSRC string/strndup.c		lib gpl
+#$LIBCSRC string/strverscmp.c		lib gpl
+#
+#$LIBCSRC string/memchr.c		lib gpl
+#$LIBCSRC string/memcmp.c		lib gpl
+#$LIBCSRC string/memrchr.c		lib gpl
+#$LIBCSRC string/stpcpy.c		lib gpl
+#$LIBCSRC string/stpncpy.c		lib gpl
+#$LIBCSRC string/strcspn.c		lib gpl
+#$LIBCSRC string/strpbrk.c		lib gpl
+#$LIBCSRC string/strstr.c		lib gpl
+#$LIBCSRC sysdeps/generic/pty-private.h	lib gpl
+#$LIBCSRC sysdeps/ieee754/ieee754.h     lib gpl (ieee754.in.h in gnulib)
+#$LIBCSRC sysdeps/posix/dup2.c		lib gpl
+#$LIBCSRC sysdeps/posix/euidaccess.c	lib gpl
+#$LIBCSRC sysdeps/posix/tempname.c	lib gpl
+#$LIBCSRC sysdeps/unix/bsd/poll.c	lib gpl
+#$LIBCSRC sysdeps/unix/bsd/ptsname.c	lib gpl
+#$LIBCSRC sysdeps/unix/bsd/unlockpt.c	lib gpl
+#$LIBCSRC sysdeps/unix/dirfd.c		lib gpl
+#$LIBCSRC sysdeps/unix/grantpt.c	lib gpl
+#$LIBCSRC sysdeps/unix/rmdir.c		lib gpl (nstrftime.c in gnulib)
+#$LIBCSRC time/strftime.c		lib gpl
+# These are close, but we are using the gettext versions.
+#$LIBCSRC misc/mkdtemp.c		lib gpl
+#$LIBCSRC stdlib/setenv.c		lib gpl (setenv.c, unsetenv.c)
+#
+# These implementations are quite different.
+#$LIBCSRC io/lstat.c				lib gpl
+#$LIBCSRC libio/__fpending.c			lib gpl
+#$LIBCSRC malloc/malloc.c			lib gpl
+#$LIBCSRC misc/dirname.c			lib gpl
+#$LIBCSRC misc/getusershell.c			lib gpl
+#$LIBCSRC stdio-common/getline.c		lib gpl
+#$LIBCSRC stdlib/atexit.c			lib gpl
+#$LIBCSRC stdlib/exit.h				lib gpl
+#$LIBCSRC stdlib/strtod.c			lib gpl
+#$LIBCSRC stdlib/strtoimax.c			lib gpl
+#$LIBCSRC stdlib/strtoull.c			lib gpl
+#$LIBCSRC stdlib/strtoumax.c			lib gpl
+#$LIBCSRC string/basename.c			lib gpl
+#$LIBCSRC string/bcopy.c			lib gpl
+#$LIBCSRC string/memcpy.c			lib gpl
+#$LIBCSRC string/memmove.c			lib gpl
+#$LIBCSRC string/memset.c			lib gpl
+#$LIBCSRC string/strcasecmp.c			lib gpl
+#$LIBCSRC string/strchrnul.c			lib gpl
+#$LIBCSRC string/strerror.c			lib gpl
+#$LIBCSRC string/strnlen.c			lib gpl
+#$LIBCSRC sysdeps/posix/gettimeofday.c		lib gpl
+#$LIBCSRC sysdeps/posix/rename.c		lib gpl
+#$LIBCSRC sysdeps/unix/mkdir.c			lib gpl
+#$LIBCSRC sysdeps/unix/sysv/gethostname.c	lib gpl
+#$LIBCSRC sysdeps/unix/utime.c			lib gpl
+
+$LIBGCRYPT src/libgcrypt.m4			m4
+
+# Now derived from concatenation of separate .c files in glibc.
+# See argz.mk for details.
+#$LIBTOOL libltdl/argz.c			lib gpl
+#$LIBTOOL libltdl/argz_.h			lib gpl
+#$LIBTOOL libltdl/m4/argz.m4			m4

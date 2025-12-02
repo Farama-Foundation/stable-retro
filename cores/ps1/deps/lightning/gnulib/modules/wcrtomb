@@ -1,0 +1,36 @@
+Description:
+wcrtomb() function: convert wide character to multibyte character.
+
+Files:
+lib/wcrtomb.c
+m4/wcrtomb.m4
+m4/mbrtowc.m4
+m4/mbstate_t.m4
+m4/locale-fr.m4
+m4/locale-ja.m4
+m4/locale-zh.m4
+m4/codeset.m4
+
+Depends-on:
+wchar
+extensions
+mbsinit         [test $HAVE_WCRTOMB = 0 || test $REPLACE_WCRTOMB = 1]
+
+configure.ac:
+gl_FUNC_WCRTOMB
+if test $HAVE_WCRTOMB = 0 || test $REPLACE_WCRTOMB = 1; then
+  AC_LIBOBJ([wcrtomb])
+  gl_PREREQ_WCRTOMB
+fi
+gl_WCHAR_MODULE_INDICATOR([wcrtomb])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

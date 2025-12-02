@@ -1,0 +1,29 @@
+Description:
+Spin locks for communication between threads and signal handlers.
+
+Files:
+lib/asyncsafe-spin.h
+lib/asyncsafe-spin.c
+
+Depends-on:
+signal-h
+stdbool
+sigprocmask
+windows-spin
+sparcv8+
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+AC_CHECK_HEADERS_ONCE([pthread.h])
+
+Makefile.am:
+lib_SOURCES += asyncsafe-spin.c
+
+Include:
+"asyncsafe-spin.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

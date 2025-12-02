@@ -1,0 +1,18 @@
+Files:
+tests/test-strings-c++.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-strings-c++
+check_PROGRAMS += test-strings-c++
+test_strings_c___SOURCES = test-strings-c++.cc
+endif

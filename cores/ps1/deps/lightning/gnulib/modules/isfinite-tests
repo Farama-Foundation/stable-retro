@@ -1,0 +1,18 @@
+Files:
+tests/test-isfinite.c
+tests/infinity.h
+tests/macros.h
+
+Depends-on:
+float
+
+configure.ac:
+gl_FLOAT_EXPONENT_LOCATION
+gl_DOUBLE_EXPONENT_LOCATION
+gl_LONG_DOUBLE_EXPONENT_LOCATION
+AC_REQUIRE([gl_LONG_DOUBLE_VS_DOUBLE])
+
+Makefile.am:
+TESTS += test-isfinite
+check_PROGRAMS += test-isfinite
+test_isfinite_LDADD = $(LDADD) @ISFINITE_LIBM@

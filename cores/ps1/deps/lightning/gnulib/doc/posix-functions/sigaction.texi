@@ -1,0 +1,57 @@
+@node sigaction
+@section @code{sigaction}
+@findex sigaction
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/sigaction.html}
+
+Gnulib module: sigaction
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+POSIX recommends that when specifying SA_RESETHAND, SA_NODEFER must
+also be specified.
+
+@item
+Support for SA_ONSTACK is missing on some platforms:
+mingw, MSVC 14, cygwin.
+
+@item
+Support for SA_SIGINFO is missing on some platforms:
+mingw, MSVC 14.
+
+@item
+Support for SIGCHLD, and thus for SA_NOCLDSTOP and SA_NOCLDWAIT, is
+missing on some platforms:
+mingw, MSVC 14.
+
+@item
+Support for SA_RESETHAND is missing on some platforms:
+NonStop.
+
+@item
+Support for SA_RESTART is missing on some platforms:
+mingw, MSVC 14, NonStop.
+
+@item
+The symbolic value @code{SIG_IGN} for the @code{SIGCHLD} signal is equivalent
+to a signal handler
+@smallexample
+void handle_child (int sigchld)
+@{
+  while (waitpid (-1, NULL, WNOHANG) > 0)
+    ;
+@}
+@end smallexample
+except that @code{SIG_IGN} for @code{SIGCHLD} has the effect that the children
+execution times are not accounted in the @code{times} function.
+On some platforms (BSD? SystemV? Linux?), you need to use the @code{sigaction}
+flag @code{SA_NOCLDWAIT} in order to obtain this behavior.
+@end itemize

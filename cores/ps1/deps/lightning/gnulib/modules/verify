@@ -1,0 +1,21 @@
+Description:
+Compile-time assert-like macros.
+
+Files:
+lib/verify.h
+
+Depends-on:
+c99
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"verify.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert, Jim Meyering

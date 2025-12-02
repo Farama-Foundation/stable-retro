@@ -1,0 +1,14 @@
+Files:
+tests/test-getlogin.c
+tests/test-getlogin.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getlogin
+check_PROGRAMS += test-getlogin
+test_getlogin_LDADD = $(LDADD) $(LIB_GETLOGIN)

@@ -1,0 +1,24 @@
+Description:
+log2l() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+log2l
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOG2L_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

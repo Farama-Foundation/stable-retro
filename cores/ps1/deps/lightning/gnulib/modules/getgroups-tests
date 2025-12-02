@@ -1,0 +1,12 @@
+Files:
+tests/test-getgroups.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getgroups
+check_PROGRAMS += test-getgroups

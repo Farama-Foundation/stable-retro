@@ -1,0 +1,21 @@
+Description:
+Determine canonical name of CPU and C ABI.
+
+Files:
+m4/host-cpu-c-abi.m4
+m4/asm-underscore.m4
+
+Depends-on:
+
+configure.ac:
+AC_REQUIRE([gl_HOST_CPU_C_ABI])
+
+Makefile.am:
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+Sam Steingold

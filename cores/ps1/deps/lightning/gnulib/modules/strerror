@@ -1,0 +1,32 @@
+Description:
+strerror() function: return string describing error code.
+
+Files:
+lib/strerror.c
+m4/strerror.m4
+
+Depends-on:
+string
+errno            [test $REPLACE_STRERROR = 1]
+intprops         [test $REPLACE_STRERROR = 1]
+strerror-override [test $REPLACE_STRERROR = 1]
+verify           [test $REPLACE_STRERROR = 1]
+
+configure.ac:
+gl_FUNC_STRERROR
+if test $REPLACE_STRERROR = 1; then
+  AC_LIBOBJ([strerror])
+fi
+gl_MODULE_INDICATOR([strerror])
+gl_STRING_MODULE_INDICATOR([strerror])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

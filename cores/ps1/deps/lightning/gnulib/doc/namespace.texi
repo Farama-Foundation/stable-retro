@@ -1,0 +1,64 @@
+@node A C++ namespace for gnulib
+@section A C++ namespace for gnulib
+
+The function definitions provided by Gnulib (@code{.c} code) are meant
+to be compiled by a C compiler.  The header files (@code{.h} files),
+on the other hand, can be used in either C or C++.
+
+By default, when used in a C++ compilation unit, the @code{.h} files
+declare the same symbols and overrides as in C mode, except that functions
+defined by Gnulib or by the system are declared as @samp{extern "C"}.
+
+It is also possible to indicate to Gnulib to provide many of its symbols
+in a dedicated C++ namespace.  If you define the macro
+@code{GNULIB_NAMESPACE} to an identifier, many functions will be defined
+in the namespace specified by the identifier instead of the global
+namespace.  For example, after you have defined
+@smallexample
+#define GNULIB_NAMESPACE gnulib
+@end smallexample
+@noindent
+at the beginning of a compilation unit, Gnulib's @code{<fcntl.h>} header
+file will make available the @code{open} function as @code{gnulib::open}.
+The symbol @code{open} will still refer to the system's @code{open} function,
+with its platform specific bugs and limitations.
+
+The symbols provided in the Gnulib namespace are those for which the
+corresponding header file contains a @code{_GL_CXXALIAS_RPL} or
+@code{_GL_CXXALIAS_SYS} macro invocation.
+
+The benefits of this namespace mode are:
+@itemize
+@item
+Gnulib defines fewer symbols as preprocessor macros.  For example, on a
+platform where @code{open} has to be overridden, Gnulib normally does
+@code{#define open rpl_open}.  If your package has a class with a member
+@code{open}, for example a class @code{foo} with a method @code{foo::open},
+then if you define this member in a compilation unit that includes
+@code{<fcntl.h>} and use it in a compilation unit that does not include
+@code{<fcntl.h>}, or vice versa, you will get a link error.  Worse: You
+will not notice this problem on the platform where the system's @code{open}
+function works fine.  This problem goes away in namespace mode.
+
+@item
+It provides a safety check whether the set of modules your package requests
+from Gnulib is sufficient.  For example, if you use the function
+@code{gnulib::open} in your code, and you forgot to request the module
+@samp{open} from Gnulib, you will get a compilation error (regardless of
+the platform).
+@end itemize
+
+The drawback of this namespace mode is that the system provided symbols in
+the global namespace are still present, even when they contain bugs that
+Gnulib fixes.  For example, if you call @code{open (...)} in your code,
+it will invoke the possibly buggy system function, even if you have
+requested the module @samp{open} from gnulib-tool.
+
+You can turn on the namespace mode in some compilation units and keep it
+turned off in others.  This can be useful if your package consists of
+an application layer that does not need to invoke POSIX functions and
+an operating system interface layer that contains all the OS function
+calls.  In such a situation, you will want to turn on the namespace mode
+for the application layer---to avoid many preprocessor macro
+definitions---and turn it off for the OS interface layer---to avoid
+the drawback of the namespace mode, mentioned above.

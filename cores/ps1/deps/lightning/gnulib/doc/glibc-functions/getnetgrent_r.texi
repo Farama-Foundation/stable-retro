@@ -1,0 +1,29 @@
+@node getnetgrent_r
+@subsection @code{getnetgrent_r}
+@findex getnetgrent_r
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Lookup Netgroup,,Looking up one Netgroup,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Lookup-Netgroup.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/getnetgrent_r.3.html,,man getnetgrent_r}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, HP-UX 11, IRIX 6.5, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

@@ -1,0 +1,15 @@
+Files:
+tests/uniconv/test-u32-strconv-to-enc.c
+tests/macros.h
+
+Depends-on:
+unistr/u32-strcmp
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u32-strconv-to-enc
+check_PROGRAMS += test-u32-strconv-to-enc
+test_u32_strconv_to_enc_SOURCES = uniconv/test-u32-strconv-to-enc.c
+test_u32_strconv_to_enc_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@
+

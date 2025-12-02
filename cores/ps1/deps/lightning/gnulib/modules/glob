@@ -1,0 +1,60 @@
+Description:
+glob() function: Search for files and directories with paths matching a
+pattern, with GNU extensions.
+
+Files:
+lib/glob.c
+lib/glob_internal.h
+lib/glob_pattern_p.c
+lib/globfree.c
+m4/glob.m4
+
+Depends-on:
+glob-h
+c99
+largefile
+alloca          [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+builtin-expect  [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+closedir        [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+d-type          [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+flexmember      [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+fnmatch         [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+getlogin_r      [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+libc-config     [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+memchr          [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+mempcpy         [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+opendir         [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+readdir         [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+scratch_buffer  [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+stat            [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+stdbool         [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+stdint          [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+strdup          [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+unistd          [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+malloc-posix    [test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1]
+
+configure.ac:
+gl_GLOB
+if test $HAVE_GLOB = 0 || test $REPLACE_GLOB = 1; then
+  AC_LIBOBJ([glob])
+  AC_LIBOBJ([globfree])
+  gl_PREREQ_GLOB
+fi
+if test $HAVE_GLOB_PATTERN_P = 0 || test $REPLACE_GLOB_PATTERN_P = 1; then
+  AC_LIBOBJ([glob_pattern_p])
+fi
+gl_GLOB_MODULE_INDICATOR([glob])
+
+Makefile.am:
+
+Include:
+<glob.h>
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

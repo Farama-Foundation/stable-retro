@@ -1,0 +1,32 @@
+Description:
+coshf() function: hyperbolic cosine function.
+
+Files:
+lib/coshf.c
+m4/coshf.m4
+
+Depends-on:
+math
+extensions
+cosh            [test $HAVE_COSHF = 0]
+
+configure.ac:
+gl_FUNC_COSHF
+if test $HAVE_COSHF = 0; then
+  AC_LIBOBJ([coshf])
+fi
+gl_MATH_MODULE_INDICATOR([coshf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(COSHF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

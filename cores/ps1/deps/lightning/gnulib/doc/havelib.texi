@@ -1,0 +1,218 @@
+@node Searching for Libraries
+@section Searching for Libraries
+
+The following macros check for the presence or location of certain C, C++, or
+Fortran library archive files.
+
+@unnumberedsubsec Simple Library Tests
+
+The macros @code{AC_CHECK_LIB}, @code{AC_SEARCH_LIBS} from GNU Autoconf check
+for the presence of certain C, C++, or Fortran library archive files.
+The libraries are looked up in the default linker path---a system dependent
+list of directories, that usually contains the @file{/usr/lib} directory---and
+those directories given by @code{-L} options in the @code{LDFLAGS}
+variable.
+
+@unnumberedsubsec Locating Libraries
+
+The following macros, defined in the Gnulib module @code{havelib}, search for
+the location of certain C, C++, or Fortran library archive files and make the
+found location available to the compilation process and to further Autoconf
+tests.
+
+@deffn Macro @code{AC_LIB_LINKFLAGS(@var{name}, [@var{dependencies}])}
+
+Searches for @code{lib<@var{name}>} and the libraries corresponding to
+explicit and implicit dependencies.  Sets and AC_SUBSTs the
+@code{LIB<@var{NAME}>} and @code{LTLIB<@var{NAME}>} variables (with
+@code{<@var{NAME}>} in upper case) and augments the @code{CPPFLAGS} variable
+by @code{-I} options.
+
+This macro should be used when @code{lib<@var{name}>} is expected to be found.
+@end deffn
+
+@deffn Macro @code{AC_LIB_HAVE_LINKFLAGS(@var{name}, [@var{dependencies}], [@var{includes}], [@var{testcode}], [@var{missing-message}])}
+
+Searches for @code{lib<@var{name}>} and the libraries corresponding to
+explicit and implicit dependencies, together with the specified include files
+and the ability to compile and link the specified @var{testcode}.  The
+@var{missing-message} defaults to @code{no} and may contain additional hints
+for the user.  If found, it sets and AC_SUBSTs @code{HAVE_LIB<@var{NAME}>=yes}
+and the @code{LIB<@var{NAME}>} and @code{LTLIB<@var{NAME}>} variables (with
+@code{<@var{NAME}>} in upper case) and augments the @code{CPPFLAGS} variable
+by @code{-I} options, and #defines @code{HAVE_LIB<@var{NAME}>} to 1.
+Otherwise, it sets and AC_SUBSTs @code{HAVE_LIB<@var{NAME}>=no} and
+@code{LIB<@var{NAME}>} and @code{LTLIB<@var{NAME}>} to empty.
+@end deffn
+
+These macros assume that when a library is installed in
+@code{@var{some_directory}/lib}, its include files are installed in
+@code{@var{some_directory}/include}.
+
+The complexities that @code{AC_LIB_LINKFLAGS} and @code{AC_LIB_HAVE_LINKFLAGS}
+deal with are the following:
+
+@itemize @bullet
+@item
+The library is not necessarily already in the search path (@code{CPPFLAGS} for
+the include file search path, @code{LDFLAGS} for the library search path).
+The macro provides a @samp{--with-lib<@var{name}>} option.  The user of the
+@samp{configure} script can use this option to indicate the location of the
+library and its include files.  If not provided, the @code{--prefix} directory
+is searched as well.
+
+@item
+The library is not necessarily already in the run time library search path.
+To avoid the need for setting an environment variable like
+@code{LD_LIBRARY_PATH}, the macro adds the appropriate run time search path
+options to the @code{LIB<@var{NAME}>} variable.  This works on most systems.
+It can also be inhibited: The user of @samp{configure} can use the
+@code{--disable-rpath} option to force an installation that doesn't contain
+hardcoded library search paths but instead may require the use of an
+environment variable like @code{LD_LIBRARY_PATH}.
+@end itemize
+
+The macros also set a variable @code{LTLIB<@var{NAME}>}, that should be used
+when linking with libtool.  Both @code{LTLIB<@var{NAME}>} and
+@code{LIB<@var{NAME}>} contain essentially the same option, but where
+@code{LIB<@var{NAME}>} contains platform dependent flags like
+@samp{-Wl,-rpath}, @code{LTLIB<@var{NAME}>} contains platform independent
+flags like @samp{-R}.
+
+If you, by mistake, use @code{LIB<@var{NAME}>} instead of
+@code{LTLIB<@var{NAME}>} when linking with libtool, you will observe that the
+binaries created in the build dir will prefer the shared libraries in the
+installation directories over the shared libraries in the build dir; this can
+lead to all sorts of build failures, test failures, or crashes!
+
+If you, on the other hand, by mistake, use @code{LTLIB<@var{NAME}>} instead of
+@code{LIB<@var{NAME}>} when linking @emph{without} libtool, you will observe
+build failures, because the @samp{-R} options contained in
+@code{LTLIB<@var{NAME}>} are not valid options to compilers such as GCC.
+
+@unnumberedsubsubsec Example of using @code{AC_LIB_LINKFLAGS}
+
+Suppose you want to use @code{libz}, the compression library.
+
+@enumerate
+@item
+In configure.ac you add the line
+
+@smallexample
+  AC_CONFIG_AUX_DIR([build-aux])
+  AC_LIB_LINKFLAGS([z])
+@end smallexample
+
+@noindent
+Note that since the @code{AC_LIB_LINKFLAGS} invocation modifies the CPPFLAGS,
+it should precede all tests that check for header files, declarations,
+structures or types.
+
+@item
+To the package's @file{build-aux} directory you add the file
+@file{config.rpath}, also part of the Gnulib @code{havelib} module.
+(@code{gnulib-tool} will usually do this for you automatically.)
+
+@item
+In @code{Makefile.in} you add @code{@@LIBZ@@} to the link command line of
+your program.  Or, if you are using Automake, you add @code{$(LIBZ)} to the
+@code{LDADD} variable that corresponds to your program.
+@end enumerate
+
+@unnumberedsubsubsec Dependencies
+
+The dependencies list is a space separated list of library names that
+@code{lib@var{name}} is known to depend upon.  Example: If @code{libfooy}
+depends on @code{libfoox}, and @code{libfooz} depends on @code{libfoox} and
+@code{libfooy}, you can write:
+
+@smallexample
+AC_LIB_LINKFLAGS([foox])
+AC_LIB_LINKFLAGS([fooy], [foox])
+AC_LIB_LINKFLAGS([fooz], [foox fooy])
+@end smallexample
+
+@noindent
+Explicit dependencies are necessary if you cannot assume that a @code{.la}
+file, created by libtool, is installed.  If you can assume that
+@code{libfooy.la} is installed by libtool (and has not been omitted by the
+ package distributor!), you can omit the explicit dependency and just write
+
+@smallexample
+AC_LIB_LINKFLAGS([fooy])
+@end smallexample
+
+@noindent
+This way, you don't need to know in advance which libraries the needed
+library depends upon.
+
+@unnumberedsubsubsec Static vs. shared
+
+The macros find the libraries regardless whether they are installed as
+shared or static libraries.
+
+@unnumberedsubsubsec @code{CPPFLAGS} vs. @code{LDFLAGS}
+
+The macros determine the directories that should be added to the compiler
+preprocessor's search path and to the linker's search path.  For the
+compiler preprocessor, @code{-I} options with the necessary directories are
+added to the @code{CPPFLAGS} variable, for use by the whole package.  For
+the linker, appropriate options are added to the @code{LIB<@var{NAME}>} and
+@code{LTLIB<@var{NAME}>} variables, for use during linking by those programs
+and libraries that need the dependency on @code{lib<@var{name}>}.  You need
+to use the value of @code{LIB<@var{NAME}>} or @code{LTLIB<@var{NAME}>} in the
+Makefiles.  @code{LTLIB<@var{NAME}>} is for use with libtool, whereas
+@code{LIB<@var{NAME}>} is for when libtool is not involved in linking.
+
+The macros do not check whether the include files and the library found
+match.  If you want to verify this at configure time, one technique is
+to have a version number in the include files and a version number in the
+library, like this:
+@smallexample
+  #define LIB@var{NAME}_VERSION 10203
+  extern int lib@var{name}_version; /* initialized to LIB@var{NAME}_VERSION */
+@end smallexample
+@noindent
+and use a test like
+@smallexample
+  AC_TRY_RUN([int main () @{ return lib@var{name}_version != LIB@var{NAME}_VERSION; @}])
+@end smallexample
+
+@unnumberedsubsubsec Bi-arch systems
+
+A bi-arch system is one where
+@itemize
+@item
+the processor has a 32-bit execution mode and a 64-bit execution mode
+(for example, x86_64, ia64, sparc64, powerpc64), and
+@item
+32-bit mode libraries and executables and 64-bit mode libraries are both
+installed, and
+@item
+32-bit mode libraries and object files cannot be mixed with 64-bit mode
+ones.
+@end itemize
+
+On several types of such systems, for historical reasons, the 32-bit libraries
+are installed in @file{@var{prefix}/lib}, whereas the 64-bit libraries are
+installed in
+@itemize
+@item
+@file{@var{prefix}/lib64} on many glibc systems,
+@item
+@file{@var{prefix}/lib/64} on Solaris systems.
+@end itemize
+
+On such systems, in 64-bit mode, @command{configure} will search for the
+libraries in @file{@var{prefix}/lib64} or @file{@var{prefix}/lib/64},
+respectively, not in @file{@var{prefix}/lib}.  A user can adhere to these
+system-wide conventions by using the @samp{--libdir} option when installing
+packages.  When a user has already installed packages in 64-bit mode using
+the GNU default @samp{--libdir=@var{prefix}/lib}, he can make this directory
+adhere to the system-wide convention by placing a symbolic link:
+@table @asis
+@item On glibc systems:
+@code{ln -s lib @var{prefix}/lib64}
+@item On Solaris systems:
+@code{ln -s . @var{prefix}/lib/64}
+@end table

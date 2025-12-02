@@ -1,0 +1,30 @@
+@node wchar.h
+@section @file{wchar.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/wchar.h.html}
+
+Gnulib module: wchar
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file cannot be included on some platforms:
+Linux uClibc built without wide character support.
+@item
+The type @code{wint_t} is incorrect on some platforms:
+mingw, MSVC 14.
+
+@item
+Some platforms provide a @code{NULL} macro that cannot be used in arbitrary
+expressions:
+NetBSD 5.0
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file leads to link errors and endless recursions or endless loops
+on some platforms:
+glibc version 2.5 or older, together with gcc version 4.3 or newer and the
+option @samp{-std=c99} or @samp{-std=gnu99}.
+@end itemize

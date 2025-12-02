@@ -1,0 +1,34 @@
+Files:
+tests/test-mbsrtowcs1.sh
+tests/test-mbsrtowcs2.sh
+tests/test-mbsrtowcs3.sh
+tests/test-mbsrtowcs4.sh
+tests/test-mbsrtowcs.c
+tests/signature.h
+tests/macros.h
+m4/locale-fr.m4
+m4/locale-ja.m4
+m4/locale-zh.m4
+m4/codeset.m4
+
+Depends-on:
+mbrtowc
+mbsinit
+wctob
+setlocale
+
+configure.ac:
+gt_LOCALE_FR
+gt_LOCALE_FR_UTF8
+gt_LOCALE_JA
+gt_LOCALE_ZH_CN
+
+Makefile.am:
+TESTS += test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh test-mbsrtowcs4.sh
+TESTS_ENVIRONMENT += \
+  LOCALE_FR='@LOCALE_FR@' \
+  LOCALE_FR_UTF8='@LOCALE_FR_UTF8@' \
+  LOCALE_JA='@LOCALE_JA@' \
+  LOCALE_ZH_CN='@LOCALE_ZH_CN@'
+check_PROGRAMS += test-mbsrtowcs
+test_mbsrtowcs_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIB_MBRTOWC)

@@ -1,0 +1,28 @@
+Description:
+Compute MD4 checksum.
+
+Files:
+lib/md4.h
+lib/md4.c
+m4/md4.m4
+
+Depends-on:
+byteswap
+stdalign
+stdint
+
+configure.ac:
+AC_REQUIRE([AC_C_RESTRICT])
+gl_MD4
+
+Makefile.am:
+lib_SOURCES += md4.c
+
+Include:
+"md4.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

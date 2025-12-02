@@ -1,0 +1,29 @@
+Description:
+log1pf() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/log1pf-ieee.m4
+m4/minus-zero.m4
+m4/signbit.m4
+
+Depends-on:
+log1pf
+fpieee
+log1p-ieee      [test $HAVE_LOG1PF = 0 || test $REPLACE_LOG1PF = 1]
+
+configure.ac:
+gl_FUNC_LOG1PF_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOG1PF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

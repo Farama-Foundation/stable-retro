@@ -1,0 +1,20 @@
+Files:
+tests/test-md5.c
+tests/test-digest.h
+tests/bench-md5.c
+tests/bench-digest.h
+tests/macros.h
+
+Depends-on:
+c99
+getrusage
+gettimeofday
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-md5
+check_PROGRAMS += test-md5
+noinst_PROGRAMS += bench-md5
+test_md5_LDADD = $(LDADD) @LIB_CRYPTO@
+bench_md5_LDADD = $(LDADD) @LIB_CRYPTO@

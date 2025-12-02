@@ -1,0 +1,32 @@
+Description:
+execvpe() function: Execute a program, replacing the current process.
+
+Files:
+lib/execvpe.c
+m4/execvpe.m4
+
+Depends-on:
+unistd
+extensions
+free-posix      [test $HAVE_EXECVPE = 0 || test $REPLACE_EXECVPE = 1]
+stdbool         [test $HAVE_EXECVPE = 0 || test $REPLACE_EXECVPE = 1]
+findprog-in     [test $HAVE_EXECVPE = 0 || test $REPLACE_EXECVPE = 1]
+execve          [test $HAVE_EXECVPE = 0 || test $REPLACE_EXECVPE = 1]
+
+configure.ac:
+gl_FUNC_EXECVPE
+if test $HAVE_EXECVPE = 0 || test $REPLACE_EXECVPE = 1; then
+  AC_LIBOBJ([execvpe])
+fi
+gl_UNISTD_MODULE_INDICATOR([execvpe])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

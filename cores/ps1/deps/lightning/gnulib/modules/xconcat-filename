@@ -1,0 +1,25 @@
+Description:
+Construct a full filename by concatenating a directory name, a relative
+filename, and a suffix, with out-of-memory checking.
+
+Files:
+lib/concat-filename.h
+lib/xconcat-filename.c
+
+Depends-on:
+concat-filename
+xalloc-die
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += xconcat-filename.c
+
+Include:
+"concat-filename.h"
+
+License:
+GPL
+
+Maintainer:
+all

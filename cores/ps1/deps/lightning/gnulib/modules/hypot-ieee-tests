@@ -1,0 +1,19 @@
+Files:
+tests/test-hypot-ieee.c
+tests/test-hypot-ieee.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnand-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-hypot-ieee
+check_PROGRAMS += test-hypot-ieee
+test_hypot_ieee_LDADD = $(LDADD) @HYPOT_LIBM@

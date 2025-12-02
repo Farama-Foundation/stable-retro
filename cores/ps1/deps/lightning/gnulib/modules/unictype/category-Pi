@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character is of general category Pi.
+
+Files:
+lib/unictype/categ_Pi.c
+lib/unictype/categ_Pi.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-Pi])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_PI
+lib_SOURCES += unictype/categ_Pi.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

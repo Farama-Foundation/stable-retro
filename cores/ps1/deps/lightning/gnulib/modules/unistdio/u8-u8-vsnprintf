@@ -1,0 +1,29 @@
+Description:
+Formatted output to a fixed-length UTF-8 string.
+
+Files:
+lib/unistdio/u8-u8-vsnprintf.c
+lib/unistdio/u-vsnprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/u8-u8-vasnprintf
+unistr/u8-cpy
+errno
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistdio/u8-u8-vsnprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_U8_U8_VSNPRINTF
+lib_SOURCES += unistdio/u8-u8-vsnprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

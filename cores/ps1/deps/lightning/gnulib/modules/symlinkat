@@ -1,0 +1,40 @@
+Description:
+symlinkat() function: create symlinks relative to a directory
+
+Files:
+lib/symlinkat.c
+lib/at-func.c
+m4/symlinkat.m4
+
+Depends-on:
+unistd
+extensions
+fcntl-h         [test $HAVE_SYMLINKAT = 0 || test $REPLACE_SYMLINKAT = 1]
+at-internal     [test $HAVE_SYMLINKAT = 0]
+errno           [test $HAVE_SYMLINKAT = 0]
+fchdir          [test $HAVE_SYMLINKAT = 0]
+filename        [test $HAVE_SYMLINKAT = 0]
+openat-die      [test $HAVE_SYMLINKAT = 0]
+openat-h        [test $HAVE_SYMLINKAT = 0]
+save-cwd        [test $HAVE_SYMLINKAT = 0]
+symlink         [test $HAVE_SYMLINKAT = 0]
+fstatat         [test $REPLACE_SYMLINKAT = 1]
+
+configure.ac:
+gl_FUNC_SYMLINKAT
+if test $HAVE_SYMLINKAT = 0 || test $REPLACE_SYMLINKAT = 1; then
+  AC_LIBOBJ([symlinkat])
+fi
+gl_UNISTD_MODULE_INDICATOR([symlinkat])
+
+Makefile.am:
+
+Include:
+<fcntl.h>
+<unistd.h>
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake

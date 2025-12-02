@@ -1,0 +1,12 @@
+Files:
+tests/test-creat.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-creat
+check_PROGRAMS += test-creat

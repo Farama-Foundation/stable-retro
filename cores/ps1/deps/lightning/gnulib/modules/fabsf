@@ -1,0 +1,33 @@
+Description:
+fabsf() function: absolute value.
+
+Files:
+lib/fabsf.c
+m4/fabsf.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+fabs            [test $HAVE_FABSF = 0]
+
+configure.ac:
+gl_FUNC_FABSF
+if test $HAVE_FABSF = 0; then
+  AC_LIBOBJ([fabsf])
+fi
+gl_MATH_MODULE_INDICATOR([fabsf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FABSF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

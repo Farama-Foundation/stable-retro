@@ -1,0 +1,26 @@
+Description:
+Abstract sequential list data type, with out-of-memory checking.
+
+Files:
+lib/gl_xlist.h
+lib/gl_xlist.c
+
+Depends-on:
+list
+extern-inline
+stdbool
+xalloc-die
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_xlist.h gl_xlist.c
+
+Include:
+"gl_xlist.h"
+
+License:
+GPL
+
+Maintainer:
+all

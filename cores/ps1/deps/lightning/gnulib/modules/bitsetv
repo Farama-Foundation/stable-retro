@@ -1,0 +1,23 @@
+Description:
+Manipulating several bitsets.
+
+Files:
+lib/bitsetv.c
+lib/bitsetv.h
+
+Depends-on:
+bitset
+c99
+xalloc
+
+Makefile.am:
+lib_SOURCES += bitsetv.c
+
+Include:
+"bitsetv.h"
+
+License:
+GPLv3+
+
+Maintainer:
+Akim Demaille <akim.demaille@gmail.com>

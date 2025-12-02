@@ -1,0 +1,18 @@
+$Id: COPYING,v 1.3 2006-10-26 16:20:28 eggert Exp $
+The files in here are mostly copyright (C) Free Software Foundation, and
+are under assorted licenses.  Mostly, but not entirely, GPL.
+
+Many modules are provided dual-license, either GPL or LGPL at your
+option.  The headers of files in the lib directory (e.g., lib/error.c)
+state GPL for convenience, since the bulk of current gnulib users are
+GPL'd programs.  But the files in the modules directory (e.g.,
+modules/error) state the true license of each file, and when you use
+'gnulib-tool --lgpl --import <modules>', gnulib-tool either rewrites
+the files to have an LGPL header as part of copying them from gnulib
+to your project directory, or fails because the modules you requested
+were not licensed under LGPL.
+
+Some of the source files in lib/ have different licenses.  Also, the
+copy of maintain.texi in doc/ has a verbatim-copying license, and
+doc/standards.texi and make-stds.texi are GFDL.  Most (but not all)
+m4/*.m4 files have nearly unlimited licenses.

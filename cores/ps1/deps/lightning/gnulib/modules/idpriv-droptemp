@@ -1,0 +1,26 @@
+Description:
+Drop uid/gid privileges of the current process temporarily.
+
+Files:
+lib/idpriv.h
+lib/idpriv-droptemp.c
+m4/idpriv.m4
+
+Depends-on:
+unistd
+extensions
+
+configure.ac:
+gl_IDPRIV
+
+Makefile.am:
+lib_SOURCES += idpriv-droptemp.c
+
+Include:
+"idpriv.h"
+
+License:
+GPL
+
+Maintainer:
+all

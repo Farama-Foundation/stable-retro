@@ -1,0 +1,79 @@
+@node asprintf
+@subsection @code{asprintf}
+@findex asprintf
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-asprintf.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Dynamic Output,,Dynamically Allocating Formatted Output,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Dynamic-Output.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/asprintf.3.html,,man asprintf}.
+@end itemize
+
+Gnulib module: vasprintf or vasprintf-posix
+
+Portability problems fixed by either Gnulib module @code{vasprintf} or @code{vasprintf-posix}:
+@itemize
+@item
+This function is missing on some platforms:
+AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, mingw, MSVC 14.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{vasprintf-posix}:
+@itemize
+@item
+This function does not support size specifiers as in C99 (@code{hh}, @code{ll},
+@code{j}, @code{t}, @code{z}) on some platforms:
+Cygwin 1.5.24.
+@item
+printf @code{"%f"}, @code{"%e"}, @code{"%g"} of Infinity and NaN yields an
+incorrect result on some platforms:
+Solaris 11.0.
+@item
+This function does not support the @samp{a} and @samp{A} directives on some
+platforms:
+glibc-2.3.6, Mac OS X 10.5, NetBSD 9.0, OpenBSD 4.0, Solaris 11.4, Cygwin 1.5.x.
+@item
+This function does not support the @samp{F} directive on some platforms:
+NetBSD 3.0, Cygwin 1.5.x.
+@item
+This function does not support the @samp{ls} directive on some platforms:
+OpenBSD 4.0, Cygwin 1.5.x, Haiku.
+@item
+This function does not support precisions in the @samp{ls} directive correctly
+on some platforms:
+Solaris 11.4.
+@item
+This function does not support format directives that access arguments in an
+arbitrary order, such as @code{"%2$s"}, on some platforms:
+NetBSD 3.0.
+@item
+This function doesn't support the @code{'} flag on some platforms:
+NetBSD 3.0, Cygwin 1.5.24.
+@item
+This function does not round the argument of the @samp{a} directive correctly
+on some platforms:
+Mac OS X 10.12, FreeBSD 6.1.
+@item
+printf @code{"%010f"} of NaN and Infinity yields an incorrect result (padded
+with zeroes) on some platforms:
+Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, Solaris 11.0, Cygwin 1.5.x.
+@item
+This function can crash in out-of-memory conditions on some platforms:
+FreeBSD 6.0, NetBSD 5.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The @code{%m} directive is not portable, use @code{%s} mapped to an
+argument of @code{strerror(errno)} (or a version of @code{strerror_r})
+instead.
+@end itemize

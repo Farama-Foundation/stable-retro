@@ -1,0 +1,36 @@
+Description:
+mktime() function: convert broken-down time to linear time.
+
+Files:
+lib/mktime-internal.h
+lib/mktime.c
+m4/mktime.m4
+
+Depends-on:
+time
+c99
+multiarch
+intprops        [test $REPLACE_MKTIME = 1]
+libc-config     [test $REPLACE_MKTIME = 1]
+stdbool         [test $REPLACE_MKTIME = 1]
+time_r          [test $REPLACE_MKTIME = 1]
+verify          [test $REPLACE_MKTIME = 1]
+
+configure.ac:
+gl_FUNC_MKTIME
+if test $REPLACE_MKTIME = 1; then
+  AC_LIBOBJ([mktime])
+  gl_PREREQ_MKTIME
+fi
+gl_TIME_MODULE_INDICATOR([mktime])
+
+Makefile.am:
+
+Include:
+<time.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert, Jim Meyering, glibc

@@ -1,0 +1,29 @@
+Description:
+wcpncpy() function: copy a size-bounded wide string.
+
+Files:
+lib/wcpncpy.c
+lib/wcpncpy-impl.h
+m4/wcpncpy.m4
+
+Depends-on:
+extensions
+wchar
+
+configure.ac:
+gl_FUNC_WCPNCPY
+if test $HAVE_WCPNCPY = 0; then
+  AC_LIBOBJ([wcpncpy])
+fi
+gl_WCHAR_MODULE_INDICATOR([wcpncpy])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPL
+
+Maintainer:
+all

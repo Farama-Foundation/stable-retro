@@ -1,0 +1,19 @@
+@node chdir
+@section @code{chdir}
+@findex chdir
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/chdir.html}
+
+Gnulib module: chdir
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is declared in different header files (namely, @code{<io.h>} or
+@code{<direct.h>}) on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

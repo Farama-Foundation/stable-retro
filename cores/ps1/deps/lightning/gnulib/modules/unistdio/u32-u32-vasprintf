@@ -1,0 +1,28 @@
+Description:
+Formatted output to an UTF-32 string, with automatic memory allocation.
+
+Files:
+lib/unistdio/u32-u32-vasprintf.c
+lib/unistdio/u-vasprintf.h
+
+Depends-on:
+unistdio/base
+unistdio/u32-u32-vasnprintf
+errno
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistdio/u32-u32-vasprintf])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTDIO_U32_U32_VASPRINTF
+lib_SOURCES += unistdio/u32-u32-vasprintf.c
+endif
+
+Include:
+"unistdio.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

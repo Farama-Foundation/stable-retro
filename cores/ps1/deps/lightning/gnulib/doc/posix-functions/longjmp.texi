@@ -1,0 +1,24 @@
+@node longjmp
+@section @code{longjmp}
+@findex longjmp
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/longjmp.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The effects of this call are system and compiler optimization dependent,
+since it restores the contents of register-allocated variables but not
+the contents of stack-allocated variables.
+@item
+When longjumping out of a signal handler that was being executed on an
+alternate stack (installed through @code{sigaltstack}), on FreeBSD, NetBSD,
+OpenBSD, you need to clear the @code{SS_ONSTACK} flag in the @code{stack_t}
+structure managed by the kernel.
+@end itemize

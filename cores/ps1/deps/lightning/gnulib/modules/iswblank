@@ -1,0 +1,32 @@
+Description:
+iswblank() function: test wide character for being blank.
+
+Files:
+lib/iswblank.c
+m4/iswblank.m4
+
+Depends-on:
+wctype-h
+extensions
+
+configure.ac:
+gl_FUNC_ISWBLANK
+if test $HAVE_ISWCNTRL = 0 || test $REPLACE_ISWCNTRL = 1; then
+  :
+else
+  if test $HAVE_ISWBLANK = 0 || test $REPLACE_ISWBLANK = 1; then
+    AC_LIBOBJ([iswblank])
+  fi
+fi
+gl_WCTYPE_MODULE_INDICATOR([iswblank])
+
+Makefile.am:
+
+Include:
+<wctype.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

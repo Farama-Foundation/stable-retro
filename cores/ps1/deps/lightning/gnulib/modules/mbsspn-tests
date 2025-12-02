@@ -1,0 +1,18 @@
+Files:
+tests/test-mbsspn.sh
+tests/test-mbsspn.c
+tests/macros.h
+m4/locale-fr.m4
+m4/codeset.m4
+
+Depends-on:
+setlocale
+
+configure.ac:
+gt_LOCALE_FR_UTF8
+
+Makefile.am:
+TESTS += test-mbsspn.sh
+TESTS_ENVIRONMENT += LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
+check_PROGRAMS += test-mbsspn
+test_mbsspn_LDADD = $(LDADD) $(LIBUNISTRING) $(LIB_SETLOCALE) $(LIB_MBRTOWC)

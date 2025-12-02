@@ -1,0 +1,15 @@
+Files:
+tests/unicase/test-cased.c
+tests/unicase/test-predicate-part1.h
+tests/unicase/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-cased
+check_PROGRAMS += test-cased
+test_cased_SOURCES = unicase/test-cased.c
+test_cased_LDADD = $(LDADD) $(LIBUNISTRING)

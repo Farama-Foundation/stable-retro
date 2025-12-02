@@ -1,0 +1,24 @@
+@node argp_program_version_hook
+@subsection @code{argp_program_version_hook}
+@findex argp_program_version_hook
+
+Documentation:@*
+@ifinfo
+@ref{Argp Global Variables,,Argp Global Variables,libc}.
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Argp-Global-Variables.html}.
+@end ifnotinfo
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This variable is missing on all non-glibc platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

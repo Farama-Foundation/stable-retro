@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-sy_c_whitespace.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sy_c_whitespace
+check_PROGRAMS += test-sy_c_whitespace
+test_sy_c_whitespace_SOURCES = unictype/test-sy_c_whitespace.c
+test_sy_c_whitespace_LDADD = $(LDADD) $(LIBUNISTRING)

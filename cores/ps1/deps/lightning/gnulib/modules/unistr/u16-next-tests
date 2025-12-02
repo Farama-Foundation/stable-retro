@@ -1,0 +1,13 @@
+Files:
+tests/unistr/test-u16-next.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u16-next
+check_PROGRAMS += test-u16-next
+test_u16_next_SOURCES = unistr/test-u16-next.c
+test_u16_next_LDADD = $(LDADD) $(LIBUNISTRING)

@@ -1,0 +1,2 @@
+# "git diff --check" should not reject modules files which end in a blank line.
+* whitespace=-trail

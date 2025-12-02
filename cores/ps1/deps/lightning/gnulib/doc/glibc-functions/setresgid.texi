@@ -1,0 +1,18 @@
+@node setresgid
+@subsection @code{setresgid}
+@findex setresgid
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/setresgid.2.html,,man setresgid}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, NetBSD 9.0, Minix 3.1.8, AIX 5.1, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14.
+@end itemize

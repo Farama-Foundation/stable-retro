@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Wiz's timings are already good, apply this for Caanoo
+if [ -e /dev/accel ]; then
+  ./pollux_set "ram_timings=3,9,4,1,1,1,1"
+fi
+
+# the sync mount causes problems when writing saves,
+# probably due to many write calls, so have to get rid of it
+if grep mmcblk /proc/mounts | grep -q '\<sync\>'; then
+  oldmount=`grep mmcblk /proc/mounts | grep '\<sync\>' | awk '{print $4}'`
+  mount /dev/mmcblk0p1 /mnt/sd/ -o remount,dirsync,noatime
+fi
+
+./pcsx "$@"
+sync
+
+if [ -n "$oldmount" ]; then
+  mount /dev/mmcblk0p1 /mnt/sd/ -o remount,$oldmount
+fi
+
+cd /usr/gp2x
+exec ./gp2xmenu

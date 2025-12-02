@@ -1,0 +1,31 @@
+Description:
+global random number generator
+
+Files:
+lib/random.c
+m4/random.m4
+
+Depends-on:
+libc-config     [test $HAVE_RANDOM = 0 || test $REPLACE_RANDOM = 1 || test $REPLACE_INITSTATE = 1 || test $REPLACE_SETSTATE = 1]
+stdlib
+stdint          [test $HAVE_RANDOM = 0 || test $REPLACE_RANDOM = 1 || test $REPLACE_INITSTATE = 1 || test $REPLACE_SETSTATE = 1]
+random_r        [test $HAVE_RANDOM = 0 || test $REPLACE_RANDOM = 1 || test $REPLACE_INITSTATE = 1 || test $REPLACE_SETSTATE = 1]
+
+configure.ac:
+gl_FUNC_RANDOM
+if test $HAVE_RANDOM = 0 || test $REPLACE_RANDOM = 1 || test $REPLACE_INITSTATE = 1 || test $REPLACE_SETSTATE = 1; then
+  AC_LIBOBJ([random])
+  gl_PREREQ_RANDOM
+fi
+gl_STDLIB_MODULE_INDICATOR([random])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPL
+
+Maintainer:
+glibc

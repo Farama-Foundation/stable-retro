@@ -1,0 +1,30 @@
+Description:
+Locale dependent transformation for comparison of UTF-16 strings.
+
+Files:
+lib/uninorm/u16-normxfrm.c
+lib/uninorm/u-normxfrm.h
+
+Depends-on:
+uninorm/base
+uninorm/u16-normalize
+uniconv/u16-conv-to-enc
+localcharset
+amemxfrm
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uninorm/u16-normxfrm])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINORM_U16_NORMXFRM
+lib_SOURCES += uninorm/u16-normxfrm.c
+endif
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

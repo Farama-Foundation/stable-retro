@@ -1,0 +1,28 @@
+Description:
+imaxdiv() function: division of 'intmax_t'.
+
+Files:
+lib/imaxdiv.c
+m4/imaxdiv.m4
+
+Depends-on:
+inttypes-incomplete
+
+configure.ac:
+gl_FUNC_IMAXDIV
+if test $ac_cv_func_imaxdiv = no; then
+  AC_LIBOBJ([imaxdiv])
+  gl_PREREQ_IMAXDIV
+fi
+gl_INTTYPES_MODULE_INDICATOR([imaxdiv])
+
+Makefile.am:
+
+Include:
+<inttypes.h>
+
+License:
+LGPL
+
+Maintainer:
+all

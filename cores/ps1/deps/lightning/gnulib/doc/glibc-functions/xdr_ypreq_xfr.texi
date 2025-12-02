@@ -1,0 +1,16 @@
+@node xdr_ypreq_xfr
+@subsection @code{xdr_ypreq_xfr}
+@findex xdr_ypreq_xfr
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, OpenBSD 3.8, Minix 3.1.8, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

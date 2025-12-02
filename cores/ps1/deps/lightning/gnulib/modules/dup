@@ -1,0 +1,29 @@
+Description:
+dup() function: duplicate an open file descriptor.
+
+Files:
+lib/dup.c
+m4/dup.m4
+
+Depends-on:
+unistd
+msvc-inval      [test $REPLACE_DUP = 1]
+
+configure.ac:
+gl_FUNC_DUP
+if test $REPLACE_DUP = 1; then
+  AC_LIBOBJ([dup])
+  gl_PREREQ_DUP
+fi
+gl_UNISTD_MODULE_INDICATOR([dup])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

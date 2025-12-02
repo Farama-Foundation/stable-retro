@@ -1,0 +1,29 @@
+Description:
+Normalization insensitive comparison of UTF-16 strings.
+
+Files:
+lib/uninorm/u16-normcmp.c
+lib/uninorm/u-normcmp.h
+
+Depends-on:
+uninorm/base
+uninorm/u16-normalize
+unistr/u16-cmp2
+minmax
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uninorm/u16-normcmp])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINORM_U16_NORMCMP
+lib_SOURCES += uninorm/u16-normcmp.c
+endif
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

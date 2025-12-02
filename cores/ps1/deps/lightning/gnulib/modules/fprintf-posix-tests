@@ -1,0 +1,23 @@
+Files:
+tests/test-fprintf-posix.sh
+tests/test-fprintf-posix.c
+tests/test-fprintf-posix.h
+tests/test-printf-posix.output
+tests/test-fprintf-posix2.sh
+tests/test-fprintf-posix2.c
+tests/test-fprintf-posix3.sh
+tests/test-fprintf-posix3.c
+tests/infinity.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+stdint
+get-rusage-as
+
+configure.ac:
+AC_CHECK_FUNCS_ONCE([getrlimit setrlimit])
+
+Makefile.am:
+TESTS += test-fprintf-posix.sh test-fprintf-posix2.sh test-fprintf-posix3.sh
+check_PROGRAMS += test-fprintf-posix test-fprintf-posix2 test-fprintf-posix3

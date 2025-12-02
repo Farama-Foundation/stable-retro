@@ -1,0 +1,24 @@
+Description:
+jn() function: Bessel function of the first kind of order n.
+
+Files:
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_COMMON_DOUBLE_MATHFUNC([jn])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(JN_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

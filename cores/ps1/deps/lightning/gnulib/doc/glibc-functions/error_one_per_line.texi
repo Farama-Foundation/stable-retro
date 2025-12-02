@@ -1,0 +1,29 @@
+@node error_one_per_line
+@subsection @code{error_one_per_line}
+@findex error_one_per_line
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Error Messages,,Error Messages,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Error-Messages.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/error_one_per_line.3.html,,man error_one_per_line}.
+@end itemize
+
+Gnulib module: error
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This variable is missing on many non-glibc platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 1.7.9, mingw, MSVC 14, Android 5.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

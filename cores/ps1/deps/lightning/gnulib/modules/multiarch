@@ -1,0 +1,20 @@
+Description:
+Detection of multi-architecture ("universal binary") builds.
+
+Files:
+m4/multiarch.m4
+
+Depends-on:
+
+configure.ac:
+gl_MULTIARCH
+
+Makefile.am:
+
+Include:
+
+License:
+unlimited
+
+Maintainer:
+autoconf

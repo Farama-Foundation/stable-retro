@@ -1,0 +1,31 @@
+Description:
+Check for timer_settime.  Within HAVE_TIMER_SETTIME one can
+assume timer_create, timer_delete and timer_gettime are available too.
+
+Files:
+m4/timer_time.m4
+
+Depends-on:
+extensions
+pthread-h
+
+configure.ac:
+gl_TIMER_TIME
+
+Makefile.am:
+
+Include:
+<time.h>
+
+Link:
+$(LIB_TIMER_TIME)
+
+License:
+LGPLv2+
+
+Maintainer:
+Pádraig Brady, Paul Eggert, Jim Meyering
+
+Local Variables:
+coding: utf-8
+End:

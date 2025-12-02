@@ -1,0 +1,16 @@
+@node setsgent
+@subsection @code{setsgent}
+@findex setsgent
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on all non-glibc platforms:
+glibc 2.9, macOS 11.1, FreeBSD 6.4, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.4, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

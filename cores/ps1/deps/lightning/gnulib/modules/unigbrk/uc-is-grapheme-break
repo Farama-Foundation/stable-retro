@@ -1,0 +1,26 @@
+Description:
+Test for grapheme cluster breakpoints.
+
+Files:
+lib/unigbrk/uc-is-grapheme-break.c
+
+Depends-on:
+unigbrk/base
+unigbrk/uc-gbrk-prop
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unigbrk/uc-is-grapheme-break])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNIGBRK_UC_IS_GRAPHEME_BREAK
+lib_SOURCES += unigbrk/uc-is-grapheme-break.c
+endif
+
+Include:
+"unigbrk.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+Ben Pfaff, Daiki Ueno

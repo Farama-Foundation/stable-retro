@@ -1,0 +1,32 @@
+Description:
+atanf() function: inverse tangent function.
+
+Files:
+lib/atanf.c
+m4/atanf.m4
+
+Depends-on:
+math
+extensions
+atan            [test $HAVE_ATANF = 0]
+
+configure.ac:
+gl_FUNC_ATANF
+if test $HAVE_ATANF = 0; then
+  AC_LIBOBJ([atanf])
+fi
+gl_MATH_MODULE_INDICATOR([atanf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ATANF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

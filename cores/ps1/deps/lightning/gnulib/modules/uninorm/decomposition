@@ -1,0 +1,26 @@
+Description:
+Decomposition of Unicode characters.
+
+Files:
+lib/uninorm/decomposition.c
+
+Depends-on:
+uninorm/base
+uninorm/decomposition-table
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uninorm/decomposition])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINORM_DECOMPOSITION
+lib_SOURCES += uninorm/decomposition.c
+endif
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

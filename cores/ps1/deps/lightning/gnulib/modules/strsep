@@ -1,0 +1,30 @@
+Description:
+strsep() function: extract token from string.
+
+Files:
+lib/strsep.c
+m4/strsep.m4
+
+Depends-on:
+string
+extensions
+strpbrk         [test $HAVE_STRSEP = 0]
+
+configure.ac:
+gl_FUNC_STRSEP
+if test $HAVE_STRSEP = 0; then
+  AC_LIBOBJ([strsep])
+  gl_PREREQ_STRSEP
+fi
+gl_STRING_MODULE_INDICATOR([strsep])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Yoann Vandoorselaere

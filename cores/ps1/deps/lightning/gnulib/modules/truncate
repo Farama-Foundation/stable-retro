@@ -1,0 +1,34 @@
+Description:
+truncate() function: truncate a file to a specified length.
+
+Files:
+lib/truncate.c
+m4/truncate.m4
+
+Depends-on:
+unistd
+sys_types
+largefile
+sys_stat
+stat            [test $REPLACE_TRUNCATE = 1]
+open            [test $HAVE_DECL_TRUNCATE = 0 || test $REPLACE_TRUNCATE = 1]
+ftruncate       [test $HAVE_DECL_TRUNCATE = 0 || test $REPLACE_TRUNCATE = 1]
+
+configure.ac:
+gl_FUNC_TRUNCATE
+if test $HAVE_DECL_TRUNCATE = 0 || test $REPLACE_TRUNCATE = 1; then
+  AC_LIBOBJ([truncate])
+  gl_PREREQ_TRUNCATE
+fi
+gl_UNISTD_MODULE_INDICATOR([truncate])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+GPL
+
+Maintainer:
+all

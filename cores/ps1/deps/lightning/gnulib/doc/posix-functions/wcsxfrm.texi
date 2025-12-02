@@ -1,0 +1,21 @@
+@node wcsxfrm
+@section @code{wcsxfrm}
+@findex wcsxfrm
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/wcsxfrm.html}
+
+Gnulib module: wcsxfrm
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, Cygwin 1.5.x.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows and 32-bit AIX platforms, @code{wchar_t} is a 16-bit type and therefore cannot
+accommodate all Unicode characters.
+@end itemize

@@ -1,0 +1,26 @@
+Description:
+Search for some characters in UTF-32 string.
+
+Files:
+lib/unistr/u32-strspn.c
+
+Depends-on:
+unistr/base
+unistr/u32-strchr
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u32-strspn])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_STRSPN
+lib_SOURCES += unistr/u32-strspn.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

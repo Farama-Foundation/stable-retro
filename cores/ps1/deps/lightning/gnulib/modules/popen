@@ -1,0 +1,29 @@
+Description:
+popen() function: open a stream to a shell command.
+
+Files:
+lib/popen.c
+m4/popen.m4
+
+Depends-on:
+stdio
+open            [test $HAVE_POPEN = 0 || test $REPLACE_POPEN = 1]
+
+configure.ac:
+gl_FUNC_POPEN
+if test $HAVE_POPEN = 0 || test $REPLACE_POPEN = 1; then
+  AC_LIBOBJ([popen])
+  gl_PREREQ_POPEN
+fi
+gl_STDIO_MODULE_INDICATOR([popen])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPL
+
+Maintainer:
+Eric Blake

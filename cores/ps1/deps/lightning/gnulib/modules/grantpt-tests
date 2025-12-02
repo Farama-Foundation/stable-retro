@@ -1,0 +1,12 @@
+Files:
+tests/test-grantpt.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-grantpt
+check_PROGRAMS += test-grantpt

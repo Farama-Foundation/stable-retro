@@ -1,0 +1,17 @@
+Files:
+tests/test-xstrtol.c
+tests/test-xstrtoll.c
+tests/test-xstrtoull.c
+tests/test-xstrtoll.sh
+
+Depends-on:
+inttypes
+test-framework-sh
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-xstrtoll.sh
+check_PROGRAMS += test-xstrtoll test-xstrtoull
+test_xstrtoll_LDADD = $(LDADD) $(LIBINTL)
+test_xstrtoull_LDADD = $(LDADD) $(LIBINTL)

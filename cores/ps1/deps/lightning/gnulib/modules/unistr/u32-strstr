@@ -1,0 +1,32 @@
+Description:
+Substring test for UTF-32 strings.
+
+Files:
+lib/unistr/u32-strstr.c
+lib/unistr/u-strstr.h
+lib/str-kmp.h
+
+Depends-on:
+unistr/base
+unistr/u32-strchr
+unistr/u32-strlen
+unistr/u32-strnlen
+stdbool
+malloca
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.4], [unistr/u32-strstr])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_STRSTR
+lib_SOURCES += unistr/u32-strstr.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

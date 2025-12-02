@@ -1,0 +1,26 @@
+Description:
+Abstract ordered map data type, with out-of-memory checking.
+
+Files:
+lib/gl_xomap.h
+lib/gl_xomap.c
+
+Depends-on:
+omap
+extern-inline
+stdbool
+xalloc-die
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_xomap.h gl_xomap.c
+
+Include:
+"gl_xomap.h"
+
+License:
+GPL
+
+Maintainer:
+all

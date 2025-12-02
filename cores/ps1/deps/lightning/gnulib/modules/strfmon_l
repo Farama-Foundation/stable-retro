@@ -1,0 +1,34 @@
+Description:
+strfmon_l() function: formatted conversion of monetary value to string.
+
+Files:
+lib/strfmon_l.c
+m4/strfmon_l.m4
+m4/locale-fr.m4
+m4/codeset.m4
+
+Depends-on:
+monetary
+extensions
+stdbool         [test $REPLACE_STRFMON_L = 1]
+
+configure.ac:
+gl_FUNC_STRFMON_L
+if test $REPLACE_STRFMON_L = 1; then
+  AC_LIBOBJ([strfmon_l])
+  gl_PREREQ_STRFMON_L
+fi
+gl_MONETARY_MODULE_INDICATOR([strfmon_l])
+
+Makefile.am:
+
+Include:
+#if HAVE_MONETARY_H
+<monetary.h>
+#endif
+
+License:
+LGPLv2+
+
+Maintainer:
+all

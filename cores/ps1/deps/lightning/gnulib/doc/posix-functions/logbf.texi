@@ -1,0 +1,21 @@
+@node logbf
+@section @code{logbf}
+@findex logbf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/logbf.html}
+
+Gnulib module: logbf
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 9, MSVC 9.
+@item
+This function produces wrong results for subnormal numbers on some platforms:
+glibc 2.11/ppc, glibc 2.7/sparc, glibc 2.7/hppa, Solaris 11.4.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

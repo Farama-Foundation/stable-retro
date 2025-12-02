@@ -1,0 +1,29 @@
+Description:
+rmdir() function: delete a directory.
+
+Files:
+lib/rmdir.c
+m4/rmdir.m4
+
+Depends-on:
+unistd
+filename        [test $REPLACE_RMDIR = 1]
+sys_stat        [test $REPLACE_RMDIR = 1]
+
+configure.ac:
+gl_FUNC_RMDIR
+if test $REPLACE_RMDIR = 1; then
+  AC_LIBOBJ([rmdir])
+fi
+gl_UNISTD_MODULE_INDICATOR([rmdir])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering, Eric Blake

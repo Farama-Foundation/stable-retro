@@ -1,0 +1,43 @@
+@node limits.h
+@section @file{limits.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/limits.h.html}
+
+Gnulib module: limits-h or gethostname
+
+Portability problems fixed by Gnulib module @code{limits-h}:
+@itemize
+@item
+The macros @code{LLONG_MIN}, @code{LLONG_MAX}, @code{ULLONG_MAX} are not
+defined on some platforms:
+older glibc systems (e.g. Fedora 1), AIX 5.1, HP-UX 11, IRIX 6.5, OpenVMS.
+@item
+The macros @code{WORD_BIT}, @code{LONG_BIT} are not defined on some platforms:
+glibc 2.11 without @code{-D_GNU_SOURCE}, Cygwin, mingw, MSVC 14.
+@item
+Macros like @code{CHAR_WIDTH} are not defined on some platforms:
+glibc 2.24, NetBSD 9.0, many others.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{gethostname}:
+@itemize
+@item
+The @code{HOST_NAME_MAX} macro is not defined on some platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, AIX 5.1, HP-UX 11,
+IRIX 6.5, Solaris 11.4, Cygwin 1.5.x, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The macro @code{SSIZE_MAX} has the wrong type,
+albeit with the correct value:
+32-bit glibc 2.24 (on some architectures), Cygwin 2.5.2.
+@item
+The macro @code{SSIZE_MAX} is not defined on some platforms:
+MSVC 14.
+@end itemize
+
+For @code{PATH_MAX}, Gnulib provides a module @code{pathmax} with a header
+file @code{"pathmax.h"}.  It defines @code{PATH_MAX} to a constant on
+platforms with a file name length limit.

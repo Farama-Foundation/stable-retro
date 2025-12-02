@@ -1,0 +1,36 @@
+Description:
+ilogbf() function: get exponent as integer.
+
+Files:
+lib/ilogbf.c
+lib/ilogb.c
+m4/ilogbf.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+isfinite        [test $HAVE_ILOGBF = 0 || test $REPLACE_ILOGBF = 1]
+frexpf          [test $HAVE_ILOGBF = 0 || test $REPLACE_ILOGBF = 1]
+isnanf          [test $HAVE_ILOGBF = 0 || test $REPLACE_ILOGBF = 1]
+
+configure.ac:
+gl_FUNC_ILOGBF
+if test $HAVE_ILOGBF = 0 || test $REPLACE_ILOGBF = 1; then
+  AC_LIBOBJ([ilogbf])
+fi
+gl_MATH_MODULE_INDICATOR([ilogbf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ILOGBF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

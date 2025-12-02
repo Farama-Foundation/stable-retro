@@ -1,0 +1,28 @@
+@node logf
+@section @code{logf}
+@findex logf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/logf.html}
+
+Gnulib module: logf or logf-ieee
+
+Portability problems fixed by either Gnulib module @code{logf} or @code{logf-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, Solaris 9.
+@item
+This function is only defined as a macro with arguments on some platforms:
+MSVC 14.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{logf-ieee}:
+@itemize
+@item
+This function returns a wrong value for a negative argument on some platforms:
+NetBSD 5.1.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

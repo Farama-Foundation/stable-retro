@@ -1,0 +1,18 @@
+@node ppoll
+@subsection @code{ppoll}
+@findex ppoll
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/ppoll.2.html,,man ppoll}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.3.6, macOS 11.1, FreeBSD 6.4, NetBSD 9.0, OpenBSD 3.8, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 10, Cygwin 1.7.x, mingw, MSVC 14, Android 4.3.
+@end itemize

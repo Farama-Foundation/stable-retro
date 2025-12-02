@@ -1,0 +1,26 @@
+Description:
+Value of a numeric Unicode character.
+
+Files:
+lib/unictype/numeric.c
+lib/unictype/numeric.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/numeric])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_NUMERIC
+lib_SOURCES += unictype/numeric.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

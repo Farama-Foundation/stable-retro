@@ -1,0 +1,28 @@
+Description:
+Determine category of a Unicode character.
+
+Files:
+lib/unictype/categ_of.c
+lib/unictype/categ_of.h
+
+Depends-on:
+unictype/base
+unictype/category-none
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-of])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_OF
+lib_SOURCES += unictype/categ_of.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

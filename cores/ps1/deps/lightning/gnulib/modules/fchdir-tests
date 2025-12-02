@@ -1,0 +1,15 @@
+Files:
+tests/test-fchdir.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+cloexec
+getcwd-lgpl
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fchdir
+check_PROGRAMS += test-fchdir
+test_fchdir_LDADD = $(LDADD) $(LIBINTL)

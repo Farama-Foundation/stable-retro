@@ -1,0 +1,24 @@
+Description:
+cbrt() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+cbrt
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(CBRT_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

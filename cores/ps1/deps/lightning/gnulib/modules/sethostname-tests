@@ -1,0 +1,17 @@
+Files:
+tests/test-sethostname1.c
+tests/test-sethostname2.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+gethostname
+root-uid
+
+configure.ac:
+AC_CHECK_FUNCS_ONCE([geteuid])
+
+Makefile.am:
+TESTS += test-sethostname1 test-sethostname2
+check_PROGRAMS += test-sethostname1 test-sethostname2
+test_sethostname2_LDADD = $(LDADD) @GETHOSTNAME_LIB@

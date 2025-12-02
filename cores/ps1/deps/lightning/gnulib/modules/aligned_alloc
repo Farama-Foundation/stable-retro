@@ -1,0 +1,28 @@
+Description:
+Allocate memory with indefinite extent and specified alignment.
+
+Files:
+lib/aligned_alloc.c
+m4/aligned_alloc.m4
+
+Depends-on:
+extensions
+stdlib
+
+configure.ac:
+gl_FUNC_ALIGNED_ALLOC
+if test $REPLACE_ALIGNED_ALLOC = 1; then
+  AC_LIBOBJ([aligned_alloc])
+fi
+gl_STDLIB_MODULE_INDICATOR([aligned_alloc])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,12 @@
+Files:
+tests/test-ffsll.c
+tests/macros.h
+tests/signature.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ffsll
+check_PROGRAMS += test-ffsll

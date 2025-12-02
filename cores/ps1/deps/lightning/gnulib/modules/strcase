@@ -1,0 +1,32 @@
+Description:
+Case-insensitive string comparison functions.
+
+Files:
+lib/strcasecmp.c
+lib/strncasecmp.c
+m4/strcase.m4
+
+Depends-on:
+strings
+
+configure.ac:
+gl_STRCASE
+if test $HAVE_STRCASECMP = 0; then
+  AC_LIBOBJ([strcasecmp])
+  gl_PREREQ_STRCASECMP
+fi
+if test $HAVE_STRNCASECMP = 0; then
+  AC_LIBOBJ([strncasecmp])
+  gl_PREREQ_STRNCASECMP
+fi
+
+Makefile.am:
+
+Include:
+<strings.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

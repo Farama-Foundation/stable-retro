@@ -1,0 +1,26 @@
+Description:
+Report a save- or restore-cwd failure in our openat replacement and then exit.
+
+Files:
+lib/openat-die.c
+
+Depends-on:
+openat-h
+error
+exitfail
+gettext-h
+snippet/_Noreturn
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += openat-die.c
+
+Include:
+"openat.h"
+
+License:
+GPL
+
+Maintainer:
+all

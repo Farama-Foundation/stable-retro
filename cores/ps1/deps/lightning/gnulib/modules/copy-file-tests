@@ -1,0 +1,21 @@
+Files:
+tests/test-copy-file.sh
+tests/test-copy-file-1.sh
+tests/test-copy-file-2.sh
+tests/test-copy-file.c
+tests/macros.h
+
+Depends-on:
+acl
+acl-tests
+read-file
+xalloc
+test-framework-sh
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-copy-file.sh test-copy-file-1.sh test-copy-file-2.sh
+TESTS_ENVIRONMENT += USE_ACL=$(USE_ACL)
+check_PROGRAMS += test-copy-file
+test_copy_file_LDADD = $(LDADD) $(LIB_ACL) $(LIB_CLOCK_GETTIME) @LIBINTL@ $(LIB_MBRTOWC)

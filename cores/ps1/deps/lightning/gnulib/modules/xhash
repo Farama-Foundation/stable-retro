@@ -1,0 +1,23 @@
+Description:
+Parameterizable hash table, with out-of-memory checking.
+
+Files:
+lib/xhash.c
+
+Depends-on:
+hash
+xalloc
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += xhash.c
+
+Include:
+"hash.h"
+
+License:
+GPLv3+
+
+Maintainer:
+Akim Demaille, Jim Meyering

@@ -1,0 +1,26 @@
+@node strtok_r
+@section @code{strtok_r}
+@findex strtok_r
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strtok_r.html}
+
+Gnulib module: strtok_r
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+This function crashes when invoked from code compiled with optimization enabled
+on some platforms:
+glibc 2.7.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function cannot work correctly on character strings in multibyte locales.
+Gnulib provides an alternative function @code{mbstok_r} that works on character
+strings in all locales.
+@end itemize

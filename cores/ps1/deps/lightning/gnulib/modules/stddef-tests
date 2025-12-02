@@ -1,0 +1,13 @@
+Files:
+tests/test-stddef.c
+
+Depends-on:
+stdalign
+verify
+stddef-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-stddef
+check_PROGRAMS += test-stddef

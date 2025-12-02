@@ -1,0 +1,24 @@
+Description:
+ARCFOUR stream cipher implementation
+
+Files:
+lib/arcfour.h
+lib/arcfour.c
+
+Depends-on:
+stdint
+
+configure.ac:
+AC_REQUIRE([AC_C_RESTRICT])
+
+Makefile.am:
+lib_SOURCES += arcfour.c
+
+Include:
+"arcfour.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

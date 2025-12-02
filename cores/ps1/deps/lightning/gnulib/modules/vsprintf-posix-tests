@@ -1,0 +1,20 @@
+Files:
+tests/test-vsprintf-posix.c
+tests/test-sprintf-posix.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+stdint
+float
+
+configure.ac:
+AC_REQUIRE([gl_LONG_DOUBLE_VS_DOUBLE])
+
+Makefile.am:
+TESTS += test-vsprintf-posix
+check_PROGRAMS += test-vsprintf-posix
+

@@ -1,0 +1,32 @@
+Description:
+fclose() function: close a stream.
+
+Files:
+lib/fclose.c
+m4/fclose.m4
+
+Depends-on:
+stdio
+close           [test $REPLACE_FCLOSE = 1]
+fflush          [test $REPLACE_FCLOSE = 1]
+freading        [test $REPLACE_FCLOSE = 1]
+lseek           [test $REPLACE_FCLOSE = 1]
+msvc-inval      [test $REPLACE_FCLOSE = 1]
+
+configure.ac:
+gl_FUNC_FCLOSE
+if test $REPLACE_FCLOSE = 1; then
+  AC_LIBOBJ([fclose])
+fi
+gl_STDIO_MODULE_INDICATOR([fclose])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

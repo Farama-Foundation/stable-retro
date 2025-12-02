@@ -1,0 +1,40 @@
+Description:
+nanosleep() function: pause execution for a specified time.
+
+Files:
+lib/nanosleep.c
+m4/nanosleep.m4
+
+Depends-on:
+time
+extensions
+multiarch
+intprops        [test $HAVE_NANOSLEEP = 0 || test $REPLACE_NANOSLEEP = 1]
+select          [test $HAVE_NANOSLEEP = 0 || test $REPLACE_NANOSLEEP = 1]
+sigaction       [test $HAVE_NANOSLEEP = 0 || test $REPLACE_NANOSLEEP = 1]
+stdbool         [test $HAVE_NANOSLEEP = 0 || test $REPLACE_NANOSLEEP = 1]
+sys_select      [test $HAVE_NANOSLEEP = 0 || test $REPLACE_NANOSLEEP = 1]
+sys_time        [test $HAVE_NANOSLEEP = 0 || test $REPLACE_NANOSLEEP = 1]
+verify          [test $HAVE_NANOSLEEP = 0 || test $REPLACE_NANOSLEEP = 1]
+
+configure.ac:
+gl_FUNC_NANOSLEEP
+if test $HAVE_NANOSLEEP = 0 || test $REPLACE_NANOSLEEP = 1; then
+  AC_LIBOBJ([nanosleep])
+  gl_PREREQ_NANOSLEEP
+fi
+gl_TIME_MODULE_INDICATOR([nanosleep])
+
+Makefile.am:
+
+Include:
+<time.h>
+
+Link:
+$(LIB_NANOSLEEP)
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

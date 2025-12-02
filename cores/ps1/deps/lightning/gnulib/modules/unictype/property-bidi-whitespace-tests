@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_bidi_whitespace.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_bidi_whitespace
+check_PROGRAMS += test-pr_bidi_whitespace
+test_pr_bidi_whitespace_SOURCES = unictype/test-pr_bidi_whitespace.c
+test_pr_bidi_whitespace_LDADD = $(LDADD) $(LIBUNISTRING)

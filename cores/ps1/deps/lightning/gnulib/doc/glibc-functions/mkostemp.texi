@@ -1,0 +1,28 @@
+@node mkostemp
+@subsection @code{mkostemp}
+@findex mkostemp
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/mkostemp.3.html,,man mkostemp}
+
+Gnulib module: mkostemp
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+glibc 2.6, Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 1.7.5, mingw, MSVC 14, Android 5.1.
+@item
+This function is declared in @code{<unistd.h>} instead of @code{<stdlib.h>}
+on some platforms:
+macOS 11.1.
+@item
+On platforms where @code{off_t} is a 32-bit type, @code{mkostemp} may not work
+correctly to create files larger than 2 GB@.  (Cf. @code{AC_SYS_LARGEFILE}.)
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize
+
+The gnulib module @code{clean-temp} can create temporary files that will not
+be left behind after signals such as SIGINT.

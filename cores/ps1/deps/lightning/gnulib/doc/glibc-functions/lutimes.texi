@@ -1,0 +1,38 @@
+@node lutimes
+@subsection @code{lutimes}
+@findex lutimes
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{File Times,,File Times,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/File-Times.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/lutimes.3.html,,man lutimes}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, mingw, MSVC 14, Android 7.1.
+@item
+This function cannot set full timestamp resolution.  Use
+@code{utimensat(AT_FDCWD,file,times,AT_SYMLINK_NOFOLLOW)}, or the
+gnulib module @code{utimens}, instead.
+@item
+The mere act of using @code{lstat} modifies the access time of
+symlinks on some platforms, so @code{lutimes} can only effectively
+change modification time:
+Cygwin.
+@end itemize

@@ -1,0 +1,29 @@
+Description:
+Fuzzy string comparison.
+
+Files:
+lib/fstrcmp.h
+lib/fstrcmp.c
+
+Depends-on:
+c99
+diffseq
+lock
+tls
+minmax
+stdint
+xalloc
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += fstrcmp.h fstrcmp.c
+
+Include:
+"fstrcmp.h"
+
+License:
+GPL
+
+Maintainer:
+all

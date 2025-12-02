@@ -1,0 +1,26 @@
+Description:
+Fill UTF-16 string.
+
+Files:
+lib/unistr/u16-set.c
+lib/unistr/u-set.h
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u16-set])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U16_SET
+lib_SOURCES += unistr/u16-set.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

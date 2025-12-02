@@ -1,0 +1,29 @@
+Description:
+Canonical normalization of Unicode strings.
+
+Files:
+lib/uninorm/nfc.c
+lib/uninorm/normalize-internal.h
+
+Depends-on:
+uninorm/base
+uninorm/canonical-decomposition
+uninorm/composition
+uninorm/nfd
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uninorm/nfc])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINORM_NFC
+lib_SOURCES += uninorm/nfc.c
+endif
+
+Include:
+"uninorm.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

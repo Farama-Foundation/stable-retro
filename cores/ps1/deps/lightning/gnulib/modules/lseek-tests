@@ -1,0 +1,13 @@
+Files:
+tests/test-lseek.c
+tests/test-lseek.sh
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-lseek.sh
+check_PROGRAMS += test-lseek

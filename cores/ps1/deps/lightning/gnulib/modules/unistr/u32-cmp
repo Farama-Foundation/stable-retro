@@ -1,0 +1,25 @@
+Description:
+Compare pieces of UTF-32 strings.
+
+Files:
+lib/unistr/u32-cmp.c
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u32-cmp])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_CMP
+lib_SOURCES += unistr/u32-cmp.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

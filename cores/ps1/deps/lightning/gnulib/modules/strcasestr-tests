@@ -1,0 +1,14 @@
+Files:
+tests/test-strcasestr.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+AC_CHECK_DECLS_ONCE([alarm])
+
+Makefile.am:
+TESTS += test-strcasestr
+check_PROGRAMS += test-strcasestr
+

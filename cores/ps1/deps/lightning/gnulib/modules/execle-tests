@@ -1,0 +1,11 @@
+Files:
+tests/test-execle.sh
+tests/test-execle-main.c
+tests/test-exec-child.c
+tests/signature.h
+
+Depends-on:
+
+Makefile.am:
+TESTS += test-execle.sh
+check_PROGRAMS += test-execle-main test-exec-child

@@ -1,0 +1,34 @@
+@node log10l
+@section @code{log10l}
+@findex log10l
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/log10l.html}
+
+Gnulib module: log10l
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, HP-UX 11, older IRIX 6.5, Solaris 9, Cygwin 1.7.x, Android 4.4.
+@item
+This function is only defined as a macro with arguments on some platforms:
+MSVC 14.
+@item
+This function is not declared and does not work on some platforms:
+AIX 5.1.
+@item
+This function returns an unnormalized negative infinity for a minus zero argument on some platforms:
+IRIX 6.5.
+@item
+This function returns an unnormalized positive infinity for a positive infinite argument on some platforms:
+IRIX 6.5.
+@item
+This function produces results which are accurate to only 16 digits on some
+platforms:
+musl libc 1.2.2/arm64, musl libc 1.2.2/s390x, NetBSD 9.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,28 @@
+Description:
+fseek() function: Reposition a FILE stream.
+
+Files:
+lib/fseek.c
+m4/fseek.m4
+
+Depends-on:
+stdio
+fseeko          [test $REPLACE_FSEEK = 1]
+
+configure.ac:
+gl_FUNC_FSEEK
+if test $REPLACE_FSEEK = 1; then
+  AC_LIBOBJ([fseek])
+fi
+gl_STDIO_MODULE_INDICATOR([fseek])
+
+Makefile.am:
+
+Include:
+<stdio.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

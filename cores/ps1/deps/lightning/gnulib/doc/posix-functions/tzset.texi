@@ -1,0 +1,30 @@
+@node tzset
+@section @code{tzset}
+@findex tzset
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/tzset.html}
+
+Gnulib module: tzset
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On native Windows platforms (mingw, MSVC), this function works incorrectly
+when the environment variable @code{TZ} has been set by Cygwin.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Native Windows platforms (mingw, MSVC) support only a subset of
+POSIX-specified values for the @env{TZ} environment variable,
+consisting of a time zone abbreviation containing exactly three ASCII
+letters with no daylight saving time or angle brackets, and with no
+support for @code{tz} database settings like
+@code{TZ='America/New_York'}.  Even this subset does not work on
+applications built via the Universal Windows Platform, as it does not
+make environment variables like @env{TZ} available to applications.
+@item
+Older POSIX platforms do not support angle brackets in @env{TZ} values,
+as this feature was added in IEEE Std 1003.1-2001.
+@end itemize

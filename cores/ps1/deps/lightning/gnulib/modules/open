@@ -1,0 +1,35 @@
+Description:
+open() function: open a descriptor to a file.
+
+Files:
+lib/open.c
+m4/open.m4
+m4/open-cloexec.m4
+m4/open-slash.m4
+m4/mode_t.m4
+
+Depends-on:
+fcntl-h
+largefile
+cloexec         [test $REPLACE_OPEN = 1]
+fstat           [test $REPLACE_OPEN = 1]
+stat            [test $REPLACE_OPEN = 1]
+
+configure.ac:
+gl_FUNC_OPEN
+if test $REPLACE_OPEN = 1; then
+  AC_LIBOBJ([open])
+  gl_PREREQ_OPEN
+fi
+gl_FCNTL_MODULE_INDICATOR([open])
+
+Makefile.am:
+
+Include:
+<fcntl.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

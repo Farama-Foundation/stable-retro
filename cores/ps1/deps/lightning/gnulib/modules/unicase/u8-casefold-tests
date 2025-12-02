@@ -1,0 +1,16 @@
+Files:
+tests/unicase/test-u8-casefold.c
+tests/macros.h
+
+Depends-on:
+unistr/u8-cmp
+uninorm/nfc
+uninorm/nfd
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-casefold
+check_PROGRAMS += test-u8-casefold
+test_u8_casefold_SOURCES = unicase/test-u8-casefold.c
+test_u8_casefold_LDADD = $(LDADD) $(LIBUNISTRING)

@@ -1,0 +1,50 @@
+@node signal.h
+@section @file{signal.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/signal.h.html}
+
+Gnulib module: signal-h
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+@code{volatile sig_atomic_t} is rejected by older compilers on some
+platforms:
+AIX.
+@item
+@code{sigset_t} is missing on some platforms:
+MSVC 14.
+@item
+@code{sigset_t} is only declared in <sys/types.h> on some platforms:
+mingw.
+@item
+@code{struct sigaction} and @code{siginfo_t} are missing on some
+platforms:
+mingw, MSVC 14.
+@item
+The type @code{pid_t} is not defined on some platforms:
+MSVC 14.
+@item
+The signal @code{SIGPIPE} is not defined on some platforms:
+mingw, MSVC 14.
+@item
+The macros @code{SA_RESETHAND} and @code{SA_RESTART} are not defined
+on some platforms:
+NonStop.
+@item
+The type @code{sighandler_t} (a GNU extension) is not defined on most non-glibc
+platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 9.0, OpenBSD 6.7, AIX 5.1, HP-UX 11,
+IRIX 6.5, Solaris 11.4, Cygwin, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Many signals are not defined on some platforms:
+mingw, MSVC 14.
+@item
+The macro @code{SIGBUS} is set to the same value as @code{SIGSEGV},
+rather than being a distinct signal, on some platforms:
+Haiku.
+@end itemize

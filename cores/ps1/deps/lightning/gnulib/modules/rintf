@@ -1,0 +1,33 @@
+Description:
+rintf() function: round according to the current rounding mode.
+
+Files:
+lib/rintf.c
+lib/rint.c
+m4/rintf.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+extensions
+
+configure.ac:
+gl_FUNC_RINTF
+if test $HAVE_RINTF = 0; then
+  AC_LIBOBJ([rintf])
+fi
+gl_MATH_MODULE_INDICATOR([rintf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(RINTF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

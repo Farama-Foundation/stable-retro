@@ -1,0 +1,86 @@
+@node stdint.h
+@section @file{stdint.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/stdint.h.html}
+
+Gnulib module: stdint
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+OpenBSD 3.8, AIX 5.1, HP-UX 11.11, IRIX 6.5, MSVC 14.
+@item
+This header file is very incomplete on some platforms.
+@item
+The values of @code{SIG_ATOMIC_MIN} and @code{SIG_ATOMIC_MAX} are incorrect
+on some platforms:
+FreeBSD 6.2 / ia64.
+@item
+The value of @code{WINT_MAX} is incorrect on some platforms:
+mingw.
+@item
+The values of @code{INT8_MAX}, @code{UINT8_MAX} etc. are not usable in
+preprocessor expressions on some platforms:
+HP-UX 11.23.
+@item
+The values of @code{INTPTR_MAX} and @code{UINTPTR_MAX}, although correctly
+defined in @code{<stdint.h>}, are replaced by empty values when
+@code{<limits.h>} or @code{<inttypes.h>} gets included later on some platforms:
+Solaris 9 with GCC 4.5 or newer.
+@item
+The macros @code{WCHAR_MIN} and @code{WCHAR_MAX} are not defined in
+@code{<stdint.h>} (only in @code{<wchar.h>}) on some platforms:
+Dragonfly.
+@item
+On some hosts that predate C++11, when using C++ one must define
+@code{__STDC_CONSTANT_MACROS} to make visible the definitions of
+constant macros such as @code{INTMAX_C}, and one must define
+@code{__STDC_LIMIT_MACROS} to make visible the definitions of limit
+macros such as @code{INTMAX_MAX}.
+@item
+The macro @code{SIZE_MAX} has the wrong type,
+albeit with the correct value:
+32-bit glibc 2.24 (on s390 architecture), Mac OS X 10.7.
+@item
+Macros like @code{INTMAX_WIDTH} are not defined on some platforms:
+glibc 2.24, NetBSD 9.0, many others.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+@code{@{uint,int@}_fast@{8,16,32,64@}_t} may not correspond to the fastest
+types available on the system.
+Other @code{<stdint.h>} substitutes may define these types differently,
+so public header files should avoid these types.
+@item
+Macros are used instead of typedefs.
+@item
+Some C preprocessors mishandle constants that do not fit in @code{long int}.
+For example, as of 2007, Sun C mishandles @code{#if LLONG_MIN < 0} on
+a platform with 32-bit @code{long int} and 64-bit @code{long long int}.
+Some older preprocessors mishandle constants ending in @code{LL}.
+To work around these problems, compute the value of expressions like
+@code{LONG_MAX < LLONG_MAX} at @code{configure}-time rather than at
+@code{#if}-time.
+@end itemize
+
+The @code{stdint} module uses @code{#include_next}.  If you wish to install
+the generated stdint.h file under another name, typically in order to
+be able to use some of the types defined by stdint.h in your public
+header file, you could use the following Makefile.am-snippet:
+
+@example
+
+BUILT_SOURCES += idn-int.h
+DISTCLEANFILES += idn-int.h
+nodist_include_HEADERS += idn-int.h
+
+idn-int.h:
+	if test -n "$(STDINT_H)"; then \
+		sed -e s/include_next/include/ gl/stdint.h > idn-int.h; \
+	else \
+		echo '#include <stdint.h>' > idn-int.h; \
+	fi
+@end example

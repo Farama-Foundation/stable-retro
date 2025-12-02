@@ -1,0 +1,19 @@
+Files:
+tests/test-expf-ieee.c
+tests/test-exp-ieee.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnanf-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-expf-ieee
+check_PROGRAMS += test-expf-ieee
+test_expf_ieee_LDADD = $(LDADD) @EXPF_LIBM@

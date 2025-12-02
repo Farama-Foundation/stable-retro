@@ -1,0 +1,30 @@
+Description:
+sethostname() function: Set machine's hostname.
+
+Files:
+lib/sethostname.c
+m4/sethostname.m4
+m4/gethostname.m4
+
+Depends-on:
+unistd
+errno           [test $HAVE_SETHOSTNAME = 0]
+fopen-gnu       [test $HAVE_SETHOSTNAME = 0]
+
+configure.ac:
+gl_FUNC_SETHOSTNAME
+if test $HAVE_SETHOSTNAME = 0; then
+  AC_LIBOBJ([sethostname])
+fi
+gl_UNISTD_MODULE_INDICATOR([sethostname])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Ben Walton

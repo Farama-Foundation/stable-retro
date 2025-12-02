@@ -1,0 +1,30 @@
+@node ilogb
+@section @code{ilogb}
+@findex ilogb
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/ilogb.html}
+
+Gnulib module: ilogb
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, MSVC 9.
+@item
+This function returns a wrong result for a zero argument on some platforms:
+OpenBSD 6.7, AIX 5.1.
+@item
+This function returns a wrong result for denormalized arguments on some platforms:
+AIX 7.1 64-bit.
+@item
+This function returns a wrong result for an infinite argument on some platforms:
+NetBSD 7.1, OpenBSD 6.7.
+@item
+This function returns a wrong result for a NaN argument on some platforms:
+NetBSD 7.1, OpenBSD 6.7.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

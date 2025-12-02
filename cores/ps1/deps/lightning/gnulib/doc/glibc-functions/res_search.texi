@@ -1,0 +1,18 @@
+@node res_search
+@subsection @code{res_search}
+@findex res_search
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/res_search.3.html,,man res_search}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Cygwin 1.5.x, mingw, MSVC 14.
+@end itemize

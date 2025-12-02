@@ -1,0 +1,27 @@
+Description:
+Determine display width of UTF-16 string.
+
+Files:
+lib/uniwidth/u16-strwidth.c
+
+Depends-on:
+uniwidth/base
+uniwidth/u16-width
+unistr/u16-strlen
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uniwidth/u16-strwidth])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNIWIDTH_U16_STRWIDTH
+lib_SOURCES += uniwidth/u16-strwidth.c
+endif
+
+Include:
+"uniwidth.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

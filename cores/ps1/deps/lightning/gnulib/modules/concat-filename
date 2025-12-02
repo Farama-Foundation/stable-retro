@@ -1,0 +1,26 @@
+Description:
+Construct a full filename by concatenating a directory name, a relative
+filename, and a suffix.
+
+Files:
+lib/concat-filename.h
+lib/concat-filename.c
+
+Depends-on:
+filename
+malloc-posix
+stpcpy
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += concat-filename.c
+
+Include:
+"concat-filename.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

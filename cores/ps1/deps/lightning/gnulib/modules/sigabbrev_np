@@ -1,0 +1,28 @@
+Description:
+sigabbrev_np() function: abbreviated name of signals.
+
+Files:
+lib/sigabbrev_np.c
+m4/sigabbrev_np.m4
+
+Depends-on:
+extensions
+string
+
+configure.ac:
+gl_FUNC_SIGABBREV_NP
+if test $HAVE_SIGABBREV_NP = 0; then
+  AC_LIBOBJ([sigabbrev_np])
+fi
+gl_STRING_MODULE_INDICATOR([sigabbrev_np])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

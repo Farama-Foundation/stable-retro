@@ -1,0 +1,31 @@
+Description:
+ISO C 11 condition variable functions.
+
+Files:
+lib/cnd.c
+
+Depends-on:
+threads-h
+windows-cond
+gettimeofday
+
+configure.ac:
+AC_REQUIRE([gl_THREADS_H])
+if test $HAVE_THREADS_H = 0; then
+  AC_LIBOBJ([cnd])
+fi
+gl_THREADS_MODULE_INDICATOR([cnd])
+
+Makefile.am:
+
+Include:
+<threads.h>
+
+Link:
+$(LIBSTDTHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

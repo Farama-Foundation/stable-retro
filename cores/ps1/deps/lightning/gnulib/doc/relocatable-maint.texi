@@ -1,0 +1,259 @@
+@node Supporting Relocation
+@section Supporting Relocation
+
+It has been a pain for many users of GNU packages for a long time that
+packages are not relocatable.  It means a user cannot copy a program,
+installed by another user on the same machine, to his home directory,
+and have it work correctly (including i18n).  So many users need to go
+through @code{configure; make; make install} with all its
+dependencies, options, and hurdles.
+
+Red Hat, Debian, and other binary distributions solve the ``ease of
+installation'' problem, but they hardwire path names, usually to
+@file{/usr} or @file{/usr/local}.  This means that users need root
+privileges to install a binary package, and prevents installing two
+different versions of the same binary package.
+
+A relocatable program can be moved or copied to a different location
+on the file system.  It is possible to make symlinks to the installed
+and moved programs, and invoke them through the symlink. It is
+possible to do the same thing with a hard link @emph{only} if the hard
+link file is in the same directory as the real program.
+
+The @code{relocatable-prog} module aims to ease the process of making a
+GNU program relocatable.  It helps overcome two obstacles.  First, it aids
+with relocating the hard-coded references to absolute file names that
+GNU programs often contain.  These references must be fixed up at
+runtime if a program is to be successfully relocated.  The
+@code{relocatable-prog} module provides a function @code{relocate} that
+does this job.
+
+Second, the loader must be able to find shared libraries linked to
+relocatable executables or referenced by other shared libraries linked
+to relocatable executables.  The @code{relocatable-prog} module helps out
+here in a platform-specific way:
+
+@itemize
+@item
+On most operating systems, it adds a linker option (@option{-rpath}) that
+causes the dynamic linker to search for libraries in a directory relative
+to the location of the invoked executable.  This works on GNU/Linux and
+modern versions of GNU/Hurd, GNU/kFreeBSD, macOS, FreeBSD, NetBSD, OpenBSD,
+Solaris, Haiku.
+
+@item
+On other Unix systems, it installs a trampoline executable.  The trampoline
+sets the environment variable that controls shared library searching
+(usually @env{LD_LIBRARY_PATH}) and then invokes the real executable.
+This applies to operating systems such as AIX, HP-UX, or Minix.
+
+@item
+On Windows, the executable's own directory is searched for libraries,
+so installing shared libraries into the executable's directory is
+sufficient.
+@end itemize
+
+You can make your program relocatable by following these steps:
+
+@enumerate
+@item
+Import the @code{relocatable-prog} module.  For libraries, use the
+@code{relocatable-lib} or @code{relocatable-lib-lgpl} module, if
+the libraries are independent.  For installing multiple libraries,
+at least one of which depends on another one, use the @code{relocatable-prog}
+module.
+If you need more than one module, or you need to use them with different
+settings, you will need multiple copies of gnulib (@pxref{Multiple instances}).
+
+@item
+In every program, add to @code{main} as the first statement (even
+before setting the locale or doing anything related to libintl):
+
+@example
+set_program_name (argv[0]);
+@end example
+
+The prototype for this function is in @file{progname.h}.
+
+@item
+If you want your code to be portable to platforms that do not support
+automatic initialization, call @code{set_relocation_prefix}.
+
+@item
+Everywhere where you use a constant pathname from installation-time,
+wrap it in @code{relocate} so it gets translated to the run-time situation.
+Example:
+
+@example
+bindtextdomain (PACKAGE, LOCALEDIR);
+@end example
+
+@noindent
+becomes:
+
+@example
+bindtextdomain (PACKAGE, relocate (LOCALEDIR));
+@end example
+
+The prototype for this function is in @file{relocatable.h}.
+
+There is also a variant of this function, named @code{relocate2}, that
+makes it easy to reclaim the memory allocated by the call.
+
+@item
+The @code{set_program_name} function can also configure some
+additional libraries to relocate files that they access, by defining
+corresponding C preprocessor symbols to 1.  The libraries for which
+this is supported and the corresponding preprocessor symbols are:
+
+@table @asis
+@item libcharset
+@code{DEPENDS_ON_LIBCHARSET}
+
+@item libiconv
+@code{DEPENDS_ON_LIBICONV}
+
+@item libintl
+@code{DEPENDS_ON_LIBINTL}
+@end table
+
+Defining the symbol for a library makes every program in the package
+depend on that library, whether the program really uses the library or
+not, so this feature should be used with some caution.
+
+@item
+If your package installs shell scripts, also import the
+@code{relocatable-script} module.  Then, near the beginning of each
+shell script that your package installs, add the following:
+
+@smallexample
+@@relocatable_sh@@
+
+prefix="@@prefix@@"
+exec_prefix="@@exec_prefix@@"   # usually needs $prefix.
+datarootdir="@@datarootdir@@"   # usually needs $prefix.
+
+if test "@@RELOCATABLE@@" = yes; then
+  bindir="@@bindir@@"
+  orig_installdir="$bindir" # see Makefile.am's *_SCRIPTS variables
+  func_find_curr_installdir # determine curr_installdir
+  func_find_prefixes
+  relocate () @{
+    echo "$1/" \
+    | sed -e "s%^$@{orig_installprefix@}/%$@{curr_installprefix@}/%" \
+    | sed -e 's,/$,,'
+  @}
+else
+  relocate () @{
+    echo "$1"
+  @}
+fi
+
+# Get some relocated directory names.
+sysconfdir=`relocate "@@sysconfdir@@"`          # usually needs $prefix.
+some_datadir=`relocate "@@datadir@@/something"` # usually needs $datarootdir.
+bindir=`relocate "@@bindir@@"`       # usually needs $exec_prefix, hence $prefix.
+@end smallexample
+
+You must adapt the definition of @code{orig_installdir}, depending on
+where the script gets installed.  Also, at the end, instead of
+@code{sysconfdir} and @code{some_datadir}, transform those variables
+that you need.
+
+@item
+If your package installs Perl scripts, also import the
+@code{relocatable-perl} module.  Then, near the beginning of each
+Perl script that your package installs, add the following:
+
+@smallexample
+@@relocatable_pl@@
+if ("@@RELOCATABLE@@" eq "yes") @{
+  my $exec_prefix = "@@exec_prefix@@";
+  my $orig_installdir = "@@bindir@@"; # see Makefile.am's *_SCRIPTS variables
+  my ($orig_installprefix, $curr_installprefix) =
+    find_prefixes($orig_installdir, find_curr_installdir());
+
+  # the subroutine is defined whether or not the enclosing block is executed
+  sub relocate @{
+    my ($dir) = @@_;
+    if ("@@RELOCATABLE@@" eq "yes") @{
+      $dir =~ s%^$orig_installprefix/%$curr_installprefix/%;
+      $dir =~ s,/$,,;
+    @}
+    return $dir;
+  @}
+@}
+
+# Get some relocated directory names.
+# (The gnulib module 'configmake' can help with this.)
+$sysconfdir = relocate("@@sysconfdir@@");
+$some_datadir = relocate(@@datadir@@/something");
+@end smallexample
+
+You must adapt the definition of @code{$orig_installdir}, depending on
+where the script gets installed.  Also, at the end, instead of
+@code{sysconfdir} and @code{some_datadir}, transform those variables
+that you need.
+
+@item
+In your @file{Makefile.am}, for every program @command{foo} that gets
+installed in, say, @file{$(bindir)}, you add:
+
+@example
+foo_CPPFLAGS = -DINSTALLDIR=\"$(bindir)\"
+if RELOCATABLE_VIA_LD
+foo_LDFLAGS = `$(RELOCATABLE_LDFLAGS) $(bindir)`
+endif
+@end example
+
+When building gnulib to use with a relocatable library, you need to
+define the preprocessor symbol @code{IN_LIBRARY}.
+You may also want to build with @code{ENABLE_COSTLY_RELOCATABLE}, in which case
+you will also need to define @code{INSTALLDIR}.
+The following fragment can be added to an override @code{Makefile.am} used
+to build gnulib (@pxref{Modified build rules}).
+
+@example
+AM_CPPFLAGS += -DIN_LIBRARY -DENABLE_COSTLY_RELOCATABLE
+
+if SHLIBS_IN_BINDIR
+AM_CPPFLAGS += -DINSTALLDIR=\"$(bindir)\"
+else
+AM_CPPFLAGS += -DINSTALLDIR=\"$(libdir)\"
+endif
+@end example
+
+@code{SHLIBS_IN_BINDIR} is defined in @file{configure.ac} as follows:
+
+@smallexample
+AM_CONDITIONAL([SHLIBS_IN_BINDIR],
+               [case "$host_os" in mingw* | cygwin*) true;; *) false;; esac])
+@end smallexample
+
+@item
+In your @file{Makefile.am}, for every library @command{libfoo} that gets
+installed in, say, @file{$(libdir)}, you add:
+
+@example
+if RELOCATABLE_VIA_LD
+libfoo_la_LDFLAGS = `$(RELOCATABLE_LDFLAGS) $(libdir)`
+endif
+@end example
+
+@item
+Add a couple of variable assignments to your @file{Makefile.am}.
+
+If your package (or any package you rely on, e.g.@: gettext-runtime)
+will be relocated together with a set of installed shared libraries,
+then set @code{RELOCATABLE_LIBRARY_PATH} to a colon-separated list
+of those libraries' directories, e.g.
+@example
+RELOCATABLE_LIBRARY_PATH = $(libdir)
+@end example
+
+If your @file{config.h} is not in @file{$(top_builddir)}, then set
+@code{RELOCATABLE_CONFIG_H_DIR} to its directory, e.g.
+@example
+RELOCATABLE_CONFIG_H_DIR = $(top_builddir)/src
+@end example
+@end enumerate

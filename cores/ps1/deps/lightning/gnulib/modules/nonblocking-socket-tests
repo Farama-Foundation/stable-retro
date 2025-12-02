@@ -1,0 +1,46 @@
+Files:
+tests/test-nonblocking-socket.sh
+tests/test-nonblocking-socket-main.c
+tests/test-nonblocking-socket-child.c
+tests/test-nonblocking-socket.h
+tests/test-nonblocking-writer.h
+tests/test-nonblocking-reader.h
+tests/test-nonblocking-misc.h
+tests/socket-server.h
+tests/socket-client.h
+tests/macros.h
+
+Depends-on:
+stdbool
+unistd
+sys_socket
+nonblocking
+wait-process
+environ
+posix_spawnp
+netinet_in
+arpa_inet
+socket
+setsockopt
+bind
+getsockname
+listen
+accept
+getsockopt
+connect
+gettimeofday
+snprintf
+vsnprintf
+strerror
+ssize_t
+usleep
+read
+write
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-nonblocking-socket.sh
+check_PROGRAMS += test-nonblocking-socket-main test-nonblocking-socket-child
+test_nonblocking_socket_main_LDADD = $(LDADD) $(LIBSOCKET) @LIBINTL@ $(LIBTHREAD)
+test_nonblocking_socket_child_LDADD = $(LDADD) $(LIBSOCKET)

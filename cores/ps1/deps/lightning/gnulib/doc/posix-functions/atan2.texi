@@ -1,0 +1,15 @@
+@node atan2
+@section @code{atan2}
+@findex atan2
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/atan2.html}
+
+Gnulib module: atan2
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

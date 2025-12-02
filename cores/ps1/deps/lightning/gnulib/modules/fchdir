@@ -1,0 +1,44 @@
+Description:
+fchdir() function: change current directory, given an open file descriptor.
+
+Files:
+lib/fchdir.c
+m4/fchdir.m4
+
+Depends-on:
+unistd
+assure           [test $HAVE_FCHDIR = 0]
+chdir            [test $HAVE_FCHDIR = 0]
+close            [test $HAVE_FCHDIR = 0]
+dirent           [test $HAVE_FCHDIR = 0]
+dirfd            [test $HAVE_FCHDIR = 0]
+dup2             [test $HAVE_FCHDIR = 0]
+fcntl            [test $HAVE_FCHDIR = 0]
+fcntl-h          [test $HAVE_FCHDIR = 0]
+filename         [test $HAVE_FCHDIR = 0]
+filenamecat-lgpl [test $HAVE_FCHDIR = 0]
+free-posix       [test $HAVE_FCHDIR = 0]
+fstat            [test $HAVE_FCHDIR = 0]
+getcwd-lgpl      [test $HAVE_FCHDIR = 0]
+malloc-posix     [test $HAVE_FCHDIR = 0]
+open             [test $HAVE_FCHDIR = 0]
+realloc-posix    [test $HAVE_FCHDIR = 0]
+stat             [test $HAVE_FCHDIR = 0]
+stdbool          [test $HAVE_FCHDIR = 0]
+strdup-posix     [test $HAVE_FCHDIR = 0]
+sys_stat         [test $HAVE_FCHDIR = 0]
+
+configure.ac:
+gl_FUNC_FCHDIR
+gl_UNISTD_MODULE_INDICATOR([fchdir])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPL
+
+Maintainer:
+all

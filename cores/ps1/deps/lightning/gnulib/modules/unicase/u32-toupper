@@ -1,0 +1,30 @@
+Description:
+Uppercase mapping for UTF-32 strings (locale dependent).
+
+Files:
+lib/unicase/u32-toupper.c
+
+Depends-on:
+unicase/base
+unicase/u32-casemap
+unicase/special-casing
+unicase/empty-prefix-context
+unicase/empty-suffix-context
+unicase/toupper
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u32-toupper])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U32_TOUPPER
+lib_SOURCES += unicase/u32-toupper.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

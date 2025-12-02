@@ -1,0 +1,26 @@
+Description:
+Substring test for UTF-8 strings.
+
+Files:
+lib/unistr/u8-startswith.c
+lib/unistr/u-startswith.h
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-startswith])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_STARTSWITH
+lib_SOURCES += unistr/u8-startswith.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

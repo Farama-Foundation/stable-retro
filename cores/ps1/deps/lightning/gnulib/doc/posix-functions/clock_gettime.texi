@@ -1,0 +1,20 @@
+@node clock_gettime
+@section @code{clock_gettime}
+@findex clock_gettime
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/clock_gettime.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Mac OS X 10.11, Minix 3.1.8, mingw, MSVC 14.
+The Gnulib module @code{gettime} is a partial substitute; it
+implements the @code{CLOCK_REALTIME} functionality of @code{clock_gettime}.
+@end itemize

@@ -1,0 +1,31 @@
+Description:
+Timed mutexes (native Windows implementation).
+
+Files:
+lib/windows-timedmutex.h
+lib/windows-timedmutex.c
+lib/windows-initguard.h
+
+Depends-on:
+errno
+time
+gettimeofday
+
+configure.ac:
+AC_REQUIRE([AC_CANONICAL_HOST])
+case "$host_os" in
+  mingw*)
+    AC_LIBOBJ([windows-timedmutex])
+    ;;
+esac
+
+Makefile.am:
+
+Include:
+"windows-timedmutex.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

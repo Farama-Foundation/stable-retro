@@ -1,0 +1,25 @@
+Description:
+Character set conversion of strings made easy, uses iconv, with out-of-memory
+checking.
+
+Files:
+lib/xstriconv.h
+lib/xstriconv.c
+
+Depends-on:
+striconv
+xalloc
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += xstriconv.h xstriconv.c
+
+Include:
+"xstriconv.h"
+
+License:
+GPL
+
+Maintainer:
+Simon Josefsson

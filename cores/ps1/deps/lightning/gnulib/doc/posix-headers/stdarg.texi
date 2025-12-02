@@ -1,0 +1,17 @@
+@node stdarg.h
+@section @file{stdarg.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/stdarg.h.html}
+
+Gnulib module: stdarg
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+Some compilers (e.g., AIX 5.3 cc) need to be in c99 mode for the builtin
+@code{va_copy} to work.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

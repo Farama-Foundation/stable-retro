@@ -1,0 +1,18 @@
+@node posix_madvise
+@section @code{posix_madvise}
+@findex posix_madvise
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_madvise.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+NetBSD 3.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x, mingw, MSVC 14, Android 5.1.
+@end itemize

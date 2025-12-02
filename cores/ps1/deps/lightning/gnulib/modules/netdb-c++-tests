@@ -1,0 +1,19 @@
+Files:
+tests/test-netdb-c++.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-netdb-c++
+check_PROGRAMS += test-netdb-c++
+test_netdb_c___SOURCES = test-netdb-c++.cc
+test_netdb_c___LDADD = $(LDADD) $(GETADDRINFO_LIB)
+endif

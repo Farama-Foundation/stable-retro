@@ -1,0 +1,14 @@
+Files:
+tests/test-atanl.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+fpucw
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-atanl
+check_PROGRAMS += test-atanl
+test_atanl_LDADD = $(LDADD) @ATANL_LIBM@

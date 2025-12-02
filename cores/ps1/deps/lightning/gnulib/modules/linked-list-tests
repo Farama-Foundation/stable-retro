@@ -1,0 +1,32 @@
+Files:
+tests/test-linked_list.c
+tests/test-asyncsafe-linked_list-weak.sh
+tests/test-asyncsafe-linked_list-weak.c
+tests/test-asyncsafe-linked_list-strong.sh
+tests/test-asyncsafe-linked_list-strong.c
+tests/macros.h
+
+Depends-on:
+array-list
+thread
+yield
+nanosleep
+sigaction
+sigprocmask
+
+configure.ac:
+
+Makefile.am:
+TESTS += \
+  test-linked_list \
+  test-asyncsafe-linked_list-weak.sh \
+  test-asyncsafe-linked_list-strong.sh
+XFAIL_TESTS += \
+  test-asyncsafe-linked_list-weak.sh \
+  test-asyncsafe-linked_list-strong.sh
+check_PROGRAMS += \
+  test-linked_list \
+  test-asyncsafe-linked_list-weak \
+  test-asyncsafe-linked_list-strong
+test_asyncsafe_linked_list_weak_LDADD = $(LDADD) @LIBMULTITHREAD@ @YIELD_LIB@
+test_asyncsafe_linked_list_strong_LDADD = $(LDADD) @LIBMULTITHREAD@ @YIELD_LIB@

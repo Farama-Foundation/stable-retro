@@ -1,0 +1,31 @@
+Description:
+mbtowc() function: convert multibyte character to wide character.
+
+Files:
+lib/mbtowc.c
+lib/mbtowc-impl.h
+m4/mbtowc.m4
+
+Depends-on:
+stdlib
+mbrtowc         [test $HAVE_MBTOWC = 0 || test $REPLACE_MBTOWC = 1]
+wchar           [test $HAVE_MBTOWC = 0 || test $REPLACE_MBTOWC = 1]
+
+configure.ac:
+gl_FUNC_MBTOWC
+if test $HAVE_MBTOWC = 0 || test $REPLACE_MBTOWC = 1; then
+  AC_LIBOBJ([mbtowc])
+  gl_PREREQ_MBTOWC
+fi
+gl_STDLIB_MODULE_INDICATOR([mbtowc])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

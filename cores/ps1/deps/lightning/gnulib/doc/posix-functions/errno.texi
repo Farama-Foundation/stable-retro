@@ -1,0 +1,18 @@
+@node errno
+@section @code{errno}
+@findex errno
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/errno.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Windows, the socket functions don't set @code{errno}; their error code is
+available through @code{WSAGetLastError()} instead.
+@end itemize

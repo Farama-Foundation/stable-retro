@@ -1,0 +1,28 @@
+Description:
+Find grapheme cluster breaks.
+
+Files:
+lib/unigbrk/uc-grapheme-breaks.c
+lib/unigbrk/u-grapheme-breaks.h
+
+Depends-on:
+unigbrk/base
+unigbrk/uc-gbrk-prop
+
+configure.ac:
+gl_MODULE_INDICATOR([unigbrk/uc-grapheme-breaks])
+gl_LIBUNISTRING_MODULE([0.9.8], [unigbrk/uc-grapheme-breaks])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNIGBRK_UC_GRAPHEME_BREAKS
+lib_SOURCES += unigbrk/uc-grapheme-breaks.c
+endif
+
+Include:
+"unigbrk.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+Ben Pfaff, Daiki Ueno

@@ -1,0 +1,54 @@
+@node Building gnulib
+@section Building gnulib
+
+If you wish to help the gnulib development effort with build logs for
+your favorite platform, you may perform these steps:
+
+@enumerate
+
+@item Prerequisites tools
+
+Install the proper development tools.  To build and test all of
+Gnulib, you will need development tools for the programming languages
+C, C++, Java, and Perl, along with standard POSIX utilities such as
+@command{awk}, @command{make} and @command{sh}.  You will also need
+development tools that include Autoconf, Automake, Bison, Gettext,
+Git, GNU M4, Gperf, Libtool, and Texinfo.  Some of these tools are
+needed only by some modules.  More details can be found in Gnulib's
+@file{DEPENDENCIES} file.
+
+@item Obtain Gnulib
+
+See @url{https://www.gnu.org/software/gnulib/} for how to get the
+current Gnulib sources via Git.
+
+@item Create gnulib directory
+
+On a machine with GNU development tools installed and with a gnulib
+git checkout, use
+
+@example
+gnulib-tool --create-megatestdir --with-tests --dir=...
+@end example
+
+Note: The created directory uses ca. 512 MB on disk.
+
+@item Transfer gnulib directory
+
+Transfer this directory to a build machine (HP-UX, Cygwin, or
+whatever).  Often it is easier to transfer one file, and this can be
+achieved by running, inside the directory the following commands:
+
+@example
+./configure
+make dist
+@end example
+
+And then transferring the @file{dummy-0.tar.gz} file.
+
+@item Build modules
+
+On the build machine, run ./do-autobuild (or "nohup ./do-autobuild").
+It creates a directory @file{logs/} with a log file for each module.
+
+@end enumerate

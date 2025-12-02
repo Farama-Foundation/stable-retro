@@ -1,0 +1,31 @@
+Description:
+Read a line from a stream, stopping at one of 2 delimiters, with bounded
+memory allocation.
+
+Files:
+lib/getndelim2.h
+lib/getndelim2.c
+m4/getndelim2.m4
+
+Depends-on:
+ssize_t
+stdbool
+stdint
+freadptr
+freadseek
+memchr2
+
+configure.ac:
+gl_GETNDELIM2
+
+Makefile.am:
+lib_SOURCES += getndelim2.c
+
+Include:
+"getndelim2.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,83 @@
+@node Safe Allocation Macros
+@section Safe Allocation Macros
+
+The standard C library malloc/realloc/calloc/free APIs are prone to a
+number of common coding errors.  The @code{safe-alloc} module provides
+macros that make it easier to avoid many of them.  It still uses the
+standard C allocation functions behind the scenes.
+
+Some of the memory allocation mistakes that are commonly made are
+
+@itemize @bullet
+@item
+passing the incorrect number of bytes to @code{malloc}, especially
+when allocating an array,
+@item
+fail to check the return value of @code{malloc} and @code{realloc} for
+errors,
+@item
+forget to fully initialize memory just allocated with @code{malloc},
+@item
+duplicate calls to @code{free} by forgetting to set the pointer
+variable to @code{NULL},
+@item
+leaking memory in calls to @code{realloc} when that call fails.
+@end itemize
+
+The @code{safe-alloc} module addresses these problems in the following way:
+
+@itemize @bullet
+@item
+It defines macros that wrap around the standard C allocation
+functions.  That makes it possible to use the compiler's knowledge of
+the size of objects for allocation; it also allows setting pointers
+passed in as arguments when appropriate.
+@item
+It uses return values only for a success/failure error condition flag,
+and annotates them with GCC's @code{__warn_unused_result__} attribute.
+@item
+It uses @code{calloc} instead of @code{malloc}.
+@end itemize
+
+@defmac {int} ALLOC (ptr)
+@findex ALLOC
+Allocate @code{sizeof(*ptr)} bytes of memory and store the address of
+allocated memory in @code{ptr}.  Fill the newly allocated memory with
+zeros.
+
+Returns @minus{}1 on failure, 0 on success.
+@end defmac
+
+@defmac {int} ALLOC_N (ptr, count)
+@findex ALLOC_N
+Allocate an array of @code{count} elements, each @code{sizeof(*ptr)}
+bytes long, and store the address of allocated memory in
+@code{ptr}.  Fill the newly allocated memory with zeros.
+
+Returns @minus{}1 on failure, 0 on success.
+@end defmac
+
+@defmac {int} ALLOC_N_UNINITIALIZED (ptr, count)
+@findex ALLOC_N_UNINITIALIZED
+Allocate an array of @code{count} elements, each @code{sizeof(*ptr)}
+bytes long, and store the address of allocated memory in
+@code{ptr}.  The allocated memory is not initialized.
+
+Returns @minus{}1 on failure, 0 on success.
+@end defmac
+
+@defmac {int} REALLOC_N (ptr, count)
+@findex REALLOC_N
+Reallocate the memory pointed to by @code{ptr} to be big enough to hold
+at least @code{count} elements, each @code{sizeof(*ptr)} bytes long,
+and store the address of allocated memory in @code{ptr}.  If
+reallocation fails, the @code{ptr} variable is not modified.
+
+Returns @minus{}1 on failure, 0 on success.
+@end defmac
+
+@defmac {void} FREE (ptr)
+@findex FREE
+Free the memory stored in @code{ptr} and set @code{ptr} to
+@code{NULL}.
+@end defmac

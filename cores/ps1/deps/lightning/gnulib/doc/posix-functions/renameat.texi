@@ -1,0 +1,63 @@
+@node renameat
+@section @code{renameat}
+@findex renameat
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/renameat.html}
+
+Gnulib module: renameat
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+glibc 2.3.6, Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Cygwin 1.5.x, mingw, MSVC 14.
+But the replacement function is not safe to be used in libraries and is not
+multithread-safe.
+@item
+This function is declared in @code{<unistd.h>}, not in @code{<stdio.h>},
+on some platforms:
+NetBSD 7.0, Solaris 11.4.
+@item
+This function is declared in @code{<sys/stat.h>}, not in @code{<stdio.h>},
+on some platforms:
+Android 4.3.
+@item
+This function does not reject trailing slashes on non-directories on
+some platforms, as in @code{renameat(fd,"file",fd,"new/")}:
+Solaris 11.4.
+@item
+This function ignores trailing slashes on symlinks on some platforms,
+such that @code{renameat(fd,"link/",fd,"new")} corrupts @file{link}:
+Solaris 9.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+POSIX requires that @code{renameat(fd,"symlink-to-dir/",fd,"dir2")} rename
+@file{dir} and leave @file{symlink-to-dir} dangling; likewise, it
+requires that @code{renameat(fd,"dir",fd,"dangling/")} rename @file{dir} so
+that @file{dangling} is no longer a dangling symlink.  This behavior
+is counter-intuitive, so on some systems, @code{renameat} fails with
+@code{ENOTDIR} if either argument is a symlink with a trailing slash:
+glibc, OpenBSD, Cygwin 1.7.
+@item
+POSIX requires that @code{renameat} do nothing and return 0 if the
+source and destination are hard links to the same file.  This behavior
+is counterintuitive, and on some systems @code{renameat} is a no-op in
+this way only if the source and destination identify the same
+directory entry.  On these systems, for example, although renaming
+@file{./f} to @file{f} is a no-op, renaming @file{f} to @file{g}
+deletes @file{f} when @file{f} and @file{g} are hard links to the same
+file:
+NetBSD 7.0.
+@item
+After renaming a non-empty directory over an existing empty directory,
+the old directory name is still visible through the @code{stat} function
+for 30 seconds after the rename, on NFS file systems, on some platforms:
+Linux 2.6.18.
+@item
+This function will not rename a source that is currently opened
+by any process:
+mingw, MSVC 14.
+@end itemize

@@ -1,0 +1,22 @@
+Description:
+Ensure IEEE compliant floating-point operations (overflow and division by zero).
+
+Files:
+m4/fpieee.m4
+
+Depends-on:
+
+configure.ac-early:
+AC_REQUIRE([gl_FP_IEEE])
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

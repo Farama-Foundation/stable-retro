@@ -1,0 +1,29 @@
+@node fmodf
+@section @code{fmodf}
+@findex fmodf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fmodf.html}
+
+Gnulib module: fmodf or fmodf-ieee
+
+Portability problems fixed by either Gnulib module @code{fmodf} or @code{fmodf-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, Solaris 9.
+@item
+This function is only defined as a macro with arguments on some platforms:
+MSVC 14.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{fmodf-ieee}:
+@itemize
+@item
+This function has problems when the first argument is minus zero on some
+platforms:
+MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

@@ -1,0 +1,43 @@
+@node fstat
+@section @code{fstat}
+@findex fstat
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fstat.html}
+
+Gnulib module: fstat
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function crashes when invoked with invalid arguments on some platforms:
+MSVC 14.
+@item
+On platforms where @code{off_t} is a 32-bit type, @code{fstat} may not correctly
+report the size of files or block devices larger than 2 GB.
+(Cf. @code{AC_SYS_LARGEFILE}.)
+@item
+On Linux/x86 and Linux/x86_64, applications compiled in 32-bit mode cannot
+access files that happen to have a 64-bit inode number.  This can occur with
+file systems such as XFS (typically on large disks) and NFS.
+(Cf. @code{AC_SYS_LARGEFILE}.)
+@item
+On Solaris 11.4, when this function yields a timestamp with a
+nonpositive @code{tv_sec} value, @code{tv_nsec} might be in the range
+@minus{}1000000000..@minus{}1, representing a negative nanoseconds
+offset from @code{tv_sec}.
+@item
+The @code{st_atime}, @code{st_ctime}, @code{st_mtime} fields are affected by
+the current time zone and by the DST flag of the current time zone on some
+platforms:
+mingw, MSVC 14 (when the environment variable @code{TZ} is set).
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+@xref{sys/stat.h}, for general portability problems with @code{struct stat}.
+@item
+On Cygwin, @code{fstat} applied to the file descriptors 0 and 1, returns
+different @code{st_ino} values, even if standard input and standard output
+are not redirected and refer to the same terminal.
+@end itemize

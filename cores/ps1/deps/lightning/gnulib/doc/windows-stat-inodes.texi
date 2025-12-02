@@ -1,0 +1,14 @@
+@node Inode numbers on Windows
+@section Inode numbers on Windows
+
+The module @samp{windows-stat-inodes} ensures that,
+on native Windows platforms, @code{struct stat} contains
+@code{st_dev}, @code{st_ino} fields that are able to distinguish
+different inodes.
+
+Note: Such values can only be provided for most files on the
+file system.  For a few files (such as inaccessible files),
+@code{st_dev} and @code{st_ino} are set to 0.  Therefore,
+you should test whether @code{st_dev != 0 && st_ino != 0},
+before going to make inferences based on the file identity
+based on @code{st_dev} and @code{st_ino}.

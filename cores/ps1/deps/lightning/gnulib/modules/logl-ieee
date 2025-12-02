@@ -1,0 +1,24 @@
+Description:
+logl() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+logl
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(LOGL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

@@ -1,0 +1,12 @@
+Files:
+tests/test-fstat.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fstat
+check_PROGRAMS += test-fstat

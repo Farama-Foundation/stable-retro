@@ -1,0 +1,52 @@
+Description:
+A POSIX-like <sys/resource.h>.
+
+Files:
+lib/sys_resource.in.h
+m4/sys_resource_h.m4
+
+Depends-on:
+include_next
+snippet/arg-nonnull
+snippet/c++defs
+snippet/warn-on-use
+sys_time
+
+configure.ac:
+gl_HEADER_SYS_RESOURCE
+AC_PROG_MKDIR_P
+
+Makefile.am:
+BUILT_SOURCES += sys/resource.h
+
+# We need the following in order to create <sys/resource.h> when the system
+# doesn't have one.
+sys/resource.h: sys_resource.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
+	$(AM_V_at)$(MKDIR_P) sys
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_SYS_RESOURCE_H''@|$(NEXT_SYS_RESOURCE_H)|g' \
+	      -e 's|@''HAVE_SYS_RESOURCE_H''@|$(HAVE_SYS_RESOURCE_H)|g' \
+	      -e 's/@''GNULIB_GETRUSAGE''@/$(GNULIB_GETRUSAGE)/g' \
+	      -e 's/@''HAVE_GETRUSAGE''@/$(HAVE_GETRUSAGE)/g' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
+	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/sys_resource.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+MOSTLYCLEANFILES += sys/resource.h sys/resource.h-t
+MOSTLYCLEANDIRS += sys
+
+Include:
+<sys/resource.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

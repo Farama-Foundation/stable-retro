@@ -1,0 +1,20 @@
+@node func
+@section func
+
+The @code{func} module makes sure that you can use the predefined
+identifier @code{__func__} as defined by C99 in your code.
+
+A small example is:
+
+@smallexample
+#include <config.h>
+#include <stdio.h> /* for printf */
+
+int main (void)
+@{
+    printf ("%s: hello world\n", __func__);
+@}
+@end smallexample
+
+Note that @code{sizeof} cannot be applied to @code{__func__}: On SunPRO C
+compiler, @code{sizeof __func__} evaluates to 0.

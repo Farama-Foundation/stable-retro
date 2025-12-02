@@ -1,0 +1,301 @@
+@node Multithreading
+@chapter Multithreading
+
+Multithreading is a programming paradigm.  In a multithreaded program,
+multiple threads execute concurrently (or quasi concurrently) at different
+places in the program.
+
+There are three motivations for using multithreading in a program:
+@itemize @bullet
+@item
+Exploiting CPU hardware with multiple execution units.  Nowadays, many CPUs
+have 2 to 8 execution cores in a single chip.  Additionally, often multiple
+CPU chips are combined in a single package.  Thus, some CPU packages support
+64 or 96 simultaneous threads of execution.
+@item
+Simplifying program architecture.  When a program has to read from different
+file descriptors, network sockets, or event channels at the same time, the
+classical single-threaded architecture is to have a main loop which uses
+@code{select} or @code{poll} on all the descriptors and then dispatches
+according to from which descriptor input arrived.  In a multi-threaded
+program, you allocate one thread for each descriptor, and these threads can
+be programmed and managed independently.
+@item
+Offloading work from signal handlers.  A signal handler is not allowed to
+call @code{malloc}; therefore you are very limited in what you can do in
+a signal handler.  But a signal handler can notify a thread, and the thread
+can then do the appropriate processing, as complex as it needs to be.
+@end itemize
+
+A multithreading API offers
+@itemize @bullet
+@item
+Primitives for creating threads, for waiting until threads are terminated,
+and for reaping their results.
+@item
+Primitives through which different threads can operate on the same data or
+use some data structures for communicating between the threads.  These are
+called ``mutexes'' or ``locks''.
+@item
+Primitives for executing a certain (initialization) code at most once.
+@item
+Primitives for notifying one or more other threads.  These are called wait
+queues or ``condition variables''.
+@item
+Primitives for allowing different threads to have different values for a
+variable.  Such a variable is said to reside in ``thread-local storage'' or
+``thread-specific storage''.
+@item
+Primitives for relinquishing control for some time and letting other threads
+go.
+@end itemize
+
+Note: Programs that achieve multithreading through OpenMP (cf. the gnulib
+module @samp{openmp}) don't create and manage their threads themselves.
+Nevertheless, they need to use mutexes/locks in many cases.
+
+@menu
+* Multithreading APIs::
+* Choosing a multithreading API::
+* POSIX multithreading::
+* ISO C multithreading::
+* Gnulib multithreading::
+* Multithreading Optimizations::
+@end menu
+
+@node Multithreading APIs
+@section The three multithreading APIs
+
+Three multithreading APIs are available to Gnulib users:
+@itemize @bullet
+@item
+POSIX multithreading,
+@item
+ISO C multithreading,
+@item
+Gnulib multithreading.
+@end itemize
+
+They are supported on all platforms that have multithreading in one form or
+the other.  Currently, these are all platforms supported by Gnulib, except
+for Minix.
+
+The main differences are:
+@itemize @bullet
+@item
+The exit code of a thread is a pointer in the POSIX and Gnulib APIs, but
+only an @code{int} in the ISO C API.
+@item
+The POSIX API has additional facilities for detaching threads, setting the
+priority of a thread, assigning a thread to a certain set of processors,
+and much more.
+@item
+In the POSIX and ISO C APIs, most functions have a return code, and you
+are supposed to check the return code; even locking and unlocking a lock
+can fail.  In the Gnulib API, many functions don't have a return code; if
+they cannot complete, the program aborts.  This sounds harsh, but such
+aborts have not been reported in 12 years.
+@item
+In the ISO C API, the initialization of a statically allocated lock is
+clumsy: You have to initialize it through a once-only function.
+@end itemize
+
+@node Choosing a multithreading API
+@section Choosing the right multithreading API
+
+Here are guidelines for determining which multithreading API is best for
+your code.
+
+In programs that use advanced POSIX APIs, such as spin locks,
+detached threads (@code{pthread_detach}),
+signal blocking (@code{pthread_sigmask}),
+priorities (@code{pthread_setschedparam}),
+processor affinity (@code{pthread_setaffinity_np}), it is best to use
+the POSIX API.  This is because you cannot convert an ISO C @code{thrd_t}
+or a Gnulib @code{gl_thread_t} to a POSIX @code{pthread_t}.
+
+In code that is shared with glibc, it is best to use the POSIX API as well.
+
+In libraries, it is best to use the Gnulib API.  This is because it gives
+the person who builds the library an option
+@samp{--enable-threads=@{isoc,posix,windows@}}, that determines on which
+native multithreading API of the platform to rely.  In other words, with
+this choice, you can minimize the amount of glue code that your library
+needs to contain.
+
+In the other cases, the POSIX API and the Gnulib API are equally well suited.
+
+The ISO C API is never the best choice, as of this writing (2020).
+
+@node POSIX multithreading
+@section The POSIX multithreading API
+
+The POSIX multithreading API is documented in POSIX
+@url{https://pubs.opengroup.org/onlinepubs/9699919799/}.
+
+To make use of POSIX multithreading, even on platforms that don't support it
+natively (most prominently, native Windows), use the following Gnulib modules:
+@multitable @columnfractions .75 .25
+@headitem Purpose @tab Module
+@item For thread creation and management:@tie{} @tab @code{pthread-thread}
+@item For simple and recursive locks:@tie{} @tab @code{pthread-mutex}
+@item For read-write locks:@tie{} @tab @code{pthread-rwlock}
+@item For once-only execution:@tie{} @tab @code{pthread-once}
+@item For ``condition variables'' (wait queues):@tie{} @tab @code{pthread-cond}
+@item For thread-local storage:@tie{} @tab @code{pthread-tss}
+@item For relinquishing control:@tie{} @tab @code{sched_yield}
+@item For spin locks:@tie{} @tab @code{pthread-spin}
+@end multitable
+
+There is also a convenience module named @code{pthread} which depends on all
+of these (except @code{sched_yield}); so you don't need to enumerate these
+modules one by one.
+
+@node ISO C multithreading
+@section The ISO C multithreading API
+
+The ISO C multithreading API is documented in ISO C 11
+@url{http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf}.
+
+To make use of ISO C multithreading, even on platforms that don't support it
+or have severe bugs, use the following Gnulib modules:
+@multitable @columnfractions .85 .15
+@headitem Purpose @tab Module
+@item For thread creation and management:@tie{} @tab @code{thrd}
+@item For simple locks, recursive locks, and read-write locks:@tie{}
+      @tab @code{mtx}
+@item For once-only execution:@tie{} @tab @code{mtx}
+@item For ``condition variables'' (wait queues):@tie{} @tab @code{cnd}
+@item For thread-local storage:@tie{} @tab @code{tss}
+@end multitable
+
+There is also a convenience module named @code{threads} which depends on all
+of these; so you don't need to enumerate these modules one by one.
+
+@node Gnulib multithreading
+@section The Gnulib multithreading API
+
+The Gnulib multithreading API is documented in the respective include files:
+@itemize
+@item
+@code{<glthread/thread.h>}
+@item
+@code{<glthread/lock.h>}
+@item
+@code{<glthread/cond.h>}
+@item
+@code{<glthread/tls.h>}
+@item
+@code{<glthread/yield.h>}
+@end itemize
+
+To make use of Gnulib multithreading, use the following Gnulib modules:
+@multitable @columnfractions .85 .15
+@headitem Purpose @tab Module
+@item For thread creation and management:@tie{} @tab @code{thread}
+@item For simple locks, recursive locks, and read-write locks:@tie{}
+      @tab @code{lock}
+@item For once-only execution:@tie{} @tab @code{lock}
+@item For ``condition variables'' (wait queues):@tie{} @tab @code{cond}
+@item For thread-local storage:@tie{} @tab @code{tls}
+@item For relinquishing control:@tie{} @tab @code{yield}
+@end multitable
+
+The Gnulib multithreading supports a configure option
+@samp{--enable-threads=@{isoc,posix,windows@}}, that chooses the underlying
+thread implementation.  Currently (2020):
+@itemize @bullet
+@item
+@code{--enable-threads=posix} is supported and is the best choice on all
+platforms except for native Windows.  It may also work, to a limited extent,
+on mingw with the @code{winpthreads} library, but is not recommended there.
+@item
+@code{--enable-threads=windows} is supported and is the best choice on
+native Windows platforms (mingw and MSVC).
+@item
+@code{--enable-threads=isoc} is supported on all platforms that have the
+ISO C multithreading API.  However, @code{--enable-threads=posix} is always
+a better choice.
+@end itemize
+
+@node Multithreading Optimizations
+@section Optimizations of multithreaded code
+
+Despite all the optimizations of multithreading primitives that have been
+implemented over the years --- from
+@url{https://en.wikipedia.org/wiki/Compare-and-swap,
+atomic operations in hardware},
+over @url{https://en.wikipedia.org/wiki/Futex, futexes} and
+@url{https://www.efficios.com/blog/2019/02/08/linux-restartable-sequences/,
+restartable sequences}
+in the Linux kernel, to lock elision
+@url{https://lwn.net/Articles/534758/, [1]}
+@url{https://www.gnu.org/software/libc/manual/html_node/Elision-Tunables.html,
+[2]})
+--- single-threaded programs can still profit performance-wise from the
+assertion that they are single-threaded.
+
+Gnulib defines four facilities that help optimizing for the single-threaded
+case.
+
+@itemize @bullet
+@item
+The Gnulib multithreading API, when used on glibc @leq{} 2.32 and *BSD systems,
+uses weak symbols to detect whether the program is linked with
+@code{libpthread}.  If not, the program has no way to create additional
+threads and must therefore be single-threaded.  This optimization applies
+to all the Gnulib multithreading API (locks, thread-local storage, and more).
+@item
+The @code{thread-optim} module, on glibc @geq{} 2.32 systems, allows your code
+to skip locking between threads (regardless which of the three multithreading
+APIs you use).  You need extra code for this: include the
+@code{"thread-optim.h"} header file, and use the macro @code{gl_multithreaded}
+like this:
+@smallexample
+bool mt = gl_multithreaded ();
+if (mt) gl_lock_lock (some_lock);
+...
+if (mt) gl_lock_unlock (some_lock);
+@end smallexample
+@item
+You may use the @code{unlocked-io} module if you want the @code{FILE} stream
+functions @code{getc}, @code{putc}, etc.@: to use unlocked I/O if available,
+throughout the package.  Unlocked I/O can improve performance, sometimes
+dramatically.  But unlocked I/O is safe only in single-threaded programs,
+as well as in multithreaded programs for which you can guarantee that
+every @code{FILE} stream, including @code{stdin}, @code{stdout}, @code{stderr},
+is used only in a single thread.
+
+You need extra code for this optimization to be effective: include the
+@code{"unlocked-io.h"} header file.  Some Gnulib modules that do operations
+on @code{FILE} streams have these preparations already included.
+@item
+You may define the C macro @code{GNULIB_REGEX_SINGLE_THREAD}, if all the
+programs in your package invoke the functions of the @code{regex} module
+only from a single thread.
+@item
+You may define the C macro @code{GNULIB_MBRTOWC_SINGLE_THREAD}, if all the
+programs in your package invoke the functions @code{mbrtowc}, @code{mbrtoc32},
+and the functions of the @code{regex} module only from a single thread.  (The
+@code{regex} module uses @code{mbrtowc} under the hood.)
+@item
+You may define the C macro @code{GNULIB_WCHAR_SINGLE_LOCALE}, if all the
+programs in your package set the locale early and
+@itemize
+@item
+don't change the locale after it has been initialized, and
+@item
+don't call locale sensitive functions (@code{mbrtowc}, @code{wcwidth}, etc.@:)
+before the locale has been initialized.
+@end itemize
+This macro optimizes the functions @code{mbrtowc}, @code{mbrtoc32}, and
+@code{wcwidth}.
+@item
+You may define the C macro @code{GNULIB_GETUSERSHELL_SINGLE_THREAD}, if all the
+programs in your package invoke the functions @code{setusershell},
+@code{getusershell}, @code{endusershell} only from a single thread.
+@item
+You may define the C macro @code{GNULIB_EXCLUDE_SINGLE_THREAD}, if all the
+programs in your package invoke the functions of the @code{exclude} module
+only from a single thread.
+@end itemize

@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_terminal_punctuation.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_terminal_punctuation
+check_PROGRAMS += test-pr_terminal_punctuation
+test_pr_terminal_punctuation_SOURCES = unictype/test-pr_terminal_punctuation.c
+test_pr_terminal_punctuation_LDADD = $(LDADD) $(LIBUNISTRING)

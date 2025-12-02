@@ -1,0 +1,54 @@
+Description:
+fnmatch() function: wildcard matching.
+
+Files:
+lib/fnmatch.c
+lib/fnmatch_loop.c
+m4/mbstate_t.m4
+m4/fnmatch.m4
+
+Depends-on:
+fnmatch-h
+alloca-opt      [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+attribute       [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+btowc           [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+builtin-expect  [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+flexmember      [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+idx             [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+intprops        [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+isblank         [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+iswctype        [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+libc-config     [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+stdbool         [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+strnlen         [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+wchar           [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+wctype-h        [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+wmemchr         [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+wmempcpy        [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+memchr          [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+memcmp          [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+mempcpy         [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+mbsrtowcs       [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+mbsinit         [test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1]
+
+configure.ac:
+gl_FUNC_FNMATCH_POSIX
+if test $HAVE_FNMATCH = 0 || test $REPLACE_FNMATCH = 1; then
+  AC_LIBOBJ([fnmatch])
+  gl_PREREQ_FNMATCH
+fi
+gl_FNMATCH_MODULE_INDICATOR([fnmatch])
+
+Makefile.am:
+
+Include:
+<fnmatch.h>
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

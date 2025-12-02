@@ -1,0 +1,30 @@
+Description:
+POSIX compatible read() function: read data from a file descriptor
+
+Files:
+lib/read.c
+m4/read.m4
+
+Depends-on:
+unistd
+msvc-inval      [test $REPLACE_READ = 1]
+msvc-nothrow    [test $REPLACE_READ = 1]
+
+configure.ac:
+gl_FUNC_READ
+if test $REPLACE_READ = 1; then
+  AC_LIBOBJ([read])
+  gl_PREREQ_READ
+fi
+gl_UNISTD_MODULE_INDICATOR([read])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

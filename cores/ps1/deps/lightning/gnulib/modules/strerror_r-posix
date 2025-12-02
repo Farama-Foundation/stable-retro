@@ -1,0 +1,34 @@
+Description:
+strerror_r() function: get string describing error code.
+
+Files:
+lib/strerror_r.c
+m4/strerror_r.m4
+
+Depends-on:
+string
+extensions
+errno           [test $HAVE_DECL_STRERROR_R = 0 || test $REPLACE_STRERROR_R = 1]
+lock            [test $HAVE_DECL_STRERROR_R = 0 || test $REPLACE_STRERROR_R = 1]
+strerror-override [test $HAVE_DECL_STRERROR_R = 0 || test $REPLACE_STRERROR_R = 1]
+
+configure.ac:
+gl_FUNC_STRERROR_R
+if test $HAVE_DECL_STRERROR_R = 0 || test $REPLACE_STRERROR_R = 1; then
+  AC_LIBOBJ([strerror_r])
+  gl_PREREQ_STRERROR_R
+fi
+gl_STRING_MODULE_INDICATOR([strerror_r])
+dnl For the modules argp, error.
+gl_MODULE_INDICATOR([strerror_r-posix])
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

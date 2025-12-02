@@ -1,0 +1,66 @@
+#!/bin/sh
+#
+# Copyright (C) 2011-2021 Free Software Foundation, Inc.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+error=0
+for module in `./gnulib-tool --list`; do
+  module_license=`./gnulib-tool --extract-license $module`
+  if test "$module_license" = 'GPLed build tool'; then
+    module_license='GPL'
+  fi
+  for file in `./gnulib-tool --extract-filelist $module | grep '^\(lib\|build-aux\)/'`; do
+    if grep 'GNU General Public' $file > /dev/null; then
+      if grep 'version 3 or later' $file > /dev/null \
+         || grep 'either version 3' $file > /dev/null; then
+        file_license='GPL'
+      else
+        if grep 'version 2 or later' $file > /dev/null \
+           || grep 'either version 2' $file > /dev/null; then
+          file_license='GPLv2+'
+        else
+          file_license='GPL??'
+        fi
+      fi
+    else
+      if grep 'Lesser General' $file > /dev/null; then
+        if grep 'version 3 or later' $file > /dev/null \
+           || grep 'either version 3' $file > /dev/null; then
+          file_license='LGPL'
+        else
+          if grep 'version 2 or later' $file > /dev/null \
+             || grep 'version 2 of the License, or' $file > /dev/null \
+             || grep 'version 2\.1 of the License, or' $file > /dev/null; then
+            file_license='LGPLv2+'
+          else
+            file_license='LGPL??'
+          fi
+        fi
+      else
+        file_license='??'
+      fi
+    fi
+    if test "$file_license" != "$module_license"; then
+      if test $error = 0; then
+        echo "Module License File License   File name"
+        echo "============== ============== ====================================="
+      fi
+      printf '%-14s %-14s %s\n' "$module_license" "$file_license" "$file"
+      error=1
+    fi
+  done
+done
+exit $error

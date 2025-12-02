@@ -1,0 +1,21 @@
+Files:
+tests/unistr/test-u32-strncpy.c
+tests/unistr/test-strncpy.h
+tests/zerosize-ptr.h
+tests/macros.h
+m4/mmap-anon.m4
+
+Depends-on:
+extensions
+getpagesize
+
+configure.ac:
+gl_FUNC_MMAP_ANON
+AC_CHECK_HEADERS_ONCE([sys/mman.h])
+AC_CHECK_FUNCS_ONCE([mprotect])
+
+Makefile.am:
+TESTS += test-u32-strncpy
+check_PROGRAMS += test-u32-strncpy
+test_u32_strncpy_SOURCES = unistr/test-u32-strncpy.c
+test_u32_strncpy_LDADD = $(LDADD) $(LIBUNISTRING)

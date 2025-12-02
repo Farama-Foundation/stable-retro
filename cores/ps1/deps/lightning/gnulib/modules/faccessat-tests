@@ -1,0 +1,15 @@
+Files:
+tests/test-faccessat.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+fcntl-h
+symlink
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-faccessat
+check_PROGRAMS += test-faccessat
+test_faccessat_LDADD = $(LDADD) $(LIB_EACCESS) @LIBINTL@

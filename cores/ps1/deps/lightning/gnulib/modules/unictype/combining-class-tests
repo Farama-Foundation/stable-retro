@@ -1,0 +1,13 @@
+Files:
+tests/unictype/test-combiningclass.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-combiningclass
+check_PROGRAMS += test-combiningclass
+test_combiningclass_SOURCES = unictype/test-combiningclass.c
+test_combiningclass_LDADD = $(LDADD) $(LIBUNISTRING)

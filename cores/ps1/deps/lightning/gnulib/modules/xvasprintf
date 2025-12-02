@@ -1,0 +1,40 @@
+Description:
+vasprintf and asprintf with out-of-memory checking.  Also see xalloc-die.
+
+Notice:
+If you are using GNU gettext version 0.16.1 or older, add the following options
+to XGETTEXT_OPTIONS in your po/Makevars: --flag=xasprintf:1:c-format
+
+Files:
+lib/xvasprintf.h
+lib/xvasprintf.c
+lib/xasprintf.c
+lib/xalloc.h
+m4/xvasprintf.m4
+
+Depends-on:
+stdio
+vasprintf
+xalloc
+xalloc-die
+xsize
+stdarg
+stdint
+errno
+
+configure.ac:
+gl_XVASPRINTF
+m4_ifdef([AM_XGETTEXT_OPTION],
+  [AM_][XGETTEXT_OPTION([--flag=xasprintf:1:c-format])])
+
+Makefile.am:
+lib_SOURCES += xvasprintf.h xvasprintf.c xasprintf.c
+
+Include:
+"xvasprintf.h"
+
+License:
+GPL
+
+Maintainer:
+Oskar Liljeblad

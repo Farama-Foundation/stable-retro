@@ -1,0 +1,24 @@
+Description:
+j1() function: Bessel function of the first kind of order 1.
+
+Files:
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_COMMON_DOUBLE_MATHFUNC([j1])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(J1_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

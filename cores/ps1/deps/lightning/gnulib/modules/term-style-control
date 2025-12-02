@@ -1,0 +1,35 @@
+Description:
+Terminal control for outputting styled text to a terminal.
+
+Files:
+lib/term-style-control.h
+lib/term-style-control.c
+
+Depends-on:
+stdbool
+fatal-signal
+sigaction
+sigprocmask
+full-write
+fstat
+same-inode
+xalloc-die
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+AC_CHECK_FUNCS_ONCE([tcgetattr])
+
+Makefile.am:
+lib_SOURCES += term-style-control.c
+
+Include:
+"term-style-control.h"
+
+Link:
+$(LIBTHREAD)
+
+License:
+GPL
+
+Maintainer:
+Bruno Haible

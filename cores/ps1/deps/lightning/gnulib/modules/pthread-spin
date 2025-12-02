@@ -1,0 +1,32 @@
+Description:
+POSIX spin locks.
+
+Files:
+lib/pthread-spin.c
+m4/pthread-spin.m4
+
+Depends-on:
+pthread-h
+stdbool         [test $HAVE_PTHREAD_SPIN_INIT = 0 || test $REPLACE_PTHREAD_SPIN_INIT = 1]
+windows-spin    [test $gl_threads_api = windows]
+
+configure.ac:
+gl_PTHREAD_SPIN
+if test $HAVE_PTHREAD_SPIN_INIT = 0 || test $REPLACE_PTHREAD_SPIN_INIT = 1; then
+  AC_LIBOBJ([pthread-spin])
+fi
+gl_PTHREAD_MODULE_INDICATOR([pthread-spin])
+
+Makefile.am:
+
+Include:
+<pthread.h>
+
+Link:
+$(LIBPMULTITHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,10 @@
+Files:
+tests/test-localcharset.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+noinst_PROGRAMS += test-localcharset
+test_localcharset_LDADD = $(LDADD) $(LIB_SETLOCALE)

@@ -1,0 +1,14 @@
+Files:
+tests/test-sigpipe.c
+tests/test-sigpipe.sh
+tests/macros.h
+
+Depends-on:
+write
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sigpipe.sh
+check_PROGRAMS += test-sigpipe
+

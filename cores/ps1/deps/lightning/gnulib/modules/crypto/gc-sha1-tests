@@ -1,0 +1,11 @@
+Files:
+tests/test-gc-sha1.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-gc-sha1
+check_PROGRAMS += test-gc-sha1
+test_gc_sha1_LDADD = $(LDADD) @LIB_CRYPTO@

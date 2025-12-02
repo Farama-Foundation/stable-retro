@@ -1,0 +1,13 @@
+Files:
+tests/unistr/test-u8-check.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-check
+check_PROGRAMS += test-u8-check
+test_u8_check_SOURCES = unistr/test-u8-check.c
+test_u8_check_LDADD = $(LDADD) $(LIBUNISTRING)

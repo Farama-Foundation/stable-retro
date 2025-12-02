@@ -1,0 +1,38 @@
+Description:
+setlocale_null() function: query the name of the current global locale.
+
+Files:
+lib/setlocale_null.h
+lib/setlocale_null.c
+lib/setlocale-lock.c
+lib/windows-initguard.h
+m4/setlocale_null.m4
+m4/threadlib.m4
+m4/visibility.m4
+
+Depends-on:
+locale
+snippet/arg-nonnull
+
+configure.ac:
+gl_FUNC_SETLOCALE_NULL
+if test $SETLOCALE_NULL_ALL_MTSAFE = 0 || test $SETLOCALE_NULL_ONE_MTSAFE = 0; then
+  AC_LIBOBJ([setlocale-lock])
+  gl_PREREQ_SETLOCALE_LOCK
+fi
+gl_LOCALE_MODULE_INDICATOR([setlocale_null])
+
+Makefile.am:
+lib_SOURCES += setlocale_null.c
+
+Include:
+#include "setlocale_null.h" or #include <locale.h>
+
+Link:
+$(LIB_SETLOCALE_NULL)
+
+License:
+LGPLv2+
+
+Maintainer:
+Bruno Haible

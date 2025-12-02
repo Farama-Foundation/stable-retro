@@ -1,0 +1,13 @@
+Files:
+tests/test-jn.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-jn
+check_PROGRAMS += test-jn
+test_jn_LDADD = $(LDADD) @JN_LIBM@

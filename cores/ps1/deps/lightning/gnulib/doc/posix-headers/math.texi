@@ -1,0 +1,58 @@
+@node math.h
+@section @file{math.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/math.h.html}
+
+Gnulib module: math
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+The conversion from @code{int} to @code{long double} in incorrect on some
+platforms:
+glibc 2.7 on Linux/SPARC64.
+
+@item
+The macro @code{NAN} is not defined on some platforms:
+OpenBSD 4.0, AIX 5.1, IRIX 6.5.
+
+@item
+The macro @code{NAN} is not exposed outside of C99 compilation on some
+platforms:
+glibc.
+
+@item
+The macros @code{NAN} and @code{HUGE_VAL} expand to a function address
+rather than a floating point constant on some platforms:
+Solaris 10.
+
+@item
+The macros @code{HUGE_VALF} and @code{HUGE_VALL} are not defined on some
+platforms:
+glibc/HPPA, glibc/SPARC, AIX 5.1, IRIX 6.5, Solaris 9, MSVC 9.
+
+@item
+The macros @code{FP_ILOGB0} and @code{FP_ILOGBNAN} are not defined on some
+platforms:
+NetBSD 5.1, AIX 5.1, IRIX 6.5, Solaris 9, MSVC 9.
+
+@item
+The macros @code{FP_ILOGB0} and @code{FP_ILOGBNAN} have wrong values on some
+platforms:
+Haiku 2017.
+
+@item
+The macros @code{NAN}, @code{HUGE_VALL}, and @code{INFINITY} are not
+defined on some platforms:
+OpenVMS.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+@code{NAN} is not a compile time constant with some compilers:
+OpenVMS.
+@item
+The macro or variable @code{math_errhandling} is not defined on some platforms:
+glibc 2.11, OpenBSD 4.9, NetBSD 5.1, UP-UX 11, IRIX 6.5, Cygwin 1.7.9, mingw, MSVC 9.
+@end itemize

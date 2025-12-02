@@ -1,0 +1,16 @@
+@node inet6_opt_next
+@subsection @code{inet6_opt_next}
+@findex inet6_opt_next
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+glibc 2.4, Mac OS X 10.5, NetBSD 3.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.2, HP-UX 11.31, IRIX 6.5, Solaris 9, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

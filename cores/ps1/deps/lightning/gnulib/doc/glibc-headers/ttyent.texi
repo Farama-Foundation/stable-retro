@@ -1,0 +1,24 @@
+@node ttyent.h
+@section @file{ttyent.h}
+
+Defines the type @code{struct ttyent} and declares the functions
+@code{setttyent}, @code{endttyent}, @code{getttyent}, @code{getttynam}.
+
+Documentation:
+@itemize
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/setttyent.3.html,,man setttyent}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin, mingw, MSVC 14, Android 9.0.
+@end itemize

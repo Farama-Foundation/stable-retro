@@ -1,0 +1,21 @@
+@node sys/un.h
+@section @file{sys/un.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_un.h.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+mingw, MSVC 14.
+@item
+This header requires <code>sys/socket.h</code> to be included first on
+some platforms:
+Cygwin 1.7.18.
+@end itemize

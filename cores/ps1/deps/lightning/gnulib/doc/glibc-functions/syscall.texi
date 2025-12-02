@@ -1,0 +1,29 @@
+@node syscall
+@subsection @code{syscall}
+@findex syscall
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{System Calls,,System Calls,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/System-Calls.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/syscall.2.html,,man syscall}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 5.1, Cygwin 2.9, mingw, MSVC 14.
+@end itemize

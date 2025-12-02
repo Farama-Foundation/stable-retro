@@ -1,0 +1,18 @@
+Files:
+tests/test-dup2.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+binary-io
+close
+fcntl-h
+getdtablesize
+msvc-nothrow
+open
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-dup2
+check_PROGRAMS += test-dup2

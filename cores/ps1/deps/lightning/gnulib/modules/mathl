@@ -1,0 +1,43 @@
+Description:
+C99 functions for transcendental functions with long double arguments.
+
+Files:
+
+Depends-on:
+floorl
+ceill
+acosl
+asinl
+atanl
+cosl
+expl
+logl
+sinl
+sqrtl
+tanl
+
+configure.ac:
+AC_REQUIRE([gl_FUNC_FLOORL])
+AC_REQUIRE([gl_FUNC_CEILL])
+AC_REQUIRE([gl_FUNC_ACOSL])
+AC_REQUIRE([gl_FUNC_ASINL])
+AC_REQUIRE([gl_FUNC_ATANL])
+AC_REQUIRE([gl_FUNC_COSL])
+AC_REQUIRE([gl_FUNC_EXPL])
+AC_REQUIRE([gl_FUNC_LOGL])
+AC_REQUIRE([gl_FUNC_SINL])
+AC_REQUIRE([gl_FUNC_SQRTL])
+AC_REQUIRE([gl_FUNC_TANL])
+LIBS="$LIBS $FLOORL_LIBM $CEILL_LIBM $ACOSL_LIBM $ASINL_LIBM $ATANL_LIBM $COSL_LIBM $EXPL_LIBM $LOGL_LIBM $SINL_LIBM $SQRTL_LIBM $TANL_LIBM"
+
+Makefile.am:
+
+Include:
+<math.h>
+
+License:
+GPL
+
+Maintainer:
+Paolo Bonzini  <bonzini@gnu.org>
+

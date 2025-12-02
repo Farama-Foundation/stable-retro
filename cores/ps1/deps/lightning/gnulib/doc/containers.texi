@@ -1,0 +1,592 @@
+@node Container data types
+@section Container data types
+
+@c Copyright (C) 2019--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+@c Written by Bruno Haible.
+
+@c This macro expands to \log in TeX mode, but just 'log' in HTML and info
+@c modes.
+@ifnottex
+@macro log
+log
+@end macro
+@end ifnottex
+
+@c This macro expands to \mathopsup in TeX mode, to a superscript in HTML
+@c mode, and to ^ without braces in info mode.
+@ifhtml
+@macro mathopsup {EXP}
+@sup{\EXP\}
+@end macro
+@end ifhtml
+@ifinfo
+@macro mathopsup {EXP}
+^\EXP\
+@end macro
+@end ifinfo
+
+Gnulib provides several generic container data types.  They can be used
+to organize collections of application-defined objects.
+
+@multitable @columnfractions .15 .5 .1 .1 .15
+@headitem Data type
+@tab Details
+@tab Module
+@tab Main include file
+@tab Include file for operations with out-of-memory checking
+@item Sequential list
+@tab Can contain any number of objects in any given order.
+     Duplicates are allowed, but can optionally be forbidden.
+@tab @code{list}
+@tab @code{"gl_list.h"}
+@tab @code{"gl_xlist.h"}
+@item Set
+@tab Can contain any number of objects; the order does not matter.
+     Duplicates (in the sense of the comparator) are forbidden.
+@tab @code{set}
+@tab @code{"gl_set.h"}
+@tab @code{"gl_xset.h"}
+@item Ordered set
+@tab Can contain any number of objects in the order of a given comparator
+     function.
+     Duplicates (in the sense of the comparator) are forbidden.
+@tab @code{oset}
+@tab @code{"gl_oset.h"}
+@tab @code{"gl_xoset.h"}
+@item Map
+@tab Can contain any number of (key, value) pairs, where keys and values
+     are objects;
+     there are no (key, value1) and (key, value2) pairs with the same key
+     (in the sense of a given comparator function).
+@tab @code{map}
+@tab @code{"gl_map.h"}
+@tab @code{"gl_xmap.h"}
+@item Ordered map
+@tab Can contain any number of (key, value) pairs, where keys and values
+     are objects;
+     the (key, value) pairs are ordered by the key, in the order of a given
+     comparator function;
+     there are no (key, value1) and (key, value2) pairs with the same key
+     (in the sense of the comparator function).
+@tab @code{omap}
+@tab @code{"gl_omap.h"}
+@tab @code{"gl_xomap.h"}
+@end multitable
+
+Operations without out-of-memory checking (suitable for use in libraries) are
+declared in the ``main include file''.  Whereas operations with out-of-memory
+checking (suitable only in programs) are declared in the ``include file for
+operations with out-of-memory checking''.
+
+For each of the data types, several implementations are available, with
+different performance profiles with respect to the available operations.
+This enables you to start with the simplest implementation (ARRAY) initially,
+and switch to a more suitable implementation after profiling your application.
+The implementation of each container instance is specified in a single place
+only: in the invocation of the function @code{gl_*_create_empty} that creates
+the instance.
+
+The implementations and the guaranteed average performance for the operations
+for the ``sequential list'' data type are:
+
+@multitable @columnfractions 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1
+@headitem Operation
+@tab ARRAY
+@tab CARRAY
+@tab LINKED
+@tab TREE
+@tab LINKEDHASH with duplicates
+@tab LINKEDHASH without duplicates
+@tab TREEHASH with duplicates
+@tab TREEHASH without duplicates
+@item @code{gl_list_size}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@item @code{gl_list_node_value}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@item @code{gl_list_node_set_value}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(1)}
+@item @code{gl_list_next_node}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_list_previous_node}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_list_get_at}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_list_get_first}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_list_get_last}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_list_set_at}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_set_first}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_set_last}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_search}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(1)}
+@item @code{gl_list_search_from}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_search_from_to}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_indexof}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_list_indexof_from}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_indexof_from_to}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_add_first}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_add_last}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_add_before}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_add_after}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_add_at}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_remove_node}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_remove_at}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_remove_first}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_remove_last}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_remove}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_list_iterator}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_list_iterator_from_to}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_list_iterator_next}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_sortedlist_search}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_sortedlist_search_from}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_sortedlist_indexof}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_sortedlist_indexof_from}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_sortedlist_add}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@item @code{gl_sortedlist_remove}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@tab @math{O(n)}
+@tab @math{O(n)}
+@tab @math{O((@log n)@mathopsup{2})}
+@tab @math{O(@log n)}
+@end multitable
+
+The implementations and the guaranteed average performance for the operations
+for the ``set'' data type are:
+
+@multitable @columnfractions 0.4 0.2 0.4
+@headitem Operation
+@tab ARRAY
+@tab LINKEDHASH, HASH
+@item @code{gl_set_size}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@item @code{gl_set_add}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@item @code{gl_set_remove}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@item @code{gl_set_search}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@item @code{gl_set_iterator}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@item @code{gl_set_iterator_next}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@end multitable
+
+The implementations and the guaranteed average performance for the operations
+for the ``ordered set'' data type are:
+
+@multitable @columnfractions 0.5 0.25 0.25
+@headitem Operation
+@tab ARRAY
+@tab TREE
+@item @code{gl_oset_size}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@item @code{gl_oset_add}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@item @code{gl_oset_remove}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@item @code{gl_oset_search}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_oset_search_atleast}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_oset_iterator}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@item @code{gl_oset_iterator_next}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@end multitable
+
+The implementations and the guaranteed average performance for the operations
+for the ``map'' data type are:
+
+@multitable @columnfractions 0.4 0.2 0.4
+@headitem Operation
+@tab ARRAY
+@tab LINKEDHASH, HASH
+@item @code{gl_map_size}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@item @code{gl_map_get}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@item @code{gl_map_put}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@item @code{gl_map_remove}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@item @code{gl_map_search}
+@tab @math{O(n)}
+@tab @math{O(1)}
+@item @code{gl_map_iterator}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@item @code{gl_map_iterator_next}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@end multitable
+
+The implementations and the guaranteed average performance for the operations
+for the ``ordered map'' data type are:
+
+@multitable @columnfractions 0.5 0.25 0.25
+@headitem Operation
+@tab ARRAY
+@tab TREE
+@item @code{gl_omap_size}
+@tab @math{O(1)}
+@tab @math{O(1)}
+@item @code{gl_omap_get}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_omap_put}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@item @code{gl_omap_remove}
+@tab @math{O(n)}
+@tab @math{O(@log n)}
+@item @code{gl_omap_search}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_omap_search_atleast}
+@tab @math{O(@log n)}
+@tab @math{O(@log n)}
+@item @code{gl_omap_iterator}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@item @code{gl_omap_iterator_next}
+@tab @math{O(1)}
+@tab @math{O(@log n)}
+@end multitable
+
+For C++, Gnulib provides a C++ template class for each of these container data types.
+
+@multitable @columnfractions .30 .20 .25 .25
+@headitem Data type
+@tab C++ class
+@tab Module
+@tab Include file
+@item Sequential list
+@tab @code{gl_List}
+@tab @code{list-c++}
+@tab @code{"gl_list.hh"}
+@item Set
+@tab @code{gl_Set}
+@tab @code{set-c++}
+@tab @code{"gl_set.hh"}
+@item Ordered set
+@tab @code{gl_OSet}
+@tab @code{oset-c++}
+@tab @code{"gl_oset.hh"}
+@item Map
+@tab @code{gl_Map}
+@tab @code{map-c++}
+@tab @code{"gl_map.hh"}
+@item Ordered map
+@tab @code{gl_OMap}
+@tab @code{omap-c++}
+@tab @code{"gl_omap.hh"}
+@end multitable
+
+@ifnottex
+@unmacro log
+@end ifnottex
+@ifhtml
+@unmacro mathopsup
+@end ifhtml
+@ifinfo
+@unmacro mathopsup
+@end ifinfo

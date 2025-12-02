@@ -1,0 +1,20 @@
+Files:
+tests/test-signal-h-c++.cc
+tests/test-signal-h-c++2.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-signal-h-c++
+check_PROGRAMS += test-signal-h-c++
+test_signal_h_c___SOURCES = test-signal-h-c++.cc test-signal-h-c++2.cc
+test_signal_h_c___LDADD = $(LDADD) $(LIBINTL) $(LIB_NANOSLEEP) $(LIB_PTHREAD_SIGMASK)
+endif

@@ -1,0 +1,26 @@
+Description:
+Test whether a Unicode character is of general category Sc.
+
+Files:
+lib/unictype/categ_Sc.c
+lib/unictype/categ_Sc.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-Sc])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_SC
+lib_SOURCES += unictype/categ_Sc.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

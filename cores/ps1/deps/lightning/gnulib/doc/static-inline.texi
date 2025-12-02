@@ -1,0 +1,19 @@
+@c GNU static-inline module documentation
+
+@c Copyright (C) 2019--2021 Free Software Foundation, Inc.
+
+@c Permission is granted to copy, distribute and/or modify this document
+@c under the terms of the GNU Free Documentation License, Version 1.3 or
+@c any later version published by the Free Software Foundation; with no
+@c Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+@c copy of the license is at <https://www.gnu.org/licenses/fdl-1.3.en.html>.
+
+@node static inline
+@section Static inline functions
+
+@cindex static inline
+@cindex inline
+
+In order to mark functions as @code{static inline}, the only
+prerequisite you need is an @code{AC_REQUIRE([AC_C_INLINE])}.
+No Gnulib module is needed.

@@ -1,0 +1,27 @@
+Description:
+Sequential list data type implemented by a binary tree.
+
+Files:
+lib/gl_rbtree_list.h
+lib/gl_rbtree_list.c
+lib/gl_anyrbtree_list1.h
+lib/gl_anyrbtree_list2.h
+lib/gl_anytree_list1.h
+lib/gl_anytree_list2.h
+
+Depends-on:
+list
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_rbtree_list.h gl_rbtree_list.c gl_anyrbtree_list1.h gl_anyrbtree_list2.h gl_anytree_list1.h gl_anytree_list2.h
+
+Include:
+"gl_rbtree_list.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

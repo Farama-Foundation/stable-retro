@@ -1,0 +1,10 @@
+Files:
+tests/test-des.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-des
+check_PROGRAMS += test-des

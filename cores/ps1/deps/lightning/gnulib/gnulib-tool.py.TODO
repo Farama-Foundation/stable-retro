@@ -1,0 +1,556 @@
+
+================================================================================
+
+Have gnulib-tool.py generate the same files and the same output as
+gnulib-tool. Test cases:
+
+1) In a checkout of https://gitlab.com/gnuwget/wget2.git :
+   $ git checkout e8ca510eda2cfc75f4c4a4e8e83e19b90af0309c
+   $ $GNULIB_SRCDIR/gnulib-tool.py --no-changelog --aux-dir=build-aux --doc-base=doc --lib=libgnu --m4-base=m4/ --source-base=lib/ --tests-base=lib/tests --local-dir=gl --makefile-name=gnulib.mk --libtool --import accept access arpa_inet atoll bind c-strcase c-strcasestr c-ctype calloc-posix canonicalize-lgpl clock-time close closedir cond connect crypto/md2 crypto/md5 crypto/sha1 crypto/sha256 crypto/sha512 dirname dup dup2 errno fclose fcntl fdopen fflush flock fnmatch-gnu fopen freopen fstat fsync ftruncate futimens getaddrinfo getpass getsockname gettext-h gettime gitlog-to-changelog glob iconv inet_pton inline inttypes ioctl isatty lib-symbol-visibility limits-h link listen lock maintainer-makefile malloc-posix memchr mkdir mkstemp msvc-nothrow nanosleep netdb netinet_in nl_langinfo open opendir pclose pipe-posix progname popen poll posix_spawn pwrite qsort_r random_r read readdir realloc-posix recv recvfrom regex rename safe-read safe-write select send sendto servent setlocale setsockopt socket sockets socklen spawn-pipe stdarg stdbool stddef stdint stat strcase strchrnul strdup-posix strerror strndup strpbrk strstr strtoll sys_file sys_socket sys_stat sys_time sys_types sys_uio thread time_r unistd unlink update-copyright warnings wcwidth write xgethostname
+
+================================================================================
+
+The following commits to gnulib-tool have not yet been reflected in
+{gnulib-tool.py,pygnulib/*.py}.
+
+--------------------------------------------------------------------------------
+
+commit baec1bac1602ba8534320c295e120f7b658400f4
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Sat Feb 22 15:15:01 2020 +0100
+
+    gnulib-tool: Ensure copied files are writable.
+
+    Reported by Benno Fünfstück <benno.fuenfstueck@gmail.com> in
+    <https://lists.gnu.org/archive/html/bug-gnulib/2020-02/msg00101.html>.
+
+    * gnulib-tool (func_ensure_writable): New function.
+    (func_ln_s, func_hardlink, func_lookup_file, func_import,
+    func_create_testdir, copy-file): Invoke it after copying a file.
+
+--------------------------------------------------------------------------------
+
+commit 0d41dbc7c88b10d16751466ec91efa75951426bb
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Mon Nov 18 13:32:46 2019 +0100
+
+    gnulib-tool: Fix build error on macOS with --conditional-dependencies.
+
+    * gnulib-tool (func_modules_add_dummy): Ignore modules that are
+    conditionally enabled.
+
+--------------------------------------------------------------------------------
+
+commit dc135c4fd14cdc219d316c61f344e64090cb33fd
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Fri Feb 15 21:27:44 2019 +0100
+
+    gnulib-tool: Support --import with just a few tests, not --with-tests.
+
+    * gnulib-tool (func_import): New variable 'gentests'. Use it instead of
+    'inctests' when generating files; use 'inctests' only for computing the
+    transitive closure.
+
+--------------------------------------------------------------------------------
+
+commit 425ee42259b04956aae20afc5204775ae6e79744
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Wed Jan 23 05:11:54 2019 +0100
+
+    gnulib-tool: Support running testdirs on Android.
+
+    * build-aux/test-driver.diff: New file.
+    * gnulib-tool (func_create_testdir, func_create_megatestdir): Patch
+    build-aux/test-driver after running automake.
+
+--------------------------------------------------------------------------------
+
+commit ce8a5edbc49dea0cb859207c2d063dbd3be0f96c
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Fri Jan 4 19:34:19 2019 +0100
+
+    gnulib-tool: New option --extract-recursive-link-directive.
+
+    * gnulib-tool (func_usage): Document the new options
+    --extract-recursive-dependencies, --extract-recursive-link-directive.
+    (func_verify_module): Document output variables.
+    (func_get_dependencies_recursively): New function.
+    (func_get_link_directive_recursively): New function.
+    Use them to implement the new options
+    --extract-recursive-dependencies, --extract-recursive-link-directive.
+    * doc/gnulib-tool.texi (Link-time requirements): New section.
+
+--------------------------------------------------------------------------------
+
+commit 97eae14a5b2506457a72f89d5897a20730ab6eee
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Tue Oct 23 00:06:46 2018 +0200
+
+    Assume Automake >= 1.11.
+
+    * m4/configmake.m4: Update comments.
+    * m4/lib-link.m4 (AC_LIB_RPATH): Assume AC_REQUIRE_AUX_FILE exists.
+    * m4/po.m4 (AM_PO_SUBDIRS, AM_POSTPROCESS_PO_MAKEFILE): Eliminate uses
+    of 'eval'.
+    * gnulib-tool (func_emit_lib_Makefile_am, func_emit_tests_Makefile_am,
+    func_create_testdir, func_create_megatestdir): Emit a Makefile.am that
+    requires Automake >= 1.11.
+
+--------------------------------------------------------------------------------
+
+commit 98993f9d1b2ed03007be9dbcdc6bd9fe2d49777b
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Mon Oct 22 20:32:41 2018 +0200
+
+    Fix failure of 'gnulib-tool --create-testdir' with all modules.
+
+    * gnulib-tool (func_create_testdir): Exclude 'timevar' module.
+
+--------------------------------------------------------------------------------
+
+commit 8b1d4a63e34f3893036d82f39c5680e845de5ddf
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Mon Sep 3 21:19:16 2018 +0200
+
+    gnulib-tool: Fix build order when $testsbase is a subdir of $sourcebase.
+
+    Reported by Antoine Luong <antoine.luong@c-s.fr> in
+    <https://lists.gnu.org/archive/html/bug-gnulib/2018-09/msg00008.html>.
+
+    * gnulib-tool (func_import): For the tests, set a dotfirst flag.
+    (func_emit_lib_Makefile_am): Consider the dotfirst flag.
+    (func_emit_tests_Makefile_am): Don't consider the dotfirst flag.
+
+--------------------------------------------------------------------------------
+
+commit a1276e5bf2286afec7b0445040be05cad858cdd1
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Tue Jul 17 15:20:39 2018 -0700
+
+    gnulib-tool: limit line length for git send-email
+
+    * gnulib-tool (func_import): Break actioncmd log line
+    into multiple lines.
+
+--------------------------------------------------------------------------------
+
+commit 589e96475f8f2d21a83405ab0672ce95091b80e5
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Fri Dec 29 00:29:23 2017 +0100
+
+    gnulib-tool: Make --conditional-dependencies work better.
+
+    Reported by Dmitry Selyutin <ghostman.sd@gmail.com>.
+
+    * gnulib-tool (Options): Don't reject the combination of
+    --conditional-dependencies with --with-tests.
+    (func_emit_autoconf_snippets): Add argument referenceable_modules.
+    Don't reference $modules.
+    (func_import, func_create_testdir): Pass it.
+
+--------------------------------------------------------------------------------
+
+commit cd58dba367a3b8ffbebb23f2099a820106197fae
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Sun Oct 29 16:57:32 2017 +0100
+
+    gnulib-tool: Avoid unnecessary config.h.in remaking in testdirs.
+
+    * gnulib-tool (func_create_testdir): Use workaround against 'autoheader'
+    bug reported at <https://savannah.gnu.org/support/index.php?109406>.
+
+--------------------------------------------------------------------------------
+
+commit 87d14d357f694338acdb8745cea7304ff623ce47
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Mon Jun 12 01:38:57 2017 +0200
+
+    gnulib-tool: Clean up after autotools.
+
+    * gnulib-tool (func_create_testdir, func_create_megatestdir): Remove
+    useless directory left over by the Autotools.
+
+--------------------------------------------------------------------------------
+
+commit 30459fe101541698ec704acb224946d73676750e
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Thu Jun 8 15:09:31 2017 +0200
+
+    gnulib-tool: Fix bug in func_symlink_if_changed, from 2006-11-13.
+
+    * gnulib-tool (func_symlink_target): New function, extracted from
+    func_symlink.
+    (func_symlink, func_symlink_if_changed): Use it.
+
+--------------------------------------------------------------------------------
+
+commit 306be564ba47ec412ca158f66ffa90a058f5253b
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Mon May 22 01:39:59 2017 +0200
+
+    gnulib-tool: Add options to create hard links.
+
+    * gnulib-tool (func_usage): Document options --hardlink,
+    --local-hardlink, --more-hardlinks.
+    (func_symlink): Renamed from func_ln.
+    (func_symlink_if_changed): Renamed from func_ln_if_changed.
+    (func_hardlink): New function.
+    (copymode, lcopymode): New variables.
+    (symbolic, lsymbolic): Remove variables.
+    (Options): Implement options --hardlink, --local-hardlink,
+    --more-hardlinks.
+    (func_should_link): Renamed from func_should_symlink. Set copyaction.
+    (func_add_file, func_update_file): Update invocation of
+    func_should_link. Invoke func_hardlink when appropriate.
+    (func_import): Update comments.
+    (func_create_testdir): Update invocation of func_should_link. Invoke
+    func_hardlink when appropriate.
+    Finally, invoke 'git update-index --refresh' to mitigate the effects of
+    the hard links on git.
+
+--------------------------------------------------------------------------------
+
+commit f5142421c62024efa22cd4429100c4d9c1cc2ac4
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Sat May 20 13:24:37 2017 +0200
+
+    gnulib-tool: Don't create hard links between gnulib and its testdirs.
+
+    * gnulib-tool (func_create_testdir): Don't invoke 'ln'.
+
+--------------------------------------------------------------------------------
+
+commit 0414a24cf57f1569b0b4f2a0f22898a0943dfc14
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Mon May 15 23:13:57 2017 +0200
+
+    gnulib-tool: Fix generated code when libtests contains module 'alloca'.
+
+    * gnulib-tool (func_emit_tests_Makefile_am): For libtests.a, use
+    @ALLOCA@, not @LTALLOCA@.
+
+--------------------------------------------------------------------------------
+
+commit a7bd2403d2d3e49a8698495e74cdbe6a5261128a
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Thu Apr 20 21:27:40 2017 +0200
+
+    verify tests: Fix spurious failure with parallel make.
+
+    * gnulib-tool (func_emit_tests_Makefile_am): Emit initialization of
+    EXTRA_PROGRAMS.
+    * tests/test-verify.sh: Build test-verify-try.o, not test-verify.o.
+    * tests/test-verify-try.c: New file.
+    * modules/verify-tests (Files): Add it.
+    (EXTRA_PROGRAMS): Add test-verify-try.
+    (MOSTLYCLEANFILES): Update accordingly.
+    Reported by Adam James Stewart <ajstewart@anl.gov>.
+
+--------------------------------------------------------------------------------
+
+commit 363135016c25696d7a173094715e7f3f2dda3596
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Wed Mar 15 23:24:03 2017 +0100
+
+    gnulib-tool: Don't produce a tests directory with only snippet .h files.
+
+    * gnulib-tool (func_modules_transitive_closure_separately): If
+    testsrelated_modules ends up with no "real" modules, aside from
+    modules with applicability 'all', set it to empty.
+
+--------------------------------------------------------------------------------
+
+commit f30205c5d59bab2c035165158e7d5d65b07b8363
+Author: Mathieu Lirzin <mthl@gnu.org>
+Date:   Tue Mar 14 12:19:40 2017 +0100
+
+    gnulib-tool: don't automatically distribute files from top/
+
+    * gnulib-tool (func_get_automake_snippet_unconditional): To be able to
+    not distribute top/README-release by default, don't distribute files
+    from top/ unconditionally.
+    * modules/gnumakefile (Makefile.am): Distribute top/GNUmakefile.
+    * modules/maintainer-makefile (Makefile.am): Distribute top/maint.mk.
+
+--------------------------------------------------------------------------------
+
+commit 60e8b9303d8ce312bb2322d4801ed08678f93d1e
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Wed Jul 4 20:42:07 2018 -0700
+
+    gnulib-tool: minor tweaks for --gnu-make
+
+    * gnulib-tool: Do not allow --gnu-make in test modes,
+    since they all require automake.
+    (func_emit_lib_Makefile_am): Don’t emit automake comment
+    if --gnu-make.
+
+commit 8224d65142d7b8cea2b8721a7d09c2cd60d2d312
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Mon May 15 07:41:10 2017 -0700
+
+    gnulib-tool: improve GNU Make debugging
+
+    * gnulib-tool (func_emit_lib_Makefile_am): Omit unnecessary echo.
+    Report autoconf diagnostics when it fails, in the output makefile.
+
+commit fb8289f44a58c9462434eba8eaffd58c3f417c42
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Tue Mar 14 08:39:27 2017 -0700
+
+    gnulib-tool: fix typo in comment output
+
+    * gnulib-tool (func_import): Fix typo with previous change.
+
+commit d6088547633af472625ab815452004c22fda6d58
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Mon Mar 13 15:50:44 2017 -0700
+
+    gnulib-tool: minor --gnu-make fixups
+
+    * gnulib-tool (func_emit_lib_Makefile_am):
+    Remove useless code that was a blind alley during implementation.
+    Problem reported by Thien-Thi Nguyen in:
+    http://lists.gnu.org/archive/html/bug-gnulib/2017-03/msg00029.html
+    (func_import): Note the "--gnu-make" option in the output comment.
+
+commit dfbe4c0276701e42ffaed13a1c7a79003dc8fb30
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Sun Mar 12 19:18:53 2017 -0700
+
+    gnulib-tool: new option --gnu-make
+
+    This is for applications like GNU Emacs that use GNU Make
+    features instead of Automake.
+    * doc/gnulib-tool.texi (Initial import): Mention --gnu-make.
+    * doc/gnulib.texi (Unit test modules, Build robot for gnulib):
+    Do not assume Automake.
+    * gnulib-tool (func_determine_path_separator)
+    (func_modules_transitive_closure, func_update_file)
+    (func_emit_lib_Makefile_am, func_emit_tests_Makefile_am)
+    (func_import): Add support for --gnu-make.
+
+--------------------------------------------------------------------------------
+
+commit f42ee040afd2e142951a9809b1d14550c29330e8
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Sun Feb 19 15:15:11 2017 +0100
+
+    gnulib-tool: Avoid conflict of havelib-tests with --single-configure.
+
+    * gnulib_tool (func_create_testdir): Avoid havelib-tests when
+    --with-tests --single-configure is specified.
+
+--------------------------------------------------------------------------------
+
+commit 31a08abd323ebffea3d4fb2d5a66f801fe8b3031
+Author: Daiki Ueno <ueno@gnu.org>
+Date:   Fri Dec 2 17:16:50 2016 +0100
+
+    gnulib-tool: fix the previous change
+
+    * gnulib-tool (func_import): Relax the regex used for "LGPLv3+ or
+    GPLv2" rewriting.
+
+commit 27d1d32a202b6b2115d5c2e287e3f5f1090032e5
+Author: Daiki Ueno <ueno@gnu.org>
+Date:   Fri Dec 2 16:56:11 2016 +0100
+
+    gnulib-tool: fix the previous change
+
+    * gnulib-tool (func_import): Relax the regex for the end marker of
+    original license text.
+
+commit 1aa6e23bd2487a7c3bd07cf693e6d968f74d951a
+Author: Nikos Mavrogiannopoulos <nmav@gnutls.org>
+Date:   Mon Nov 21 21:15:25 2016 +0100
+
+    gnulib-tool: properly list the LGPL3orGPLv2 license
+
+    * gnulib-tool (func_import): Adhere to the license guideline when
+    rewriting the license text to "LGPLv3+ or GPLv2":
+    https://www.gnu.org/prep/maintain/maintain.html#Licensing-of-GNU-Packages
+
+commit 567bbf7b7b14b31385801b1fee47acfc5b6d2b01
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Sun Nov 13 04:12:26 2016 +0100
+
+    gnulib-tool: Support for the dual "LGPLv3+ or GPLv2" license.
+
+    * gnulib-tool (--lgpl): Accept value 3orGPLv2.
+    (func_import): Extend determination of license_incompatibilities.
+    (func_create_testdir): Extend table of license compatibility. Handle
+    also the licenses GPLv3+, GPL, LGPLv3+.
+
+--------------------------------------------------------------------------------
+
+commit ff9debcf75301805b1db925cdcdfb248541c576d
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Sat Oct 15 15:51:20 2016 +0200
+
+    Avoid gnulib-tool warnings about the dependencies of 'parse-datetime'.
+
+    * gnulib-tool (func_get_license): Special-case the 'parse-datetime'
+    module.
+
+--------------------------------------------------------------------------------
+
+commit 932a1ae7ba56a9a3da52287ac028017323269d44
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Sun Oct 16 14:11:18 2016 +0200
+
+    gnulib-tool: Make --create-testdir on all modules work again.
+
+    * gnulib-tool (func_create_testdir): Don't include the
+    non-recursive-gnulib-prefix-hack module.
+
+--------------------------------------------------------------------------------
+
+commit c09c24932066ecee81756adf2fca840b7c146e9d
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Thu Jun 8 14:45:39 2017 +0200
+
+    gnulib-tool: Fix bug in func_ln_s, from 2016-01-15.
+
+    * gnulib-tool (func_ln_s): Determine cp_src correctly.
+
+commit d9958eb1eb951f950f9b321419965001b1368a38
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Sun Jan 24 14:24:35 2016 -0800
+
+    gnulib-tool: don't give up on ln -s so easily
+
+    * gnulib-tool (func_ln_s): Don't give up on a later ln -s merely
+    because an earlier one failed.  The targets could be on different
+    file systems.  Problem reported by KO Myung-Hun in:
+    http://lists.gnu.org/archive/html/bug-gnulib/2016-01/msg00081.html
+
+commit 350f2c6fb569f42f0a8ff47fd5b7442f24f0e658
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Fri Jan 15 10:12:41 2016 -0800
+
+    * gnulib-tool: fix stray debug line in previous patch
+
+commit 0e50dd0071be89825810dbf4c2310663dcb77767
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Wed May 1 13:39:22 2013 +0900
+
+    gnulib-tool: don't assume ln -s works
+
+    * gnulib-tool (func_ln_s): New function.
+    (func_ln): Use it.
+
+--------------------------------------------------------------------------------
+
+commit 49137e3bc6a2b3fd83c502a514e4a3b89fc1571c
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Thu Feb 14 20:50:57 2019 +0100
+
+    gnulib-tool: Improve handling of multiple --local-dir options.
+
+    * doc/gnulib.texi (Extending Gnulib): Explain how multiple --local-dir
+    options work.
+    * gnulib-tool (func_path_prepend): Remove function.
+    (func_path_foreach): Make IFS handling more robust.
+    (local_gnulib_path): Collect --local-dir values using func_path_append,
+    not func_path_prepend.
+    (func_determine_path_separator): Make IFS handling more robust.
+    (func_lookup_file_cb): New function.
+    (func_lookup_file): Rewritten to use func_lookup_file_cb instead of
+    func_lookup_local_file. Apply the patches in the reverse order of their
+    origin in $local_gnulib_path.
+    (func_count_relative_local_gnulib_path): Make IFS handling more robust.
+    * NEWS: Mention that the first --local-dir option is the one with
+    highest priority.
+
+commit 55c6f22b8043843aa7cf6843326eb4abed4de75c
+Author: Pavel Raiskup <praiskup@redhat.com>
+Date:   Sat Nov 21 14:09:15 2015 +0100
+
+    gnulib-tool: allow multiple --local-dir usage
+
+    * gnulib-tool: Use --local-dir to construct compound
+    $local_gnulib_path path instead of $local_gnulib_dir.  Determine
+    PATH_SEPARATOR early.
+    (local_gnulib_dir): Rename into $local_gnulib_path everywhere.
+    (func_gnulib_dir): Cut out PATH_SEPARATOR detection code into
+    func_determine_path_separator because that needs to be detected
+    earlier now.
+    (func_determine_path_separator): New function.
+    (func_path_foreach, func_path_foreach_inner): New functions.
+    (func_path_prepend, func_path_append): Likewise.
+    (func_lookup_local_file, func_lookup_local_file_cb): Likewise.
+    (func_lookup_file, func_all_modules): Use new functions to work
+    with local_gnulib_path.
+    (func_modules_in_dir, func_exists_module): New callbacks for
+    func_path_foreach.
+    (func_exists_module, func_get_tests_module): Likewise.
+    (func_is_local_file, func_should_symlink): New helper methods.
+    (func_add_file, func_update_file): Use new func_should_symlink
+    instead, DRY.
+    (func_reconstruct_cached_local_gnulib_path): New helper.
+    (func_reconstruct_cached_dir): New callback.
+    (func_import): The cached_local_gnulib_dir renamed to
+    cached_local_gnulib_path similarly to local_gnulib_dir.
+    Use new func_reconstruct_cached_local_gnulib_path.
+    (func_count_relative_local_gnulib_path): New sub-method.
+    (func_create_testdir): Use func_should_symlink, DRY.
+    (func_create_megatestdir): Use new functions to work with
+    local_gnulib_path correctly.
+    (func_append_local_dir): New helper.
+
+--------------------------------------------------------------------------------
+
+commit 63ce1a2103dd4452f7bd5bc873a982e03ed52427
+Author: Pavel Raiskup <praiskup@redhat.com>
+Date:   Tue Oct 6 13:20:05 2015 +0200
+
+    gnulib-tool: fix tests of 'extensions' module
+
+    This complements f8fe25fab60e3c687a124 commit.
+
+    * gnulib-tool (func_emit_pre_early_macros): New function, it wraps
+    emitting of initial gl_EARLY macros.
+    (func_import, func_create_testdir): All dumps of gl_PROG_AR_RANLIB
+    replaced with func_emit_pre_early_macros call.
+
+commit f8fe25fab60e3c687a12446984bb475342956bb8
+Author: Pavel Raiskup <praiskup@redhat.com>
+Date:   Fri Sep 25 11:25:03 2015 -0700
+
+    gnulib-common.m4: fix gl_PROG_AR_RANLIB/AM_PROG_AR clash
+
+    The gl_PROG_AR_RANLIB (it is always called by gl_EARLY) sets AR
+    and ARFLAGS variables.  Doing this unconditionally could break
+    later Automake's AM_PROG_AR invocation (at least it's
+    AC_CHECK_TOOLS call to detect correct 'ar' binary).
+
+    Original purpose of the gl_PROG_AR_RANLIB was only to handle the
+    Amsterdam Compiler Kit, so make the previous code to have effects
+    only on ACK, and rather automatically call the Automake's
+    AM_PROG_AR as soon as possible to decide other cases.
+
+    References:
+    http://lists.gnu.org/archive/html/bug-gnulib/2015-07/msg00001.html
+
+    * m4/gnulib-common.m4 (gl_PROG_AR_RANLIB): AC_BEFORE AM_PROG_AR.
+    Set the AR/ARFLAGS to ACK defaults OR call AM_PROG_AR.  If neither
+    is possible, keep setting AR/ARFLAGS to reasonable defaults.
+    * gnulib-tool (func_import): Put the gl_USE_SYSTEM_EXTENSIONS
+    right before gl_PROG_AR_RANLIB into gnulib-comp.m4 (if the
+    'extensions' module is used.
+    * modules/extensions (configure.ac-early): Remove as this snippet
+    is added to gnulib-comp.m4 earlier anyway.
+
+commit 9bdf6c8a0cdeb13c12e4b65dee9538c5468dbe1d
+Author: Bruno Haible <bruno@clisp.org>
+Date:   Sun Aug 19 14:06:50 2012 +0200
+
+    gnulib-tool: Remove old file names from .cvsignore, .gitignore.
+
+    * gnulib-tool (func_update_ignorelist): Don't use 'join -v 1' command
+    on the list of removed files.
+
+--------------------------------------------------------------------------------
+
+================================================================================

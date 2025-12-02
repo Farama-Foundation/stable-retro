@@ -1,0 +1,15 @@
+Files:
+tests/test-fgetc.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+unistd
+fdopen
+msvc-inval
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fgetc
+check_PROGRAMS += test-fgetc

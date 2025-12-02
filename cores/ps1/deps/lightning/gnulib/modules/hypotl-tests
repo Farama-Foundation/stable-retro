@@ -1,0 +1,18 @@
+Files:
+tests/test-hypotl.c
+tests/test-hypot.h
+tests/signature.h
+tests/macros.h
+tests/randoml.c
+
+Depends-on:
+fpucw
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-hypotl
+check_PROGRAMS += test-hypotl
+test_hypotl_SOURCES = test-hypotl.c randoml.c
+test_hypotl_LDADD = $(LDADD) @HYPOTL_LIBM@

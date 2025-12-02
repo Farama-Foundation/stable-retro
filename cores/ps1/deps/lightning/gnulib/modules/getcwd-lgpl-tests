@@ -1,0 +1,13 @@
+Files:
+tests/test-getcwd-lgpl.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-getcwd-lgpl
+check_PROGRAMS += test-getcwd-lgpl
+test_getcwd_lgpl_LDADD = $(LDADD) $(LIBINTL)

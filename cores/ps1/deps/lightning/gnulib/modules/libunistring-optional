@@ -1,0 +1,28 @@
+Description:
+Try to use system libunistring for Unicode string functions.
+
+Files:
+m4/libunistring-optional.m4
+m4/libunistring.m4
+m4/absolute-header.m4
+lib/libunistring.valgrind
+
+Depends-on:
+havelib
+iconv
+
+configure.ac:
+gl_LIBUNISTRING_OPTIONAL
+
+Makefile.am:
+
+Include:
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+Paolo Bonzini, Daiki Ueno

@@ -1,0 +1,33 @@
+Description:
+POSIX read-write locks.
+
+Files:
+lib/pthread-rwlock.c
+m4/pthread-rwlock.m4
+
+Depends-on:
+pthread-h
+pthread-cond        [test $gl_threads_api != windows && test $REPLACE_PTHREAD_RWLOCK_INIT = 1]
+nanosleep           [test $gl_threads_api != windows && test $HAVE_PTHREAD_RWLOCK_INIT = 1 && test $HAVE_PTHREAD_RWLOCK_TIMEDRDLOCK = 0]
+windows-timedrwlock [test $gl_threads_api = windows]
+
+configure.ac:
+gl_PTHREAD_RWLOCK
+if test $HAVE_PTHREAD_RWLOCK_TIMEDRDLOCK = 0 || test $REPLACE_PTHREAD_RWLOCK_TIMEDRDLOCK = 1; then
+  AC_LIBOBJ([pthread-rwlock])
+fi
+gl_PTHREAD_MODULE_INDICATOR([pthread-rwlock])
+
+Makefile.am:
+
+Include:
+<pthread.h>
+
+Link:
+$(LIBPTHREAD) or $(LIBPMULTITHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

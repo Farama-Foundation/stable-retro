@@ -1,0 +1,32 @@
+Description:
+sinf() function: sine function.
+
+Files:
+lib/sinf.c
+m4/sinf.m4
+
+Depends-on:
+math
+extensions
+sin             [test $HAVE_SINF = 0]
+
+configure.ac:
+gl_FUNC_SINF
+if test $HAVE_SINF = 0; then
+  AC_LIBOBJ([sinf])
+fi
+gl_MATH_MODULE_INDICATOR([sinf])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(SINF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

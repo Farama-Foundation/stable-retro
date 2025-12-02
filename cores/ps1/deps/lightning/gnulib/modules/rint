@@ -1,0 +1,31 @@
+Description:
+rint() function: round according to the current rounding mode.
+
+Files:
+lib/rint.c
+m4/rint.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+
+configure.ac:
+gl_FUNC_RINT
+if test $HAVE_RINT = 0; then
+  AC_LIBOBJ([rint])
+fi
+gl_MATH_MODULE_INDICATOR([rint])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(RINT_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

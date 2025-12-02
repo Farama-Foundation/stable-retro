@@ -1,0 +1,26 @@
+Description:
+Copy UTF-16 string.
+
+Files:
+lib/unistr/u16-stpncpy.c
+lib/unistr/u-stpncpy.h
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.3], [unistr/u16-stpncpy])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U16_STPNCPY
+lib_SOURCES += unistr/u16-stpncpy.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

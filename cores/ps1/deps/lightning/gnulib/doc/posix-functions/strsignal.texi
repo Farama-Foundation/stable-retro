@@ -1,0 +1,31 @@
+@node strsignal
+@section @code{strsignal}
+@findex strsignal
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/strsignal.html}
+
+Gnulib module: strsignal
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, HP-UX 11, IRIX 6.5, mingw, MSVC 14.
+
+@item
+This function does not return a string for out-of-range numbers on
+some platforms:
+Solaris, AIX 5.1.
+
+@item
+This function is declared in @code{unistd.h} instead of
+@code{string.h} on some platforms:
+NetBSD 5.0.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item This function returns @code{const char *} instead of @code{char *} on
+some platforms:
+cygwin 1.5.25.
+@end itemize

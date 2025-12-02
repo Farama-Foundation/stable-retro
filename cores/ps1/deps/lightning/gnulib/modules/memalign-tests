@@ -1,0 +1,12 @@
+Files:
+tests/test-memalign.c
+tests/macros.h
+
+Depends-on:
+stdint
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-memalign
+check_PROGRAMS += test-memalign

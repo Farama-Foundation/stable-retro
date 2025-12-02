@@ -1,0 +1,26 @@
+Description:
+Union of categories of Unicode characters.
+
+Files:
+lib/unictype/categ_or.c
+
+Depends-on:
+unictype/base
+unictype/category-test-withtable
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-or])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_OR
+lib_SOURCES += unictype/categ_or.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

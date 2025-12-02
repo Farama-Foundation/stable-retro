@@ -1,0 +1,75 @@
+Description:
+Find a Unicode character category, given its name.
+
+Files:
+lib/unictype/categ_byname.c
+lib/unictype/categ_byname.gperf
+
+Depends-on:
+unictype/base
+unictype/category-C
+unictype/category-Cc
+unictype/category-Cf
+unictype/category-Cn
+unictype/category-Co
+unictype/category-Cs
+unictype/category-L
+unictype/category-LC
+unictype/category-Ll
+unictype/category-Lm
+unictype/category-Lo
+unictype/category-Lt
+unictype/category-Lu
+unictype/category-M
+unictype/category-Mc
+unictype/category-Me
+unictype/category-Mn
+unictype/category-N
+unictype/category-Nd
+unictype/category-Nl
+unictype/category-No
+unictype/category-P
+unictype/category-Pc
+unictype/category-Pd
+unictype/category-Pe
+unictype/category-Pf
+unictype/category-Pi
+unictype/category-Po
+unictype/category-Ps
+unictype/category-S
+unictype/category-Sc
+unictype/category-Sk
+unictype/category-Sm
+unictype/category-So
+unictype/category-Z
+unictype/category-Zl
+unictype/category-Zp
+unictype/category-Zs
+unictype/category-none
+gperf
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/category-byname])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CATEGORY_BYNAME
+lib_SOURCES += unictype/categ_byname.c
+endif
+
+$(srcdir)/unictype/categ_byname.h: $(srcdir)/unictype/categ_byname.gperf
+	$(V_GPERF)$(GPERF) -m 10 $(srcdir)/unictype/categ_byname.gperf > $(srcdir)/unictype/categ_byname.h-t1 \
+	&& sed -e 's/^const/static const/' < $(srcdir)/unictype/categ_byname.h-t1 > $(srcdir)/unictype/categ_byname.h-t2 \
+	&& mv $(srcdir)/unictype/categ_byname.h-t2 $(srcdir)/unictype/categ_byname.h
+BUILT_SOURCES        += unictype/categ_byname.h
+MOSTLYCLEANFILES     += unictype/categ_byname.h-t1 unictype/categ_byname.h-t2
+MAINTAINERCLEANFILES += unictype/categ_byname.h
+EXTRA_DIST           += unictype/categ_byname.h
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

@@ -1,0 +1,29 @@
+Description:
+Locale dependent, case and normalization insensitive comparison of UTF-32
+strings.
+
+Files:
+lib/unicase/u32-casecoll.c
+lib/unicase/u-casecoll.h
+
+Depends-on:
+unicase/base
+unicase/u32-casexfrm
+memcmp2
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u32-casecoll])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U32_CASECOLL
+lib_SOURCES += unicase/u32-casecoll.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

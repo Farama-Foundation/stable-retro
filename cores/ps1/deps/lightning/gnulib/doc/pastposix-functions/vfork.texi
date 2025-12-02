@@ -1,0 +1,18 @@
+@node vfork
+@section @code{vfork}
+@findex vfork
+
+POSIX specification: @url{https://pubs.opengroup.org/onlinepubs/009695399/functions/vfork.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+IRIX 6.5, mingw, MSVC 14.
+@end itemize

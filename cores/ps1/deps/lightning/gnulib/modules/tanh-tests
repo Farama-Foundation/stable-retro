@@ -1,0 +1,13 @@
+Files:
+tests/test-tanh.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-tanh
+check_PROGRAMS += test-tanh
+test_tanh_LDADD = $(LDADD) @TANH_LIBM@

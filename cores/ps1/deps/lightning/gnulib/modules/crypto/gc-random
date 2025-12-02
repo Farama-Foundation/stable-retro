@@ -1,0 +1,25 @@
+Description:
+Generic crypto random number functions.
+
+Files:
+
+Depends-on:
+crypto/gc
+getrandom [test "$ac_cv_libgcrypt" != yes]
+
+configure.ac:
+gl_MODULE_INDICATOR([gc-random])
+
+Makefile.am:
+
+Include:
+"gc.h"
+
+Link:
+$(LIB_GETRANDOM)
+
+License:
+LGPLv2+
+
+Maintainer:
+Simon Josefsson

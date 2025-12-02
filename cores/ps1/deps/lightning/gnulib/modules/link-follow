@@ -1,0 +1,20 @@
+Description:
+Determine whether link("symlink", "foo") follows the symlink.
+
+Files:
+m4/link-follow.m4
+
+Depends-on:
+
+configure.ac:
+gl_FUNC_LINK_FOLLOWS_SYMLINK
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering

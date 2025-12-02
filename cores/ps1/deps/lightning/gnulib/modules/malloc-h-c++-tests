@@ -1,0 +1,18 @@
+Files:
+tests/test-malloc-h-c++.cc
+tests/signature.h
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-malloc-h-c++
+check_PROGRAMS += test-malloc-h-c++
+test_malloc_h_c___SOURCES = test-malloc-h-c++.cc
+endif

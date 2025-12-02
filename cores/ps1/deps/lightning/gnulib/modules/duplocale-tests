@@ -1,0 +1,18 @@
+Files:
+tests/test-duplocale.c
+tests/signature.h
+tests/macros.h
+m4/intl-thread-locale.m4
+
+Depends-on:
+langinfo
+
+configure.ac:
+AC_CHECK_FUNCS_ONCE([duplocale strfmon_l snprintf_l nl_langinfo_l])
+AC_CHECK_HEADERS_ONCE([monetary.h])
+gt_FUNC_USELOCALE
+
+Makefile.am:
+TESTS += test-duplocale
+check_PROGRAMS += test-duplocale
+test_duplocale_LDADD = $(LDADD) $(LIB_SETLOCALE) @LIB_DUPLOCALE@

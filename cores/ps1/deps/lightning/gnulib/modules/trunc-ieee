@@ -1,0 +1,27 @@
+Description:
+trunc() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/trunc-ieee.m4
+m4/minus-zero.m4
+m4/signbit.m4
+
+Depends-on:
+trunc
+
+configure.ac:
+gl_FUNC_TRUNC_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(TRUNC_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

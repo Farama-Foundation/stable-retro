@@ -1,0 +1,24 @@
+@node socket
+@section @code{socket}
+@findex socket
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/socket.html}
+
+Gnulib module: socket
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), the descriptors returned by
+the @code{socket} function cannot be used in calls to @code{read},
+@code{write}, and @code{close}; you have to use @code{recv}, @code{send},
+@code{closesocket} in these cases instead.
+@item
+On Windows platforms (excluding Cygwin), error codes from this function
+are not placed in @code{errno}, and @code{WSAGetLastError} must be used
+instead.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

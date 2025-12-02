@@ -1,0 +1,25 @@
+@node dirfd
+@section @code{dirfd}
+@findex dirfd
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/dirfd.html}
+
+Gnulib module: dirfd
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, AIX 7.1, HP-UX 11, Solaris 10, mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function always fails on some platforms:
+mingw.
+@end itemize
+
+With the @code{dirfd} module, this functions always sets @code{errno} when it
+fails. (POSIX does not require that @code{dirfd} sets @code{errno} when it
+fails.)

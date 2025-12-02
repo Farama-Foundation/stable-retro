@@ -1,0 +1,39 @@
+@node ftell
+@section @code{ftell}
+@findex ftell
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/ftell.html}
+
+Gnulib module: ftell
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function mistakenly succeeds on pipes on some platforms:
+mingw, MSVC 14.
+@item
+This function produces incorrect results after @code{putc} that followed a
+@code{getc} call that reached EOF on some platforms:
+Solaris 11 2010-11.
+@item
+This function, when invoked after @code{ungetc}, throws away the @code{ungetc}
+buffer, changes the stream's file position, and returns the wrong position on
+some platforms:
+macOS 10.15 and newer.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function produces incorrect results immediately after @code{fseek} on some
+platforms:
+HP-UX 11.
+@item
+@code{fflush}, @code{ftell}, @code{ftello}, @code{fgetpos} behave incorrectly
+on input streams that are opened in @code{O_TEXT} mode and whose contents
+contains Unix line terminators (LF), on some platforms: mingw, MSVC 14.
+@item
+On platforms where @code{long} is a 32-bit type, @code{ftell} does not work
+correctly with files larger than 2 GB, even when the @code{AC_SYS_LARGEFILE}
+macro is used.  The fix is to use @code{ftello} instead.
+@end itemize

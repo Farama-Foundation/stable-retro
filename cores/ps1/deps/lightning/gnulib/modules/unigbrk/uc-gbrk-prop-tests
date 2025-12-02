@@ -1,0 +1,14 @@
+Files:
+tests/unigbrk/test-uc-gbrk-prop.c
+tests/unigbrk/test-uc-gbrk-prop.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-uc-gbrk-prop
+check_PROGRAMS += test-uc-gbrk-prop
+test_uc_gbrk_prop_SOURCES = unigbrk/test-uc-gbrk-prop.c
+test_uc_gbrk_prop_LDADD = $(LDADD) $(LIBUNISTRING)

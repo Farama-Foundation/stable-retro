@@ -1,0 +1,25 @@
+Description:
+Sequential list data type implemented by a linked list.
+
+Files:
+lib/gl_linked_list.h
+lib/gl_linked_list.c
+lib/gl_anylinked_list1.h
+lib/gl_anylinked_list2.h
+
+Depends-on:
+list
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_linked_list.h gl_linked_list.c gl_anylinked_list1.h gl_anylinked_list2.h
+
+Include:
+"gl_linked_list.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

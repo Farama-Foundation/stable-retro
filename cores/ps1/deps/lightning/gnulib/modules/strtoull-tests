@@ -1,0 +1,12 @@
+Files:
+tests/test-strtoull.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-strtoull
+check_PROGRAMS += test-strtoull

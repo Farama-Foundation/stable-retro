@@ -1,0 +1,14 @@
+Files:
+tests/test-array_omap.c
+tests/macros.h
+
+Depends-on:
+xlist
+array-list
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-array_omap
+check_PROGRAMS += test-array_omap
+test_array_omap_LDADD = $(LDADD) @LIBINTL@

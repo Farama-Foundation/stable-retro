@@ -1,0 +1,17 @@
+@node fenv.h
+@section @file{fenv.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/fenv.h.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+FreeBSD 5.2.1, NetBSD 5.0, OpenBSD 3.8, AIX 5.1, IRIX 6.5, Cygwin 1.7.7, MSVC 9.
+@end itemize

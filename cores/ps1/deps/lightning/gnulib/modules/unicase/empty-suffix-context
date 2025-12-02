@@ -1,0 +1,25 @@
+Description:
+Case-mapping context of empty suffix string.
+
+Files:
+lib/unicase/empty-suffix-context.c
+
+Depends-on:
+unicase/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.1], [unicase/empty-suffix-context])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_EMPTY_SUFFIX_CONTEXT
+lib_SOURCES += unicase/empty-suffix-context.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

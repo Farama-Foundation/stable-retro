@@ -1,0 +1,31 @@
+Description:
+Set the current time, with nanosecond resolution.
+
+Files:
+lib/settime.c
+m4/settime.m4
+
+Depends-on:
+clock-time
+errno
+extensions
+sys_time
+timespec
+
+configure.ac:
+gl_SETTIME
+
+Makefile.am:
+lib_SOURCES += settime.c
+
+Include:
+"timespec.h"
+
+Link:
+$(LIB_CLOCK_GETTIME)
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert, Jim Meyering

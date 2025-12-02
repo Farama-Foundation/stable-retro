@@ -1,0 +1,18 @@
+Files:
+tests/test-trunc-ieee.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnand-nolibm
+float
+signbit
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-trunc-ieee
+check_PROGRAMS += test-trunc-ieee
+test_trunc_ieee_LDADD = $(LDADD) @TRUNC_LIBM@

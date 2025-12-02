@@ -1,0 +1,27 @@
+Description:
+ISO C 11 multithreading functions.
+
+Files:
+
+Depends-on:
+threads-h
+thrd
+mtx
+cnd
+tss
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<threads.h>
+
+Link:
+$(LIBSTDTHREAD)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

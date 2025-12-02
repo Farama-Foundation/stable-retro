@@ -1,0 +1,63 @@
+@node readlink
+@section @code{readlink}
+@findex readlink
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/readlink.html}
+
+Gnulib module: readlink
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+Some platforms mistakenly succeed on file names ending in @file{/}:
+FreeBSD 7.2, Solaris 9, Mac OS X 10.10.
+@item
+On some platforms, this function returns @code{int} instead of
+@code{ssize_t}:
+glibc 2.4, FreeBSD 6.0, OpenBSD 6.7, Cygwin 1.5.x, AIX 7.1.
+@end itemize
+
+Portability problems mostly fixed by Gnulib:
+@itemize
+@item
+On some platforms, this function fails and sets @code{errno} to
+@code{ERANGE} rather than returning truncated contents:
+AIX 7.2, HP-UX 11.
+The Gnulib replacement normally works as POSIX requires by returning
+the truncated contents.  However, if the full link contents are
+unreasonably large (more than 4000 bytes) the replacement clears the
+entire buffer and returns the buffer size; although this is not a
+complete fix, it suffices for typical callers, which ignore the buffer
+contents anyway.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function always fails on platforms that don't support symlinks:
+mingw, MSVC 14.
+@item
+When this function is called on a directory: In the case of NFS mounted
+directories, Cygwin sets @code{errno} to @code{ENOENT} or @code{EIO} instead of
+@code{EINVAL}.  To avoid this problem, check for a directory before calling
+this function.
+@item
+When this function is called on a file that is not a symbolic link:
+IRIX may set @code{errno} to @code{ENXIO} instead of @code{EINVAL}.  Cygwin
+may set errno to @code{EACCES} instead of @code{EINVAL}.
+@item
+When this function fails because it is called on an existing
+non-directory's name concatenated to @file{/},
+it sets @code{errno} to @code{EINVAL}:
+AIX 7.2.
+@item
+Symlink contents do not always have a trailing null byte, and there is
+no indication if symlink contents were truncated if the return value
+matches the length.  Furthermore,
+Linux sets @code{errno} to @code{EINVAL} if the
+requested length is zero.  Use the gnulib module @code{areadlink} for
+improved ability to read symlink contents.
+@end itemize

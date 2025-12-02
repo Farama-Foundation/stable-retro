@@ -1,0 +1,16 @@
+Files:
+tests/test-inet_pton.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+netinet_in
+sys_socket
+
+configure.ac:
+AC_C_BIGENDIAN
+
+Makefile.am:
+TESTS += test-inet_pton
+check_PROGRAMS += test-inet_pton
+test_inet_pton_LDADD = $(LDADD) @INET_PTON_LIB@

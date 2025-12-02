@@ -1,0 +1,46 @@
+Description:
+openat() function: Open a file at a directory.
+
+Files:
+lib/openat.c
+m4/openat.m4
+m4/open-cloexec.m4
+m4/lstat.m4
+m4/mode_t.m4
+
+Depends-on:
+fcntl-h
+extensions
+largefile
+openat-h        [test $HAVE_OPENAT = 0 || test $REPLACE_OPENAT = 1]
+stdbool         [test $HAVE_OPENAT = 0 || test $REPLACE_OPENAT = 1]
+sys_stat        [test $HAVE_OPENAT = 0 || test $REPLACE_OPENAT = 1]
+cloexec         [test $REPLACE_OPENAT = 1]
+fstat           [test $REPLACE_OPENAT = 1]
+at-internal     [test $HAVE_OPENAT = 0]
+errno           [test $HAVE_OPENAT = 0]
+fchdir          [test $HAVE_OPENAT = 0]
+filename        [test $HAVE_OPENAT = 0]
+open            [test $HAVE_OPENAT = 0]
+openat-die      [test $HAVE_OPENAT = 0]
+save-cwd        [test $HAVE_OPENAT = 0]
+
+configure.ac:
+gl_FUNC_OPENAT
+if test $HAVE_OPENAT = 0 || test $REPLACE_OPENAT = 1; then
+  AC_LIBOBJ([openat])
+  gl_PREREQ_OPENAT
+fi
+gl_MODULE_INDICATOR([openat]) dnl for lib/getcwd.c
+gl_FCNTL_MODULE_INDICATOR([openat])
+
+Makefile.am:
+
+Include:
+<fcntl.h>
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake

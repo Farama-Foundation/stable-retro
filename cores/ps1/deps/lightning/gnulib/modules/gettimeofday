@@ -1,0 +1,28 @@
+Description:
+gettimeofday() function: return current time.
+
+Files:
+lib/gettimeofday.c
+m4/gettimeofday.m4
+
+Depends-on:
+sys_time
+
+configure.ac:
+gl_FUNC_GETTIMEOFDAY
+if test $HAVE_GETTIMEOFDAY = 0 || test $REPLACE_GETTIMEOFDAY = 1; then
+  AC_LIBOBJ([gettimeofday])
+  gl_PREREQ_GETTIMEOFDAY
+fi
+gl_SYS_TIME_MODULE_INDICATOR([gettimeofday])
+
+Makefile.am:
+
+Include:
+<sys/time.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Paul Eggert, Jim Meyering

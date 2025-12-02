@@ -1,0 +1,27 @@
+Description:
+Copy UTF-32 string.
+
+Files:
+lib/unistr/u32-strdup.c
+lib/unistr/u-strdup.h
+
+Depends-on:
+unistr/base
+unistr/u32-strlen
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u32-strdup])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U32_STRDUP
+lib_SOURCES += unistr/u32-strdup.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

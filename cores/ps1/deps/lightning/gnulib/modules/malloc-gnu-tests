@@ -1,0 +1,10 @@
+Files:
+tests/test-malloc-gnu.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-malloc-gnu
+check_PROGRAMS += test-malloc-gnu

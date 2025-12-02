@@ -1,0 +1,125 @@
+Many of the files in this directory are shared between the coreutils,
+diffutils, tar and gettext packages -- and others, so if you
+change them, try to ensure that you don't break those packages.
+That's hard without a systematic approach, but here is a set of conventions
+that makes it easy.
+
+- The lib/ sources are split into modules.  Usually the module of a
+  lib/foo.h and lib/foo.c is called "foo" - not unexpected, hey! -, but
+  in more ambiguous cases you can look up the module a file belongs to
+  by doing "grep lib/foo.c modules/*".
+
+- For every module there is an autoconf macro file, usually called
+  m4/foo.m4 according to the module name.  When you modify lib/foo.h or
+  lib/foo.c, remember to modify m4/foo.m4 as well!
+  What if you don't find m4/foo.m4? This probably means that the module
+  doesn't need autoconf support up to now (again, take a look in modules/*).
+  So you might need to create one.
+
+- A module which defines a replacement function (i.e. a function which is
+  compiled only on systems which lack it or where it exists but doesn't
+  work satisfactorily) has a .m4 file with typically the following structure:
+
+  AC_DEFUN([gl_FUNC_FOO],
+  [
+    AC_REPLACE_FUNCS(foo)
+    if test $ac_cv_func_foo = no; then
+      gl_PREREQ_FOO
+    fi
+  ])
+
+  # Prerequisites of lib/foo.c.
+  AC_DEFUN([gl_PREREQ_FOO], [
+    dnl Many AC_CHECK_* invocations.
+  ])
+
+- A module which is compiled on all platforms can define multiple functions
+  and be spread across multiple source files (although each time you do
+  this you should consider splitting the module, if the source files could
+  be independent). The .m4 file has typically the following structure:
+
+  AC_DEFUN([gl_FOO],
+  [
+    dnl Prerequisites of lib/foo.c.
+    dnl Many AC_CHECK_* invocations.
+
+    dnl Prerequisites of lib/foobar.c.
+    dnl Many AC_CHECK_* invocations.
+  ])
+
+- When a module FOO depends on a module BAR, you do *not* generally need
+  to write
+
+  AC_DEFUN([gl_FOO],
+  [
+    AC_REQUIRE([gl_BAR])
+    ...
+  ])
+
+  because the maintainers might want to use locally modified / renamed copies
+  of the module BAR.
+
+- If the autoconf tests for the modules FOO and BAR have some checks in
+  common, still list them separately. Autoconf has two mechanisms for
+  avoiding that a configure file runs the same test twice: AC_REQUIRE
+  and AC_CACHE_CHECK. Trying to omit the checks leads to maintenance
+  problems: If FOO depends on BAR, and you omit a check from FOO's .m4 file,
+  later on, when someone modifies bar.c and removes the check from bar.m4,
+  he will not remember that foo.c needs the check as well.
+
+- Now, how can you find the prerequisites of lib/foo.c? Try this:
+    "grep '#.*if' lib/foo.c | grep -v endif"
+  and for each HAVE_* macro search in the autoconf documentation what could
+  be the autoconf macro that provides it. This is only an approximation; in
+  general you should look at all preprocessor directives in lib/foo.c.
+
+- In AC_RUN_IFELSE invocations, try to put as much information about failed
+  tests as possible in the exit code. The exit code is 0 for success and any
+  value between 1 and 127 for failure. The exit code is printed in config.log;
+  therefore when an AC_RUN_IFELSE invocation failed, it is possible to analyze
+  the failure immediately if sufficient information is contained in the exit
+  code.
+
+  For a program that performs a single test, the typical idiom is:
+
+      if (do_test1 ())
+        return 1;
+      return 0;
+
+  For a test that performs a test with some preparation, the typical idiom is
+  to return an enumerated value:
+
+      if (prep1 ())
+        return 1;
+      else if (prep2 ())
+        return 2;
+      else if (prep3 ())
+        return 3;
+      else if (do_test1 ())
+        return 4;
+      return 0;
+
+  For multiple independent tests in a single program, you can return a bit
+  mask with up to 7 bits:
+
+      int result = 0;
+      if (do_test1 ())
+        result |= 1;
+      if (do_test2 ())
+        result |= 2;
+      if (do_test3 ())
+        result |= 4;
+      return result;
+
+  For more than 7 independent tests, you have to map some possible test
+  failures to same bit.
+
+- After ANY modifications of an m4 file, you should increment its serial
+  number (in the first line). Also, if this first line features a particular
+  release, _remove_ this release stamp. Example: Change
+
+    # setenv.m4 serial 2 (gettext-0.11.1)
+
+  into
+
+    # setenv.m4 serial 3

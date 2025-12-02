@@ -1,0 +1,29 @@
+Description:
+Character set conversion.
+
+Files:
+m4/iconv.m4
+
+Depends-on:
+havelib
+
+configure.ac:
+AM_ICONV
+m4_ifdef([gl_ICONV_MODULE_INDICATOR],
+  [gl_ICONV_MODULE_INDICATOR([iconv])])
+
+Makefile.am:
+
+Include:
+#if HAVE_ICONV
+# include <iconv.h>
+#endif
+
+Link:
+$(LTLIBICONV) when linking with libtool, $(LIBICONV) otherwise
+
+License:
+LGPLv2+
+
+Maintainer:
+all

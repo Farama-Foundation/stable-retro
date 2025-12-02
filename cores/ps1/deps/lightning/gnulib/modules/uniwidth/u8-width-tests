@@ -1,0 +1,13 @@
+Files:
+tests/uniwidth/test-u8-width.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-u8-width
+check_PROGRAMS += test-u8-width
+test_u8_width_SOURCES = uniwidth/test-u8-width.c
+test_u8_width_LDADD = $(LDADD) $(LIBUNISTRING)

@@ -1,0 +1,26 @@
+Description:
+Look at first character in UTF-16 string, returning an error code upon failure.
+
+Files:
+lib/unistr/u16-mbtoucr.c
+
+Depends-on:
+unistr/base
+
+configure.ac:
+gl_MODULE_INDICATOR([unistr/u16-mbtoucr])
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u16-mbtoucr])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U16_MBTOUCR
+lib_SOURCES += unistr/u16-mbtoucr.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

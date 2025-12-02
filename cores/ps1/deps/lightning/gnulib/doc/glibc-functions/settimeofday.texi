@@ -1,0 +1,29 @@
+@node settimeofday
+@subsection @code{settimeofday}
+@findex settimeofday
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{High-Resolution Calendar,,High-Resolution Calendar,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/High_002dResolution-Calendar.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/settimeofday.2.html,,man settimeofday}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@end itemize

@@ -1,0 +1,31 @@
+Description:
+malloc() function that is glibc compatible.
+
+Comment:
+This module should not be used as a dependency from a test module,
+otherwise when this module occurs as a tests-related module, it will
+have side effects on the compilation of the main modules in lib/.
+
+Files:
+lib/malloc.c
+
+Depends-on:
+malloc-posix
+
+configure.ac:
+gl_FUNC_MALLOC_GNU
+if test $REPLACE_MALLOC = 1; then
+  AC_LIBOBJ([malloc])
+fi
+gl_MODULE_INDICATOR([malloc-gnu])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Jim Meyering

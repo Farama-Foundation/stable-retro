@@ -1,0 +1,16 @@
+Files:
+tests/test-fmodf.c
+tests/test-fmod.h
+tests/signature.h
+tests/macros.h
+tests/randomf.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fmodf
+check_PROGRAMS += test-fmodf
+test_fmodf_SOURCES = test-fmodf.c randomf.c
+test_fmodf_LDADD = $(LDADD) @FMODF_LIBM@

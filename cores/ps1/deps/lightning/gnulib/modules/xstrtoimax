@@ -1,0 +1,23 @@
+Description:
+Convert string to 'intmax_t', with error checking.
+
+Files:
+lib/xstrtoimax.c
+
+Depends-on:
+xstrtol
+strtoimax
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += xstrtoimax.c
+
+Include:
+"xstrtol.h"
+
+License:
+GPL
+
+Maintainer:
+Paul Eggert

@@ -1,0 +1,41 @@
+Description:
+fma() function: fused multiply-add.
+
+Files:
+lib/fma.c
+lib/float+.h
+m4/fma.m4
+m4/fegetround.m4
+m4/mathfunc.m4
+
+Depends-on:
+math
+float           [test $HAVE_FMA = 0 || test $REPLACE_FMA = 1]
+stdbool         [test $HAVE_FMA = 0 || test $REPLACE_FMA = 1]
+verify          [test $HAVE_FMA = 0 || test $REPLACE_FMA = 1]
+isfinite        [test $HAVE_FMA = 0 || test $REPLACE_FMA = 1]
+integer_length  [test $HAVE_FMA = 0 || test $REPLACE_FMA = 1]
+frexp           [test $HAVE_FMA = 0 || test $REPLACE_FMA = 1]
+ldexp           [test $HAVE_FMA = 0 || test $REPLACE_FMA = 1]
+
+configure.ac:
+gl_FUNC_FMA
+if test $HAVE_FMA = 0 || test $REPLACE_FMA = 1; then
+  AC_LIBOBJ([fma])
+  gl_PREREQ_FMA
+fi
+gl_MATH_MODULE_INDICATOR([fma])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FMA_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

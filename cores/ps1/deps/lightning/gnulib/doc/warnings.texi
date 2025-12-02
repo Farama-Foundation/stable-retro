@@ -1,0 +1,65 @@
+@node warnings
+@section warnings
+
+The @code{warnings} module allows to regularly build a package with more
+GCC warnings than the default warnings emitted by GCC.
+
+It provides the following functionality:
+
+@itemize @bullet
+@item
+You can select some warning options, such as @samp{-Wall}, to be enabled
+whenever building with a GCC version that supports these options.  The
+user can choose to override these warning options by providing the
+opposite options in the @code{CFLAGS} variable at configuration time.
+
+@item
+You can make these warnings apply to selected directories only.  In
+projects where subprojects are maintained by different people, or where
+parts of the source code are imported from external sources (for example
+from gnulib), it is useful to apply different warning options to
+different directories.
+
+@item
+It lets you use @samp{-Werror} at @samp{make distcheck} time, to verify
+that on the maintainer's system, no warnings remain.  (Note that use of
+@samp{-Werror} in @code{CFLAGS} does not work in general, because it may
+break autoconfiguration.)
+
+@item
+Similarly, it lets you use @samp{-Werror} when the builder runs
+@command{configure} with an option such as
+@option{--enable-gcc-warnings}.
+@end itemize
+
+To use this module, you need the following:
+
+@enumerate
+@item
+In @file{configure.ac}, use for example
+@smallexample
+gl_WARN_ADD([-Wall], [WARN_CFLAGS])
+gl_WARN_ADD([-Wpointer-arith], [WARN_CFLAGS])
+@end smallexample
+
+@item
+In the directories which shall use @code{WARN_CFLAGS}, use it in the
+definition of @code{AM_CFLAGS}, like this:
+@smallexample
+AM_CFLAGS = $(WARN_CFLAGS)
+@end smallexample
+
+Note that the @code{AM_CFLAGS} is used in combination with @code{CFLAGS}
+and before @code{CFLAGS} in build rules emitted by Automake.  This allows
+the user to provide @code{CFLAGS} that override the @code{WARN_CFLAGS}.
+@end enumerate
+
+@samp{gl_WARN_ADD([-Werror])} is intended for developers, and should be
+avoided in contexts where it would affect ordinary installation builds.  The
+warnings emitted by GCC depend, to some extent, on the contents of the
+system header files, on the size and signedness of built-in types, etc.
+Use of @samp{-Werror} would cause frustration to all users on platforms
+that the maintainer has not tested before the release.  It is better if
+@samp{-Werror} is off by default, and is enabled only by developers.
+For example, @samp{-Werror} could affect @samp{make distcheck} or
+@samp{configure --enable-gcc-warnings} as mentioned above.

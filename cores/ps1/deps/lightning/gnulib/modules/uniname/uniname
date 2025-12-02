@@ -1,0 +1,30 @@
+Description:
+Association between Unicode characters and their names.
+
+Files:
+lib/uniname/gen-uninames.lisp
+lib/uniname/uninames.h
+lib/uniname/uniname.c
+
+Depends-on:
+uniname/base
+attribute
+memcmp
+c99
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [uniname/uniname])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNINAME_UNINAME
+lib_SOURCES += uniname/uniname.c
+endif
+
+Include:
+"uniname.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

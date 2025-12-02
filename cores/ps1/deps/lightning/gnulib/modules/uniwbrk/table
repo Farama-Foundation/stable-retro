@@ -1,0 +1,21 @@
+Description:
+
+Files:
+lib/uniwbrk/wbrktable.h
+lib/uniwbrk/wbrktable.c
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += uniwbrk/wbrktable.c
+
+Include:
+"uniwbrk/wbrktable.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

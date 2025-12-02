@@ -1,0 +1,24 @@
+Description:
+rintl() function according to ISO C 99 with IEC 60559.
+
+Files:
+
+Depends-on:
+rintl
+fpieee
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(RINTL_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

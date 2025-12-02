@@ -1,0 +1,40 @@
+@node sys/types.h
+@section @file{sys/types.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_types.h.html}
+
+Gnulib module: sys_types
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+The type @code{pid_t} is not defined on some platforms:
+MSVC 14.
+@item
+The type @code{size_t} is not defined in this file on some platforms:
+MSVC 14.
+@item
+The type @code{ssize_t} is not defined on some platforms:
+MSVC 14.
+@item
+The type @code{mode_t} is not defined on some platforms:
+MSVC 14.
+@item
+Some systems leak definitions of @code{major}, @code{minor}, and
+@code{makedev} through this header; however, when
+@file{sys/sysmacros.h} exists, that file should also be included to
+avoid deprecation warnings from the versions in this header:
+glibc 2.25.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On some platforms the types @code{blksize_t} and @code{suseconds_t}
+are signed integer types that are wider than @code{long}:
+glibc x32
+@end itemize
+
+This module, together with the module @code{largefile}, also defines the type
+@code{off_t} to a 64-bit integer type on some platforms:
+mingw, MSVC 14.

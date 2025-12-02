@@ -1,0 +1,21 @@
+Description:
+Character set conversion support for UTF-{16,32}{BE,LE} encodings.
+
+Files:
+m4/iconv_open-utf.m4
+
+Depends-on:
+iconv_open
+
+configure.ac:
+gl_FUNC_ICONV_OPEN_UTF
+
+Makefile.am:
+
+Include:
+
+License:
+LGPL
+
+Maintainer:
+all

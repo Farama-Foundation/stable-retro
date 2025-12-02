@@ -1,0 +1,30 @@
+Description:
+Find a POSIX-conforming shell.
+
+Files:
+m4/posix-shell.m4
+
+Depends-on:
+
+configure.ac:
+gl_POSIX_SHELL
+
+Makefile.am:
+##Sample usage of posix-shell module:
+#script: script.in
+#	rm -f $@-t $@
+#	sed -e 's#@''PREFERABLY_POSIX_SHELL''@#$(PREFERABLY_POSIX_SHELL)#g' \
+#	    -e 's#@''POSIX_SHELL''@#$(POSIX_SHELL)#g' \
+#	    -e $(srcdir)/$@.in >$@-t
+#	chmod a+x $@-t
+#	mv $@-t $@
+#EXTRA_DIST += script.in
+#MOSTLYCLEANFILES += script script-t
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+Paul Eggert

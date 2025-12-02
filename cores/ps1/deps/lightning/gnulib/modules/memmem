@@ -1,0 +1,25 @@
+Description:
+memmem() function: efficiently locate first substring in a buffer.
+
+Files:
+lib/memmem.c
+
+Depends-on:
+memmem-simple
+
+configure.ac:
+gl_FUNC_MEMMEM
+if test $HAVE_MEMMEM = 0 || test $REPLACE_MEMMEM = 1; then
+  AC_LIBOBJ([memmem])
+fi
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+libc, Eric Blake

@@ -1,0 +1,13 @@
+Files:
+tests/unictype/test-mirror.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-mirror
+check_PROGRAMS += test-mirror
+test_mirror_SOURCES = unictype/test-mirror.c
+test_mirror_LDADD = $(LDADD) $(LIBUNISTRING)

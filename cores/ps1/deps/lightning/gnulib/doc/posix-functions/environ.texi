@@ -1,0 +1,44 @@
+@node environ
+@section @code{environ}
+@findex environ
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/environ.html}
+
+Gnulib module: environ
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+POSIX does not require this variable to be declared, and it is indeed not
+declared on some platforms:
+macOS 11.1, FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, IRIX 6.5, Solaris 11.4.
+@item
+On macOS, this variable is not declared.  Up to Mac OS X 10.4, one can use
+@smallexample
+extern char **environ;
+@end smallexample
+to get the variable declared.  This does not work any more, however, in
+shared libraries on macOS 11.1.  Here is a workaround: Instead, one can use
+@smallexample
+#include <crt_externs.h>
+#define environ (*_NSGetEnviron())
+@end smallexample
+This works at all versions of macOS.
+@item
+On Cygwin in 64-bit mode, references to this variable cause a link error when
+the option @code{-Wl,--disable-auto-import} is in use.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The address of this variable is not a compile-time constant on some platforms:
+mingw.
+@item
+Assigning NULL to @code{environ} to clear all variables is not
+portable; better is to assign @code{environ} to one-element array
+containing a NULL pointer.  That said, an empty environment is not
+portable either, as some systems may require particular environment
+variables (such as @code{PATH}) to be present in order to operate
+consistently.
+@end itemize

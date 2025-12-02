@@ -1,0 +1,26 @@
+Description:
+A buffer that accumulates a string by piecewise concatenation.
+
+Files:
+lib/string-buffer.h
+lib/string-buffer.c
+
+Depends-on:
+stdbool
+attribute
+stdarg
+vsnprintf-posix
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += string-buffer.c
+
+Include:
+"string-buffer.h"
+
+License:
+LGPL
+
+Maintainer:
+all

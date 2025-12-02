@@ -1,0 +1,27 @@
+Description:
+Determine Arabic joining type of a Unicode character.
+
+Files:
+lib/unictype/joiningtype_of.c
+lib/unictype/joiningtype_of.h
+
+Depends-on:
+unictype/base
+unictype/category-test-withtable
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/joiningtype-of])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_JOININGTYPE_OF
+lib_SOURCES += unictype/joiningtype_of.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

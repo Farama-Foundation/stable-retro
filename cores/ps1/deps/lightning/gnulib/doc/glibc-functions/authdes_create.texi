@@ -1,0 +1,16 @@
+@node authdes_create
+@subsection @code{authdes_create}
+@findex authdes_create
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+macOS 11.1, NetBSD 9.0, OpenBSD 6.7, Minix 3.1.8, IRIX 6.5, Cygwin 2.9, mingw, MSVC 14, Android 9.0.
+@end itemize

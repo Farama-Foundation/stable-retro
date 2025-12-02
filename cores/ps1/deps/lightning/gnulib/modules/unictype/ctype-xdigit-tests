@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-ctype_xdigit.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ctype_xdigit
+check_PROGRAMS += test-ctype_xdigit
+test_ctype_xdigit_SOURCES = unictype/test-ctype_xdigit.c
+test_ctype_xdigit_LDADD = $(LDADD) $(LIBUNISTRING)

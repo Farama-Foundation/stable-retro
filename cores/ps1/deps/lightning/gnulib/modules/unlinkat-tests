@@ -1,0 +1,18 @@
+Files:
+tests/test-unlinkat.c
+tests/test-rmdir.h
+tests/test-unlink.h
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+ignore-value
+symlink
+unlinkdir
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-unlinkat
+check_PROGRAMS += test-unlinkat
+test_unlinkat_LDADD = $(LDADD) @LIBINTL@

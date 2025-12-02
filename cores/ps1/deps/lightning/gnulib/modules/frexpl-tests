@@ -1,0 +1,23 @@
+Files:
+tests/test-frexpl.c
+tests/test-frexp.h
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/signature.h
+tests/macros.h
+tests/randoml.c
+
+Depends-on:
+fpucw
+isnanl-nolibm
+signbit
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-frexpl
+check_PROGRAMS += test-frexpl
+test_frexpl_SOURCES = test-frexpl.c randoml.c
+test_frexpl_LDADD = $(LDADD) @FREXPL_LIBM@

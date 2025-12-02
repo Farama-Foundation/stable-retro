@@ -1,0 +1,14 @@
+Files:
+tests/test-fopen.h
+tests/test-fopen.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fopen
+check_PROGRAMS += test-fopen
+

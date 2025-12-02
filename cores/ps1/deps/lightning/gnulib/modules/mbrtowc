@@ -1,0 +1,58 @@
+Description:
+mbrtowc() function: convert multibyte character to wide character.
+
+Files:
+lib/mbrtowc.c
+lib/mbrtowc-impl.h
+lib/mbrtowc-impl-utf8.h
+lib/lc-charset-dispatch.h
+lib/lc-charset-dispatch.c
+lib/mbtowc-lock.h
+lib/mbtowc-lock.c
+lib/windows-initguard.h
+m4/mbrtowc.m4
+m4/mbstate_t.m4
+m4/locale-fr.m4
+m4/locale-ja.m4
+m4/locale-zh.m4
+m4/codeset.m4
+m4/threadlib.m4
+m4/visibility.m4
+
+Depends-on:
+wchar
+extensions
+attribute       [test $HAVE_MBRTOWC = 0 || test $REPLACE_MBRTOWC = 1]
+stdint          [test $HAVE_MBRTOWC = 0 || test $REPLACE_MBRTOWC = 1]
+hard-locale     [{ test $HAVE_MBRTOWC = 0 || test $REPLACE_MBRTOWC = 1; } && test $REPLACE_MBSTATE_T = 0]
+mbsinit         [{ test $HAVE_MBRTOWC = 0 || test $REPLACE_MBRTOWC = 1; } && test $REPLACE_MBSTATE_T = 0]
+localcharset    [test $HAVE_MBRTOWC = 0 || test $REPLACE_MBRTOWC = 1]
+streq           [test $HAVE_MBRTOWC = 0 || test $REPLACE_MBRTOWC = 1]
+verify          [test $HAVE_MBRTOWC = 0 || test $REPLACE_MBRTOWC = 1]
+
+configure.ac:
+gl_FUNC_MBRTOWC
+if test $HAVE_MBRTOWC = 0 || test $REPLACE_MBRTOWC = 1; then
+  AC_LIBOBJ([mbrtowc])
+  if test $REPLACE_MBSTATE_T = 1; then
+    AC_LIBOBJ([lc-charset-dispatch])
+    AC_LIBOBJ([mbtowc-lock])
+    gl_PREREQ_MBTOWC_LOCK
+  fi
+  gl_PREREQ_MBRTOWC
+fi
+gl_WCHAR_MODULE_INDICATOR([mbrtowc])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+Link:
+$(LIB_MBRTOWC)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

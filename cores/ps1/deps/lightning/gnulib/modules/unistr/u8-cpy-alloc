@@ -1,0 +1,27 @@
+Description:
+Copy piece of UTF-8 string.
+
+Files:
+lib/unistr/u8-cpy-alloc.c
+lib/unistr/u-cpy-alloc.h
+
+Depends-on:
+unistr/base
+malloc-posix
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9], [unistr/u8-cpy-alloc])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNISTR_U8_CPY_ALLOC
+lib_SOURCES += unistr/u8-cpy-alloc.c
+endif
+
+Include:
+"unistr.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

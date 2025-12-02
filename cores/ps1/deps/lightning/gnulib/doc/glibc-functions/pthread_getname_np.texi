@@ -1,0 +1,18 @@
+@node pthread_getname_np
+@subsection @code{pthread_getname_np}
+@findex pthread_getname_np
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/pthread_getname_np.3.html,,man pthread_getname_np}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+glibc 2.11, Mac OS X 10.5, FreeBSD 6.4, OpenBSD 6.7, Minix 3.1.8, AIX 7.1, HP-UX 11.31, IRIX 6.5, Solaris 11.0, Cygwin 1.7.x, mingw, MSVC 14, Android 7.1.
+@end itemize

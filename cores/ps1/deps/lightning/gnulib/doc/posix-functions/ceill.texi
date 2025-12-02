@@ -1,0 +1,28 @@
+@node ceill
+@section @code{ceill}
+@findex ceill
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/ceill.html}
+
+Gnulib module: ceill or ceill-ieee
+
+Portability problems fixed by either Gnulib module @code{ceill} or @code{ceill-ieee}:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 5.2.1, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, HP-UX 11, IRIX 6.5, Solaris 9, Cygwin 1.7.x.
+@item
+This function is only defined as a macro with arguments on some platforms:
+MSVC 14.
+@item
+This function returns a wrong result for small arguments on some platforms:
+OpenBSD 5.6.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{ceill-ieee}:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

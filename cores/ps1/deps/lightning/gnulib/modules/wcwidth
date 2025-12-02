@@ -1,0 +1,38 @@
+Description:
+Determine the number of screen columns needed for a character.
+
+Files:
+lib/wcwidth.c
+m4/wcwidth.m4
+m4/wchar_t.m4
+m4/wint_t.m4
+
+Depends-on:
+wchar
+extensions
+wctype-h        [test $HAVE_WCWIDTH = 0 || test $REPLACE_WCWIDTH = 1]
+localcharset    [test $HAVE_WCWIDTH = 0 || test $REPLACE_WCWIDTH = 1]
+streq           [test $HAVE_WCWIDTH = 0 || test $REPLACE_WCWIDTH = 1]
+uniwidth/width  [test $HAVE_WCWIDTH = 0 || test $REPLACE_WCWIDTH = 1]
+
+configure.ac:
+gl_FUNC_WCWIDTH
+if test $HAVE_WCWIDTH = 0 || test $REPLACE_WCWIDTH = 1; then
+  AC_LIBOBJ([wcwidth])
+  gl_PREREQ_WCWIDTH
+fi
+gl_WCHAR_MODULE_INDICATOR([wcwidth])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+
+License:
+LGPLv2+
+
+Maintainer:
+all

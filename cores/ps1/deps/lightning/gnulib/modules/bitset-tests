@@ -1,0 +1,13 @@
+Files:
+tests/test-bitset.c
+tests/macros.h
+
+Depends-on:
+c99
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-bitset
+check_PROGRAMS += test-bitset
+test_bitset_LDADD = $(LDADD) @LIBINTL@

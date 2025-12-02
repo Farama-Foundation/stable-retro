@@ -1,0 +1,106 @@
+@node vfprintf
+@section @code{vfprintf}
+@findex vfprintf
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/vfprintf.html}
+
+Gnulib module: vfprintf-posix or stdio, nonblocking, sigpipe
+
+Portability problems fixed by Gnulib module @code{vfprintf-posix}:
+@itemize
+@item
+This function does not support size specifiers as in C99 (@code{hh}, @code{ll},
+@code{j}, @code{t}, @code{z}) on some platforms:
+AIX 5.1, HP-UX 11.23, IRIX 6.5, Solaris 9, Cygwin 1.5.24, mingw, MSVC 14.
+@item
+printf of @samp{long double} numbers is unsupported on some platforms:
+mingw, MSVC 14.
+@item
+printf @code{"%f"}, @code{"%e"}, @code{"%g"} of Infinity and NaN yields an
+incorrect result on some platforms:
+AIX 5.2, Solaris 11.4, mingw, MSVC 14.
+@item
+This function does not support the @samp{a} and @samp{A} directives on some
+platforms:
+glibc-2.3.6, Mac OS X 10.5, NetBSD 9.0, OpenBSD 4.0, AIX 5.2, HP-UX 11,
+IRIX 6.5, Solaris 11.4, Cygwin 1.5.x, mingw, MSVC 14.
+@item
+This function does not support the @samp{F} directive on some platforms:
+NetBSD 3.0, AIX 5.1, HP-UX 11.23, IRIX 6.5, Solaris 9,
+Cygwin 1.5.x, mingw, MSVC 14.
+@item
+This function does not support the @samp{n} directive on some platforms:
+glibc when used with @code{_FORTIFY_SOURCE >= 2} (set by default on Ubuntu),
+macOS 11.1, MSVC 14.
+@item
+This function does not support the @samp{ls} directive on some platforms:
+OpenBSD 4.0, IRIX 6.5, Cygwin 1.5.x, Haiku.
+@item
+This function does not support precisions in the @samp{ls} directive correctly
+on some platforms:
+Solaris 11.4.
+@item
+This function does not support format directives that access arguments in an
+arbitrary order, such as @code{"%2$s"}, on some platforms:
+NetBSD 3.0, mingw, MSVC 14.
+@item
+This function doesn't support the @code{'} flag on some platforms:
+NetBSD 3.0, Cygwin 1.5.24, mingw, MSVC 14.
+@item
+This function does not round the argument of the @samp{a} directive correctly
+on some platforms:
+Mac OS X 10.12, FreeBSD 6.1.
+@item
+printf @code{"%010f"} of NaN and Infinity yields an incorrect result (padded
+with zeroes, or wrong capitalization) on some platforms:
+Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, AIX 5.2, IRIX 6.5, Solaris 11.4, Cygwin 1.5.x, mingw, MSVC/clang.
+@item
+This function does not support precisions larger than 512 or 1024 in integer,
+floating-point and pointer output on some platforms:
+AIX 7.1, Solaris 10/x86, mingw, MSVC/clang.
+@item
+This function mishandles large floating point precisions
+(for example, formatting 1.0 with @samp{"%.511f"})
+on some platforms:
+Solaris 10.
+@item
+This function can crash in out-of-memory conditions on some platforms:
+FreeBSD 6.0, NetBSD 5.0.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{stdio} or @code{vfprintf-posix}, together with module @code{nonblocking}:
+@itemize
+@item
+When writing to a non-blocking pipe whose buffer is full, this function fails
+with @code{errno} being set to @code{ENOSPC} instead of @code{EAGAIN} on some
+platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{stdio} or @code{vfprintf-posix}, together with module @code{sigpipe}:
+@itemize
+@item
+When writing to a pipe with no readers, this function fails, instead of
+obeying the current @code{SIGPIPE} handler, on some platforms:
+mingw, MSVC 14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The @code{%m} directive is not portable, use @code{%s} mapped to an
+argument of @code{strerror(errno)} (or a version of @code{strerror_r})
+instead.
+@item
+Formatting noncanonical @samp{long double} numbers produces
+nonmeaningful results on some platforms:
+glibc and others, on x86, x86_64, IA-64 CPUs.
+@item
+When formatting an integer with grouping flag, this function inserts thousands
+separators even in the "C" locale on some platforms:
+NetBSD 5.1.
+@item
+Attempting to write to a read-only stream fails with @code{EOF} but
+does not set the error flag for @code{ferror} on some platforms:
+glibc 2.13, cygwin 1.7.9.
+@end itemize

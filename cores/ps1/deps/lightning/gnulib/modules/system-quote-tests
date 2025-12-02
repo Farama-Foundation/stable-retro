@@ -1,0 +1,25 @@
+Status:
+longrunning-test
+
+Files:
+tests/test-system-quote.sh
+tests/test-system-quote-main.c
+tests/test-system-quote-child.c
+tests/macros.h
+
+Depends-on:
+stdbool
+unistd
+popen
+pclose
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-system-quote.sh
+check_PROGRAMS += test-system-quote-main test-system-quote-child
+test_system_quote_main_LDADD = $(LDADD) @LIBINTL@ $(LIB_MBRTOWC)
+# The test-system-quote-child program must be a real executable, not a libtool
+# wrapper script, and should link against as few libraries as possible.
+# Therefore don't link it against any libraries other than -lc.
+test_system_quote_child_LDADD =

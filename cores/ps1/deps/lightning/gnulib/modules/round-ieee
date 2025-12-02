@@ -1,0 +1,29 @@
+Description:
+round() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/round-ieee.m4
+m4/minus-zero.m4
+m4/signbit.m4
+
+Depends-on:
+round
+floor-ieee      [test $HAVE_ROUND = 0 || test $REPLACE_ROUND = 1]
+ceil-ieee       [test $HAVE_ROUND = 0 || test $REPLACE_ROUND = 1]
+
+configure.ac:
+gl_FUNC_ROUND_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ROUND_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

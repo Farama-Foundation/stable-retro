@@ -1,0 +1,25 @@
+Description:
+strstr() function: efficiently locate first substring in a buffer.
+
+Files:
+lib/strstr.c
+
+Depends-on:
+strstr-simple
+
+configure.ac:
+gl_FUNC_STRSTR
+if test $REPLACE_STRSTR = 1; then
+  AC_LIBOBJ([strstr])
+fi
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all, Eric Blake

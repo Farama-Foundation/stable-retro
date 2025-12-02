@@ -1,0 +1,37 @@
+Description:
+c32isdigit() function: test 32-bit wide character for being a digit.
+
+Files:
+lib/c32isdigit.c
+lib/c32is-impl.h
+m4/mbrtoc32.m4
+
+Depends-on:
+uchar
+wchar
+wctype-h
+iswdigit
+localcharset    [test $REPLACE_MBSTATE_T = 1]
+streq           [test $REPLACE_MBSTATE_T = 1]
+unictype/ctype-digit
+verify
+
+configure.ac:
+AC_REQUIRE([gl_UCHAR_H])
+AC_REQUIRE([gl_MBRTOC32_SANITYCHECK])
+gl_UCHAR_MODULE_INDICATOR([c32isdigit])
+
+Makefile.am:
+lib_SOURCES += c32isdigit.c
+
+Include:
+<uchar.h>
+
+Link:
+$(LTLIBUNISTRING) when linking with libtool, $(LIBUNISTRING) otherwise
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+Bruno Haible

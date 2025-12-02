@@ -1,0 +1,27 @@
+@node fork
+@section @code{fork}
+@findex fork
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/fork.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+On some platforms, @code{fork} followed by a call of the @code{exec} family
+(@code{execl}, @code{execlp}, @code{execle}, @code{execv}, @code{execvp},
+or @code{execve}) is less efficient than @code{vfork} followed by the same
+call.  @code{vfork} is a variant of @code{fork} that has been introduced to
+optimize the @code{fork}/@code{exec} pattern.
+@item
+On Windows platforms (excluding Cygwin), this function is not implemented; use
+@code{_spawnvp} instead.
+@end itemize

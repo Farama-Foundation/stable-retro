@@ -1,0 +1,42 @@
+Description:
+POSIX compatible vsprintf with automatic memory allocation and bounded output
+size.
+
+Comment:
+This module should not be used as a dependency from a test module,
+otherwise when this module occurs as a tests-related module, it will
+have side effects on the compilation of the 'vasnprintf' module, if
+that module occurs among the main modules in lib/.
+
+Files:
+m4/vasnprintf-posix.m4
+m4/printf.m4
+m4/math_h.m4
+
+Depends-on:
+vasnprintf
+isnand-nolibm
+isnanl-nolibm
+frexp-nolibm
+frexpl-nolibm
+printf-frexp
+printf-frexpl
+signbit
+fpucw
+nocrash
+printf-safe
+multiarch
+
+configure.ac:
+gl_FUNC_VASNPRINTF_POSIX
+
+Makefile.am:
+
+Include:
+"vasnprintf.h"
+
+License:
+LGPL
+
+Maintainer:
+all

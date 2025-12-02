@@ -1,0 +1,35 @@
+Description:
+wcspbrk() function: search a wide string for any of a set of wide characters.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+lib/wcspbrk.c
+lib/wcspbrk-impl.h
+m4/wcspbrk.m4
+
+Depends-on:
+wchar
+wcschr          [test $HAVE_WCSPBRK = 0]
+
+configure.ac:
+gl_FUNC_WCSPBRK
+if test $HAVE_WCSPBRK = 0; then
+  AC_LIBOBJ([wcspbrk])
+fi
+gl_WCHAR_MODULE_INDICATOR([wcspbrk])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPL
+
+Maintainer:
+all

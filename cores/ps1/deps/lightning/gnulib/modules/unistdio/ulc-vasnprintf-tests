@@ -1,0 +1,29 @@
+Files:
+tests/unistdio/test-ulc-vasnprintf1.c
+tests/unistdio/test-ulc-asnprintf1.h
+tests/unistdio/test-ulc-printf1.h
+tests/unistdio/test-ulc-vasnprintf2.sh
+tests/unistdio/test-ulc-vasnprintf2.c
+tests/unistdio/test-ulc-vasnprintf3.sh
+tests/unistdio/test-ulc-vasnprintf3.c
+tests/macros.h
+m4/locale-fr.m4
+m4/codeset.m4
+
+Depends-on:
+setlocale
+
+configure.ac:
+gt_LOCALE_FR
+gt_LOCALE_FR_UTF8
+
+Makefile.am:
+TESTS += test-ulc-vasnprintf1 unistdio/test-ulc-vasnprintf2.sh unistdio/test-ulc-vasnprintf3.sh
+TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@' LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
+check_PROGRAMS += test-ulc-vasnprintf1 test-ulc-vasnprintf2 test-ulc-vasnprintf3
+test_ulc_vasnprintf1_SOURCES = unistdio/test-ulc-vasnprintf1.c
+test_ulc_vasnprintf1_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@ $(LIB_MBRTOWC)
+test_ulc_vasnprintf2_SOURCES = unistdio/test-ulc-vasnprintf2.c
+test_ulc_vasnprintf2_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBUNISTRING) @LIBICONV@ $(LIB_MBRTOWC)
+test_ulc_vasnprintf3_SOURCES = unistdio/test-ulc-vasnprintf3.c
+test_ulc_vasnprintf3_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBUNISTRING) @LIBICONV@ $(LIB_MBRTOWC)

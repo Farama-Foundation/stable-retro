@@ -1,0 +1,29 @@
+Description:
+Generalization of the <ctype.h> isupper() function and the
+<wctype.h> iswupper() function.
+
+Files:
+lib/unictype/ctype_upper.c
+lib/unictype/ctype_upper.h
+lib/unictype/bitmap.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+AC_REQUIRE([AC_C_INLINE])
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/ctype-upper])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_CTYPE_UPPER
+lib_SOURCES += unictype/ctype_upper.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

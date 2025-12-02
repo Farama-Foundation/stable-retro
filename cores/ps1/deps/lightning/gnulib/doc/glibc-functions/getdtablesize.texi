@@ -1,0 +1,35 @@
+@node getdtablesize
+@subsection @code{getdtablesize}
+@findex getdtablesize
+
+SUSv2 specification: @url{https://pubs.opengroup.org/onlinepubs/7908799/xsh/getdtablesize.html}
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-getdtablesize.html}
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man3/getdtablesize.3.html,,man getdtablesize}
+
+Gnulib module: getdtablesize
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Android LP64, mingw, MSVC 14, Android 9.0.
+
+@item
+This function is not declared on some platforms:
+Android LP32.
+
+@item
+This function does not represent the true @code{RLIMIT_NOFILE} soft
+limit on some platforms:
+Android LP32, Cygwin 1.7.25.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On OpenVMS, this function returns the maximum number of open file descriptors
+in a process.  The possible values of file descriptors are not constrained by
+this function.
+@end itemize

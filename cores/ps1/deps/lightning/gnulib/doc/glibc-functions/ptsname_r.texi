@@ -1,0 +1,44 @@
+@node ptsname_r
+@subsection @code{ptsname_r}
+@findex ptsname_r
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Allocation,,Allocating Pseudo-Terminals,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Allocation.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/ptsname_r.3.html,,man ptsname_r}.
+@end itemize
+
+Gnulib module: ptsname_r
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Mac OS X 10.5, FreeBSD 6.0, NetBSD 5.0, OpenBSD 6.7, Minix 3.1.8,
+AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 1.7.9, mingw,
+MSVC 14.
+@item
+When this function fails, it returns -1 instead of the error code
+on some platforms:
+macOS 11.1, Android 4.3.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+When this function fails, it returns 0 and stores an empty string as result
+on some platforms:
+Cygwin 2.9.
+@end itemize
+
+Note: Portable programs should expect to find the error code as the
+return value of this function, not as the value of @code{errno}.
+This is needed for compatibility with musl libc and with the
+forthcoming POSIX Issue 8.

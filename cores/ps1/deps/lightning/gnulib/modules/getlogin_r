@@ -1,0 +1,36 @@
+Description:
+getlogin_r() function: Get user name to a buffer allocated by the caller.
+
+Files:
+lib/getlogin_r.c
+m4/getlogin_r.m4
+m4/getlogin.m4
+
+Depends-on:
+unistd
+extensions
+malloca         [test $HAVE_GETLOGIN_R = 0 || test $REPLACE_GETLOGIN_R = 1]
+memchr          [test $HAVE_GETLOGIN_R = 0 || test $REPLACE_GETLOGIN_R = 1]
+
+configure.ac:
+gl_FUNC_GETLOGIN_R
+if test $HAVE_GETLOGIN_R = 0 || test $REPLACE_GETLOGIN_R = 1; then
+  AC_LIBOBJ([getlogin_r])
+  gl_PREREQ_GETLOGIN_R
+fi
+gl_UNISTD_MODULE_INDICATOR([getlogin_r])
+AC_REQUIRE([gl_LIB_GETLOGIN])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+Link:
+$(LIB_GETLOGIN)
+
+License:
+LGPLv2+
+
+Maintainer:
+all

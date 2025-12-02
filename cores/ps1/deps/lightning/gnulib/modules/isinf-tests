@@ -1,0 +1,21 @@
+Files:
+m4/exponentf.m4
+m4/exponentd.m4
+m4/exponentl.m4
+tests/test-isinf.c
+tests/infinity.h
+tests/macros.h
+
+Depends-on:
+float
+
+configure.ac:
+gl_FLOAT_EXPONENT_LOCATION
+gl_DOUBLE_EXPONENT_LOCATION
+gl_LONG_DOUBLE_EXPONENT_LOCATION
+AC_REQUIRE([gl_LONG_DOUBLE_VS_DOUBLE])
+
+Makefile.am:
+TESTS += test-isinf
+check_PROGRAMS += test-isinf
+test_isinf_LDADD = $(LDADD) @ISINF_LIBM@

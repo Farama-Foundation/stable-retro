@@ -1,0 +1,31 @@
+@node wait4
+@subsection @code{wait4}
+@findex wait4
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-wait4-2.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Process Completion,,Process Completion,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Process-Completion.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man2/wait4.2.html,,man wait4}.
+@end itemize
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+Minix 3.1.8, HP-UX 11.11, IRIX 6.5, mingw, MSVC 14, Android 4.2.
+@end itemize

@@ -1,0 +1,35 @@
+@node posix_spawn
+@section @code{posix_spawn}
+@findex posix_spawn
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_spawn.html}
+
+Gnulib module: posix_spawn
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 9, Cygwin 1.7.x, mingw, MSVC 14, Android 8.1.
+@item
+When this function fails, it causes the stdio buffer contents to be output
+twice on some platforms:
+AIX 6.1.
+@item
+When the program to be invoked is an executable script without a @samp{#!}
+marker in the first line, this function executes the script as if it were
+a shell script, on some platforms:
+GNU/Hurd.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function does not work on some platforms:
+AIX 6.1 (under particular circumstances).
+@end itemize
+
+The Gnulib modules @code{posix_spawn_file_actions_addchdir} and
+@code{posix_spawn_file_actions_addfchdir} provide additional actions,
+that consist in changing the current directory of the child process
+before starting the specified program.

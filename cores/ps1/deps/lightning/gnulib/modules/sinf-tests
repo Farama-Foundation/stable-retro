@@ -1,0 +1,13 @@
+Files:
+tests/test-sinf.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sinf
+check_PROGRAMS += test-sinf
+test_sinf_LDADD = $(LDADD) @SINF_LIBM@

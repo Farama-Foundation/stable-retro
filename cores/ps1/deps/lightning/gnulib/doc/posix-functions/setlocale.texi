@@ -1,0 +1,55 @@
+@node setlocale
+@section @code{setlocale}
+@findex setlocale
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/setlocale.html}
+
+Gnulib module: setlocale, setlocale-null
+
+Portability problems fixed by Gnulib module @code{setlocale}:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), @code{setlocale(@var{category},NULL)}
+ignores the environment variables @code{LC_ALL}, @code{@var{category}}, and
+@code{LANG}.
+@item
+On Windows platforms (excluding Cygwin) and Cygwin 1.5.x,
+@code{setlocale(LC_ALL,@var{name})} succeeds and sets the LC_CTYPE category to
+@samp{C} when it does not support the encoding, instead of failing.
+@item
+On Windows platforms (excluding Cygwin), @code{setlocale} understands different
+locale names, that are not based on ISO 639 language names and ISO 3166 country
+names.
+@item
+On Android 4.3, which which doesn't have locales, the @code{setlocale} function
+always fails.  The replacement, however, supports only the locale names
+@code{"C"} and @code{"POSIX"}.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{setlocale} or @code{setlocale-null}:
+@itemize
+@item
+Invocations of @code{setlocale (..., NULL)} are not multithread-safe on some
+platforms:
+musl libc, macOS, FreeBSD, NetBSD, OpenBSD, AIX, Haiku, Cygwin.
+To make these invocations multithread-safe, you need the Gnulib module
+@code{setlocale}, or you need to change the code to invoke @code{setlocale_null}
+or @code{setlocale_null_r} instead.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+On Cygwin 1.5.x, which doesn't have locales,
+@code{setlocale(LC_ALL,NULL)} always returns @code{"C"}.
+@item
+On Cygwin 1.7.0, only the charset portion of a locale designation is honored.
+@item
+On OpenBSD, @code{setlocale(LC_ALL,"")} will only update categories that
+are deemed appropriate for the @code{LC_ALL} environment value, even if
+there are other categories set to different values in the environment.
+In addition any value is accepted for @code{LC_CTYPE}, and so NULL
+is never returned to indicate a failure to set locale.
+To verify category values, each category must be set individually
+with @code{setlocale(LC_COLLATE,"")} etc.
+@end itemize

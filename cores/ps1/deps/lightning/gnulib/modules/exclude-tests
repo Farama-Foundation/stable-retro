@@ -1,0 +1,29 @@
+Files:
+tests/test-exclude.c
+tests/test-exclude1.sh
+tests/test-exclude2.sh
+tests/test-exclude3.sh
+tests/test-exclude4.sh
+tests/test-exclude5.sh
+tests/test-exclude6.sh
+tests/test-exclude7.sh
+tests/test-exclude8.sh
+
+Depends-on:
+argmatch
+error
+test-framework-sh
+
+Makefile.am:
+TESTS += \
+ test-exclude1.sh\
+ test-exclude2.sh\
+ test-exclude3.sh\
+ test-exclude4.sh\
+ test-exclude5.sh\
+ test-exclude6.sh\
+ test-exclude7.sh\
+ test-exclude8.sh
+
+check_PROGRAMS += test-exclude
+test_exclude_LDADD = $(LDADD) $(LIBUNISTRING) @LIBINTL@ $(LIB_MBRTOWC) $(LIBTHREAD)

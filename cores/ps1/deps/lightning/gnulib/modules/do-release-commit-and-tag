@@ -1,0 +1,19 @@
+Description:
+Automate the release-commit and tag process.  See also readme-release.
+
+Files:
+build-aux/do-release-commit-and-tag
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+GPLed build tool
+
+Maintainer:
+coreutils

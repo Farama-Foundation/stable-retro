@@ -1,0 +1,5 @@
+PCSX-Reloaded: Bringing clarity, joy, and a nice GUI to PCSX.
+
+You should remove your old ~/.pcsx directory before using PCSX-Reloaded, to
+avoid any possible compatibility issues, such as missing folders. Remember
+that memcards and savestates are kept there, so be sure to copy them out first!

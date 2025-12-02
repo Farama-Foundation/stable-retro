@@ -1,0 +1,33 @@
+Files:
+tests/unistdio/test-u16-vasnprintf1.c
+tests/unistdio/test-u16-asnprintf1.h
+tests/unistdio/test-u16-printf1.h
+tests/unistdio/test-u16-vasnprintf2.sh
+tests/unistdio/test-u16-vasnprintf2.c
+tests/unistdio/test-u16-vasnprintf3.sh
+tests/unistdio/test-u16-vasnprintf3.c
+tests/macros.h
+m4/locale-fr.m4
+m4/codeset.m4
+
+Depends-on:
+unistr/u16-cmp
+unistr/u16-cpy
+unistr/u16-strcmp
+unistr/u16-strlen
+setlocale
+
+configure.ac:
+gt_LOCALE_FR
+gt_LOCALE_FR_UTF8
+
+Makefile.am:
+TESTS += test-u16-vasnprintf1 unistdio/test-u16-vasnprintf2.sh unistdio/test-u16-vasnprintf3.sh
+TESTS_ENVIRONMENT += LOCALE_FR='@LOCALE_FR@' LOCALE_FR_UTF8='@LOCALE_FR_UTF8@'
+check_PROGRAMS += test-u16-vasnprintf1 test-u16-vasnprintf2 test-u16-vasnprintf3
+test_u16_vasnprintf1_SOURCES = unistdio/test-u16-vasnprintf1.c
+test_u16_vasnprintf1_LDADD = $(LDADD) $(LIBUNISTRING) @LIBICONV@
+test_u16_vasnprintf2_SOURCES = unistdio/test-u16-vasnprintf2.c
+test_u16_vasnprintf2_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBUNISTRING) @LIBICONV@
+test_u16_vasnprintf3_SOURCES = unistdio/test-u16-vasnprintf3.c
+test_u16_vasnprintf3_LDADD = $(LDADD) $(LIB_SETLOCALE) $(LIBUNISTRING) @LIBICONV@

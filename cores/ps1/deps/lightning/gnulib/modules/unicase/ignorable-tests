@@ -1,0 +1,15 @@
+Files:
+tests/unicase/test-ignorable.c
+tests/unicase/test-predicate-part1.h
+tests/unicase/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-ignorable
+check_PROGRAMS += test-ignorable
+test_ignorable_SOURCES = unicase/test-ignorable.c
+test_ignorable_LDADD = $(LDADD) $(LIBUNISTRING)

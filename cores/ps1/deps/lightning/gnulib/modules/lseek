@@ -1,0 +1,31 @@
+Description:
+lseek() function: Reposition a file descriptor.
+
+Files:
+lib/lseek.c
+m4/lseek.m4
+
+Depends-on:
+unistd
+sys_types
+largefile
+msvc-nothrow    [test $REPLACE_LSEEK = 1]
+fstat           [test $REPLACE_LSEEK = 1]
+
+configure.ac:
+gl_FUNC_LSEEK
+if test $REPLACE_LSEEK = 1; then
+  AC_LIBOBJ([lseek])
+fi
+gl_UNISTD_MODULE_INDICATOR([lseek])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Eric Blake

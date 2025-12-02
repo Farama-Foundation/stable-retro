@@ -1,0 +1,12 @@
+Files:
+tests/test-sys_stat.c
+
+Depends-on:
+verify
+sys_stat-c++-tests
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-sys_stat
+check_PROGRAMS += test-sys_stat

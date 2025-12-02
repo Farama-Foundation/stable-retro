@@ -1,0 +1,21 @@
+Description:
+Enable more efficient wchar replacements, where we know
+the locale charset will not change between calls.
+
+Files:
+
+Depends-on:
+wchar
+
+configure.ac:
+gl_MODULE_INDICATOR([wchar-single])
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,29 @@
+Description:
+execle() function: Execute a program, replacing the current process.
+
+Files:
+lib/execle.c
+m4/execle.m4
+
+Depends-on:
+unistd
+execve          [test $REPLACE_EXECLE = 1]
+malloca         [test $REPLACE_EXECLE = 1]
+
+configure.ac:
+gl_FUNC_EXECLE
+if test $REPLACE_EXECLE = 1; then
+  AC_LIBOBJ([execle])
+fi
+gl_UNISTD_MODULE_INDICATOR([execle])
+
+Makefile.am:
+
+Include:
+<unistd.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

@@ -1,0 +1,45 @@
+@node stddef.h
+@section @file{stddef.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/stddef.h.html}
+
+Gnulib module: stddef
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+Some platforms fail to provide @code{max_align_t}, which was added in C11:
+NetBSD 8.0, Solaris 11.0, and others.
+
+@item
+@code{max_align_t} does not have the expected alignment on some platforms:
+NetBSD 8.0/x86, AIX 7.2 with xlc in 64-bit mode.
+
+@item
+Some old platforms fail to provide @code{wchar_t}.
+
+@item
+Some platforms provide a @code{NULL} macro that cannot be used in arbitrary
+expressions:
+NetBSD 5.0
+
+@item
+Some platforms provide a @code{NULL} macro whose value does not have the size
+of a pointer:
+AIX 7.2 with xlc in 64-bit mode.
+
+@item
+When this header file is provided by TinyCC 0.9.27 on glibc or macOS systems,
+it does not fulfil the expectations of other system header files.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Some platforms provide an @code{offsetof} macro that cannot be used in
+arbitrary expressions:
+Solaris 11.4
+This problem can be worked around by parenthesizing the
+@code{offsetof} expression in the unlikely case you use it with
+@code{sizeof} or @samp{[]}.
+@end itemize

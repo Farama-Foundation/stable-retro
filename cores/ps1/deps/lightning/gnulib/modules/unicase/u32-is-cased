@@ -1,0 +1,32 @@
+Description:
+Test whether case matters for an UTF-32 string.
+
+Files:
+lib/unicase/u32-is-cased.c
+lib/unicase/u-is-cased.h
+
+Depends-on:
+unicase/base
+unicase/u32-toupper
+unicase/u32-tolower
+unicase/u32-totitle
+uninorm/u32-normalize
+uninorm/nfd
+unistr/u32-cmp
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/u32-is-cased])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_U32_IS_CASED
+lib_SOURCES += unicase/u32-is-cased.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

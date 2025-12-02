@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Test config.rpath and AC_LIB_LINKFLAGS macro.
+# With dependencies: a static library depending on a static library.
+
+rp=rp2aaa
+build1_configure_flags=--disable-shared
+build2_configure_flags=--disable-shared
+build3_package=rpathly
+remove_la=no
+
+. $srcdir/rpath-2_a

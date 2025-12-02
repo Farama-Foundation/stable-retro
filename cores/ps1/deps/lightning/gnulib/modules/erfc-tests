@@ -1,0 +1,13 @@
+Files:
+tests/test-erfc.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-erfc
+check_PROGRAMS += test-erfc
+test_erfc_LDADD = $(LDADD) @ERFC_LIBM@

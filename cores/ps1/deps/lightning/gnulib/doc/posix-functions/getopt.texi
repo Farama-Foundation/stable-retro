@@ -1,0 +1,81 @@
+@node getopt
+@section @code{getopt}
+@findex getopt
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/getopt.html}
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/libutil-getopt-3.html}
+
+Gnulib module: getopt-posix or getopt-gnu
+
+The module @code{getopt-gnu} has support for ``long options'' and for
+``options that take optional arguments''.  Compared to the API defined by POSIX,
+it adds a header file @code{<getopt.h>} and a function @code{getopt_long}.
+
+Portability problems fixed by either Gnulib module @code{getopt-posix} or @code{getopt-gnu}:
+@itemize
+@item
+This function is missing on some platforms:
+MSVC 14.
+@item
+The value of @code{optind} after a missing required argument is wrong
+on some platforms:
+macOS 11.1, AIX 7.1, mingw.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{getopt-gnu}:
+@itemize
+@item
+The function @code{getopt} does not support the @samp{+} flag in the options
+string on some platforms:
+macOS 11.1, AIX 5.2, HP-UX 11, IRIX 6.5, Solaris 11 2010-11.
+@item
+The function @code{getopt} does not obey the combination of @samp{+}
+and @samp{:} flags in the options string on some platforms:
+glibc 2.11.
+@item
+The function @code{getopt} does not obey the @samp{-} flag in the options
+string when @env{POSIXLY_CORRECT} is set on some platforms:
+Cygwin 1.7.0.
+@item
+The function @code{getopt} does not support options with optional arguments
+on some platforms:
+macOS 11.1, OpenBSD 4.0, AIX 5.2, HP-UX 11, IRIX 6.5, Solaris 11 2010-11, Cygwin 1.5.x.
+@item
+The function @code{getopt_long} is missing on some platforms:
+AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 9, MSVC 14.
+@item
+The function @code{getopt_long} does not support abbreviated long options
+where all disambiguations are equivalent on some platforms:
+OpenBSD 5.0.
+@item
+The function @code{getopt_long_only} is missing on some platforms:
+FreeBSD 5.2.1, NetBSD 9.0, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 9, mingw, MSVC 14.
+@item
+This function crashes if the option string includes @code{W;} on some
+platforms:
+glibc 2.14.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+The default behavior of the glibc implementation of @code{getopt} allows
+mixing option and non-option arguments on the command line in any order.
+Other implementations, such as the one in Cygwin, enforce strict POSIX
+compliance: they require that the option arguments precede the non-option
+arguments.  This is something to watch out in your program's
+testsuite.
+@item
+The glibc implementation allows a complete reset of the environment,
+including re-checking for @env{POSIXLY_CORRECT}, by setting
+@code{optind} to 0.  Several BSD implementations provide @code{optreset},
+causing a reset by setting it non-zero, although it does not
+necessarily re-read @env{POSIXLY_CORRECT}.  Solaris @code{getopt} does
+not support either reset method, but does not maintain state that
+needs the extra level of reset.
+@item
+On some platforms, this function does not set the stream error
+indicator on attempts to write to a read-only stream:
+glibc 2.13, Cygwin 1.7.9.
+@end itemize

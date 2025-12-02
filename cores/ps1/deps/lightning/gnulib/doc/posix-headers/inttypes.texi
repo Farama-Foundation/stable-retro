@@ -1,0 +1,31 @@
+@node inttypes.h
+@section @file{inttypes.h}
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/inttypes.h.html}
+
+Gnulib module: inttypes
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+This header file is missing on some platforms:
+MSVC 9.
+@item
+This header file is very incomplete on some platforms.
+@item
+The declarations of @code{imaxabs} and @code{imaxdiv} are missing on some
+platforms:
+NetBSD 3.0, OpenBSD 6.7, AIX 5.1, HP-UX 11, IRIX 6.5.
+@item
+The declarations of @code{strtoimax} and @code{strtoumax} are missing on some
+platforms:
+OpenBSD 6.7, AIX 5.1 (missing only @code{strtoumax}).
+@item
+On some hosts that predate C++11, when using C++ one must define
+@code{__STDC_FORMAT_MACROS} to make visible the declarations of format
+macros such as @code{PRIdMAX}.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

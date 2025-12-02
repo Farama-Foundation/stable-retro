@@ -1,0 +1,31 @@
+Description:
+wctomb() function: convert wide character to multibyte character.
+
+Files:
+lib/wctomb.c
+lib/wctomb-impl.h
+m4/wctomb.m4
+
+Depends-on:
+stdlib
+wcrtomb         [test $REPLACE_WCTOMB = 1]
+wchar           [test $REPLACE_WCTOMB = 1]
+
+configure.ac:
+gl_FUNC_WCTOMB
+if test $REPLACE_WCTOMB = 1; then
+  AC_LIBOBJ([wctomb])
+  gl_PREREQ_WCTOMB
+fi
+gl_STDLIB_MODULE_INDICATOR([wctomb])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

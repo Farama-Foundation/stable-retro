@@ -1,0 +1,19 @@
+Description:
+Describe the various regular expression flavors.
+
+Files:
+doc/regexprops-generic.texi
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+
+License:
+public domain
+
+Maintainer:
+James Youngman

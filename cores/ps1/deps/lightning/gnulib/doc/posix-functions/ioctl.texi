@@ -1,0 +1,35 @@
+@node ioctl
+@section @code{ioctl}
+@findex ioctl
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/ioctl.html}
+
+LSB specification:
+@itemize
+@item
+@url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-ioctl-2.html}
+@item
+@url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-ttyio-2.html}
+@item
+@url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-sockio-2.html}
+@end itemize
+
+Gnulib module: ioctl
+
+Portability problems fixed by Gnulib:
+@itemize
+@item
+On Windows platforms (excluding Cygwin), @code{ioctl} is called
+@code{ioctlsocket}, and error codes from this function are not placed in
+@code{errno}, and @code{WSAGetLastError} must be used instead.
+@item
+The second parameter is of type @code{unsigned long} rather than @code{int}
+on some platforms:
+glibc 2.26, macOS 11.1, FreeBSD 11.0, NetBSD 9.0, OpenBSD 6.7, Haiku 2017.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Most @code{ioctl} requests are platform and hardware specific.
+@end itemize

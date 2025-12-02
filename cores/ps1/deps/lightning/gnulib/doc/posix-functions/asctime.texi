@@ -1,0 +1,17 @@
+@node asctime
+@section @code{asctime}
+@findex asctime
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/asctime.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function may overflow its internal buffer if an invalid year is passed.
+@end itemize

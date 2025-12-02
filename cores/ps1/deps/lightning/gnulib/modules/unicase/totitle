@@ -1,0 +1,27 @@
+Description:
+Titlecase mapping for Unicode characters (locale and context independent).
+
+Files:
+lib/unicase/totitle.c
+lib/unicase/totitle.h
+lib/unicase/simple-mapping.h
+
+Depends-on:
+unicase/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unicase/totitle])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICASE_TOTITLE
+lib_SOURCES += unicase/totitle.c
+endif
+
+Include:
+"unicase.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

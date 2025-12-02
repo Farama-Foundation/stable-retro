@@ -1,0 +1,50 @@
+Description:
+A POSIX-like <poll.h>.
+
+Files:
+lib/poll.in.h
+m4/poll_h.m4
+m4/sys_socket_h.m4
+
+Depends-on:
+extensions
+include_next
+snippet/c++defs
+snippet/warn-on-use
+
+configure.ac:
+gl_POLL_H
+
+Makefile.am:
+BUILT_SOURCES += poll.h
+
+# We need the following in order to create <poll.h> when the system
+# doesn't have one.
+poll.h: poll.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H)
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's|@''HAVE_POLL_H''@|$(HAVE_POLL_H)|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_POLL_H''@|$(NEXT_POLL_H)|g' \
+	      -e 's/@''GNULIB_POLL''@/$(GNULIB_POLL)/g' \
+	      -e 's|@''HAVE_WINSOCK2_H''@|$(HAVE_WINSOCK2_H)|g' \
+	      -e 's|@''HAVE_POLL''@|$(HAVE_POLL)|g' \
+	      -e 's|@''REPLACE_POLL''@|$(REPLACE_POLL)|g' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/poll.in.h; \
+	} > $@-t && \
+	mv -f $@-t $@
+MOSTLYCLEANFILES += poll.h poll.h-t
+
+Include:
+<poll.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+Paolo Bonzini

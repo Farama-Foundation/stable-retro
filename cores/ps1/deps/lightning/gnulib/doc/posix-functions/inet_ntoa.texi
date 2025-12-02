@@ -1,0 +1,28 @@
+@node inet_ntoa
+@section @code{inet_ntoa}
+@findex inet_ntoa
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/inet_ntoa.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on some platforms:
+mingw, MSVC 14.
+@item
+The @code{inet_ntoa} function need not be reentrant, and consequently
+is not required to be thread safe.  Implementations of
+@code{inet_ntoa} typically write the timestamp into static buffer.
+If two threads call @code{inet_ntoa} at roughly the same time, you
+might end up with the wrong date in one of the threads, or some
+undefined string.
+@end itemize
+
+Note: @code{inet_ntoa} is specific for IPv4 addresses.
+A protocol independent function is @code{inet_ntop}.

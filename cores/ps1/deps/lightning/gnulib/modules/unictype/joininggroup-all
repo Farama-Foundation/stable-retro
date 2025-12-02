@@ -1,0 +1,23 @@
+Description:
+Complete API for Unicode character Arabic joining groups.
+
+Files:
+
+Depends-on:
+unictype/base
+unictype/joininggroup-byname
+unictype/joininggroup-name
+unictype/joininggroup-of
+
+configure.ac:
+
+Makefile.am:
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

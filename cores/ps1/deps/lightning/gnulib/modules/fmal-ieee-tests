@@ -1,0 +1,16 @@
+Files:
+tests/test-fmal-ieee.c
+tests/test-fma-ieee.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+isnanl-nolibm
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-fmal-ieee
+check_PROGRAMS += test-fmal-ieee
+test_fmal_ieee_LDADD = $(LDADD) @FMAL_LIBM@

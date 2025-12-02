@@ -1,0 +1,25 @@
+Description:
+Reading symbolic links without size limitation, relative to fd.
+
+Files:
+lib/xreadlink.h
+lib/xreadlinkat.c
+
+Depends-on:
+areadlinkat
+xalloc
+
+configure.ac:
+gl_MODULE_INDICATOR([xreadlinkat])
+
+Makefile.am:
+lib_SOURCES += xreadlinkat.c
+
+Include:
+"xreadlink.h"
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering, Eric Blake

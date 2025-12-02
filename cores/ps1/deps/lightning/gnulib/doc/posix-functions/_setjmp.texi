@@ -1,0 +1,21 @@
+@node _setjmp
+@section @code{_setjmp}
+@findex _setjmp
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/_setjmp.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize
+
+Note: A future revision of POSIX later than the 2008/2009 one may drop the
+functions @code{_setjmp} and @code{_longjmp}.  Still, in 2008, on all
+systems which have @code{_setjmp}, it is the fastest way to save the
+registers but not the signal mask (up to 30 times faster than @code{setjmp}
+on some systems).

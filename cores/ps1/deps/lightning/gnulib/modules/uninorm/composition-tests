@@ -1,0 +1,13 @@
+Files:
+tests/uninorm/test-composition.c
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-composition
+check_PROGRAMS += test-composition
+test_composition_SOURCES = uninorm/test-composition.c
+test_composition_LDADD = $(LDADD) $(LIBUNISTRING)

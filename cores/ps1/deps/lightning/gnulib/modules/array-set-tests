@@ -1,0 +1,15 @@
+Files:
+tests/test-array_set.c
+tests/macros.h
+
+Depends-on:
+xoset
+array-oset
+xalloc
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-array_set
+check_PROGRAMS += test-array_set
+test_array_set_LDADD = $(LDADD) @LIBINTL@

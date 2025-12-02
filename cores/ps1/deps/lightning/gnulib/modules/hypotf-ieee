@@ -1,0 +1,27 @@
+Description:
+hypotf() function according to ISO C 99 with IEC 60559.
+
+Files:
+m4/hypotf-ieee.m4
+
+Depends-on:
+hypotf
+fpieee
+hypot-ieee      [test $HAVE_HYPOTF = 0 || test $REPLACE_HYPOTF = 1]
+
+configure.ac:
+gl_FUNC_HYPOTF_IEEE
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(HYPOTF_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

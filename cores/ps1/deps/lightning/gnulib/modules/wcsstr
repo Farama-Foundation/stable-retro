@@ -1,0 +1,29 @@
+Description:
+wcsstr() function: locate a substring in a wide string.
+
+Files:
+lib/wcsstr.c
+lib/wcsstr-impl.h
+m4/wcsstr.m4
+
+Depends-on:
+wchar
+wcschr          [test $HAVE_WCSSTR = 0]
+
+configure.ac:
+gl_FUNC_WCSSTR
+if test $HAVE_WCSSTR = 0; then
+  AC_LIBOBJ([wcsstr])
+fi
+gl_WCHAR_MODULE_INDICATOR([wcsstr])
+
+Makefile.am:
+
+Include:
+<wchar.h>
+
+License:
+LGPL
+
+Maintainer:
+all

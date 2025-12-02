@@ -1,0 +1,14 @@
+Files:
+tests/test-read.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+binary-io
+open
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-read
+check_PROGRAMS += test-read

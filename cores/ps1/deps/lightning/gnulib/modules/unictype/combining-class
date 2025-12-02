@@ -1,0 +1,26 @@
+Description:
+Determine canonical combining class of a Unicode character.
+
+Files:
+lib/unictype/combiningclass.c
+lib/unictype/combiningclass.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/combining-class])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_COMBINING_CLASS
+lib_SOURCES += unictype/combiningclass.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all

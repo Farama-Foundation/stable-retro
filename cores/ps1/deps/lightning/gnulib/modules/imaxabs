@@ -1,0 +1,28 @@
+Description:
+imaxabs() function: absolute value of 'intmax_t'.
+
+Files:
+lib/imaxabs.c
+m4/imaxabs.m4
+
+Depends-on:
+inttypes-incomplete
+
+configure.ac:
+gl_FUNC_IMAXABS
+if test $ac_cv_func_imaxabs = no; then
+  AC_LIBOBJ([imaxabs])
+  gl_PREREQ_IMAXABS
+fi
+gl_INTTYPES_MODULE_INDICATOR([imaxabs])
+
+Makefile.am:
+
+Include:
+<inttypes.h>
+
+License:
+LGPL
+
+Maintainer:
+all

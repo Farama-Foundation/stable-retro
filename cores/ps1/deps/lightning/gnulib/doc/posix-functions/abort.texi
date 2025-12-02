@@ -1,0 +1,24 @@
+@node abort
+@section @code{abort}
+@findex abort
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/abort.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+Some platforms mistakenly close all stdio streams prior to raising
+SIGABRT:
+Cygwin 1.5.x.
+
+@item
+Some platforms always print a message to stderr, even if a SIGABRT handler
+uses longjmp to resume execution at a safe point:
+mingw, MSVC 14.
+@end itemize

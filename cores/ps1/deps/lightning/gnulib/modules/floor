@@ -1,0 +1,31 @@
+Description:
+floor() function: round towards negative infinity.
+
+Files:
+lib/floor.c
+m4/floor.m4
+
+Depends-on:
+math
+float           [test $REPLACE_FLOOR = 1]
+
+configure.ac:
+AC_REQUIRE([gl_FUNC_FLOOR])
+if test $REPLACE_FLOOR = 1; then
+  AC_LIBOBJ([floor])
+fi
+gl_MATH_MODULE_INDICATOR([floor])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(FLOOR_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

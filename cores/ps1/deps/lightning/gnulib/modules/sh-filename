@@ -1,0 +1,20 @@
+Description:
+Provide BOURNE_SHELL, the file name of the standard Bourne shell.
+
+Files:
+m4/sh-filename.m4
+
+Depends-on:
+
+configure.ac:
+gl_SH_FILENAME
+
+Makefile.am:
+
+Include:
+
+License:
+LGPLv2+
+
+Maintainer:
+all

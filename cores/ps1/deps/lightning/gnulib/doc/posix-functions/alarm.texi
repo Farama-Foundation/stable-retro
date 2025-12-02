@@ -1,0 +1,28 @@
+@node alarm
+@section @code{alarm}
+@findex alarm
+
+POSIX specification:@* @url{https://pubs.opengroup.org/onlinepubs/9699919799/functions/alarm.html}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function has no impact if <code>SIGALRM</code> is inherited as
+ignored; programs should use <code>signal (SIGALRM, SIG_DFL)</code> if
+it is important to ensure the alarm will fire.
+@item
+Use of this function in multi-threaded applications is not advised.
+@item
+This function is missing on some platforms:
+mingw (2011), MSVC 14.
+@item
+This function is conditionally declared in the non-standard
+@code{<io.h>} header on some platforms:
+mingw (2012 or newer).
+@end itemize

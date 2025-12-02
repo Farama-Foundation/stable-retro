@@ -1,0 +1,35 @@
+Description:
+strtold() function: convert string to 'long double'.
+
+Files:
+lib/strtold.c
+lib/strtod.c
+m4/strtold.m4
+m4/math_h.m4
+m4/ldexpl.m4
+
+Depends-on:
+stdlib
+c-ctype         [test $HAVE_STRTOLD = 0 || test $REPLACE_STRTOLD = 1]
+math            [test $HAVE_STRTOLD = 0 || test $REPLACE_STRTOLD = 1]
+stdbool         [test $HAVE_STRTOLD = 0 || test $REPLACE_STRTOLD = 1]
+strtod          [{ test $HAVE_STRTOLD = 0 || test $REPLACE_STRTOLD = 1; } && test $HAVE_SAME_LONG_DOUBLE_AS_DOUBLE = 1]
+
+configure.ac:
+gl_FUNC_STRTOLD
+if test $HAVE_STRTOLD = 0 || test $REPLACE_STRTOLD = 1; then
+  AC_LIBOBJ([strtold])
+  gl_PREREQ_STRTOLD
+fi
+gl_STDLIB_MODULE_INDICATOR([strtold])
+
+Makefile.am:
+
+Include:
+<stdlib.h>
+
+License:
+LGPL
+
+Maintainer:
+all

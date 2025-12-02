@@ -1,0 +1,17 @@
+Files:
+tests/test-noreturn-c++.cc
+
+Status:
+c++-test
+
+Depends-on:
+ansi-c++-opt
+
+configure.ac:
+
+Makefile.am:
+if ANSICXX
+TESTS += test-noreturn-c++
+check_PROGRAMS += test-noreturn-c++
+test_noreturn_c___SOURCES = test-noreturn-c++.cc
+endif

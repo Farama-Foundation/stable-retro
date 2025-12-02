@@ -1,0 +1,18 @@
+Files:
+tests/test-modfl.c
+tests/test-modf.h
+tests/signature.h
+tests/macros.h
+tests/randoml.c
+
+Depends-on:
+fpucw
+float
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-modfl
+check_PROGRAMS += test-modfl
+test_modfl_SOURCES = test-modfl.c randoml.c
+test_modfl_LDADD = $(LDADD) @MODFL_LIBM@

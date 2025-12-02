@@ -1,0 +1,24 @@
+Description:
+erfc() function: complementary error function.
+
+Files:
+m4/mathfunc.m4
+
+Depends-on:
+
+configure.ac:
+gl_COMMON_DOUBLE_MATHFUNC([erfc])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ERFC_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

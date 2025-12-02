@@ -1,0 +1,39 @@
+Description:
+isnand() function: test for NaN.
+
+Files:
+lib/isnand.c
+lib/isnan.c
+lib/float+.h
+m4/exponentd.m4
+m4/isnand.m4
+
+Depends-on:
+math
+fpieee
+memcmp
+
+configure.ac:
+gl_FUNC_ISNAND
+m4_ifdef([gl_ISNAN], [
+  AC_REQUIRE([gl_ISNAN])
+])
+if test $HAVE_ISNAND = 0 || test $REPLACE_ISNAN = 1; then
+  AC_LIBOBJ([isnand])
+  gl_PREREQ_ISNAND
+fi
+gl_MATH_MODULE_INDICATOR([isnand])
+
+Makefile.am:
+
+Include:
+<math.h>
+
+Link:
+$(ISNAND_LIBM)
+
+License:
+LGPL
+
+Maintainer:
+all

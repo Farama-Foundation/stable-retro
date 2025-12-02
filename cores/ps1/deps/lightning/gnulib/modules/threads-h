@@ -1,0 +1,78 @@
+Description:
+An ISO C 11 compatible <threads.h>.
+
+Files:
+lib/threads.in.h
+lib/windows-thread.h
+lib/windows-mutex.h
+lib/windows-recmutex.h
+lib/windows-timedmutex.h
+lib/windows-timedrecmutex.h
+lib/windows-once.h
+lib/windows-cond.h
+lib/windows-tls.h
+lib/windows-initguard.h
+m4/threads.m4
+m4/threadlib.m4
+build-aux/config.rpath
+
+Depends-on:
+include_next
+snippet/c++defs
+snippet/_Noreturn
+snippet/arg-nonnull
+snippet/warn-on-use
+time
+havelib
+
+configure.ac-early:
+gl_ANYTHREADLIB_EARLY
+
+configure.ac:
+AC_REQUIRE([gl_THREADS_H])
+
+Makefile.am:
+BUILT_SOURCES += threads.h
+
+# We need the following in order to create <threads.h> when the system
+# doesn't have one.
+threads.h: threads.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(_NORETURN_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's|@''HAVE_THREADS_H''@|$(HAVE_THREADS_H)|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_THREADS_H''@|$(NEXT_THREADS_H)|g' \
+	      -e 's/@''GNULIB_CND''@/$(GNULIB_CND)/g' \
+	      -e 's/@''GNULIB_MTX''@/$(GNULIB_MTX)/g' \
+	      -e 's/@''GNULIB_THRD''@/$(GNULIB_THRD)/g' \
+	      -e 's/@''GNULIB_TSS''@/$(GNULIB_TSS)/g' \
+	      -e 's|@''HAVE_THREAD_LOCAL''@|$(HAVE_THREAD_LOCAL)|g' \
+	      -e 's|@''BROKEN_THRD_START_T''@|$(BROKEN_THRD_START_T)|g' \
+	      -e 's|@''REPLACE_THRD_CREATE''@|$(REPLACE_THRD_CREATE)|g' \
+	      -e 's|@''REPLACE_THRD_CURRENT''@|$(REPLACE_THRD_CURRENT)|g' \
+	      -e 's|@''REPLACE_THRD_DETACH''@|$(REPLACE_THRD_DETACH)|g' \
+	      -e 's|@''REPLACE_THRD_EQUAL''@|$(REPLACE_THRD_EQUAL)|g' \
+	      -e 's|@''REPLACE_THRD_JOIN''@|$(REPLACE_THRD_JOIN)|g' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
+	      -e '/definition of _Noreturn/r $(_NORETURN_H)' \
+	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/threads.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += threads.h threads.h-t
+
+Include:
+<threads.h>
+
+Link:
+$(LIBTHREADLOCAL) if you use the thread_local macro
+
+License:
+LGPLv2+
+
+Maintainer:
+all

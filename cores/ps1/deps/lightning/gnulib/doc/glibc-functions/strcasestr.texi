@@ -1,0 +1,51 @@
+@node strcasestr
+@subsection @code{strcasestr}
+@findex strcasestr
+
+LSB specification:@* @url{https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib-strcasestr.html}
+
+Documentation:
+@itemize
+@item
+@ifinfo
+@ref{Search Functions,,Search Functions,libc},
+@end ifinfo
+@ifnotinfo
+@url{https://www.gnu.org/software/libc/manual/html_node/Search-Functions.html},
+@end ifnotinfo
+@item
+@uref{https://www.kernel.org/doc/man-pages/online/pages/man3/strcasestr.3.html,,man strcasestr}.
+@end itemize
+
+Gnulib module: strcasestr or strcasestr-simple
+
+Portability problems fixed by either Gnulib module @code{strcasestr-simple}
+or @code{strcasestr}:
+@itemize
+@item
+This function is missing on some platforms:
+AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 10, Cygwin 1.5.x,
+mingw, MSVC 14.
+@item
+This function can trigger memchr bugs on some platforms:
+glibc 2.10.
+@item
+This function can trigger false positives for long periodic needles on
+some platforms:
+glibc 2.12, Cygwin 1.7.7.
+@item
+This function may fail to find matches on some platforms:
+glibc 2.28.
+@end itemize
+
+Portability problems fixed by Gnulib module @code{strcasestr}:
+@itemize
+@item
+This function has quadratic instead of linear worst-case complexity on some
+platforms:
+glibc 2.8, FreeBSD 6.2, NetBSD 9.0, OpenBSD 4.0, Solaris 11.4.
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@end itemize

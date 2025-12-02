@@ -1,0 +1,33 @@
+Description:
+bind() function: bind a server socket to a port.
+
+Files:
+lib/bind.c
+lib/w32sock.h
+
+Depends-on:
+sys_socket
+socketlib
+errno           [test "$ac_cv_header_winsock2_h" = yes]
+msvc-nothrow    [test "$ac_cv_header_winsock2_h" = yes]
+
+configure.ac:
+AC_REQUIRE([gl_HEADER_SYS_SOCKET])
+if test "$ac_cv_header_winsock2_h" = yes; then
+  AC_LIBOBJ([bind])
+fi
+gl_SYS_SOCKET_MODULE_INDICATOR([bind])
+
+Makefile.am:
+
+Include:
+<sys/socket.h>
+
+Link:
+$(LIBSOCKET)
+
+License:
+LGPLv2+
+
+Maintainer:
+Paolo Bonzini, Simon Josefsson

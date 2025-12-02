@@ -1,0 +1,47 @@
+Description:
+<sys/file.h> for systems with an incomplete header.
+
+Files:
+lib/sys_file.in.h
+m4/sys_file_h.m4
+
+Depends-on:
+include_next
+snippet/warn-on-use
+
+configure.ac:
+gl_HEADER_SYS_FILE_H
+AC_PROG_MKDIR_P
+
+Makefile.am:
+BUILT_SOURCES += sys/file.h
+
+# We need the following in order to create <sys/file.h> when the system
+# has one that is incomplete.
+sys/file.h: sys_file.in.h $(top_builddir)/config.status $(WARN_ON_USE_H)
+	$(AM_V_at)$(MKDIR_P) sys
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  sed -e 's|@''GUARD_PREFIX''@|${gl_include_guard_prefix}|g' \
+	      -e 's/@''HAVE_SYS_FILE_H''@/$(HAVE_SYS_FILE_H)/g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_SYS_FILE_H''@|$(NEXT_SYS_FILE_H)|g' \
+	      -e 's/@''HAVE_FLOCK''@/$(HAVE_FLOCK)/g' \
+	      -e 's/@''GNULIB_FLOCK''@/$(GNULIB_FLOCK)/g' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/sys_file.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += sys/file.h sys/file.h-t
+MOSTLYCLEANDIRS += sys
+
+Include:
+<sys/file.h>
+
+License:
+LGPLv2+
+
+Maintainer:
+all

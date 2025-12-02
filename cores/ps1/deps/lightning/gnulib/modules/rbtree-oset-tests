@@ -1,0 +1,13 @@
+Files:
+tests/test-rbtree_oset.c
+tests/test-oset-update.h
+tests/macros.h
+
+Depends-on:
+array-oset
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-rbtree_oset
+check_PROGRAMS += test-rbtree_oset

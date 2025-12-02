@@ -1,0 +1,21 @@
+Files:
+tests/test-isnan.c
+tests/minus-zero.h
+tests/infinity.h
+tests/nan.h
+tests/macros.h
+
+Depends-on:
+float
+
+configure.ac:
+gl_FLOAT_EXPONENT_LOCATION
+gl_DOUBLE_EXPONENT_LOCATION
+gl_LONG_DOUBLE_EXPONENT_LOCATION
+AC_REQUIRE([gl_LONG_DOUBLE_VS_DOUBLE])
+
+Makefile.am:
+TESTS += test-isnan
+check_PROGRAMS += test-isnan
+test_isnan_LDADD = $(LDADD) @ISNAN_LIBM@
+

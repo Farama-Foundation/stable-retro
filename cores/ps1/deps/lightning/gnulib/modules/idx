@@ -1,0 +1,22 @@
+Description:
+A type for indices and sizes.
+
+Files:
+lib/idx.h
+
+Depends-on:
+stdint
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += idx.h
+
+Include:
+"idx.h"
+
+License:
+LGPLv2+
+
+Maintainer:
+all, glibc

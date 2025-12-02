@@ -1,0 +1,26 @@
+Description:
+Value of a decimal digit Unicode character.
+
+Files:
+lib/unictype/decdigit.c
+lib/unictype/decdigit.h
+
+Depends-on:
+unictype/base
+
+configure.ac:
+gl_LIBUNISTRING_MODULE([0.9.8], [unictype/decimal-digit])
+
+Makefile.am:
+if LIBUNISTRING_COMPILE_UNICTYPE_DECIMAL_DIGIT
+lib_SOURCES += unictype/decdigit.c
+endif
+
+Include:
+"unictype.h"
+
+License:
+LGPLv3+ or GPLv2
+
+Maintainer:
+all

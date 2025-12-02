@@ -1,0 +1,13 @@
+Files:
+tests/test-nextafter.c
+tests/signature.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-nextafter
+check_PROGRAMS += test-nextafter
+test_nextafter_LDADD = $(LDADD) @NEXTAFTER_LIBM@

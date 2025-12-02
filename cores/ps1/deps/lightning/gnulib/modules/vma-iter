@@ -1,0 +1,31 @@
+Description:
+Iteration over virtual memory areas.
+
+Files:
+lib/vma-iter.h
+lib/vma-iter.c
+m4/mmap-anon.m4
+
+Depends-on:
+stdint
+unistd
+extensions
+getpagesize
+open
+
+configure.ac:
+gl_FUNC_MMAP_ANON
+AC_REQUIRE([AC_C_INLINE])
+AC_CHECK_FUNCS_ONCE([mquery pstat_getprocvm])
+
+Makefile.am:
+lib_SOURCES += vma-iter.c
+
+Include:
+"vma-iter.h"
+
+License:
+GPL
+
+Maintainer:
+all

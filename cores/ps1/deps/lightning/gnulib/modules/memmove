@@ -1,0 +1,33 @@
+Description:
+memmove() function: copy memory area.
+
+Status:
+obsolete
+
+Notice:
+This module is obsolete.
+
+Files:
+lib/memmove.c
+m4/memmove.m4
+
+Depends-on:
+string
+
+configure.ac:
+gl_FUNC_MEMMOVE
+if test $ac_cv_func_memmove = no; then
+  AC_LIBOBJ([memmove])
+  gl_PREREQ_MEMMOVE
+fi
+
+Makefile.am:
+
+Include:
+<string.h>
+
+License:
+public domain
+
+Maintainer:
+Jim Meyering

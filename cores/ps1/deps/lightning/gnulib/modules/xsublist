@@ -1,0 +1,25 @@
+Description:
+Sequential list data type backed by another list, with out-of-memory checking.
+
+Files:
+lib/gl_xsublist.h
+lib/gl_xsublist.c
+
+Depends-on:
+sublist
+extern-inline
+xalloc-die
+
+configure.ac:
+
+Makefile.am:
+lib_SOURCES += gl_xsublist.h gl_xsublist.c
+
+Include:
+"gl_xsublist.h"
+
+License:
+GPL
+
+Maintainer:
+all

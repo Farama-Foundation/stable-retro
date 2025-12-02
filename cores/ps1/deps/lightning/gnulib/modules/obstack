@@ -1,0 +1,29 @@
+Description:
+Memory allocation, optimized for stack-like allocation patterns.
+
+Files:
+lib/obstack.h
+lib/obstack.c
+m4/obstack.m4
+
+Depends-on:
+alignof
+gettext-h
+exitfail
+stdint
+stdlib
+
+configure.ac:
+AC_FUNC_OBSTACK
+dnl Note: AC_FUNC_OBSTACK does AC_LIBSOURCES([obstack.h, obstack.c]).
+
+Makefile.am:
+
+Include:
+"obstack.h"
+
+License:
+LGPL
+
+Maintainer:
+all, glibc

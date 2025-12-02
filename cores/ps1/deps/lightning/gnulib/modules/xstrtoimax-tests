@@ -1,0 +1,13 @@
+Files:
+tests/test-xstrtoimax.c
+tests/test-xstrtoimax.sh
+
+Depends-on:
+test-framework-sh
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-xstrtoimax.sh
+check_PROGRAMS += test-xstrtoimax
+test_xstrtoimax_LDADD = $(LDADD) @LIBINTL@

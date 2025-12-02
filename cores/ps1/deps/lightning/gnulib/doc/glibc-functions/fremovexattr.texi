@@ -1,0 +1,18 @@
+@node fremovexattr
+@subsection @code{fremovexattr}
+@findex fremovexattr
+
+Documentation:@* @uref{https://www.kernel.org/doc/man-pages/online/pages/man2/fremovexattr.2.html,,man fremovexattr}
+
+Gnulib module: ---
+
+Portability problems fixed by Gnulib:
+@itemize
+@end itemize
+
+Portability problems not fixed by Gnulib:
+@itemize
+@item
+This function is missing on many non-glibc platforms:
+FreeBSD 6.0, NetBSD 5.0, OpenBSD 6.7, Minix 3.1.8, AIX 5.1, HP-UX 11, IRIX 6.5, Solaris 11.4, Cygwin 1.5.x, mingw, MSVC 14, Android 4.0.4.
+@end itemize

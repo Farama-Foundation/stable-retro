@@ -1,0 +1,26 @@
+Description:
+Estimate number of blocks of a file, if 'struct stat' doesn't have st_blocks.
+
+Files:
+lib/fileblocks.c
+m4/fileblocks.m4
+
+Depends-on:
+
+configure.ac:
+gl_FILEBLOCKS
+if test $ac_cv_member_struct_stat_st_blocks = no; then
+  AC_LIBOBJ([fileblocks])
+  gl_PREREQ_FILEBLOCKS
+fi
+
+Makefile.am:
+
+Include:
+
+License:
+GPL
+
+Maintainer:
+Jim Meyering
+

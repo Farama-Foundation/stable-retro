@@ -1,0 +1,15 @@
+Files:
+tests/unictype/test-pr_soft_dotted.c
+tests/unictype/test-predicate-part1.h
+tests/unictype/test-predicate-part2.h
+tests/macros.h
+
+Depends-on:
+
+configure.ac:
+
+Makefile.am:
+TESTS += test-pr_soft_dotted
+check_PROGRAMS += test-pr_soft_dotted
+test_pr_soft_dotted_SOURCES = unictype/test-pr_soft_dotted.c
+test_pr_soft_dotted_LDADD = $(LDADD) $(LIBUNISTRING)

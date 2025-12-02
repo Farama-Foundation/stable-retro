@@ -1,0 +1,122 @@
+BURN_BLACKLIST += $(ADSP2100_CPU_DIR)/2100ops.c \
+	$(ADSP2100_CPU_DIR)/2100dasm.cpp \
+	$(ARM7_CPU_DIR)/arm7exec.c \
+	$(ARM7_CPU_DIR)/arm7core.c \
+	$(H6280_CPU_DIR)/tblh6280.c \
+	$(HD6309_CPU_DIR)/6309tbl.c \
+	$(HD6309_CPU_DIR)/6309ops.c \
+	$(I386_CPU_DIR)/i386dasm.c \
+	$(I386_CPU_DIR)/i386op16.c \
+	$(I386_CPU_DIR)/i386op32.c \
+	$(I386_CPU_DIR)/i386ops.c \
+	$(I386_CPU_DIR)/i486ops.c \
+	$(I386_CPU_DIR)/pentops.c \
+	$(I386_CPU_DIR)/x87ops.c \
+	$(M6502_CPU_DIR)/t65sc02.c \
+	$(M6502_CPU_DIR)/t65c02.c \
+	$(M6502_CPU_DIR)/tdeco16.c \
+	$(M6502_CPU_DIR)/tn2a03.c \
+	$(M6502_CPU_DIR)/t6502.c \
+	$(M68K_CPU_DIR)/m68k_in.c \
+	$(M68K_CPU_DIR)/m68kmake.c \
+	$(M68K_CPU_DIR)/m68kfpu.c \
+	$(M68K_CPU_DIR)/m68kdasm.c \
+	$(MIPS3_CPU_DIR)/mips3_dasm.cpp \
+	$(NEC_CPU_DIR)/v25sfr.c \
+	$(NEC_CPU_DIR)/v25instr.c \
+	$(NEC_CPU_DIR)/necinstr.c \
+	$(TMS34010_CPU_DIR)/34010fld.c \
+	$(TMS34010_CPU_DIR)/34010gfx.c \
+	$(TMS34010_CPU_DIR)/34010ops.c \
+	$(TMS34010_CPU_DIR)/34010tbl.c \
+	$(V60_CPU_DIR)/am.c \
+	$(V60_CPU_DIR)/am1.c \
+	$(V60_CPU_DIR)/am2.c \
+	$(V60_CPU_DIR)/am3.c \
+	$(V60_CPU_DIR)/op2.c \
+	$(V60_CPU_DIR)/op3.c \
+	$(V60_CPU_DIR)/op4.c \
+	$(V60_CPU_DIR)/op5.c \
+	$(V60_CPU_DIR)/op6.c \
+	$(V60_CPU_DIR)/op7a.c \
+	$(V60_CPU_DIR)/op12.c \
+	$(V60_CPU_DIR)/optable.c \
+	$(V60_CPU_DIR)/v60d.c \
+	$(V60_CPU_DIR)/v60mem.c \
+	$(KONAMI_CPU_DIR)/konamtbl.c \
+	$(KONAMI_CPU_DIR)/konamops.c \
+	$(M6800_CPU_DIR)/6800ops.c \
+	$(M6800_CPU_DIR)/6800tbl.c \
+	$(M6805_CPU_DIR)/6805ops.c \
+	$(M6809_CPU_DIR)/6809ops.c \
+	$(M6809_CPU_DIR)/6809tbl.c \
+	$(FBNEO_CPU_DIR)/tms34010_intf.cpp \
+	$(I8051_CPU_DIR)/mcs51ops.c \
+	$(UPD7810_CPU_DIR)/7810ops.c \
+	$(UPD7810_CPU_DIR)/7810tbl.c \
+	$(I8X41_CPU_DIR)/8x41dasm.c \
+	$(Z180_CPU_DIR)/z180xy.c \
+	$(Z180_CPU_DIR)/z180fd.c \
+	$(Z180_CPU_DIR)/z180op.c \
+	$(Z180_CPU_DIR)/z180ed.c \
+	$(Z180_CPU_DIR)/z180dd.c \
+	$(Z180_CPU_DIR)/z180cb.c \
+	$(TLCS900_CPU_DIR)/900tbl.c \
+	$(FBNEO_BURNER_DIR)/wave_writer.cpp \
+	$(FBNEO_BURNER_DIR)/sshot.cpp \
+	$(FBNEO_BURNER_DIR)/cong.cpp \
+	$(FBNEO_BURNER_DIR)/image.cpp \
+	$(FBNEO_BURNER_DIR)/misc.cpp \
+	$(FBNEO_BURNER_DIR)/state.cpp \
+	$(FBNEO_BURNER_DIR)/gami.cpp \
+	$(FBNEO_BURNER_DIR)/gamc.cpp \
+	$(FBNEO_BURNER_DIR)/dynhuff.cpp \
+	$(FBNEO_BURNER_DIR)/luaengine.cpp \
+	$(FBNEO_BURNER_DIR)/luasav.cpp \
+	$(CAPCOM_DIR)/ctv_make.cpp \
+	$(PGM_DIR)/pgm_sprite_create.cpp \
+	$(FBNEO_INTERFACE_DIR)/audio/aud_interface.cpp \
+	$(ATARI_DIR)/WHATSNEW.txt.cpp
+
+# removing everything related to kinst as it's not worth keeping and only causing issues :
+# - the driver is tagged as not working and for debug builds only
+# - the related mips3 cpu core won't even build with recentish version of gcc (11+ ?)
+BURN_BLACKLIST += $(FBNEO_CPU_DIR)/mips3_intf.cpp \
+	$(MIPS3_CPU_DIR)/cop0.cpp \
+	$(MIPS3_CPU_DIR)/cop1.cpp \
+	$(MIPS3_CPU_DIR)/mips3.cpp \
+	$(MIDWAY_DIR)/d_kinst.cpp \
+	$(MIDWAY_DIR)/ide.cpp
+
+ifeq ($(USE_CYCLONE), 1)
+	FBNEO_DEFINES		+= -DUSE_CYCLONE
+	INCLUDE_DIRS	+= $(FBNEO_CPU_DIR)/cyclone
+	SOURCES_S		+= $(FBNEO_CPU_DIR)/cyclone/Cyclone.S
+	BURN_BLACKLIST	+= $(FBNEO_CPU_DIR)/m68000_intf.cpp
+	ARM_FLAGS		= -mword-relocations -mlittle-endian -munaligned-access
+	# ios and android don't support this
+	ifneq (,$(findstring ios,$(platform)))
+		ARM_FLAGS =
+	endif
+	ifneq (,$(findstring android,$(platform)))
+		ARM_FLAGS =
+	endif
+	CFLAGS			+= -fno-optimize-sibling-calls -funsafe-math-optimizations -fsingle-precision-constant
+	CXXFLAGS		+= -fno-optimize-sibling-calls -funsafe-math-optimizations -fsingle-precision-constant
+else
+	BURN_BLACKLIST	+= $(FBNEO_CPU_DIR)/c68000_intf.cpp
+endif
+
+SOURCES_CXX += $(FBNEO_BURN_DIR)/burn_bitmap.cpp \
+	$(FBNEO_BURN_DIR)/burn_led.cpp \
+	$(FBNEO_BURN_DIR)/burn_pal.cpp \
+	$(FBNEO_BURN_DIR)/burn_sha1.cpp \
+	$(FBNEO_BURN_DIR)/burn_shift.cpp \
+	$(FBNEO_BURN_DIR)/tilemap_generic.cpp \
+	$(FBNEO_BURN_DIR)/tiles_generic.cpp \
+	$(FBNEO_BURN_DIR)/vector.cpp
+
+FBNEO_SRC_DIRS := $(FBNEO_CPU_DIRS) $(FBNEO_BURN_DIRS)
+
+SOURCES_C   += $(filter-out $(BURN_BLACKLIST),$(foreach dir,$(FBNEO_SRC_DIRS),$(wildcard $(dir)/*.c)))
+SOURCES_CXX += $(filter-out $(BURN_BLACKLIST),$(foreach dir,$(FBNEO_SRC_DIRS),$(wildcard $(dir)/*.cpp)))

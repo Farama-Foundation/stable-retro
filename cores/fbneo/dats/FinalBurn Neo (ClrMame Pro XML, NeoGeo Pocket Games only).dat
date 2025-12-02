@@ -1,0 +1,1381 @@
+<?xml version="1.0"?>
+<!DOCTYPE datafile PUBLIC "-//FinalBurn Neo//DTD ROM Management Datafile//EN" "http://www.logiqx.com/Dats/datafile.dtd">
+
+<datafile>
+	<header>
+		<name>FinalBurn Neo - Neo Geo Pocket Games</name>
+		<description>FinalBurn Neo v1.0.0.03 Neo Geo Pocket Games</description>
+		<category>Standard DatFile</category>
+		<version>1.0.0.03</version>
+		<author>FinalBurn Neo</author>
+		<homepage>https://neo-source.com/</homepage>
+		<url>https://neo-source.com/</url>
+		<clrmamepro forcenodump="ignore"/>
+	</header>
+	<game name="bakumats" cloneof="lastblad" romof="lastblad" sourcefile="pst90s/d_ngp.cpp">
+		<description>Bakumatsu Rouman Tokubetsu Hen (Japan)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Bakumatsu Rouman Tokubetsu Hen (Japan)(2000)(SNK).ngp" size="2097152" crc="12afacb0"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="bstars" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Baseball Stars - Pocket Sports Series (Euro, Japan)</description>
+		<year>1998</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Baseball Stars - Pocket Sports Series (Euro, Japan)(1998)(SNK).ngp" size="1048576" crc="4781ae84"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="bstarsc" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Baseball Stars Color - Pocket Sports Series (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Baseball Stars Color - Pocket Sports Series (World)(1999)(SNK).ngp" size="1048576" crc="ffa7e88d"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="bigbang" cloneof="wrestmad" romof="wrestmad" sourcefile="pst90s/d_ngp.cpp">
+		<description>Big Bang Pro Wrestling (Japan)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Big Bang Pro Wrestling (Japan)(2000)(SNK).ngp" size="2097152" crc="b783c372"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="bikkuri" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Bikkuriman 2000: Viva! Pocket Festiva! (Japan)</description>
+		<year>2000</year>
+		<manufacturer>Sega Toys</manufacturer>
+		<rom name="Bikkuriman 2000 - Viva! Pocket Festiva! (Japan)(2000)(Sega Toys).ngp" size="1048576" crc="7a2d7635"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="biomotor" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>BioMotor Unitron (Euro, USA)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="BioMotor Unitron (Euro, USA)(1999)(SNK - Yumekobo).ngp" size="1048576" crc="3807df4f"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="biomotorj" cloneof="biomotor" romof="biomotor" sourcefile="pst90s/d_ngp.cpp">
+		<description>BioMotor Unitron (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Yumekobo</manufacturer>
+		<rom name="BioMotor Unitron (Japan)(1999)(SNK - Yumekobo).ngp" size="1048576" crc="ecee99f3"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="bam" cloneof="pbobble" romof="pbobble" sourcefile="pst90s/d_ngp.cpp">
+		<description>Bust-A-Move Pocket (USA)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Bust-A-Move Pocket (USA)(1999)(SNK).ngp" size="1048576" crc="85fe6ae3"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="bamp" cloneof="pbobble" romof="pbobble" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Bust-A-Move Pocket (USA, Prototype)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Bust-A-Move Pocket (USA, Proto)(1999)(SNK).ngp" size="1048576" crc="78a1361d"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="coolboar" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Cool Boarders Pocket (Euro, Japan)</description>
+		<year>2000</year>
+		<manufacturer>UEP Systems</manufacturer>
+		<rom name="Cool Boarders Pocket (Euro, Japan)(2000)(UEP Systems).ngp" size="1048576" crc="833f9c22"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="coolcool" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Cool Cool Jam (Euro, USA, Sample-Demo)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Cool Cool Jam (Euro, USA, Sample-Demo)(2000)(SNK).ngp" size="2097152" crc="4d8d27f0"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="coolcoolj" cloneof="coolcool" romof="coolcool" sourcefile="pst90s/d_ngp.cpp">
+		<description>Cool Cool Jam (Japan)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Cool Cool Jam (Japan)(2000)(SNK).ngp" size="2097152" crc="4fda5d8a"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="crushrol" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Crush Roller (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK - ADK Corp.</manufacturer>
+		<rom name="Crush Roller (World)(1999)(SNK - ADK).ngp" size="1048576" crc="f20ff9f2"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="darkarmsp" cloneof="darkarms" romof="darkarms" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Dark Arms: Beast Buster 1999 (Euro, USA, Prototype)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Dark Arms - Beast Buster 1999 (Euro, USA, Proto)(1999)(SNK).ngp" size="2097152" crc="77caa548"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="darkarms" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Dark Arms: Beast Buster 1999 (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Dark Arms - Beast Buster 1999 (World)(1999)(SNK).ngp" size="2097152" crc="6f353f34"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="deltawrp" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Delta Warp (Japan)</description>
+		<year>2000</year>
+		<manufacturer>IOSYS Co.</manufacturer>
+		<rom name="Delta Warp (Japan)(2000)(IOSYS).ngp" size="524288" crc="add4fdff"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="dendego2" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Densha de GO! 2 on Neo Geo Pocket (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Densha de GO! 2 on Neo Geo Pocket (Japan)(1999)(SNK).ngp" size="4194304" crc="d5ced9e9"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="dendego2p" cloneof="dendego2" romof="dendego2" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Densha de Go! 2 on Neo Geo Pocket (Japan, Prototype)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Densha de Go! 2 on Neo Geo Pocket (Japan, Proto)(1999)(SNK).ngp" size="4194304" crc="2fc4623e"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="divealrmj" cloneof="divealrm" romof="divealrm" sourcefile="pst90s/d_ngp.cpp">
+		<description>Dive Alert: Barn Hen (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Sacnoth</manufacturer>
+		<rom name="Dive Alert - Barn Hen (Japan)(1999)(SNK - Sacnoth).ngp" size="2097152" crc="c213941d"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="divealrmjp" cloneof="divealrm" romof="divealrm" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Dive Alert: Barn Hen (Japan, Prototype)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Sacnoth</manufacturer>
+		<rom name="Dive Alert - Barn Hen (Japan, Proto)(1999)(SNK - Sacnoth).ngp" size="2097152" crc="d9817a88"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="divealrb" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Dive Alert: Becky's Version (Euro, USA)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Sacnoth</manufacturer>
+		<rom name="Dive Alert - Becky's Version (Euro, USA)(1999)(SNK - Sacnoth).ngp" size="2097152" crc="83db5772"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="divealrm" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Dive Alert: Matt's Version (Euro, USA)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Sacnoth</manufacturer>
+		<rom name="Dive Alert - Matt's Version (Euro, USA)(1999)(SNK - Sacnoth).ngp" size="2097152" crc="ef75081b"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="divealrbj" cloneof="divealrb" romof="divealrb" sourcefile="pst90s/d_ngp.cpp">
+		<description>Dive Alert: Rebecca Hen (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Sacnoth</manufacturer>
+		<rom name="Dive Alert - Rebecca Hen (Japan)(1999)(SNK - Sacnoth).ngp" size="2097152" crc="3c4af4f5"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="dokodemo" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Dokodemo Mahjong (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK - ADK Corp.</manufacturer>
+		<rom name="Dokodemo Mahjong (Japan)(1999)(SNK - ADK).ngp" size="524288" crc="78c21b5e"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="ddmr" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Homebrew</comment>
+		<description>Don't Die, Mr. Robot! (HB, v2.0.3)</description>
+		<year>2025</year>
+		<manufacturer>Infinite State Games</manufacturer>
+		<rom name="Don't Die, Mr. Robot! v2.0.3 (2025)(Infinite State Games).ngp" size="2097152" crc="0c36f0f3"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="dynaslug" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Dynamite Slugger (Euro, Japan)</description>
+		<year>2000</year>
+		<manufacturer>SNK - ADK Corp.</manufacturer>
+		<rom name="Dynamite Slugger (Euro, Japan)(2000)(SNK - ADK).ngp" size="1048576" crc="7f1779cd"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="evolutn" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Evolution: Eternal Dungeons (Euro)</description>
+		<year>2000</year>
+		<manufacturer>SNK - ESP.</manufacturer>
+		<rom name="Evolution - Eternal Dungeons (Euro)(2000)(SNK - ESP.).ngp" size="2097152" crc="be47e531"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="cotton" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Fantastic Night Dreams Cotton (Euro)</description>
+		<year>2000</year>
+		<manufacturer>Success</manufacturer>
+		<rom name="Fantastic Night Dreams Cotton (Euro)(2000)(Success)" size="1048576" crc="1bf412f5"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="cottonj" cloneof="cotton" romof="cotton" sourcefile="pst90s/d_ngp.cpp">
+		<description>Fantastic Night Dreams Cotton (Japan)</description>
+		<year>2000</year>
+		<manufacturer>Success</manufacturer>
+		<rom name="Fantastic Night Dreams Cotton (Japan)(2000)(Success).ngp" size="1048576" crc="b8a12409"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="faselei" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Faselei! (Euro)</description>
+		<year>2000</year>
+		<manufacturer>SNK - Sacnoth</manufacturer>
+		<rom name="Faselei! (Euro)(2000)(SNK - Sacnoth).ngp" size="2097152" crc="e705e30e"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="faseleij" cloneof="faselei" romof="faselei" sourcefile="pst90s/d_ngp.cpp">
+		<description>Faselei! (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Sacnoth</manufacturer>
+		<rom name="Faselei! (Japan)(1999)(SNK - Sacnoth).ngp" size="2097152" crc="8f585838"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="fatfury" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Fatal Fury F-Contact - Pocket Fighting Series (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Fatal Fury F-Contact - Pocket Fighting Series (World)(1999)(SNK).ngp" size="2097152" crc="a9119b5a"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="fatfuryd" cloneof="fatfury" romof="fatfury" sourcefile="pst90s/d_ngp.cpp">
+		<description>Fatal Fury F-Contact - Pocket Fighting Series (World, Demo)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Fatal Fury F-Contact - Pocket Fighting Series (World, Demo)(1999)(SNK).ngp" size="2097152" crc="e7e5d6e8"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="fruitypalsr" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Homebrew</comment>
+		<description>Fruity Pals' Revenge (HB, v1.2)</description>
+		<year>2025</year>
+		<manufacturer>Infinite State Games</manufacturer>
+		<rom name="Fruity Pals' Revenge v1.2 (2025)(Infinite State Games).ngp" size="2097152" crc="f92db309"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="ganbaren" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Ganbare Neo Poke-kun (Japan)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Ganbare Neo Poke-kun (Japan)(2000)(SNK).ngp" size="2097152" crc="6df986a3"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="gearsoffate" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Homebrew</comment>
+		<description>Gears of Fate (HB)</description>
+		<year>2009</year>
+		<manufacturer>Thor</manufacturer>
+		<rom name="Gears of Fate (2009)(Thor).ngp" size="1917732" crc="3c75807e"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="infinity" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Infinity Cure (Japan)</description>
+		<year>2000</year>
+		<manufacturer>KID</manufacturer>
+		<rom name="Infinity Cure (Japan)(2000)(KID).ngp" size="1048576" crc="32dc2aa2"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="kikousei" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Kikou Seiki Unitron: Sono Tsuide. Hikari Umareru Chi Yori. (Japan)</description>
+		<year>2000</year>
+		<manufacturer>SNK - Yumekobo</manufacturer>
+		<rom name="Kikou Seiki Unitron - Sono Tsuide. Hikari Umareru Chi Yori. (Japan)(2000)(SNK - Yumekobo).ngp" size="2097152" crc="84580d66"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="kof_mlon" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>King of Fighters R-1 &amp; Melon-chan no Seichou Nikki (Japan, Prototype)</description>
+		<year>1998</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="King of Fighters R-1 &amp; Melon-chan no Seichou Nikki (Japan, Proto)(1998)(SNK).ngp" size="2097152" crc="2660bfc4"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="kofr1" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>King of Fighters R-1 - Pocket Fighting Series (Euro, Japan)</description>
+		<year>1998</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="King of Fighters R-1 - Pocket Fighting Series (Euro, Japan)(1998)(SNK).ngp" size="2097152" crc="dceb7e11"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="kofr2" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>King of Fighters R-2 - Pocket Fighting Series (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="King of Fighters R-2 - Pocket Fighting Series (World)(1999)(SNK).ngp" size="2097152" crc="47e490a2"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="kofr2d2" cloneof="kofr2" romof="kofr2" sourcefile="pst90s/d_ngp.cpp">
+		<description>King of Fighters R-2 - Pocket Fighting Series (World, Demo v2)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="King of Fighters R-2 - Pocket Fighting Series (World, Demo v2)(1999)(SNK).ngp" size="2097152" crc="76544c97"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="kofr2d" cloneof="kofr2" romof="kofr2" sourcefile="pst90s/d_ngp.cpp">
+		<description>King of Fighters R-2 - Pocket Fighting Series (World, Demo)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="King of Fighters R-2 - Pocket Fighting Series (World, Demo)(1999)(SNK).npg" size="2097152" crc="e3ae79c0"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="kofparae" cloneof="kofpara" romof="kofpara" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Hack, Force B&amp;W mode to unlock the hidden game 'Yosaku'</comment>
+		<description>King of Fighters, The: Battle de Paradise (Hack, English)</description>
+		<year>2025</year>
+		<manufacturer>marc_max</manufacturer>
+		<rom name="King of Fighters, The - Battle de Paradise T-Eng (2025)(marc_max).ngp" size="2097152" crc="e08dc918"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="kofpara" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Force B&amp;W mode to unlock the hidden game 'Yosaku'</comment>
+		<description>King of Fighters, The: Battle de Paradise (Japan)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="King of Fighters, The - Battle de Paradise (Japan)(2000)(SNK).ngp" size="2097152" crc="77e37bac"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="koikoi" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Koi Koi Mahjong (Japan)</description>
+		<year>2000</year>
+		<manufacturer>Visco Corp.</manufacturer>
+		<rom name="Koi Koi Mahjong (Japan)(2000)(Visco Corp.).ngp" size="524288" crc="b51c3eba"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="lastblad" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Last Blade, The: Beyond the Destiny (Euro)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Last Blade, The - Beyond the Destiny (Euro)(2000)(SNK).ngp" size="2097152" crc="94fcfd1e"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="magdrop" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Magical Drop Pocket (Euro, USA)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Magical Drop Pocket (Euro, USA)(1999)(Data East).ngp" size="1048576" crc="7712f82d"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="magdropj" cloneof="magdrop" romof="magdrop" sourcefile="pst90s/d_ngp.cpp">
+		<description>Magical Drop Pocket (Japan)</description>
+		<year>1999</year>
+		<manufacturer>Data East</manufacturer>
+		<rom name="Magical Drop Pocket (Japan)(1999)(Data East).ngp" size="1048576" crc="694ce2dc"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="magdropjd" cloneof="magdrop" romof="magdrop" sourcefile="pst90s/d_ngp.cpp">
+		<description>Magical Drop Pocket (Japan, Demo)</description>
+		<year>1999</year>
+		<manufacturer>Data East</manufacturer>
+		<rom name="Magical Drop Pocket (Japan, Demo)(1999)(Data East).ngp" size="1048576" crc="d76f1a47"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="mminer" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Homebrew</comment>
+		<description>Manic Miner (HB, v1.0)</description>
+		<year>2001</year>
+		<manufacturer>Lindon Dodd</manufacturer>
+		<rom name="Manic Miner v1.0 (2001)(Lindon Dodd).ngp" size="524288" crc="7b23af97"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="melonchn" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Melon-chan no Seichou Nikki (Japan)</description>
+		<year>1998</year>
+		<manufacturer>SNK - ADK Corp.</manufacturer>
+		<rom name="Melon-chan no Seichou Nikki (Japan)(1998)(SNK - ADK).ngp" size="1048576" crc="cb42cfa4"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="memories" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Memories Off: Pure (Japan)</description>
+		<year>2000</year>
+		<manufacturer>KID</manufacturer>
+		<rom name="Memories Off - Pure (Japan)(2000)(KID).ngp" size="1048576" crc="a7926e90"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="mslug1st" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Metal Slug: 1st Mission (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Metal Slug - 1st Mission (World)(1999)(SNK).ngp" size="2097152" crc="4ff91807"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="mslug2nd" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Metal Slug: 2nd Mission (World)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Metal Slug - 2nd Mission (World)(2000)(SNK).ngp" size="4194304" crc="ac549144"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="mslug2ndd" cloneof="mslug2nd" romof="mslug2nd" sourcefile="pst90s/d_ngp.cpp">
+		<description>Metal Slug: 2nd Mission (World, Demo)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Metal Slug - 2nd Mission (World, Demo)(2000)(SNK).ngp" size="2097152" crc="8b1647d4"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="mezase" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Mezase! Kanji Ou (Japan)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Mezase! Kanji Ou (Japan)(2000)(SNK).ngp" size="2097152" crc="a52e1c82"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="mizuki" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Mizuki Shigeru no Youkai Shashinkan (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Mizuki Shigeru no Youkai Shashinkan (Japan)(1999)(SNK).ngp" size="2097152" crc="dde08335"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neo21" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Neo 21 - Real Casino Series (World)</description>
+		<year>2000</year>
+		<manufacturer>Dyna Corp.</manufacturer>
+		<rom name="Neo 21 - Real Casino Series (World)(2000)(Dyna Corp.).ngp" size="1048576" crc="0a2a2f28"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neobacca" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Neo Baccarat - Real Casino Series (World)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Neo Baccarat - Real Casino Series (World)(2000)(Dyna Corp.).ngp" size="1048576" crc="22aab454"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neobaccap" cloneof="neobacca" romof="neobacca" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Neo Baccarat - Real Casino Series (World, Prototype)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Neo Baccarat - Real Casino Series (World, Proto)(2000)(Dyna Corp.).ngp" size="1048576" crc="80880498"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neocher" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Neo Cherry Master - Real Casino Series (Euro, Japan)</description>
+		<year>1998</year>
+		<manufacturer>Dyna Corp.</manufacturer>
+		<rom name="Neo Cherry Master - Real Casino Series (Euro, Japan)(1998)(Dyna Corp.).ngp" size="1048576" crc="5c067579"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neocherc" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Neo Cherry Master Color - Real Casino Series (World)</description>
+		<year>1999</year>
+		<manufacturer>Dyna Corp.</manufacturer>
+		<rom name="Neo Cherry Master Color - Real Casino Series (World)(1999)(Dyna Corp.).ngp" size="1048576" crc="a6dca584"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neochercp" cloneof="neocherc" romof="neocherc" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Neo Cherry Master Color - Real Casino Series (World, Prototype)</description>
+		<year>1999</year>
+		<manufacturer>Dyna Corp.</manufacturer>
+		<rom name="Neo Cherry Master Color - Real Casino Series (World, Proto)(1999)(Dyna Corp.).ngp" size="1048576" crc="939a9912"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neoderby" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Neo Derby Champ Daiyosou (Japan)</description>
+		<year>1999</year>
+		<manufacturer>Dyna Corp.</manufacturer>
+		<rom name="Neo Derby Champ Daiyosou (Japan)(1999)(Dyna Corp.).ngp" size="2097152" crc="5a053559"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neodraga" cloneof="neodrag" romof="neodrag" sourcefile="pst90s/d_ngp.cpp">
+		<description>Neo Dragon's Wild - Real Casino Series (World, v1.11)</description>
+		<year>1999</year>
+		<manufacturer>Dyna Corp.</manufacturer>
+		<rom name="Neo Dragon's Wild - Real Casino Series v1.11 (World)(1999)(Dyna Corp.).ngp" size="1048576" crc="225fd7f9"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neodrag" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Neo Dragon's Wild - Real Casino Series (World, v1.13)</description>
+		<year>1999</year>
+		<manufacturer>Dyna Corp.</manufacturer>
+		<rom name="Neo Dragon's Wild - Real Casino Series v1.13 (World)(1999)(Dyna Corp.).ngp" size="1048576" crc="5d028c99"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neocup98" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Neo Geo Cup '98 - Pocket Sports Series (Euro, Japan)</description>
+		<year>1998</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Neo Geo Cup '98 - Pocket Sports Series (Euro, Japan)(1998)(SNK).ngp" size="1048576" crc="33add5bd"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neocuppl" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Neo Geo Cup '98 Plus - Pocket Sports Series (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Neo Geo Cup '98 Plus - Pocket Sports Series (World)(1999)(SNK).ngp" size="1048576" crc="c0da4fe9"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neomystr" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Neo Mystery Bonus - Real Casino Series (World)</description>
+		<year>1999</year>
+		<manufacturer>Dyna Corp.</manufacturer>
+		<rom name="Neo Mystery Bonus - Real Casino Series (World)(1999)(Dyna Corp.).ngp" size="1048576" crc="e79dc5b3"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neoproyk" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Neo Poke Pro Yakyuu - Pocket Sport Series (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK - ADK Corp.</manufacturer>
+		<rom name="Neo Poke Pro Yakyuu - Pocket Sport Series (Japan)(1999)(SNK - ADK).ngp" size="1048576" crc="f4d78f12"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="neoturfm" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Neo Turf Masters - Pocket Sport Series (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Neo Turf Masters - Pocket Sport Series (World)(1999)(SNK).ngp" size="2097152" crc="317a66d2"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="nigeronpe" cloneof="nigeronp" romof="nigeronp" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Hack</comment>
+		<description>Nige-ron-pa (Hack, English v0.9)</description>
+		<year>2018</year>
+		<manufacturer>Loic</manufacturer>
+		<rom name="Nige-ron-pa T-Eng v0.9 (2018)(Loic).ngp" size="2097152" crc="6672d6e6"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="nigeronp" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Nige-ron-pa (Japan)</description>
+		<year>2000</year>
+		<manufacturer>Dennou Eizo</manufacturer>
+		<rom name="Nige-ron-pa (Japan)(2000)(Dennoi Eizo).ngp" size="1048576" crc="3cc3e269"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="oekakip" cloneof="picturep" romof="picturep" sourcefile="pst90s/d_ngp.cpp">
+		<description>Oekaki Puzzle (Japan)</description>
+		<year>2000</year>
+		<manufacturer>Success</manufacturer>
+		<rom name="Oekaki Puzzle (Japan)(2000)(Success).ngp" size="524288" crc="59ab1e0f"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="ogrebatl" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Ogre Battle Gaiden: Prince of Zenobia (Japan)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Ogre Battle Gaiden - Prince of Zenobia (Japan)(2000)(SNK).ngp" size="2097152" crc="eeeefd6a"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pacman" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pac-Man (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Namco</manufacturer>
+		<rom name="Pac-Man (World)(1999)(SNK - Namco).ngp" size="524288" crc="21e8cc15"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pslotazt" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pachi-Slot Aruze Oukoku Pocket: Azteca (Japan)</description>
+		<year>2000</year>
+		<manufacturer>Aruze Corp.</manufacturer>
+		<rom name="Pachi-Slot Aruze Oukoku Pocket - Azteca (Japan)(2000)(Aruze).ngp" size="524288" crc="c56ef8c3"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pslotdk2" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pachi-Slot Aruze Oukoku Pocket: Dekahel 2 (Japan)</description>
+		<year>2001</year>
+		<manufacturer>Aruze Corp.</manufacturer>
+		<rom name="Pachi-Slot Aruze Oukoku Pocket - Dekahel 2 (Japan)(2001)(Aruze).ngp" size="1048576" crc="346f3c46"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pslotds2" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pachi-Slot Aruze Oukoku Pocket: Delsol 2 (Japan)</description>
+		<year>2000</year>
+		<manufacturer>Aruze Corp.</manufacturer>
+		<rom name="Pachi-Slot Aruze Oukoku Pocket - Delsol 2 (Japan)(2000)(Aruze).ngp" size="1048576" crc="1ea69db1"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pslotecp" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pachi-Slot Aruze Oukoku Pocket: e-Cup (Japan)</description>
+		<year>2001</year>
+		<manufacturer>Aruze Corp.</manufacturer>
+		<rom name="Pachi-Slot Aruze Oukoku Pocket - e-Cup (Japan)(2001)(Aruze).ngp" size="1048576" crc="0a7c32df"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pslothana" cloneof="pslothan" romof="pslothan" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pachi-Slot Aruze Oukoku Pocket: Hanabi (Japan, v1.02)</description>
+		<year>1999</year>
+		<manufacturer>Aruze Corp.</manufacturer>
+		<rom name="Pachi-Slot Aruze Oukoku Pocket - Hanabi v1.02 (Japan)(1999)(Aruze).ngp" size="524288" crc="cfd1c8f2"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pslothan" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pachi-Slot Aruze Oukoku Pocket: Hanabi (Japan, v1.04)</description>
+		<year>1999</year>
+		<manufacturer>Aruze Corp.</manufacturer>
+		<rom name="Pachi-Slot Aruze Oukoku Pocket - Hanabi v1.04 (Japan)(1999)(Aruze).ngp" size="524288" crc="a0c26f9b"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pslotooh" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pachi-Slot Aruze Oukoku Pocket: Oohanabi (Japan)</description>
+		<year>2000</year>
+		<manufacturer>Aruze Corp.</manufacturer>
+		<rom name="Pachi-Slot Aruze Oukoku Pocket - Oohanabi (Japan)(2000)(Aruze).ngp" size="1048576" crc="8a88c50f"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pslotpc2" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pachi-Slot Aruze Oukoku Pocket: Porcano 2 (Japan)</description>
+		<year>2000</year>
+		<manufacturer>Aruze Corp.</manufacturer>
+		<rom name="Pachi-Slot Aruze Oukoku Pocket - Porcano 2 (Japan)(2000)(Aruze).ngp" size="1048576" crc="96ddfbe3"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pslotwrd" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pachi-Slot Aruze Oukoku Pocket: Ward of Lights (Japan)</description>
+		<year>2000</year>
+		<manufacturer>Aruze Corp.</manufacturer>
+		<rom name="Pachi-Slot Aruze Oukoku Pocket - Ward of Lights (Japan)(2000)(Aruze).ngp" size="524288" crc="d46cbc54"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pachinko" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pachinko Hisshou Guide: Pocket Parlor (Japan)</description>
+		<year>1999</year>
+		<manufacturer>Japan Vistec</manufacturer>
+		<rom name="Pachinko Hisshou Guide - Pocket Parlor (Japan)(1999)(Japan Vistec).ngp" size="1048576" crc="c3d6b28b"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="prtymail" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Party Mail (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK - ADK Corp.</manufacturer>
+		<rom name="Party Mail (Japan)(1999)(SNK - ADK).ngp" size="1048576" crc="4da8a1c0"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="prtymailp" cloneof="prtymail" romof="prtymail" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Party Mail (Japan, Proto)</description>
+		<year>1999</year>
+		<manufacturer>SNK - ADK Corp.</manufacturer>
+		<rom name="Party Mail (Japan, Proto)(1999)(SNK - ADK).ngp" size="2097152" crc="f2284a95"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="picturep" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Picture Puzzle (Euro, USA)</description>
+		<year>2000</year>
+		<manufacturer>Success</manufacturer>
+		<rom name="Picture Puzzle (Euro, USA)(2000)(Success).ngp" size="1048576" crc="67e6dc56"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="poktlove" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pocket Love if (Japan)</description>
+		<year>1999</year>
+		<manufacturer>KID</manufacturer>
+		<rom name="Pocket Love if (Japan)(1999)(KID).ngp" size="2097152" crc="c2ee1ee5"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pockrev" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pocket Reversi (Euro)</description>
+		<year>2000</year>
+		<manufacturer>Success</manufacturer>
+		<rom name="Pocket Reversi (Euro)(2000)(Success).ngp" size="1048576" crc="20f09880"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pockrevj" cloneof="pockrev" romof="pockrev" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pocket Reversi (Japan)</description>
+		<year>2000</year>
+		<manufacturer>Success</manufacturer>
+		<rom name="Pocket Reversi (Japan)(2000)(Success).ngp" size="524288" crc="fb0b55b8"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="ptennis" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pocket Tennis - Pocket Sports Series (Euro, Japan)</description>
+		<year>1998</year>
+		<manufacturer>SNK - Yumekobo</manufacturer>
+		<rom name="Pocket Tennis - Pocket Sports Series (Euro, Japan)(1998)(SNK - Yumekobo).ngp" size="524288" crc="4b1eed05"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="ptennisc" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Pocket Tennis Color - Pocket Sports Series (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Yumekobo</manufacturer>
+		<rom name="Pocket Tennis Color - Pocket Sports Series (World)(1999)(SNK - Yumekobo).ngp" size="524288" crc="d8590b96"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="puyopopa" cloneof="puyopop" romof="puyopop" sourcefile="pst90s/d_ngp.cpp">
+		<description>Puyo Pop ~ Puyo Pyuo Tsuu (World, v1.05)</description>
+		<year>1999</year>
+		<manufacturer>Sega</manufacturer>
+		<rom name="Puyo Pop - Puyo Pyuo Tsuu v1.05 (World)(1999)(Sega).ngp" size="1048576" crc="3090b2fd"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="puyopop" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Puyo Pop ~ Puyo Pyuo Tsuu (World, v1.06)</description>
+		<year>1999</year>
+		<manufacturer>Sega</manufacturer>
+		<rom name="Puyo Pop - Puyo Pyuo Tsuu v1.06 (World)(1999)(Sega).ngp" size="1048576" crc="5c649d1e"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pbobbleb" cloneof="pbobble" romof="pbobble" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Puzzle Bobble Mini (Euro, Japan, Prototype)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Puzzle Bobble Mini (Euro, Japan, Proto)(1999)(SNK).ngp" size="1048576" crc="e3d9f38e"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pbobblea" cloneof="pbobble" romof="pbobble" sourcefile="pst90s/d_ngp.cpp">
+		<description>Puzzle Bobble Mini (Euro, Japan, v1.09)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Puzzle Bobble Mini v1.09 (Euro, Japan)(1999)(SNK).ngp" size="1048576" crc="c94b173a"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="pbobble" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Puzzle Bobble Mini (Euro, Japan, v1.10)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Puzzle Bobble Mini v1.10 (Euro, Japan)(1999)(SNK).ngp" size="1048576" crc="e69eae3e"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="puzzlink" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Puzzle Link (Euro)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Yumekobo</manufacturer>
+		<rom name="Puzzle Link (Euro)(1999)(SNK - Yumekobo).ngp" size="524288" crc="8d0610ac"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="puzzlnk2" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Puzzle Link 2 (Euro, USA)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Yumekobo</manufacturer>
+		<rom name="Puzzle Link 2 (Euro, USA)(1999)(SNK - Yumekobo).ngp" size="1048576" crc="ba9ca21c"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="tsunapn" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Renketsu Puzzle Tsunagete Pon! (Japan)</description>
+		<year>1998</year>
+		<manufacturer>SNK - Yumekobo</manufacturer>
+		<rom name="Renketsu Puzzle Tsunagete Pon! (Japan)(1998)(SNK - Yumekobo).ngp" size="524288" crc="ce09f534"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="tsunapnc" cloneof="puzzlink" romof="puzzlink" sourcefile="pst90s/d_ngp.cpp">
+		<description>Renketsu Puzzle Tsunagete Pon! Color (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Yumekobo</manufacturer>
+		<rom name="Renketsu Puzzle Tsunagete Pon! Color (Japan)(1999)(SNK - Yumekobo).ngp" size="524288" crc="c3f3e83c"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="rockmanbe" cloneof="rockmanb" romof="rockmanb" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Hack</comment>
+		<description>Rockman: Battle &amp; Fighters (Hack, English v0.9)</description>
+		<year>2018</year>
+		<manufacturer>marc_max</manufacturer>
+		<rom name="Rockman - Battle &amp; Fighters T-Eng v0.9 (2018)(marc_max).ngp" size="2097152" crc="65985356"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="rockmanb" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Rockman: Battle &amp; Fighters (Japan)</description>
+		<year>2000</year>
+		<manufacturer>Capcom</manufacturer>
+		<rom name="Rockman - Battle &amp; Fighters (Japan)(2000)(Capcom).ngp" size="2097152" crc="9c861e49"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="rockmanbd" cloneof="rockmanb" romof="rockmanb" sourcefile="pst90s/d_ngp.cpp">
+		<description>Rockman: Battle &amp; Fighters (Japan, Demo)</description>
+		<year>2000</year>
+		<manufacturer>Capcom</manufacturer>
+		<rom name="Rockman - Battle &amp; Fighters (Japan, Demo)(2000)(Capcom).ngp" size="2097152" crc="16a98ac4"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="samsho2" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Samurai Shodown! 2 - Pocket Fighting Series (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Samurai Shodown! 2 - Pocket Fighting Series (World)(1999)(SNK).ngp" size="2097152" crc="4f7fb156"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="samsho" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Samurai Spirit! - Pocket Fighting Series (Euro, Japan)</description>
+		<year>1998</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Samurai Spirit! - Pocket Fighting Series (Euro, Japan)(1998)(SNK).ngp" size="2097152" crc="32e4696a"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="shanghaipj" cloneof="shanghai" romof="shanghai" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Shanghai Mini (Japan, Prototype)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Activision</manufacturer>
+		<rom name="Shanghai Mini (Japan, Proto)(1999)(SNK - Activision).ngp" size="1048576" crc="79620c3f"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="shanghaipu" cloneof="shanghai" romof="shanghai" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Shanghai Mini (USA, Prototype)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Activision</manufacturer>
+		<rom name="Shanghai Mini (USA, Proto)(1999)(SNK - Activision).ngp" size="1048576" crc="920af0ed"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="shanghai" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Shanghai Mini (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Activision</manufacturer>
+		<rom name="Shanghai Mini (World)(1999)(SNK - Activision).ngp" size="1048576" crc="90732d53"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="evolutnj" cloneof="evolutn" romof="evolutn" sourcefile="pst90s/d_ngp.cpp">
+		<description>Shinki Sekai Evolution: Hateshinai Dungeon (Japan)</description>
+		<year>2000</year>
+		<manufacturer>SNK - ESP.</manufacturer>
+		<rom name="Shinki Sekai Evolution - Hateshinai Dungeon (Japan)(2000)(SNK - ESP.).ngp" size="2097152" crc="e006f42f"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="shougi" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Shougi no Tatsujin (Japan)</description>
+		<year>1998</year>
+		<manufacturer>SNK - ADK Corp.</manufacturer>
+		<rom name="Shougi no Tatsujin (Japan)(1998)(SNK - ADK).ngp" size="524288" crc="f34d0c9b"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="shougic" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Shougi no Tatsujin Color (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK - ADK Corp.</manufacturer>
+		<rom name="Shougi no Tatsujin Color (Japan)(1999)(SNK - ADK).ngp" size="524288" crc="1f2872ed"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="snkgals" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>SNK Gals' Fighters (Euro, USA)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="SNK Gals' Fighters (Euro, USA)(2000)(SNK).ngp" size="2097152" crc="b02c2be7"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="snkgalsj" cloneof="snkgals" romof="snkgals" sourcefile="pst90s/d_ngp.cpp">
+		<description>SNK Gals' Fighters (Japan)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="SNK Gals' Fighters (Japan)(2000)(SNK).ngp" size="2097152" crc="6a9ffa47"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="svccard2e" cloneof="svccard2" romof="svccard2" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Hack</comment>
+		<description>SNK vs. Capcom: Card Fighters 2 - Expand Edition (Hack, English)</description>
+		<year>2017</year>
+		<manufacturer>The CFC2 Translation Team</manufacturer>
+		<rom name="SNK vs. Capcom - Card Fighters 2 - Expand Edition T-Eng (2017)(The CFC2 Translation Team).ngp" size="2097152" crc="0cc88d96"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="svccard2" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>SNK vs. Capcom: Card Fighters 2 - Expand Edition (Japan)</description>
+		<year>2001</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="SNK vs. Capcom - Card Fighters 2 - Expand Edition (Japan)(2001)(SNK).ngp" size="2097152" crc="ccbcfda7"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="svccardc" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Capcom Supporters Version</comment>
+		<description>SNK vs. Capcom: Card Fighters' Clash - Capcom Ver. (Euro, USA)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="SNK vs. Capcom - Card Fighters' Clash - Capcom Ver. (Euro, USA)(1999)(SNK).ngp" size="2097152" crc="80ce137b"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="svccards" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<comment>SNK Cardfighter's Version</comment>
+		<description>SNK vs. Capcom: Card Fighters' Clash - SNK Ver. (Euro, USA)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="SNK vs. Capcom - Card Fighters' Clash - SNK Ver. (Euro, USA)(1999)(SNK).ngp" size="2097152" crc="94b63a97"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="svccardp" cloneof="svccards" romof="svccards" sourcefile="pst90s/d_ngp.cpp">
+		<description>SNK vs. Capcom: Gekitotsu Card Fighters (Japan, Demo)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="SNK vs. Capcom: Gekitotsu Card Fighters (Japan, Demo)(1999)(SNK).ngp" size="2097152" crc="4a41a56e"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="svccardcj" cloneof="svccardc" romof="svccardc" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Capcom Supporters Version</comment>
+		<description>SNK vs. Capcom: Gekitotsu Card Fighters - Capcom Ver. (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="SNK vs. Capcom - Gekitotsu Card Fighters - Capcom Ver. (Japan)(SNK)(1999).ngp" size="2097152" crc="9217159b"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="svccardsja" cloneof="svccards" romof="svccards" sourcefile="pst90s/d_ngp.cpp">
+		<comment>SNK Cardfighter's Version</comment>
+		<description>SNK vs. Capcom: Gekitotsu Card Fighters - SNK Ver. (Japan, v6)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="SNK vs. Capcom: Gekitotsu Card Fighters - SNK Ver. (Japan, v6)(1999)(SNK).ngp" size="2097152" crc="e70e3f1a"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="svccardsj" cloneof="svccards" romof="svccards" sourcefile="pst90s/d_ngp.cpp">
+		<comment>SNK Cardfighter's Version</comment>
+		<description>SNK vs. Capcom: Gekitotsu Card Fighters - SNK Ver. (Japan, v7)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="SNK vs. Capcom: Gekitotsu Card Fighters - SNK Ver. (Japan, v7)(1999)(SNK).ngp" size="2097152" crc="7065295c"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="svc" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>SNK vs. Capcom: The Match of the Millennium (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="SNK vs. Capcom - The Match of the Millennium (World)(1999)(SNK).ngp" size="4194304" crc="b173030a"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="sonic" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Sonic the Hedgehog: Pocket Adventure (World)</description>
+		<year>1999</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Sonic the Hedgehog - Pocket Adventure (World)(1999)(Sega).ngp" size="2097152" crc="356f0849"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="sonicp2" cloneof="sonic" romof="sonic" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Sonic the Hedgehog: Pocket Adventure (World, Prototype 2)</description>
+		<year>1999</year>
+		<manufacturer>Sega</manufacturer>
+		<rom name="Sonic the Hedgehog - Pocket Adventure (World, Proto 2)(1999)(Sega).ngp" size="2097152" crc="45fc3bca"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="sonicp" cloneof="sonic" romof="sonic" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Sonic the Hedgehog: Pocket Adventure (World, Prototype)</description>
+		<year>1999</year>
+		<manufacturer>Sega</manufacturer>
+		<rom name="Sonic the Hedgehog: Pocket Adventure (World, Proto)(1999)(Sega).ngp" size="2097152" crc="622176ce"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="hanadojo" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Soreike!! Hanafuda Doujou (Japan)</description>
+		<year>1999</year>
+		<manufacturer>Dyna Corp.</manufacturer>
+		<rom name="Soreike!! Hanafuda Doujou (Japan)(1999(Dyna Corp.).ngp" size="524288" crc="05fa3eb0"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="srmp" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<description>Super Real Mahjong: Premium Collection (Japan)</description>
+		<year>2001</year>
+		<manufacturer>SNK - Seta Corp.</manufacturer>
+		<rom name="Super Real Mahjong: Premium Collection (Japan)(2001)(SNK - Seta Corp.).ngp" size="2097152" crc="c6e620c3"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="tsunapn2" cloneof="puzzlnk2" romof="puzzlnk2" sourcefile="pst90s/d_ngp.cpp">
+		<description>Tsunagete Pon! 2 (Japan)</description>
+		<year>1999</year>
+		<manufacturer>SNK - Yumekobo</manufacturer>
+		<rom name="Tsunagete Pon 2 (Japan)(1999)(SNK - Yumekobo).ngp" size="1048576" crc="129091bb"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game name="wrestmad" romof="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<comment>Prototype</comment>
+		<description>Wrestling Madness (Euro, USA, Prototype)</description>
+		<year>2000</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="Wrestling Madness (Euro, USA, Proto)(2000)(SNK).ngp" size="2097152" crc="16b0be9b"/>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" merge="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+		<video type="raster" orientation="horizontal" width="160" height="152" aspectx="4" aspecty="3"/>
+		<driver status="good"/>
+	</game>
+	<game isbios="yes" name="ngp" sourcefile="pst90s/d_ngp.cpp">
+		<comment>BIOS only</comment>
+		<description>NeoGeo Pocket (Bios)</description>
+		<year>1998</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="SNK Neo-Geo Pocket BIOS (1998)(SNK)(en-ja).bin" size="65536" crc="6232df8d"/>
+		<rom name="SNK Neo-Geo Pocket Color BIOS (1999)(SNK)(en-ja).bin" size="65536" crc="6eeb6f40"/>
+	</game>
+</datafile>

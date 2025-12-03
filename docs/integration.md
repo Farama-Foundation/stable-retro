@@ -12,7 +12,7 @@ If you are going to integrate a new game, you'll need a ROM for the correct syst
 
 ## Example Integration
 
-This is a list of the integration files for the game [Airstriker-Genesis](https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/Airstriker-Genesis).
+This is a list of the integration files for the game [Airstriker-Genesis-v0](https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/Airstriker-Genesis-v0).
 
 ### `Level1.state`
 
@@ -22,21 +22,21 @@ This is a savestate from the beginning of the game, restarting the environment w
 
 This file defines the list of game-related variables that python can see based on their memory addresses in the games
 
-```{literalinclude} ../retro/data/stable/Airstriker-Genesis/data.json
+```{literalinclude} ../retro/data/stable/Airstriker-Genesis-v0/data.json
 ```
 
 ### `scenario.json`
 
 This file defines the reward function and done condition using the variables defined in `data.json`
 
-```{literalinclude} ../retro/data/stable/Airstriker-Genesis/scenario.json
+```{literalinclude} ../retro/data/stable/Airstriker-Genesis-v0/scenario.json
 ```
 
 ### `metadata.json`
 
 This file defines the default starting state if no state is specified by the user as well as some miscellaneous debugging information.
 
-```{literalinclude} ../retro/data/stable/Airstriker-Genesis/metadata.json
+```{literalinclude} ../retro/data/stable/Airstriker-Genesis-v0/metadata.json
 ```
 
 ### `rom.md`
@@ -47,7 +47,7 @@ This is the ROM file used for this game, with a few exceptions, ROM files are no
 
 This is the SHA1 hash of the `rom.md` file, used for importing ROMs.
 
-```{literalinclude} ../retro/data/stable/Airstriker-Genesis/rom.sha
+```{literalinclude} ../retro/data/stable/Airstriker-Genesis-v0/rom.sha
 ```
 
 These are all the files used in an integration.  The next section will describe the files in more detail.
@@ -171,7 +171,7 @@ To integrate a game you need to define a done condition and a reward function.  
 
 To define these, you find variables from the game's memory, such as the player's current score and lives remaining, and use those to create the done condition and reward function.  An example done condition is when the `lives` variable is equal to `0`, an example reward function is the change in the `score` variable.
 
-Note: if the game requires that you hit the `Start` button to play, for instance after dying, then you need to modify the scenario file to allow this as `Start` is disallowed by default.  See the `actions` key in [KidChameleon-Genesis](https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/KidChameleon-Genesis/scenario.json) for an example of this.
+Note: if the game requires that you hit the `Start` button to play, for instance after dying, then you need to modify the scenario file to allow this as `Start` is disallowed by default.  See the `actions` key in [KidChameleon-Genesis-v0](https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/KidChameleon-Genesis-v0/scenario.json) for an example of this.
 
 ### Done Condition
 

@@ -467,9 +467,31 @@ def get_known_hashes():
                     shas = f.read().strip().split("\n")
             except (FileNotFoundError, ValueError):
                 continue
-            for ext, platform in EMU_EXTENSIONS.items():
-                if game.endswith("-" + platform):
-                    break
+            # Extract platform robustly from game name, handling optional -vN suffix
+            base = game
+            parts = base.rsplit("-", 1)
+            if len(parts) == 2 and parts[1].startswith("v") and parts[1][1:].isdigit():
+                base = parts[0]
+            platform = base.split("-")[-1]
+
+            # Choose canonical extension for platform deterministically
+            ext = None
+            try:
+                exts = EMU_INFO[platform]["ext"]
+                if exts:
+                    ext = "." + exts[0]
+            except Exception:
+                ext = None
+
+            # Fallback: map via EMU_EXTENSIONS if EMU_INFO lookup fails
+            if not ext:
+                for e, p in EMU_EXTENSIONS.items():
+                    if p == platform:
+                        ext = e
+                        break
+            # If still unknown, skip to avoid mislabeling
+            if not ext:
+                continue
             for sha in shas:
                 known_hashes[sha] = (game, ext, os.path.join(path(), curpath))
     return known_hashes

@@ -323,7 +323,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">multi_rewards</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">rom_path</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_romfile_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
+        <span class="n">rom_path</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_original_romfile_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
         <span class="n">metadata_path</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="s2">&quot;metadata.json&quot;</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="n">retro</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>

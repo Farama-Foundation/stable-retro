@@ -14,7 +14,7 @@ After installing you can now create a [Gymnasium](https://gymnasium.farama.org/)
 
 ```python
 import retro
-env = retro.make(game='Airstriker-Genesis')
+env = retro.make(game='Airstriker-Genesis-v0')
 ```
 
 `Airstriker-Genesis` has a non-commercial ROM that is included by default.
@@ -32,7 +32,7 @@ Here are some example ways to use Stable Retro:
 There is a Python script that lets you interact with the game using the Gymnasium interface.  Run it like this:
 
 ```shell
-python3 -m retro.examples.interactive --game Airstriker-Genesis
+python3 -m retro.examples.interactive --game Airstriker-Genesis-v0
 ```
 
 You can use the arrow keys and the `X` key to control your ship and fire.  This Python script lets you try out an environment using only the Stable Retro Python API and is quite basic.  For a more advanced tool, check out the {ref}`integration-ui`.
@@ -47,7 +47,7 @@ A random agent that chooses a random action on each timestep looks much like the
 A more full-featured random agent script is available in the examples dir:
 
 ```shell
-python3 -m retro.examples.random_agent --game Airstriker-Genesis
+python3 -m retro.examples.random_agent --game Airstriker-Genesis-v0
 ```
 
 It will print the current reward and will exit when the scenario is done. Note that it will throw an exception if no reward or scenario data is defined for that game. This script is useful to see if a scenario is properly set up and that the reward function isn't too generous.
@@ -57,7 +57,7 @@ It will print the current reward and will exit when the scenario is done. Note t
 There is a simple but effective reinforcement learning algorithm called "the Brute" from ["Revisiting the Arcade Learning Environment"](https://arxiv.org/abs/1709.06009)  by Machado et al. which works on deterministic environments like Stable Retro games and is easy to implement.  To run the example:
 
 ```shell
-python3 -m retro.examples.brute --game Airstriker-Genesis
+python3 -m retro.examples.brute --game Airstriker-Genesis-v0
 ```
 
 This algorithm works by building up a sequence of button presses that do well in the game, it doesn't look at the screen at all.  It will print out the best reward seen so far while training.
@@ -69,7 +69,7 @@ Using ["Proximal Policy Optimization"](https://arxiv.org/abs/1707.06347) by Schu
 This example requires installing [Stable Baselines](https://github.com/DLR-RM/stable-baselines3).  Once installed, you can run it:
 
 ```shell
-python3 -m retro.examples.ppo --game Airstriker-Genesis
+python3 -m retro.examples.ppo --game Airstriker-Genesis-v0
 ```
 
 This will take awhile to train, but will print out progress as it goes.  More information about PPO can be found in [Spinning Up](https://spinningup.openai.com/en/latest/algorithms/ppo.html).

@@ -61,7 +61,7 @@ If you have an agent playing a game, you can record the gameplay to a `.bk2` fil
 ```python
 import retro
 
-env = retro.make(game='Airstriker-Genesis', record='.')
+env = retro.make(game='Airstriker-Genesis-v0', record='.')
 env.reset()
 while True:
     _, _, terminate, truncate, _ = env.step(env.action_space.sample())

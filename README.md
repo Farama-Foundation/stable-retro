@@ -113,7 +113,7 @@ pip3 install stable_baselines3[extra]
 Start training:
 ```
 cd retro/examples
-python3 ppo.py --game='Airstriker-Genesis'
+python3 ppo.py --game='Airstriker-Genesis-v0'
 ```
 
 More advanced examples:

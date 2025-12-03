@@ -7,11 +7,11 @@
     <meta property="og:title" content="Stable-Retro Documentation" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="" />
-    <meta property="og:url" content="https://stable-retro.farama.org/python.html" /><meta property="og:image" content="https://stable-retro.farama.org/_static/img/stable-retro-github.png" /><meta name="twitter:card" content="summary_large_image"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:url" content="https://stable-retro.farama.org/python.html" /><meta property="og:image" content="https://stable-retro.farama.org/_static/img/stable-retro-github.svg" /><meta name="twitter:card" content="summary_large_image"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Release Notes" href="../release_notes/" /><link rel="prev" title="Game Integration" href="../integration/" />
         <link rel="canonical" href="https://stable-retro.farama.org/python.html" />
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 -->
+    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 -->
         <title>Python API - Stable-Retro Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
@@ -380,11 +380,11 @@ also specify a string that is the name of the <code class="docutils literal notr
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="c1"># action_space will by MultiBinary(16) now instead of MultiBinary(8)</span>
         <span class="c1"># the bottom half of the actions will be for player 1 and the top half for player 2</span>
-        <span class="n">obs</span><span class="p">,</span> <span class="n">rew</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">())</span>
+        <span class="n">obs</span><span class="p">,</span> <span class="n">rew</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">())</span>
         <span class="c1"># rew will be a list of [player_1_rew, player_2_rew]</span>
         <span class="c1"># done and info will remain the same</span>
         <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">done</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">terminated</span> <span class="ow">or</span> <span class="n">truncated</span><span class="p">:</span>
             <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
     <span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
@@ -640,7 +640,7 @@ also specify a string that is the name of the <code class="docutils literal notr
         })()
       </script>
 
-    <script src="../_static/documentation_options.js?v=64d3c7d8"></script>
+    <script src="../_static/documentation_options.js?v=b8328053"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=7660844c"></script>

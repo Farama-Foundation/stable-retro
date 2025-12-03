@@ -86,7 +86,7 @@ def get_fbneo_rom_name(game, inttype=retro.data.Integrations.DEFAULT):
             with open(metadata_path) as f:
                 metadata = json.load(f)
                 return metadata.get("original_rom_name")
-        except (json.JSONDecodeError, IOError):
+        except (json.JSONDecodeError, OSError):
             pass
     return None
 
@@ -110,7 +110,7 @@ def is_fbneo_game(game, inttype=retro.data.Integrations.DEFAULT):
             with open(metadata_path) as f:
                 metadata = json.load(f)
                 return metadata.get("system") == "FBNeo"
-        except (json.JSONDecodeError, IOError):
+        except (json.JSONDecodeError, OSError):
             pass
     return False
 

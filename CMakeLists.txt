@@ -246,7 +246,12 @@ add_core(gba mgba)
 add_core(pce mednafen_pce_fast)
 add_core(32x picodrive)
 add_core(saturn mednafen_saturn)
-add_core(fbneo fbneo)
+
+if(APPLE)
+  message(WARNING "FBNeo arcade emulator is currently not supported on macOS")
+else()
+  add_core(fbneo fbneo)
+endif()
 
 set(CLEAN_CORES)
 

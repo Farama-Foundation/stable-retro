@@ -332,10 +332,14 @@ def get_original_romfile_path(game, inttype=Integrations.DEFAULT):
             with open(metadata_path) as f:
                 metadata = json.load(f)
                 if "original_rom_name" in metadata:
-                    original_rom_path = get_file_path(game, metadata["original_rom_name"], inttype)
+                    original_rom_path = get_file_path(
+                        game,
+                        metadata["original_rom_name"],
+                        inttype,
+                    )
                     if original_rom_path and os.path.exists(original_rom_path):
                         return original_rom_path
-        except (json.JSONDecodeError, IOError):
+        except (json.JSONDecodeError, OSError):
             # If metadata file is invalid, fall back to standard naming
             pass
 
@@ -502,11 +506,16 @@ def merge(*args, quiet=True):
                         if "original_rom_name" in metadata:
                             # Also write the file with its original name
                             original_name = metadata["original_rom_name"]
-                            with open(os.path.join(game_path, original_name), "wb") as of:
+                            with open(
+                                os.path.join(game_path, original_name),
+                                "wb",
+                            ) as of:
                                 of.write(data)
                             if not quiet:
-                                print(f"  Also saved as {original_name} for FBNeo compatibility")
-                except (json.JSONDecodeError, IOError):
+                                print(
+                                    f"  Also saved as {original_name} for FBNeo compatibility",
+                                )
+                except (json.JSONDecodeError, OSError):
                     pass
 
             imported_games += 1

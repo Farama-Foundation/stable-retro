@@ -324,7 +324,11 @@ def verify_extension(game, inttype):
     rom = os.path.split(retro.data.get_romfile_path(game, inttype=inttype))[-1]
     platform = retro.data.EMU_EXTENSIONS.get(os.path.splitext(rom)[-1])
 
-    if not platform or not game.endswith(f"-{platform}"):
+    # Strip version suffix (-vN) from game name for comparison
+    import re
+    game_base = re.sub(r'-v\d+$', '', game)
+
+    if not platform or not game_base.endswith(f"-{platform}"):
         errors.append((game, f"invalid extension for {rom}"))
     if rom in whitelist:
         return [], []
@@ -337,6 +341,10 @@ def verify_rom(game, inttype):
     except FileNotFoundError:
         return [], [(game, "ROM file missing")]
 
-    if game.endswith("-Genesis"):
+    # Strip version suffix (-vN) from game name for comparison
+    import re
+    game_base = re.sub(r'-v\d+$', '', game)
+
+    if game_base.endswith("-Genesis"):
         return verify_genesis(game, inttype)
     return verify_extension(game, inttype)

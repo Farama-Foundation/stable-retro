@@ -358,9 +358,7 @@ QList<Cheat> EmulatorController::cheats() const {
 }
 
 void EmulatorController::start() {
-	if (!m_initialState.isEmpty()) {
-		m_re.reset();
-	}
+	m_re.reset();
 	m_screen = QImage();
 	stopMovie();
 	if (!m_initialState.isEmpty()) {

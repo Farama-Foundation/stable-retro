@@ -219,7 +219,7 @@ MainWindow::MainWindow(QWidget* parent)
 			QString text = QInputDialog::getText(this, tr("Destination name"),
 				tr("Please enter game name:"), QLineEdit::Normal, name, &ok);
 			if (!text.isNull() && ok) {
-				integrate(file, text, fileinfo.suffix());
+				integrate(file, text, fileinfo.suffix(), core);
 			}
 		}
 	});
@@ -597,13 +597,23 @@ void MainWindow::removeCheat() {
 	m_cheatModel.removeRows(minRow, maxRow - minRow + 1, QModelIndex());
 }
 
-void MainWindow::integrate(const QString& before, const QString& after, const QString& extension) {
+void MainWindow::integrate(const QString& before, const QString& after, const QString& extension, const QString& core) {
 	QDir newDir(EmulatorController::dataPath());
 	newDir.cd("contrib");
 	newDir.mkpath(after);
 	newDir.cd(after);
-	QString newPath = newDir.filePath("rom." + extension);
+	
+	QString newPath;
+	// For FBNeo arcade ROMs, keep the original filename for ROM identification
+	// For other platforms, use the standard rom.[ext] naming
+	if (core == "FBNeo" || extension == "zip" || extension == "7z") {
+		QFileInfo sourceInfo(before);
+		newPath = newDir.filePath(sourceInfo.fileName());
+	} else {
+		newPath = newDir.filePath("rom." + extension);
+	}
 	QFile::copy(before, newPath);
+	
 	if (m_controller->loadGame(newPath)) {
 		QCryptographicHash sha1(QCryptographicHash::Sha1);
 		QFile newFile(newPath);

@@ -49,7 +49,7 @@ private slots:
 	void addCheat();
 	void removeCheat();
 
-	void integrate(const QString& before, const QString& after, const QString& extension);
+	void integrate(const QString& before, const QString& after, const QString& extension, const QString& core);
 	void startGame(const QString& path);
 	void changeGame(const QString& path);
 	void startEpisode();

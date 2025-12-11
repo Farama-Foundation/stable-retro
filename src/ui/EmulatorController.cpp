@@ -358,10 +358,14 @@ QList<Cheat> EmulatorController::cheats() const {
 }
 
 void EmulatorController::start() {
-	m_re.reset();
+	if (!m_initialState.isEmpty()) {
+		m_re.reset();
+	}
 	m_screen = QImage();
 	stopMovie();
-	m_re.unserialize(static_cast<void*>(m_initialState.data()), m_initialState.size());
+	if (!m_initialState.isEmpty()) {
+		m_re.unserialize(static_cast<void*>(m_initialState.data()), m_initialState.size());
+	}
 	m_data->updateRam();
 	m_data->updateRam();
 	m_scen->restart();

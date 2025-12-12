@@ -602,7 +602,7 @@ void MainWindow::integrate(const QString& before, const QString& after, const QS
 	newDir.cd("contrib");
 	newDir.mkpath(after);
 	newDir.cd(after);
-	
+
 	QString newPath;
 	// For FBNeo arcade ROMs, keep the original filename for ROM identification
 	// For other platforms, use the standard rom.[ext] naming
@@ -613,7 +613,7 @@ void MainWindow::integrate(const QString& before, const QString& after, const QS
 		newPath = newDir.filePath("rom." + extension);
 	}
 	QFile::copy(before, newPath);
-	
+
 	if (m_controller->loadGame(newPath)) {
 		QCryptographicHash sha1(QCryptographicHash::Sha1);
 		QFile newFile(newPath);

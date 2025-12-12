@@ -25,7 +25,11 @@ def load_whitelist(game, inttype):
 def scan_missing():
     missing = []
     for game in stable_retro.data.list_games(stable_retro.data.Integrations.ALL):
-        if not stable_retro.data.get_file_path(game, "data.json", stable_retro.data.Integrations.ALL):
+        if not stable_retro.data.get_file_path(
+            game,
+            "data.json",
+            stable_retro.data.Integrations.ALL,
+        ):
             missing.append((game, "data.json"))
         if not stable_retro.data.get_file_path(
             game,
@@ -41,7 +45,11 @@ def scan_missing():
             missing.append((game, "metadata.json"))
         if not stable_retro.data.list_states(game, stable_retro.data.Integrations.ALL):
             missing.append((game, "*.state"))
-        if not stable_retro.data.get_file_path(game, "rom.sha", stable_retro.data.Integrations.ALL):
+        if not stable_retro.data.get_file_path(
+            game,
+            "rom.sha",
+            stable_retro.data.Integrations.ALL,
+        ):
             missing.append((game, "rom.sha"))
     return missing
 
@@ -279,7 +287,11 @@ def verify_hash_collisions():
     errors = []
     seen_hashes = {}
     for game in stable_retro.data.list_games(stable_retro.data.Integrations.ALL):
-        shafile = stable_retro.data.get_file_path(game, "rom.sha", stable_retro.data.Integrations.ALL)
+        shafile = stable_retro.data.get_file_path(
+            game,
+            "rom.sha",
+            stable_retro.data.Integrations.ALL,
+        )
         try:
             with open(os.path.join(shafile, "rom.sha")) as f:
                 expected_shas = f.read().strip().split("\n")

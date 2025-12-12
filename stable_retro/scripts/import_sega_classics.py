@@ -87,7 +87,7 @@ def main():
                 if not base.endswith("uncompressed ROMs"):
                     continue
                 roms.extend([os.path.join(base, file) for file in files])
-            retro.data.merge(*roms, quiet=False)
+            stable_retro.data.merge(*roms, quiet=False)
 
 
 if __name__ == "__main__":

@@ -7,7 +7,10 @@ from tests.test_python import all_games
 
 @pytest.mark.parametrize("game_name, integration_type", all_games)
 def test_data(game_name, integration_type):
-    warnings, errors = stable_retro.testing.tools.verify_data(game_name, integration_type)
+    warnings, errors = stable_retro.testing.tools.verify_data(
+        game_name,
+        integration_type,
+    )
     for file, warning in warnings:
         gym.logger.warn(f"{file}: {warning}")
     assert len(errors) == 0
@@ -15,7 +18,10 @@ def test_data(game_name, integration_type):
 
 @pytest.mark.parametrize("game_name, integration_type", all_games)
 def test_scenario(game_name, integration_type):
-    warnings, errors = stable_retro.testing.tools.verify_scenario(game_name, integration_type)
+    warnings, errors = stable_retro.testing.tools.verify_scenario(
+        game_name,
+        integration_type,
+    )
     for file, warning in warnings:
         gym.logger.warn(f"{file}: {warning}")
     assert len(errors) == 0

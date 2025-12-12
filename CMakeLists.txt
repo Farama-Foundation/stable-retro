@@ -172,8 +172,9 @@ function(add_core platform core_name)
 
   add_custom_command(
     OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version"
-    COMMAND ${CMAKE_COMMAND} -E touch
-            "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version")
+    COMMAND
+      ${CMAKE_COMMAND} -E touch
+      "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version")
 
   if(WIN32)
     set(libretro_platform platform=win)
@@ -205,7 +206,8 @@ function(add_core platform core_name)
     COMMAND ${CMAKE_COMMAND} -E copy "${core_name}_libretro${DYNLIB_SUFFIX}"
             "${TARGET_PATH}"
     WORKING_DIRECTORY "cores/${platform}/${subdir}"
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version")
+    DEPENDS
+      "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version")
   unset(core_ldflags)
   add_custom_command(
     OUTPUT "${PYLIB_DIRECTORY}/stable_retro/cores/${core_name}.json"
@@ -213,12 +215,15 @@ function(add_core platform core_name)
       ${CMAKE_COMMAND} -E copy
       "${CMAKE_CURRENT_SOURCE_DIR}/cores/${platform}.json"
       "${PYLIB_DIRECTORY}/stable_retro/cores/${core_name}.json"
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version")
+    DEPENDS
+      "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version")
 
   add_custom_target(
     ${platform} ALL
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version"
-            "${PYLIB_DIRECTORY}/stable_retro/cores/${core_name}.json" "${TARGET_PATH}")
+    DEPENDS
+      "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version"
+      "${PYLIB_DIRECTORY}/stable_retro/cores/${core_name}.json"
+      "${TARGET_PATH}")
   list(APPEND CORE_TARGETS "${platform}")
   set(CORE_TARGETS
       "${CORE_TARGETS}"
@@ -387,7 +392,8 @@ if(BUILD_PYTHON)
     set(PYBIND_LIBS "${Python_LIBRARY}")
   endif()
 
-  target_link_libraries(stable_retro retro-base ${PYBIND_LIBS} ${STATIC_LDFLAGS})
+  target_link_libraries(stable_retro retro-base ${PYBIND_LIBS}
+                        ${STATIC_LDFLAGS})
 endif()
 
 if(BUILD_TESTS)

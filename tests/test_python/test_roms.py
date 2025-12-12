@@ -21,7 +21,10 @@ def test_hash_collisions():
 
 @pytest.mark.parametrize("game_name, integration_type", all_games_with_roms)
 def test_rom(game_name, integration_type):
-    warnings, errors = stable_retro.testing.tools.verify_rom(game_name, integration_type)
+    warnings, errors = stable_retro.testing.tools.verify_rom(
+        game_name,
+        integration_type,
+    )
     for file, warning in warnings:
         gym.logger.warn(f"{file}: {warning}")
     assert len(errors) == 0

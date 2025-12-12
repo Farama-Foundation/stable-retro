@@ -16,7 +16,11 @@ for game in stable_retro.data.list_games(Integrations.ALL):
         num_types += 1
 
     if os.path.exists(
-        os.path.join(stable_retro.data.path(), *Integrations.EXPERIMENTAL_ONLY.paths, game),
+        os.path.join(
+            stable_retro.data.path(),
+            *Integrations.EXPERIMENTAL_ONLY.paths,
+            game,
+        ),
     ):
         all_games.append((game, Integrations.EXPERIMENTAL_ONLY))
         num_types += 1

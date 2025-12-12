@@ -50,7 +50,12 @@ def get_system_info(system):
         raise KeyError(f"Unsupported system type: {system}")
 
 
-def make(game, state=State.DEFAULT, inttype=stable_retro.data.Integrations.DEFAULT, **kwargs):
+def make(
+    game,
+    state=State.DEFAULT,
+    inttype=stable_retro.data.Integrations.DEFAULT,
+    **kwargs,
+):
     """
     Create a Gym environment for the specified game
     """

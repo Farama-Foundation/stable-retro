@@ -1,6 +1,7 @@
 # cf. https://github.com/pypa/manylinux/issues/53
 
 import sys
+from urllib.request import urlopen  # moved to top to satisfy E402
 
 GOOD_SSL = "https://google.com"
 BAD_SSL = "https://self-signed.badssl.com"
@@ -12,14 +13,7 @@ if sys.version_info[:2] < (3, 4):
     print("This version never checks SSL certs; skipping tests")
     sys.exit(0)
 
-if sys.version_info[0] >= 3:
-    from urllib.request import urlopen
-
-    EXC = OSError
-else:
-    from urllib import urlopen
-
-    EXC = IOError
+EXC = OSError
 
 print(f"Connecting to {GOOD_SSL} should work")
 urlopen(GOOD_SSL)

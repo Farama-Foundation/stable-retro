@@ -129,8 +129,8 @@ lib*.a
 *.app
 *_autogen
 *.capnp.*
-retro/cores/*-version
-retro/cores/*.json
+stable_retro/cores/*-version
+stable_retro/cores/*.json
 
 # FBNeo build artifacts (only ignore actual build outputs, not source dependencies)
 cores/fbneo/src/obj/

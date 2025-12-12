@@ -7,7 +7,7 @@ from concurrent.futures.process import BrokenProcessPool
 import gymnasium as gym
 import pytest
 
-import retro
+import stable_retro as retro
 from tests.test_python import all_games_with_roms
 
 pool = ProcessPoolExecutor(1)

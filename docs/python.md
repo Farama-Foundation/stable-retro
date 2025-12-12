@@ -2,48 +2,48 @@
 
 ## RetroEnv
 
-The Python API consists primarily of {func}`retro.make`, {class}`retro.RetroEnv`, and a few enums.  The main function most users will want is {func}`retro.make`.
+The Python API consists primarily of {func}`stable_retro.make`, {class}`stable_retro.RetroEnv`, and a few enums.  The main function most users will want is {func}`stable_retro.make`.
 
 ```{eval-rst}
-.. autofunction:: retro.make
+.. autofunction:: stable_retro.make
 ```
 
 ```{eval-rst}
-.. autoclass:: retro.RetroEnv
+.. autoclass:: stable_retro.RetroEnv
 ```
 
-If you want to specify either the default state named in the game integration's `metadata.json` or specify that you want to start from the initial power on state of the console, you can use the {class}`retro.State` enum:
+If you want to specify either the default state named in the game integration's `metadata.json` or specify that you want to start from the initial power on state of the console, you can use the {class}`stable_retro.State` enum:
 
 ```{eval-rst}
-.. autoclass:: retro.State
+.. autoclass:: stable_retro.State
    :members:
 ```
 
 ## Actions
 
-There are a few possible action spaces included with {class}`retro.RetroEnv`:
+There are a few possible action spaces included with {class}`stable_retro.RetroEnv`:
 
 ```{eval-rst}
-.. autoclass:: retro.Actions
+.. autoclass:: stable_retro.Actions
    :members:
 ```
 
-You can also create your own action spaces derived from these.  For an example, see [discretizer.py](https://github.com/farama-foundation/stable-retro/blob/master/retro/examples/discretizer.py).  This file shows how to use `retro.Actions.Discrete` as well as how to make a custom wrapper that reduces the action space from `126` actions to `7`
+You can also create your own action spaces derived from these.  For an example, see [discretizer.py](https://github.com/farama-foundation/stable-retro/blob/master/stable_retro/examples/discretizer.py).  This file shows how to use `stable_retro.Actions.Discrete` as well as how to make a custom wrapper that reduces the action space from `126` actions to `7`
 
 ## Observations
 
 The default observations are RGB images of the game, but you can view RAM values instead (often much smaller than the RGB images and also your agent can observe the game state more directly).  If you want variable values, any variables defined in `data.json` will appear in the `info` dict after each step.
 
 ```{eval-rst}
-.. autoclass:: retro.Observations
+.. autoclass:: stable_retro.Observations
    :members:
 ```
 
 ## Multiplayer Environments
 
-A small number of games support multiplayer.  To use this feature, pass `players=<n>` to {class}`retro.RetroEnv`.  Here is an example random agent that controls both paddles in `Pong-Atari2600`:
+A small number of games support multiplayer.  To use this feature, pass `players=<n>` to {class}`stable_retro.RetroEnv`.  Here is an example random agent that controls both paddles in `Pong-Atari2600`:
 
-```{literalinclude} ../retro/examples/trivial_random_agent_multiplayer.py
+```{literalinclude} ../stable_retro/examples/trivial_random_agent_multiplayer.py
 ```
 
 ## Replay files
@@ -59,9 +59,9 @@ You can create and view replay files using the {ref}`integration-ui` (Game > Pla
 If you have an agent playing a game, you can record the gameplay to a `.bk2` file for later processing:
 
 ```python
-import retro
+import stable_retro
 
-env = retro.make(game='Airstriker-Genesis-v0', record='.')
+env = stable_retro.make(game='Airstriker-Genesis-v0', record='.')
 env.reset()
 while True:
     _, _, terminate, truncate, _ = env.step(env.action_space.sample())
@@ -74,16 +74,16 @@ while True:
 Given a `.bk2` file you can load it in python and either play it back or use the actions for training.
 
 ```python
-import retro
+import stable_retro
 
-movie = retro.Movie('Airstriker-Genesis-Level1-000000.bk2')
+movie = stable_retro.Movie('Airstriker-Genesis-Level1-000000.bk2')
 movie.step()
 
-env = retro.make(
+env = stable_retro.make(
     game=movie.get_game(),
     state=None,
     # bk2s can contain any button presses, so allow everything
-    use_restricted_actions=retro.Actions.ALL,
+    use_restricted_actions=stable_retro.Actions.ALL,
     players=movie.players,
 )
 env.initial_state = movie.get_state()
@@ -102,5 +102,5 @@ while movie.step():
 This requires [ffmpeg](https://www.ffmpeg.org/) to be installed and writes the output to the directory that the input file is located in.
 
 ```shell
-python3 -m retro.scripts.playback_movie Airstriker-Genesis-Level1-000000.bk2
+python3 -m stable_retro.scripts.playback_movie Airstriker-Genesis-Level1-000000.bk2
 ```

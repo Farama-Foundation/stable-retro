@@ -39,7 +39,7 @@ from stable_baselines3.common.vec_env import (
     VecTransposeImage,
 )
 
-import retro
+import stable_retro
 
 
 class StochasticFrameSkip(gym.Wrapper):
@@ -85,8 +85,8 @@ class StochasticFrameSkip(gym.Wrapper):
 
 def make_retro(*, game, state=None, max_episode_steps=4500, **kwargs):
     if state is None:
-        state = retro.State.DEFAULT
-    env = retro.make(game, state, **kwargs)
+        state = stable_retro.State.DEFAULT
+    env = stable_retro.make(game, state, **kwargs)
     env = StochasticFrameSkip(env, n=4, stickprob=0.25)
     if max_episode_steps is not None:
         env = TimeLimit(env, max_episode_steps=max_episode_steps)
@@ -105,7 +105,7 @@ def wrap_deepmind_retro(env):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--game", default="Airstriker-Genesis-v0")
-    parser.add_argument("--state", default=retro.State.DEFAULT)
+    parser.add_argument("--state", default=stable_retro.State.DEFAULT)
     parser.add_argument("--scenario", default=None)
     args = parser.parse_args()
 
@@ -473,7 +473,7 @@ DoubleDragonIITheRevenge-Nes                      Plok-Snes                     
 DoubleDragonVTheShadowFalls-Genesis               Pong-Atari2600                                        ZoolNinjaOfTheNthDimension-Genesis
 DoubleDribbleThePlayoffEdition-Genesis            Pooyan-Atari2600                                      ZoolNinjaOfTheNthDimension-Sms
 DoubleDunk-Atari2600                              Pooyan-Nes                                            ZoolNinjaOfTheNthDimension-Snes
-DrRobotniksMeanBeanMachine-Genesis                Popeye-Nes                                            
+DrRobotniksMeanBeanMachine-Genesis                Popeye-Nes
 DragonPower-Nes                                   PopnTwinBee-Snes
 DragonSpiritTheNewLegend-Nes                      PopnTwinBeeRainbowBellAdventures-Snes
 ```

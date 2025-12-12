@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-import retro
+import stable_retro as retro
 
 
 @pytest.fixture

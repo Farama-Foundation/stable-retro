@@ -1,124 +1,54 @@
-import os
+"""
+Backward compatibility module for retro -> stable_retro migration.
+
+This module provides a compatibility layer that allows 'import retro' to continue
+working while warning users about the deprecation.
+"""
 import sys
+import warnings
 
-import retro.data
-from retro._retro import Movie, RetroEmulator, core_path
-from retro.enums import Actions, Observations, State
-from retro.retro_env import RetroEnv
+# Issue deprecation warning
+warnings.warn(
+    "The 'retro' package name is deprecated and will be removed in a future version. "
+    "Please use 'import stable_retro' instead of 'import retro'.",
+    DeprecationWarning,
+    stacklevel=2
+)
 
-ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
-core_path(os.path.join(os.path.dirname(__file__), "cores"))
+# Import and re-export everything from stable_retro
+from stable_retro import *  # noqa: F401, F403
+import stable_retro as _stable_retro
 
-with open(os.path.join(os.path.dirname(__file__), "VERSION.txt")) as f:
-    __version__ = f.read()
+# Make sure submodules are accessible by importing them explicitly
+import stable_retro.data
+import stable_retro.scripts
+import stable_retro.examples
+import stable_retro.testing
+import stable_retro._retro
+import stable_retro.enums
+import stable_retro.retro_env
+# Import the 'import' module using __import__
+import importlib
+stable_retro_import = importlib.import_module('stable_retro.import')
 
+# Map the modules
+sys.modules['retro'] = sys.modules['stable_retro']
+sys.modules['retro.data'] = stable_retro.data
+sys.modules['retro.scripts'] = stable_retro.scripts
+sys.modules['retro.examples'] = stable_retro.examples
+sys.modules['retro.import'] = stable_retro_import
+sys.modules['retro.testing'] = stable_retro.testing
+sys.modules['retro._retro'] = stable_retro._retro
+sys.modules['retro.enums'] = stable_retro.enums
+sys.modules['retro.retro_env'] = stable_retro.retro_env
 
-__all__ = [
-    "Movie",
-    "RetroEmulator",
-    "Actions",
-    "State",
-    "Observations",
-    "get_core_path",
-    "get_romfile_system",
-    "get_system_info",
-    "get_fbneo_rom_name",
-    "is_fbneo_game",
-    "make",
-    "RetroEnv",
-]
-
-retro.data.init_core_info(core_path())
-
-
-def get_core_path(corename):
-    return os.path.join(core_path(), retro.data.EMU_CORES[corename])
-
-
-def get_romfile_system(rom_path):
-    extension = os.path.splitext(rom_path)[1]
-    if extension in retro.data.EMU_EXTENSIONS:
-        return retro.data.EMU_EXTENSIONS[extension]
-    else:
-        raise Exception(f"Unsupported rom type at path: {rom_path}")
-
-
-def get_system_info(system):
-    if system in retro.data.EMU_INFO:
-        return retro.data.EMU_INFO[system]
-    else:
-        raise KeyError(f"Unsupported system type: {system}")
-
-
-def make(game, state=State.DEFAULT, inttype=retro.data.Integrations.DEFAULT, **kwargs):
-    """
-    Create a Gym environment for the specified game
-    """
-    try:
-        retro.data.get_romfile_path(game, inttype)
-    except FileNotFoundError:
-        if not retro.data.get_file_path(game, "rom.sha", inttype):
-            raise
-        else:
-            raise FileNotFoundError(
-                f"Game not found: {game}. Did you make sure to import the ROM?",
-            )
-    return RetroEnv(game, state, inttype=inttype, **kwargs)
-
-
-def get_fbneo_rom_name(game, inttype=retro.data.Integrations.DEFAULT):
-    """
-    Get the original FBNeo ROM name for a game.
-    Returns None if the game doesn't have an original_rom_name in metadata.
-
-    Args:
-        game: Game name
-        inttype: Integration type (default: DEFAULT)
-
-    Returns:
-        str: Original ROM name (e.g., "mk2.zip") or None
-    """
-    import json
-
-    metadata_path = retro.data.get_file_path(game, "metadata.json", inttype)
-    if metadata_path and os.path.exists(metadata_path):
-        try:
-            with open(metadata_path) as f:
-                metadata = json.load(f)
-                return metadata.get("original_rom_name")
-        except (json.JSONDecodeError, OSError):
-            pass
-    return None
-
-
-def is_fbneo_game(game, inttype=retro.data.Integrations.DEFAULT):
-    """
-    Check if a game is an FBNeo game.
-
-    Args:
-        game: Game name
-        inttype: Integration type (default: DEFAULT)
-
-    Returns:
-        bool: True if the game is an FBNeo game
-    """
-    import json
-
-    metadata_path = retro.data.get_file_path(game, "metadata.json", inttype)
-    if metadata_path and os.path.exists(metadata_path):
-        try:
-            with open(metadata_path) as f:
-                metadata = json.load(f)
-                return metadata.get("system") == "FBNeo"
-        except (json.JSONDecodeError, OSError):
-            pass
-    return False
-
-
+# Try to import rendering if it exists
 try:
-    from farama_notifications import notifications
-
-    if "stable-retro" in notifications and __version__ in notifications["stable-retro"]:
-        print(notifications["stable-retro"][__version__], file=sys.stderr)
-except Exception:  # nosec
+    import stable_retro.rendering
+    sys.modules['retro.rendering'] = stable_retro.rendering
+except (ImportError, AttributeError):
     pass
+
+# Re-export commonly used items
+__version__ = _stable_retro.__version__
+__all__ = _stable_retro.__all__

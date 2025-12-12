@@ -1,5 +1,30 @@
 # Changelog
 
+## Unreleased
+
+### Breaking Changes (with backward compatibility)
+
+**Package import name changed from `retro` to `stable_retro`**
+
+- Users should now use `import stable_retro` instead of `import retro`
+- The old `import retro` will continue to work with a deprecation warning for backward compatibility
+- This change aligns the Python import name with the PyPI package name `stable-retro`
+- All internal code has been updated to use `stable_retro`
+- Documentation updated to reflect the new import name
+- Backward compatibility will be maintained for multiple versions to allow gradual migration
+
+**Migration Guide:**
+```python
+# Old way (deprecated but still works)
+import retro  # Shows deprecation warning
+
+# New way (recommended)
+import stable_retro
+
+# Or use an alias for easier migration
+import stable_retro as retro  # Keeps your code working with minimal changes
+```
+
 ## 0.8.0
 
 * add python 3.8 support
@@ -23,7 +48,7 @@
 * add ability to use arbitrary additional integration directories
 * integration UI searches for current Python's Gym Retro data directory
 * import script can now accept files in addition to directories
-* you can now use RAM observations by sending `obs_type=retro.Observations.RAM` to `retro.make`
+* you can now use RAM observations by sending `obs_type=stable_retro.Observations.RAM` to `stable_retro.make`
 * update Atari 2600 emulator
 
 ## 0.6.0

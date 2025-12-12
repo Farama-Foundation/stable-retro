@@ -8,7 +8,7 @@ from setuptools.command.build_ext import build_ext
 
 VERSION_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
-    "retro/VERSION.txt",
+    "stable_retro/VERSION.txt",
 )
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -59,7 +59,7 @@ class CMakeBuild(build_ext):
 
             jobs = f"-j{multiprocessing.cpu_count():d}"
 
-        subprocess.check_call(["make", jobs, "retro"])
+        subprocess.check_call(["make", jobs, "stable_retro"])
 
 
 platform_globs = [
@@ -97,29 +97,30 @@ setup(
         "farama-notifications>=0.0.1",
     ],
     python_requires=">=3.8.0,<3.13",
-    ext_modules=[Extension("retro._retro", ["CMakeLists.txt", "src/*.cpp"])],
+    ext_modules=[Extension("stable_retro._retro", ["CMakeLists.txt", "src/*.cpp"])],
     cmdclass={"build_ext": CMakeBuild},
     packages=[
-        "retro",
-        "retro.data",
-        "retro.data.stable",
-        "retro.data.experimental",
-        "retro.data.contrib",
-        "retro.scripts",
-        "retro.import",
-        "retro.examples",
-        "retro.testing",
+        "retro",  # Compatibility shim
+        "stable_retro",
+        "stable_retro.data",
+        "stable_retro.data.stable",
+        "stable_retro.data.experimental",
+        "stable_retro.data.contrib",
+        "stable_retro.scripts",
+        "stable_retro.import",
+        "stable_retro.examples",
+        "stable_retro.testing",
     ],
     package_data={
-        "retro": [
+        "stable_retro": [
             "cores/*.json",
             "cores/*_libretro*",
             "VERSION.txt",
             "README.md",
             "LICENSES.md",
         ],
-        "retro.data.stable": platform_globs,
-        "retro.data.experimental": platform_globs,
-        "retro.data.contrib": platform_globs,
+        "stable_retro.data.stable": platform_globs,
+        "stable_retro.data.experimental": platform_globs,
+        "stable_retro.data.contrib": platform_globs,
     },
 )

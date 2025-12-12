@@ -1,0 +1,12 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+zipcmp=/usr/local/bin/zipcmp
+
+Name: libzip
+Description: library for handling zip archives
+Version: 1.4.0
+Libs:  -L${libdir} -lzip  -lz
+Cflags: -I${includedir}

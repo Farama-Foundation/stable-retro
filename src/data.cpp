@@ -148,7 +148,7 @@ string GameData::dataPath(const string& hint) {
 	if (envDir) {
 		s_dataDirectory = envDir;
 	} else {
-		s_dataDirectory = drillUp({ "retro/data", "data" }, ".", hint);
+		s_dataDirectory = drillUp({ "stable_retro/data", "data" }, ".", hint);
 	}
 	return s_dataDirectory;
 }

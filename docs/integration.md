@@ -84,9 +84,9 @@ For more information on the possible variable types, see {ref}`appendix-types`.
 
 ### Scenario `scenario.json`
 
-Information pertaining to reward functions and done conditions can either be specified by manually overriding functions in {class}`retro.RetroEnv` or can be done by writing a scenario file.
+Information pertaining to reward functions and done conditions can either be specified by manually overriding functions in {class}`stable_retro.RetroEnv` or can be done by writing a scenario file.
 
-Scenario files contain information that is used to compute the reward function and done condition from variables defined in the information manifest. Each variable specified in the scenario file is multiplied by a `reward` value if positive and a `penalty` value if negative and then summed up to create the reward for that step. Similarly, states of these variables can be checked to see if the game is over. By default the scenario file will be loaded from `scenario.json`, but alternative scenario files can be specified in the {class}`retro.RetroEnv` constructor.
+Scenario files contain information that is used to compute the reward function and done condition from variables defined in the information manifest. Each variable specified in the scenario file is multiplied by a `reward` value if positive and a `penalty` value if negative and then summed up to create the reward for that step. Similarly, states of these variables can be checked to see if the game is over. By default the scenario file will be loaded from `scenario.json`, but alternative scenario files can be specified in the {class}`stable_retro.RetroEnv` constructor.
 
 Scenario files are again JSON and specified with the following sections:
 

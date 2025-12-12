@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-import retro
+import stable_retro as retro
 
 
 @pytest.fixture(
@@ -12,12 +12,12 @@ import retro
     ],
 )
 def generate_test_env(request):
-    import retro.data
+    import stable_retro.data
 
     path = os.path.join(os.path.dirname(__file__), "../roms")
 
-    get_file_path_fn = retro.data.get_file_path
-    get_romfile_path_fn = retro.data.get_romfile_path
+    get_file_path_fn = stable_retro.data.get_file_path
+    get_romfile_path_fn = stable_retro.data.get_romfile_path
 
     retro.data.get_file_path = lambda game, file, *args, **kwargs: os.path.join(
         path,

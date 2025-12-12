@@ -31,7 +31,7 @@ endif()
 
 find_package(Git QUIET)
 
-file(READ "${CMAKE_SOURCE_DIR}/retro/VERSION.txt" PROJECT_VERSION)
+file(READ "${CMAKE_SOURCE_DIR}/stable_retro/VERSION.txt" PROJECT_VERSION)
 string(REGEX REPLACE "\n$" "" PROJECT_VERSION "${PROJECT_VERSION}")
 set_property(
   DIRECTORY
@@ -135,7 +135,7 @@ endif()
 set(PYLIB_DIRECTORY
     "${CMAKE_CURRENT_BINARY_DIR}"
     CACHE PATH "Build directory that contains retro module")
-file(MAKE_DIRECTORY "${PYLIB_DIRECTORY}/retro/cores")
+file(MAKE_DIRECTORY "${PYLIB_DIRECTORY}/stable_retro/cores")
 
 set(CORES)
 set(COREINFO)
@@ -144,10 +144,10 @@ set(CORE_TARGETS)
 function(add_core platform core_name)
   set(target_name ${core_name}_libretro${CMAKE_SHARED_LIBRARY_SUFFIX})
   get_filename_component(
-    TARGET_PATH "${PYLIB_DIRECTORY}/retro/cores/${target_name}" ABSOLUTE)
+    TARGET_PATH "${PYLIB_DIRECTORY}/stable_retro/cores/${target_name}" ABSOLUTE)
   list(APPEND CORES "${TARGET_PATH}")
   list(APPEND COREINFO
-       "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}.json")
+       "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}.json")
   set(CORES
       "${CORES}"
       PARENT_SCOPE)
@@ -171,9 +171,9 @@ function(add_core platform core_name)
   endif()
 
   add_custom_command(
-    OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version"
+    OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version"
     COMMAND ${CMAKE_COMMAND} -E touch
-            "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version")
+            "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version")
 
   if(WIN32)
     set(libretro_platform platform=win)
@@ -205,20 +205,20 @@ function(add_core platform core_name)
     COMMAND ${CMAKE_COMMAND} -E copy "${core_name}_libretro${DYNLIB_SUFFIX}"
             "${TARGET_PATH}"
     WORKING_DIRECTORY "cores/${platform}/${subdir}"
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version")
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version")
   unset(core_ldflags)
   add_custom_command(
-    OUTPUT "${PYLIB_DIRECTORY}/retro/cores/${core_name}.json"
+    OUTPUT "${PYLIB_DIRECTORY}/stable_retro/cores/${core_name}.json"
     COMMAND
       ${CMAKE_COMMAND} -E copy
       "${CMAKE_CURRENT_SOURCE_DIR}/cores/${platform}.json"
-      "${PYLIB_DIRECTORY}/retro/cores/${core_name}.json"
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version")
+      "${PYLIB_DIRECTORY}/stable_retro/cores/${core_name}.json"
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version")
 
   add_custom_target(
     ${platform} ALL
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/retro/cores/${core_name}-version"
-            "${PYLIB_DIRECTORY}/retro/cores/${core_name}.json" "${TARGET_PATH}")
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version"
+            "${PYLIB_DIRECTORY}/stable_retro/cores/${core_name}.json" "${TARGET_PATH}")
   list(APPEND CORE_TARGETS "${platform}")
   set(CORE_TARGETS
       "${CORE_TARGETS}"
@@ -363,15 +363,15 @@ if(CAPN_PROTO_FOUND)
   target_link_libraries(retro-capnp retro-base CapnProto::capnp)
 endif()
 
-include_directories(src retro third-party/pybind11/include third-party
+include_directories(src stable_retro third-party/pybind11/include third-party
                     third-party/gtest/googletest/include ${Python_INCLUDE_DIRS})
 
 if(BUILD_PYTHON)
-  add_library(retro SHARED src/retro.cpp)
+  add_library(stable_retro SHARED src/retro.cpp)
   set_target_properties(
-    retro
-    PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${PYLIB_DIRECTORY}/retro"
-               RUNTIME_OUTPUT_DIRECTORY "${PYLIB_DIRECTORY}/retro"
+    stable_retro
+    PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${PYLIB_DIRECTORY}/stable_retro"
+               RUNTIME_OUTPUT_DIRECTORY "${PYLIB_DIRECTORY}/stable_retro"
                OUTPUT_NAME _retro
                PREFIX ""
                SUFFIX ${PYEXT_SUFFIX})
@@ -387,7 +387,7 @@ if(BUILD_PYTHON)
     set(PYBIND_LIBS "${Python_LIBRARY}")
   endif()
 
-  target_link_libraries(retro retro-base ${PYBIND_LIBS} ${STATIC_LDFLAGS})
+  target_link_libraries(stable_retro retro-base ${PYBIND_LIBS} ${STATIC_LDFLAGS})
 endif()
 
 if(BUILD_TESTS)

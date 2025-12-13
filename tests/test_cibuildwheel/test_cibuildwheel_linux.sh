@@ -30,7 +30,7 @@ DOCKERFILES_TO_BUILD_AND_RUN=(
 cd $REPO_ROOT
 rm -f CMakeCache.txt
 rm -rf CMakeFiles
-rm -f retro/*.so retro/cores/*.so retro/cores/*.json retro/cores/*-version
+rm -f stable_retro/*.so stable_retro/cores/*.so stable_retro/cores/*.json stable_retro/cores/*-version
 rm -f cores/*/*.so cores/snes/libretro/*.so
 rm -rf build
 

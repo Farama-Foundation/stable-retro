@@ -41,7 +41,7 @@ void EmulatorController::initCorePath() {
 #ifdef Q_OS_MAC
 	hint = QString("%1/../PlugIns").arg(appPath);
 #else
-	hint = QString("%1/retro").arg(appPath);
+	hint = QString("%1/stable_retro").arg(appPath);
 #endif
 	Retro::corePath(hint.toStdString()); // Set hint
 }

@@ -298,65 +298,14 @@
 <section id="data-json">
 <h3><code class="docutils literal notranslate"><span class="pre">data.json</span></code><a class="headerlink" href="#data-json" title="Link to this heading">¶</a></h3>
 <p>This file defines the list of game-related variables that python can see based on their memory addresses in the games</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;gameover&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="mi">16712294</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;u2&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;lives&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="mi">16712282</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;u2&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="mi">16712270</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;u4&quot;</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
 </section>
 <section id="scenario-json">
 <h3><code class="docutils literal notranslate"><span class="pre">scenario.json</span></code><a class="headerlink" href="#scenario-json" title="Link to this heading">¶</a></h3>
 <p>This file defines the reward function and done condition using the variables defined in <code class="docutils literal notranslate"><span class="pre">data.json</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;condition&quot;</span><span class="p">:</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;variables&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;gameover&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;equal&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;reference&quot;</span><span class="p">:</span> <span class="mi">1</span>
-      <span class="p">},</span>
-      <span class="s2">&quot;lives&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;zero&quot;</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;reward&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;variables&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;reward&quot;</span><span class="p">:</span> <span class="mf">1.0</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
 </section>
 <section id="metadata-json">
 <h3><code class="docutils literal notranslate"><span class="pre">metadata.json</span></code><a class="headerlink" href="#metadata-json" title="Link to this heading">¶</a></h3>
 <p>This file defines the default starting state if no state is specified by the user as well as some miscellaneous debugging information.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;default_state&quot;</span><span class="p">:</span> <span class="s2">&quot;Level1&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;whitelist&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;data.json&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;suspicious type &gt;u2 for lives&quot;</span>
-    <span class="p">]</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
 </section>
 <section id="rom-md">
 <h3><code class="docutils literal notranslate"><span class="pre">rom.md</span></code><a class="headerlink" href="#rom-md" title="Link to this heading">¶</a></h3>
@@ -365,9 +314,6 @@
 <section id="rom-sha">
 <h3><code class="docutils literal notranslate"><span class="pre">rom.sha</span></code><a class="headerlink" href="#rom-sha" title="Link to this heading">¶</a></h3>
 <p>This is the SHA1 hash of the <code class="docutils literal notranslate"><span class="pre">rom.md</span></code> file, used for importing ROMs.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c67af162391fff4a63432be5a156eb9ca7b4da5a</span>
-</pre></div>
-</div>
 <p>These are all the files used in an integration.  The next section will describe the files in more detail.</p>
 </section>
 </section>
@@ -400,8 +346,8 @@
 </section>
 <section id="scenario-scenario-json">
 <h3>Scenario <code class="docutils literal notranslate"><span class="pre">scenario.json</span></code><a class="headerlink" href="#scenario-scenario-json" title="Link to this heading">¶</a></h3>
-<p>Information pertaining to reward functions and done conditions can either be specified by manually overriding functions in <a class="reference internal" href="../python/#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a> or can be done by writing a scenario file.</p>
-<p>Scenario files contain information that is used to compute the reward function and done condition from variables defined in the information manifest. Each variable specified in the scenario file is multiplied by a <code class="docutils literal notranslate"><span class="pre">reward</span></code> value if positive and a <code class="docutils literal notranslate"><span class="pre">penalty</span></code> value if negative and then summed up to create the reward for that step. Similarly, states of these variables can be checked to see if the game is over. By default the scenario file will be loaded from <code class="docutils literal notranslate"><span class="pre">scenario.json</span></code>, but alternative scenario files can be specified in the <a class="reference internal" href="../python/#retro.RetroEnv" title="retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">retro.RetroEnv</span></code></a> constructor.</p>
+<p>Information pertaining to reward functions and done conditions can either be specified by manually overriding functions in <a class="reference internal" href="../python/#stable_retro.RetroEnv" title="stable_retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">stable_retro.RetroEnv</span></code></a> or can be done by writing a scenario file.</p>
+<p>Scenario files contain information that is used to compute the reward function and done condition from variables defined in the information manifest. Each variable specified in the scenario file is multiplied by a <code class="docutils literal notranslate"><span class="pre">reward</span></code> value if positive and a <code class="docutils literal notranslate"><span class="pre">penalty</span></code> value if negative and then summed up to create the reward for that step. Similarly, states of these variables can be checked to see if the game is over. By default the scenario file will be loaded from <code class="docutils literal notranslate"><span class="pre">scenario.json</span></code>, but alternative scenario files can be specified in the <a class="reference internal" href="../python/#stable_retro.RetroEnv" title="stable_retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">stable_retro.RetroEnv</span></code></a> constructor.</p>
 <p>Scenario files are again JSON and specified with the following sections:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">reward</span></code> section used to calculate the reward function, and it split into the following subsections:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">variables</span></code> subsection is used for defining how to calculate the reward function from the current state of memory. For each variable in the <code class="docutils literal notranslate"><span class="pre">variables</span></code> section, a value is calculated, multiplied by a coefficient, then added to the reward function for this step. How a value is extracted is specified by the <code class="docutils literal notranslate"><span class="pre">op</span></code>/<code class="docutils literal notranslate"><span class="pre">measurement</span></code>/<code class="docutils literal notranslate"><span class="pre">reference</span></code> values (see the addendum below on operations for the meanings of these). The default <code class="docutils literal notranslate"><span class="pre">measurement</span></code> is <code class="docutils literal notranslate"><span class="pre">delta</span></code>. There is no default <code class="docutils literal notranslate"><span class="pre">op</span></code>, and by default the value is passed through raw.</p>

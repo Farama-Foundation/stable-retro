@@ -309,7 +309,7 @@ Retro games for Reinforcement Learning
     <span class="n">VecTransposeImage</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">retro</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">stable_retro</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">StochasticFrameSkip</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Wrapper</span><span class="p">):</span>
@@ -355,8 +355,8 @@ Retro games for Reinforcement Learning
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_retro</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">4500</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">DEFAULT</span>
-    <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">DEFAULT</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">env</span> <span class="o">=</span> <span class="n">StochasticFrameSkip</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">stickprob</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">max_episode_steps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">env</span> <span class="o">=</span> <span class="n">TimeLimit</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">max_episode_steps</span><span class="o">=</span><span class="n">max_episode_steps</span><span class="p">)</span>
@@ -375,7 +375,7 @@ Retro games for Reinforcement Learning
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--game&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;Airstriker-Genesis-v0&quot;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--state&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--state&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">stable_retro</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--scenario&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
@@ -742,7 +742,7 @@ Retro games for Reinforcement Learning
 <span class="n">DoubleDragonVTheShadowFalls</span><span class="o">-</span><span class="n">Genesis</span>               <span class="n">Pong</span><span class="o">-</span><span class="n">Atari2600</span>                                        <span class="n">ZoolNinjaOfTheNthDimension</span><span class="o">-</span><span class="n">Genesis</span>
 <span class="n">DoubleDribbleThePlayoffEdition</span><span class="o">-</span><span class="n">Genesis</span>            <span class="n">Pooyan</span><span class="o">-</span><span class="n">Atari2600</span>                                      <span class="n">ZoolNinjaOfTheNthDimension</span><span class="o">-</span><span class="n">Sms</span>
 <span class="n">DoubleDunk</span><span class="o">-</span><span class="n">Atari2600</span>                              <span class="n">Pooyan</span><span class="o">-</span><span class="n">Nes</span>                                            <span class="n">ZoolNinjaOfTheNthDimension</span><span class="o">-</span><span class="n">Snes</span>
-<span class="n">DrRobotniksMeanBeanMachine</span><span class="o">-</span><span class="n">Genesis</span>                <span class="n">Popeye</span><span class="o">-</span><span class="n">Nes</span>                                            
+<span class="n">DrRobotniksMeanBeanMachine</span><span class="o">-</span><span class="n">Genesis</span>                <span class="n">Popeye</span><span class="o">-</span><span class="n">Nes</span>
 <span class="n">DragonPower</span><span class="o">-</span><span class="n">Nes</span>                                   <span class="n">PopnTwinBee</span><span class="o">-</span><span class="n">Snes</span>
 <span class="n">DragonSpiritTheNewLegend</span><span class="o">-</span><span class="n">Nes</span>                      <span class="n">PopnTwinBeeRainbowBellAdventures</span><span class="o">-</span><span class="n">Snes</span>
 </pre></div>

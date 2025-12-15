@@ -22,7 +22,7 @@ copyright = "2023 Farama Foundation"
 author = "Farama Foundation"
 
 # The full version, including alpha/beta/rc tags
-with open(os.path.join(os.path.dirname(__file__), "../retro/VERSION.txt")) as f:
+with open(os.path.join(os.path.dirname(__file__), "../stable_retro/VERSION.txt")) as f:
     release = f.read()
 
 

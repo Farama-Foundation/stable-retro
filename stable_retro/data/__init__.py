@@ -489,9 +489,14 @@ def get_known_hashes():
                     if p == platform:
                         ext = e
                         break
-            # If still unknown, skip to avoid mislabeling
+            # If still unknown, choose sensible default for Arcade datasets
             if not ext:
-                continue
+                if platform.lower() == "arcade":
+                    # Arcade sets are commonly distributed as archives; store as rom.zip
+                    ext = ".zip"
+                else:
+                    # Skip to avoid mislabeling for other platforms
+                    continue
             for sha in shas:
                 known_hashes[sha] = (game, ext, os.path.join(path(), curpath))
     return known_hashes

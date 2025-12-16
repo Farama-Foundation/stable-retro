@@ -43,6 +43,10 @@ def main():
                 with open(filepath, "rb") as f:
                     _root, ext = os.path.splitext(filename)
                     if ext == ".zip":
+                        # First, try to match the raw zip file's SHA-1 against known hashes
+                        # Some datasets store the archive's SHA directly in rom.sha
+                        save_if_matches(filename, f)
+                        f.seek(0)
                         try:
                             _check_zipfile(f, save_if_matches)
                         except zipfile.BadZipFile:

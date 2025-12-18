@@ -157,3 +157,13 @@ Makefile
 
 # thirdparty
 third-party/libzip/man/
+
+# Local tools
+gym-retro-integration
+
+# libzip generated/test artifacts
+third-party/libzip/examples/
+third-party/libzip/regress/
+third-party/libzip/src/zipcmp
+third-party/libzip/src/zipmerge
+third-party/libzip/src/ziptool

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import json
 import os
 import sys
 import zipfile
@@ -32,8 +33,22 @@ def main():
         if hash in known_hashes:
             game, ext, curpath = known_hashes[hash]
             print("Importing", game)
-            with open(os.path.join(curpath, game, "rom%s" % ext), "wb") as f:
+            game_path = os.path.join(curpath, game)
+            rom_path = os.path.join(game_path, "rom%s" % ext)
+            with open(rom_path, "wb") as f:
                 f.write(data)
+
+            metadata_path = os.path.join(game_path, "metadata.json")
+            if os.path.exists(metadata_path):
+                try:
+                    with open(metadata_path) as mf:
+                        metadata = json.load(mf)
+                    original_name = metadata.get("original_rom_name")
+                    if original_name:
+                        with open(os.path.join(game_path, original_name), "wb") as of:
+                            of.write(data)
+                except (json.JSONDecodeError, OSError):
+                    pass
             imported_games += 1
 
     for path in paths:

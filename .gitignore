@@ -152,5 +152,8 @@ tests/test_cibuildwheel/tmp_dockerfiles
 
 # build artifacts
 *.cmake
-# Makefile - removed to allow FBNeo and other core Makefiles to be tracked
+Makefile
 *.tmp
+
+# thirdparty
+third-party/libzip/man/

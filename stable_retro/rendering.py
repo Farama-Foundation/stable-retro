@@ -103,6 +103,7 @@ class SimpleImageViewer:
             @self.window.event
             def on_close():
                 self.isopen = False
+
         self._rotation = rotation_steps
 
         assert len(arr.shape) == 3, "You passed in an image with the wrong number shape"

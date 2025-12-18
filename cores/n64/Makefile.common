@@ -1,0 +1,521 @@
+RSPDIR             = $(ROOT_DIR)/mupen64plus-rsp-hle
+CXD4DIR            = $(ROOT_DIR)/mupen64plus-rsp-cxd4
+CORE_DIR           = $(ROOT_DIR)/mupen64plus-core
+LIBRETRO_COMM_DIR  = $(ROOT_DIR)/libretro-common
+LIBRETRO_DIR       = $(ROOT_DIR)/libretro
+AUDIO_LIBRETRO_DIR = $(CORE_DIR)/src/plugin/audio_libretro
+VIDEODIR_RICE      = $(ROOT_DIR)/gles2rice/src
+VIDEODIR_GLN64     = $(ROOT_DIR)/gles2n64/src
+VIDEODIR_ANGRYLION = $(ROOT_DIR)/mupen64plus-video-angrylion
+VIDEODIR_PARALLEL  = $(ROOT_DIR)/mupen64plus-video-paraLLEl
+RSPDIR_PARALLEL    = $(ROOT_DIR)/mupen64plus-rsp-paraLLEl
+VIDEODIR_GLIDE     = $(ROOT_DIR)/glide2gl/src
+VIDEODIR_GLIDEN64  = $(ROOT_DIR)/mupen64plus-video-gliden64
+
+ifeq ($(HAVE_OPENGL),0)
+	HAVE_GLN64    =0
+	HAVE_GLIDE64  =0
+	HAVE_GLIDEN64 =0
+	HAVE_RICE     =0
+else
+ifneq ($(platform), vita)
+	HAVE_GLIDE64 = 1
+ifeq ($(GLIDEN64),1)
+	HAVE_GLIDEN64 =1
+	HAVE_GLN64    =0
+else
+	HAVE_GLN64    =1
+	HAVE_GLIDEN64 =0
+endif
+	HAVE_RICE     = 1
+else
+	HAVE_GLIDE64 = 0
+	HAVE_GLN64    = 0
+	HAVE_GLIDEN64 = 0
+	HAVE_RICE     = 0
+endif
+
+INCFLAGS += -I$(VIDEODIR_GLIDE)/Glitch64/inc
+endif
+
+INCFLAGS += \
+	-I$(CORE_DIR)/src \
+	-I$(CORE_DIR)/src/api \
+	-I$(ROOT_DIR)/include \
+	-I$(AUDIO_LIBRETRO_DIR) \
+	-I$(LIBRETRO_COMM_DIR)/include \
+	-I$(LIBRETRO_DIR)
+
+# libco
+ifneq ($(platform), emscripten)
+SOURCES_C += $(LIBRETRO_COMM_DIR)/libco/libco.c
+endif
+
+SOURCES_C += $(RSPDIR)/src/alist.c \
+    $(RSPDIR)/src/alist_audio.c \
+    $(RSPDIR)/src/alist_naudio.c \
+    $(RSPDIR)/src/alist_nead.c \
+    $(RSPDIR)/src/audio.c \
+    $(RSPDIR)/src/cicx105.c \
+    $(RSPDIR)/src/hle.c \
+    $(RSPDIR)/src/jpeg.c \
+    $(RSPDIR)/src/hle_memory.c \
+    $(RSPDIR)/src/mp3.c \
+    $(RSPDIR)/src/musyx.c \
+    $(RSPDIR)/src/re2.c \
+	$(RSPDIR)/src/hvqm.c \
+    $(RSPDIR)/src/hle_plugin.c
+
+SOURCES_C += $(CXD4DIR)/rsp.c
+
+ifeq ($(HAVE_RSP_DUMP), 1)
+SOURCES_CXX += $(CXD4DIR)/rsp_dump.cpp
+CFLAGS   += -DHAVE_RSP_DUMP
+CXXFLAGS += -DHAVE_RSP_DUMP
+endif
+
+# Core
+SOURCES_C += \
+	$(CORE_DIR)/src/api/callbacks.c \
+	$(CORE_DIR)/src/api/common.c \
+	$(CORE_DIR)/src/api/config.c \
+	$(CORE_DIR)/src/api/frontend.c \
+	$(CORE_DIR)/src/api/vidext_libretro.c \
+	$(CORE_DIR)/src/main/cheat.c \
+	$(CORE_DIR)/src/main/eventloop.c \
+	$(CORE_DIR)/src/main/main.c \
+	$(CORE_DIR)/src/main/device.c \
+	$(CORE_DIR)/src/main/profile.c \
+	$(CORE_DIR)/src/main/md5.c \
+	$(CORE_DIR)/src/main/rom.c \
+	$(CORE_DIR)/src/main/savestates.c \
+	$(CORE_DIR)/src/main/util.c \
+	$(CORE_DIR)/src/memory/m64p_memory.c \
+	$(CORE_DIR)/src/gb/gb_cart.c \
+	$(CORE_DIR)/src/si/n64_cic_nus_6105.c \
+	$(CORE_DIR)/src/si/pif.c \
+	$(CORE_DIR)/src/si/af_rtc.c \
+	$(CORE_DIR)/src/si/cic.c \
+	$(CORE_DIR)/src/si/eeprom.c \
+	$(CORE_DIR)/src/si/game_controller.c \
+	$(CORE_DIR)/src/si/mempak.c \
+	$(CORE_DIR)/src/si/rumblepak.c \
+	$(CORE_DIR)/src/si/transferpak.c \
+	$(CORE_DIR)/src/plugin/plugin.c \
+	$(CORE_DIR)/src/plugin/get_time_using_C_localtime.c \
+	$(CORE_DIR)/src/plugin/rumble_via_input_plugin.c \
+	$(CORE_DIR)/src/pifbootrom/pifbootrom.c \
+	$(CORE_DIR)/src/r4300/r4300.c \
+	$(CORE_DIR)/src/r4300/cached_interp.c \
+	$(CORE_DIR)/src/r4300/cp0.c \
+	$(CORE_DIR)/src/r4300/cp1.c \
+	$(CORE_DIR)/src/r4300/exception.c \
+	$(CORE_DIR)/src/r4300/instr_counters.c \
+	$(CORE_DIR)/src/r4300/interrupt.c \
+	$(CORE_DIR)/src/r4300/mi_controller.c \
+	$(CORE_DIR)/src/r4300/pure_interp.c \
+	$(CORE_DIR)/src/r4300/r4300_core.c \
+	$(CORE_DIR)/src/r4300/recomp.c \
+	$(CORE_DIR)/src/r4300/reset.c \
+	$(CORE_DIR)/src/r4300/tlb.c \
+	$(CORE_DIR)/src/dd/dd_controller.c \
+	$(CORE_DIR)/src/dd/dd_rom.c \
+	$(CORE_DIR)/src/dd/dd_disk.c \
+	$(CORE_DIR)/src/ri/ri_controller.c \
+	$(CORE_DIR)/src/ri/rdram.c \
+	$(CORE_DIR)/src/ri/rdram_detection_hack.c \
+	$(CORE_DIR)/src/si/si_controller.c \
+	$(CORE_DIR)/src/vi/vi_controller.c \
+	$(CORE_DIR)/src/rdp/rdp_core.c \
+	$(CORE_DIR)/src/rdp/fb.c \
+	$(CORE_DIR)/src/rsp/rsp_core.c \
+	$(CORE_DIR)/src/ai/ai_controller.c \
+	$(CORE_DIR)/src/pi/pi_controller.c \
+	$(CORE_DIR)/src/pi/sram.c \
+	$(CORE_DIR)/src/pi/flashram.c \
+	$(CORE_DIR)/src/pi/cart_rom.c
+
+#	$(CORE_DIR)/src/api/debugger.c \
+#	$(CORE_DIR)/src/main/ini_reader.c \
+
+ifeq ($(PLATFORM_EXT), win32)
+DYNAFLAGS += -DWIN32
+endif
+
+ifeq ($(PLATFORM_EXT), win64)
+DYNAFLAGS += -DWIN64
+endif
+
+### DYNAREC ###
+ifdef WITH_DYNAREC
+	DYNAFLAGS += -DDYNAREC
+	ifeq ($(WITH_DYNAREC), arm)
+		DYNAFLAGS += -DNEW_DYNAREC=3
+	endif
+
+	ifeq ($(WITH_DYNAREC), aarch64)
+		DYNAFLAGS += -DNEW_DYNAREC=4
+	endif
+
+	ifeq ($(WITH_DYNAREC), x86)
+		DYNAFLAGS += -D_M_IX86
+		CFLAGS += -DARCH_MIN_SSE2 
+		CXXFLAGS += -DARCH_MIN_SSE2
+	endif
+
+	ifeq ($(WITH_DYNAREC), x86_64)
+		DYNAFLAGS += -D_M_X64
+		CFLAGS += -DARCH_MIN_SSE2
+		CXXFLAGS += -DARCH_MIN_SSE2
+
+ifneq (,$(findstring msvc,$(platform)))
+ifeq ($(WITH_DYNAREC), $(filter $(WITH_DYNAREC), x86_64 x64))
+	SOURCES_ASM += $(CORE_DIR)/src/r4300/hacktarux_dynarec/dyna_start_nasm_x64.S
+else ifeq ($(WITH_DYNAREC), $(filter $(WITH_DYNAREC), i386 i686))
+	SOURCES_ASM += $(CORE_DIR)/src/r4300/hacktarux_dynarec/dyna_start_nasm_x86.S
+endif
+endif
+
+#ifneq (,$(findstring msvc,$(platform)))
+#	SOURCES_ASM += $(CORE_DIR)/src/r4300/hacktarux_dynarec/dyna_start.S
+#endif
+
+endif
+
+ifeq ($(WITH_DYNAREC), arm)
+		SOURCES_C += $(CORE_DIR)/src/r4300/new_dynarec/new_dynarec.c \
+						 $(CORE_DIR)/src/r4300/new_dynarec/arm/arm_cpu_features.c
+
+		SOURCES_ASM += \
+			$(CORE_DIR)/src/r4300/new_dynarec/arm/linkage_$(WITH_DYNAREC).S
+endif
+
+ifeq ($(WITH_DYNAREC), aarch64)
+		SOURCES_C += $(CORE_DIR)/src/r4300/new_dynarec/new_dynarec_64.c
+
+		SOURCES_ASM += \
+			$(CORE_DIR)/src/r4300/new_dynarec/arm64/linkage_$(WITH_DYNAREC).S
+endif
+
+ifeq ($(WITH_DYNAREC), $(filter $(WITH_DYNAREC), i386 i686 x86 x86_64 x64))
+		DYNAFLAGS += -DHAVE_DYNAREC_HACKTARUX
+ifneq ($(NOSSE), 1)
+ifeq (,$(findstring msvc,$(platform)))
+		CPUFLAGS += -msse -msse2
+endif
+endif
+		SOURCES_C += $(CORE_DIR)/src/r4300/hacktarux_dynarec/assemble.c \
+						 $(CORE_DIR)/src/r4300/hacktarux_dynarec/regcache.c \
+						 $(CORE_DIR)/src/r4300/hacktarux_dynarec/hacktarux_dynarec.c
+endif
+endif
+
+SOURCES_C += $(CORE_DIR)/src/r4300/empty_dynarec.c
+
+ifeq ($(NATIVE_MARCH), 1)
+	CPUFLAGS += -march=native
+endif
+
+### VIDEO PLUGINS ###
+
+# Rice
+
+ifeq ($(HAVE_RICE),1)
+CFLAGS   += -DHAVE_RICE
+CXXFLAGS += -DHAVE_RICE
+SOURCES_CXX += $(VIDEODIR_RICE)/Blender.cpp \
+				$(VIDEODIR_RICE)/gSP_rice.cpp \
+				$(VIDEODIR_RICE)/gDP_rice.cpp \
+            $(VIDEODIR_RICE)/Combiner.cpp \
+            $(VIDEODIR_RICE)/RiceConfig.cpp \
+            $(VIDEODIR_RICE)/ConvertImage16.cpp \
+            $(VIDEODIR_RICE)/ConvertImage.cpp \
+            $(VIDEODIR_RICE)/RiceDebugger.cpp \
+            $(VIDEODIR_RICE)/DecodedMux.cpp \
+            $(VIDEODIR_RICE)/DeviceBuilder.cpp \
+            $(VIDEODIR_RICE)/FrameBuffer.cpp \
+            $(VIDEODIR_RICE)/GraphicsContext.cpp \
+            $(VIDEODIR_RICE)/OGLCombiner.cpp \
+            $(VIDEODIR_RICE)/OGLDecodedMux.cpp \
+            $(VIDEODIR_RICE)/OGLES2FragmentShaders.cpp \
+            $(VIDEODIR_RICE)/OGLExtCombiner.cpp \
+            $(VIDEODIR_RICE)/OGLExtRender.cpp \
+            $(VIDEODIR_RICE)/OGLGraphicsContext.cpp \
+            $(VIDEODIR_RICE)/OGLRender.cpp \
+            $(VIDEODIR_RICE)/OGLRenderExt.cpp \
+            $(VIDEODIR_RICE)/OGLTexture.cpp \
+            $(VIDEODIR_RICE)/RenderBase.cpp \
+            $(VIDEODIR_RICE)/Render.cpp \
+            $(VIDEODIR_RICE)/RenderExt.cpp \
+            $(VIDEODIR_RICE)/RenderTexture.cpp \
+            $(VIDEODIR_RICE)/RSP_Parser.cpp \
+            $(VIDEODIR_RICE)/RSP_S2DEX.cpp \
+            $(VIDEODIR_RICE)/Texture.cpp \
+            $(VIDEODIR_RICE)/TextureManager.cpp \
+            $(VIDEODIR_RICE)/VectorMath.cpp \
+            $(VIDEODIR_RICE)/Video.cpp
+endif
+
+# Libretro
+
+ifeq ($(HAVE_OPENGL),1)
+SOURCES_C += $(LIBRETRO_COMM_DIR)/glsm/glsm.c
+endif
+
+SOURCES_C += $(LIBRETRO_DIR)/libretro.c \
+				 $(CORE_DIR)/src/plugin/emulate_game_controller_via_libretro.c \
+				 $(LIBRETRO_COMM_DIR)/memmap/memalign.c \
+				 $(LIBRETRO_COMM_DIR)/encodings/encoding_crc32.c \
+				 $(AUDIO_LIBRETRO_DIR)/audio_backend_libretro.c \
+
+ifeq ($(STATIC_LINKING),1)
+else
+SOURCES_C += \
+				 $(LIBRETRO_COMM_DIR)/file/config_file.c \
+				 $(LIBRETRO_COMM_DIR)/file/config_file_userdata.c \
+				 $(LIBRETRO_COMM_DIR)/vfs/vfs_implementation.c \
+				 $(LIBRETRO_COMM_DIR)/audio/resampler/audio_resampler.c \
+				 $(LIBRETRO_COMM_DIR)/audio/resampler/drivers/null_resampler.c \
+				 $(LIBRETRO_COMM_DIR)/audio/resampler/drivers/sinc_resampler.c \
+				 $(LIBRETRO_COMM_DIR)/audio/resampler/drivers/nearest_resampler.c \
+				 $(LIBRETRO_COMM_DIR)/compat/compat_strl.c \
+				 $(LIBRETRO_COMM_DIR)/compat/compat_snprintf.c \
+				 $(LIBRETRO_COMM_DIR)/compat/compat_strcasestr.c \
+				 $(LIBRETRO_COMM_DIR)/compat/compat_posix_string.c \
+				 $(LIBRETRO_COMM_DIR)/compat/fopen_utf8.c \
+				 $(LIBRETRO_COMM_DIR)/encodings/encoding_utf.c \
+				 $(LIBRETRO_COMM_DIR)/audio/conversion/float_to_s16.c \
+				 $(LIBRETRO_COMM_DIR)/audio/conversion/s16_to_float.c \
+				 $(LIBRETRO_COMM_DIR)/features/features_cpu.c
+endif
+
+ifeq ($(STATIC_LINKING),1)
+else
+SOURCES_C += $(LIBRETRO_COMM_DIR)/streams/file_stream.c \
+				 $(LIBRETRO_COMM_DIR)/hash/rhash.c \
+				 $(LIBRETRO_COMM_DIR)/lists/string_list.c \
+				 $(LIBRETRO_COMM_DIR)/string/stdstring.c \
+				 $(LIBRETRO_COMM_DIR)/file/file_path.c
+
+ifeq ($(HAVE_OPENGL),1)
+SOURCES_C += $(LIBRETRO_COMM_DIR)/gfx/gl_capabilities.c
+endif
+endif
+
+ifeq ($(WITH_CRC),brumme)
+   SOURCES_C += $(LIBRETRO_DIR)/brumme_crc.c
+else
+   SOURCES_C += $(LIBRETRO_DIR)/libretro_crc.c
+endif
+
+ifeq ($(HAVE_GLIDEN64),1)
+CFLAGS   += -DHAVE_GLIDEN64
+CXXFLAGS += -DHAVE_GLIDEN64
+SOURCES_C     += $(VIDEODIR_GLN64)/3DMath.c
+SOURCES_CXX   += \
+					 $(VIDEODIR_GLIDEN64)/src/mupenplus/CommonAPIImpl_mupenplus.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/mupenplus/Config_mupenplus.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/common/CommonAPIImpl_common.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/FrameBuffer_gliden64.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/FrameBufferInfo.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/DepthBuffer.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/TxFilterStub.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/Combiner_gliden64.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/F3DEX2CBFD.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/F3DEX2.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/gln64Config.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/CRC.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/F3D.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/GBI.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/gDP_gliden64.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/gSP.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/N64.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/F3DDKR.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/F3DEX.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/F3DPD.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/F3DSWSE.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/F3DWRUS.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/L3D.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/L3DEX.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/L3DEX2.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/S2DEX.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/S2DEX2.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/ZSort.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/OpenGL.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/RDP.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/RSP_gliden64.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/Turbo3D.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/Textures.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/PostProcessor.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/VI.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/ShaderUtils.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/mupenplus/OpenGL_mupenplus.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/MupenPlusPluginAPI.cpp
+
+ifeq ($(GLIDEN64ES),1)
+SOURCES_CXX	 += $(VIDEODIR_GLIDEN64)/src/GLES2/GLSLCombiner_gles2.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/GLES2/UniformSet.cpp
+else
+SOURCES_CXX  += $(VIDEODIR_GLIDEN64)/src/OGL3X/GLSLCombiner_ogl3x.cpp \
+					 $(VIDEODIR_GLIDEN64)/src/OGL3X/UniformBlock.cpp
+endif
+
+SOURCES_CXX +=  $(VIDEODIR_GLIDEN64)/src/CommonPluginAPI.cpp
+endif
+
+ifeq ($(HAVE_GLN64),1)
+CFLAGS   += -DHAVE_GLN64
+CXXFLAGS += -DHAVE_GLN64
+
+SOURCES_C += $(VIDEODIR_GLN64)/3DMath.c \
+            $(VIDEODIR_GLN64)/glN64Config.c \
+				$(VIDEODIR_GLN64)/Combiner_gles2n64.c \
+            $(VIDEODIR_GLN64)/FrameBuffer_gles2n64.c \
+            $(VIDEODIR_GLN64)/Hash.c \
+            $(VIDEODIR_GLN64)/DepthBuffer.c \
+            $(VIDEODIR_GLN64)/F3DEX2CBFD.c \
+            $(VIDEODIR_GLN64)/F3D.c \
+            $(VIDEODIR_GLN64)/F3DDKR.c \
+            $(VIDEODIR_GLN64)/F3DEX2.c \
+            $(VIDEODIR_GLN64)/F3DEX.c \
+            $(VIDEODIR_GLN64)/F3DPD.c \
+            $(VIDEODIR_GLN64)/F3DSWSE.c \
+            $(VIDEODIR_GLN64)/F3DWRUS.c \
+            $(VIDEODIR_GLN64)/GBI.c \
+            $(VIDEODIR_GLN64)/gDP_gles2n64.c \
+            $(VIDEODIR_GLN64)/gles2N64.c \
+            $(VIDEODIR_GLN64)/gSP_gles2n64.c \
+            $(VIDEODIR_GLN64)/L3D.c \
+            $(VIDEODIR_GLN64)/L3DEX2.c \
+            $(VIDEODIR_GLN64)/L3DEX.c \
+            $(VIDEODIR_GLN64)/N64.c \
+            $(VIDEODIR_GLN64)/OpenGL.c \
+            $(VIDEODIR_GLN64)/RDP.c \
+            $(VIDEODIR_GLN64)/gles2n64_rsp.c \
+            $(VIDEODIR_GLN64)/S2DEX2.c \
+            $(VIDEODIR_GLN64)/S2DEX.c \
+            $(VIDEODIR_GLN64)/ShaderCombiner.c \
+            $(VIDEODIR_GLN64)/Textures.c \
+            $(VIDEODIR_GLN64)/Turbo3D.c \
+            $(VIDEODIR_GLN64)/ZSort.c \
+            $(VIDEODIR_GLN64)/VI.c
+endif
+
+ifeq ($(HAVE_NEON),1)
+	SOURCES_ASM	+= $(LIBRETRO_COMM_DIR)/audio/conversion/float_to_s16_neon.S \
+						$(LIBRETRO_COMM_DIR)/audio/conversion/s16_to_float_neon.S \
+						$(LIBRETRO_COMM_DIR)/audio/resampler/drivers/sinc_resampler_neon.S
+endif
+
+
+SOURCES_C   += $(ROOT_DIR)/Graphics/RSP/gSP_funcs_C.c \
+					$(ROOT_DIR)/Graphics/RSP/gSP_state.c \
+				 	$(ROOT_DIR)/Graphics/RDP/gDP_funcs_C.c \
+					$(ROOT_DIR)/Graphics/RDP/gDP_state.c \
+					$(ROOT_DIR)/Graphics/RDP/RDP_state.c \
+					$(ROOT_DIR)/Graphics/RSP/RSP_state.c \
+					$(ROOT_DIR)/Graphics/3dmaths.c \
+					$(ROOT_DIR)/Graphics/HLE/Microcode/Fast3D.c
+SOURCES_CXX += $(ROOT_DIR)/Graphics/RSP/gSP_funcs.cpp \
+				 $(ROOT_DIR)/Graphics/RDP/gDP_funcs.cpp
+
+SOURCES_C += $(ROOT_DIR)/Graphics/plugins.c
+
+ifeq ($(HAVE_GLIDE64),1)
+CFLAGS   += -DHAVE_GLIDE64
+CXXFLAGS += -DHAVE_GLIDE64
+SOURCES_C += $(VIDEODIR_GLIDE)/Glide64/glide64_3dmath.c \
+            $(VIDEODIR_GLIDE)/Glide64/Framebuffer_glide64.c \
+            $(VIDEODIR_GLIDE)/Glide64/Glide64_Ini.c \
+            $(VIDEODIR_GLIDE)/Glide64/glidemain.c \
+            $(VIDEODIR_GLIDE)/Glide64/glide64_util.c \
+				$(VIDEODIR_GLIDE)/Glide64/Glide64_UCode.c \
+            $(VIDEODIR_GLIDE)/Glide64/glide64_gSP.c \
+            $(VIDEODIR_GLIDE)/Glide64/glide64_gDP.c \
+            $(VIDEODIR_GLIDE)/Glide64/Combine.c \
+            $(VIDEODIR_GLIDE)/Glide64/TexCache.c \
+				$(VIDEODIR_GLIDE)/Glide64/MiClWr.c \
+            $(VIDEODIR_GLIDE)/Glide64/TexLoad.c \
+				$(VIDEODIR_GLIDE)/Glide64/glide64_rdp.c
+
+# Glitch64
+SOURCES_C   += $(VIDEODIR_GLIDE)/Glitch64/glitch64_combiner.c \
+            $(VIDEODIR_GLIDE)/Glitch64/geometry.c \
+            $(VIDEODIR_GLIDE)/Glitch64/glitchmain.c \
+            $(VIDEODIR_GLIDE)/Glitch64/glitch64_textures.c
+endif
+
+ifeq ($(HAVE_THR_AL), 1)
+CFLAGS      += -DHAVE_THR_AL
+CXXFLAGS    += -DHAVE_THR_AL
+### Angrylion's renderer ###
+SOURCES_CXX += $(VIDEODIR_ANGRYLION)/parallel_al.cpp
+SOURCES_C   += $(VIDEODIR_ANGRYLION)/interface.c \
+				   $(VIDEODIR_ANGRYLION)/n64video.c
+ifeq ($(HAVE_RDP_DUMP), 1)
+	SOURCES_C += $(VIDEODIR_ANGRYLION)/rdp_dump.c
+	CFLAGS   += -DHAVE_RDP_DUMP
+	CXXFLAGS += -DHAVE_RDP_DUMP
+endif
+endif
+
+ifeq ($(HAVE_PARALLEL),1)
+	PARALLEL_RDP_IMPLEMENTATION = $(VIDEODIR_PARALLEL)/parallel-rdp
+	include $(PARALLEL_RDP_IMPLEMENTATION)/config.mk
+	CFLAGS   += $(PARALLEL_RDP_CFLAGS) -DHAVE_PARALLEL
+	CXXFLAGS += $(PARALLEL_RDP_CXXFLAGS) -DHAVE_PARALLEL
+	INCFLAGS += $(PARALLEL_RDP_INCLUDE_DIRS)
+	SOURCES_CXX += $(PARALLEL_RDP_SOURCES_CXX) $(VIDEODIR_PARALLEL)/parallel.cpp $(VIDEODIR_PARALLEL)/rdp.cpp
+	SOURCES_C += $(PARALLEL_RDP_SOURCES_C)
+	LDFLAGS += $(PARALLEL_RDP_LDFLAGS)
+endif
+
+ifeq ($(HAVE_PARALLEL_RSP), 1)
+	PARALLEL_RSP_ARCH := x86_64
+	SOURCES_CXX += $(RSPDIR_PARALLEL)/parallel.cpp \
+				   $(RSPDIR_PARALLEL)/rsp_disasm.cpp \
+				   $(wildcard $(RSPDIR_PARALLEL)/rsp/*.cpp) \
+				   $(wildcard $(RSPDIR_PARALLEL)/arch/$(PARALLEL_RSP_ARCH)/rsp/*.cpp)
+ifneq ($(DEBUG_JIT),)
+	CXXFLAGS += -DDEBUG_JIT
+	SOURCES_CXX += $(RSPDIR_PARALLEL)/debug_jit.cpp \
+				   $(RSPDIR_PARALLEL)/rsp.cpp
+	LDFLAGS += -ldl
+else
+	INCFLAGS += -I$(RSPDIR_PARALLEL)/arch/simd/rsp
+	SOURCES_CXX += $(RSPDIR_PARALLEL)/rsp_jit.cpp \
+				   $(RSPDIR_PARALLEL)/jit_allocator.cpp \
+				   $(RSPDIR_PARALLEL)/arch/simd/rsp/rsp_core.cpp
+	SOURCES_C += \
+				 $(RSPDIR_PARALLEL)/lightning/lib/jit_disasm.c \
+				 $(RSPDIR_PARALLEL)/lightning/lib/jit_memory.c \
+				 $(RSPDIR_PARALLEL)/lightning/lib/jit_names.c \
+				 $(RSPDIR_PARALLEL)/lightning/lib/jit_note.c \
+				 $(RSPDIR_PARALLEL)/lightning/lib/jit_print.c \
+				 $(RSPDIR_PARALLEL)/lightning/lib/jit_size.c \
+				 $(RSPDIR_PARALLEL)/lightning/lib/lightning.c
+
+ifneq (,$(findstring win,$(platform)))
+	SOURCES_C += $(RSPDIR_PARALLEL)/win32/mman/sys/mman.c
+	CFLAGS += -I$(RSPDIR_PARALLEL)/win32/mman
+endif
+endif
+
+	CXXFLAGS += -I$(RSPDIR_PARALLEL)/arch/$(PARALLEL_RSP_ARCH)/rsp -I$(RSPDIR_PARALLEL)/lightning/include
+	CFLAGS += -DHAVE_PARALLEL_RSP -DPARALLEL_INTEGRATION -I$(RSPDIR_PARALLEL)/lightning/include
+	CXXFLAGS += -DHAVE_PARALLEL_RSP -DPARALLEL_INTEGRATION
+endif
+
+ifeq ($(HAVE_OPENGL),1)
+ifeq ($(GLES),1)
+	GLFLAGS += -DHAVE_OPENGLES -DHAVE_OPENGLES2 -DDISABLE_3POINT
+	SOURCES_C += $(LIBRETRO_COMM_DIR)/glsym/glsym_es2.c
+else
+	#Texture sampling enhancements.
+	GLFLAGS += -DENABLE_3POINT -DENABLE_TEXTURE_SAMPLING
+
+	GLFLAGS += -DHAVE_OPENGL
+	SOURCES_C += $(LIBRETRO_COMM_DIR)/glsym/glsym_gl.c
+endif
+SOURCES_C += $(LIBRETRO_COMM_DIR)/glsym/rglgen.c
+endif

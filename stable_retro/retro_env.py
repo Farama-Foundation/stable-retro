@@ -135,7 +135,7 @@ class RetroEnv(gym.Env):
         if self._obs_type == retro.Observations.RAM:
             shape = self.get_ram().shape
         else:
-            img = [self.get_screen(p) for p in range(players)]
+            img = [self.get_screen(p, apply_rotation=True) for p in range(players)]
             shape = img[0].shape
         self.observation_space = gym.spaces.Box(
             low=0,
@@ -160,10 +160,29 @@ class RetroEnv(gym.Env):
             self.ram = self.get_ram()
             return self.ram
         elif self._obs_type == retro.Observations.IMAGE:
-            self.img = self.get_screen()
+            self.img = self.get_screen(apply_rotation=True)
             return self.img
         else:
             raise ValueError(f"Unrecognized observation type: {self._obs_type}")
+
+    def _rotation_steps(self):
+        try:
+            rotation = int(self.em.get_rotation())
+        except AttributeError:
+            return 0
+        return rotation % 4
+
+    def _apply_rotation(self, image):
+        steps = self._rotation_steps()
+        if steps == 0:
+            return image
+        if steps == 1:
+            return np.flipud(np.swapaxes(image, 0, 1))
+        if steps == 2:
+            return np.flipud(np.fliplr(image))
+        if steps == 3:
+            return np.fliplr(np.swapaxes(image, 0, 1))
+        return image
 
     def action_to_array(self, a):
         actions = []
@@ -243,7 +262,9 @@ class RetroEnv(gym.Env):
     def render(self):
         mode = self.render_mode
 
-        img = self.get_screen() if self.img is None else self.img
+        img = self.img
+        if img is None:
+            img = self.get_screen(apply_rotation=True)
         if mode == "rgb_array":
             return img
         elif mode == "human":
@@ -251,12 +272,7 @@ class RetroEnv(gym.Env):
                 from stable_retro.rendering import SimpleImageViewer
 
                 self.viewer = SimpleImageViewer()
-            rotation = 0
-            try:
-                rotation = int(self.em.get_rotation())
-            except AttributeError:
-                rotation = 0
-            self.viewer.imshow(img, rotation=rotation)
+            self.viewer.imshow(img, rotation=0)
             return self.viewer.isopen
 
     def close(self):
@@ -285,7 +301,7 @@ class RetroEnv(gym.Env):
             blocks.append(arr)
         return np.concatenate(blocks)
 
-    def get_screen(self, player=0):
+    def get_screen(self, player=0, apply_rotation=False):
         img = self.em.get_screen()
         x, y, w, h = self.data.crop_info(player)
         if not w or x + w > img.shape[1]:
@@ -297,8 +313,12 @@ class RetroEnv(gym.Env):
         else:
             h += y
         if x == 0 and y == 0 and w == img.shape[1] and h == img.shape[0]:
-            return img
-        return img[y:h, x:w]
+            result = img
+        else:
+            result = img[y:h, x:w]
+        if apply_rotation:
+            result = self._apply_rotation(result)
+        return result
 
     def load_state(self, statename, inttype=retro.data.Integrations.DEFAULT):
         if not statename.endswith(".state"):

@@ -68,23 +68,31 @@ class SimpleImageViewer:
         self.isopen = False
         self.display = get_display(display)
         self.maxwidth = maxwidth
+        self.width = 0
+        self.height = 0
+        self._rotation = 0
 
-    def imshow(self, arr):
+    def imshow(self, arr, rotation=0):
+        rotation_steps = int(rotation) % 4
+        height, width, _channels = arr.shape
+        display_width = width
+        display_height = height
+        if rotation_steps % 2:
+            display_width, display_height = display_height, display_width
+        if display_width > self.maxwidth:
+            scale = self.maxwidth / display_width
+            display_width = int(scale * display_width)
+            display_height = int(scale * display_height)
         if self.window is None:
-            height, width, _channels = arr.shape
-            if width > self.maxwidth:
-                scale = self.maxwidth / width
-                width = int(scale * width)
-                height = int(scale * height)
             self.window = get_window(
-                width=width,
-                height=height,
+                width=display_width,
+                height=display_height,
                 display=self.display,
                 vsync=False,
                 resizable=True,
             )
-            self.width = width
-            self.height = height
+            self.width = display_width
+            self.height = display_height
             self.isopen = True
 
             @self.window.event
@@ -95,6 +103,7 @@ class SimpleImageViewer:
             @self.window.event
             def on_close():
                 self.isopen = False
+        self._rotation = rotation_steps
 
         assert len(arr.shape) == 3, "You passed in an image with the wrong number shape"
         image = pyglet.image.ImageData(
@@ -105,17 +114,46 @@ class SimpleImageViewer:
             pitch=arr.shape[1] * -3,
         )
         texture = image.get_texture()
-        gl.glTexParameteri(
-            gl.GL_TEXTURE_2D,
-            gl.GL_TEXTURE_MAG_FILTER,
-            gl.GL_NEAREST,
-        )
-        texture.width = self.width
-        texture.height = self.height
-        self.window.clear()
         self.window.switch_to()
         self.window.dispatch_events()
-        texture.blit(0, 0)  # draw
+        self.window.clear()
+        gl.glViewport(0, 0, int(self.width), int(self.height))
+        gl.glBindTexture(texture.target, texture.id)
+        gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MIN_FILTER, gl.GL_NEAREST)
+        gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MAG_FILTER, gl.GL_NEAREST)
+        gl.glMatrixMode(gl.GL_TEXTURE)
+        gl.glPushMatrix()
+        gl.glLoadIdentity()
+        if self._rotation:
+            gl.glTranslatef(0.5, 0.5, 0.0)
+            gl.glRotatef(-90.0 * self._rotation, 0.0, 0.0, 1.0)
+            gl.glTranslatef(-0.5, -0.5, 0.0)
+        gl.glMatrixMode(gl.GL_PROJECTION)
+        gl.glPushMatrix()
+        gl.glLoadIdentity()
+        gl.glOrtho(0, self.width, self.height, 0, -1, 1)
+        gl.glMatrixMode(gl.GL_MODELVIEW)
+        gl.glPushMatrix()
+        gl.glLoadIdentity()
+        gl.glColor4f(1.0, 1.0, 1.0, 1.0)
+        gl.glBegin(gl.GL_TRIANGLE_FAN)
+        gl.glTexCoord2f(0.0, 0.0)
+        gl.glVertex2f(0.0, 0.0)
+        gl.glTexCoord2f(1.0, 0.0)
+        gl.glVertex2f(float(self.width), 0.0)
+        gl.glTexCoord2f(1.0, 1.0)
+        gl.glVertex2f(float(self.width), float(self.height))
+        gl.glTexCoord2f(0.0, 1.0)
+        gl.glVertex2f(0.0, float(self.height))
+        gl.glEnd()
+        gl.glBindTexture(texture.target, 0)
+        gl.glMatrixMode(gl.GL_MODELVIEW)
+        gl.glPopMatrix()
+        gl.glMatrixMode(gl.GL_PROJECTION)
+        gl.glPopMatrix()
+        gl.glMatrixMode(gl.GL_TEXTURE)
+        gl.glPopMatrix()
+        gl.glMatrixMode(gl.GL_MODELVIEW)
         self.window.flip()
 
     def close(self):

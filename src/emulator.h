@@ -35,6 +35,7 @@ public:
 	int getImageWidth() { return m_avInfo.geometry.base_width; }
 	int getImagePitch() { return m_imgPitch; }
 	int getImageDepth() { return m_imgDepth; }
+	int getRotation() const { return m_rotation; }
 	double getFrameRate() { return m_avInfo.timing.fps; }
 	int getAudioSamples() { return m_audioData.size() / 2; }
 	double getAudioRate() { return m_avInfo.timing.sample_rate; }
@@ -82,6 +83,7 @@ private:
 
 	retro_system_av_info m_avInfo = {};
 	std::vector<retro_memory_descriptor> m_map;
+	int m_rotation = 0;
 
 	char* m_corePath = nullptr;
 

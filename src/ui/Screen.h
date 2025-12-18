@@ -13,7 +13,7 @@ public:
 	~Screen();
 
 public slots:
-	void setImage(const QImage&);
+	void setImage(const QImage&, int rotation);
 	void setPaused(bool);
 	void gamesWereBetter() { m_nostalgia ^= 1; }
 
@@ -26,6 +26,7 @@ protected:
 	bool event(QEvent*) override;
 
 	std::unique_ptr<QOpenGLTexture> m_texture;
+	int m_rotation = 0;
 	bool m_nostalgia = false;
 	bool m_started = false;
 	bool m_paused = false;

@@ -28,7 +28,7 @@ Screen::~Screen() {
 	doneCurrent();
 }
 
-void Screen::setImage(const QImage& image) {
+void Screen::setImage(const QImage& image, int rotation) {
 	if (image.isNull()) {
 		return;
 	}
@@ -37,7 +37,9 @@ void Screen::setImage(const QImage& image) {
 	m_texture->destroy();
 	m_texture->setData(image, QOpenGLTexture::DontGenerateMipMaps);
 	doneCurrent();
-	setMinimumSize(image.size());
+	m_rotation = ((rotation % 4) + 4) % 4;
+	const QSize minSize = (m_rotation % 2) ? QSize(image.height(), image.width()) : image.size();
+	setMinimumSize(minSize);
 	m_started = true;
 	update();
 }
@@ -59,6 +61,14 @@ void Screen::paintGL() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glVertexPointer(2, GL_INT, 0, _glVertices);
 	glTexCoordPointer(2, GL_INT, 0, _glTexCoords);
+	glMatrixMode(GL_TEXTURE);
+	glLoadIdentity();
+	if (m_rotation) {
+		glTranslatef(0.5f, 0.5f, 0.f);
+		glRotatef(-90.f * m_rotation, 0.f, 0.f, 1.f);
+		glTranslatef(-0.5f, -0.5f, 0.f);
+	}
+	glMatrixMode(GL_MODELVIEW);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0, width(), height(), 0, 0, 1);

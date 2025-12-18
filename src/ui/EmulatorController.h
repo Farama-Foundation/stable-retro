@@ -56,7 +56,7 @@ public:
 signals:
 	void started();
 	void pauseChanged(bool);
-	void frameAvailable(const QImage&);
+	void frameAvailable(const QImage&, int rotation);
 	void dataUpdated();
 	void searchUpdated();
 	void movieStopped();
@@ -116,6 +116,7 @@ private:
 	bool m_running = false;
 	bool m_paused = false;
 	bool m_fastForward = false;
+	int m_rotation = 0;
 
 	QList<Cheat> m_cheats;
 

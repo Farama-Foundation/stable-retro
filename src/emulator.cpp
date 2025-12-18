@@ -122,6 +122,7 @@ bool Emulator::loadRom(const string& romPath) {
 	}
 	in.close();
 
+	m_rotation = 0;
 	auto res = retro_load_game(&gameInfo);
 	delete[] romData;
 	if (!res) {
@@ -397,6 +398,17 @@ bool Emulator::cbEnvironment(unsigned cmd, void* data) {
 		}
 		s_loadedEmulator->reconfigureAddressSpace();
 		return true;
+	case RETRO_ENVIRONMENT_SET_ROTATION: {
+		const unsigned* rotation = reinterpret_cast<const unsigned*>(data);
+		if (rotation) {
+			unsigned raw = *rotation % 4;
+			if (s_loadedEmulator->m_core == "FBNeo") {
+				raw = (4 - raw) % 4;
+			}
+			s_loadedEmulator->m_rotation = static_cast<int>(raw);
+		}
+		return true;
+	}
 	// Logs needs to be handled even when not used, otherwise some cores (ex: mame2003_plus) will crash
 	// Also very useful when integrating new emulators to debug issues within the core itself
 	case RETRO_ENVIRONMENT_GET_LOG_INTERFACE: {

@@ -251,7 +251,12 @@ class RetroEnv(gym.Env):
                 from stable_retro.rendering import SimpleImageViewer
 
                 self.viewer = SimpleImageViewer()
-            self.viewer.imshow(img)
+            rotation = 0
+            try:
+                rotation = int(self.em.get_rotation())
+            except AttributeError:
+                rotation = 0
+            self.viewer.imshow(img, rotation=rotation)
             return self.viewer.isopen
 
     def close(self):

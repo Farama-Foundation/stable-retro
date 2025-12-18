@@ -1,6 +1,7 @@
 #include "EmulatorController.h"
 
 #include <QCoreApplication>
+#include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
@@ -11,6 +12,7 @@
 #include <QMap>
 #include <QProcess>
 #include <QSettings>
+#include <QtGlobal>
 
 #include "coreinfo.h"
 #include "movie-bk2.h"
@@ -504,7 +506,9 @@ void EmulatorController::runOnce() {
 		static_cast<int>(height)
 	};
 
-	if (m_screen.constBits() != static_cast<const uchar*>(m_re.getImageData()) || m_crop != crop) {
+	int rotation = m_re.getRotation();
+	bool rotationChanged = rotation != m_rotation;
+	if (m_screen.constBits() != static_cast<const uchar*>(m_re.getImageData()) || m_crop != crop || rotationChanged) {
 		QImage::Format format = QImage::Format_RGB16;
 		switch (m_re.getImageDepth()) {
 		case 32:
@@ -526,9 +530,10 @@ void EmulatorController::runOnce() {
 			crop.setHeight(m_re.getImageHeight() - y);
 		}
 		m_screen = m_screen.copy(crop);
+		m_rotation = rotation;
 	}
 
-	emit frameAvailable(m_screen);
+	emit frameAvailable(m_screen, m_rotation);
 }
 
 void EmulatorController::runOneStep() {

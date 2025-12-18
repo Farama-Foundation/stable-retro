@@ -94,6 +94,10 @@ struct PyRetroEmulator {
 		return py::make_tuple(m_re.getImageWidth(), m_re.getImageHeight());
 	}
 
+	int getRotation() const {
+		return m_re.getRotation();
+	}
+
 	void setButtonMask(py::array_t<uint8_t> mask, unsigned player) {
 		if (mask.size() > N_BUTTONS) {
 			throw std::runtime_error("mask.size() > N_BUTTONS");
@@ -469,6 +473,7 @@ PYBIND11_MODULE(_retro, m) {
 		.def("get_state", &PyRetroEmulator::getState)
 		.def("set_state", &PyRetroEmulator::setState)
 		.def("get_screen", &PyRetroEmulator::getScreen)
+		.def("get_rotation", &PyRetroEmulator::getRotation)
 		.def("get_screen_rate", &PyRetroEmulator::getScreenRate)
 		.def("get_audio", &PyRetroEmulator::getAudio)
 		.def("get_audio_rate", &PyRetroEmulator::getAudioRate)

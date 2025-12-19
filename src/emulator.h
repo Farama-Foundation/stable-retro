@@ -3,12 +3,21 @@
 #include "libretro.h"
 #include "memory.h"
 
+#include <cstdint>
 #include <string>
 #include <vector>
 #include <cstring>
 #include <stdarg.h>
 #ifdef _WIN32
 #include <windows.h>
+#endif
+
+// Backfill serialization quirk definitions if building against an older libretro.h
+#ifndef RETRO_ENVIRONMENT_SET_SERIALIZATION_QUIRKS
+#define RETRO_ENVIRONMENT_SET_SERIALIZATION_QUIRKS 44
+#endif
+#ifndef RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE
+#define RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE (1 << 1)
 #endif
 
 namespace Retro {
@@ -58,6 +67,9 @@ public:
 	std::vector<std::string> buttons() const;
 	std::vector<std::string> keybinds() const;
 
+	// Ensure the core has run at least one frame after (re)initialization when required
+	void ensureInitializedForSerialization();
+
 private:
 	bool loadCore(const std::string& corePath);
 	void fixScreenSize(const std::string& romName);
@@ -95,5 +107,8 @@ private:
 	bool m_romLoaded = false;
 	std::string m_core;
 	std::string m_romPath;
+
+	uint64_t m_serializationQuirks = 0;
+	bool m_needsInitFrame = false;
 };
 }

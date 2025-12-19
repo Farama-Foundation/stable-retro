@@ -131,6 +131,10 @@ bool Emulator::loadRom(const string& romPath) {
 	retro_get_system_av_info(&m_avInfo);
 	fixScreenSize(romPath);
 
+	if (m_serializationQuirks & RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE) {
+		m_needsInitFrame = true;
+	}
+
 	m_romLoaded = true;
 	m_romPath = romPath;
 	return true;
@@ -140,6 +144,9 @@ void Emulator::run() {
 	assert(s_loadedEmulator == this);
 	m_audioData.clear();
 	retro_run();
+	if (m_serializationQuirks & RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE) {
+		m_needsInitFrame = false;
+	}
 }
 
 void Emulator::reset() {
@@ -169,6 +176,10 @@ void Emulator::reset() {
 	}
 
 	retro_reset();
+
+	if (m_serializationQuirks & RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE) {
+		m_needsInitFrame = true;
+	}
 }
 
 void Emulator::unloadCore() {
@@ -201,6 +212,7 @@ void Emulator::unloadRom() {
 
 bool Emulator::serialize(void* data, size_t size) {
 	assert(s_loadedEmulator == this);
+	ensureInitializedForSerialization();
 	return retro_serialize(data, size);
 }
 
@@ -213,7 +225,13 @@ bool Emulator::unserialize(const void* data, size_t size) {
 			reset();
 		}
 
-		return retro_unserialize(data, size);
+
+			ensureInitializedForSerialization();
+			bool ok = retro_unserialize(data, size);
+			if (ok && (m_serializationQuirks & RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE)) {
+				m_needsInitFrame = false;
+			}
+			return ok;
 	} catch (...) {
 		return false;
 	}
@@ -222,6 +240,13 @@ bool Emulator::unserialize(const void* data, size_t size) {
 size_t Emulator::serializeSize() {
 	assert(s_loadedEmulator == this);
 	return retro_serialize_size();
+}
+
+void Emulator::ensureInitializedForSerialization() {
+	if ((m_serializationQuirks & RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE) && m_needsInitFrame) {
+		// Run a single frame to satisfy cores that require initialization before (de)serialization
+		run();
+	}
 }
 
 void Emulator::clearCheats() {
@@ -282,6 +307,10 @@ bool Emulator::loadCore(const string& corePath) {
 	retro_set_input_poll(cbInputPoll);
 	retro_set_input_state(cbInputState);
 	retro_init();
+
+		if (m_serializationQuirks & RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE) {
+			m_needsInitFrame = true;
+		}
 
 	return true;
 }
@@ -414,6 +443,13 @@ bool Emulator::cbEnvironment(unsigned cmd, void* data) {
 	case RETRO_ENVIRONMENT_GET_LOG_INTERFACE: {
 		struct retro_log_callback *cb = (struct retro_log_callback *)data;
 		cb->log = cbLog;
+		return true;
+	}
+	case RETRO_ENVIRONMENT_SET_SERIALIZATION_QUIRKS: {
+		s_loadedEmulator->m_serializationQuirks = *reinterpret_cast<const uint64_t*>(data);
+		if (s_loadedEmulator->m_serializationQuirks & RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE) {
+			s_loadedEmulator->m_needsInitFrame = true;
+		}
 		return true;
 	}
 	default:

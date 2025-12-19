@@ -240,6 +240,7 @@ add_core(snes snes9x)
 add_core(genesis genesis_plus_gx)
 add_core(nes fceumm)
 add_core(atari2600 stella)
+add_core(n64 parallel_n64)
 
 if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
   message(warning "Detected Apple Silicon, skipping gambatte (gb)")

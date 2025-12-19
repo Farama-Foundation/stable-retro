@@ -1,0 +1,9 @@
+{
+    "N64": {
+        "lib": "parallel_n64",
+        "ext": ["n64"],
+        "rambase": 0,
+        "keybinds": ["X", "Z", null, "ENTER", "UP", "DOWN", "LEFT", "RIGHT", "J", "I", "Q", "W", "E", "O", null, null],
+        "buttons": ["A", "B", null, "START", "UP", "DOWN", "LEFT", "RIGHT", "C-RIGHT", "C-UP", "L", "R", "Z", "C-MODE", "L3", "R3"]
+    }
+}

@@ -40,8 +40,8 @@ public:
 	void reset();
 	AddressSpace* getAddressSpace();
 	const void* getImageData() { return m_imgData; }
-	int getImageHeight() { return m_avInfo.geometry.base_height; }
-	int getImageWidth() { return m_avInfo.geometry.base_width; }
+	int getImageHeight() { return m_imgHeight; }
+	int getImageWidth() { return m_imgWidth; }
 	int getImagePitch() { return m_imgPitch; }
 	int getImageDepth() { return m_imgDepth; }
 	int getRotation() const { return m_rotation; }
@@ -87,6 +87,8 @@ private:
 	// Video frame info
 	const void* m_imgData = nullptr;
 	size_t m_imgPitch = 0;
+	int m_imgWidth = 0;
+	int m_imgHeight = 0;
 	int m_imgDepth = 0;
 
 	// Audio buffer; accumulated during run()

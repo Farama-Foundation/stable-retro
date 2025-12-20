@@ -130,6 +130,8 @@ bool Emulator::loadRom(const string& romPath) {
 	}
 	retro_get_system_av_info(&m_avInfo);
 	fixScreenSize(romPath);
+	m_imgWidth = static_cast<int>(m_avInfo.geometry.base_width);
+	m_imgHeight = static_cast<int>(m_avInfo.geometry.base_height);
 
 	if (m_serializationQuirks & RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE) {
 		m_needsInitFrame = true;
@@ -458,13 +460,20 @@ bool Emulator::cbEnvironment(unsigned cmd, void* data) {
 	return false;
 }
 
-void Emulator::cbVideoRefresh(const void* data, unsigned, unsigned, size_t pitch) {
+void Emulator::cbVideoRefresh(const void* data, unsigned width, unsigned height, size_t pitch) {
 	assert(s_loadedEmulator);
 	if (data) {
 		s_loadedEmulator->m_imgData = data;
 	}
 	if (pitch) {
 		s_loadedEmulator->m_imgPitch = pitch;
+	}
+	if (width && height) {
+		s_loadedEmulator->m_imgWidth = static_cast<int>(width);
+		s_loadedEmulator->m_imgHeight = static_cast<int>(height);
+	} else {
+		s_loadedEmulator->m_imgWidth = static_cast<int>(s_loadedEmulator->m_avInfo.geometry.base_width);
+		s_loadedEmulator->m_imgHeight = static_cast<int>(s_loadedEmulator->m_avInfo.geometry.base_height);
 	}
 }
 

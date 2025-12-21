@@ -1,10 +1,15 @@
 {
     "N64": {
         "lib": "parallel_n64",
-        "ext": ["n64"],
+        "ext": ["n64", "v64", "z64", "bin", "u1", "ndd"],
         "rambase": 0,
         "keybinds": ["X", "Z", null, "ENTER", "UP", "DOWN", "LEFT", "RIGHT", "J", "I", "Q", "W", "E", "O", null, null],
         "buttons": ["A", "B", null, "START", "UP", "DOWN", "LEFT", "RIGHT", "C-RIGHT", "C-UP", "L", "R", "Z", "C-MODE", "L3", "R3"],
+        "actions": [
+            [[], ["UP"], ["DOWN"]],
+            [[], ["LEFT"], ["RIGHT"]],
+            [[], ["A"], ["B"], ["Z"], ["L"], ["R"], ["C-UP"], ["C-RIGHT"], ["START"]]
+        ],
         "types": ["|u1", ">u2", ">u4", "|i1", ">i2", ">i4", "|d1", ">d2", ">d4", ">d6", ">d8", ">n4", ">n6", ">n8"]
     }
 }

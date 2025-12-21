@@ -49,7 +49,9 @@ def _parse_integrations(s: str):
         return d.Integrations.CUSTOM_ONLY
     if s in {"all"}:
         return d.Integrations.ALL
-    raise SystemExit(f"Unknown integrations: {s} (use one of: default|stable|contrib|experimental|custom|all)")
+    raise SystemExit(
+        f"Unknown integrations: {s} (use one of: default|stable|contrib|experimental|custom|all)",
+    )
 
 
 @dataclass(frozen=True)
@@ -76,11 +78,11 @@ class CoreSkip:
     reason: str
 
 
-def _iter_installed_roms(inttype) -> List[Candidate]:
+def _iter_installed_roms(inttype) -> list[Candidate]:
     import stable_retro
     import stable_retro.data as d
 
-    out: List[Candidate] = []
+    out: list[Candidate] = []
     for game in d.list_games(inttype):
         try:
             rom = d.get_romfile_path(game, inttype)
@@ -94,18 +96,20 @@ def _iter_installed_roms(inttype) -> List[Candidate]:
     return out
 
 
-def _pick_representative_rom_per_system(cands: Iterable[Candidate]) -> Dict[str, Candidate]:
-    chosen: Dict[str, Candidate] = {}
+def _pick_representative_rom_per_system(
+    cands: Iterable[Candidate],
+) -> dict[str, Candidate]:
+    chosen: dict[str, Candidate] = {}
     for c in cands:
         if c.system not in chosen:
             chosen[c.system] = c
     return chosen
 
 
-def _group_systems_by_core_lib() -> Dict[str, List[str]]:
+def _group_systems_by_core_lib() -> dict[str, list[str]]:
     import stable_retro.data as d
 
-    lib_to_systems: Dict[str, List[str]] = {}
+    lib_to_systems: dict[str, list[str]] = {}
     for system, info in d.EMU_INFO.items():
         lib = info.get("lib")
         if not lib:
@@ -122,7 +126,7 @@ def _bench_one_rom(
     rom_path: str,
     seconds: float,
     screen: bool,
-) -> Tuple[int, float]:
+) -> tuple[int, float]:
     import stable_retro
     import stable_retro.data as d
 
@@ -171,11 +175,18 @@ def _fmt_float(x: float) -> str:
     return f"{x:,.2f}"
 
 
-def main(argv: Optional[List[str]] = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     _set_single_thread_env()
 
-    p = argparse.ArgumentParser(description="Benchmark max FPS (steps/sec) per libretro core.")
-    p.add_argument("--seconds", type=float, default=5.0, help="Benchmark duration per core (default: 5)")
+    p = argparse.ArgumentParser(
+        description="Benchmark max FPS (steps/sec) per libretro core.",
+    )
+    p.add_argument(
+        "--seconds",
+        type=float,
+        default=5.0,
+        help="Benchmark duration per core (default: 5)",
+    )
     p.add_argument(
         "--integrations",
         type=str,
@@ -218,23 +229,29 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     lib_to_systems = _group_systems_by_core_lib()
 
-    results: List[CoreBenchResult] = []
-    skips: List[CoreSkip] = []
+    results: list[CoreBenchResult] = []
+    skips: list[CoreSkip] = []
 
     interrupted = False
     for lib, systems in lib_to_systems.items():
-        chosen: Optional[Candidate] = None
+        chosen: Candidate | None = None
         for sysname in systems:
             c = by_system.get(sysname)
             if c is not None:
                 chosen = c
                 break
         if chosen is None:
-            skips.append(CoreSkip(core_lib=lib, reason="no ROM found for any supported system"))
+            skips.append(
+                CoreSkip(core_lib=lib, reason="no ROM found for any supported system"),
+            )
             continue
 
         try:
-            steps, elapsed = _bench_one_rom(chosen.rom_path, seconds=args.seconds, screen=args.screen)
+            steps, elapsed = _bench_one_rom(
+                chosen.rom_path,
+                seconds=args.seconds,
+                screen=args.screen,
+            )
             sps = steps / elapsed if elapsed > 0 else 0.0
             results.append(
                 CoreBenchResult(
@@ -245,17 +262,21 @@ def main(argv: Optional[List[str]] = None) -> int:
                     steps=steps,
                     steps_per_sec=sps,
                     screen=args.screen,
-                )
+                ),
             )
         except KeyboardInterrupt:
             interrupted = True
             break
         except Exception as e:
-            skips.append(CoreSkip(core_lib=lib, reason=f"error: {type(e).__name__}: {e}"))
+            skips.append(
+                CoreSkip(core_lib=lib, reason=f"error: {type(e).__name__}: {e}"),
+            )
 
     results_sorted = sorted(results, key=lambda r: r.steps_per_sec, reverse=True)
 
-    print(f"ROM systems found: {len(by_system)} | Cores discovered: {len(lib_to_systems)}")
+    print(
+        f"ROM systems found: {len(by_system)} | Cores discovered: {len(lib_to_systems)}",
+    )
     print(f"Benchmark: {args.seconds}s per core | screen={args.screen}")
     if args.hw_render:
         print("Env: STABLE_RETRO_HW_RENDER=1")
@@ -276,7 +297,7 @@ def main(argv: Optional[List[str]] = None) -> int:
                 f"{_fmt_float(r.steps_per_sec)} | "
                 f"{r.core_lib} | "
                 f"{r.system} | "
-                f"{r.game}"
+                f"{r.game}",
             )
         print()
 

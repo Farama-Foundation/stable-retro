@@ -241,7 +241,6 @@ add_core(genesis genesis_plus_gx)
 add_core(nes fceumm)
 add_core(atari2600 stella)
 
-
 if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
   message(warning "Detected Apple Silicon, skipping gambatte (gb)")
 else()
@@ -254,7 +253,10 @@ add_core(32x picodrive)
 add_core(saturn mednafen_saturn)
 
 if(APPLE)
-  message(WARNING "FBNeo arcade and parallel N64 emulator is currently not supported on macOS")
+  message(
+    WARNING
+      "FBNeo arcade and parallel N64 emulator is currently not supported on macOS"
+  )
 else()
   add_core(fbneo fbneo)
   add_core(n64 parallel_n64)

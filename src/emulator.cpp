@@ -135,6 +135,17 @@ bool Emulator::loadRom(const string& romPath) {
 	retro_get_system_av_info(&m_avInfo);
 	fixScreenSize(romPath);
 
+	// For some cores (notably some N64 cores), the initial AV info can be wrong.
+	// Prefer the per-frame dimensions passed to cbVideoRefresh.
+	{
+		retro_system_info systemInfo;
+		retro_get_system_info(&systemInfo);
+		m_updateGeometryFromVideoRefresh =
+			!strcmp(systemInfo.library_name, "ParaLLEl N64") ||
+			!strcmp(systemInfo.library_name, "Mupen64Plus") ||
+			!strcmp(systemInfo.library_name, "Mupen64Plus-Next");
+	}
+
 	if (m_serializationQuirks & RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE) {
 		m_needsInitFrame = true;
 	}
@@ -345,6 +356,16 @@ void Emulator::fixScreenSize(const string& romName) {
 	} else if (!strcmp(systemInfo.library_name, "Mednafen PCE Fast")) {
 		m_avInfo.geometry.base_width = 256;
 		m_avInfo.geometry.base_height = 242;
+	} else if (!strcmp(systemInfo.library_name, "ParaLLEl N64") ||
+			   !strcmp(systemInfo.library_name, "Mupen64Plus") ||
+			   !strcmp(systemInfo.library_name, "Mupen64Plus-Next")) {
+		// Some N64 libretro cores report a half-height (or otherwise unexpected)
+		// base_height which causes the frontend to display only the top half
+		// of the frame. Ensure we have at least a 480px height reported so the
+		// image isn't vertically cropped.
+		if (m_avInfo.geometry.base_height < 480) {
+			m_avInfo.geometry.base_height = 480;
+		}
 	}
 }
 
@@ -462,8 +483,18 @@ bool Emulator::cbEnvironment(unsigned cmd, void* data) {
 	return false;
 }
 
-void Emulator::cbVideoRefresh(const void* data, unsigned, unsigned, size_t pitch) {
+void Emulator::cbVideoRefresh(const void* data, unsigned width, unsigned height, size_t pitch) {
 	assert(s_loadedEmulator);
+	if (s_loadedEmulator->m_updateGeometryFromVideoRefresh && width && height) {
+		s_loadedEmulator->m_avInfo.geometry.base_width = width;
+		s_loadedEmulator->m_avInfo.geometry.base_height = height;
+		if (s_loadedEmulator->m_avInfo.geometry.max_width < width) {
+			s_loadedEmulator->m_avInfo.geometry.max_width = width;
+		}
+		if (s_loadedEmulator->m_avInfo.geometry.max_height < height) {
+			s_loadedEmulator->m_avInfo.geometry.max_height = height;
+		}
+	}
 	// Hardware rendering: the core is signaling that the framebuffer lives on the GPU.
 	// We currently don't support GPU readback here; ignore and keep m_imgData null.
 	if (data == RETRO_HW_FRAME_BUFFER_VALID) {

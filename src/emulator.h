@@ -110,5 +110,6 @@ private:
 
 	uint64_t m_serializationQuirks = 0;
 	bool m_needsInitFrame = false;
+	bool m_updateGeometryFromVideoRefresh = false;
 };
 }

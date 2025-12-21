@@ -18,10 +18,9 @@ from __future__ import annotations
 import argparse
 import gc
 import os
-import sys
 import time
 from dataclasses import dataclass
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Iterable
 
 
 def _set_single_thread_env() -> None:
@@ -218,9 +217,6 @@ def main(argv: list[str] | None = None) -> int:
         os.environ["STABLE_RETRO_HW_RENDER"] = "1"
     if args.n64_gfxplugin:
         os.environ["STABLE_RETRO_PARALLEL_N64_GFXPLUGIN"] = args.n64_gfxplugin
-
-    # Import after env is set.
-    import stable_retro.data as d
 
     inttype = _parse_integrations(args.integrations)
 

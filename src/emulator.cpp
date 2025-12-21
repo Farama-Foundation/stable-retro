@@ -28,7 +28,11 @@ static Emulator* s_loadedEmulator = nullptr;
 static map<string, const char*> s_envVariables = {
 	{ "genesis_plus_gx_bram", "per game" },
 	{ "genesis_plus_gx_render", "single field" },
-	{ "genesis_plus_gx_blargg_ntsc_filter", "disabled" }
+	{ "genesis_plus_gx_blargg_ntsc_filter", "disabled" },
+
+	// Parallel-N64 defaults: force a CPU-rendered framebuffer so the frontend can read pixels.
+	// If left on auto, the core may choose an OpenGL path and provide no CPU buffer.
+	{ "parallel-n64-gfxplugin", "angrylion" },
 };
 
 static void (*retro_init)(void);
@@ -460,6 +464,13 @@ bool Emulator::cbEnvironment(unsigned cmd, void* data) {
 
 void Emulator::cbVideoRefresh(const void* data, unsigned, unsigned, size_t pitch) {
 	assert(s_loadedEmulator);
+	// Hardware rendering: the core is signaling that the framebuffer lives on the GPU.
+	// We currently don't support GPU readback here; ignore and keep m_imgData null.
+	if (data == RETRO_HW_FRAME_BUFFER_VALID) {
+		s_loadedEmulator->m_imgData = nullptr;
+		s_loadedEmulator->m_imgPitch = 0;
+		return;
+	}
 	if (data) {
 		s_loadedEmulator->m_imgData = data;
 	}

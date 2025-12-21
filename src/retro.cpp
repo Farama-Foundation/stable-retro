@@ -65,11 +65,28 @@ struct PyRetroEmulator {
 		py::array_t<uint8_t> arr({ { h, w, 3 } });
 		uint8_t* data = arr.mutable_data();
 		Image out(Image::Format::RGB888, data, w, h, w);
+		const void* img = m_re.getImageData();
+		if (!img) {
+			// Some cores (notably N64) can take a number of frames before the first CPU framebuffer is produced.
+			for (int i = 0; i < 180 && !img; ++i) {
+				m_re.run();
+				img = m_re.getImageData();
+			}
+		}
+		if (!img) {
+			throw std::runtime_error(
+				"Core did not provide a CPU framebuffer. "
+				"This usually means the core is using hardware rendering, which stable-retro can't capture yet. "
+				"For N64/parallel_n64, try forcing a software renderer (parallel-n64-gfxplugin=angrylion)."
+			);
+		}
 		Image in;
 		if (m_re.getImageDepth() == 16) {
-			in = Image(Image::Format::RGB565, m_re.getImageData(), w, h, m_re.getImagePitch());
+			in = Image(Image::Format::RGB565, img, w, h, m_re.getImagePitch());
 		} else if (m_re.getImageDepth() == 32) {
-			in = Image(Image::Format::RGBX888, m_re.getImageData(), w, h, m_re.getImagePitch());
+			in = Image(Image::Format::RGBX888, img, w, h, m_re.getImagePitch());
+		} else {
+			throw std::runtime_error("Unsupported image depth from core");
 		}
 		in.copyTo(&out);
 		return arr;

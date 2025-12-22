@@ -20,6 +20,7 @@ Currently added games on top of gym-retro:
 *	Virtua Fighter 2 - Genesis
 *	Virtua Fighter 2 - Saturn
 *	Mortal Kombat 1 - Sega CD
+*	Mortal Kombat Trilogy - Nintendo 64
 
 PvP games that support two models fighting each other:
 *	Samurai Showdown - Genesis
@@ -40,13 +41,14 @@ As well as additional states on already integrated games.
 	- Game Boy Advance (via mGBA)
 	- Nintendo Entertainment System (via FCEUmm)
 	- Super Nintendo Entertainment System (via Snes9x)
+	- Nintendo 64(via parallel_n64)(Experimental)
 - Sega
 	- GameGear (via Genesis Plus GX)
 	- Genesis/Mega Drive (via Genesis Plus GX)
 	- Master System (via Genesis Plus GX)
 	- 32x (via Picodrive)
-		- Saturn (via Beetle Saturn)
-		- Sega CD (via Genesis Plus GX)
+	- Saturn (via Beetle Saturn)
+	- Sega CD (via Genesis Plus GX)
 - Arcade Machines (via FBNeo):
   	- Neo Geo (MVS hardware: 1990–2004)
  	- Sega System 1 (1983–1987)

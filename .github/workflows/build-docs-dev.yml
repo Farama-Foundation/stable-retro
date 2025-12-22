@@ -2,6 +2,8 @@ name: Build main branch documentation website
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
 permissions:
   contents: write
 jobs:
@@ -16,6 +18,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
             python-version: '3.9'
+
+      - name: Install system packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git cmake capnproto zlib1g-dev build-essential pkg-config libzip-dev libbz2-dev python3-opengl
 
       - name: Install dependencies
         run: pip install -r docs/requirements.txt

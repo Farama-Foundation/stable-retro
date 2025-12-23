@@ -19,9 +19,9 @@ import argparse
 import gc
 import json
 import os
-from pathlib import Path
 import time
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Iterable
 
 
@@ -360,7 +360,9 @@ def main(argv: list[str] | None = None) -> int:
     results_sorted = sorted(results, key=lambda r: r.steps_per_sec, reverse=True)
 
     print(f"Benchmark spec: {bench_path}")
-    print(f"Benchmark: {args.seconds}s per entry | warmup_steps={args.warmup_steps} | screen={args.screen}")
+    print(
+        f"Benchmark: {args.seconds}s per entry | warmup_steps={args.warmup_steps} | screen={args.screen}",
+    )
     if args.hw_render:
         print("Env: STABLE_RETRO_HW_RENDER=1")
     if args.n64_gfxplugin:

@@ -33,6 +33,12 @@ static map<string, const char*> s_envVariables = {
 	// Parallel-N64 defaults: force a CPU-rendered framebuffer so the frontend can read pixels.
 	// If left on auto, the core may choose an OpenGL path and provide no CPU buffer.
 	{ "parallel-n64-gfxplugin", "angrylion" },
+
+	// Beetle Saturn: trim overscan so hi-res video fills the viewport without letterboxing.
+	{ "beetle_saturn_initial_scanline", "8" },
+	{ "beetle_saturn_last_scanline", "231" },
+	{ "beetle_saturn_initial_scanline_pal", "16" },
+	{ "beetle_saturn_last_scanline_pal", "271" },
 };
 
 static void (*retro_init)(void);
@@ -143,7 +149,9 @@ bool Emulator::loadRom(const string& romPath) {
 		m_updateGeometryFromVideoRefresh =
 			!strcmp(systemInfo.library_name, "ParaLLEl N64") ||
 			!strcmp(systemInfo.library_name, "Mupen64Plus") ||
-			!strcmp(systemInfo.library_name, "Mupen64Plus-Next");
+			!strcmp(systemInfo.library_name, "Mupen64Plus-Next") ||
+			!strcmp(systemInfo.library_name, "Beetle Saturn") ||
+			!strcmp(systemInfo.library_name, "Mednafen Saturn");
 	}
 
 	if (m_serializationQuirks & RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE) {
@@ -356,6 +364,12 @@ void Emulator::fixScreenSize(const string& romName) {
 	} else if (!strcmp(systemInfo.library_name, "Mednafen PCE Fast")) {
 		m_avInfo.geometry.base_width = 256;
 		m_avInfo.geometry.base_height = 242;
+	} else if (!strcmp(systemInfo.library_name, "Beetle Saturn") ||
+			   !strcmp(systemInfo.library_name, "Mednafen Saturn")) {
+		// Beetle Saturn always reports 320x240 even when outputting wider/higher frames
+		m_avInfo.geometry.base_width = 352;
+		m_avInfo.geometry.base_height = 240;
+		m_updateGeometryFromVideoRefresh = true;
 	} else if (!strcmp(systemInfo.library_name, "ParaLLEl N64") ||
 			   !strcmp(systemInfo.library_name, "Mupen64Plus") ||
 			   !strcmp(systemInfo.library_name, "Mupen64Plus-Next")) {
@@ -393,7 +407,7 @@ void Emulator::reconfigureAddressSpace() {
 // callback for logging from emulator
 // turned off by default to avoid spamming the log, only used for debugging issues within cores
 static void cbLog(enum retro_log_level level, const char *fmt, ...) {
-#if 0
+#if 1
 	char buffer[4096] = {0};
 	static const char * levelName[] = { "DEBUG", "INFO", "WARNING", "ERROR" };
 	va_list va;
@@ -488,6 +502,10 @@ void Emulator::cbVideoRefresh(const void* data, unsigned width, unsigned height,
 	if (s_loadedEmulator->m_updateGeometryFromVideoRefresh && width && height) {
 		s_loadedEmulator->m_avInfo.geometry.base_width = width;
 		s_loadedEmulator->m_avInfo.geometry.base_height = height;
+		if (height) {
+			s_loadedEmulator->m_avInfo.geometry.aspect_ratio =
+				static_cast<float>(width) / static_cast<float>(height);
+		}
 		if (s_loadedEmulator->m_avInfo.geometry.max_width < width) {
 			s_loadedEmulator->m_avInfo.geometry.max_width = width;
 		}

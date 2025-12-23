@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "benchmarks": [
+    {
+      "core_lib": "gambatte",
+      "system": "GameBoy",
+      "game": "BattleBull-GameBoy-v0"
+    },
+    {
+      "core_lib": "stella",
+      "system": "Atari2600",
+      "game": "AirRaid-Atari2600-v0"
+    },
+    {
+      "core_lib": "fceumm",
+      "system": "Nes",
+      "game": "1942-Nes-v0"
+    },
+    {
+      "core_lib": "genesis_plus_gx",
+      "system": "Genesis",
+      "game": "3NinjasKickBack-Genesis-v0"
+    },
+    {
+      "core_lib": "fbneo",
+      "system": "FBNeo",
+      "game": "MortalKombat2-Arcade-v0"
+    },
+    {
+      "core_lib": "snes9x",
+      "system": "Snes",
+      "game": "AcceleBrid-Snes-v0"
+    },
+    {
+      "core_lib": "picodrive",
+      "system": "32x",
+      "game": "VirtuaFighter-32x-v0"
+    },
+    {
+      "core_lib": "parallel_n64",
+      "system": "N64",
+      "game": "MortalKombatTrilogy-N64-v0"
+    },
+    {
+      "core_lib": "mednafen_saturn",
+      "system": "Saturn",
+      "game": "VirtuaFighter2-Saturn-v0"
+    }
+  ]
+}

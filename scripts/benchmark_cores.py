@@ -17,7 +17,9 @@ from __future__ import annotations
 
 import argparse
 import gc
+import json
 import os
+from pathlib import Path
 import time
 from dataclasses import dataclass
 from typing import Iterable
@@ -54,6 +56,13 @@ def _parse_integrations(s: str):
 
 
 @dataclass(frozen=True)
+class BenchmarkSpec:
+    core_lib: str
+    system: str
+    game: str
+
+
+@dataclass(frozen=True)
 class Candidate:
     system: str
     game: str
@@ -75,6 +84,42 @@ class CoreBenchResult:
 class CoreSkip:
     core_lib: str
     reason: str
+
+
+def _default_benchmark_json_path() -> Path:
+    # Default to this script's directory.
+    return Path(__file__).resolve().with_name("benchmark.json")
+
+
+def _load_benchmark_specs(path: Path) -> list[BenchmarkSpec]:
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError as e:
+        raise SystemExit(
+            f"Benchmark file not found: {path} (create it or pass --benchmark-json)",
+        ) from e
+
+    if not isinstance(raw, dict) or "benchmarks" not in raw:
+        raise SystemExit(f"Invalid benchmark file format: {path}")
+
+    benches = raw.get("benchmarks")
+    if not isinstance(benches, list) or not benches:
+        raise SystemExit(f"Benchmark file has no benchmarks: {path}")
+
+    specs: list[BenchmarkSpec] = []
+    for i, item in enumerate(benches):
+        if not isinstance(item, dict):
+            raise SystemExit(f"Invalid benchmark entry at index {i} in {path}")
+        try:
+            core_lib = str(item["core_lib"])
+            system = str(item["system"])
+            game = str(item["game"])
+        except KeyError as e:
+            raise SystemExit(
+                f"Missing key {e} in benchmark entry at index {i} in {path}",
+            ) from e
+        specs.append(BenchmarkSpec(core_lib=core_lib, system=system, game=game))
+    return specs
 
 
 def _iter_installed_roms(inttype) -> list[Candidate]:
@@ -125,6 +170,8 @@ def _bench_one_rom(
     rom_path: str,
     seconds: float,
     screen: bool,
+    *,
+    warmup_steps: int,
 ) -> tuple[int, float]:
     import stable_retro
     import stable_retro.data as d
@@ -139,7 +186,7 @@ def _bench_one_rom(
         em.step()  # initialize
 
         # Warmup
-        for _ in range(30):
+        for _ in range(warmup_steps):
             em.step()
             if screen:
                 _ = em.get_screen()
@@ -174,9 +221,7 @@ def _fmt_float(x: float) -> str:
     return f"{x:,.2f}"
 
 
-def main(argv: list[str] | None = None) -> int:
-    _set_single_thread_env()
-
+def _parse_args(argv: list[str] | None) -> argparse.Namespace:
     p = argparse.ArgumentParser(
         description="Benchmark max FPS (steps/sec) per libretro core.",
     )
@@ -184,7 +229,19 @@ def main(argv: list[str] | None = None) -> int:
         "--seconds",
         type=float,
         default=5.0,
-        help="Benchmark duration per core (default: 5)",
+        help="Benchmark duration per entry (default: 5)",
+    )
+    p.add_argument(
+        "--warmup-steps",
+        type=int,
+        default=30,
+        help="Warmup steps before timing (default: 30)",
+    )
+    p.add_argument(
+        "--benchmark-json",
+        type=str,
+        default=str(_default_benchmark_json_path()),
+        help="Benchmark spec JSON file (default: scripts/benchmark.json)",
     )
     p.add_argument(
         "--integrations",
@@ -212,6 +269,15 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.seconds <= 0:
         raise SystemExit("--seconds must be > 0")
+    if args.warmup_steps < 0:
+        raise SystemExit("--warmup-steps must be >= 0")
+    return args
+
+
+def main(argv: list[str] | None = None) -> int:
+    _set_single_thread_env()
+
+    args = _parse_args(argv)
 
     if args.hw_render:
         os.environ["STABLE_RETRO_HW_RENDER"] = "1"
@@ -220,40 +286,60 @@ def main(argv: list[str] | None = None) -> int:
 
     inttype = _parse_integrations(args.integrations)
 
-    cands = _iter_installed_roms(inttype)
-    by_system = _pick_representative_rom_per_system(cands)
+    bench_path = Path(args.benchmark_json)
+    specs = _load_benchmark_specs(bench_path)
 
-    lib_to_systems = _group_systems_by_core_lib()
+    # Optional consistency check: map system -> core lib from EMU_INFO.
+    import stable_retro.data as d
+
+    system_to_lib: dict[str, str] = {}
+    for system, info in d.EMU_INFO.items():
+        lib = info.get("lib")
+        if lib:
+            system_to_lib[system] = lib
 
     results: list[CoreBenchResult] = []
     skips: list[CoreSkip] = []
 
     interrupted = False
-    for lib, systems in lib_to_systems.items():
-        chosen: Candidate | None = None
-        for sysname in systems:
-            c = by_system.get(sysname)
-            if c is not None:
-                chosen = c
-                break
-        if chosen is None:
+    for spec in specs:
+        expected_lib = system_to_lib.get(spec.system)
+        if expected_lib is not None and expected_lib != spec.core_lib:
             skips.append(
-                CoreSkip(core_lib=lib, reason="no ROM found for any supported system"),
+                CoreSkip(
+                    core_lib=spec.core_lib,
+                    reason=(
+                        f"system/core mismatch for {spec.system}: benchmark.json has {spec.core_lib}"
+                        f" but EMU_INFO maps to {expected_lib}"
+                    ),
+                ),
+            )
+            continue
+
+        try:
+            rom_path = d.get_romfile_path(spec.game, inttype)
+        except Exception as e:
+            skips.append(
+                CoreSkip(
+                    core_lib=spec.core_lib,
+                    reason=f"ROM not found for game {spec.game} ({spec.system}): {type(e).__name__}: {e}",
+                ),
             )
             continue
 
         try:
             steps, elapsed = _bench_one_rom(
-                chosen.rom_path,
+                rom_path,
                 seconds=args.seconds,
                 screen=args.screen,
+                warmup_steps=args.warmup_steps,
             )
             sps = steps / elapsed if elapsed > 0 else 0.0
             results.append(
                 CoreBenchResult(
-                    core_lib=lib,
-                    system=chosen.system,
-                    game=chosen.game,
+                    core_lib=spec.core_lib,
+                    system=spec.system,
+                    game=spec.game,
                     seconds=elapsed,
                     steps=steps,
                     steps_per_sec=sps,
@@ -265,15 +351,16 @@ def main(argv: list[str] | None = None) -> int:
             break
         except Exception as e:
             skips.append(
-                CoreSkip(core_lib=lib, reason=f"error: {type(e).__name__}: {e}"),
+                CoreSkip(
+                    core_lib=spec.core_lib,
+                    reason=f"error running {spec.game}: {type(e).__name__}: {e}",
+                ),
             )
 
     results_sorted = sorted(results, key=lambda r: r.steps_per_sec, reverse=True)
 
-    print(
-        f"ROM systems found: {len(by_system)} | Cores discovered: {len(lib_to_systems)}",
-    )
-    print(f"Benchmark: {args.seconds}s per core | screen={args.screen}")
+    print(f"Benchmark spec: {bench_path}")
+    print(f"Benchmark: {args.seconds}s per entry | warmup_steps={args.warmup_steps} | screen={args.screen}")
     if args.hw_render:
         print("Env: STABLE_RETRO_HW_RENDER=1")
     if args.n64_gfxplugin:

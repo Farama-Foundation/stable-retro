@@ -1,0 +1,512 @@
+DEPS_DIR          = $(CORE_DIR)/core/deps
+LIBRETRO_COMM_DIR = $(CORE_DIR)/core/libretro-common
+
+INCFLAGS    += -I$(CORE_DIR)/core/libretro \
+					-I$(CORE_DIR)/core/ \
+					-I$(DEPS_DIR) \
+					-I$(CORE_DIR)/core/deps/libchdr/include \
+					-I$(CORE_DIR)/core/deps/lzma/C \
+					-I$(LIBRETRO_COMM_DIR)/include \
+					-I$(DEPS_DIR)/vixl \
+					-I$(DEPS_DIR)/stb
+
+SOURCES_C   ?=
+SOURCES_CXX := \
+					$(CORE_DIR)/core/hw/arm7/arm_mem.cpp \
+					$(CORE_DIR)/core/hw/arm7/arm64.cpp \
+					$(CORE_DIR)/core/hw/arm7/arm7.cpp \
+					$(CORE_DIR)/core/hw/arm7/virt_arm.cpp \
+					$(CORE_DIR)/core/hw/arm7/vbaARM.cpp \
+					\
+					$(CORE_DIR)/core/hw/aica/dsp.cpp \
+					$(CORE_DIR)/core/hw/aica/dsp_arm64.cpp \
+					$(CORE_DIR)/core/hw/aica/dsp_interp.cpp \
+					$(CORE_DIR)/core/hw/aica/dsp_x64.cpp \
+					$(CORE_DIR)/core/hw/aica/aica.cpp \
+					$(CORE_DIR)/core/hw/aica/aica_if.cpp \
+					$(CORE_DIR)/core/hw/aica/aica_mem.cpp \
+					$(CORE_DIR)/core/hw/aica/sgc_if.cpp \
+					\
+					$(CORE_DIR)/core/hw/holly/holly_intc.cpp \
+					$(CORE_DIR)/core/hw/holly/sb.cpp \
+					$(CORE_DIR)/core/hw/holly/sb_mem.cpp \
+					\
+					$(CORE_DIR)/core/hw/gdrom/gdrom_response.cpp \
+					$(CORE_DIR)/core/hw/gdrom/gdromv3.cpp \
+					\
+					$(CORE_DIR)/core/hw/maple/maple_helper.cpp \
+					$(CORE_DIR)/core/hw/maple/maple_devs.cpp \
+					$(CORE_DIR)/core/hw/maple/maple_if.cpp \
+					$(CORE_DIR)/core/hw/maple/maple_cfg.cpp \
+					\
+					$(CORE_DIR)/core/hw/mem/_vmem.cpp \
+					$(CORE_DIR)/core/hw/mem/vmem32.cpp \
+					\
+					$(CORE_DIR)/core/hw/pvr/drkPvr.cpp \
+					$(CORE_DIR)/core/hw/pvr/Renderer_if.cpp \
+					$(CORE_DIR)/core/hw/pvr/pvr_mem.cpp \
+					$(CORE_DIR)/core/hw/pvr/pvr_regs.cpp \
+					$(CORE_DIR)/core/hw/pvr/pvr_sb_regs.cpp \
+					$(CORE_DIR)/core/hw/pvr/spg.cpp \
+					$(CORE_DIR)/core/hw/pvr/ta.cpp \
+					$(CORE_DIR)/core/hw/pvr/ta_ctx.cpp \
+					$(CORE_DIR)/core/hw/pvr/ta_vtx.cpp \
+					$(CORE_DIR)/core/rend/CustomTexture.cpp \
+					$(CORE_DIR)/core/rend/sorter.cpp \
+					$(CORE_DIR)/core/rend/TexCache.cpp \
+					\
+					$(CORE_DIR)/core/hw/sh4/sh4_mmr.cpp \
+					$(CORE_DIR)/core/hw/sh4/sh4_mem.cpp \
+					$(CORE_DIR)/core/hw/sh4/sh4_interrupts.cpp \
+					$(CORE_DIR)/core/hw/sh4/sh4_rom.cpp \
+					$(CORE_DIR)/core/hw/sh4/sh4_core_regs.cpp \
+					$(CORE_DIR)/core/hw/sh4/sh4_sched.cpp \
+					$(CORE_DIR)/core/hw/sh4/sh4_opcode_list.cpp \
+					$(CORE_DIR)/core/hw/sh4/interpr/sh4_interpreter.cpp \
+					$(CORE_DIR)/core/hw/sh4/interpr/sh4_fpu.cpp \
+					$(CORE_DIR)/core/hw/sh4/interpr/sh4_opcodes.cpp \
+					$(CORE_DIR)/core/hw/sh4/modules/serial.cpp \
+					$(CORE_DIR)/core/hw/sh4/modules/rtc.cpp  \
+					$(CORE_DIR)/core/hw/sh4/modules/bsc.cpp \
+					$(CORE_DIR)/core/hw/sh4/modules/tmu.cpp \
+					$(CORE_DIR)/core/hw/sh4/modules/ccn.cpp \
+					$(CORE_DIR)/core/hw/sh4/modules/intc.cpp \
+					$(CORE_DIR)/core/hw/sh4/modules/ubc.cpp \
+					$(CORE_DIR)/core/hw/sh4/modules/cpg.cpp \
+					$(CORE_DIR)/core/hw/sh4/modules/dmac.cpp \
+					$(CORE_DIR)/core/hw/sh4/modules/mmu.cpp \
+					$(CORE_DIR)/core/hw/sh4/modules/fastmmu.cpp \
+					$(CORE_DIR)/core/imgread/ImgReader.cpp \
+					$(CORE_DIR)/core/imgread/cdi.cpp \
+					$(CORE_DIR)/core/imgread/chd.cpp \
+					$(CORE_DIR)/core/imgread/common.cpp \
+					$(CORE_DIR)/core/imgread/cue.cpp \
+					$(CORE_DIR)/core/imgread/gdi.cpp \
+					$(CORE_DIR)/core/log/LogManagerLibretro.cpp \
+					\
+					$(CORE_DIR)/core/cheats.cpp \
+					$(CORE_DIR)/core/nullDC.cpp \
+					$(CORE_DIR)/core/serialize.cpp \
+					$(CORE_DIR)/core/stdclass.cpp \
+					\
+					$(DEPS_DIR)/coreio/coreio.cpp \
+					$(DEPS_DIR)/crypto/sha1.cpp \
+					$(DEPS_DIR)/crypto/sha256.cpp \
+					$(DEPS_DIR)/crypto/md5.cpp \
+					$(DEPS_DIR)/libelf/elf.cpp \
+					$(DEPS_DIR)/libelf/elf32.cpp \
+					$(DEPS_DIR)/libelf/elf64.cpp \
+					$(DEPS_DIR)/chdpsr/cdipsr.cpp \
+					\
+					$(CORE_DIR)/core/reios/reios_elf.cpp \
+					$(CORE_DIR)/core/reios/reios.cpp \
+					$(CORE_DIR)/core/reios/gdrom_hle.cpp \
+					$(CORE_DIR)/core/reios/descrambl.cpp \
+					\
+					$(CORE_DIR)/core/archive/archive.cpp \
+					$(CORE_DIR)/core/archive/7zArchive.cpp \
+					$(CORE_DIR)/core/archive/ZipArchive.cpp \
+
+GLSLANG_INCFLAGS = \
+					-I$(DEPS_DIR)/khronos \
+					-I$(DEPS_DIR)/glslang
+
+GLSLANG_SOURCES_CXX = \
+					$(DEPS_DIR)/glslang/glslang/OSDependent/Web/glslang.js.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/ParseContextBase.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/Versions.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/RemoveTree.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/parseConst.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/Intermediate.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/limits.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/attribute.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/InfoSink.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/Constant.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/SymbolTable.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/Scan.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/IntermTraverse.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/intermOut.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/glslang_tab.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/propagateNoContraction.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/ShaderLang.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/reflection.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/ParseHelper.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/iomapper.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/linkValidate.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/Initialize.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/PoolAlloc.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/preprocessor/Pp.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/preprocessor/PpContext.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/preprocessor/PpScanner.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/preprocessor/PpTokens.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/preprocessor/PpAtom.cpp \
+					$(DEPS_DIR)/glslang/glslang/MachineIndependent/pch.cpp \
+					$(DEPS_DIR)/glslang/glslang/GenericCodeGen/CodeGen.cpp \
+					$(DEPS_DIR)/glslang/glslang/GenericCodeGen/Link.cpp \
+					$(DEPS_DIR)/glslang/OGLCompilersDLL/InitializeDll.cpp \
+					$(DEPS_DIR)/glslang/SPIRV/SpvTools.cpp \
+					$(DEPS_DIR)/glslang/SPIRV/disassemble.cpp \
+					$(DEPS_DIR)/glslang/SPIRV/GlslangToSpv.cpp \
+					$(DEPS_DIR)/glslang/SPIRV/SPVRemapper.cpp \
+					$(DEPS_DIR)/glslang/SPIRV/Logger.cpp \
+					$(DEPS_DIR)/glslang/SPIRV/SpvPostProcess.cpp \
+					$(DEPS_DIR)/glslang/SPIRV/InReadableOrder.cpp \
+					$(DEPS_DIR)/glslang/SPIRV/SpvBuilder.cpp \
+					$(DEPS_DIR)/glslang/SPIRV/doc.cpp
+
+ifeq ($(platform), win)
+	GLSLANG_SOURCES_CXX += $(DEPS_DIR)/glslang/glslang/OSDependent/Windows/ossource.cpp
+else
+	GLSLANG_SOURCES_CXX += $(DEPS_DIR)/glslang/glslang/OSDependent/Unix/ossource.cpp
+endif
+
+LIBCHDR_INCFLAGS = -I$(DEPS_DIR)/flac/include
+
+LIBCHDR_SOURCES_C = \
+					$(DEPS_DIR)/libchdr/src/libchdr_bitstream.c \
+					$(DEPS_DIR)/libchdr/src/libchdr_cdrom.c \
+					$(DEPS_DIR)/libchdr/src/libchdr_chd.c \
+					$(DEPS_DIR)/libchdr/src/libchdr_flac.c \
+					$(DEPS_DIR)/libchdr/src/libchdr_huffman.c \
+
+LIBZIP_SOURCES_C = \
+					$(DEPS_DIR)/libzip/mkstemp.c \
+					$(DEPS_DIR)/libzip/zip_add.c \
+					$(DEPS_DIR)/libzip/zip_add_dir.c \
+					$(DEPS_DIR)/libzip/zip_close.c \
+					$(DEPS_DIR)/libzip/zip_delete.c \
+					$(DEPS_DIR)/libzip/zip_dirent.c \
+					$(DEPS_DIR)/libzip/zip_entry_free.c \
+					$(DEPS_DIR)/libzip/zip_entry_new.c \
+					$(DEPS_DIR)/libzip/zip_error.c \
+					$(DEPS_DIR)/libzip/zip_error_clear.c \
+					$(DEPS_DIR)/libzip/zip_error_get.c \
+					$(DEPS_DIR)/libzip/zip_error_get_sys_type.c \
+					$(DEPS_DIR)/libzip/zip_error_strerror.c \
+					$(DEPS_DIR)/libzip/zip_error_to_str.c \
+					$(DEPS_DIR)/libzip/zip_err_str.c \
+					$(DEPS_DIR)/libzip/zip_fclose.c \
+					$(DEPS_DIR)/libzip/zip_file_error_clear.c \
+					$(DEPS_DIR)/libzip/zip_file_error_get.c \
+					$(DEPS_DIR)/libzip/zip_file_get_offset.c \
+					$(DEPS_DIR)/libzip/zip_filerange_crc.c \
+					$(DEPS_DIR)/libzip/zip_file_strerror.c \
+					$(DEPS_DIR)/libzip/zip_fopen.c \
+					$(DEPS_DIR)/libzip/zip_fopen_index.c \
+					$(DEPS_DIR)/libzip/zip_fread.c \
+					$(DEPS_DIR)/libzip/zip_free.c \
+					$(DEPS_DIR)/libzip/zip_get_archive_comment.c \
+					$(DEPS_DIR)/libzip/zip_get_archive_flag.c \
+					$(DEPS_DIR)/libzip/zip_get_file_comment.c \
+					$(DEPS_DIR)/libzip/zip_get_name.c \
+					$(DEPS_DIR)/libzip/zip_get_num_files.c \
+					$(DEPS_DIR)/libzip/zip_memdup.c \
+					$(DEPS_DIR)/libzip/zip_name_locate.c \
+					$(DEPS_DIR)/libzip/zip_new.c \
+					$(DEPS_DIR)/libzip/zip_open.c \
+					$(DEPS_DIR)/libzip/zip_rename.c \
+					$(DEPS_DIR)/libzip/zip_replace.c \
+					$(DEPS_DIR)/libzip/zip_set_archive_comment.c \
+					$(DEPS_DIR)/libzip/zip_set_archive_flag.c \
+					$(DEPS_DIR)/libzip/zip_set_file_comment.c \
+					$(DEPS_DIR)/libzip/zip_set_name.c \
+					$(DEPS_DIR)/libzip/zip_source_buffer.c \
+					$(DEPS_DIR)/libzip/zip_source_file.c \
+					$(DEPS_DIR)/libzip/zip_source_filep.c \
+					$(DEPS_DIR)/libzip/zip_source_free.c \
+					$(DEPS_DIR)/libzip/zip_source_function.c \
+					$(DEPS_DIR)/libzip/zip_source_zip.c \
+					$(DEPS_DIR)/libzip/zip_stat.c \
+					$(DEPS_DIR)/libzip/zip_stat_index.c \
+					$(DEPS_DIR)/libzip/zip_stat_init.c \
+					$(DEPS_DIR)/libzip/zip_strerror.c \
+					$(DEPS_DIR)/libzip/zip_unchange_all.c \
+					$(DEPS_DIR)/libzip/zip_unchange_archive.c \
+					$(DEPS_DIR)/libzip/zip_unchange.c \
+					$(DEPS_DIR)/libzip/zip_unchange_data.c
+
+PICOTCP_INCFLAGS = \
+					-I$(DEPS_DIR)/picotcp/include \
+					-I$(DEPS_DIR)/picotcp/modules
+
+PICOTCP_CFLAGS = -DPICO_SUPPORT_UDP -DPICO_SUPPORT_DHCPD
+
+PICOTCP_SOURCES_C = \
+					$(DEPS_DIR)/picotcp/modules/pico_arp.c \
+					$(DEPS_DIR)/picotcp/modules/pico_dev_ppp.c \
+					$(DEPS_DIR)/picotcp/modules/pico_dhcp_common.c \
+					$(DEPS_DIR)/picotcp/modules/pico_dhcp_server.c \
+					$(DEPS_DIR)/picotcp/modules/pico_dns_client.c \
+					$(DEPS_DIR)/picotcp/modules/pico_dns_common.c \
+					$(DEPS_DIR)/picotcp/modules/pico_ethernet.c \
+					$(DEPS_DIR)/picotcp/modules/pico_fragments.c \
+					$(DEPS_DIR)/picotcp/modules/pico_ipv4.c \
+					$(DEPS_DIR)/picotcp/modules/pico_socket_tcp.c \
+					$(DEPS_DIR)/picotcp/modules/pico_socket_udp.c \
+					$(DEPS_DIR)/picotcp/modules/pico_tcp.c \
+					$(DEPS_DIR)/picotcp/modules/pico_udp.c \
+					$(DEPS_DIR)/picotcp/stack/pico_device.c \
+					$(DEPS_DIR)/picotcp/stack/pico_frame.c \
+					$(DEPS_DIR)/picotcp/stack/pico_md5.c \
+					$(DEPS_DIR)/picotcp/stack/pico_protocol.c \
+					$(DEPS_DIR)/picotcp/stack/pico_socket_multicast.c \
+					$(DEPS_DIR)/picotcp/stack/pico_socket.c \
+					$(DEPS_DIR)/picotcp/stack/pico_stack.c \
+					$(DEPS_DIR)/picotcp/stack/pico_tree.c
+
+XXHASH_SOURCES_C = $(DEPS_DIR)/xxhash/xxhash.c
+
+ZLIB_SOURCES_C = \
+					$(DEPS_DIR)/zlib/deflate.c \
+					$(DEPS_DIR)/zlib/uncompr.c \
+					$(DEPS_DIR)/zlib/zutil.c \
+					$(DEPS_DIR)/zlib/inffast.c \
+					$(DEPS_DIR)/zlib/crc32.c \
+					$(DEPS_DIR)/zlib/inflate.c \
+					$(DEPS_DIR)/zlib/infback.c \
+					$(DEPS_DIR)/zlib/inftrees.c \
+					$(DEPS_DIR)/zlib/trees.c \
+					$(DEPS_DIR)/zlib/adler32.c
+
+SOURCES_ASM :=
+
+ifeq ($(SYSTEM_LIBZIP), 1)
+	CFLAGS += $(shell pkg-config --cflags libzip)
+	LIBS += $(shell pkg-config --libs libzip)
+else
+	SOURCES_C += $(LIBZIP_SOURCES_C)
+endif
+
+ifeq ($(SYSTEM_PICOTCP), 1)
+	CFLAGS += $(shell pkg-config --cflags picotcp)
+	LIBS += $(shell pkg-config --libs picotcp)
+else
+	INCFLAGS += $(PICOTCP_INCFLAGS)
+	CFLAGS    += $(PICOTCP_CFLAGS)
+	SOURCES_C += $(PICOTCP_SOURCES_C)
+endif
+
+ifeq ($(SYSTEM_XXHASH), 1)
+	CFLAGS += $(shell pkg-config --cflags libxxhash)
+	LIBS += $(shell pkg-config --libs libxxhash)
+else
+	SOURCES_C += $(XXHASH_SOURCES_C)
+endif
+
+ifeq ($(NO_REND), 1)
+	SOURCES_CXX += $(CORE_DIR)/core/rend/norend/norend.cpp
+endif
+
+ifeq ($(ENABLE_MODEM), 1)
+	INCFLAGS    += -I$(CORE_DIR)/core/deps/miniupnpc
+	SOURCES_CXX += $(CORE_DIR)/core/hw/modem/dns.cpp \
+						$(CORE_DIR)/core/hw/modem/modem.cpp \
+						$(CORE_DIR)/core/hw/bba/bba.cpp \
+						$(CORE_DIR)/core/hw/bba/rtl8139c.cpp \
+						$(CORE_DIR)/core/network/picoppp.cpp \
+						$(CORE_DIR)/core/network/miniupnp.cpp
+
+	SOURCES_C += \
+					 $(CORE_DIR)/core/deps/miniupnpc/addr_is_reserved.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/igd_desc_parse.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/upnpreplyparse.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/upnpcommands.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/upnperrors.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/connecthostport.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/portlistingparse.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/receivedata.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/upnpdev.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/minissdpc.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/miniwget.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/miniupnpc.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/minixml.c \
+					 $(CORE_DIR)/core/deps/miniupnpc/minisoap.c
+
+	CORE_DEFINES += -DENABLE_MODEM -DMINIUPNP_STATICLIB
+endif
+
+ifeq ($(HAVE_GL), 1)
+	SOURCES_CXX += $(CORE_DIR)/core/rend/gles/gles.cpp \
+						$(CORE_DIR)/core/rend/gles/gldraw.cpp \
+						$(CORE_DIR)/core/rend/gles/gltex.cpp \
+						$(CORE_DIR)/core/rend/gles/postprocess.cpp
+	ifeq ($(HAVE_OIT), 1)
+		SOURCES_CXX += $(CORE_DIR)/core/rend/gl4/gles.cpp \
+							$(CORE_DIR)/core/rend/gl4/gldraw.cpp \
+							$(CORE_DIR)/core/rend/gl4/gltex.cpp \
+							$(CORE_DIR)/core/rend/gl4/abuffer.cpp
+	endif
+	SOURCES_C += $(LIBRETRO_COMM_DIR)/glsym/rglgen.c \
+						$(LIBRETRO_COMM_DIR)/glsm/glsm.c
+	ifeq ($(GLES), 1)
+		SOURCES_C += $(LIBRETRO_COMM_DIR)/glsym/glsym_es2.c
+	else
+		SOURCES_C += $(LIBRETRO_COMM_DIR)/glsym/glsym_gl.c
+	endif
+endif
+
+ifeq ($(HAVE_VULKAN), 1)
+	ifeq ($(SYSTEM_GLSLANG), 1)
+	    CFLAGS += -I/usr/include/glslang
+		LIBS +=
+	else
+		INCFLAGS += $(GLSLANG_INCFLAGS)
+		SOURCES_CXX += $(GLSLANG_SOURCES_CXX)
+	endif
+
+	SOURCES_C += $(LIBRETRO_COMM_DIR)/vulkan/vulkan_symbol_wrapper.c
+	SOURCES_CXX += \
+					$(CORE_DIR)/core/rend/vulkan/vulkan_context.cpp \
+					$(CORE_DIR)/core/rend/vulkan/vmallocator.cpp \
+					$(CORE_DIR)/core/rend/vulkan/buffer.cpp \
+					$(CORE_DIR)/core/rend/vulkan/compiler.cpp \
+					$(CORE_DIR)/core/rend/vulkan/drawer.cpp \
+					$(CORE_DIR)/core/rend/vulkan/pipeline.cpp \
+					$(CORE_DIR)/core/rend/vulkan/quad.cpp \
+					$(CORE_DIR)/core/rend/vulkan/shaders.cpp \
+					$(CORE_DIR)/core/rend/vulkan/texture.cpp \
+					$(CORE_DIR)/core/rend/vulkan/vmu.cpp \
+					$(CORE_DIR)/core/rend/vulkan/vulkan_renderer.cpp \
+					$(CORE_DIR)/core/rend/vulkan/oit/oit_drawer.cpp \
+					$(CORE_DIR)/core/rend/vulkan/oit/oit_pipeline.cpp \
+					$(CORE_DIR)/core/rend/vulkan/oit/oit_renderer.cpp \
+					$(CORE_DIR)/core/rend/vulkan/oit/oit_renderpass.cpp \
+					$(CORE_DIR)/core/rend/vulkan/oit/oit_shaders.cpp
+endif
+
+SOURCES_CXX += $(CORE_DIR)/core/hw/naomi/naomi.cpp \
+					$(CORE_DIR)/core/hw/naomi/naomi_cart.cpp \
+					$(CORE_DIR)/core/hw/naomi/decrypt.cpp \
+					$(CORE_DIR)/core/hw/naomi/m1cartridge.cpp \
+					$(CORE_DIR)/core/hw/naomi/m4cartridge.cpp \
+					$(CORE_DIR)/core/hw/naomi/awcartridge.cpp \
+					$(CORE_DIR)/core/hw/naomi/gdcartridge.cpp \
+					$(CORE_DIR)/core/hw/naomi/naomi_m3comm.cpp \
+					$(CORE_DIR)/core/network/naomi_network.cpp
+
+ifeq ($(HAVE_GENERIC_JIT), 1)
+	DYNAREC_USED = 1
+	SOURCES_CXX += $(CORE_DIR)/core/rec-cpp/rec_cpp.cpp
+endif
+
+# Recompiler (x64)
+ifneq ($(filter $(WITH_DYNAREC), x86_64 x64),)
+	DYNAREC_USED = 1
+	SOURCES_CXX += $(CORE_DIR)/core/rec-x64/rec_x64.cpp 
+
+# Recompiler (x86 32bit)
+else ifneq ($(filter $(WITH_DYNAREC), i386 i686 x86),)
+	DYNAREC_USED = 1
+	ifneq ($(filter $(platform), unix android),)
+		SOURCES_ASM += $(CORE_DIR)/core/rec-x86/rec_lin86_asm.S
+	else
+		SOURCES_ASM += $(CORE_DIR)/core/rec-x86/rec_win86_asm.S
+		#SOURCES_ASM += $(CORE_DIR)/core/hw/arm7/arm7_win86_asm.S
+	endif
+	SOURCES_CXX += $(CORE_DIR)/core/rec-x86/rec_x86_asm.cpp \
+						$(CORE_DIR)/core/rec-x86/rec_x86_driver.cpp \
+						$(CORE_DIR)/core/rec-x86/rec_x86_il.cpp \
+						$(CORE_DIR)/core/rec-x86/x86_emitter.cpp
+endif
+
+
+# Recompiler (ARM)
+ifeq ($(WITH_DYNAREC), arm)
+	DYNAREC_USED = 1
+	SOURCES_CXX += $(CORE_DIR)/core/rec-ARM/rec_arm.cpp
+	SOURCES_ASM += $(CORE_DIR)/core/rec-ARM/ngen_arm.S
+endif
+
+# Recompiler (ARM64)
+ifneq ($(filter $(WITH_DYNAREC), arm64 aarch64),)
+	DYNAREC_USED = 1
+	SOURCES_ASM += $(CORE_DIR)/core/rec-ARM64/ngen_arm64.S
+	SOURCES_CXX += $(CORE_DIR)/core/rec-ARM64/rec_arm64.cpp \
+					$(DEPS_DIR)/vixl/code-buffer-vixl.cc \
+					$(DEPS_DIR)/vixl/compiler-intrinsics-vixl.cc \
+					$(DEPS_DIR)/vixl/cpu-features.cc \
+					$(DEPS_DIR)/vixl/utils-vixl.cc \
+					$(DEPS_DIR)/vixl/aarch64/assembler-aarch64.cc \
+					$(DEPS_DIR)/vixl/aarch64/cpu-aarch64.cc \
+					$(DEPS_DIR)/vixl/aarch64/cpu-features-auditor-aarch64.cc \
+					$(DEPS_DIR)/vixl/aarch64/decoder-aarch64.cc \
+					$(DEPS_DIR)/vixl/aarch64/disasm-aarch64.cc \
+					$(DEPS_DIR)/vixl/aarch64/instructions-aarch64.cc \
+					$(DEPS_DIR)/vixl/aarch64/instrument-aarch64.cc \
+					$(DEPS_DIR)/vixl/aarch64/logic-aarch64.cc \
+					$(DEPS_DIR)/vixl/aarch64/macro-assembler-aarch64.cc \
+					$(DEPS_DIR)/vixl/aarch64/operands-aarch64.cc \
+					$(DEPS_DIR)/vixl/aarch64/pointer-auth-aarch64.cc \
+					$(DEPS_DIR)/vixl/aarch64/simulator-aarch64.cc
+endif
+
+# Dynarec
+ifeq ($(DYNAREC_USED), 1)
+SOURCES_CXX += $(CORE_DIR)/core/hw/sh4/dyna/decoder.cpp \
+					$(CORE_DIR)/core/hw/sh4/dyna/driver.cpp \
+					$(CORE_DIR)/core/hw/sh4/dyna/blockmanager.cpp \
+					$(CORE_DIR)/core/hw/sh4/dyna/shil.cpp \
+					$(CORE_DIR)/core/hw/sh4/dyna/ssa.cpp 
+endif
+
+SOURCES_CXX += $(CORE_DIR)/core/libretro/libretro.cpp \
+					$(CORE_DIR)/core/libretro/audiostream.cpp \
+					$(CORE_DIR)/core/libretro/common.cpp \
+					$(CORE_DIR)/core/libretro/vmem_utils.cpp
+
+SOURCES_C += $(LIBRETRO_COMM_DIR)/memmap/memalign.c \
+					$(LIBRETRO_COMM_DIR)/file/file_path.c \
+					$(LIBRETRO_COMM_DIR)/vfs/vfs_implementation.c \
+					$(LIBRETRO_COMM_DIR)/encodings/encoding_utf.c \
+					$(LIBRETRO_COMM_DIR)/compat/compat_strl.c \
+					$(LIBRETRO_COMM_DIR)/compat/fopen_utf8.c \
+					$(LIBRETRO_COMM_DIR)/compat/compat_strcasestr.c \
+					$(LIBRETRO_COMM_DIR)/file/retro_dirent.c \
+					$(LIBRETRO_COMM_DIR)/string/stdstring.c
+
+ifeq ($(NO_THREADS), 1)
+else
+	SOURCES_C += $(LIBRETRO_COMM_DIR)/rthreads/rthreads.c
+endif
+
+ifeq ($(HAVE_TEXUPSCALE), 1)
+	SOURCES_CXX += $(DEPS_DIR)/xbrz/xbrz.cpp
+endif
+
+ifeq ($(HAVE_CHD), 1)
+	ifeq ($(SYSTEM_LIBCHDR), 1)
+		CFLAGS += $(shell pkg-config --cflags libchdr)
+		LIBS += $(shell pkg-config --libs libchdr)
+	else
+		INCFLAGS += $(LIBCHDR_INCFLAGS)
+		SOURCES_C += $(LIBCHDR_SOURCES_C)
+	endif
+endif
+
+SOURCES_C += \
+				$(DEPS_DIR)/lzma/C/7zArcIn.c \
+				$(DEPS_DIR)/lzma/C/7zBuf.c \
+				$(DEPS_DIR)/lzma/C/7zCrc.c \
+				$(DEPS_DIR)/lzma/C/7zCrcOpt.c \
+				$(DEPS_DIR)/lzma/C/7zDec.c \
+				$(DEPS_DIR)/lzma/C/7zFile.c \
+				$(DEPS_DIR)/lzma/C/7zStream.c \
+				$(DEPS_DIR)/lzma/C/Alloc.c \
+				$(DEPS_DIR)/lzma/C/Bcj2.c \
+				$(DEPS_DIR)/lzma/C/Bra86.c \
+				$(DEPS_DIR)/lzma/C/Bra.c \
+				$(DEPS_DIR)/lzma/C/BraIA64.c \
+				$(DEPS_DIR)/lzma/C/CpuArch.c \
+				$(DEPS_DIR)/lzma/C/Delta.c \
+				$(DEPS_DIR)/lzma/C/LzFind.c \
+				$(DEPS_DIR)/lzma/C/Lzma2Dec.c \
+				$(DEPS_DIR)/lzma/C/Lzma86Dec.c \
+				$(DEPS_DIR)/lzma/C/LzmaDec.c \
+				$(DEPS_DIR)/lzma/C/LzmaEnc.c
+
+ifeq ($(SYSTEM_ZLIB), 1)
+	CFLAGS += $(shell pkg-config --cflags zlib)
+	LIBS += $(shell pkg-config --libs zlib)
+else
+	SOURCES_C += $(ZLIB_SOURCES_C)
+endif

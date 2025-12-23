@@ -502,10 +502,10 @@ void Emulator::cbVideoRefresh(const void* data, unsigned width, unsigned height,
 	if (s_loadedEmulator->m_updateGeometryFromVideoRefresh && width && height) {
 		s_loadedEmulator->m_avInfo.geometry.base_width = width;
 		s_loadedEmulator->m_avInfo.geometry.base_height = height;
-		
+
 		s_loadedEmulator->m_avInfo.geometry.aspect_ratio =
 			static_cast<float>(width) / static_cast<float>(height);
-			
+
 		if (s_loadedEmulator->m_avInfo.geometry.max_width < width) {
 			s_loadedEmulator->m_avInfo.geometry.max_width = width;
 		}

@@ -407,7 +407,7 @@ void Emulator::reconfigureAddressSpace() {
 // callback for logging from emulator
 // turned off by default to avoid spamming the log, only used for debugging issues within cores
 static void cbLog(enum retro_log_level level, const char *fmt, ...) {
-#if 1
+#if 0
 	char buffer[4096] = {0};
 	static const char * levelName[] = { "DEBUG", "INFO", "WARNING", "ERROR" };
 	va_list va;
@@ -502,10 +502,10 @@ void Emulator::cbVideoRefresh(const void* data, unsigned width, unsigned height,
 	if (s_loadedEmulator->m_updateGeometryFromVideoRefresh && width && height) {
 		s_loadedEmulator->m_avInfo.geometry.base_width = width;
 		s_loadedEmulator->m_avInfo.geometry.base_height = height;
-		if (height) {
-			s_loadedEmulator->m_avInfo.geometry.aspect_ratio =
-				static_cast<float>(width) / static_cast<float>(height);
-		}
+		
+		s_loadedEmulator->m_avInfo.geometry.aspect_ratio =
+			static_cast<float>(width) / static_cast<float>(height);
+			
 		if (s_loadedEmulator->m_avInfo.geometry.max_width < width) {
 			s_loadedEmulator->m_avInfo.geometry.max_width = width;
 		}

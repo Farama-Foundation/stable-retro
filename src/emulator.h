@@ -12,6 +12,10 @@
 #include <windows.h>
 #endif
 
+#ifdef ENABLE_HW_RENDER
+#include "hwrender.h"
+#endif
+
 // Backfill serialization quirk definitions if building against an older libretro.h
 #ifndef RETRO_ENVIRONMENT_SET_SERIALIZATION_QUIRKS
 #define RETRO_ENVIRONMENT_SET_SERIALIZATION_QUIRKS 44
@@ -45,6 +49,7 @@ public:
 	int getImagePitch() { return m_imgPitch; }
 	int getImageDepth() { return m_imgDepth; }
 	int getRotation() const { return m_rotation; }
+	bool isHWRenderEnabled() const;
 	double getFrameRate() { return m_avInfo.timing.fps; }
 	int getAudioSamples() { return m_audioData.size() / 2; }
 	double getAudioRate() { return m_avInfo.timing.sample_rate; }
@@ -111,5 +116,11 @@ private:
 	uint64_t m_serializationQuirks = 0;
 	bool m_needsInitFrame = false;
 	bool m_updateGeometryFromVideoRefresh = false;
+
+#ifdef ENABLE_HW_RENDER
+	HWRenderContext m_hwRender;
+	static uintptr_t cbGetCurrentFramebuffer();
+	static retro_proc_address_t cbGetProcAddress(const char* sym);
+#endif
 };
 }

@@ -1,0 +1,15 @@
+{
+    "Dreamcast": {
+        "lib": "flycast",
+        "ext": ["chd2"],
+        "rambase": 0,
+        "keybinds": ["X", "Z", "TAB", "ENTER", "UP", "DOWN", "LEFT", "RIGHT", "C", "A", "S", "D", "W", "Q"],
+        "buttons": ["A", "B", "X", "Y", "START", "DPAD_UP", "DPAD_DOWN", "DPAD_LEFT", "DPAD_RIGHT", "L", "R", null, null, null],
+        "types": ["|u1", "<u2", "<u4", "|i1", "<i2", "<i4", "|d1", "<d2", "<d4", "<d6", "<d8", "<n4", "<n6", "<n8"],
+        "actions": [
+            [[], ["DPAD_UP"], ["DPAD_DOWN"]],
+            [[], ["DPAD_LEFT"], ["DPAD_RIGHT"]],
+            [[], ["A"], ["B"], ["X"], ["Y"], ["L"], ["R"], ["START"]]
+        ]
+    }
+}

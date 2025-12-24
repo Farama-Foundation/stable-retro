@@ -180,9 +180,11 @@ bool CHDDisc::TryOpen(const char* file)
 
 Disc* chd_parse(const char* file)
 {
-	// Only try to open .chd files
+	// Only try to open .chd or .chd2 files
 	size_t len = strlen(file);
-	if (len > 4 && stricmp( &file[len - 4], ".chd"))
+	bool is_chd = (len > 4 && !stricmp(&file[len - 4], ".chd"));
+	bool is_chd2 = (len > 5 && !stricmp(&file[len - 5], ".chd2"));
+	if (!is_chd && !is_chd2)
 		return nullptr;
 
 	CHDDisc* rv = new CHDDisc();

@@ -61,6 +61,7 @@ option(BUILD_UI "Should integration UI be built" OFF)
 option(BUILD_LUAJIT "Should static LuaJIT be used instead of system Lua" ON)
 option(BUILD_MANYLINUX "Should use static libraries compatible with manylinux1"
        OFF)
+option(ENABLE_HW_RENDER "Enable hardware rendering support for GPU cores (requires EGL/OpenGL)" OFF)
 
 set(BUILD_PYTHON
     ON
@@ -156,18 +157,18 @@ function(add_core platform core_name)
       PARENT_SCOPE)
   set(subdir)
 
-  if(EXISTS "cores/${platform}/Makefile.libretro")
+  if(EXISTS "${CMAKE_SOURCE_DIR}/cores/${platform}/Makefile.libretro")
     set(makefile Makefile.libretro)
-  elseif(EXISTS "cores/${platform}/Makefile")
+  elseif(EXISTS "${CMAKE_SOURCE_DIR}/cores/${platform}/Makefile")
     set(makefile Makefile)
-  elseif(EXISTS "cores/${platform}/libretro/Makefile")
+  elseif(EXISTS "${CMAKE_SOURCE_DIR}/cores/${platform}/libretro/Makefile")
     set(makefile Makefile)
     set(subdir libretro)
-  elseif(EXISTS "cores/${platform}/src/burner/libretro/Makefile")
+  elseif(EXISTS "${CMAKE_SOURCE_DIR}/cores/${platform}/src/burner/libretro/Makefile")
     set(makefile Makefile)
     set(subdir src/burner/libretro)
   else()
-    message(FATAL_ERROR "Could not find Makefile.")
+    message(FATAL_ERROR "Could not find Makefile for ${platform}.")
   endif()
 
   add_custom_command(
@@ -205,7 +206,7 @@ function(add_core platform core_name)
       CXX="${CMAKE_CXX_COMPILER}" fpic=${core_fpic_flags} ${libretro_platform}
     COMMAND ${CMAKE_COMMAND} -E copy "${core_name}_libretro${DYNLIB_SUFFIX}"
             "${TARGET_PATH}"
-    WORKING_DIRECTORY "cores/${platform}/${subdir}"
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/cores/${platform}/${subdir}"
     DEPENDS
       "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version")
   unset(core_ldflags)
@@ -233,7 +234,7 @@ function(add_core platform core_name)
     clean-${platform}
     COMMAND $(MAKE) -f ${makefile} clean
     COMMAND ${CMAKE_COMMAND} -E remove "${TARGET_PATH}"
-    WORKING_DIRECTORY "cores/${platform}/${subdir}")
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/cores/${platform}/${subdir}")
 endfunction()
 
 add_core(snes snes9x)
@@ -260,6 +261,11 @@ if(APPLE)
 else()
   add_core(fbneo fbneo)
   add_core(n64 parallel_n64)
+endif()
+
+# Flycast (Dreamcast) - requires hardware rendering
+if(ENABLE_HW_RENDER)
+  add_core(flycast flycast)
 endif()
 
 set(CLEAN_CORES)
@@ -340,6 +346,27 @@ else()
   include_directories(third-party/libzip third-party/libzip/lib)
 endif()
 
+# Hardware rendering support (EGL/OpenGL)
+set(HWRENDER_SOURCES)
+set(HWRENDER_LIBRARIES)
+if(ENABLE_HW_RENDER)
+  if(UNIX AND NOT APPLE)
+    find_package(OpenGL REQUIRED)
+    find_package(X11 REQUIRED)
+    pkg_check_modules(EGL REQUIRED egl)
+    
+    add_definitions(-DENABLE_HW_RENDER)
+    set(HWRENDER_SOURCES src/hwrender.cpp)
+    set(HWRENDER_LIBRARIES ${OPENGL_LIBRARIES} ${EGL_LIBRARIES} ${X11_LIBRARIES})
+    include_directories(${EGL_INCLUDE_DIRS} ${X11_INCLUDE_DIR})
+    
+    message(STATUS "Hardware rendering enabled (EGL/GLX/OpenGL)")
+  else()
+    message(WARNING "Hardware rendering is currently only supported on Linux. Disabling ENABLE_HW_RENDER.")
+    set(ENABLE_HW_RENDER OFF)
+  endif()
+endif()
+
 include_directories(${LUA_INCLUDE_DIRS})
 
 add_library(
@@ -357,9 +384,10 @@ add_library(
   src/search.cpp
   src/utils.cpp
   src/zipfile.cpp
+  ${HWRENDER_SOURCES}
   ${LUA_LIBRARY})
 target_link_libraries(retro-base ${ZLIB_LIBRARY} ${LIBZIP_LIBRARIES}
-                      ${LUA_LIBRARY} ${LUA_LIBRRAY})
+                      ${LUA_LIBRARY} ${LUA_LIBRRAY} ${HWRENDER_LIBRARIES})
 add_dependencies(retro-base ${CORE_TARGETS})
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")

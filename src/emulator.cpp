@@ -39,6 +39,18 @@ static map<string, const char*> s_envVariables = {
 	{ "beetle_saturn_last_scanline", "231" },
 	{ "beetle_saturn_initial_scanline_pal", "16" },
 	{ "beetle_saturn_last_scanline_pal", "271" },
+
+	// Flycast (Dreamcast) settings for training
+	{ "flycast_internal_resolution", "640x480" },
+	{ "flycast_gdrom_fast_loading", "enabled" },
+	{ "flycast_system", "auto" },
+	{ "flycast_boot_to_bios", "disabled" },
+	{ "flycast_mipmapping", "disabled" },
+	{ "flycast_volume_modifier_enable", "disabled" },
+	{ "flycast_threaded_rendering", "enabled" },
+	{ "flycast_alpha_sorting", "per-strip (fast, least accurate)" },
+	// Force OpenGL instead of Vulkan
+	{ "flycast_pvr2_filtering", "disabled" },
 };
 
 static void (*retro_init)(void);
@@ -74,6 +86,11 @@ Emulator::~Emulator() {
 	if (m_romLoaded) {
 		unloadRom();
 	}
+#ifdef ENABLE_HW_RENDER
+	// Destroy HW render context after unloading ROM but before unloading core
+	// This ensures the GL context is still valid during context_destroy callback
+	m_hwRender.destroy();
+#endif
 	if (m_coreHandle) {
 		unloadCore();
 	}
@@ -105,7 +122,8 @@ bool Emulator::loadRom(const string& romPath) {
 #else
 		lib += "so";
 #endif
-		if (!loadCore(corePath() + "/" + lib)) {
+		string fullPath = corePath() + "/" + lib;
+		if (!loadCore(fullPath)) {
 			return false;
 		}
 		m_core = core;
@@ -138,6 +156,18 @@ bool Emulator::loadRom(const string& romPath) {
 	if (!res) {
 		return false;
 	}
+	
+#ifdef ENABLE_HW_RENDER
+	// If HW rendering was enabled during retro_load_game, now call context_reset
+	// This must be done after RETRO_ENVIRONMENT_SET_HW_RENDER has returned and
+	// the frontend callbacks are wired up
+	if (m_hwRender.isEnabled()) {
+		std::cerr << "Emulator: About to call m_hwRender.contextReset()..." << std::endl;
+		m_hwRender.contextReset();
+		std::cerr << "Emulator: m_hwRender.contextReset() returned" << std::endl;
+	}
+#endif
+
 	retro_get_system_av_info(&m_avInfo);
 	fixScreenSize(romPath);
 
@@ -407,7 +437,7 @@ void Emulator::reconfigureAddressSpace() {
 // callback for logging from emulator
 // turned off by default to avoid spamming the log, only used for debugging issues within cores
 static void cbLog(enum retro_log_level level, const char *fmt, ...) {
-#if 0
+#if 1
 	char buffer[4096] = {0};
 	static const char * levelName[] = { "DEBUG", "INFO", "WARNING", "ERROR" };
 	va_list va;
@@ -425,6 +455,7 @@ static void cbLog(enum retro_log_level level, const char *fmt, ...) {
 
 bool Emulator::cbEnvironment(unsigned cmd, void* data) {
 	assert(s_loadedEmulator);
+	
 	switch (cmd) {
 	case RETRO_ENVIRONMENT_SET_PIXEL_FORMAT:
 		switch (*reinterpret_cast<retro_pixel_format*>(data)) {
@@ -491,6 +522,18 @@ bool Emulator::cbEnvironment(unsigned cmd, void* data) {
 		}
 		return true;
 	}
+#ifdef ENABLE_HW_RENDER
+	case RETRO_ENVIRONMENT_SET_HW_RENDER: {
+		auto* cb = static_cast<retro_hw_render_callback*>(data);
+		if (!s_loadedEmulator->m_hwRender.init(*cb)) {
+			return false;
+		}
+		// Provide frontend callbacks to the core
+		cb->get_current_framebuffer = cbGetCurrentFramebuffer;
+		cb->get_proc_address = cbGetProcAddress;
+		return true;
+	}
+#endif
 	default:
 		return false;
 	}
@@ -514,8 +557,20 @@ void Emulator::cbVideoRefresh(const void* data, unsigned width, unsigned height,
 		}
 	}
 	// Hardware rendering: the core is signaling that the framebuffer lives on the GPU.
-	// We currently don't support GPU readback here; ignore and keep m_imgData null.
 	if (data == RETRO_HW_FRAME_BUFFER_VALID) {
+#ifdef ENABLE_HW_RENDER
+		if (s_loadedEmulator->m_hwRender.isEnabled()) {
+			// Read pixels from GPU framebuffer to CPU
+			const void* pixels = s_loadedEmulator->m_hwRender.readbackFramebuffer(width, height);
+			if (pixels) {
+				s_loadedEmulator->m_imgData = pixels;
+				s_loadedEmulator->m_imgPitch = s_loadedEmulator->m_hwRender.getReadbackPitch();
+				s_loadedEmulator->m_imgDepth = 32;  // RGBA8888
+				return;
+			}
+		}
+#endif
+		// HW render not enabled or failed - keep m_imgData null
 		s_loadedEmulator->m_imgData = nullptr;
 		s_loadedEmulator->m_imgPitch = 0;
 		return;
@@ -566,4 +621,24 @@ vector<string> Emulator::buttons() const {
 vector<string> Emulator::keybinds() const {
 	return Retro::keybinds(m_core);
 }
+
+bool Emulator::isHWRenderEnabled() const {
+#ifdef ENABLE_HW_RENDER
+	return m_hwRender.isEnabled();
+#else
+	return false;
+#endif
+}
+
+#ifdef ENABLE_HW_RENDER
+uintptr_t Emulator::cbGetCurrentFramebuffer() {
+	assert(s_loadedEmulator);
+	return s_loadedEmulator->m_hwRender.getCurrentFramebuffer();
+}
+
+retro_proc_address_t Emulator::cbGetProcAddress(const char* sym) {
+	assert(s_loadedEmulator);
+	return s_loadedEmulator->m_hwRender.getProcAddress(sym);
+}
+#endif
 }

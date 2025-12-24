@@ -508,11 +508,21 @@ void EmulatorController::runOnce() {
 
 	int rotation = m_re.getRotation();
 	bool rotationChanged = rotation != m_rotation;
-	if (m_screen.constBits() != static_cast<const uchar*>(m_re.getImageData()) || m_crop != crop || rotationChanged) {
+	// For HW render, always refresh since the buffer content changes but pointer stays same
+	bool needsRefresh = m_re.isHWRenderEnabled() || 
+	                    m_screen.constBits() != static_cast<const uchar*>(m_re.getImageData()) || 
+	                    m_crop != crop || rotationChanged;
+	if (needsRefresh) {
 		QImage::Format format = QImage::Format_RGB16;
 		switch (m_re.getImageDepth()) {
 		case 32:
-			format = QImage::Format_RGB32;
+			// Check if this is from HW render (RGBA) vs software render (RGB32/BGRX)
+			// HW render returns RGBA8888 from glReadPixels
+			if (m_re.isHWRenderEnabled()) {
+				format = QImage::Format_RGBA8888;
+			} else {
+				format = QImage::Format_RGB32;
+			}
 			break;
 		case 16:
 			format = QImage::Format_RGB16;

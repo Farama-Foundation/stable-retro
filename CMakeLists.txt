@@ -61,7 +61,9 @@ option(BUILD_UI "Should integration UI be built" OFF)
 option(BUILD_LUAJIT "Should static LuaJIT be used instead of system Lua" ON)
 option(BUILD_MANYLINUX "Should use static libraries compatible with manylinux1"
        OFF)
-option(ENABLE_HW_RENDER "Enable hardware rendering support for GPU cores (requires EGL/OpenGL)" OFF)
+option(ENABLE_HW_RENDER
+       "Enable hardware rendering support for GPU cores (requires EGL/OpenGL)"
+       OFF)
 
 set(BUILD_PYTHON
     ON
@@ -164,7 +166,8 @@ function(add_core platform core_name)
   elseif(EXISTS "${CMAKE_SOURCE_DIR}/cores/${platform}/libretro/Makefile")
     set(makefile Makefile)
     set(subdir libretro)
-  elseif(EXISTS "${CMAKE_SOURCE_DIR}/cores/${platform}/src/burner/libretro/Makefile")
+  elseif(EXISTS
+         "${CMAKE_SOURCE_DIR}/cores/${platform}/src/burner/libretro/Makefile")
     set(makefile Makefile)
     set(subdir src/burner/libretro)
   else()
@@ -354,15 +357,19 @@ if(ENABLE_HW_RENDER)
     find_package(OpenGL REQUIRED)
     find_package(X11 REQUIRED)
     pkg_check_modules(EGL REQUIRED egl)
-    
+
     add_definitions(-DENABLE_HW_RENDER)
     set(HWRENDER_SOURCES src/hwrender.cpp)
-    set(HWRENDER_LIBRARIES ${OPENGL_LIBRARIES} ${EGL_LIBRARIES} ${X11_LIBRARIES})
+    set(HWRENDER_LIBRARIES ${OPENGL_LIBRARIES} ${EGL_LIBRARIES}
+                           ${X11_LIBRARIES})
     include_directories(${EGL_INCLUDE_DIRS} ${X11_INCLUDE_DIR})
-    
+
     message(STATUS "Hardware rendering enabled (EGL/GLX/OpenGL)")
   else()
-    message(WARNING "Hardware rendering is currently only supported on Linux. Disabling ENABLE_HW_RENDER.")
+    message(
+      WARNING
+        "Hardware rendering is currently only supported on Linux. Disabling ENABLE_HW_RENDER."
+    )
     set(ENABLE_HW_RENDER OFF)
   endif()
 endif()

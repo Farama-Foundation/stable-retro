@@ -21,6 +21,7 @@ Currently added games on top of gym-retro:
 *	Virtua Fighter 2 - Saturn
 *	Mortal Kombat 1 - Sega CD
 *	Mortal Kombat Trilogy - Nintendo 64
+*	Street Fighter 3rd Strike - Dreamcast
 
 PvP games that support two models fighting each other:
 *	Samurai Showdown - Genesis
@@ -49,6 +50,7 @@ As well as additional states on already integrated games.
 	- 32x (via Picodrive)
 	- Saturn (via Beetle Saturn)
 	- Sega CD (via Genesis Plus GX)
+	- Sega Dreamcast (via Flycast)(Experimental)
 - Arcade Machines (via FBNeo):
   	- Neo Geo (MVS hardware: 1990–2004)
  	- Sega System 1 (1983–1987)
@@ -121,18 +123,6 @@ python3 ppo.py --game='Airstriker-Genesis-v0'
 More advanced examples:
 [https://github.com/MatPoliquin/stable-retro-scripts](https://github.com/MatPoliquin/stable-retro-scripts)
 
-## Citation
-
-```
-@misc{stable-retro,
-  author = {Poliquin, Mathieu},
-  title = {Stable Retro, a maintained fork of OpenAI's gym-retro},
-  year = {2025},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/Farama-Foundation/stable-retro}},
-}
-```
 
 ## Tutorials
 
@@ -150,11 +140,6 @@ https://www.youtube.com/watch?v=hkOcxJvJVjk
 Join here:
 https://discord.gg/dXuBSg3B4D
 
-## Contributing
-
-[See CONTRIBUTING.md](https://github.com/Farama-Foundation/stable-retro/blob/master/CONTRIBUTING.md)
-
-There is an effort to get this project to the [Farama Foundation Project Standards](https://farama.org/project_standards). These development efforts are being coordinated in the `stable-retro` channel of the Farama Foundation's Discord. Click [here](https://discord.gg/aPjhD5cf) for the invite
 
 ## Supported specs:
 
@@ -184,20 +169,37 @@ Run this script in the roms folder you want to import. If the checksum matches i
 python3 -m retro.import .
 ```
 
-The following non-commercial ROMs are included with Stable Retro for testing purposes:
-
-- [the 128 sine-dot](http://www.pouet.net/prod.php?which=2762) by Anthrox
-- [Sega Tween](https://pdroms.de/files/gamegear/sega-tween) by Ben Ryves
-- [Happy 10!](http://www.pouet.net/prod.php?which=52716) by Blind IO
-- [512-Colour Test Demo](https://pdroms.de/files/pcengine/512-colour-test-demo) by Chris Covell
-- [Dekadrive](http://www.pouet.net/prod.php?which=67142) by Dekadence
-- [Automaton](https://pdroms.de/files/atari2600/automaton-minigame-compo-2003) by Derek Ledbetter
-- [Fire](http://privat.bahnhof.se/wb800787/gb/demo/64/) by dox
-- [FamiCON intro](http://www.pouet.net/prod.php?which=53497) by dr88
+The following non-commercial Sega Genesis ROM is included with Stable Retro for testing purposes:
 - [Airstriker](https://pdroms.de/genesis/airstriker-v1-50-genesis-game) by Electrokinesis
-- [Lost Marbles](https://pdroms.de/files/gameboyadvance/lost-marbles) by Vantage
+
+ [List of other included ROMs](docs/included_roms.md).
+
+## BIOS
+
+Some plateforms like Sega Saturn and Dreamcast also needs to be provided a BIOS.
+ [List of BIOS names and checksums](docs/core_bios.md).
+
+## Contributing
+
+[See CONTRIBUTING.md](https://github.com/Farama-Foundation/stable-retro/blob/master/CONTRIBUTING.md)
+
+There is an effort to get this project to the [Farama Foundation Project Standards](https://farama.org/project_standards). These development efforts are being coordinated in the `stable-retro` channel of the Farama Foundation's Discord. Click [here](https://discord.gg/aPjhD5cf) for the invite
+
+## Citation
+
+```
+@misc{stable-retro,
+  author = {Poliquin, Mathieu},
+  title = {Stable Retro, a maintained fork of OpenAI's gym-retro},
+  year = {2025},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/Farama-Foundation/stable-retro}},
+}
+```
 
 ## Papers
+
 List of papers mentioning stable-retro. If you want your paper to be added here please open a github issue.
 
 *	[Exploration-Driven Generative Interactive Environments](https://arxiv.org/pdf/2504.02515)

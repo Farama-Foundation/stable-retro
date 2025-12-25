@@ -484,6 +484,8 @@ DragonSpiritTheNewLegend-Nes                      PopnTwinBeeRainbowBellAdventur
 :caption: Introduction
 
 getting_started.md
+included_roms.md
+core_bios.md
 developing.md
 integration.md
 python.md

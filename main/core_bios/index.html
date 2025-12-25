@@ -7,11 +7,13 @@
     <meta property="og:title" content="Stable-Retro Documentation" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="" />
-    <meta property="og:url" content="https://stable-retro.farama.org/genindex.html" /><meta property="og:image" content="https://stable-retro.farama.org/_static/img/stable-retro-github.svg" /><meta name="twitter:card" content="summary_large_image"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="../search/" />
-        <link rel="canonical" href="https://stable-retro.farama.org/genindex.html" />
+    <meta property="og:url" content="https://stable-retro.farama.org/core_bios.html" /><meta property="og:image" content="https://stable-retro.farama.org/_static/img/stable-retro-github.svg" /><meta name="twitter:card" content="summary_large_image"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Development" href="../developing/" /><link rel="prev" title="Included Roms" href="../included_roms/" />
+        <link rel="canonical" href="https://stable-retro.farama.org/core_bios.html" />
 
-    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 --><title>Index - Stable-Retro Documentation</title>
-<link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 -->
+        <title>Platforms that needs a BIOS - Stable-Retro Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=82c8b628" />
     
@@ -209,10 +211,10 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../included_roms/">Included Roms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../core_bios/">Platforms that needs a BIOS</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Platforms that needs a BIOS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developing/">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integration/">Game Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python/">Python API</a></li>
@@ -246,7 +248,16 @@
             </svg>
             <span>Back to top</span>
           </a>
-          <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+          <div class="content-icon-container"><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Farama-Foundation/stable-retro/edit/master/docs/core_bios.md" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
               <button class="theme-toggle" title="Toggle color theme">
                 <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
                 <svg class="theme-icon-when-auto">
@@ -269,115 +280,62 @@
           </div>
           <article role="main">
             
-            
-<section class="genindex-section">
-  <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a></div>
+            <section class="tex2jax_ignore mathjax_ignore" id="platforms-that-needs-a-bios">
+<h1>Platforms that needs a BIOS<a class="headerlink" href="#platforms-that-needs-a-bios" title="Link to this heading">¶</a></h1>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Platform</p></th>
+<th class="head"><p>BIOS file</p></th>
+<th class="head"><p>SHA1</p></th>
+<th class="head"><p>Destination path</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dreamcast (<code class="docutils literal notranslate"><span class="pre">flycast</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dc_boot.bin</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8951d1bb219ab2ff8583033d2119c899cc81f18c</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stable_retro/cores/dc/dc_boot.bin</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Saturn</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mpr-17933.bin</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">faa8ea183a6d7bbe5d4e03bb1332519800d3fbc3</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stable_retro/cores/mpr-17933.bin</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
-<section id="A" class="genindex-section">
-  <h2>A</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="../python/#stable_retro.Actions">Actions (class in stable_retro)</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="../python/#stable_retro.Actions.ALL">ALL (stable_retro.Actions attribute)</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="D" class="genindex-section">
-  <h2>D</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="../python/#stable_retro.State.DEFAULT">DEFAULT (stable_retro.State attribute)</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="../python/#stable_retro.Actions.DISCRETE">DISCRETE (stable_retro.Actions attribute)</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="I" class="genindex-section">
-  <h2>I</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="../python/#stable_retro.Observations.IMAGE">IMAGE (stable_retro.Observations attribute)</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="M" class="genindex-section">
-  <h2>M</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="../python/#stable_retro.make">make() (in module stable_retro)</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="../python/#stable_retro.Actions.MULTI_DISCRETE">MULTI_DISCRETE (stable_retro.Actions attribute)</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="N" class="genindex-section">
-  <h2>N</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="../python/#stable_retro.State.NONE">NONE (stable_retro.State attribute)</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="O" class="genindex-section">
-  <h2>O</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="../python/#stable_retro.Observations">Observations (class in stable_retro)</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="R" class="genindex-section">
-  <h2>R</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="../python/#stable_retro.Observations.RAM">RAM (stable_retro.Observations attribute)</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="../python/#stable_retro.RetroEnv">RetroEnv (class in stable_retro)</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="S" class="genindex-section">
-  <h2>S</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="../python/#stable_retro.State">State (class in stable_retro)</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
 
           </article>
         </div>
         <footer>
           
           <div class="related-pages">
-            
-            
+            <a class="next-page" href="../developing/">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Development</div>
+              </div>
+              <svg class="furo-related-icon">
+                <use href="#svg-arrow-right"></use>
+              </svg>
+            </a>
+            <a class="prev-page" href="../included_roms/">
+              <svg class="furo-related-icon">
+                <use href="#svg-arrow-right"></use>
+              </svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Included Roms</div>
+                
+              </div>
+            </a>
           </div>
           <div class="bottom-of-page">
             <div class="left-details">

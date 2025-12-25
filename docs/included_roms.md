@@ -9,3 +9,4 @@
 - [Fire](http://privat.bahnhof.se/wb800787/gb/demo/64/) by dox
 - [FamiCON intro](http://www.pouet.net/prod.php?which=53497) by dr88
 - [Lost Marbles](https://pdroms.de/files/gameboyadvance/lost-marbles) by Vantage
+- [Airstriker](https://pdroms.de/genesis/airstriker-v1-50-genesis-game) by Electrokinesis

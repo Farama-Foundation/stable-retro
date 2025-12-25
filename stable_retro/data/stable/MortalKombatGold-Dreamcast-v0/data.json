@@ -1,0 +1,12 @@
+{
+  "info": {
+    "p1_health": {
+      "address": 204498080,
+      "type": "|u1"
+    },
+    "time": {
+      "address": 204638496,
+      "type": "|i1"
+    }
+  }
+}

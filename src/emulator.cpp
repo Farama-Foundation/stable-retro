@@ -156,7 +156,7 @@ bool Emulator::loadRom(const string& romPath) {
 	if (!res) {
 		return false;
 	}
-	
+
 #ifdef ENABLE_HW_RENDER
 	// If HW rendering was enabled during retro_load_game, now call context_reset
 	// This must be done after RETRO_ENVIRONMENT_SET_HW_RENDER has returned and
@@ -455,7 +455,7 @@ static void cbLog(enum retro_log_level level, const char *fmt, ...) {
 
 bool Emulator::cbEnvironment(unsigned cmd, void* data) {
 	assert(s_loadedEmulator);
-	
+
 	switch (cmd) {
 	case RETRO_ENVIRONMENT_SET_PIXEL_FORMAT:
 		switch (*reinterpret_cast<retro_pixel_format*>(data)) {

@@ -165,14 +165,14 @@ typedef EGLBoolean (EGLAPIENTRY *PFNEGLQUERYDEVICESEXTPROC)(EGLint max_devices, 
 
 bool HWRenderContext::initEGL() {
     EGLint major, minor;
-    
+
     const char* extensions = eglQueryString(EGL_NO_DISPLAY, EGL_EXTENSIONS);
-    
+
     // Check if we have a display (GUI mode)
     const char* displayEnv = getenv("DISPLAY");
     bool hasDisplay = (displayEnv != nullptr && displayEnv[0] != '\0');
-    
-    // For GUI apps with a display, try X11 display FIRST 
+
+    // For GUI apps with a display, try X11 display FIRST
     // (EGL device platform has issues with virgl and other virtual GPUs)
     if (hasDisplay) {
         m_eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -184,46 +184,46 @@ bool HWRenderContext::initEGL() {
             m_eglDisplay = nullptr;
         }
     }
-    
+
     // For headless mode, try EGL device platform
-    if (extensions && strstr(extensions, "EGL_EXT_device_base") && 
+    if (extensions && strstr(extensions, "EGL_EXT_device_base") &&
         strstr(extensions, "EGL_EXT_platform_device")) {
-        
+
         auto eglQueryDevicesEXT = (PFNEGLQUERYDEVICESEXTPROC)
             eglGetProcAddress("eglQueryDevicesEXT");
         auto eglGetPlatformDisplayEXT = (PFNEGLGETPLATFORMDISPLAYEXTPROC)
             eglGetProcAddress("eglGetPlatformDisplayEXT");
-        
+
         if (eglQueryDevicesEXT && eglGetPlatformDisplayEXT) {
             EGLDeviceEXT devices[8];
             EGLint numDevices = 0;
-            
+
             if (eglQueryDevicesEXT(8, devices, &numDevices) && numDevices > 0) {
                 std::cerr << "HWRender: Found " << numDevices << " EGL device(s)" << std::endl;
-                
+
                 // Try to get device query extension
                 auto eglQueryDeviceStringEXT = (const char* (*)(EGLDeviceEXT, EGLint))
                     eglGetProcAddress("eglQueryDeviceStringEXT");
-                
+
                 // Try each device, preferring non-software devices
                 for (EGLint i = 0; i < numDevices; ++i) {
                     // Query device info if available
                     if (eglQueryDeviceStringEXT) {
                         const char* devExts = eglQueryDeviceStringEXT(devices[i], EGL_EXTENSIONS);
-                        std::cerr << "HWRender: Device " << i << " extensions: " 
+                        std::cerr << "HWRender: Device " << i << " extensions: "
                                   << (devExts ? devExts : "none") << std::endl;
                     }
-                    
+
                     m_eglDisplay = eglGetPlatformDisplayEXT(
                         EGL_PLATFORM_DEVICE_EXT, devices[i], nullptr);
-                    
+
                     if (m_eglDisplay != EGL_NO_DISPLAY) {
                         if (eglInitialize((EGLDisplay)m_eglDisplay, &major, &minor)) {
                             // Check vendor to prefer hardware over software
                             const char* vendor = eglQueryString((EGLDisplay)m_eglDisplay, EGL_VENDOR);
-                            std::cerr << "HWRender: Device " << i << " vendor: " 
+                            std::cerr << "HWRender: Device " << i << " vendor: "
                                       << (vendor ? vendor : "unknown") << std::endl;
-                            
+
                             std::cerr << "HWRender: Trying EGL device platform (device " << i << ")" << std::endl;
                             m_useSurfaceless = true;  // Device platform uses surfaceless
                             goto egl_initialized;
@@ -234,7 +234,7 @@ bool HWRenderContext::initEGL() {
             }
         }
     }
-    
+
     // Fallback: try native X11 display
     if (hasDisplay) {
         m_eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -246,16 +246,16 @@ bool HWRenderContext::initEGL() {
             m_eglDisplay = nullptr;
         }
     }
-    
+
     // Fallback: try surfaceless platform (Mesa)
     if (extensions && strstr(extensions, "EGL_MESA_platform_surfaceless")) {
         auto eglGetPlatformDisplayEXT = (PFNEGLGETPLATFORMDISPLAYEXTPROC)
             eglGetProcAddress("eglGetPlatformDisplayEXT");
-        
+
         if (eglGetPlatformDisplayEXT) {
             m_eglDisplay = eglGetPlatformDisplayEXT(
                 EGL_PLATFORM_SURFACELESS_MESA, EGL_DEFAULT_DISPLAY, nullptr);
-            
+
             if (m_eglDisplay != EGL_NO_DISPLAY) {
                 if (eglInitialize((EGLDisplay)m_eglDisplay, &major, &minor)) {
                     std::cerr << "HWRender: Using Mesa surfaceless platform" << std::endl;
@@ -266,7 +266,7 @@ bool HWRenderContext::initEGL() {
             }
         }
     }
-    
+
     // Final fallback: default display without checking DISPLAY
     if (!hasDisplay) {
         m_eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -276,13 +276,13 @@ bool HWRenderContext::initEGL() {
             }
         }
     }
-    
+
     std::cerr << "HWRender: No EGL display available" << std::endl;
     return false;
 
 egl_initialized:
     std::cerr << "HWRender: EGL " << major << "." << minor << " initialized, useSurfaceless=" << m_useSurfaceless << std::endl;
-    
+
     // Print EGL vendor info for debugging
     const char* eglVendor = eglQueryString((EGLDisplay)m_eglDisplay, EGL_VENDOR);
     const char* eglVersion = eglQueryString((EGLDisplay)m_eglDisplay, EGL_VERSION);
@@ -297,12 +297,12 @@ egl_initialized:
     // Try OpenGL ES FIRST - it has better EGL support on virtual GPUs like virgl
     // Then fall back to desktop OpenGL
     bool useOpenGLES = false;
-    
+
     // Check what the core wants
     bool coreWantsGLES = (m_callback.context_type == RETRO_HW_CONTEXT_OPENGLES2 ||
                           m_callback.context_type == RETRO_HW_CONTEXT_OPENGLES3 ||
                           m_callback.context_type == RETRO_HW_CONTEXT_OPENGLES_VERSION);
-    
+
     // Try OpenGL ES first (better compatibility with virgl and other virtual GPUs)
     if (eglBindAPI(EGL_OPENGL_ES_API)) {
         useOpenGLES = true;
@@ -321,7 +321,7 @@ egl_initialized:
     EGLConfig config;
     EGLint numConfigs;
     EGLint renderableType = useOpenGLES ? EGL_OPENGL_ES3_BIT : EGL_OPENGL_BIT;
-    
+
     // Try pbuffer config first (more compatible)
     {
         EGLint configAttribs[] = {
@@ -358,20 +358,20 @@ egl_initialized:
             }
         }
     }
-    
+
     if (numConfigs == 0) {
         std::cerr << "HWRender: eglChooseConfig failed - no configs found" << std::endl;
         eglTerminate((EGLDisplay)m_eglDisplay);
         return false;
     }
     std::cerr << "HWRender: Got " << numConfigs << " config(s)" << std::endl;
-    
+
     // Query config details for debugging
     EGLint configRenderableType = 0;
     EGLint configSurfaceType = 0;
     eglGetConfigAttrib((EGLDisplay)m_eglDisplay, config, EGL_RENDERABLE_TYPE, &configRenderableType);
     eglGetConfigAttrib((EGLDisplay)m_eglDisplay, config, EGL_SURFACE_TYPE, &configSurfaceType);
-    std::cerr << "HWRender: Config RENDERABLE_TYPE=0x" << std::hex << configRenderableType 
+    std::cerr << "HWRender: Config RENDERABLE_TYPE=0x" << std::hex << configRenderableType
               << " (OpenGL=" << ((configRenderableType & EGL_OPENGL_BIT) ? "yes" : "no")
               << ", ES3=" << ((configRenderableType & EGL_OPENGL_ES3_BIT) ? "yes" : "no") << ")"
               << ", SURFACE_TYPE=0x" << configSurfaceType << std::dec << std::endl;
@@ -398,7 +398,7 @@ egl_initialized:
     // Create OpenGL context
     EGLint contextAttribs[16];
     int attrIdx = 0;
-    
+
     if (useOpenGLES) {
         // OpenGL ES context - use EGL_CONTEXT_CLIENT_VERSION for EGL 1.4 compatibility
         contextAttribs[attrIdx++] = EGL_CONTEXT_CLIENT_VERSION;
@@ -410,19 +410,19 @@ egl_initialized:
         contextAttribs[attrIdx++] = EGL_CONTEXT_MINOR_VERSION;
         contextAttribs[attrIdx++] = (EGLint)(m_callback.version_minor ? m_callback.version_minor : 3);
         contextAttribs[attrIdx++] = EGL_CONTEXT_OPENGL_PROFILE_MASK;
-        contextAttribs[attrIdx++] = (m_callback.context_type == RETRO_HW_CONTEXT_OPENGL_CORE) 
-            ? EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT 
+        contextAttribs[attrIdx++] = (m_callback.context_type == RETRO_HW_CONTEXT_OPENGL_CORE)
+            ? EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT
             : EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT;
     }
     contextAttribs[attrIdx] = EGL_NONE;
 
-    std::cerr << "HWRender: Creating context (" << (useOpenGLES ? "OpenGL ES 3" : 
+    std::cerr << "HWRender: Creating context (" << (useOpenGLES ? "OpenGL ES 3" :
               (std::string("OpenGL ") + std::to_string(contextAttribs[1]) + "." + std::to_string(contextAttribs[3])).c_str()) << ")" << std::endl;
 
     m_eglContext = eglCreateContext((EGLDisplay)m_eglDisplay, config, EGL_NO_CONTEXT, contextAttribs);
     if (m_eglContext == EGL_NO_CONTEXT) {
         std::cerr << "HWRender: eglCreateContext failed (error: 0x" << std::hex << eglGetError() << std::dec << "), trying simpler context" << std::endl;
-        
+
         // Try a simpler context without version/profile constraints
         EGLint simpleContextAttribs[] = { EGL_NONE };
         m_eglContext = eglCreateContext((EGLDisplay)m_eglDisplay, config, EGL_NO_CONTEXT, simpleContextAttribs);
@@ -443,14 +443,14 @@ egl_initialized:
     }
     // Release any existing context on this thread first
     eglMakeCurrent((EGLDisplay)m_eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
-    
+
     // Make context current
     EGLSurface surface = m_useSurfaceless ? EGL_NO_SURFACE : (EGLSurface)m_eglSurface;
     std::cerr << "HWRender: Making current with surface=" << (m_useSurfaceless ? "EGL_NO_SURFACE" : "pbuffer") << std::endl;
     if (!eglMakeCurrent((EGLDisplay)m_eglDisplay, surface, surface, (EGLContext)m_eglContext)) {
         EGLint error = eglGetError();
         std::cerr << "HWRender: eglMakeCurrent failed (error: 0x" << std::hex << error << std::dec << ")" << std::endl;
-        
+
         // If surfaceless failed, try with a pbuffer as last resort
         if (m_useSurfaceless && !m_eglSurface) {
             std::cerr << "HWRender: Trying pbuffer fallback..." << std::endl;
@@ -471,7 +471,7 @@ egl_initialized:
                 m_eglSurface = nullptr;
             }
         }
-        
+
         eglDestroyContext((EGLDisplay)m_eglDisplay, (EGLContext)m_eglContext);
         if (m_eglSurface) {
             eglDestroySurface((EGLDisplay)m_eglDisplay, (EGLSurface)m_eglSurface);
@@ -583,9 +583,9 @@ bool HWRenderContext::initGLX() {
         int contextAttribs[] = {
             GLX_CONTEXT_MAJOR_VERSION_ARB, (int)(m_callback.version_major ? m_callback.version_major : 3),
             GLX_CONTEXT_MINOR_VERSION_ARB, (int)(m_callback.version_minor ? m_callback.version_minor : 3),
-            GLX_CONTEXT_PROFILE_MASK_ARB, 
-                (m_callback.context_type == RETRO_HW_CONTEXT_OPENGL_CORE) 
-                    ? GLX_CONTEXT_CORE_PROFILE_BIT_ARB 
+            GLX_CONTEXT_PROFILE_MASK_ARB,
+                (m_callback.context_type == RETRO_HW_CONTEXT_OPENGL_CORE)
+                    ? GLX_CONTEXT_CORE_PROFILE_BIT_ARB
                     : GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB,
             None
         };

@@ -509,8 +509,8 @@ void EmulatorController::runOnce() {
 	int rotation = m_re.getRotation();
 	bool rotationChanged = rotation != m_rotation;
 	// For HW render, always refresh since the buffer content changes but pointer stays same
-	bool needsRefresh = m_re.isHWRenderEnabled() || 
-	                    m_screen.constBits() != static_cast<const uchar*>(m_re.getImageData()) || 
+	bool needsRefresh = m_re.isHWRenderEnabled() ||
+	                    m_screen.constBits() != static_cast<const uchar*>(m_re.getImageData()) ||
 	                    m_crop != crop || rotationChanged;
 	if (needsRefresh) {
 		QImage::Format format = QImage::Format_RGB16;

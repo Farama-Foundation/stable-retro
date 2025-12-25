@@ -1,0 +1,31 @@
+{
+  "crop": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "done": {
+    "variables": {
+      "p1_health": {
+        "op": "equal"
+      },
+      "p2_health": {
+        "op": "equal"
+      },
+      "time": {
+        "op": "equal"
+      }
+    }
+  },
+  "reward": {
+    "variables": {
+      "p1_health": {
+        "penalty": 1.0
+      },
+      "p2_health": {
+        "penalty": -1.0
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
     "Dreamcast": {
         "lib": "flycast",
-        "ext": ["chd2"],
+        "ext": ["chd2", "cdi"],
         "rambase": 201326592,
         "keybinds": ["X", "Z", "TAB", "ENTER", "UP", "DOWN", "LEFT", "RIGHT", "C", "A", "S", "D", "W", "Q"],
         "buttons": ["A", "B", "X", "Y", "START", "DPAD_UP", "DPAD_DOWN", "DPAD_LEFT", "DPAD_RIGHT", "L", "R", null, null, null],

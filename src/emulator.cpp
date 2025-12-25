@@ -51,6 +51,7 @@ static map<string, const char*> s_envVariables = {
 	{ "flycast_alpha_sorting", "per-strip (fast, least accurate)" },
 	// Force OpenGL instead of Vulkan
 	{ "flycast_pvr2_filtering", "disabled" },
+	{ "flycast_region", "Auto" },
 };
 
 static void (*retro_init)(void);

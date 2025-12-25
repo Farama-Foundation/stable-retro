@@ -39,7 +39,7 @@ from stable_baselines3.common.vec_env import (
     VecTransposeImage,
 )
 
-import stable_retro
+import stable_retro as retro
 
 
 class StochasticFrameSkip(gym.Wrapper):
@@ -85,8 +85,8 @@ class StochasticFrameSkip(gym.Wrapper):
 
 def make_retro(*, game, state=None, max_episode_steps=4500, **kwargs):
     if state is None:
-        state = stable_retro.State.DEFAULT
-    env = stable_retro.make(game, state, **kwargs)
+        state = retro.State.DEFAULT
+    env = retro.make(game, state, **kwargs)
     env = StochasticFrameSkip(env, n=4, stickprob=0.25)
     if max_episode_steps is not None:
         env = TimeLimit(env, max_episode_steps=max_episode_steps)

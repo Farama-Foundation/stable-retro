@@ -47,8 +47,8 @@ set(CMAKE_CXX_FLAGS
     "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-sign-compare -Wno-missing-field-initializers -fvisibility=hidden"
 )
 
-include(CheckIncludeFile)
-check_include_file("GL/gl.h" STABLE_RETRO_HAVE_GL_GL_H)
+include(CheckIncludeFileCXX)
+check_include_file_cxx("GL/gl.h" STABLE_RETRO_HAVE_GL_GL_H)
 
 if(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" OR CMAKE_SYSTEM_PROCESSOR STREQUAL
                                                "AMD64")
@@ -267,9 +267,6 @@ if(APPLE)
   )
 else()
   add_core(fbneo fbneo)
-  if(NOT BUILD_N64)
-    message(STATUS "BUILD_N64=OFF: skipping Parallel N64 core")
-  endif()
   if(BUILD_N64)
     if(STABLE_RETRO_HAVE_GL_GL_H)
       add_core(n64 parallel_n64)
@@ -279,6 +276,8 @@ else()
           "Skipping Parallel N64 core: missing OpenGL headers (GL/gl.h). Install an OpenGL dev package (e.g., libgl1-mesa-dev on Debian/Ubuntu, mesa-libGL-devel on Fedora/RHEL, mesa on Arch) or set -DBUILD_N64=OFF."
       )
     endif()
+  else()
+    message(STATUS "BUILD_N64=OFF: skipping Parallel N64 core")
   endif()
 endif()
 

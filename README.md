@@ -80,6 +80,31 @@ cd stable-retro
 pip3 install -e .
 ```
 
+### Linux build dependencies
+
+If you build from source (e.g. `pip3 install -e .`), you may need system development headers.
+In particular:
+- The experimental N64 core (`parallel_n64`) requires OpenGL headers (`GL/gl.h`).
+- The experimental Dreamcast core (`flycast`) is only built when hardware rendering is enabled (`-DENABLE_HW_RENDER=ON`) and requires EGL/GLES + X11 development headers.
+
+```bash
+sudo apt-get update
+sudo apt-get install -y \
+	build-essential \
+	cmake \
+	pkg-config \
+	python3-dev \
+	zlib1g-dev \
+	libegl1-mesa-dev \
+	libgl1-mesa-dev \
+	libgles2-mesa-dev \
+	libx11-dev \
+	mesa-common-dev
+```
+
+If you don't want to build the N64 core, configure CMake with `-DBUILD_N64=OFF`.
+If you want to build the Dreamcast core, configure CMake with `-DENABLE_HW_RENDER=ON`.
+
 #### Apple Silicon Installation (Tested on python3.10)
 - NOTE: The Game Boy (gambatte) emulator is not supported on Apple Silicon
 

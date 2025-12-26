@@ -47,6 +47,9 @@ set(CMAKE_CXX_FLAGS
     "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-sign-compare -Wno-missing-field-initializers -fvisibility=hidden"
 )
 
+include(CheckIncludeFile)
+check_include_file("GL/gl.h" STABLE_RETRO_HAVE_GL_GL_H)
+
 if(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" OR CMAKE_SYSTEM_PROCESSOR STREQUAL
                                                "AMD64")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mssse3")
@@ -64,6 +67,7 @@ option(BUILD_MANYLINUX "Should use static libraries compatible with manylinux1"
 option(ENABLE_HW_RENDER
        "Enable hardware rendering support for GPU cores (requires EGL/OpenGL)"
        OFF)
+option(BUILD_N64 "Build Parallel N64 core (requires OpenGL headers)" ON)
 
 set(BUILD_PYTHON
     ON
@@ -263,7 +267,16 @@ if(APPLE)
   )
 else()
   add_core(fbneo fbneo)
-  add_core(n64 parallel_n64)
+  if(BUILD_N64)
+    if(STABLE_RETRO_HAVE_GL_GL_H)
+      add_core(n64 parallel_n64)
+    else()
+      message(
+        WARNING
+          "Skipping Parallel N64 core: missing OpenGL headers (GL/gl.h). Install an OpenGL dev package (e.g., libgl1-mesa-dev on Debian/Ubuntu, mesa-libGL-devel on Fedora/RHEL, mesa on Arch) or set -DBUILD_N64=OFF."
+      )
+    endif()
+  endif()
 endif()
 
 # Flycast (Dreamcast) - requires hardware rendering

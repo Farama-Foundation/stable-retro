@@ -1,4 +1,5 @@
 import os
+import shlex
 import subprocess
 import sys
 import sysconfig
@@ -36,22 +37,32 @@ class CMakeBuild(build_ext):
         python_include_dir = f"-DPython_INCLUDE_DIR={sysconfig.get_path('include')}"
         python_library = f"-DPython_LIBRARY={sysconfig.get_path('platlib')}"
 
-        subprocess.check_call(
-            [
-                "cmake",
-                ".",
-                "-G",
-                "Unix Makefiles",
-                build_type,
-                pyext_suffix,
-                pylib_dir,
-                python_root_dir,
-                python_find_strategy,
-                python_executable,
-                python_include_dir,
-                python_library,
-            ],
-        )
+        # Allow users to pass extra CMake configure flags when building via pip.
+        # Example:
+        #   CMAKE_ARGS="-DBUILD_N64=OFF -DENABLE_HW_RENDER=ON" pip3 install -e .
+        extra_cmake_args = []
+        for env_var in ("STABLE_RETRO_CMAKE_ARGS", "CMAKE_ARGS"):
+            value = os.environ.get(env_var)
+            if value:
+                extra_cmake_args.extend(shlex.split(value))
+
+        cmake_cmd = [
+            "cmake",
+            ".",
+            "-G",
+            "Unix Makefiles",
+            build_type,
+            pyext_suffix,
+            pylib_dir,
+            python_root_dir,
+            python_find_strategy,
+            python_executable,
+            python_include_dir,
+            python_library,
+            *extra_cmake_args,
+        ]
+
+        subprocess.check_call([arg for arg in cmake_cmd if arg])
         if self.parallel:
             jobs = f"-j{self.parallel:d}"
         else:

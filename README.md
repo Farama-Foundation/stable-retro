@@ -105,6 +105,12 @@ sudo apt-get install -y \
 If you don't want to build the N64 core, configure CMake with `-DBUILD_N64=OFF`.
 If you want to build the Dreamcast core, configure CMake with `-DENABLE_HW_RENDER=ON`.
 
+When building via `pip3 install -e .`, pass CMake configure options via the `CMAKE_ARGS` environment variable, for example:
+
+```bash
+CMAKE_ARGS="-DBUILD_N64=OFF -DENABLE_HW_RENDER=ON" pip3 install -e .
+```
+
 #### Apple Silicon Installation (Tested on python3.10)
 - NOTE: The Game Boy (gambatte) emulator is not supported on Apple Silicon
 

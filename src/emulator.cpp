@@ -60,7 +60,7 @@ static map<string, const char*> s_envVariables = {
 	{ "melonds_opengl_renderer", "disabled" },
 	{ "melonds_jit_enable", "enabled" },
 	{ "melonds_touch_mode", "joystick" },
-	{ "melonds_screen_layout", "top/bottom" },
+	{ "melonds_screen_layout", "Bottom Only" },
 };
 
 static void (*retro_init)(void);
@@ -449,7 +449,7 @@ void Emulator::reconfigureAddressSpace() {
 // callback for logging from emulator
 // turned off by default to avoid spamming the log, only used for debugging issues within cores
 static void cbLog(enum retro_log_level level, const char *fmt, ...) {
-#if 1
+#if 0
 	char buffer[4096] = {0};
 	static const char * levelName[] = { "DEBUG", "INFO", "WARNING", "ERROR" };
 	va_list va;

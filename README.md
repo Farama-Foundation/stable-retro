@@ -22,6 +22,7 @@ Currently added games on top of gym-retro:
 *	Mortal Kombat 1 - Sega CD
 *	Mortal Kombat Trilogy - Nintendo 64
 *	Street Fighter 3rd Strike - Dreamcast
+*	Ultimate Mortal Kombat - Nintendo DS
 
 PvP games that support two models fighting each other:
 *	Samurai Showdown - Genesis
@@ -42,7 +43,8 @@ As well as additional states on already integrated games.
 	- Game Boy Advance (via mGBA)
 	- Nintendo Entertainment System (via FCEUmm)
 	- Super Nintendo Entertainment System (via Snes9x)
-	- Nintendo 64(via parallel_n64)(Experimental)
+	- Nintendo 64 (via parallel_n64)(Experimental)
+	- Nitendo DS (via MelonDS)(Experimental)
 - Sega
 	- GameGear (via Genesis Plus GX)
 	- Genesis/Mega Drive (via Genesis Plus GX)

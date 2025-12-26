@@ -1,0 +1,14 @@
+{
+    "NintendoDs": {
+        "lib": "melonds",
+        "ext": ["nds"],
+        "keybinds": ["Z", "A", "TAB", "ENTER", "UP", "DOWN", "LEFT", "RIGHT", "X", "S", "Q", "W", "E", "R", "T", "Y"],
+        "buttons": ["B", "Y", "SELECT", "START", "UP", "DOWN", "LEFT", "RIGHT", "A", "X", "L", "R", "L2", "R2", "L3", "R3"],
+        "actions": [
+            [[], ["UP"], ["DOWN"]],
+            [[], ["LEFT"], ["RIGHT"]],
+            [[], ["A"], ["B"], ["X"], ["Y"], ["SELECT"], ["A", "B"], ["X", "Y"]],
+            [[], ["L"], ["R"], ["L", "R"]]
+        ]
+    }
+}

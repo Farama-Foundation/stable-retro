@@ -112,6 +112,8 @@ private:
 	bool m_romLoaded = false;
 	std::string m_core;
 	std::string m_romPath;
+	std::vector<char> m_romData;  // Keep ROM data alive for cores that need it on reset
+	retro_game_info m_gameInfo{};  // Keep game info struct alive for cores that cache the pointer
 
 	uint64_t m_serializationQuirks = 0;
 	bool m_needsInitFrame = false;

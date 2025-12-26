@@ -52,6 +52,15 @@ static map<string, const char*> s_envVariables = {
 	// Force OpenGL instead of Vulkan
 	{ "flycast_pvr2_filtering", "disabled" },
 	{ "flycast_region", "Auto" },
+
+	// melonDS (Nintendo DS) settings for training
+	{ "melonds_boot_directly", "enabled" },
+	{ "melonds_console_mode", "DS" },
+	{ "melonds_threaded_renderer", "enabled" },
+	{ "melonds_opengl_renderer", "disabled" },
+	{ "melonds_jit_enable", "enabled" },
+	{ "melonds_touch_mode", "joystick" },
+	{ "melonds_screen_layout", "top/bottom" },
 };
 
 static void (*retro_init)(void);
@@ -130,31 +139,31 @@ bool Emulator::loadRom(const string& romPath) {
 		m_core = core;
 	}
 
-	retro_game_info gameInfo;
+	m_romPath = romPath;
 	ifstream in(romPath, ios::binary | ios::ate);
 	if (in.fail()) {
 		return false;
 	}
 	ostringstream out;
-	gameInfo.size = in.tellg();
+	m_gameInfo.size = in.tellg();
 	if (in.fail()) {
 		return false;
 	}
-	char* romData = new char[gameInfo.size];
-	gameInfo.path = romPath.c_str();
-	gameInfo.data = romData;
+	m_romData.resize(m_gameInfo.size);
+	m_gameInfo.path = m_romPath.c_str();
+	m_gameInfo.data = m_romData.data();
 	in.seekg(0, ios::beg);
-	in.read(romData, gameInfo.size);
+	in.read(m_romData.data(), m_gameInfo.size);
 	if (in.fail()) {
-		delete[] romData;
+		m_romData.clear();
 		return false;
 	}
 	in.close();
 
 	m_rotation = 0;
-	auto res = retro_load_game(&gameInfo);
-	delete[] romData;
+	auto res = retro_load_game(&m_gameInfo);
 	if (!res) {
+		m_romData.clear();
 		return false;
 	}
 
@@ -260,6 +269,8 @@ void Emulator::unloadRom() {
 	retro_unload_game();
 	m_romLoaded = false;
 	m_romPath.clear();
+	m_romData.clear();
+	m_gameInfo = {};
 	m_addressSpace = nullptr;
 	m_map.clear();
 }

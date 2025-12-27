@@ -1,0 +1,4025 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="">
+    <meta property="og:title" content="Stable-Retro Documentation" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="" />
+    <meta property="og:url" content="https://stable-retro.farama.org/supported_games.html" /><meta property="og:image" content="https://stable-retro.farama.org/_static/img/stable-retro-github.svg" /><meta name="twitter:card" content="summary_large_image"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Development" href="../developing/" /><link rel="prev" title="Supported Emulators" href="../supported_emulators/" />
+        <link rel="canonical" href="https://stable-retro.farama.org/supported_games.html" />
+
+    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 -->
+        <title>Supported Games - Stable-Retro Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=82c8b628" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <header class="farama-header" aria-label="Farama header">
+      <div class="farama-header__container">
+        <div class="farama-header__left--mobile">
+          <label class="nav-overlay-icon" for="__navigation">
+            <div class="visually-hidden">Toggle site navigation sidebar</div>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <defs></defs>
+              <line x1="0.5" y1="4" x2="23.5" y2="4"></line>
+              <line x1="0.232" y1="12" x2="23.5" y2="12"></line>
+              <line x1="0.232" y1="20" x2="23.5" y2="20"></line>
+            </svg>
+          </label>
+        </div>
+        <div class="farama-header__left farama-header__center--mobile">
+          <a href="../">
+              <img class="farama-header__logo only-light" src="../_static/img/stable_retro_black.svg" alt="Light Logo"/>
+              <img class="farama-header__logo only-dark" src="../_static/img/stable_retro_white.svg" alt="Dark Logo"/>
+            <span class="farama-header__title">Stable-Retro Documentation</span>
+          </a>
+        </div>
+        <div class="farama-header__right">
+          <div class="farama-header-menu">
+            <button class="farama-header-menu__btn" aria-label="Open Farama Menu" aria-expanded="false" aria-haspopup="true" aria-controls="farama-menu">
+              <img class="farama-black-logo-invert" src="../_static/img/farama-logo-header.svg">
+              <svg viewBox="0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <polyline style="stroke-linecap: round; stroke-linejoin: round; fill: none; stroke-width: 2px;" points="1 7 12 18 23 7"></polyline>
+              </svg>
+            </button>
+            <div class="farama-header-menu-container farama-hidden" aria-hidden="true" id="farama-menu">
+              <div class="farama-header-menu__header">
+                <a href="https://farama.org">
+                  <img class="farama-header-menu__logo farama-white-logo-invert" src="../_static/img/farama_solid_white.svg" alt="Farama Foundation logo">
+                  <span>Farama Foundation</span>
+                </a>
+                <div class="farama-header-menu-header__right">
+                  <button id="farama-close-menu">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-close">
+                      <line x1="3" y1="21" x2="21" y2="3"></line>
+                      <line x1="3" y1="3" x2="21" y2="21"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="farama-header-menu__body">
+                <!-- Response from farama.org/api/projects.json -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<div class="page">
+  <!--<header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../"><div class="brand">Stable-Retro Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>-->
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="farama-sidebar__title" href="../">
+      <img class="farama-header__logo only-light" src="../_static/img/stable_retro_black.svg" alt="Light Logo"/>
+      <img class="farama-header__logo only-dark" src="../_static/img/stable_retro_white.svg" alt="Dark Logo"/>
+    <span class="farama-header__title">Stable-Retro Documentation</span>
+  </a><form class="sidebar-search-container" method="get" action="../search/" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../included_roms/">Included Roms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_bios/">Platforms that needs a BIOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supported_emulators/">Supported Emulators</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Supported Games</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing/">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/">Game Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/">Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/master/docs/README.md">Contribute to the Docs</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main-container">
+
+    
+
+    
+
+    <div class="main">
+      <div class="content">
+        <div class="article-container">
+          <a href="#" class="back-to-top muted-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+            </svg>
+            <span>Back to top</span>
+          </a>
+          <div class="content-icon-container"><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Farama-Foundation/stable-retro/edit/master/docs/supported_games.md" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+              <button class="theme-toggle" title="Toggle color theme">
+                <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+                <svg class="theme-icon-when-auto">
+                  <use href="#svg-sun-half"></use>
+                </svg>
+                <svg class="theme-icon-when-dark">
+                  <use href="#svg-moon"></use>
+                </svg>
+                <svg class="theme-icon-when-light">
+                  <use href="#svg-sun"></use>
+                </svg>
+              </button>
+            </div>
+            <label class="toc-overlay-icon toc-content-icon" for="__toc">
+              <div class="visually-hidden">Toggle table of contents sidebar</div>
+              <i class="icon"><svg>
+                  <use href="#svg-toc"></use>
+                </svg></i>
+            </label>
+          </div>
+          <article role="main">
+            
+            <section class="tex2jax_ignore mathjax_ignore" id="supported-games">
+<h1>Supported Games<a class="headerlink" href="#supported-games" title="Link to this heading">¶</a></h1>
+<p>This page lists the bundled game integrations found under <code class="docutils literal notranslate"><span class="pre">stable_retro/data/</span></code>.</p>
+<p>The tables below are derived from the directory names in these folders:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stable_retro/data/stable/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stable_retro/data/contrib/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stable_retro/data/experimental/</span></code></p></li>
+</ul>
+<p>Each table groups games by the emulator core that Stable-Retro uses for that system.</p>
+<section id="snes9x-snes">
+<h2>Snes9x (SNES)<a class="headerlink" href="#snes9x-snes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Game (folder name)</p></th>
+<th class="head"><p>Dataset</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AcceleBrid-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ActionPachio-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ActRaiser2-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AddamsFamily-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AddamsFamilyPugsleysScavengerHunt-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AdventuresOfDrFranken-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AdventuresOfKidKleets-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AdventuresOfMightyMax-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AdventuresOfRockyAndBullwinkleAndFriends-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AdventuresOfYogiBear-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AeroFighters-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AeroTheAcroBat-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AeroTheAcroBat2-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AirCavalry-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AlfredChicken-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AlienVsPredator-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ArcherMacleansSuperDropzone-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ArdyLightfoot-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ArtOfFighting-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Asterix-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Axelay-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BatmanReturns-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BattleMasterKyuukyokuNoSenshiTachi-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BattletoadsDoubleDragon-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BattletoadsInBattlemaniacs-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BattleZequeDen-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BebesKids-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BioMetal-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BishoujoSenshiSailorMoonR-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BlaZeonTheBioCyborgChallenge-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BlockKuzushi-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BOB-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BoogermanAPickAndFlickAdventure-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BramStokersDracula-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BrawlBrothers-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BronkieTheBronchiasaurus-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BubsyII-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BubsyInClawsEncountersOfTheFurredKind-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CacomaKnightInBizyland-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cameltry-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CannonFodder-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CaptainAmericaAndTheAvengers-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CaptainCommando-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CastlevaniaDraculaX-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ChesterCheetahTooCoolToFool-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ChesterCheetahWildWildQuest-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ChoplifterIIIRescueSurvive-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ChoujikuuYousaiMacrossScrambledValkyrie-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ChuckRock-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Claymates-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Cliffhanger-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CongosCaper-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CoolSpot-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CosmoGangTheVideo-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Cybernator-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DaffyDuckTheMarvinMissions-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DariusForce-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DariusTwin-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DazeBeforeChristmas-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DennisTheMenace-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DimensionForce-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DinoCity-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DonkeyKongCountry-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DonkeyKongCountry2-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DonkeyKongCountry3DixieKongsDoubleTrouble-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DragonsLair-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DragonTheBruceLeeStory-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>EarthDefenseForce-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FamilyDog-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FinalFight-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FinalFight2-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FinalFight3-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FinalFightGuy-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FirstSamurai-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Flintstones-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FlyingHeroBugyuruNoDaibouken-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Gods-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GokujouParodius-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GradiusIII-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GreatCircusMysteryStarringMickeyAndMinnie-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>HarleysHumongousAdventure-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hook-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>HuntForRedOctober-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hurricanes-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Imperium-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Incantation-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>IncredibleHulk-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>InspectorGadget-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ItchyAndScratchyGame-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>IzzysQuestForTheOlympicRings-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>JellyBoy-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JetsonsInvasionOfThePlanetPirates-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>JoeAndMac-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JoeAndMac2LostInTheTropics-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>JudgeDredd-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JungleBook-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>KaiteTsukutteAsoberuDezaemon-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>KidKlownInCrazyChase-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>KingOfDragons-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>KingOfTheMonsters2-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>KnightsOfTheRound-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>LastActionHero-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Legend-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>LethalWeapon-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MagicalQuestStarringMickeyMouse-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MagicBoy-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MagicSword-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mask-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MightyMorphinPowerRangersTheMovie-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MrNutz-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>OutToLunch-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PacInTime-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Parodius-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PeaceKeepers-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Phalanx-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PiratesOfDarkWater-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PitfallTheMayanAdventure-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Plok-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PopnTwinBee-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PopnTwinBeeRainbowBellAdventures-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PorkyPigsHauntedHoliday-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PowerPiggsOfTheDarkAge-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PrehistorikMan-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PuttySquad-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RadicalRex-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RaidenDensetsu-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Realm-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RenAndStimpyShowVeediots-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RenderingRangerR2-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RivalTurf-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RoadRunnersDeathValleyRally-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RoboCop3-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RoboCopVersusTheTerminator-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RTypeIII-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RunSaber-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SkuljaggerRevoltOfTheWesticans-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SmartBall-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Smurfs-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SonicBlastMan-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SonicBlastManII-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SonicWings-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SpaceInvaders-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SpaceMegaforce-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SpankysQuest-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Sparkster-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SpeedyGonzalesLosGatosBandidos-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SprigganPowered-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>StoneProtectors-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperAdventureIsland-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperAlfredChicken-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperBCKid-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperCastlevaniaIV-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperDoubleDragon-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperGhoulsnGhosts-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperJamesPond-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperMarioWorld-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperMarioWorld2-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperRType-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperSmashTV-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperStarWars-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperStarWarsReturnOfTheJedi-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperStarWarsTheEmpireStrikesBack-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperStrikeGunner-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperSWIV-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperTrollIslands-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperTurrican-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperTurrican2-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperValisIV-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperWidget-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TazMania-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TeenageMutantNinjaTurtlesIVTurtlesInTime-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TetrisAttack-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ThunderSpirits-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tick-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TinyToonAdventuresBusterBustsLoose-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TomAndJerry-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>UchuuNoKishiTekkamanBlade-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>UNSquadron-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>WereBackADinosaursStory-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wolfchild-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>XKaliber2097-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZeroTheKamikazeSquirrel-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ZombiesAteMyNeighbors-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZoolNinjaOfTheNthDimension-Snes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ActRaiser2-Snes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>ArdyLightfoot-Snes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>ChesterCheetahWildWildQuest-Snes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>JikkyouOshaberiParodius-Snes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>Legend-Snes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>MaerchenAdventureCotton100-Snes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>MegaManX-Snes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sparkster-Snes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>StarFox-Snes</p></td>
+<td><p>experimental</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="genesis-plus-gx-genesis-sms-sega-cd">
+<h2>Genesis Plus GX (Genesis / SMS / Sega CD)<a class="headerlink" href="#genesis-plus-gx-genesis-sms-sega-cd" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Game (folder name)</p></th>
+<th class="head"><p>Dataset</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3NinjasKickBack-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AaahhRealMonsters-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AddamsFamily-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AddamsFamily-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AdvancedBusterhawkGleylancer-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AdventuresOfBatmanAndRobin-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AdventuresOfMightyMax-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AdventuresOfRockyAndBullwinkleAndFriends-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AeroTheAcroBat2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AfterBurnerII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AirBuster-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AirDiver-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Airstriker-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Alien3-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AlienSoldier-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AlienSyndrome-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AlteredBeast-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AmericanGladiators-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ArchRivalsTheArcadeGame-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ArielTheLittleMermaid-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ArrowFlash-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ArtOfFighting-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Asterix-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AsterixAndTheGreatRescue-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AsterixAndTheGreatRescue-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AsterixAndThePowerOfTheGods-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AsterixAndTheSecretMission-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AstroWarrior-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AtomicRoboKid-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AtomicRunner-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AwesomePossumKicksDrMachinosButt-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AyrtonSennasSuperMonacoGPII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BackToTheFuturePartIII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BarkleyShutUpAndJam-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BarkleyShutUpAndJam2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BarneysHideAndSeekGame-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Batman-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BatmanReturns-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BattleSquadron-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BattleTechAGameOfArmoredCombat-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Battletoads-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BattletoadsDoubleDragon-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BeautyAndTheBeastBellesQuest-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BeautyAndTheBeastRoarOfTheBeast-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BiminiRun-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BioHazardBattle-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BishoujoSenshiSailorMoon-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BladeEagle-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BladesOfVengeance-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Blockout-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BOB-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BodyCount-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BomberRaid-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BonkersWaxUp-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BoogermanAPickAndFlickAdventure-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BoogieWoogieBowling-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BoxingLegendsOfTheRing-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BramStokersDracula-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BubbaNStix-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BubbleAndSqueak-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BubbleBobble-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BubsyII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BubsyInClawsEncountersOfTheFurredKind-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BullsVersusBlazersAndTheNBAPlayoffs-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BullsVsLakersAndTheNBAPlayoffs-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BurningForce-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Cadash-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Caliber50-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CaliforniaGames-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CalRipkenJrBaseball-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CannonFodder-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CaptainAmericaAndTheAvengers-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CaptainPlanetAndThePlaneteers-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CastleOfIllusion-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CastlevaniaBloodlines-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CastlevaniaTheNewGeneration-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ChampionshipProAm-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ChampionsWorldClassSoccer-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ChaosEngine-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ChaseHQII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CheeseCatAstropheStarringSpeedyGonzales-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CheeseCatAstropheStarringSpeedyGonzales-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ChesterCheetahTooCoolToFool-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ChesterCheetahWildWildQuest-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ChiChisProChallengeGolf-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ChikiChikiBoys-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ChuckRock-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ChuckRock-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ChuckRockIISonOfChuck-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ChuckRockIISonOfChuck-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ClayFighter-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cliffhanger-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CloudMaster-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CollegeSlam-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Columns-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ColumnsIII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CombatCars-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ComicalMachineGunJoe-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ComixZone-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CoolSpot-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CoolSpot-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CrackDown-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CrueBallHeavyMetalPinball-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Curse-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CutieSuzukiNoRingsideAngel-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CutthroatIsland-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Cyberball-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CyberShinobi-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CyborgJustice-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DaffyDuckInHollywood-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DaisenpuuTwinHawk-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DananTheJungleFighter-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DangerousSeed-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DariusII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DarkCastle-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Darwin4081-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DashinDesperadoes-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DavidRobinsonsSupremeCourt-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DazeBeforeChristmas-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DeadlyMoves-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DeathDuel-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DeepDuckTroubleStarringDonaldDuck-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DesertStrikeReturnToTheGulf-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DevilCrashMD-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DevilishTheNextPossession-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DickTracy-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DickTracy-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DickVitalesAwesomeBabyCollegeHoops-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DinoLand-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DJBoy-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DoubleDragon-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DoubleDragonIITheRevenge-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DoubleDragonVTheShadowFalls-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DoubleDribbleThePlayoffEdition-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DragonsRevenge-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DragonTheBruceLeeStory-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DreamTeamUSA-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DrRobotniksMeanBeanMachine-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DynamiteDuke-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DynamiteDuke-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DynamiteHeaddy-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>EarnestEvans-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ElementalMaster-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>EliminateDown-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ElViento-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ESPNBaseballTonight-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>EuropeanClubSoccer-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ExMutants-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>F1-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FaeryTaleAdventure-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Fantasia-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FantasticDizzy-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FantasyZone-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FantasyZoneIITheTearsOfOpaOpa-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FantasyZoneTheMaze-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FatalFury-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FatalFury2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FatalLabyrinth-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FatalRewind-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FerrariGrandPrixChallenge-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FightingMasters-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FinalBubbleBobble-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FireAndIce-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Flicky-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Flintstones-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ForemanForReal-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ForgottenWorlds-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FrankThomasBigHurtBaseball-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Frogger-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FushigiNoOshiroPitPot-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FZSenkiAxisFinalZone-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GadgetTwins-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Gaiares-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GainGround-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GalaxyForce-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GalaxyForceII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Gauntlet-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gauntlet-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GeneralChaos-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GhoulsnGhosts-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GlobalDefense-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GlobalGladiators-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Gods-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GoldenAxe-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GoldenAxeIII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Granada-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GreatCircusMysteryStarringMickeyAndMinnie-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GreatWaldoSearch-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GreendogTheBeachedSurferDude-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GrindStormer-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Growl-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gunship-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Gynoug-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>HangOn-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>HardDrivin-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Havoc-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>HeavyNova-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>HeavyUnitMegaDriveSpecial-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Hellfire-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>HomeAlone-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>HomeAlone2LostInNewYork-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hook-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Hurricanes-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>IMGInternationalTourTennis-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>IncredibleCrashDummies-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>IncredibleHulk-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>IncredibleHulk-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>IndianaJonesAndTheLastCrusade-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>InsectorX-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>IshidoTheWayOfStones-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>IzzysQuestForTheOlympicRings-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JamesBond007TheDuel-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>JamesBond007TheDuel-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JamesPond2CodenameRoboCod-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>JamesPond3-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JamesPondIICodenameRobocod-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>JamesPondUnderwaterAgent-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JewelMaster-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>JoeAndMac-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JudgeDredd-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>JuJuDensetsuTokiGoingApeSpit-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JungleBook-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>JusticeLeagueTaskForce-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>KaGeKiFistsOfSteel-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>KidChameleon-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>KingOfTheMonsters2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>KungFuKid-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>LandOfIllusionStarringMickeyMouse-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>LastActionHero-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>LastBattle-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>LawnmowerMan-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>LegendOfGalahad-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>LethalEnforcers-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>LethalEnforcersIIGunFighters-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>LineOfFire-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>LuckyDimeCaperStarringDonaldDuck-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MagicalTaruruutoKun-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MaouRenjishi-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MarbleMadness-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MarbleMadness-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Marko-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Marsupilami-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MarvelLand-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MasterOfDarkness-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>McDonaldsTreasureLandAdventure-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MegaManTheWilyWars-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MegaSWIV-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MegaTurrican-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MichaelJacksonsMoonwalker-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MichaelJacksonsMoonwalker-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MidnightResistance-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MightyMorphinPowerRangers-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MightyMorphinPowerRangersTheMovie-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MonsterLair-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MortalKombat-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MortalKombat-SCD-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MortalKombat3-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MortalKombatII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MrNutz-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MsPacMan-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MsPacMan-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MUSHA-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MyHero-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>NewZealandStory-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>NewZealandStory-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>NHL94-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>NHL941on1-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>NHL942on2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Ninja-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>NinjaGaiden-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>NormysBeachBabeORama-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ottifants-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Ottifants-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PacMania-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PacMania-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Paperboy-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Paperboy-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Paperboy2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Phelios-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PinkGoesToHollywood-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PitfallTheMayanAdventure-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PitFighter-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PitFighter-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PoseidonWars3D-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PowerAthlete-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PowerStrike-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PowerStrikeII-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Predator2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Predator2-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PsychicWorld-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Pulseman-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Punisher-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>QuackShot-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Quartet-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RadicalRex-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RaidenDensetsuRaidenTrad-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RainbowIslandsStoryOfTheBubbleBobble2-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RamboFirstBloodPartII-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RamboIII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RangerX-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RastanSagaII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RenAndStimpyShowPresentsStimpysInvention-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Renegade-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RevengeOfShinobi-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RiseOfTheRobots-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RiskyWoods-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Ristar-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RoboCop3-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RoboCop3-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RoboCopVersusTheTerminator-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RocketKnightAdventures-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RollingThunder2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RType-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RunningBattle-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Sagaia-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sagaia-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SaintSword-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SameSameSame-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SamuraiShodown-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Satellite7-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SecondSamurai-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SenjouNoOokamiIIMercs-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ShadowDancerTheSecretOfShinobi-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ShadowOfTheBeast-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ShaqFu-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Shinobi-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ShinobiIIIReturnOfTheNinjaMaster-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SimpsonsBartVsTheSpaceMutants-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SkeletonKrew-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Smurfs-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Socket-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SolDeace-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SoldiersOfFortune-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SonicAndKnuckles-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SonicAndKnuckles3-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SonicBlast-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SonicTheHedgehog-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SonicTheHedgehog-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SonicTheHedgehog2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SonicTheHedgehog2-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SonicTheHedgehog3-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SonicTheHedgehogRandomLevels-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SpaceHarrier-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SpaceHarrier3D-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SpaceHarrierII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SpaceInvaders91-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Sparkster-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SpiderManReturnOfTheSinisterSix-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Splatterhouse2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SpotGoesToHollywood-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SteelEmpire-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SteelTalons-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Stormlord-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>StreetFighterIISpecialChampionEdition-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>StreetSmart-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>StreetsOfRage-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>StreetsOfRage2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>StreetsOfRage3-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>StreetsOfRageII-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Strider-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SubmarineAttack-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SubTerrania-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SunsetRiders-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperFantasyZone-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperHangOn-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Superman-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SupermanTheManOfSteel-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperSmashTV-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperSpaceInvaders-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperThunderBlade-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperWonderBoy-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SwordOfSodan-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SydOfValis-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SylvesterAndTweetyInCageyCapers-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>T2TheArcadeGame-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>T2TheArcadeGame-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TargetEarth-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TaskForceHarrierEX-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TazMania-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TazMania-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TeenageMutantNinjaTurtlesTheHyperstoneHeist-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TeenageMutantNinjaTurtlesTournamentFighters-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Terminator-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Terminator-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ThunderBlade-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ThunderForceII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ThunderForceIII-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ThunderForceIV-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ThunderFox-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tick-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TinHead-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TinyToonAdventuresBustersHiddenTreasure-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ToxicCrusaders-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TrampolineTerror-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TransBot-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TroubleShooter-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Truxton-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Turrican-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TwinCobraDesertAttackHelicopter-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TwinkleTale-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TwoCrudeDudes-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>UndeadLine-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>UniversalSoldier-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>UzuKeobukseon-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>VaporTrail-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vectorman-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Vectorman2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Viewpoint-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Vigilante-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>VirtuaFighter2-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>VRTroopers-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>WaniWaniWorld-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Wardner-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>WhipRush-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>WiznLiz-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wolfchild-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Wolfchild-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>WolverineAdamantiumRage-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>WonderBoyInMonsterWorld-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>WorldHeroes-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>WWFArcade-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>XDRXDazedlyRay-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Xenon2Megablast-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>XMenMojoWorld-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ZeroTheKamikazeSquirrel-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZeroWing-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ZoolNinjaOfTheNthDimension-Genesis-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZoolNinjaOfTheNthDimension-Sms-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SonicAndKnuckles3CustomKevin-Genesis</p></td>
+<td><p>contrib</p></td>
+</tr>
+<tr class="row-odd"><td><p>SonicTheHedgehog2CustomKevin-Genesis</p></td>
+<td><p>contrib</p></td>
+</tr>
+<tr class="row-even"><td><p>SonicTheHedgehog2CustomLeaderboard-Genesis</p></td>
+<td><p>contrib</p></td>
+</tr>
+<tr class="row-odd"><td><p>SonicTheHedgehogCustomCathy-Genesis</p></td>
+<td><p>contrib</p></td>
+</tr>
+<tr class="row-even"><td><p>SonicTheHedgehogCustomKevin-Genesis</p></td>
+<td><p>contrib</p></td>
+</tr>
+<tr class="row-odd"><td><p>SonicTheHedgehogCustomLeaderboard-Genesis</p></td>
+<td><p>contrib</p></td>
+</tr>
+<tr class="row-even"><td><p>AwesomePossumKicksDrMachinosButt-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>AyrtonSennasSuperMonacoGPII-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>BonanzaBros-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>BoxingLegendsOfTheRing-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>DavidCranesAmazingTennis-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>DeathDuel-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>DoubleDragonVTheShadowFalls-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>EarnestEvans-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>F1-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fantasia-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>Flintstones-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>Geraldinho-Sms</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>GhostHouse-Sms</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>GlobalGladiators-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>LandOfIllusionStarringMickeyMouse-Sms</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>Marsupilami-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>MazinSagaMutantFighter-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>MontezumasRevengeFeaturingPanamaJoe-Sms</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>MortalKombat-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>MrNutz-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>PowerAthlete-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>RadicalRex-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>RainbowIslandsStoryOfTheBubbleBobble2-Sms</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>Smurfs-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>StreetSmart-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>ToeJamAndEarlInPanicOnFunkotron-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>Verytex-Genesis</p></td>
+<td><p>experimental</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="fceumm-nes">
+<h2>FCEUmm (NES)<a class="headerlink" href="#fceumm-nes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Game (folder name)</p></th>
+<th class="head"><p>Dataset</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1942-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>1943-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>8Eyes-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AbadoxTheDeadlyInnerWar-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AddamsFamily-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AddamsFamilyPugsleysScavengerHunt-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AdventureIsland3-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AdventureIslandII-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AdventuresOfBayouBilly-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AdventuresOfDinoRiki-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AdventuresOfRockyAndBullwinkleAndFriends-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Airwolf-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AlfredChicken-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Alien3-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AlphaMission-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Amagon-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Argus-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Arkanoid-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ArkistasRing-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Armadillo-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AstroRoboSasa-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Astyanax-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Athena-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AtlantisNoNazo-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AttackAnimalGakuen-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AttackOfTheKillerTomatoes-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BadDudes-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BadStreetBrawler-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BalloonFight-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Baltron-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BananaPrince-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Barbie-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BatmanReturns-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BattleCity-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Battletoads-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BinaryLand-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BioMiracleBokutteUpa-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BioSenshiDanIncreaserTonoTatakai-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BirdWeek-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BoobyKids-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BoulderDash-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BramStokersDracula-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BreakThru-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BubbleBobble-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BubbleBobblePart2-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BuckyOHare-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BugsBunnyBirthdayBlowout-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BuraiFighter-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BWings-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CaptainAmericaAndTheAvengers-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CaptainPlanetAndThePlaneteers-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CaptainSilver-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Castelian-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Castlevania-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CastlevaniaIIIDraculasCurse-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CatNindenTeyandee-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ChacknPop-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Challenger-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Choplifter-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ChouFuyuuYousaiExedExes-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ChoujikuuYousaiMacross-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ChubbyCherub-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CircusCaper-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CircusCharlie-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CityConnection-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cliffhanger-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CluCluLand-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CobraTriangle-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CodeNameViper-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Conan-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ConquestOfTheCrystalPalace-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ContraForce-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CosmicEpsilon-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>CrossFire-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Darkman-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DashGalaxyInTheAlienAsylum-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DefenderII-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DigDugIITroubleInParadise-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DiggerTheLegendOfTheLostCity-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DirtyHarry-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DonDokoDon-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DonkeyKong-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DonkeyKong3-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DonkeyKongJr-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DoubleDragon-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DoubleDragonIITheRevenge-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DragonPower-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DragonSpiritTheNewLegend-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ElevatorAction-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Exerion-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FantasyZoneIIOpaOpaNoNamida-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FelixTheCat-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FistOfTheNorthStar-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FlintstonesTheRescueOfDinoAndHoppy-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FlyingDragonTheSecretScroll-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FlyingHero-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FormationZ-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>FoxsPeterPanAndThePiratesTheRevengeOfCaptainHook-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FrontLine-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GalagaDemonsOfDeath-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Geimos-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GhostsnGoblins-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GhoulSchool-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GIJoeARealAmericanHero-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GIJoeTheAtlantisFactor-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gimmick-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Gradius-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GradiusII-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GreatTank-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gremlins2TheNewBatch-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GuardianLegend-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>GuerrillaWar-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GunNac-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gyrodine-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Gyruss-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>HammerinHarry-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>HeavyBarrel-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>HelloKittyWorld-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>HomeAlone2LostInNewYork-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>HuntForRedOctober-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>IceClimber-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ikari-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>IkariIIITheRescue-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ikki-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>IndianaJonesAndTheTempleOfDoom-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>InsectorX-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>IronSwordWizardsAndWarriorsII-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>IsolatedWarrior-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Jackal-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JackieChansActionKungFu-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>JajamaruNoDaibouken-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JamesBondJr-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Jaws-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JetsonsCogswellsCaper-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>JoeAndMac-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JourneyToSilius-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Joust-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>JungleBook-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>KabukiQuantumFighter-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>KaiketsuYanchaMaru2KarakuriLand-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>KaiketsuYanchaMaru3TaiketsuZouringen-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>KamenNoNinjaAkakage-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>KanshakudamaNageKantarouNoToukaidouGojuusanTsugi-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>KeroppiToKeroriinuNoSplashBomb-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>KidIcarus-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>KidKlownInNightMayorWorld-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>KidNikiRadicalNinja-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>KirbysAdventure-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>KungFu-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>KungFuHeroes-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>LastActionHero-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>LastStarfighter-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>LegendaryWings-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>LegendOfKage-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>LegendOfPrinceValiant-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>LifeForce-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>LittleMermaid-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>LowGManTheLowGravityMan-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Magmax-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MappyLand-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MarioBros-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCKids-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MechanizedAttack-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MegaMan-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MegaMan2-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MendelPalace-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MetalStorm-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MickeyMousecapade-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MightyBombJack-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MightyFinalFight-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Millipede-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MitsumeGaTooru-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MoeroTwinBeeCinnamonHakaseOSukue-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MonsterInMyPocket-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MonsterParty-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MsPacMan-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MutantVirusCrisisInAComputerWorld-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MysteryQuest-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>NARC-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>NinjaCrusaders-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>NinjaGaiden-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>NinjaGaidenIIITheAncientShipOfDoom-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>NinjaGaidenIITheDarkSwordOfChaos-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>NinjaKid-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>NoahsArk-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>OperationWolf-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>OverHorizon-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PacManNamco-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PanicRestaurant-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Paperboy-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Parodius-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PenguinKunWars-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PizzaPop-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pooyan-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Popeye-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>POWPrisonersOfWar-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PunchOut-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Punisher-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>PussNBootsPerosGreatAdventure-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>QBert-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Quarth-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RainbowIslands-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Rampage-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Renegade-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RoboccoWars-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RoboCop2-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RoboCop3-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RoboWarrior-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RockinKats-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rollerball-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Rollergames-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>RushnAttack-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Sansuu5And6NenKeisanGame-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCATSpecialCyberneticAttackTeam-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SDHeroSoukessenTaoseAkuNoGundan-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SectionZ-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Seicross-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SeikimaIIAkumaNoGyakushuu-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Shatterhand-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SilverSurfer-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SimpsonsBartmanMeetsRadioactiveMan-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SimpsonsBartVsTheSpaceMutants-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SimpsonsBartVsTheWorld-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SkyDestroyer-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SkyKid-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SkyShark-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SmashTV-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Smurfs-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SnakeRattleNRoll-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SnowBrothers-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SonSon-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SpaceHarrier-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SpaceInvaders-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SpartanX2-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Spelunker-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SpyHunter-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Sqoon-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>StarForce-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>StarshipHector-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>StarSoldier-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>StarWars-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stinger-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperArabian-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperC-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperMarioBros-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperMarioBros2Japan-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperMarioBros3-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperPitfall-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SuperStarForce-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SuperXeviousGumpNoNazo-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>SwampThing-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TaiyouNoYuushaFighbird-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TakahashiMeijinNoBugutteHoney-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TargetRenegade-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TeenageMutantNinjaTurtles-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TeenageMutantNinjaTurtlesIIITheManhattanProject-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TeenageMutantNinjaTurtlesIITheArcadeGame-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TeenageMutantNinjaTurtlesTournamentFighters-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Terminator2JudgmentDay-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TerraCresta-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TetrastarTheFighter-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TetsuwanAtom-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Thexder-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ThunderAndLightning-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Thundercade-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TigerHeli-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TimeZone-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TinyToonAdventures-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Toki-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TotallyRad-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TotalRecall-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ToxicCrusaders-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TreasureMaster-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Trog-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Trojan-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TrollsInCrazyland-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TwinBee-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TwinBee3PokoPokoDaimaou-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TwinCobra-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TwinEagle-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Untouchables-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>UrbanChampion-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>UruseiYatsuraLumNoWeddingBell-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ViceProjectDoom-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>VolguardII-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Warpman-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>WaynesWorld-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Widget-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>WizardsAndWarriors-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>WrathOfTheBlackManta-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>WreckingCrew-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xenophobe-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>XeviousTheAvenger-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xexyz-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>YoukaiClub-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>YoukaiDouchuuki-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>YoungIndianaJonesChronicles-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Zanac-Nes-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BadDudes-Nes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>BugsBunnyBirthdayBlowout-Nes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>Contra-Nes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>ElevatorAction-Nes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>KirbysAdventure-Nes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>LegendOfKage-Nes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>LegendOfPrinceValiant-Nes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCKids-Nes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>NinjaGaiden-Nes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>SeikimaIIAkumaNoGyakushuu-Nes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>TeenageMutantNinjaTurtlesIIITheManhattanProject-Nes</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>ViceProjectDoom-Nes</p></td>
+<td><p>experimental</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="stella-atari-2600">
+<h2>Stella (Atari 2600)<a class="headerlink" href="#stella-atari-2600" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Game (folder name)</p></th>
+<th class="head"><p>Dataset</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Adventure-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AirRaid-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Alien-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Amidar-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Assault-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Asterix-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Asteroids-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Atlantis-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BankHeist-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BattleZone-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BeamRider-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Berzerk-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Bowling-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Boxing-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Breakout-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Carnival-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Centipede-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>ChopperCommand-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>CrazyClimber-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Defender-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>DemonAttack-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>DoubleDunk-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>ElevatorAction-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Enduro-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>FishingDerby-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Freeway-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Frostbite-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gopher-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Gravitar-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hero-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>IceHockey-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jamesbond-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>JourneyEscape-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kaboom-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Kangaroo-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Krull-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>KungFuMaster-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MontezumaRevenge-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>MoonPatrol-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>MsPacman-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>NameThisGame-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Phoenix-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Pitfall-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pong-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Pooyan-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>PrivateEye-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Qbert-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Riverraid-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>RoadRunner-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Robotank-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Seaquest-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Skiing-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Solaris-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>SpaceInvaders-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>StarGunner-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tennis-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>TimePilot-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tutankham-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>UpNDown-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Venture-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>VideoPinball-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>WizardOfWor-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>YarsRevenge-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Zaxxon-Atari2600-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="gambatte-game-boy">
+<h2>Gambatte (Game Boy)<a class="headerlink" href="#gambatte-game-boy" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Game (folder name)</p></th>
+<th class="head"><p>Dataset</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AddamsFamily-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AdventureIsland-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AdventuresOfStarSaver-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AeroStar-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AfterBurst-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AlfredChicken-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Alleyway-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AmazingPenguin-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AsterixAndObelix-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Asteroids-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>AstroRabby-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AttackOfTheKillerTomatoes-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BakuretsuSenshiWarrior-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BalloonKid-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BanishingRacer-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BartSimpsonsEscapeFromCampDeadly-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BattleArenaToshinden-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BattleBull-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BattletoadsInRagnaroksWorld-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BattleUnitZeoth-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BillAndTedsExcellentGameBoyAdventure-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BlockKuzushiGB-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BombJack-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BoobyBoys-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>BoulderDash-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>BubbleGhost-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>GradiusTheInterstellarAssault-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>HighStakesGambling-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-even"><td><p>Tetris-GameBoy-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+<tr class="row-odd"><td><p>AdventureIsland-GameBoy</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>AfterBurst-GameBoy</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-odd"><td><p>AsterixAndObelix-GameBoy</p></td>
+<td><p>experimental</p></td>
+</tr>
+<tr class="row-even"><td><p>BarbieGameGirl-GameBoy</p></td>
+<td><p>experimental</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="mgba-gba">
+<h2>mGBA (GBA)<a class="headerlink" href="#mgba-gba" title="Link to this heading">¶</a></h2>
+<p>No bundled games found in <code class="docutils literal notranslate"><span class="pre">stable_retro/data</span></code> for this emulator core.</p>
+</section>
+<section id="mednafen-pce-fast-pc-engine">
+<h2>Mednafen PCE Fast (PC Engine)<a class="headerlink" href="#mednafen-pce-fast-pc-engine" title="Link to this heading">¶</a></h2>
+<p>No bundled games found in <code class="docutils literal notranslate"><span class="pre">stable_retro/data</span></code> for this emulator core.</p>
+</section>
+<section id="picodrive-sega-32x">
+<h2>PicoDrive (Sega 32X)<a class="headerlink" href="#picodrive-sega-32x" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Game (folder name)</p></th>
+<th class="head"><p>Dataset</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VirtuaFighter-32x-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="mednafen-saturn-saturn">
+<h2>Mednafen Saturn (Saturn)<a class="headerlink" href="#mednafen-saturn-saturn" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Game (folder name)</p></th>
+<th class="head"><p>Dataset</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VirtuaFighter2-Saturn-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="melonds-nintendo-ds">
+<h2>melonDS (Nintendo DS)<a class="headerlink" href="#melonds-nintendo-ds" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Game (folder name)</p></th>
+<th class="head"><p>Dataset</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>UltimateMortalKombatM5-NintendoDS-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="fbneo-arcade">
+<h2>FBNeo (Arcade)<a class="headerlink" href="#fbneo-arcade" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Game (folder name)</p></th>
+<th class="head"><p>Dataset</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MortalKombat2-Arcade-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="parallel-n64-nintendo-64">
+<h2>Parallel N64 (Nintendo 64)<a class="headerlink" href="#parallel-n64-nintendo-64" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Game (folder name)</p></th>
+<th class="head"><p>Dataset</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MortalKombatTrilogy-N64-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="flycast-dreamcast">
+<h2>Flycast (Dreamcast)<a class="headerlink" href="#flycast-dreamcast" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Game (folder name)</p></th>
+<th class="head"><p>Dataset</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>StreetFighter3rdStrike-Dreamcast-v0</p></td>
+<td><p>stable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+          </article>
+        </div>
+        <footer>
+          
+          <div class="related-pages">
+            <a class="next-page" href="../developing/">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Development</div>
+              </div>
+              <svg class="furo-related-icon">
+                <use href="#svg-arrow-right"></use>
+              </svg>
+            </a>
+            <a class="prev-page" href="../supported_emulators/">
+              <svg class="furo-related-icon">
+                <use href="#svg-arrow-right"></use>
+              </svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Supported Emulators</div>
+                
+              </div>
+            </a>
+          </div>
+          <div class="bottom-of-page">
+            <div class="left-details">
+              <div class="copyright">
+                Copyright &#169; 2023 Farama Foundation
+              </div>
+              <!--
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            -->
+            </div>
+            <div class="right-details">
+              <div class="icons">
+                <a class="muted-link" href="https://github.com/Farama-Foundation/stable-retro/"
+                  aria-label="On GitHub">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+        </footer>
+      </div>
+      <aside class="toc-drawer">
+        
+        
+        <div class="toc-sticky toc-scroll">
+          <div class="toc-title-container">
+            <span class="toc-title">
+              On this page
+            </span>
+          </div>
+          <div class="toc-tree-container">
+            <div class="toc-tree">
+              <ul>
+<li><a class="reference internal" href="#">Supported Games</a><ul>
+<li><a class="reference internal" href="#snes9x-snes">Snes9x (SNES)</a></li>
+<li><a class="reference internal" href="#genesis-plus-gx-genesis-sms-sega-cd">Genesis Plus GX (Genesis / SMS / Sega CD)</a></li>
+<li><a class="reference internal" href="#fceumm-nes">FCEUmm (NES)</a></li>
+<li><a class="reference internal" href="#stella-atari-2600">Stella (Atari 2600)</a></li>
+<li><a class="reference internal" href="#gambatte-game-boy">Gambatte (Game Boy)</a></li>
+<li><a class="reference internal" href="#mgba-gba">mGBA (GBA)</a></li>
+<li><a class="reference internal" href="#mednafen-pce-fast-pc-engine">Mednafen PCE Fast (PC Engine)</a></li>
+<li><a class="reference internal" href="#picodrive-sega-32x">PicoDrive (Sega 32X)</a></li>
+<li><a class="reference internal" href="#mednafen-saturn-saturn">Mednafen Saturn (Saturn)</a></li>
+<li><a class="reference internal" href="#melonds-nintendo-ds">melonDS (Nintendo DS)</a></li>
+<li><a class="reference internal" href="#fbneo-arcade">FBNeo (Arcade)</a></li>
+<li><a class="reference internal" href="#parallel-n64-nintendo-64">Parallel N64 (Nintendo 64)</a></li>
+<li><a class="reference internal" href="#flycast-dreamcast">Flycast (Dreamcast)</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+        
+        
+      </aside>
+    </div>
+  </div>
+</div>
+    <script>
+      const toggleMenu = () => {
+        const menuBtn = document.querySelector(".farama-header-menu__btn");
+        const menuContainer = document.querySelector(".farama-header-menu-container");
+        if (document.querySelector(".farama-header-menu").classList.contains("active")) {
+          menuBtn.setAttribute("aria-expanded", "false");
+          menuContainer.setAttribute("aria-hidden", "true");
+        } else {
+          menuBtn.setAttribute("aria-expanded", "true");
+          menuContainer.setAttribute("aria-hidden", "false");
+        }
+        document.querySelector(".farama-header-menu").classList.toggle("active");
+      }
+
+      document.querySelector(".farama-header-menu__btn").addEventListener("click", toggleMenu);
+      document.getElementById("farama-close-menu").addEventListener("click", toggleMenu);
+    </script>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0VNK81VVGP"></script>
+      <script>
+        const enableGtag = () => {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-0VNK81VVGP');
+        }
+        (() => {
+            if (!localStorage.getItem("acceptedCookieAlert")) {
+                const boxElem = document.createElement("div");
+                boxElem.classList.add("cookie-alert");
+                const containerElem = document.createElement("div");
+                containerElem.classList.add("cookie-alert__container");
+                const textElem = document.createElement("p");
+                textElem.innerHTML = `This page uses <a href="https://analytics.google.com/">
+                                    Google Analytics</a> to collect statistics.`;
+                                    containerElem.appendChild(textElem);
+
+                const declineBtn = Object.assign(document.createElement("button"),
+                  {
+                    innerText: "Deny",
+                    className: "farama-btn cookie-alert__button",
+                    id: "cookie-alert__decline",
+                  }
+                );
+                declineBtn.addEventListener("click", () => {
+                  localStorage.setItem("acceptedCookieAlert", false);
+                  boxElem.remove();
+                });
+
+                const acceptBtn = Object.assign(document.createElement("button"),
+                  {
+                    innerText: "Allow",
+                    className: "farama-btn cookie-alert__button",
+                    id: "cookie-alert__accept",
+                  }
+                );
+                acceptBtn.addEventListener("click", () => {
+                  localStorage.setItem("acceptedCookieAlert", true);
+                  boxElem.remove();
+                  enableGtag();
+                });
+
+                containerElem.appendChild(declineBtn);
+                containerElem.appendChild(acceptBtn);
+                boxElem.appendChild(containerElem);
+                document.body.appendChild(boxElem);
+            } else if (localStorage.getItem("acceptedCookieAlert") === "true") {
+              enableGtag();
+            }
+        })()
+      </script>
+
+    <script src="../_static/documentation_options.js?v=4542bf15"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=7660844c"></script>
+    
+    <script>
+
+      const createProjectsList = (projects, displayImages) => {
+        const ulElem = Object.assign(document.createElement('ul'),
+          {
+            className:'farama-header-menu-list',
+          }
+        )
+        for (let project of projects) {
+          const liElem = document.createElement("li");
+          const aElem = Object.assign(document.createElement("a"),
+            {
+              href: project.link
+            }
+          );
+          liElem.appendChild(aElem);
+          if (displayImages) {
+            const imgElem = Object.assign(document.createElement("img"),
+              {
+                src: project.image ? imagesBasepath + project.image : imagesBasepath + "/farama_black.svg",
+                alt: `${project.name} logo`,
+                className: "farama-black-logo-invert"
+              }
+            );
+            aElem.appendChild(imgElem);
+          }
+          aElem.appendChild(document.createTextNode(project.name));
+          ulElem.appendChild(liElem);
+        }
+        return ulElem;
+      }
+
+      // Create menu with Farama projects by using the API at farama.org/api/projects.json
+      const createCORSRequest = (method, url) => {
+        let xhr = new XMLHttpRequest();
+        xhr.responseType = 'json';
+
+        if ("withCredentials" in xhr) {
+          xhr.open(method, url, true);
+        } else if (typeof XDomainRequest != "undefined") {
+          // IE8 & IE9
+          xhr = new XDomainRequest();
+          xhr.open(method, url);
+        } else {
+          // CORS not supported.
+          xhr = null;
+        }
+        return xhr;
+      };
+
+      const url = 'https://farama.org/api/projects.json';
+      const imagesBasepath = "https://farama.org/assets/images"
+      const method = 'GET';
+      let xhr = createCORSRequest(method, url);
+
+      xhr.onload = () => {
+        const jsonResponse = xhr.response;
+        const sections = {
+          "Core Projects": [],
+          "Mature Projects": {
+            "Documentation": [],
+            "Repositories": [],
+          },
+          "Incubating Projects": {
+            "Documentation": [],
+            "Repositories": [],
+          },
+          "Foundation": [
+            {
+              name: "About",
+              link: "https://farama.org/about"
+            },
+            {
+              name: "Standards",
+              link: "https://farama.org/project_standards",
+            },
+            {
+              name: "Donate",
+              link: "https://farama.org/donations"
+            }
+          ]
+        }
+
+        // Categorize projects
+        Object.keys(jsonResponse).forEach(key => {
+          projectJson = jsonResponse[key];
+          if (projectJson.website !== null) {
+            projectJson.link = projectJson.website;
+          } else {
+            projectJson.link = projectJson.github;
+          }
+          if (projectJson.type === "core") {
+            sections["Core Projects"].push(projectJson)
+          } else if (projectJson.type == "mature") {
+            if (projectJson.website !== null) {
+              sections["Mature Projects"]["Documentation"].push(projectJson)
+            } else {
+              sections["Mature Projects"]["Repositories"].push(projectJson)
+            }
+          } else {
+            if (projectJson.website !== null) {
+              sections["Incubating Projects"]["Documentation"].push(projectJson)
+            } else {
+              sections["Incubating Projects"]["Repositories"].push(projectJson)
+            }
+          }
+        })
+
+        const menuContainer = document.querySelector(".farama-header-menu__body");
+
+        Object.keys(sections).forEach((key, i) => {
+          const sectionElem = Object.assign(
+            document.createElement('div'), {
+              className:'farama-header-menu__section',
+            }
+          )
+          sectionElem.appendChild(Object.assign(document.createElement('span'),
+            {
+              className:'farama-header-menu__section-title' ,
+              innerText: key
+            }
+          ))
+          // is not a list
+          if (sections[key].constructor !== Array) {
+            const subSections = sections[key];
+            const subSectionContainerElem = Object.assign(
+                document.createElement('div'), {
+                  className:'farama-header-menu__subsections-container',
+                  style: 'display: flex'
+                }
+            )
+            Object.keys(subSections).forEach((subKey, i) => {
+              const subSectionElem = Object.assign(
+                document.createElement('div'), {
+                  className:'farama-header-menu__subsection',
+                }
+              )
+              subSectionElem.appendChild(Object.assign(document.createElement('span'),
+                {
+                  className:'farama-header-menu__subsection-title' ,
+                  innerText: subKey
+                }
+              ))
+              const ulElem = createProjectsList(subSections[subKey], key !== 'Foundation');
+              subSectionElem.appendChild(ulElem);
+              subSectionContainerElem.appendChild(subSectionElem);
+            })
+            sectionElem.appendChild(subSectionContainerElem);
+          } else {
+            const projects = sections[key];
+            const ulElem = createProjectsList(projects, true);
+            sectionElem.appendChild(ulElem);
+          }
+          menuContainer.appendChild(sectionElem)
+        });
+      }
+
+      xhr.onerror = function() {
+        console.error("Unable to load projects");
+      };
+
+      xhr.send();
+    </script>
+
+    
+    <script>
+      const versioningConfig = {
+        githubUser: 'Farama-Foundation',
+        githubRepo: 'stable-retro',
+      };
+      fetch('/main/_static/versioning/versioning_menu.html').then(response => {
+        if (response.status === 200) {
+            response.text().then(text => {
+                const container = document.createElement("div");
+                container.innerHTML = text;
+                document.querySelector("body").appendChild(container);
+                // innerHtml doenst evaluate scripts, we need to add them dynamically
+                Array.from(container.querySelectorAll("script")).forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+            });
+        } else {
+            console.warn("Unable to load versioning menu", response);
+        }
+      });
+    </script>
+
+    </body>
+</html>

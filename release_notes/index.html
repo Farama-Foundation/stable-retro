@@ -213,6 +213,10 @@
   <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../included_roms/">Included Roms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_bios/">Platforms that needs a BIOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supported_emulators/">Supported Emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supported_games/">Supported Games</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developing/">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integration/">Game Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python/">Python API</a></li>
@@ -280,6 +284,46 @@
             
             <section class="tex2jax_ignore mathjax_ignore" id="release-notes">
 <h1>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h1>
+<section id="release-v0-9-7">
+<h2>stable-retro v0.9.7<a class="headerlink" href="#release-v0-9-7" title="Link to this heading">¶</a></h2>
+<p><em>Released on 2025-12-27 - <a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/releases/tag/v0.9.7">GitHub</a></em></p>
+<h2>What's Changed</h2>
+<ul>
+<li>
+<p>N64 core integration</p>
+</li>
+<li>
+<p>Dreamcast core integration</p>
+</li>
+<li>
+<p>Nintendo DS core integration</p>
+</li>
+<li>
+<p>Fix crash when integrating Arcade games (FBNeo core)</p>
+</li>
+<li>
+<p>Fix render and obs when game is meant for vertical screens</p>
+</li>
+<li>
+<p>Fix Sega Saturn screen dimensions</p>
+</li>
+<li>
+<p>Fix update install instructions and CMakeLists.txt to fix build issue with GL dependencies</p>
+</li>
+<li>
+<p>Support explicit versioning</p>
+</li>
+<li>
+<p>Refactor: rename package from retro to stable_retro with compat shim</p>
+</li>
+<li>
+<p>Add benchmark script for retro cores</p>
+</li>
+<li>
+<p>docs: add supported emulators and games pages</p>
+</li>
+</ul>
+<p><strong>Full Changelog</strong>: <a class="commit-link" href="https://github.com/Farama-Foundation/stable-retro/compare/v0.9.6...v0.9.7"><tt>v0.9.6...v0.9.7</tt></a></p></section>
 <section id="release-v0-9-6">
 <h2>v0.9.6: stable-retro 0.9.6<a class="headerlink" href="#release-v0-9-6" title="Link to this heading">¶</a></h2>
 <p><em>Released on 2025-12-03 - <a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/releases/tag/v0.9.6">GitHub</a></em></p>
@@ -549,6 +593,7 @@
             <div class="toc-tree">
               <ul>
 <li><a class="reference internal" href="#">Release Notes</a><ul>
+<li><a class="reference internal" href="#release-v0-9-7">stable-retro v0.9.7</a></li>
 <li><a class="reference internal" href="#release-v0-9-6">v0.9.6: stable-retro 0.9.6</a></li>
 <li><a class="reference internal" href="#release-v0-9-5">v0.9.5: stable-retro 0.9.5</a></li>
 <li><a class="reference internal" href="#release-v0-9-4">stable-retro v0.9.4</a></li>
@@ -641,7 +686,7 @@
         })()
       </script>
 
-    <script src="../_static/documentation_options.js?v=b8328053"></script>
+    <script src="../_static/documentation_options.js?v=4542bf15"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=7660844c"></script>

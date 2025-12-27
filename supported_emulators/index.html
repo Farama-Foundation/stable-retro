@@ -7,11 +7,12 @@
     <meta property="og:title" content="Stable-Retro Documentation" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="" />
-    <meta property="og:url" content="https://stable-retro.farama.org/_modules/index.html" /><meta property="og:image" content="https://stable-retro.farama.org/_static/img/stable-retro-github.svg" /><meta name="twitter:card" content="summary_large_image"><link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" />
-        <link rel="canonical" href="https://stable-retro.farama.org/_modules/index.html" />
+    <meta property="og:url" content="https://stable-retro.farama.org/supported_emulators.html" /><meta property="og:image" content="https://stable-retro.farama.org/_static/img/stable-retro-github.svg" /><meta name="twitter:card" content="summary_large_image"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Supported Games" href="../supported_games/" /><link rel="prev" title="Platforms that needs a BIOS" href="../core_bios/" />
+        <link rel="canonical" href="https://stable-retro.farama.org/supported_emulators.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 -->
-        <title>Overview: module code - Stable-Retro Documentation</title>
+        <title>Supported Emulators - Stable-Retro Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=82c8b628" />
@@ -210,11 +211,11 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../included_roms/">Included Roms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_bios/">Platforms that needs a BIOS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../supported_emulators/">Supported Emulators</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Supported Emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../supported_games/">Supported Games</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developing/">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integration/">Game Integration</a></li>
@@ -249,7 +250,16 @@
             </svg>
             <span>Back to top</span>
           </a>
-          <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+          <div class="content-icon-container"><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Farama-Foundation/stable-retro/edit/master/docs/supported_emulators.md" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
               <button class="theme-toggle" title="Toggle color theme">
                 <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
                 <svg class="theme-icon-when-auto">
@@ -272,18 +282,123 @@
           </div>
           <article role="main">
             
-            <h1>All modules for which code is available</h1>
-<ul><li><a href="stable_retro/">stable_retro</a></li>
-<ul><li><a href="stable_retro/enums/">stable_retro.enums</a></li>
-<li><a href="stable_retro/retro_env/">stable_retro.retro_env</a></li>
-</ul></ul>
+            <section class="tex2jax_ignore mathjax_ignore" id="supported-emulators">
+<h1>Supported Emulators<a class="headerlink" href="#supported-emulators" title="Link to this heading">¶</a></h1>
+<p>This page lists the emulator cores that Stable-Retro can build, and whether they are supported on each platform.</p>
+<p>Legend: ✓ supported, — not supported.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Emulator core</p></th>
+<th class="head"><p>Linux</p></th>
+<th class="head"><p>Windows</p></th>
+<th class="head"><p>Apple</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Snes9x (SNES)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>Genesis Plus GX (Genesis / SMS / Sega CD)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>FCEUmm (NES)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stella (Atari 2600)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>Gambatte (Game Boy)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓*</p></td>
+</tr>
+<tr class="row-odd"><td><p>mGBA (GBA)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>Mednafen PCE Fast (PC Engine)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>PicoDrive (Sega 32X)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>Beetle Saturn (Saturn)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>melonDS (Nintendo DS)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>FBNeo (Arcade)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>Parallel N64 (Nintendo 64)</p></td>
+<td><p>✓†</p></td>
+<td><p>✓†</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>Flycast (Dreamcast)</p></td>
+<td><p>✓‡</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a class="reference external" href="https://emulation.gametechwiki.com/index.php/FinalBurn_Neo">Full list of supported Arcade machines here</a></p>
+<p>* On Apple Silicon (arm64), Gambatte (GB) is skipped by default in the CMake build.</p>
+<p>† Built by default when <code class="docutils literal notranslate"><span class="pre">BUILD_N64=ON</span></code> and OpenGL headers are available. If headers are missing, the build skips the N64 core.</p>
+<p>‡ Only available when hardware rendering is enabled (<code class="docutils literal notranslate"><span class="pre">ENABLE_HW_RENDER=ON</span></code>). Hardware rendering support is currently Linux-only in this project.</p>
+</section>
+
           </article>
         </div>
         <footer>
           
           <div class="related-pages">
-            
-            
+            <a class="next-page" href="../supported_games/">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Supported Games</div>
+              </div>
+              <svg class="furo-related-icon">
+                <use href="#svg-arrow-right"></use>
+              </svg>
+            </a>
+            <a class="prev-page" href="../core_bios/">
+              <svg class="furo-related-icon">
+                <use href="#svg-arrow-right"></use>
+              </svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Platforms that needs a BIOS</div>
+                
+              </div>
+            </a>
           </div>
           <div class="bottom-of-page">
             <div class="left-details">

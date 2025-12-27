@@ -7,63 +7,28 @@
 
 A fork of [gym-retro](https://github.com/openai/retro) ('lets you turn classic video games into Gymnasium environments for reinforcement learning') with additional games, emulators and supported platforms. Since gym-retro is in maintenance now and doesn't accept new games, platforms or bug fixes, you can instead submit PRs with new games or features here in stable-retro.
 
-Currently added games on top of gym-retro:
-*	Super Mario Bros 2 Japan (Lost Levels) - NES
-*	Hang On - SMS
-*	Punch Out - NES
-*	WWF Wrestlemania the Arcade Game - Genesis
-*	NHL 94 - Genesis
-*	NHL 94 (1 on 1 rom hack) - Genesis
-*	Super Hang On - Genesis
-*	Tetris - GameBoy
-*	Virtua Fighter - 32x
-*	Virtua Fighter 2 - Genesis
-*	Virtua Fighter 2 - Saturn
-*	Mortal Kombat 1 - Sega CD
-*	Mortal Kombat Trilogy - Nintendo 64
-*	Street Fighter 3rd Strike - Dreamcast
-*	Ultimate Mortal Kombat - Nintendo DS
-
-PvP games that support two models fighting each other:
-*	Samurai Showdown - Genesis
-*	WWF Wrestlemania the Arcade Game - Genesis
-*	Mortal Kombat II - Genesis
-*	NHL 94 - Genesis
-
-As well as additional states on already integrated games.
+- [Supported emulators](docs/supported_emulators.md)
+- [Supported games/envs](docs/supported_games.md)
 
 ## Emulated Systems
 
-- Atari
-	- Atari2600 (via Stella)
-- NEC
-	- TurboGrafx-16/PC Engine (via Mednafen/Beetle PCE Fast)
-- Nintendo
-	- Game Boy/Game Boy Color (via gambatte)
-	- Game Boy Advance (via mGBA)
-	- Nintendo Entertainment System (via FCEUmm)
-	- Super Nintendo Entertainment System (via Snes9x)
-	- Nintendo 64 (via parallel_n64)(Experimental)
-	- Nitendo DS (via MelonDS)(Experimental)
-- Sega
-	- GameGear (via Genesis Plus GX)
-	- Genesis/Mega Drive (via Genesis Plus GX)
-	- Master System (via Genesis Plus GX)
-	- 32x (via Picodrive)
-	- Saturn (via Beetle Saturn)
-	- Sega CD (via Genesis Plus GX)
-	- Sega Dreamcast (via Flycast)(Experimental)
-- Arcade Machines (via FBNeo):
-  	- Neo Geo (MVS hardware: 1990–2004)
- 	- Sega System 1 (1983–1987)
- 	- Sega System 16 (And similar. 1985–1994)
- 	- Sega System 18 (1989–1992)
- 	- Sega System 24 (1988–1994)
- 	- Capcom CPS1 (1988–1995)
- 	- Capcom CPS2 (1993–2003)
- 	- Capcom CPS3 (1996–1999)
-
-[Full list of supported Arcade machines here](https://emulation.gametechwiki.com/index.php/FinalBurn_Neo)
+| System| Linux | Windows | Apple |
+| --- | --- | --- | --- |
+| Atari 2600 | ✓ | ✓ | ✓ |
+| NES | ✓ | ✓ | ✓ |
+| SNES| ✓ | ✓ | ✓ |
+| Nintendo 64 | ✓† | ✓† | — |
+| Nintendo DS | ✓ | ✓ | ✓ |
+| Gameboy/Color | ✓ | ✓ | ✓* |
+| Gameboy Advance| ✓ | ✓ | ✓ |
+| Sega Genesis | ✓ | ✓ | ✓ |
+| Sega Master System | ✓ | ✓ | ✓ |
+| Sega CD | ✓ | ✓ | ✓ |
+| Sega 32X | ✓ | ✓ | ✓ |
+| Sega Saturn | ✓ | ✓ | ✓ |
+| Sega Dreamcast | ✓‡ | — | — |
+| PC Engine | ✓ | ✓ | ✓ |
+| Arcade Machines | ✓ | ✓ | — |
 
 ## Installation
 
@@ -80,37 +45,6 @@ If you plan to integrate new ROMs, states or emulator cores or plan to edit an e
 git clone https://github.com/Farama-Foundation/stable-retro.git
 cd stable-retro
 pip3 install -e .
-```
-
-### Linux build dependencies
-
-If you build from source (e.g. `pip3 install -e .`), you may need system development headers.
-In particular:
-- The experimental N64 core (`parallel_n64`) requires OpenGL headers (`GL/gl.h`).
-- The experimental Dreamcast core (`flycast`) is only built when hardware rendering is enabled (`-DENABLE_HW_RENDER=ON`) and requires EGL/GLES + X11 development headers.
-
-```bash
-sudo apt-get update
-sudo apt-get install -y \
-	build-essential \
-	cmake \
-	pkg-config \
-	python3-dev \
-	zlib1g-dev \
-	libegl1-mesa-dev \
-	libgl1-mesa-dev \
-	libgles2-mesa-dev \
-	libx11-dev \
-	mesa-common-dev
-```
-
-If you don't want to build the N64 core, configure CMake with `-DBUILD_N64=OFF`.
-If you want to build the Dreamcast core, configure CMake with `-DENABLE_HW_RENDER=ON`.
-
-When building via `pip3 install -e .`, pass CMake configure options via the `CMAKE_ARGS` environment variable, for example:
-
-```bash
-CMAKE_ARGS="-DBUILD_N64=OFF -DENABLE_HW_RENDER=ON" pip3 install -e .
 ```
 
 #### Apple Silicon Installation (Tested on python3.10)

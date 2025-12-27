@@ -14,11 +14,13 @@ Legend: ✓ supported, — not supported.
 | mGBA (GBA) | ✓ | ✓ | ✓ |
 | Mednafen PCE Fast (PC Engine) | ✓ | ✓ | ✓ |
 | PicoDrive (Sega 32X) | ✓ | ✓ | ✓ |
-| Mednafen Saturn (Saturn) | ✓ | ✓ | ✓ |
+| Beetle Saturn (Saturn) | ✓ | ✓ | ✓ |
 | melonDS (Nintendo DS) | ✓ | ✓ | ✓ |
 | FBNeo (Arcade) | ✓ | ✓ | — |
 | Parallel N64 (Nintendo 64) | ✓† | ✓† | — |
 | Flycast (Dreamcast) | ✓‡ | — | — |
+
+[Full list of supported Arcade machines here](https://emulation.gametechwiki.com/index.php/FinalBurn_Neo)
 
 \* On Apple Silicon (arm64), Gambatte (GB) is skipped by default in the CMake build.
 

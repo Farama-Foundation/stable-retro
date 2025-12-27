@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+* (nothing yet)
+
+## 0.9.7
+
+* add experimental Nintendo 64 core integration
+* add experimental Nintendo DS core integration (MelonDS)
+* add experimental Dreamcast core integration (Flycast)
+* fix rendering/observations for vertical-screen games
+* fix crash when integrating arcade games
+
 ### Breaking Changes (with backward compatibility)
 
 **Package import name changed from `retro` to `stable_retro`**
@@ -13,17 +23,43 @@
 - Documentation updated to reflect the new import name
 - Backward compatibility will be maintained for multiple versions to allow gradual migration
 
-**Migration Guide:**
-```python
-# Old way (deprecated but still works)
-import retro  # Shows deprecation warning
+## 0.9.6
 
-# New way (recommended)
-import stable_retro
+* add FBNeo core support (arcade ROMs)
+* fix retro/examples scripts for modern Gymnasium
 
-# Or use an alias for easier migration
-import stable_retro as retro  # Keeps your code working with minimal changes
-```
+## 0.9.5
+
+* packaging/CI fixes for source distribution and build artifacts
+
+## 0.9.4
+
+* macOS build/CI support updates (including macos-14)
+* build system dependency/version bumps for improved compatibility
+
+## 0.9.3
+
+* add Python 3.11 and 3.12 support (including manylinux wheels)
+* fix build issues on Apple Silicon (M-series)
+
+## 0.9.2
+
+* build and publish manylinux wheels via cibuildwheel
+* integration tool build fixes/workarounds
+
+## 0.9.1
+
+* add Apple Silicon (arm64) support
+* add Windows build support for Python 3.10
+* upgrade from Gym to Gymnasium
+* add Sega 32X core support
+* add Sega Saturn core support
+* add Sega CD core support
+
+## 0.9.0
+
+* fix cores build on GCC 10
+* add option to record interactive gameplay
 
 ## 0.8.0
 

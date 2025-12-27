@@ -25,6 +25,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r docs/requirements.txt
 
+      - name: Install OpenGL development libraries
+        run: sudo apt-get update && sudo apt-get install -y libgl1-mesa-dev
+
       - name: Install Stable-Retro
         run: pip install .
 

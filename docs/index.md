@@ -486,6 +486,8 @@ DragonSpiritTheNewLegend-Nes                      PopnTwinBeeRainbowBellAdventur
 getting_started.md
 included_roms.md
 core_bios.md
+supported_emulators.md
+supported_games.md
 developing.md
 integration.md
 python.md

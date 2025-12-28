@@ -73,24 +73,33 @@ class CMakeBuild(build_ext):
         subprocess.check_call(["make", jobs, "stable_retro"])
 
 
+platforms = [
+    "Nes",
+    "Snes",
+    "Genesis",
+    "Atari2600",
+    "GameBoy",
+    "Sms",
+    "GameGear",
+    "PCEngine",
+    "GbColor",
+    "GbAdvance",
+    "32x",
+    "Saturn",
+    "N64",
+    "Arcade",
+]
+
+# Data folders are named both with and without a version suffix, e.g.
+#   Pong-Atari2600/
+#   Pong-Atari2600-v0/
 platform_globs = [
-    "*-%s/*" % plat
-    for plat in [
-        "Nes",
-        "Snes",
-        "Genesis",
-        "Atari2600",
-        "GameBoy",
-        "Sms",
-        "GameGear",
-        "PCEngine",
-        "GbColor",
-        "GbAdvance",
-        "32x",
-        "Saturn",
-        "N64",
-        "Arcade",
-    ]
+    pattern
+    for plat in platforms
+    for pattern in (
+        "*-%s/*" % plat,
+        "*-%s-v*/*" % plat,
+    )
 ]
 
 

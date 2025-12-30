@@ -7,11 +7,12 @@
     <meta property="og:title" content="Stable-Retro Documentation" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="" />
-    <meta property="og:url" content="https://stable-retro.farama.org/_modules/index.html" /><meta property="og:image" content="https://stable-retro.farama.org/_static/img/stable-retro-github.svg" /><meta name="twitter:card" content="summary_large_image"><link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" />
-        <link rel="canonical" href="https://stable-retro.farama.org/_modules/index.html" />
+    <meta property="og:url" content="https://stable-retro.farama.org/macos_installation.html" /><meta property="og:image" content="https://stable-retro.farama.org/_static/img/stable-retro-github.svg" /><meta name="twitter:card" content="summary_large_image"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Included Roms" href="../included_roms/" /><link rel="prev" title="Linux Installation" href="../linux_installation/" />
+        <link rel="canonical" href="https://stable-retro.farama.org/macos_installation.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 -->
-        <title>Overview: module code - Stable-Retro Documentation</title>
+        <title>macOS Installation - Stable-Retro Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=82c8b628" />
@@ -190,7 +191,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -210,10 +211,10 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../linux_installation/">Linux Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../macos_installation/">macOS Installation</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">macOS Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../included_roms/">Included Roms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_bios/">Platforms that needs a BIOS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../supported_emulators/">Supported Emulators</a></li>
@@ -251,7 +252,16 @@
             </svg>
             <span>Back to top</span>
           </a>
-          <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+          <div class="content-icon-container"><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/Farama-Foundation/stable-retro/edit/master/docs/macos_installation.md" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
               <button class="theme-toggle" title="Toggle color theme">
                 <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
                 <svg class="theme-icon-when-auto">
@@ -265,7 +275,7 @@
                 </svg>
               </button>
             </div>
-            <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <label class="toc-overlay-icon toc-content-icon" for="__toc">
               <div class="visually-hidden">Toggle table of contents sidebar</div>
               <i class="icon"><svg>
                   <use href="#svg-toc"></use>
@@ -274,18 +284,153 @@
           </div>
           <article role="main">
             
-            <h1>All modules for which code is available</h1>
-<ul><li><a href="stable_retro/">stable_retro</a></li>
-<ul><li><a href="stable_retro/enums/">stable_retro.enums</a></li>
-<li><a href="stable_retro/retro_env/">stable_retro.retro_env</a></li>
-</ul></ul>
+            <section class="tex2jax_ignore mathjax_ignore" id="macos-installation">
+<h1>macOS Installation<a class="headerlink" href="#macos-installation" title="Link to this heading">¶</a></h1>
+<p>This guide covers installing Stable Retro on macOS, including both Intel and Apple Silicon Macs.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Python 3.7 to 3.12</p></li>
+<li><p>macOS 10.13 (High Sierra) or later</p></li>
+</ul>
+</section>
+<section id="standard-installation">
+<h2>Standard Installation<a class="headerlink" href="#standard-installation" title="Link to this heading">¶</a></h2>
+<p>For most users, the simplest installation method is via pip:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>stable-retro
+</pre></div>
+</div>
+<p>If the above doesn’t work for your platform:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>git+https://github.com/Farama-Foundation/stable-retro.git
+</pre></div>
+</div>
+</section>
+<section id="development-installation">
+<h2>Development Installation<a class="headerlink" href="#development-installation" title="Link to this heading">¶</a></h2>
+<p>If you plan to integrate new ROMs, states or emulator cores, or plan to edit an existing environment:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Farama-Foundation/stable-retro.git
+<span class="nb">cd</span><span class="w"> </span>stable-retro
+pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="apple-silicon-installation">
+<h2>Apple Silicon Installation<a class="headerlink" href="#apple-silicon-installation" title="Link to this heading">¶</a></h2>
+<p>Tested on Python 3.10.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Game Boy (gambatte) emulator is not supported on Apple Silicon.</p>
+</div>
+<section id="build-from-source">
+<h3>Build from Source<a class="headerlink" href="#build-from-source" title="Link to this heading">¶</a></h3>
+<ol class="arabic">
+<li><p>Install build dependencies:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cmake<span class="w"> </span>wheel
+</pre></div>
+</div>
+</li>
+<li><p>Install system dependencies via Homebrew:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>pkg-config<span class="w"> </span>lua@5.3<span class="w"> </span>libzip<span class="w"> </span>qt@5<span class="w"> </span>capnp
+</pre></div>
+</div>
+</li>
+<li><p>Add Qt to your PATH:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PATH=&quot;/opt/homebrew/opt/qt@5/bin:$PATH&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
+</pre></div>
+</div>
+</li>
+<li><p>Set the SDK root:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">SDKROOT</span><span class="o">=</span><span class="k">$(</span>xcrun<span class="w"> </span>--sdk<span class="w"> </span>macosx<span class="w"> </span>--show-sdk-path<span class="k">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install the package:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="build-integration-ui">
+<h3>Build Integration UI<a class="headerlink" href="#build-integration-ui" title="Link to this heading">¶</a></h3>
+<p>After building from source, you can optionally build the Integration UI:</p>
+<ol class="arabic">
+<li><p>Configure CMake with UI support:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>.<span class="w"> </span>-DCMAKE_PREFIX_PATH<span class="o">=</span>/usr/local/opt/qt<span class="w"> </span>-DBUILD_UI<span class="o">=</span>ON<span class="w"> </span>-UPYLIB_DIRECTORY
+</pre></div>
+</div>
+</li>
+<li><p>Build the application:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>-j<span class="k">$(</span>sysctl<span class="w"> </span>hw.ncpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f2<span class="k">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Launch the Integration UI:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>open<span class="w"> </span><span class="s2">&quot;Gym Retro Integration.app&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="docker-for-apple-silicon">
+<h2>Docker for Apple Silicon<a class="headerlink" href="#docker-for-apple-silicon" title="Link to this heading">¶</a></h2>
+<p>An alternative option for M1/M2/M3 Macs is to use Docker:</p>
+<p><a class="reference external" href="https://github.com/arvganesh/stable-retro-docker">https://github.com/arvganesh/stable-retro-docker</a></p>
+</section>
+<section id="verify-installation">
+<h2>Verify Installation<a class="headerlink" href="#verify-installation" title="Link to this heading">¶</a></h2>
+<p>After installation, verify it works by running:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">stable_retro</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">&#39;Airstriker-Genesis-v0&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Installation successful!&quot;</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Import errors</strong>: Ensure you have the correct Python version (3.7-3.12)</p></li>
+<li><p><strong>Build failures on Apple Silicon</strong>: Make sure you’ve set <code class="docutils literal notranslate"><span class="pre">SDKROOT</span></code> correctly</p></li>
+<li><p><strong>Qt not found</strong>: Verify Qt is in your PATH after running the export command</p></li>
+<li><p><strong>Game Boy games not working on Apple Silicon</strong>: This is expected; the gambatte core is not supported on arm64</p></li>
+</ul>
+</section>
+</section>
+</section>
+
           </article>
         </div>
         <footer>
           
           <div class="related-pages">
-            
-            
+            <a class="next-page" href="../included_roms/">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Included Roms</div>
+              </div>
+              <svg class="furo-related-icon">
+                <use href="#svg-arrow-right"></use>
+              </svg>
+            </a>
+            <a class="prev-page" href="../linux_installation/">
+              <svg class="furo-related-icon">
+                <use href="#svg-arrow-right"></use>
+              </svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Linux Installation</div>
+                
+              </div>
+            </a>
           </div>
           <div class="bottom-of-page">
             <div class="left-details">
@@ -314,8 +459,40 @@
           
         </footer>
       </div>
-      <aside class="toc-drawer no-toc">
+      <aside class="toc-drawer">
         
+        
+        <div class="toc-sticky toc-scroll">
+          <div class="toc-title-container">
+            <span class="toc-title">
+              On this page
+            </span>
+          </div>
+          <div class="toc-tree-container">
+            <div class="toc-tree">
+              <ul>
+<li><a class="reference internal" href="#">macOS Installation</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#standard-installation">Standard Installation</a></li>
+<li><a class="reference internal" href="#development-installation">Development Installation</a></li>
+<li><a class="reference internal" href="#apple-silicon-installation">Apple Silicon Installation</a><ul>
+<li><a class="reference internal" href="#build-from-source">Build from Source</a></li>
+<li><a class="reference internal" href="#build-integration-ui">Build Integration UI</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#docker-for-apple-silicon">Docker for Apple Silicon</a></li>
+<li><a class="reference internal" href="#verify-installation">Verify Installation</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#common-issues">Common Issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          </div>
+        </div>
         
         
       </aside>

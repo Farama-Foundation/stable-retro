@@ -1,0 +1,49 @@
+{
+  "info": {
+    "game_mode": { "address": 18, "type": "|u1" },
+    "current_level": { "address": 16, "type": "|u1" },
+    "map_location": { "address": 235, "type": "|u1" },
+    "next_location": { "address": 236, "type": "|u1" },
+
+    "link_x": { "address": 112, "type": "|u1" },
+    "link_y": { "address": 132, "type": "|u1" },
+    "link_direction": { "address": 152, "type": "|u1" },
+
+    "buttons_last": { "address": 248, "type": "|u1" },
+    "buttons_pressed": { "address": 250, "type": "|u1" },
+
+    "heart_containers_and_fill": { "address": 1647, "type": "|u1" },
+    "partial_heart": { "address": 1648, "type": "|u1" },
+    "triforce_pieces": { "address": 1649, "type": "|u1" },
+
+    "rupees": { "address": 1645, "type": "|u1" },
+    "keys": { "address": 1646, "type": "|u1" },
+    "bombs": { "address": 1624, "type": "|u1" },
+    "max_bombs": { "address": 1660, "type": "|u1" },
+
+    "current_sword": { "address": 1623, "type": "|u1" },
+    "arrow_status": { "address": 1625, "type": "|u1" },
+    "bow": { "address": 1626, "type": "|u1" },
+    "boomerang": { "address": 1652, "type": "|u1" },
+    "magic_boomerang": { "address": 1653, "type": "|u1" },
+    "magic_shield": { "address": 1654, "type": "|u1" },
+    "ring": { "address": 1634, "type": "|u1" },
+    "ladder": { "address": 1635, "type": "|u1" },
+    "magic_key": { "address": 1636, "type": "|u1" },
+    "power_bracelet": { "address": 1637, "type": "|u1" },
+    "letter": { "address": 1638, "type": "|u1" },
+    "clock_active": { "address": 1644, "type": "|u1" },
+
+    "candle": { "address": 1627, "type": "|u1" },
+    "whistle": { "address": 1628, "type": "|u1" },
+    "bait": { "address": 1629, "type": "|u1" },
+    "potion": { "address": 1630, "type": "|u1" },
+    "magical_rod": { "address": 1631, "type": "|u1" },
+    "raft": { "address": 1632, "type": "|u1" },
+    "magic_book": { "address": 1633, "type": "|u1" },
+    "compass_flags": { "address": 1639, "type": "|u1" },
+    "map_flags": { "address": 1640, "type": "|u1" },
+    "compass_level9": { "address": 1641, "type": "|u1" },
+    "map_level9": { "address": 1642, "type": "|u1" }
+  }
+}

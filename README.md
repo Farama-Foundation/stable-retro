@@ -5,7 +5,7 @@
     <img src="docs/_static/img/stable-retro-text.png" width="500px" />
 </a></p>
 
-A fork of [gym-retro](https://github.com/openai/retro) ('lets you turn classic video games into Gymnasium environments for reinforcement learning') with additional games, emulators and supported platforms. Since gym-retro is in maintenance now and doesn't accept new games, platforms or bug fixes, you can instead submit PRs with new games or features here in stable-retro.
+A fork of [gym-retro](https://github.com/openai/retro) ('lets you turn classic video games into Gymnasium environments for reinforcement learning') with additional games, emulators and supported platforms. Since gym-retro is in maintenance now, you can instead submit PRs with new games or features here in stable-retro.
 
 - [Supported emulators](docs/supported_emulators.md)
 - [Supported games/envs](docs/supported_games.md)
@@ -30,6 +30,23 @@ A fork of [gym-retro](https://github.com/openai/retro) ('lets you turn classic v
 | PC Engine | ✓ | ✓ | ✓ |
 | Arcade Machines | ✓ | ✓ | — |
 
+## Supported Games
+
+Currently over 1000 games are integrated including:
+
+| Category | Games |
+| --- | --- |
+| Platformers | Super Mario World, Sonic The Hedgehog 2, Mega Man 2, Castlevania IV |
+| Fighters | Mortal Kombat Trilogy, Street Fighter II, Fatal Fury, King of Fighters '98 |
+| Sports | NHL94, NBA Jam, Baseball Stars |
+| Puzzle | Tetris, Columns |
+| Shmups | 1943, Thunder Force IV, Gradius III, R-Type |
+| BeatEmUps | Streets Of Rage, Double Dragon, TMNT 2: The Arcade Game, Golden Axe, Final Fight |
+| Racing | Super Hang On, F-Zero, OutRun |
+| RPGs | coming soon |
+
+If the game you want is not included but is supported but the one of the systems in the list above you, an integration tool is provided to help adding new games.
+
 ## Installation
 
 ```
@@ -47,24 +64,9 @@ cd stable-retro
 pip3 install -e .
 ```
 
-#### Apple Silicon Installation (Tested on python3.10)
-- NOTE: The Game Boy (gambatte) emulator is not supported on Apple Silicon
-
-**Build from source**
-1. `pip install cmake wheel`
-2. `brew install pkg-config lua@5.3 libzip qt@5 capnp`
-3. `echo 'export PATH="/opt/homebrew/opt/qt@5/bin:$PATH"' >> ~/.zshrc`
-4. `export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)`
-5. `pip install -e .`
-
-**Build Integration UI**
-1. build package from source
-2. `cmake . -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DBUILD_UI=ON -UPYLIB_DIRECTORY`
-3. `make -j$(sysctl hw.ncpu | cut -d: -f2)`
-4. `open "Gym Retro Integration.app"`
-
-Docker image for M1 Macs:
-https://github.com/arvganesh/stable-retro-docker
+For platform-specific instructions including building from source, optional core dependencies, and the Integration UI:
+- [Linux Installation](docs/linux_installation.md) - Ubuntu/Debian dependencies, N64 and Dreamcast core setup, WSL2 guide
+- [macOS Installation](docs/macos_installation.md) - Apple Silicon build instructions, Homebrew dependencies
 
 ## Example
 
@@ -91,22 +93,46 @@ More advanced examples:
 [https://github.com/MatPoliquin/stable-retro-scripts](https://github.com/MatPoliquin/stable-retro-scripts)
 
 
-## Tutorials
+## Documentation & Tutorials
 
-Windows WSL2 + Ubuntu 22.04 setup guide:
-https://www.youtube.com/watch?v=vPnJiUR21Og
+Documentation is available at [https://stable-retro.farama.org/](https://stable-retro.farama.org/) (work in progress)
 
-Game Integration tool:
-https://www.youtube.com/playlist?list=PLmwlWbdWpZVvWqzOxu0jVBy-CaRpYha0t
+See [LICENSES.md](https://github.com/Farama-Foundation/stable-retro/blob/master/LICENSES.md) for information on the licenses of the individual cores.
 
-How to run a custom version of RetroArch that supports overriding player input with models trained with stable-retro/stable-baselines:
-https://www.youtube.com/watch?v=hkOcxJvJVjk
+| Topic | Description |
+| --- | --- |
+| [Windows WSL2 Setup](https://www.youtube.com/watch?v=vPnJiUR21Og) | Step-by-step guide for setting up stable-retro on Windows 11 with WSL2 and Ubuntu 22.04 |
+| [Game Integration Tool](https://www.youtube.com/playlist?list=PLmwlWbdWpZVvWqzOxu0jVBy-CaRpYha0t) | Playlist covering how to use the integration tool to add new games |
+| [RetroArch + ML Models](https://www.youtube.com/watch?v=hkOcxJvJVjk) | Running a custom RetroArch build that supports overriding player input with trained models |
 
-## Discord channel
 
-Join here:
-https://discord.gg/dXuBSg3B4D
 
+## ROMs and BIOS files
+
+Each game integration has files listing memory locations for in-game variables, reward functions based on those variables, episode end conditions, savestates at the beginning of levels and a file containing hashes of ROMs that work with these files.
+
+Please note that ROMs are not included and you must obtain them yourself.  Most ROM hashes are sourced from their respective No-Intro SHA-1 sums.
+
+Run this script in the roms folder you want to import. If the checksum matches it will import them in the related game folder in stable-retro.
+```bash
+python3 -m retro.import .
+```
+
+Some plateforms like Sega Saturn and Dreamcast also needs to be provided a BIOS.
+ [List of BIOS names and checksums](docs/core_bios.md).
+
+The following non-commercial Sega Genesis ROM is included with Stable Retro for testing purposes:
+- [Airstriker](https://pdroms.de/genesis/airstriker-v1-50-genesis-game) by Electrokinesis
+
+ [List of other included ROMs](docs/included_roms.md).
+
+## Contributing & Support
+
+[See CONTRIBUTING.md](https://github.com/Farama-Foundation/stable-retro/blob/master/CONTRIBUTING.md)
+
+There is an effort to get this project to the [Farama Foundation Project Standards](https://farama.org/project_standards). These development efforts are being coordinated in the `stable-retro` channel of the Farama Foundation's Discord. Click [here](https://discord.gg/aPjhD5cf) for the invite
+
+Feel free to reach to the above Discord for any issues/suggestions/discussions related to stable-retro
 
 ## Supported specs:
 
@@ -118,39 +144,6 @@ Plateforms:
 CPU with `SSE3` or better
 
 Supported Pythons: 3.7 to 3.12
-
-## Documentation
-
-Documentation is available at [https://stable-retro.farama.org/](https://stable-retro.farama.org/) (work in progress)
-
-See [LICENSES.md](https://github.com/Farama-Foundation/stable-retro/blob/master/LICENSES.md) for information on the licenses of the individual cores.
-
-## ROMs
-
-Each game integration has files listing memory locations for in-game variables, reward functions based on those variables, episode end conditions, savestates at the beginning of levels and a file containing hashes of ROMs that work with these files.
-
-Please note that ROMs are not included and you must obtain them yourself.  Most ROM hashes are sourced from their respective No-Intro SHA-1 sums.
-
-Run this script in the roms folder you want to import. If the checksum matches it will import them in the related game folder in stable-retro.
-```bash
-python3 -m retro.import .
-```
-
-The following non-commercial Sega Genesis ROM is included with Stable Retro for testing purposes:
-- [Airstriker](https://pdroms.de/genesis/airstriker-v1-50-genesis-game) by Electrokinesis
-
- [List of other included ROMs](docs/included_roms.md).
-
-## BIOS
-
-Some plateforms like Sega Saturn and Dreamcast also needs to be provided a BIOS.
- [List of BIOS names and checksums](docs/core_bios.md).
-
-## Contributing
-
-[See CONTRIBUTING.md](https://github.com/Farama-Foundation/stable-retro/blob/master/CONTRIBUTING.md)
-
-There is an effort to get this project to the [Farama Foundation Project Standards](https://farama.org/project_standards). These development efforts are being coordinated in the `stable-retro` channel of the Farama Foundation's Discord. Click [here](https://discord.gg/aPjhD5cf) for the invite
 
 ## Citation
 

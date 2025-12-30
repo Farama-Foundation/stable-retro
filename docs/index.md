@@ -146,6 +146,8 @@ if __name__ == "__main__":
 :caption: Introduction
 
 getting_started.md
+linux_installation.md
+macos_installation.md
 included_roms.md
 core_bios.md
 supported_emulators.md

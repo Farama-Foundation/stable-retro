@@ -44,6 +44,88 @@
     "compass_flags": { "address": 1639, "type": "|u1" },
     "map_flags": { "address": 1640, "type": "|u1" },
     "compass_level9": { "address": 1641, "type": "|u1" },
-    "map_level9": { "address": 1642, "type": "|u1" }
+    "map_level9": { "address": 1642, "type": "|u1" },
+
+    "paused": { "address": 224, "type": "|u1" },
+    "screen_scrolling": { "address": 232, "type": "|u1" },
+    "item_menu_scrolling_anim": { "address": 225, "type": "|u1" },
+
+    "frame_counter": { "address": 21, "type": "|u1" },
+    "routine_index": { "address": 19, "type": "|u1" },
+    "ppu_loading_index": { "address": 20, "type": "|u1" },
+    "current_save_slot": { "address": 22, "type": "|u1" },
+
+    "subscreen_y_scroll": { "address": 252, "type": "|u1" },
+    "subscreen_x_scroll": { "address": 253, "type": "|u1" },
+    "ppu_mask": { "address": 254, "type": "|u1" },
+
+    "link_move_direction_raw": { "address": 15, "type": "|u1" },
+    "link_animation": { "address": 172, "type": "|u1" },
+    "link_subtile": { "address": 916, "type": "|u1" },
+    "link_subpixel": { "address": 936, "type": "|u1" },
+    "link_walking_anim_timer": { "address": 976, "type": "|u1" },
+    "link_walking_anim_state": { "address": 996, "type": "|u1" },
+    "link_colliding_tile": { "address": 1182, "type": "|u1" },
+
+    "room_clear_counter": { "address": 845, "type": "|u1" },
+    "enemies_killed_since_enter": { "address": 1322, "type": "|u1" },
+    "killed_enemy_count": { "address": 1575, "type": "|u1" },
+    "counts_enemies_killed_without_damage": { "address": 80, "type": "|u1" },
+
+    "candle_used_this_screen": { "address": 1299, "type": "|u1" },
+    "whistle_screen_index": { "address": 1315, "type": "|u1" },
+    "cave_return_screen": { "address": 1318, "type": "|u1" },
+    "sword_disable": { "address": 1326, "type": "|u1" },
+    "maze_counter": { "address": 1327, "type": "|u1" },
+
+    "screen_options": { "address": 1229, "type": "|u1" },
+
+    "screen_history_write_index": { "address": 1568, "type": "|u1" },
+    "screen_history_1": { "address": 1569, "type": "|u1" },
+    "screen_history_2": { "address": 1570, "type": "|u1" },
+    "screen_history_3": { "address": 1571, "type": "|u1" },
+    "screen_history_4": { "address": 1572, "type": "|u1" },
+    "screen_history_5": { "address": 1573, "type": "|u1" },
+
+    "enemy_type_1": { "address": 848, "type": "|u1" },
+    "enemy_type_2": { "address": 849, "type": "|u1" },
+    "enemy_type_3": { "address": 850, "type": "|u1" },
+    "enemy_type_4": { "address": 851, "type": "|u1" },
+    "enemy_type_5": { "address": 852, "type": "|u1" },
+    "enemy_type_6": { "address": 853, "type": "|u1" },
+    "enemy_type_7": { "address": 854, "type": "|u1" },
+    "enemy_type_8": { "address": 855, "type": "|u1" },
+    "enemy_type_9": { "address": 856, "type": "|u1" },
+    "enemy_type_10": { "address": 857, "type": "|u1" },
+    "enemy_type_11": { "address": 858, "type": "|u1" },
+    "enemy_type_12": { "address": 859, "type": "|u1" },
+    "room_enemy_type": { "address": 863, "type": "|u1" },
+
+    "enemy1_x": { "address": 113, "type": "|u1" },
+    "enemy2_x": { "address": 114, "type": "|u1" },
+    "enemy3_x": { "address": 115, "type": "|u1" },
+    "enemy4_x": { "address": 116, "type": "|u1" },
+    "enemy5_x": { "address": 117, "type": "|u1" },
+    "enemy6_x": { "address": 118, "type": "|u1" },
+
+    "enemy1_y": { "address": 133, "type": "|u1" },
+    "enemy2_y": { "address": 134, "type": "|u1" },
+    "enemy3_y": { "address": 135, "type": "|u1" },
+    "enemy4_y": { "address": 136, "type": "|u1" },
+    "enemy5_y": { "address": 137, "type": "|u1" },
+    "enemy6_y": { "address": 138, "type": "|u1" },
+
+    "enemy1_direction": { "address": 153, "type": "|u1" },
+    "enemy2_direction": { "address": 154, "type": "|u1" },
+    "enemy3_direction": { "address": 155, "type": "|u1" },
+    "enemy4_direction": { "address": 156, "type": "|u1" },
+    "enemy5_direction": { "address": 157, "type": "|u1" },
+    "enemy6_direction": { "address": 158, "type": "|u1" },
+
+    "song_trigger": { "address": 1536, "type": "|u1" },
+    "songtype_active": { "address": 1545, "type": "|u1" },
+    "pulse1_im_trigger": { "address": 1540, "type": "|u1" },
+    "pulse2_im_trigger": { "address": 1538, "type": "|u1" },
+    "sound_effects": { "address": 1542, "type": "|u1" }
   }
 }

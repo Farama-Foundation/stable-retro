@@ -45,14 +45,14 @@ Currently over 1000 games are integrated including:
 | Racing | Super Hang On, F-Zero, OutRun |
 | RPGs | coming soon |
 
-If the game you want is not included but is supported but the one of the systems in the list above you, an integration tool is provided to help adding new games.
+If the game you want is not included but is supported by one of the systems in the list above, an integration tool is provided to help add new games.
 
 ## Installation
 
 ```
 pip3 install stable-retro
 ```
-or if the above doesn't work for your plateform:
+or if the above doesn't work for your platform:
 ```
 pip3 install git+https://github.com/Farama-Foundation/stable-retro.git
 ```
@@ -118,7 +118,7 @@ Run this script in the roms folder you want to import. If the checksum matches i
 python3 -m retro.import .
 ```
 
-Some plateforms like Sega Saturn and Dreamcast also needs to be provided a BIOS.
+Some platforms like Sega Saturn and Dreamcast also need to be provided a BIOS.
  [List of BIOS names and checksums](docs/core_bios.md).
 
 The following non-commercial Sega Genesis ROM is included with Stable Retro for testing purposes:
@@ -136,7 +136,7 @@ Feel free to reach to the above Discord for any issues/suggestions/discussions r
 
 ## Supported specs:
 
-Plateforms:
+Platforms:
 - Windows 10, 11 (via WSL2)
 - macOS 10.13 (High Sierra), 10.14 (Mojave)
 - Linux (manylinux1). Ubuntu 22.04 is recommended

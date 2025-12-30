@@ -67,6 +67,92 @@
     "link_walking_anim_state": { "address": 996, "type": "|u1" },
     "link_colliding_tile": { "address": 1182, "type": "|u1" },
 
+    "enemy1_action_cooldown": { "address": 41, "type": "|u1" },
+    "enemy2_action_cooldown": { "address": 42, "type": "|u1" },
+    "enemy3_action_cooldown": { "address": 43, "type": "|u1" },
+    "enemy4_action_cooldown": { "address": 44, "type": "|u1" },
+    "enemy5_action_cooldown": { "address": 45, "type": "|u1" },
+    "enemy6_action_cooldown": { "address": 46, "type": "|u1" },
+
+    "rock1_zola_fireball_start_timer": { "address": 48, "type": "|u1" },
+    "rock2_zola_fireball_start_timer": { "address": 49, "type": "|u1" },
+    "rock3_zola_fireball_start_timer": { "address": 50, "type": "|u1" },
+    "zola_animation_timer": { "address": 51, "type": "|u1" },
+
+    "bait_disappear_timer": { "address": 55, "type": "|u1" },
+    "bomb_or_flame_timer": { "address": 56, "type": "|u1" },
+    "recorder_freeze_timer": { "address": 60, "type": "|u1" },
+    "white_bubble_sword_reenable_timer": { "address": 76, "type": "|u1" },
+
+    "scroll_offset_y_hi": { "address": 92, "type": "|u1" },
+    "collision_tile_misc": { "address": 101, "type": "|u1" },
+
+    "link_sword_melee_x": { "address": 125, "type": "|u1" },
+    "link_sword_melee_y": { "address": 145, "type": "|u1" },
+    "link_sword_melee_direction": { "address": 165, "type": "|u1" },
+    "link_sword_animation": { "address": 185, "type": "|u1" },
+
+    "link_sword_projectile_x": { "address": 126, "type": "|u1" },
+    "link_sword_projectile_y": { "address": 146, "type": "|u1" },
+    "link_sword_projectile_direction": { "address": 166, "type": "|u1" },
+    "link_sword_projectile_state": { "address": 186, "type": "|u1" },
+
+    "boomerang_or_bait_x": { "address": 127, "type": "|u1" },
+    "boomerang_or_bait_y": { "address": 147, "type": "|u1" },
+    "boomerang_direction": { "address": 167, "type": "|u1" },
+    "boomerang_or_bait_state": { "address": 187, "type": "|u1" },
+
+    "bomb_or_flame1_x": { "address": 128, "type": "|u1" },
+    "bomb_or_flame1_y": { "address": 148, "type": "|u1" },
+    "flame1_direction": { "address": 168, "type": "|u1" },
+    "bomb_or_flame1_state": { "address": 188, "type": "|u1" },
+
+    "bomb_or_flame2_x": { "address": 129, "type": "|u1" },
+    "bomb_or_flame2_y": { "address": 149, "type": "|u1" },
+    "flame2_direction": { "address": 169, "type": "|u1" },
+    "flame2_state": { "address": 189, "type": "|u1" },
+
+    "arrow_x": { "address": 130, "type": "|u1" },
+    "arrow_y": { "address": 150, "type": "|u1" },
+    "arrow_or_rod_projectile_direction": { "address": 170, "type": "|u1" },
+    "arrow_or_rod_projectile_state": { "address": 190, "type": "|u1" },
+
+    "enemy4_projectile_x": { "address": 119, "type": "|u1" },
+    "enemy1_projectile_x": { "address": 120, "type": "|u1" },
+    "enemy2_projectile_x": { "address": 121, "type": "|u1" },
+    "enemy3_projectile_x": { "address": 122, "type": "|u1" },
+    "zola_x": { "address": 123, "type": "|u1" },
+
+    "enemy4_projectile_y": { "address": 139, "type": "|u1" },
+    "enemy1_projectile_y": { "address": 140, "type": "|u1" },
+    "enemy2_projectile_y": { "address": 141, "type": "|u1" },
+    "enemy3_projectile_y": { "address": 142, "type": "|u1" },
+    "zola_y": { "address": 143, "type": "|u1" },
+
+    "enemy4_projectile_direction": { "address": 159, "type": "|u1" },
+    "enemy1_projectile_direction": { "address": 160, "type": "|u1" },
+    "enemy2_projectile_direction": { "address": 161, "type": "|u1" },
+    "enemy3_projectile_direction": { "address": 162, "type": "|u1" },
+
+    "enemy4_projectile_state": { "address": 179, "type": "|u1" },
+    "enemy1_projectile_state": { "address": 180, "type": "|u1" },
+    "enemy2_projectile_state": { "address": 181, "type": "|u1" },
+    "enemy3_projectile_state": { "address": 182, "type": "|u1" },
+    "enemy_unknown_projectile_state": { "address": 183, "type": "|u1" },
+
+    "dungeon_floor_item": { "address": 151, "type": "|u1" },
+    "screen_item_type": { "address": 171, "type": "|u1" },
+
+    "dropped_enemy_item_type_1": { "address": 173, "type": "|u1" },
+    "dropped_enemy_item_type_2": { "address": 174, "type": "|u1" },
+    "dropped_enemy_item_type_3": { "address": 175, "type": "|u1" },
+    "dropped_enemy_item_type_4": { "address": 176, "type": "|u1" },
+    "dropped_enemy_item_type_5": { "address": 177, "type": "|u1" },
+    "dropped_enemy_item_type_6": { "address": 178, "type": "|u1" },
+
+    "dropped_enemy_item_1": { "address": 194, "type": "|u1" },
+    "dropped_enemy_item_2": { "address": 195, "type": "|u1" },
+
     "room_clear_counter": { "address": 845, "type": "|u1" },
     "enemies_killed_since_enter": { "address": 1322, "type": "|u1" },
     "killed_enemy_count": { "address": 1575, "type": "|u1" },

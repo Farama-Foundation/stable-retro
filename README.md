@@ -92,7 +92,6 @@ python3 ppo.py --game='Airstriker-Genesis-v0'
 More advanced examples:
 [https://github.com/MatPoliquin/stable-retro-scripts](https://github.com/MatPoliquin/stable-retro-scripts)
 
-
 ## Documentation & Tutorials
 
 Documentation is available at [https://stable-retro.farama.org/](https://stable-retro.farama.org/) (work in progress)
@@ -104,8 +103,6 @@ See [LICENSES.md](https://github.com/Farama-Foundation/stable-retro/blob/master/
 | [Windows WSL2 Setup](https://www.youtube.com/watch?v=vPnJiUR21Og) | Step-by-step guide for setting up stable-retro on Windows 11 with WSL2 and Ubuntu 22.04 |
 | [Game Integration Tool](https://www.youtube.com/playlist?list=PLmwlWbdWpZVvWqzOxu0jVBy-CaRpYha0t) | Playlist covering how to use the integration tool to add new games |
 | [RetroArch + ML Models](https://www.youtube.com/watch?v=hkOcxJvJVjk) | Running a custom RetroArch build that supports overriding player input with trained models |
-
-
 
 ## ROMs and BIOS files
 
@@ -132,7 +129,7 @@ The following non-commercial Sega Genesis ROM is included with Stable Retro for 
 
 There is an effort to get this project to the [Farama Foundation Project Standards](https://farama.org/project_standards). These development efforts are being coordinated in the `stable-retro` channel of the Farama Foundation's Discord. Click [here](https://discord.gg/aPjhD5cf) for the invite
 
-Feel free to reach to the above Discord for any issues/suggestions/discussions related to stable-retro
+Feel free to reach out to the above Discord for any issues/suggestions/discussions related to stable-retro
 
 ## Supported specs:
 

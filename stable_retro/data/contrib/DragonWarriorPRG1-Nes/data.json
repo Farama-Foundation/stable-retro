@@ -1,0 +1,331 @@
+{
+  "info": {
+    "map_horizontal_offset": {
+      "address": 17,
+      "type": "|u1"
+    },
+    "map_load_info": {
+      "address": 18,
+      "type": "|u1"
+    },
+    "tiles_linked": {
+      "address": 19,
+      "type": "<u2"
+    },
+    "exterior_tile": {
+      "address": 21,
+      "type": "|u1"
+    },
+    "terrain_offset": {
+      "address": 22,
+      "type": "|u1"
+    },
+    "player_x": {
+      "address": 58,
+      "type": "|u1"
+    },
+    "player_y": {
+      "address": 59,
+      "type": "|u1"
+    },
+    "overworld_v_pos": {
+      "address": 62,
+      "type": "|u1"
+    },
+    "overworld_h_pos": {
+      "address": 66,
+      "type": "|u1"
+    },
+    "map_id": {
+      "address": 69,
+      "type": "|u1"
+    },
+    "buttons_pressed": {
+      "address": 71,
+      "type": "|u1"
+    },
+    "overworld_idle_clock": {
+      "address": 79,
+      "type": "|u1"
+    },
+    "overworld_clock": {
+      "address": 80,
+      "type": "|u1"
+    },
+    "player_sprite_x": {
+      "address": 144,
+      "type": "<u2"
+    },
+    "player_sprite_y": {
+      "address": 146,
+      "type": "<u2"
+    },
+    "rng_state": {
+      "address": 148,
+      "type": "<u2"
+    },
+    "experience": {
+      "address": 186,
+      "type": "<u2"
+    },
+    "gold": {
+      "address": 188,
+      "type": "<u2"
+    },
+    "equipment_packed": {
+      "address": 190,
+      "type": "|u1"
+    },
+    "magic_keys": {
+      "address": 191,
+      "type": "|u1"
+    },
+    "herbs": {
+      "address": 192,
+      "type": "|u1"
+    },
+    "inventory_bytes_0": {
+      "address": 193,
+      "type": "|u1"
+    },
+    "inventory_bytes_1": {
+      "address": 194,
+      "type": "|u1"
+    },
+    "inventory_bytes_2": {
+      "address": 195,
+      "type": "|u1"
+    },
+    "inventory_bytes_3": {
+      "address": 196,
+      "type": "|u1"
+    },
+    "hp": {
+      "address": 197,
+      "type": "|u1"
+    },
+    "mp": {
+      "address": 198,
+      "type": "|u1"
+    },
+    "level": {
+      "address": 199,
+      "type": "|u1"
+    },
+    "strength": {
+      "address": 200,
+      "type": "|u1"
+    },
+    "agility": {
+      "address": 201,
+      "type": "|u1"
+    },
+    "max_hp": {
+      "address": 202,
+      "type": "|u1"
+    },
+    "max_mp": {
+      "address": 203,
+      "type": "|u1"
+    },
+    "attack_power": {
+      "address": 204,
+      "type": "|u1"
+    },
+    "defense_power": {
+      "address": 205,
+      "type": "|u1"
+    },
+    "spells_0": {
+      "address": 206,
+      "type": "|u1"
+    },
+    "spells_1_progress": {
+      "address": 207,
+      "type": "|u1"
+    },
+    "spells_byte0": {
+      "address": 206,
+      "type": "|u1"
+    },
+    "spells_byte1": {
+      "address": 207,
+      "type": "|u1"
+    },
+    "spell_heal": {
+      "address": 206,
+      "type": "|u1",
+      "mask": 1
+    },
+    "spell_hurt": {
+      "address": 206,
+      "type": "|u1",
+      "mask": 2
+    },
+    "spell_sleep": {
+      "address": 206,
+      "type": "|u1",
+      "mask": 4
+    },
+    "spell_radiant": {
+      "address": 206,
+      "type": "|u1",
+      "mask": 8
+    },
+    "spell_stopspell": {
+      "address": 206,
+      "type": "|u1",
+      "mask": 16
+    },
+    "spell_outside": {
+      "address": 206,
+      "type": "|u1",
+      "mask": 32
+    },
+    "spell_return": {
+      "address": 206,
+      "type": "|u1",
+      "mask": 64
+    },
+    "spell_repel": {
+      "address": 206,
+      "type": "|u1",
+      "mask": 128
+    },
+    "spell_healmore": {
+      "address": 207,
+      "type": "|u1",
+      "mask": 1
+    },
+    "spell_hurtmore": {
+      "address": 207,
+      "type": "|u1",
+      "mask": 2
+    },
+    "quest_secret_stairs_dragonlord_castle": {
+      "address": 207,
+      "type": "|u1",
+      "mask": 4
+    },
+    "quest_rainbow_bridge_constructed": {
+      "address": 207,
+      "type": "|u1",
+      "mask": 8
+    },
+    "equip_dragons_scale": {
+      "address": 207,
+      "type": "|u1",
+      "mask": 16
+    },
+    "equip_fighters_ring": {
+      "address": 207,
+      "type": "|u1",
+      "mask": 32
+    },
+    "equip_cursed_belt": {
+      "address": 207,
+      "type": "|u1",
+      "mask": 64
+    },
+    "equip_death_necklace": {
+      "address": 207,
+      "type": "|u1",
+      "mask": 128
+    },
+    "light_radius": {
+      "address": 208,
+      "type": "|u1"
+    },
+    "menu_h_ptr": {
+      "address": 216,
+      "type": "|u1"
+    },
+    "menu_v_ptr": {
+      "address": 217,
+      "type": "|u1"
+    },
+    "light_timer": {
+      "address": 218,
+      "type": "|u1"
+    },
+    "repel_timer": {
+      "address": 219,
+      "type": "|u1"
+    },
+    "quest_combat_flags": {
+      "address": 223,
+      "type": "|u1"
+    },
+    "quest_rescued_princess": {
+      "address": 223,
+      "type": "|u1",
+      "mask": 1
+    },
+    "quest_returned_princess": {
+      "address": 223,
+      "type": "|u1",
+      "mask": 2
+    },
+    "quest_death_necklace_obtained": {
+      "address": 223,
+      "type": "|u1",
+      "mask": 4
+    },
+    "quest_left_first_room": {
+      "address": 223,
+      "type": "|u1",
+      "mask": 8
+    },
+    "status_stopspell_self": {
+      "address": 223,
+      "type": "|u1",
+      "mask": 16
+    },
+    "status_stopspell_enemy": {
+      "address": 223,
+      "type": "|u1",
+      "mask": 32
+    },
+    "status_enemy_asleep": {
+      "address": 223,
+      "type": "|u1",
+      "mask": 64
+    },
+    "status_self_asleep": {
+      "address": 223,
+      "type": "|u1",
+      "mask": 128
+    },
+    "terrain_enemy_ptr": {
+      "address": 224,
+      "type": "|u1"
+    },
+    "enemy_hp": {
+      "address": 226,
+      "type": "|u1"
+    },
+    "quest_progress_flags": {
+      "address": 228,
+      "type": "|u1"
+    },
+    "quest_killed_golem": {
+      "address": 228,
+      "type": "|u1",
+      "mask": 2
+    },
+    "quest_killed_dragonlord": {
+      "address": 228,
+      "type": "|u1",
+      "mask": 4
+    },
+    "quest_killed_green_dragon": {
+      "address": 228,
+      "type": "|u1",
+      "mask": 64
+    },
+    "music_tempo": {
+      "address": 252,
+      "type": "|u1"
+    }
+  }
+}

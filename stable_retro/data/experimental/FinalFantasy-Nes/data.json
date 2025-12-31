@@ -12,7 +12,7 @@
 
     "scrolling": { "address": 52, "type": "|u1" },
     "scroll_timer": { "address": 53, "type": "|u1" },
-    "scroll_counter": { "address": 64, "type": "|u2" },
+    "scroll_counter": { "address": 64, "type": "<u2" },
 
     "battle_flag": { "address": 67, "type": "|u1" },
 

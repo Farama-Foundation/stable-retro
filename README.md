@@ -43,9 +43,10 @@ Currently over 1000 games are integrated including:
 | Shmups | 1943, Thunder Force IV, Gradius III, R-Type |
 | BeatEmUps | Streets Of Rage, Double Dragon, TMNT 2: The Arcade Game, Golden Axe, Final Fight |
 | Racing | Super Hang On, F-Zero, OutRun |
-| RPGs (experimental) | Pokemon Red-GameBoy, LegendOfZelda-Nes, FinalFantasy-Nes, DragonWarrior-Nes |
+| RPGs (experimental) | Pokemon Red, Legend Of Zelda, Final Fantasy, Dragon Warrior |
 
-If the game you want is not included but is supported by one of the systems in the list above, an integration tool is provided to help add new games.
+> **Note:** If the game you want is not included but is supported by one of the systems in the list above, an integration tool is provided to help add new games.
+
 
 ## Installation
 

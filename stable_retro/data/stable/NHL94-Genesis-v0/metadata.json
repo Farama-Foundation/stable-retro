@@ -1,7 +1,7 @@
 {
-  "default_state": "canadiensvsnordique",
+  "default_state": "PenguinsVsSenators.start",
   "default_player_state": [
-    "canadiensvsnordique",
-    "canadiensvsnordique.2P"
+    "PenguinsVsSenators.start.",
+    "PenguinsVsSenators.start.2P"
   ]
 }

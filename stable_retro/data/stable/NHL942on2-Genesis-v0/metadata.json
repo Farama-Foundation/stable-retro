@@ -1,3 +1,7 @@
 {
-  "default_state": "PenguinsVsWhalers"
+  "default_state": "PenguinsVsWhalers.start",
+  "default_player_state": [
+    "PenguinsVsWhalers.start.",
+    "PenguinsVsWhalers.start.2P"
+  ]
 }

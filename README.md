@@ -164,3 +164,4 @@ List of papers mentioning stable-retro. If you want your paper to be added here 
 *	[Gymnasium: A Standardized Interface for Reinforcement Learning Environments](https://openreview.net/pdf?id=qPMLvJxtPK)
 *	[IPR-1: Interactive Physical Reasoner](https://arxiv.org/html/2511.15407v1)
 *	[SAFE-SMART: Safety Analysis and Formal Evaluation using STL Metrics for Autonomous RoboTs](https://arxiv.org/html/2511.17781v1)
+*	[General Modular Harness for LLM Agents in Multi-Turn Gaming Environments](https://arxiv.org/abs/2507.11633v1)

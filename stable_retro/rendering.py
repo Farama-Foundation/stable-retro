@@ -125,10 +125,6 @@ class SimpleImageViewer:
         gl.glBindTexture(texture.target, 0)
         texture.width = self.width
         texture.height = self.height
-        gl.glMatrixMode(gl.GL_PROJECTION)
-        gl.glPushMatrix()
-        gl.glLoadIdentity()
-        gl.glOrtho(0, self.width, self.height, 0, -1, 1)
         gl.glMatrixMode(gl.GL_MODELVIEW)
         gl.glPushMatrix()
         gl.glLoadIdentity()
@@ -138,8 +134,6 @@ class SimpleImageViewer:
             gl.glTranslatef(float(-self.width) / 2.0, float(-self.height) / 2.0, 0.0)
         texture.blit(0, 0)
         gl.glMatrixMode(gl.GL_MODELVIEW)
-        gl.glPopMatrix()
-        gl.glMatrixMode(gl.GL_PROJECTION)
         gl.glPopMatrix()
         gl.glMatrixMode(gl.GL_MODELVIEW)
         self.window.flip()

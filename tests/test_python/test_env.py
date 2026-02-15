@@ -1,4 +1,5 @@
 import os
+import pickle
 
 import pytest
 
@@ -87,3 +88,64 @@ def test_env_data(generate_test_env):
     with pytest.raises(KeyError):
         val = env.data["foo"]
         assert val
+
+
+def test_env_pickle_roundtrip(generate_test_env):
+    json_path = os.path.join(os.path.dirname(__file__), "../dummy.json")
+
+    env = generate_test_env(
+        info=json_path,
+        scenario=json_path,
+        render_mode="rgb_array",
+    )
+    env.reset()
+
+    payload = pickle.dumps(env)
+    env.close()
+
+    restored = pickle.loads(payload)
+    try:
+        obs, info = restored.reset()
+        assert obs in restored.observation_space
+        assert isinstance(info, dict)
+
+        obs, rew, terminated, truncated, info = restored.step(
+            restored.action_space.sample(),
+        )
+        assert obs in restored.observation_space
+        assert isinstance(rew, float)
+        assert isinstance(terminated, bool)
+        assert isinstance(truncated, bool)
+        assert isinstance(info, dict)
+    finally:
+        restored.close()
+
+
+def test_env_pickle_roundtrip_does_not_serialize_open_movie(generate_test_env, tmp_path):
+    json_path = os.path.join(os.path.dirname(__file__), "../dummy.json")
+
+    env = generate_test_env(
+        info=json_path,
+        scenario=json_path,
+        record=str(tmp_path),
+        render_mode="rgb_array",
+    )
+    if env.statename is None:
+        env.close()
+        pytest.skip("recording path requires a named state in this fixture setup")
+
+    env.reset()
+    assert env.movie is not None
+
+    payload = pickle.dumps(env)
+    env.close()
+
+    restored = pickle.loads(payload)
+    try:
+        assert restored.movie is None
+        assert restored.movie_path == str(tmp_path)
+
+        restored.reset()
+        assert restored.movie is not None
+    finally:
+        restored.close()

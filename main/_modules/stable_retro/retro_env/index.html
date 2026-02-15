@@ -314,6 +314,9 @@
         <span class="n">obs_type</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">Observations</span><span class="o">.</span><span class="n">IMAGE</span><span class="p">,</span>
         <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;human&quot;</span><span class="p">,</span>
     <span class="p">):</span>
+        <span class="k">if</span> <span class="n">inttype</span> <span class="ow">is</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Integrations</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">:</span>
+            <span class="n">inttype</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DefaultIntegrations</span><span class="o">.</span><span class="n">DEFAULT</span>
+
         <span class="n">EzPickle</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">game</span><span class="p">,</span>

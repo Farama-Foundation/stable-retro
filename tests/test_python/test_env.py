@@ -122,7 +122,8 @@ def test_env_pickle_roundtrip(generate_test_env):
 
 
 def test_env_pickle_roundtrip_does_not_serialize_open_movie(
-    generate_test_env, tmp_path,
+    generate_test_env,
+    tmp_path,
 ):
     json_path = os.path.join(os.path.dirname(__file__), "../dummy.json")
 

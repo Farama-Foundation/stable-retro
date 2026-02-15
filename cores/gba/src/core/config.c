@@ -331,7 +331,6 @@ void mCoreConfigMap(const struct mCoreConfig* config, struct mCoreOptions* opts)
 	_lookupIntValue(config, "frameskip", &opts->frameskip);
 	_lookupIntValue(config, "volume", &opts->volume);
 	_lookupIntValue(config, "rewindBufferCapacity", &opts->rewindBufferCapacity);
-	_lookupIntValue(config, "rewindSave", &opts->rewindSave);
 	_lookupFloatValue(config, "fpsTarget", &opts->fpsTarget);
 	unsigned audioBuffers;
 	if (_lookupUIntValue(config, "audioBuffers", &audioBuffers)) {
@@ -369,6 +368,9 @@ void mCoreConfigMap(const struct mCoreConfig* config, struct mCoreOptions* opts)
 	}
 	if (_lookupIntValue(config, "rewindEnable", &fakeBool)) {
 		opts->rewindEnable = fakeBool;
+	}
+	if (_lookupIntValue(config, "rewindSave", &fakeBool)) {
+		opts->rewindSave = fakeBool;
 	}
 
 	_lookupIntValue(config, "fullscreen", &opts->fullscreen);

@@ -5,6 +5,7 @@ import os
 
 import gymnasium as gym
 import numpy as np
+from gymnasium.utils.ezpickle import EzPickle
 
 import stable_retro as retro
 import stable_retro.data
@@ -12,7 +13,7 @@ import stable_retro.data
 __all__ = ["RetroEnv"]
 
 
-class RetroEnv(gym.Env):
+class RetroEnv(gym.Env, EzPickle):
     """
     Gym Retro environment class
 
@@ -34,6 +35,19 @@ class RetroEnv(gym.Env):
         obs_type=retro.Observations.IMAGE,
         render_mode="human",
     ):
+        EzPickle.__init__(
+            self,
+            game,
+            state,
+            scenario,
+            info,
+            use_restricted_actions,
+            record,
+            players,
+            inttype,
+            obs_type,
+            render_mode,
+        )
         if not hasattr(self, "spec"):
             self.spec = None
         self._obs_type = obs_type

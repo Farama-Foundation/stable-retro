@@ -2,7 +2,21 @@
 
 ## Unreleased
 
-* (nothing yet)
+* add `EzPickle` support for `RetroEnv` to improve compatibility with multiprocessing/vectorized RL tooling
+  * pickling recreates environments from constructor arguments
+  * live emulator/viewer/movie runtime handles are not serialized
+
+## 0.9.9
+
+* fix human-mode rendering regression that could show a blank white window on some systems
+* add four experimental RPG integrations
+* clean up NHL94 environments
+* documentation updates, including supported games table and Linux/macOS installation guides
+* add paper/reference documentation
+
+## 0.9.8
+
+* fix packaging issue in `0.9.7` wheels where `data/stable` was empty
 
 ## 0.9.7
 

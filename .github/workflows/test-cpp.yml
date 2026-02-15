@@ -24,8 +24,8 @@ jobs:
       - name: Install pip package and build tests
         run: |
           cmake .
-          make -j
-          make -f tests/Makefile
+          make -j2
+          make -j2 -f tests/Makefile
 
       - name: Run tests
         run: ctest --progress --verbose

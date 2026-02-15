@@ -197,63 +197,82 @@ class GameData(GameDataGlue):
 
 
 class Variables:
+    """Dictionary-like view over scenario variables managed by ``GameData``."""
+
     def __init__(self, data):
         super().__init__()
         self.data = data
 
     def __getitem__(self, name):
+        """Return the current value of variable ``name``."""
         return self.data.get_variable(name)
 
     def __setitem__(self, name, value):
+        """Set variable ``name`` to ``value``."""
         return self.data.set_variable(name, value)
 
     def __delitem__(self, name):
+        """Remove variable ``name`` from the current variable set."""
         self.data.remove_variable(name)
 
     def __iter__(self):
+        """Iterate over ``(name, value)`` pairs for all variables."""
         variables = self.data.list_variables()
         yield from variables.items()
 
     def __contains__(self, name):
+        """Return whether variable ``name`` exists."""
         variables = self.data.list_variables()
         return name in variables
 
 
 class SearchListHandle:
+    """Container-style accessor for named memory search definitions."""
+
     def __init__(self, data):
         self._data = data
 
     def __getitem__(self, name):
+        """Return a ``SearchHandle`` for the named search entry."""
         return SearchHandle(self._data, name)
 
     def __delitem__(self, name):
+        """Delete a stored search definition by name."""
         self._data.remove_search(name)
 
     def __iter__(self):
+        """Iterate over ``(name, search_spec)`` pairs for saved searches."""
         searches = self._data.list_searches()
         yield from searches.items()
 
     def __contains__(self, name):
+        """Return whether a saved search with ``name`` exists."""
         searches = self._data.list_searches()
         return name in searches
 
     def load(self, name):
+        """Load search definitions from a file name or path."""
         self._data.load_searches(name)
 
     def save(self, name):
+        """Save current search definitions to a file name or path."""
         self._data.save_searches(name)
 
 
 class SearchHandle:
+    """Proxy object used to run and inspect a specific named memory search."""
+
     def __init__(self, data, name):
         self._data = data
         self._name = name
         self._search = None
 
     def search(self, value):
+        """Filter matches by searching for ``value`` in the named search."""
         self._data.search(self._name, value)
 
     def delta(self, op, ref):
+        """Apply a delta comparison operation against a reference value."""
         self._data.delta_search(self._name, op, ref)
 
     def __getattr__(self, attr):
@@ -263,15 +282,18 @@ class SearchHandle:
 
 
 def add_integrations(integrations):
+    """Include extra integration sets in the process-wide default integration mask."""
     DefaultIntegrations.add(integrations)
 
 
 def add_custom_integration(path):
+    """Register a custom integration directory and enable custom integrations."""
     DefaultIntegrations.add(Integrations.CUSTOM_ONLY)
     Integrations.add_custom_path(path)
 
 
 def init_core_info(path):
+    """Load core metadata JSON files and populate core lookup tables."""
     for fname in glob.glob(os.path.join(path, "*.json")):
         with open(fname) as f:
             core_info = f.read()
@@ -284,6 +306,7 @@ def init_core_info(path):
 
 
 def path(hint=DATA_PATH):
+    """Return the resolved root directory that contains Retro integration data."""
     if hint == DATA_PATH and not os.path.exists(
         os.path.join(DATA_PATH, "data", "stable", "Airstriker-Genesis"),
     ):
@@ -348,6 +371,7 @@ def get_original_romfile_path(game, inttype=Integrations.DEFAULT):
 
 
 def list_games(inttype=Integrations.DEFAULT):
+    """List all game names that have a recognized ``rom.sha`` for ``inttype``."""
     files = []
     for curpath in inttype.paths:
         files.extend(os.listdir(os.path.join(path(), curpath)))
@@ -359,6 +383,7 @@ def list_games(inttype=Integrations.DEFAULT):
 
 
 def list_states(game, inttype=Integrations.DEFAULT):
+    """List available save-state names for ``game`` without the ``.state`` suffix."""
     paths = []
     for curpath in inttype.paths:
         paths.append(os.path.join(path(), curpath, game))
@@ -374,6 +399,7 @@ def list_states(game, inttype=Integrations.DEFAULT):
 
 
 def list_scenarios(game, inttype=Integrations.DEFAULT):
+    """List scenario JSON names for ``game`` that define reward/done configuration."""
     paths = []
     for curpath in inttype.paths:
         paths.append(os.path.join(path(), curpath, game))
@@ -396,6 +422,7 @@ def list_scenarios(game, inttype=Integrations.DEFAULT):
 
 
 def parse_smd(header, body):
+    """Convert interleaved Super Magic Drive ROM data into linear byte order."""
     import numpy as np
 
     try:
@@ -416,6 +443,7 @@ def parse_smd(header, body):
 
 
 def groom_rom(rom, r):
+    """Read and normalize ROM bytes and return ``(data, sha1)`` for matching."""
     if rom.lower().endswith(".smd"):
         # Read Super Magic Drive header
         header = r.read(512)
@@ -434,6 +462,7 @@ def groom_rom(rom, r):
 
 
 def verify_hash(game, inttype=Integrations.DEFAULT):
+    """Verify a game's current ROM hash against expected ``rom.sha`` entries."""
     import stable_retro as retro
 
     errors = []
@@ -458,6 +487,7 @@ def verify_hash(game, inttype=Integrations.DEFAULT):
 
 
 def get_known_hashes():
+    """Build a mapping of known ROM SHA1 values to game/import target metadata."""
     known_hashes = {}
     for game in list_games(Integrations.ALL):
         for curpath in Integrations.ALL.paths:
@@ -503,6 +533,7 @@ def get_known_hashes():
 
 
 def merge(*args, quiet=True):
+    """Import ROM files by hash-matching them to known Retro game datasets."""
     import stable_retro as retro
 
     known_hashes = get_known_hashes()

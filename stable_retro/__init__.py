@@ -32,10 +32,12 @@ stable_retro.data.init_core_info(core_path())
 
 
 def get_core_path(corename):
+    """Return the absolute path to the libretro core binary for ``corename``."""
     return os.path.join(core_path(), stable_retro.data.EMU_CORES[corename])
 
 
 def get_romfile_system(rom_path):
+    """Infer and return the emulator system name from a ROM file extension."""
     extension = os.path.splitext(rom_path)[1]
     if extension in stable_retro.data.EMU_EXTENSIONS:
         return stable_retro.data.EMU_EXTENSIONS[extension]
@@ -44,6 +46,7 @@ def get_romfile_system(rom_path):
 
 
 def get_system_info(system):
+    """Return loaded core metadata for the given system name."""
     if system in stable_retro.data.EMU_INFO:
         return stable_retro.data.EMU_INFO[system]
     else:
@@ -56,9 +59,7 @@ def make(
     inttype=stable_retro.data.Integrations.DEFAULT,
     **kwargs,
 ):
-    """
-    Create a Gym environment for the specified game
-    """
+    """Create and return a ``RetroEnv`` for the requested game and options."""
     try:
         stable_retro.data.get_romfile_path(game, inttype)
     except FileNotFoundError:

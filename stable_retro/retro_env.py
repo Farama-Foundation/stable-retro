@@ -35,6 +35,7 @@ class RetroEnv(gym.Env, EzPickle):
         obs_type=retro.Observations.IMAGE,
         render_mode="human",
     ):
+        """Initialize a Retro environment for a specific game/state configuration."""
         if inttype is retro.data.Integrations.DEFAULT or isinstance(
             inttype,
             retro.data.DefaultIntegrations,
@@ -206,6 +207,7 @@ class RetroEnv(gym.Env, EzPickle):
         return image
 
     def action_to_array(self, a):
+        """Convert an action-space value into per-player button-mask arrays."""
         actions = []
         for p in range(self.players):
             action = 0
@@ -232,6 +234,7 @@ class RetroEnv(gym.Env, EzPickle):
         return actions
 
     def step(self, a):
+        """Advance one emulator frame and return Gymnasium step outputs."""
         if self.img is None and self.ram is None:
             raise RuntimeError("Please call env.reset() before env.step()")
 
@@ -254,6 +257,7 @@ class RetroEnv(gym.Env, EzPickle):
         return ob, rew, bool(done), False, dict(info)
 
     def reset(self, seed=None, options=None):
+        """Reset emulator state and return the initial observation and info."""
         super().reset(seed=seed)
 
         if self.initial_state:
@@ -281,6 +285,7 @@ class RetroEnv(gym.Env, EzPickle):
         return self._update_obs(), {}
 
     def render(self):
+        """Render the current frame in human mode or return an RGB array."""
         mode = self.render_mode
 
         img = self.img
@@ -297,12 +302,14 @@ class RetroEnv(gym.Env, EzPickle):
             return self.viewer.isopen
 
     def close(self):
+        """Release emulator and viewer resources."""
         if hasattr(self, "em"):
             del self.em
         if self.viewer:
             self.viewer.close()
 
     def get_action_meaning(self, act):
+        """Return human-readable button names for an encoded action."""
         actions = []
         for p, action in enumerate(self.action_to_array(act)):
             actions.append(
@@ -316,6 +323,7 @@ class RetroEnv(gym.Env, EzPickle):
         self.data.set_value(name, val)
 
     def get_ram(self):
+        """Return concatenated emulator RAM blocks as a uint8 array."""
         blocks = []
         for offset in sorted(self.data.memory.blocks):
             arr = np.frombuffer(self.data.memory.blocks[offset], dtype=np.uint8)
@@ -323,6 +331,7 @@ class RetroEnv(gym.Env, EzPickle):
         return np.concatenate(blocks)
 
     def get_screen(self, player=0, apply_rotation=False):
+        """Return the current screen, optionally cropped and rotation-corrected."""
         img = self.em.get_screen()
         x, y, w, h = self.data.crop_info(player)
         if not w or x + w > img.shape[1]:
@@ -342,6 +351,7 @@ class RetroEnv(gym.Env, EzPickle):
         return result
 
     def load_state(self, statename, inttype=retro.data.Integrations.DEFAULT):
+        """Load a named save-state file into ``self.initial_state``."""
         if not statename.endswith(".state"):
             statename += ".state"
 
@@ -354,6 +364,7 @@ class RetroEnv(gym.Env, EzPickle):
         self.statename = statename
 
     def compute_step(self):
+        """Compute reward, done flag, and info dictionary from current RAM data."""
         if self.players > 1 and self.multi_rewards:
             reward = [self.data.current_reward(p) for p in range(self.players)]
         else:
@@ -362,12 +373,14 @@ class RetroEnv(gym.Env, EzPickle):
         return reward, done, self.data.lookup_all()
 
     def record_movie(self, path):
+        """Start recording gameplay input to a BK2 movie at ``path``."""
         self.movie = retro.Movie(path, True, self.players)
         self.movie.configure(self.gamename, self.em)
         if self.initial_state:
             self.movie.set_state(self.initial_state)
 
     def stop_record(self):
+        """Stop movie recording and clear recording state."""
         self.movie_path = None
         self.movie_id = 0
         if self.movie:
@@ -375,6 +388,7 @@ class RetroEnv(gym.Env, EzPickle):
             self.movie = None
 
     def auto_record(self, path=None):
+        """Enable automatic per-episode movie recording to a directory."""
         if not path:
             path = os.getcwd()
         self.movie_path = path

@@ -352,6 +352,7 @@ also specify a string that is the name of the <code class="docutils literal notr
 </dd></dl>
 
 <p>You can also create your own action spaces derived from these.  For an example, see <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/master/stable_retro/examples/discretizer.py">discretizer.py</a>.  This file shows how to use <code class="docutils literal notranslate"><span class="pre">stable_retro.Actions.Discrete</span></code> as well as how to make a custom wrapper that reduces the action space from <code class="docutils literal notranslate"><span class="pre">126</span></code> actions to <code class="docutils literal notranslate"><span class="pre">7</span></code></p>
+<p>If you are integrating a new game and need to understand or customize action filtering (including the <code class="docutils literal notranslate"><span class="pre">scenario.json</span></code> <code class="docutils literal notranslate"><span class="pre">actions</span></code> format), see <a class="reference internal" href="../integration/#filtered-actions"><span class="std std-ref">Filtered Actions (actions in scenario.json)</span></a>.</p>
 </section>
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Link to this heading">¶</a></h2>

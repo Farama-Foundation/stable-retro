@@ -429,6 +429,76 @@
 <p>To integrate a game you need to define a done condition and a reward function.  The done condition lets Stable Retro know when to end a game session, while the reward function provides a simple numeric goal for machine learning agents to maximize.</p>
 <p>To define these, you find variables from the game’s memory, such as the player’s current score and lives remaining, and use those to create the done condition and reward function.  An example done condition is when the <code class="docutils literal notranslate"><span class="pre">lives</span></code> variable is equal to <code class="docutils literal notranslate"><span class="pre">0</span></code>, an example reward function is the change in the <code class="docutils literal notranslate"><span class="pre">score</span></code> variable.</p>
 <p>Note: if the game requires that you hit the <code class="docutils literal notranslate"><span class="pre">Start</span></code> button to play, for instance after dying, then you need to modify the scenario file to allow this as <code class="docutils literal notranslate"><span class="pre">Start</span></code> is disallowed by default.  See the <code class="docutils literal notranslate"><span class="pre">actions</span></code> key in <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/KidChameleon-Genesis-v0/scenario.json">KidChameleon-Genesis-v0</a> for an example of this.</p>
+<section id="filtered-actions-actions-in-scenario-json">
+<span id="filtered-actions"></span><h3>Filtered Actions (<code class="docutils literal notranslate"><span class="pre">actions</span></code> in <code class="docutils literal notranslate"><span class="pre">scenario.json</span></code>)<a class="headerlink" href="#filtered-actions-actions-in-scenario-json" title="Link to this heading">¶</a></h3>
+<p>Stable Retro supports action filtering to prevent invalid or unwanted button combinations.</p>
+<p>By default, each emulator core provides a built-in filter (for example, preventing <code class="docutils literal notranslate"><span class="pre">UP</span></code> + <code class="docutils literal notranslate"><span class="pre">DOWN</span></code> and <code class="docutils literal notranslate"><span class="pre">LEFT</span></code> + <code class="docutils literal notranslate"><span class="pre">RIGHT</span></code> at the same time). For some systems, this default also excludes menu buttons such as <code class="docutils literal notranslate"><span class="pre">START</span></code> and <code class="docutils literal notranslate"><span class="pre">SELECT</span></code>.</p>
+<p>You can override those defaults in your game’s <code class="docutils literal notranslate"><span class="pre">scenario.json</span></code> by defining an <code class="docutils literal notranslate"><span class="pre">actions</span></code> field.</p>
+<section id="format">
+<h4>Format<a class="headerlink" href="#format" title="Link to this heading">¶</a></h4>
+<p>The shape is:</p>
+<ul class="simple">
+<li><p>Outer list: independent action groups.</p></li>
+<li><p>Middle list: allowed choices within one group.</p></li>
+<li><p>Inner list: buttons pressed together for a single choice.</p></li>
+</ul>
+<p>In other words:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;actions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">[</span><span class="err">choice_</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">choice_</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">],</span>
+<span class="w">        </span><span class="p">[</span><span class="err">choice_</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">choice_</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">],</span>
+<span class="w">        </span><span class="err">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">choice</span></code> is a list of button names, for example <code class="docutils literal notranslate"><span class="pre">[]</span></code>, <code class="docutils literal notranslate"><span class="pre">[&quot;LEFT&quot;]</span></code>, or <code class="docutils literal notranslate"><span class="pre">[&quot;A&quot;,</span> <span class="pre">&quot;B&quot;]</span></code>.</p>
+</section>
+<section id="how-choices-are-combined">
+<h4>How choices are combined<a class="headerlink" href="#how-choices-are-combined" title="Link to this heading">¶</a></h4>
+<p>At runtime, the environment picks at most one choice from each group, and combines groups together.</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">[]</span></code> as one choice in a group to represent “press none of this group”.</p></li>
+<li><p>Buttons must match names from <code class="docutils literal notranslate"><span class="pre">env.buttons</span></code> for that system (for example <code class="docutils literal notranslate"><span class="pre">UP</span></code>, <code class="docutils literal notranslate"><span class="pre">DOWN</span></code>, <code class="docutils literal notranslate"><span class="pre">LEFT</span></code>, <code class="docutils literal notranslate"><span class="pre">RIGHT</span></code>, <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">B</span></code>, <code class="docutils literal notranslate"><span class="pre">START</span></code>, <code class="docutils literal notranslate"><span class="pre">SELECT</span></code>).</p></li>
+</ul>
+</section>
+<section id="practical-example">
+<h4>Practical example<a class="headerlink" href="#practical-example" title="Link to this heading">¶</a></h4>
+<p>If you want to enforce:</p>
+<ul class="simple">
+<li><p>no <code class="docutils literal notranslate"><span class="pre">UP</span></code> + <code class="docutils literal notranslate"><span class="pre">DOWN</span></code></p></li>
+<li><p>no <code class="docutils literal notranslate"><span class="pre">LEFT</span></code> + <code class="docutils literal notranslate"><span class="pre">RIGHT</span></code></p></li>
+<li><p>no <code class="docutils literal notranslate"><span class="pre">START</span></code> + <code class="docutils literal notranslate"><span class="pre">SELECT</span></code></p></li>
+</ul>
+<p>you can define:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;actions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">[[],</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;UP&quot;</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;DOWN&quot;</span><span class="p">]],</span>
+<span class="w">                </span><span class="p">[[],</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;LEFT&quot;</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;RIGHT&quot;</span><span class="p">]],</span>
+<span class="w">                </span><span class="p">[[],</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;START&quot;</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;SELECT&quot;</span><span class="p">]]</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This still allows valid combinations across groups (for example <code class="docutils literal notranslate"><span class="pre">UP</span></code> + <code class="docutils literal notranslate"><span class="pre">LEFT</span></code>).</p>
+<p>If you do not want the agent to ever press <code class="docutils literal notranslate"><span class="pre">START</span></code> or <code class="docutils literal notranslate"><span class="pre">SELECT</span></code>, omit them from all groups entirely.</p>
+</section>
+<section id="interaction-with-use-restricted-actions">
+<h4>Interaction with <code class="docutils literal notranslate"><span class="pre">use_restricted_actions</span></code><a class="headerlink" href="#interaction-with-use-restricted-actions" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Actions.FILTERED</span></code> (default): action space is multi-binary, then invalid combinations are filtered to the closest allowed combination.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Actions.DISCRETE</span></code> / <code class="docutils literal notranslate"><span class="pre">Actions.MULTI_DISCRETE</span></code>: the action space is built directly from these allowed choices.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Actions.ALL</span></code>: no filtering.</p></li>
+</ul>
+</section>
+<section id="common-integration-pattern">
+<h4>Common integration pattern<a class="headerlink" href="#common-integration-pattern" title="Link to this heading">¶</a></h4>
+<p>For a new game, a good starting point is:</p>
+<ol class="arabic simple">
+<li><p>Keep only physically impossible combinations out (<code class="docutils literal notranslate"><span class="pre">UP</span></code> + <code class="docutils literal notranslate"><span class="pre">DOWN</span></code>, <code class="docutils literal notranslate"><span class="pre">LEFT</span></code> + <code class="docutils literal notranslate"><span class="pre">RIGHT</span></code>).</p></li>
+<li><p>Decide explicitly whether menu buttons (<code class="docutils literal notranslate"><span class="pre">START</span></code>, <code class="docutils literal notranslate"><span class="pre">SELECT</span></code>, etc.) should be available during training.</p></li>
+<li><p>Add extra restrictions only if they are truly required for your environment design.</p></li>
+</ol>
+</section>
+</section>
 <section id="done-condition">
 <h3>Done Condition<a class="headerlink" href="#done-condition" title="Link to this heading">¶</a></h3>
 <p>This is usually the easier of the two.  The best done condition to use is the Game Over or Continue screen after you run out of lives.  For some games this is when you have zero lives left, for some <code class="docutils literal notranslate"><span class="pre">-1</span></code> lives, for others, it can be pretty hard.</p>
@@ -713,6 +783,14 @@ Ideally, this should be a power of two, e.g. 1, 2, 4, 8, etc., however non-power
 </li>
 <li><a class="reference internal" href="#supported-rom-types">Supported ROM Types</a></li>
 <li><a class="reference internal" href="#integrating-a-game">Integrating a Game</a><ul>
+<li><a class="reference internal" href="#filtered-actions-actions-in-scenario-json">Filtered Actions (<code class="docutils literal notranslate"><span class="pre">actions</span></code> in <code class="docutils literal notranslate"><span class="pre">scenario.json</span></code>)</a><ul>
+<li><a class="reference internal" href="#format">Format</a></li>
+<li><a class="reference internal" href="#how-choices-are-combined">How choices are combined</a></li>
+<li><a class="reference internal" href="#practical-example">Practical example</a></li>
+<li><a class="reference internal" href="#interaction-with-use-restricted-actions">Interaction with <code class="docutils literal notranslate"><span class="pre">use_restricted_actions</span></code></a></li>
+<li><a class="reference internal" href="#common-integration-pattern">Common integration pattern</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#done-condition">Done Condition</a></li>
 <li><a class="reference internal" href="#reward-function">Reward Function</a></li>
 <li><a class="reference internal" href="#finding-variables">Finding Variables</a></li>

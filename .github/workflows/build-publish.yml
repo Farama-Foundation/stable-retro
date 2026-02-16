@@ -52,6 +52,100 @@ jobs:
           name: wheels-${{ matrix.os }}
           path: ./wheelhouse/*.whl
 
+  build_integration_linux:
+    name: Build Linux integration AppImage
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'release' && github.event.action == 'published')
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            git \
+            pkg-config \
+            zlib1g-dev \
+            libzip-dev \
+            qtbase5-dev \
+            qttools5-dev-tools \
+            patchelf \
+            desktop-file-utils
+
+      - name: Configure integration build
+        run: |
+          cmake -S . -B build-integration \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_UI=ON \
+            -DBUILD_PYTHON=OFF \
+            -DBUILD_TESTS=OFF \
+            -DBUILD_N64=OFF
+
+      - name: Build integration binary
+        run: |
+          cmake --build build-integration --target gym-retro-integration -j"$(nproc)"
+
+      - name: Assemble AppDir
+        run: |
+          mkdir -p AppDir/usr/bin
+          mkdir -p AppDir/usr/bin/stable_retro/cores
+          mkdir -p AppDir/usr/share/applications
+          mkdir -p AppDir/usr/share/icons/hicolor/256x256/apps
+          cp build-integration/gym-retro-integration AppDir/usr/bin/
+          cp build-integration/stable_retro/cores/*_libretro.so AppDir/usr/bin/stable_retro/cores/
+          cp build-integration/stable_retro/cores/*.json AppDir/usr/bin/stable_retro/cores/
+          cp src/ui/logo.ico AppDir/usr/share/icons/hicolor/256x256/apps/stable-retro-integration.ico
+
+          cat > AppDir/usr/share/applications/stable-retro-integration.desktop << 'EOF'
+          [Desktop Entry]
+          Type=Application
+          Name=Gym Retro Integration
+          Exec=gym-retro-integration
+          Icon=stable-retro-integration
+          Categories=Development;
+          Terminal=false
+          EOF
+
+      - name: Build AppImage
+        env:
+          QMAKE: /usr/lib/qt5/bin/qmake
+        run: |
+          wget -q https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+          wget -q https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
+          chmod +x linuxdeploy-x86_64.AppImage linuxdeploy-plugin-qt-x86_64.AppImage
+
+          export PATH="$PWD:$PATH"
+          export APPIMAGE_EXTRACT_AND_RUN=1
+          ./linuxdeploy-x86_64.AppImage \
+            --appdir AppDir \
+            --desktop-file AppDir/usr/share/applications/stable-retro-integration.desktop \
+            --icon-file AppDir/usr/share/icons/hicolor/256x256/apps/stable-retro-integration.ico \
+            --executable AppDir/usr/bin/gym-retro-integration \
+            --plugin qt \
+            --output appimage
+
+      - name: Rename AppImage
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          APPIMAGE_PATH="$(ls -1 ./*.AppImage | head -n 1)"
+          mv "$APPIMAGE_PATH" "stable-retro-integration-${VERSION}-x86_64.AppImage"
+
+      - name: Upload AppImage artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: integration-appimage
+          path: stable-retro-integration-*-x86_64.AppImage
+
+      - name: Attach AppImage to GitHub Release
+        if: github.event_name == 'release' && github.event.action == 'published'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: stable-retro-integration-*-x86_64.AppImage
+
   build_sdist:
     name: Build source distribution
     runs-on: ubuntu-latest

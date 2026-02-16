@@ -30,6 +30,8 @@ There are a few possible action spaces included with {class}`stable_retro.RetroE
 
 You can also create your own action spaces derived from these.  For an example, see [discretizer.py](https://github.com/farama-foundation/stable-retro/blob/master/stable_retro/examples/discretizer.py).  This file shows how to use `stable_retro.Actions.Discrete` as well as how to make a custom wrapper that reduces the action space from `126` actions to `7`
 
+If you are integrating a new game and need to understand or customize action filtering (including the `scenario.json` `actions` format), see {ref}`filtered-actions`.
+
 ## Observations
 
 The default observations are RGB images of the game, but you can view RAM values instead (often much smaller than the RGB images and also your agent can observe the game state more directly).  If you want variable values, any variables defined in `data.json` will appear in the `info` dict after each step.

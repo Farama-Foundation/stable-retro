@@ -54,7 +54,7 @@ jobs:
 
   build_integration_linux:
     name: Build Linux integration AppImage
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'release' && github.event.action == 'published')
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' || (github.event_name == 'release' && github.event.action == 'published')
     runs-on: ubuntu-20.04
     permissions:
       contents: write

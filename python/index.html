@@ -292,7 +292,7 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="stable_retro.make">
 <span class="sig-prename descclassname"><span class="pre">stable_retro.</span></span><span class="sig-name descname"><span class="pre">make</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">State.DEFAULT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inttype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">stable_retro.data.Integrations.DEFAULT</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stable_retro/#make"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stable_retro.make" title="Link to this definition">¶</a></dt>
-<dd><p>Create a Gym environment for the specified game</p>
+<dd><p>Create and return a <code class="docutils literal notranslate"><span class="pre">RetroEnv</span></code> for the requested game and options.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -300,6 +300,7 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">stable_retro.</span></span><span class="sig-name descname"><span class="pre">RetroEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.State.DEFAULT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_restricted_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.Actions.FILTERED</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inttype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.data.Integrations.STABLE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.Observations.IMAGE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'human'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stable_retro/retro_env/#RetroEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stable_retro.RetroEnv" title="Link to this definition">¶</a></dt>
 <dd><p>Gym Retro environment class</p>
 <p>Provides a Gym interface to classic video games</p>
+<p>Initialize a Retro environment for a specific game/state configuration.</p>
 </dd></dl>
 
 <p>If you want to specify either the default state named in the game integration’s <code class="docutils literal notranslate"><span class="pre">metadata.json</span></code> or specify that you want to start from the initial power on state of the console, you can use the <a class="reference internal" href="#stable_retro.State" title="stable_retro.State"><code class="xref py py-class docutils literal notranslate"><span class="pre">stable_retro.State</span></code></a> enum:</p>
@@ -646,7 +647,7 @@ also specify a string that is the name of the <code class="docutils literal notr
         })()
       </script>
 
-    <script src="../_static/documentation_options.js?v=a1b4d576"></script>
+    <script src="../_static/documentation_options.js?v=3596a5a1"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=7660844c"></script>

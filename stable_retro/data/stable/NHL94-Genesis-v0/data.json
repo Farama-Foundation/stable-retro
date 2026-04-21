@@ -16,6 +16,18 @@
       "address": 16757470,
       "type": ">i2"
     },
+    "g1_anim": {
+      "address": 16757538,
+      "type": ">u2"
+    },
+    "g1_anim_frame": {
+      "address": 16757540,
+      "type": ">u2"
+    },
+    "g1_state_flags": {
+      "address": 16757550,
+      "type": "|u1"
+    },
     "g2_x": {
       "address": 16758218,
       "type": ">i2"
@@ -24,8 +36,32 @@
       "address": 16758238,
       "type": ">i2"
     },
+    "g2_anim": {
+      "address": 16758306,
+      "type": ">u2"
+    },
+    "g2_anim_frame": {
+      "address": 16758308,
+      "type": ">u2"
+    },
+    "g2_state_flags": {
+      "address": 16758318,
+      "type": "|u1"
+    },
     "p1_2_ori": {
       "address": 16757023,
+      "type": "|u1"
+    },
+    "p1_2_anim": {
+      "address": 16757026,
+      "type": ">u2"
+    },
+    "p1_2_anim_frame": {
+      "address": 16757028,
+      "type": ">u2"
+    },
+    "p1_2_state_flags": {
+      "address": 16757038,
       "type": "|u1"
     },
     "p1_2_vel_x": {
@@ -48,6 +84,18 @@
       "address": 16757151,
       "type": "|u1"
     },
+    "p1_3_anim": {
+      "address": 16757154,
+      "type": ">u2"
+    },
+    "p1_3_anim_frame": {
+      "address": 16757156,
+      "type": ">u2"
+    },
+    "p1_3_state_flags": {
+      "address": 16757166,
+      "type": "|u1"
+    },
     "p1_3_vel_x": {
       "address": 16757106,
       "type": "|i1"
@@ -68,6 +116,18 @@
       "address": 16757279,
       "type": "|u1"
     },
+    "p1_4_anim": {
+      "address": 16757282,
+      "type": ">u2"
+    },
+    "p1_4_anim_frame": {
+      "address": 16757284,
+      "type": ">u2"
+    },
+    "p1_4_state_flags": {
+      "address": 16757294,
+      "type": "|u1"
+    },
     "p1_4_vel_x": {
       "address": 16757234,
       "type": "|i1"
@@ -86,6 +146,18 @@
     },
     "p1_5_ori": {
       "address": 16757407,
+      "type": "|u1"
+    },
+    "p1_5_anim": {
+      "address": 16757410,
+      "type": ">u2"
+    },
+    "p1_5_anim_frame": {
+      "address": 16757412,
+      "type": ">u2"
+    },
+    "p1_5_state_flags": {
+      "address": 16757422,
       "type": "|u1"
     },
     "p1_5_vel_x": {
@@ -132,6 +204,22 @@
       "address": 16756895,
       "type": "|u1"
     },
+    "p1_anim": {
+      "address": 16756898,
+      "type": ">u2"
+    },
+    "p1_anim_frame": {
+      "address": 16756900,
+      "type": ">u2"
+    },
+    "p1_state_flags": {
+      "address": 16756910,
+      "type": "|u1"
+    },
+    "p1_pass_attempts": {
+      "address": 16762592,
+      "type": ">u2"
+    },
     "p1_passing": {
       "address": 16762594,
       "type": ">u2"
@@ -164,6 +252,18 @@
       "address": 16757791,
       "type": "|u1"
     },
+    "p2_2_anim": {
+      "address": 16757794,
+      "type": ">u2"
+    },
+    "p2_2_anim_frame": {
+      "address": 16757796,
+      "type": ">u2"
+    },
+    "p2_2_state_flags": {
+      "address": 16757806,
+      "type": "|u1"
+    },
     "p2_2_vel_x": {
       "address": 16757746,
       "type": "|i1"
@@ -182,6 +282,18 @@
     },
     "p2_3_ori": {
       "address": 16757919,
+      "type": "|u1"
+    },
+    "p2_3_anim": {
+      "address": 16757922,
+      "type": ">u2"
+    },
+    "p2_3_anim_frame": {
+      "address": 16757924,
+      "type": ">u2"
+    },
+    "p2_3_state_flags": {
+      "address": 16757934,
       "type": "|u1"
     },
     "p2_3_vel_x": {
@@ -204,6 +316,18 @@
       "address": 16758047,
       "type": "|u1"
     },
+    "p2_4_anim": {
+      "address": 16758050,
+      "type": ">u2"
+    },
+    "p2_4_anim_frame": {
+      "address": 16758052,
+      "type": ">u2"
+    },
+    "p2_4_state_flags": {
+      "address": 16758062,
+      "type": "|u1"
+    },
     "p2_4_vel_x": {
       "address": 16758002,
       "type": "|i1"
@@ -222,6 +346,18 @@
     },
     "p2_5_ori": {
       "address": 16758175,
+      "type": "|u1"
+    },
+    "p2_5_anim": {
+      "address": 16758178,
+      "type": ">u2"
+    },
+    "p2_5_anim_frame": {
+      "address": 16758180,
+      "type": ">u2"
+    },
+    "p2_5_state_flags": {
+      "address": 16758190,
       "type": "|u1"
     },
     "p2_5_vel_x": {
@@ -268,6 +404,22 @@
       "address": 16757663,
       "type": "|u1"
     },
+    "p2_anim": {
+      "address": 16757666,
+      "type": ">u2"
+    },
+    "p2_anim_frame": {
+      "address": 16757668,
+      "type": ">u2"
+    },
+    "p2_state_flags": {
+      "address": 16757678,
+      "type": "|u1"
+    },
+    "p2_pass_attempts": {
+      "address": 16763460,
+      "type": ">u2"
+    },
     "p2_passing": {
       "address": 16763462,
       "type": ">u2"
@@ -300,12 +452,20 @@
       "address": 16761958,
       "type": ">u2"
     },
+    "puck_owner": {
+      "address": 16758698,
+      "type": ">i2"
+    },
     "puck_vel_x": {
       "address": 16758642,
       "type": "|i1"
     },
     "puck_vel_y": {
       "address": 16758644,
+      "type": "|i1"
+    },
+    "puck_vel_z": {
+      "address": 16758646,
       "type": "|i1"
     },
     "puck_x": {
@@ -315,7 +475,51 @@
     "puck_y": {
       "address": 16758622,
       "type": ">i2"
+      },
+      "puck_z": {
+        "address": 16758626,
+        "type": ">i2"
     },
+      "shot_player": {
+        "address": 16760536,
+        "type": ">i2"
+      },
+      "pass_dir": {
+        "address": 16760540,
+        "type": ">u2"
+      },
+      "pass_speed": {
+        "address": 16760542,
+        "type": ">u2"
+      },
+      "goalie_chk_body": {
+        "address": 16760676,
+        "type": ">i2"
+      },
+      "sflags": {
+        "address": 16761580,
+        "type": ">u2"
+      },
+      "sflags2": {
+        "address": 16761582,
+        "type": ">u2"
+      },
+      "ba_ps_flags": {
+        "address": 16761586,
+        "type": ">u2"
+      },
+      "word_ffc2f6": {
+        "address": 16761590,
+        "type": ">u2"
+      },
+      "word_ffc2f8": {
+        "address": 16761592,
+        "type": ">u2"
+      },
+      "word_ffc2fa": {
+        "address": 16761594,
+        "type": ">u2"
+      },
     "time": {
       "address": 16761958,
       "type": ">u4"

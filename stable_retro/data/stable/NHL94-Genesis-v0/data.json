@@ -1,5 +1,13 @@
 {
   "info": {
+    "camera_y": {
+      "address": 16760088,
+      "type": ">i2"
+    },
+    "camera_x": {
+      "address": 16760092,
+      "type": ">i2"
+    },
     "fullstar_x": {
       "address": 16760700,
       "type": ">i2"

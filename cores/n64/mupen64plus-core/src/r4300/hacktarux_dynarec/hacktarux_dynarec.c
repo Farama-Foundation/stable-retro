@@ -6317,13 +6317,13 @@ void gensqrt_d(void)
 #ifdef __x86_64__
    mov_xreg64_m64rel(RAX, (uint64_t *)(&reg_cop1_double[dst->f.cf.fs]));
    fld_preg64_qword(RAX);
-   fsqrt();
+   m64_emit_fsqrt();
    mov_xreg64_m64rel(RAX, (uint64_t *)(&reg_cop1_double[dst->f.cf.fd]));
    fstp_preg64_qword(RAX);
 #else
    mov_eax_memoffs32((unsigned int *)(&reg_cop1_double[dst->f.cf.fs]));
    fld_preg32_qword(EAX);
-   fsqrt();
+   m64_emit_fsqrt();
    mov_eax_memoffs32((unsigned int *)(&reg_cop1_double[dst->f.cf.fd]));
    fstp_preg32_qword(EAX);
 #endif
@@ -7301,13 +7301,13 @@ void gensqrt_s(void)
 #ifdef __x86_64__
    mov_xreg64_m64rel(RAX, (uint64_t *)(&reg_cop1_simple[dst->f.cf.fs]));
    fld_preg64_dword(RAX);
-   fsqrt();
+   m64_emit_fsqrt();
    mov_xreg64_m64rel(RAX, (uint64_t *)(&reg_cop1_simple[dst->f.cf.fd]));
    fstp_preg64_dword(RAX);
 #else
    mov_eax_memoffs32((unsigned int *)(&reg_cop1_simple[dst->f.cf.fs]));
    fld_preg32_dword(EAX);
-   fsqrt();
+   m64_emit_fsqrt();
    mov_eax_memoffs32((unsigned int *)(&reg_cop1_simple[dst->f.cf.fd]));
    fstp_preg32_dword(EAX);
 #endif

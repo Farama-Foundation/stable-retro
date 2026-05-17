@@ -113,11 +113,12 @@ setup(
     version=open(VERSION_PATH).read().strip(),
     license="MIT",
     install_requires=[
-        "gymnasium>=0.27.1",
-        "pyglet>=1.3.2,==1.*",
+        "gymnasium>=1.0.0",
+        "pyglet>=1.5.27,<2",
         "farama-notifications>=0.0.1",
+        "numpy>=1.26.0",
     ],
-    python_requires=">=3.8.0,<3.13",
+    python_requires=">=3.9.0,<3.14",
     ext_modules=[Extension("stable_retro._retro", ["CMakeLists.txt", "src/*.cpp"])],
     cmdclass={"build_ext": CMakeBuild},
     packages=[

@@ -1650,7 +1650,8 @@ static INLINE void fchs(void)
 }
 
 
-static INLINE void fsqrt(void)
+/* Renamed from fsqrt: glibc/mathcalls-narrow.h defines fsqrt() on GCC 15+ */
+static INLINE void m64_emit_fsqrt(void)
 {
    put8(0xD9);
    put8(0xFA);

@@ -42,7 +42,7 @@
 
 #include "zipint.h"
 
-#if defined(__APPLE__) || defined(__SWITCH__)
+#if defined(__APPLE__) || defined(__SWITCH__) || defined(__linux__)
 #include <unistd.h>
 #endif
 

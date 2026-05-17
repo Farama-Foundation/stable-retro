@@ -9,8 +9,9 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 file(GLOB SRC *.cpp)
 
 set(RETRO_EXTRA)
-# Temporarily disable CapnProto until we upgrade it to a newer version
-# if(CapnProto_FOUND) list(APPEND RETRO_EXTRA retro-capnp) endif()
+if(CAPN_PROTO_FOUND)
+  list(APPEND RETRO_EXTRA retro-capnp)
+endif()
 
 get_target_property(QT_TYPE Qt5::Core TYPE)
 

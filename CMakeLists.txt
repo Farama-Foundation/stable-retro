@@ -90,6 +90,9 @@ find_package(PkgConfig)
 if(NOT BUILD_MANYLINUX)
   # CapnProto requires a newer kernel than manylinux1 provides
   find_package(CapnProto QUIET)
+  if(CapnProto_FOUND)
+    set(CAPN_PROTO_FOUND ON)
+  endif()
 endif()
 
 pkg_search_module(LIBZIP QUIET libzip)
@@ -317,8 +320,6 @@ if(NOT CAPN_PROTO_FOUND AND NOT BUILD_MANYLINUX)
     add_subdirectory(third-party/capnproto/c++)
   endif()
 endif()
-
-set(CAPN_PROTO_FOUND OFF)
 
 if(CAPN_PROTO_FOUND)
   add_definitions(-DUSE_CAPNP)

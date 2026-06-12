@@ -1,4 +1,4 @@
-# pip requirements for cpython 3.6
+# pip requirements for certifi and auditwheel
 # NOTE: certifi has GPG signatures; could download and verify independently.
 certifi==2022.12.7 \
     --hash=sha256:35824b4c3a97115964b408844d64aa14db1cc518f6562e8d7261699d1350a9e3 \

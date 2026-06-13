@@ -30,9 +30,9 @@ A fork of [gym-retro](https://github.com/openai/retro) ('lets you turn classic v
 | PC Engine | ✓ | ✓ | ✓ |
 | Arcade Machines | ✓ | ✓ | — |
 
-* On Apple Silicon (arm64), Gambatte (GB) is skipped by default in the CMake build.
-† Built by default when BUILD_N64=ON and OpenGL headers are available. If headers are missing, the build skips the N64 core.
-‡ Only available when hardware rendering is enabled (ENABLE_HW_RENDER=ON). Hardware rendering support is currently Linux-only in this project.
+*    * On Apple Silicon (arm64), Gambatte (GB) is skipped by default in the CMake build.
+*    † Built by default when BUILD_N64=ON and OpenGL headers are available. If headers are missing, the build skips the N64 core.
+*    ‡ Only available when hardware rendering is enabled (ENABLE_HW_RENDER=ON). Hardware rendering support is currently Linux-only in this project.
 
 ## Supported Games
 

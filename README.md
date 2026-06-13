@@ -30,6 +30,12 @@ A fork of [gym-retro](https://github.com/openai/retro) ('lets you turn classic v
 | PC Engine | ✓ | ✓ | ✓ |
 | Arcade Machines | ✓ | ✓ | — |
 
+\* On Apple Silicon (arm64), Gambatte (GB) is skipped by default in the CMake build.
+
+† Built by default when BUILD_N64=ON and OpenGL headers are available. If headers are missing, the build skips the N64 core.
+
+‡ Only available when hardware rendering is enabled (ENABLE_HW_RENDER=ON). Hardware rendering support is currently Linux-only in this project.
+
 ## Supported Games
 
 Currently over 1000 games are integrated including:
@@ -73,7 +79,6 @@ For platform-specific instructions including building from source, optional core
 
 'Nature CNN' model trained using PPO on Airstriker-Genesis env (rom already included in the repo)
 
-Tested on Ubuntu 20.04 and Windows 11 WSL2 (Ubuntu 20.04 VM)
 ```
 sudo apt-get update
 sudo apt-get install python3 python3-pip git zlib1g-dev libopenmpi-dev ffmpeg
@@ -137,7 +142,7 @@ Feel free to reach out to the above Discord for any issues/suggestions/discussio
 Platforms:
 - Windows 10, 11 (via WSL2)
 - macOS 10.13 (High Sierra), 10.14 (Mojave)
-- Linux (manylinux1). Ubuntu 22.04 is recommended
+- Linux (manylinux1). Ubuntu 24.04 is recommended
 
 CPU with `SSE3` or better
 

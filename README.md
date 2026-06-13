@@ -133,9 +133,7 @@ The following non-commercial Sega Genesis ROM is included with Stable Retro for 
 
 [See CONTRIBUTING.md](https://github.com/Farama-Foundation/stable-retro/blob/master/CONTRIBUTING.md)
 
-There is an effort to get this project to the [Farama Foundation Project Standards](https://farama.org/project_standards). These development efforts are being coordinated in the `stable-retro` channel of the Farama Foundation's Discord. Click [here](https://discord.gg/aPjhD5cf) for the invite
-
-Feel free to reach out to the above Discord for any issues/suggestions/discussions related to stable-retro
+For any issues, suggestions, or discussions related to Stable-Retro, please use [GitHub Issues](https://github.com/Farama-Foundation/stable-retro/issues) or the Farama Foundation's [Discord](https://discord.gg/aPjhD5cf).
 
 ## Supported specs:
 

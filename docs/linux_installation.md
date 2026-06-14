@@ -4,7 +4,7 @@ This guide covers installing Stable Retro on Linux distributions.
 
 ## Requirements
 
-- Python 3.8 to 3.12
+- Python 3.10 to 3.14
 - Linux (manylinux1 compatible)
 - CPU with SSE3 or better
 - Ubuntu 22.04 is recommended
@@ -155,7 +155,7 @@ env.close()
 
 ### Common Issues
 
-- **Import errors**: Ensure you have the correct Python version (3.8-3.12)
+- **Import errors**: Ensure you have the correct Python version (3.10-3.14)
 - **Missing shared libraries**: Install the required system dependencies listed above
 - **Permission errors**: You may need to use `pip3 install --user` or a virtual environment
 - **32-bit systems**: Not supported due to compatibility issues with some cores

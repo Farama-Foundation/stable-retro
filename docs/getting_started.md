@@ -1,6 +1,6 @@
 # Getting Started
 
-Stable Retro requires Python 3.8 through 3.12. Please make sure to install the appropriate distribution for your OS beforehand. Please note that due to compatibility issues with some of the cores, 32-bit operating systems are not supported.
+Stable Retro requires Python 3.10 through 3.14. Please make sure to install the appropriate distribution for your OS beforehand. Please note that due to compatibility issues with some of the cores, 32-bit operating systems are not supported.
 
 ```shell
 pip3 install stable-retro

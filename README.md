@@ -56,6 +56,8 @@ Currently over 1000 games are integrated including:
 
 ## Installation
 
+Stable Retro supports Python 3.10 through 3.14.
+
 ```
 pip3 install stable-retro
 ```
@@ -141,6 +143,9 @@ Platforms:
 - Windows 10, 11 (via WSL2)
 - macOS 10.13 (High Sierra), 10.14 (Mojave)
 - Linux (manylinux1). Ubuntu 24.04 is recommended
+
+Python:
+- Python 3.10 through 3.14
 
 CPU with `SSE3` or better
 

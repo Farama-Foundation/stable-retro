@@ -4,7 +4,7 @@ This guide covers installing Stable Retro on macOS, including both Intel and App
 
 ## Requirements
 
-- Python 3.8 to 3.12
+- Python 3.10 to 3.14
 - macOS 10.13 (High Sierra) or later
 
 ## Standard Installation
@@ -106,7 +106,7 @@ env.close()
 
 ### Common Issues
 
-- **Import errors**: Ensure you have the correct Python version (3.8-3.12)
+- **Import errors**: Ensure you have the correct Python version (3.10-3.14)
 - **Build failures on Apple Silicon**: Make sure you've set `SDKROOT` correctly
 - **Qt not found**: Verify Qt is in your PATH after running the export command
 - **Game Boy games not working on Apple Silicon**: This is expected; the gambatte core is not supported on arm64

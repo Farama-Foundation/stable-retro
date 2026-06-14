@@ -2,6 +2,9 @@
 
 #include "gtest/gtest.h"
 
+#include <algorithm>
+#include <cstdint>
+#include <cstring>
 #include <functional>
 #include <map>
 #include <memory>

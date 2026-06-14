@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 -->
         <title>macOS Installation - Stable-Retro Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=5b1a364e" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=82c8b628" />
     
     
@@ -290,7 +290,7 @@
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>Python 3.8 to 3.12</p></li>
+<li><p>Python 3.10 to 3.14</p></li>
 <li><p>macOS 10.13 (High Sierra) or later</p></li>
 </ul>
 </section>
@@ -393,7 +393,7 @@ pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </
 <section id="common-issues">
 <h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><strong>Import errors</strong>: Ensure you have the correct Python version (3.8-3.12)</p></li>
+<li><p><strong>Import errors</strong>: Ensure you have the correct Python version (3.10-3.14)</p></li>
 <li><p><strong>Build failures on Apple Silicon</strong>: Make sure you’ve set <code class="docutils literal notranslate"><span class="pre">SDKROOT</span></code> correctly</p></li>
 <li><p><strong>Qt not found</strong>: Verify Qt is in your PATH after running the export command</p></li>
 <li><p><strong>Game Boy games not working on Apple Silicon</strong>: This is expected; the gambatte core is not supported on arm64</p></li>
@@ -636,14 +636,6 @@ pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </
         const jsonResponse = xhr.response;
         const sections = {
           "Core Projects": [],
-          "Mature Projects": {
-            "Documentation": [],
-            "Repositories": [],
-          },
-          "Incubating Projects": {
-            "Documentation": [],
-            "Repositories": [],
-          },
           "Foundation": [
             {
               name: "About",
@@ -657,7 +649,14 @@ pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </
               name: "Donate",
               link: "https://farama.org/donations"
             }
-          ]
+          ],
+          "Mature Projects": {
+            "Documentation": [],
+          },
+          "Incubating Projects": {
+            "Documentation": [],
+            "Repositories": [],
+          }
         }
 
         // Categorize projects
@@ -673,8 +672,6 @@ pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </
           } else if (projectJson.type == "mature") {
             if (projectJson.website !== null) {
               sections["Mature Projects"]["Documentation"].push(projectJson)
-            } else {
-              sections["Mature Projects"]["Repositories"].push(projectJson)
             }
           } else {
             if (projectJson.website !== null) {
@@ -686,6 +683,13 @@ pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </
         })
 
         const menuContainer = document.querySelector(".farama-header-menu__body");
+
+        const stackedColumnElem = Object.assign(
+          document.createElement('div'), {
+            style: 'display: flex; flex-direction: column;'
+          }
+        );
+        const stackedKeys = new Set(["Core Projects", "Foundation"]);
 
         Object.keys(sections).forEach((key, i) => {
           const sectionElem = Object.assign(
@@ -730,7 +734,14 @@ pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </
             const ulElem = createProjectsList(projects, true);
             sectionElem.appendChild(ulElem);
           }
-          menuContainer.appendChild(sectionElem)
+          if (stackedKeys.has(key)) {
+            if (!stackedColumnElem.parentNode) {
+              menuContainer.appendChild(stackedColumnElem);
+            }
+            stackedColumnElem.appendChild(sectionElem);
+          } else {
+            menuContainer.appendChild(sectionElem);
+          }
         });
       }
 

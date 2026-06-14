@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2023.08.19.dev1 -->
         <title>Linux Installation - Stable-Retro Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=3e7f4c72" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=5b1a364e" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=82c8b628" />
     
     
@@ -290,7 +290,7 @@
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>Python 3.8 to 3.12</p></li>
+<li><p>Python 3.10 to 3.14</p></li>
 <li><p>Linux (manylinux1 compatible)</p></li>
 <li><p>CPU with SSE3 or better</p></li>
 <li><p>Ubuntu 22.04 is recommended</p></li>
@@ -422,7 +422,7 @@ make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</s
 <section id="common-issues">
 <h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><strong>Import errors</strong>: Ensure you have the correct Python version (3.8-3.12)</p></li>
+<li><p><strong>Import errors</strong>: Ensure you have the correct Python version (3.10-3.14)</p></li>
 <li><p><strong>Missing shared libraries</strong>: Install the required system dependencies listed above</p></li>
 <li><p><strong>Permission errors</strong>: You may need to use <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--user</span></code> or a virtual environment</p></li>
 <li><p><strong>32-bit systems</strong>: Not supported due to compatibility issues with some cores</p></li>
@@ -683,14 +683,6 @@ pip<span class="w"> </span>install<span class="w"> </span>stable-retro
         const jsonResponse = xhr.response;
         const sections = {
           "Core Projects": [],
-          "Mature Projects": {
-            "Documentation": [],
-            "Repositories": [],
-          },
-          "Incubating Projects": {
-            "Documentation": [],
-            "Repositories": [],
-          },
           "Foundation": [
             {
               name: "About",
@@ -704,7 +696,14 @@ pip<span class="w"> </span>install<span class="w"> </span>stable-retro
               name: "Donate",
               link: "https://farama.org/donations"
             }
-          ]
+          ],
+          "Mature Projects": {
+            "Documentation": [],
+          },
+          "Incubating Projects": {
+            "Documentation": [],
+            "Repositories": [],
+          }
         }
 
         // Categorize projects
@@ -720,8 +719,6 @@ pip<span class="w"> </span>install<span class="w"> </span>stable-retro
           } else if (projectJson.type == "mature") {
             if (projectJson.website !== null) {
               sections["Mature Projects"]["Documentation"].push(projectJson)
-            } else {
-              sections["Mature Projects"]["Repositories"].push(projectJson)
             }
           } else {
             if (projectJson.website !== null) {
@@ -733,6 +730,13 @@ pip<span class="w"> </span>install<span class="w"> </span>stable-retro
         })
 
         const menuContainer = document.querySelector(".farama-header-menu__body");
+
+        const stackedColumnElem = Object.assign(
+          document.createElement('div'), {
+            style: 'display: flex; flex-direction: column;'
+          }
+        );
+        const stackedKeys = new Set(["Core Projects", "Foundation"]);
 
         Object.keys(sections).forEach((key, i) => {
           const sectionElem = Object.assign(
@@ -777,7 +781,14 @@ pip<span class="w"> </span>install<span class="w"> </span>stable-retro
             const ulElem = createProjectsList(projects, true);
             sectionElem.appendChild(ulElem);
           }
-          menuContainer.appendChild(sectionElem)
+          if (stackedKeys.has(key)) {
+            if (!stackedColumnElem.parentNode) {
+              menuContainer.appendChild(stackedColumnElem);
+            }
+            stackedColumnElem.appendChild(sectionElem);
+          } else {
+            menuContainer.appendChild(sectionElem);
+          }
         });
       }
 

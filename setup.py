@@ -7,6 +7,7 @@ import sysconfig
 from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext
 
+
 class CMakeBuild(build_ext):
     def run(self):
         suffix = super().get_ext_filename("")

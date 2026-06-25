@@ -1,5 +1,38 @@
 [build-system]
-requires = ["cmake>=3.2.0", "setuptools", "wheel", "build"]
+requires = ["cmake>=3.2.0", "setuptools>=77.0.0", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stable-retro"
+description = "A maintained fork of OpenAI's gym-retro for Gymnasium."
+readme = "README.md"
+requires-python = ">=3.10.0,<3.15"
+authors = [{ name = "Farama Foundation", email = "contact@farama.org" }]
+license = "MIT"
+license-files = ["LICENSE", "LICENSES.md"]
+classifiers = [
+	"Programming Language :: Python :: 3",
+	"Programming Language :: Python :: 3.10",
+	"Programming Language :: Python :: 3.11",
+	"Programming Language :: Python :: 3.12",
+	"Programming Language :: Python :: 3.13",
+	"Programming Language :: Python :: 3.14",
+]
+dependencies = [
+	"gymnasium>=1.0.0",
+	"pyglet>=1.5.27,<2",
+	"farama-notifications>=0.0.1",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/Farama-Foundation/stable-retro"
+Repository = "https://github.com/Farama-Foundation/stable-retro"
+Documentation = "https://stable-retro.farama.org/"
+"Bug Report" = "https://github.com/Farama-Foundation/stable-retro/issues"
+
+[tool.setuptools.dynamic]
+version = { file = ["stable_retro/VERSION.txt"] }
 
 [tool.cibuildwheel]
 # We need to build for the following Python versions:

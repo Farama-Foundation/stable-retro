@@ -36,6 +36,46 @@
       "address": 16757038,
       "type": "|u1"
     },
+    "g1_goalie_weight": {
+      "address": 16757041,
+      "type": "|u1"
+    },
+    "g1_goalie_agility": {
+      "address": 16757042,
+      "type": "|u1"
+    },
+    "g1_goalie_speed": {
+      "address": 16757043,
+      "type": "|u1"
+    },
+    "g1_goalie_puck_control": {
+      "address": 16757046,
+      "type": "|u1"
+    },
+    "g1_goalie_passing": {
+      "address": 16757048,
+      "type": "|u1"
+    },
+    "g1_goalie_glove_right": {
+      "address": 16757048,
+      "type": "|u1"
+    },
+    "g1_goalie_stick_left": {
+      "address": 16757050,
+      "type": "|u1"
+    },
+    "g1_goalie_stick_right": {
+      "address": 16757052,
+      "type": "|u1"
+    },
+    "g1_goalie_endurance": {
+      "address": 16757052,
+      "type": "|u1"
+    },
+    "g1_goalie_glove_left": {
+      "address": 16757053,
+      "type": "|u1"
+    },
     "g2_x": {
       "address": 16757706,
       "type": ">i2"
@@ -54,6 +94,46 @@
     },
     "g2_state_flags": {
       "address": 16757806,
+      "type": "|u1"
+    },
+    "g2_goalie_weight": {
+      "address": 16757809,
+      "type": "|u1"
+    },
+    "g2_goalie_agility": {
+      "address": 16757810,
+      "type": "|u1"
+    },
+    "g2_goalie_speed": {
+      "address": 16757811,
+      "type": "|u1"
+    },
+    "g2_goalie_puck_control": {
+      "address": 16757814,
+      "type": "|u1"
+    },
+    "g2_goalie_passing": {
+      "address": 16757816,
+      "type": "|u1"
+    },
+    "g2_goalie_glove_right": {
+      "address": 16757816,
+      "type": "|u1"
+    },
+    "g2_goalie_stick_left": {
+      "address": 16757818,
+      "type": "|u1"
+    },
+    "g2_goalie_stick_right": {
+      "address": 16757820,
+      "type": "|u1"
+    },
+    "g2_goalie_endurance": {
+      "address": 16757820,
+      "type": "|u1"
+    },
+    "g2_goalie_glove_left": {
+      "address": 16757821,
       "type": "|u1"
     },
     "p1_attackzone": {

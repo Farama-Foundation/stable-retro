@@ -20,12 +20,32 @@ g1_y - Team 1 goalie Y position.
 g1_anim - Team 1 goalie current animation id.
 g1_anim_frame - Team 1 goalie current animation frame.
 g1_state_flags - Team 1 goalie internal state flags.
+g1_goalie_glove_left - Team 1 current goalie glove-left rating from the loaded player struct.
+g1_goalie_glove_right - Team 1 current goalie glove-right rating from the loaded player struct.
+g1_goalie_stick_left - Team 1 current goalie stick-left rating from the loaded player struct.
+g1_goalie_stick_right - Team 1 current goalie stick-right rating from the loaded player struct.
+g1_goalie_puck_control - Team 1 current goalie puck-control rating from the loaded player struct.
+g1_goalie_agility - Team 1 current goalie agility rating from the loaded player struct.
+g1_goalie_speed - Team 1 current goalie speed rating from the loaded player struct.
+g1_goalie_passing - Team 1 current goalie passing rating from the loaded player struct.
+g1_goalie_endurance - Team 1 current goalie endurance rating from the loaded player struct.
+g1_goalie_weight - Team 1 current goalie weight component from the loaded player struct.
 
 g2_x - Team 2 goalie X position.
 g2_y - Team 2 goalie Y position.
 g2_anim - Team 2 goalie current animation id.
 g2_anim_frame - Team 2 goalie current animation frame.
 g2_state_flags - Team 2 goalie internal state flags.
+g2_goalie_glove_left - Team 2 current goalie glove-left rating from the loaded player struct.
+g2_goalie_glove_right - Team 2 current goalie glove-right rating from the loaded player struct.
+g2_goalie_stick_left - Team 2 current goalie stick-left rating from the loaded player struct.
+g2_goalie_stick_right - Team 2 current goalie stick-right rating from the loaded player struct.
+g2_goalie_puck_control - Team 2 current goalie puck-control rating from the loaded player struct.
+g2_goalie_agility - Team 2 current goalie agility rating from the loaded player struct.
+g2_goalie_speed - Team 2 current goalie speed rating from the loaded player struct.
+g2_goalie_passing - Team 2 current goalie passing rating from the loaded player struct.
+g2_goalie_endurance - Team 2 current goalie endurance rating from the loaded player struct.
+g2_goalie_weight - Team 2 current goalie weight component from the loaded player struct.
 
 p1_x - Team 1 skater slot 1 X position.
 p1_y - Team 1 skater slot 1 Y position.
@@ -157,3 +177,5 @@ Address alias notes
 - period and time share the same base address in this manifest, so they are two views of the same clock block.
 - p2_faceoffwon and p2_score currently point at the same address in this manifest. If one of those looks wrong in practice, verify the RAM map.
 - fullstar_y and p2_fullstar_y currently point at the same address in this manifest.
+- g1_goalie_passing/g1_goalie_glove_right and g2_goalie_passing/g2_goalie_glove_right currently point at the same loaded player-struct byte. The ROM uses that byte for goalie glove-right saves and also names the corresponding generic player field as pass accuracy.
+- g1_goalie_endurance/g1_goalie_stick_right and g2_goalie_endurance/g2_goalie_stick_right currently point at the same loaded player-struct byte. The ROM uses that byte for goalie stick-right saves and also names the corresponding generic player field as endurance.

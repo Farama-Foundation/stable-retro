@@ -1,4 +1,4 @@
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://pre-commit.com/) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Python](https://img.shields.io/pypi/pyversions/stable-retro.svg)](https://pypi.org/project/stable-retro/) [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://pre-commit.com/) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 <p align="center">
     <a href="https://gymnasium.farama.org/" target = "_blank">
@@ -30,6 +30,12 @@ A fork of [gym-retro](https://github.com/openai/retro) ('lets you turn classic v
 | PC Engine | ✓ | ✓ | ✓ |
 | Arcade Machines | ✓ | ✓ | — |
 
+\* On Apple Silicon (arm64), Gambatte (GB) is skipped by default in the CMake build.
+
+† Built by default when BUILD_N64=ON and OpenGL headers are available. If headers are missing, the build skips the N64 core.
+
+‡ Only available when hardware rendering is enabled (ENABLE_HW_RENDER=ON). Hardware rendering support is currently Linux-only in this project.
+
 ## Supported Games
 
 Currently over 1000 games are integrated including:
@@ -49,6 +55,8 @@ Currently over 1000 games are integrated including:
 
 
 ## Installation
+
+Stable Retro supports Python 3.10 through 3.14.
 
 ```
 pip3 install stable-retro
@@ -73,7 +81,6 @@ For platform-specific instructions including building from source, optional core
 
 'Nature CNN' model trained using PPO on Airstriker-Genesis env (rom already included in the repo)
 
-Tested on Ubuntu 20.04 and Windows 11 WSL2 (Ubuntu 20.04 VM)
 ```
 sudo apt-get update
 sudo apt-get install python3 python3-pip git zlib1g-dev libopenmpi-dev ffmpeg
@@ -128,20 +135,19 @@ The following non-commercial Sega Genesis ROM is included with Stable Retro for 
 
 [See CONTRIBUTING.md](https://github.com/Farama-Foundation/stable-retro/blob/master/CONTRIBUTING.md)
 
-There is an effort to get this project to the [Farama Foundation Project Standards](https://farama.org/project_standards). These development efforts are being coordinated in the `stable-retro` channel of the Farama Foundation's Discord. Click [here](https://discord.gg/aPjhD5cf) for the invite
-
-Feel free to reach out to the above Discord for any issues/suggestions/discussions related to stable-retro
+For any issues, suggestions, or discussions related to Stable-Retro, please use [GitHub Issues](https://github.com/Farama-Foundation/stable-retro/issues) or the Farama Foundation's [Discord](https://discord.gg/aPjhD5cf).
 
 ## Supported specs:
 
 Platforms:
 - Windows 10, 11 (via WSL2)
 - macOS 10.13 (High Sierra), 10.14 (Mojave)
-- Linux (manylinux1). Ubuntu 22.04 is recommended
+- Linux (manylinux1). Ubuntu 24.04 is recommended
+
+Python:
+- Python 3.10 through 3.14
 
 CPU with `SSE3` or better
-
-Supported Pythons: 3.7 to 3.12
 
 ## Citation
 
@@ -165,3 +171,5 @@ List of papers mentioning stable-retro. If you want your paper to be added here 
 *	[IPR-1: Interactive Physical Reasoner](https://arxiv.org/html/2511.15407v1)
 *	[SAFE-SMART: Safety Analysis and Formal Evaluation using STL Metrics for Autonomous RoboTs](https://arxiv.org/html/2511.17781v1)
 *	[General Modular Harness for LLM Agents in Multi-Turn Gaming Environments](https://arxiv.org/abs/2507.11633v1)
+*	[ReactiveGWM: Steering NPC in Reactive Game World Models](https://arxiv.org/pdf/2605.15256)
+*	[Dissecting Discrete Soft Actor-Critic: Limitations and Principled Alternatives](https://arxiv.org/pdf/2509.09838)

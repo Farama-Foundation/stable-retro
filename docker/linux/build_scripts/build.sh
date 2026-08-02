@@ -122,7 +122,7 @@ build_cpythons $CPYTHON_VERSIONS
 PY36_BIN=/opt/python/cp36-cp36m/bin
 
 # Install certifi and auditwheel
-$PY36_BIN/pip install --require-hashes -r $MY_DIR/py36-requirements.txt
+$PY36_BIN/pip install --require-hashes -r $MY_DIR/build-requirements.txt
 
 # Our openssl doesn't know how to find the system CA trust store
 #   (https://github.com/pypa/manylinux/issues/53)

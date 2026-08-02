@@ -1,0 +1,159 @@
+NHL94 data.json notes
+
+Conventions
+- p1 / p2 = team 1 / team 2 skater slots.
+- g1 / g2 = team 1 / team 2 goalies.
+- x, y, z = position coordinates; vel_x, vel_y, vel_z = velocity components.
+- ori = facing direction code.
+- anim = current animation id.
+- anim_frame = current frame inside the current animation.
+- state_flags = internal player state bitfield.
+- fullstar / emptystar = on-rink control markers used by the game UI.
+- Some engine words are internal ROM flags, so their descriptions are best-effort.
+
+Entries
+fullstar_x - X position of the filled star marker used to show the puck carrier.
+fullstar_y - Y position of the filled star marker used to show the puck carrier.
+
+g1_x - Team 1 goalie X position.
+g1_y - Team 1 goalie Y position.
+g1_anim - Team 1 goalie current animation id.
+g1_anim_frame - Team 1 goalie current animation frame.
+g1_state_flags - Team 1 goalie internal state flags.
+
+g2_x - Team 2 goalie X position.
+g2_y - Team 2 goalie Y position.
+g2_anim - Team 2 goalie current animation id.
+g2_anim_frame - Team 2 goalie current animation frame.
+g2_state_flags - Team 2 goalie internal state flags.
+
+p1_x - Team 1 skater slot 1 X position.
+p1_y - Team 1 skater slot 1 Y position.
+p1_vel_x - Team 1 skater slot 1 X velocity.
+p1_vel_y - Team 1 skater slot 1 Y velocity.
+p1_ori - Team 1 skater slot 1 facing direction code.
+p1_anim - Team 1 skater slot 1 current animation id.
+p1_anim_frame - Team 1 skater slot 1 current animation frame.
+p1_state_flags - Team 1 skater slot 1 internal state flags.
+p1_2_x - Team 1 skater slot 2 X position.
+p1_2_y - Team 1 skater slot 2 Y position.
+p1_2_vel_x - Team 1 skater slot 2 X velocity.
+p1_2_vel_y - Team 1 skater slot 2 Y velocity.
+p1_2_ori - Team 1 skater slot 2 facing direction code.
+p1_2_anim - Team 1 skater slot 2 current animation id.
+p1_2_anim_frame - Team 1 skater slot 2 current animation frame.
+p1_2_state_flags - Team 1 skater slot 2 internal state flags.
+p1_3_x - Team 1 skater slot 3 X position.
+p1_3_y - Team 1 skater slot 3 Y position.
+p1_3_vel_x - Team 1 skater slot 3 X velocity.
+p1_3_vel_y - Team 1 skater slot 3 Y velocity.
+p1_3_ori - Team 1 skater slot 3 facing direction code.
+p1_3_anim - Team 1 skater slot 3 current animation id.
+p1_3_anim_frame - Team 1 skater slot 3 current animation frame.
+p1_3_state_flags - Team 1 skater slot 3 internal state flags.
+p1_4_x - Team 1 skater slot 4 X position.
+p1_4_y - Team 1 skater slot 4 Y position.
+p1_4_vel_x - Team 1 skater slot 4 X velocity.
+p1_4_vel_y - Team 1 skater slot 4 Y velocity.
+p1_4_ori - Team 1 skater slot 4 facing direction code.
+p1_4_anim - Team 1 skater slot 4 current animation id.
+p1_4_anim_frame - Team 1 skater slot 4 current animation frame.
+p1_4_state_flags - Team 1 skater slot 4 internal state flags.
+p1_5_x - Team 1 skater slot 5 X position.
+p1_5_y - Team 1 skater slot 5 Y position.
+p1_5_vel_x - Team 1 skater slot 5 X velocity.
+p1_5_vel_y - Team 1 skater slot 5 Y velocity.
+p1_5_ori - Team 1 skater slot 5 facing direction code.
+p1_5_anim - Team 1 skater slot 5 current animation id.
+p1_5_anim_frame - Team 1 skater slot 5 current animation frame.
+p1_5_state_flags - Team 1 skater slot 5 internal state flags.
+
+p1_attackzone - Team 1 attack-zone stat or counter.
+p1_bodychecks - Team 1 body check count.
+p1_emptystar_x - Team 1 empty star marker X position for the currently selected player.
+p1_emptystar_y - Team 1 empty star marker Y position for the currently selected player.
+p1_faceoffwon - Team 1 faceoffs won count.
+p1_onetimer - Team 1 one-timer stat or counter.
+p1_pass_attempts - Team 1 pass attempts count.
+p1_passing - Team 1 passing stat or completed-pass counter.
+p1_score - Team 1 score.
+p1_shots - Team 1 shots count.
+
+p2_x - Team 2 skater slot 1 X position.
+p2_y - Team 2 skater slot 1 Y position.
+p2_vel_x - Team 2 skater slot 1 X velocity.
+p2_vel_y - Team 2 skater slot 1 Y velocity.
+p2_ori - Team 2 skater slot 1 facing direction code.
+p2_anim - Team 2 skater slot 1 current animation id.
+p2_anim_frame - Team 2 skater slot 1 current animation frame.
+p2_state_flags - Team 2 skater slot 1 internal state flags.
+p2_2_x - Team 2 skater slot 2 X position.
+p2_2_y - Team 2 skater slot 2 Y position.
+p2_2_vel_x - Team 2 skater slot 2 X velocity.
+p2_2_vel_y - Team 2 skater slot 2 Y velocity.
+p2_2_ori - Team 2 skater slot 2 facing direction code.
+p2_2_anim - Team 2 skater slot 2 current animation id.
+p2_2_anim_frame - Team 2 skater slot 2 current animation frame.
+p2_2_state_flags - Team 2 skater slot 2 internal state flags.
+p2_3_x - Team 2 skater slot 3 X position.
+p2_3_y - Team 2 skater slot 3 Y position.
+p2_3_vel_x - Team 2 skater slot 3 X velocity.
+p2_3_vel_y - Team 2 skater slot 3 Y velocity.
+p2_3_ori - Team 2 skater slot 3 facing direction code.
+p2_3_anim - Team 2 skater slot 3 current animation id.
+p2_3_anim_frame - Team 2 skater slot 3 current animation frame.
+p2_3_state_flags - Team 2 skater slot 3 internal state flags.
+p2_4_x - Team 2 skater slot 4 X position.
+p2_4_y - Team 2 skater slot 4 Y position.
+p2_4_vel_x - Team 2 skater slot 4 X velocity.
+p2_4_vel_y - Team 2 skater slot 4 Y velocity.
+p2_4_ori - Team 2 skater slot 4 facing direction code.
+p2_4_anim - Team 2 skater slot 4 current animation id.
+p2_4_anim_frame - Team 2 skater slot 4 current animation frame.
+p2_4_state_flags - Team 2 skater slot 4 internal state flags.
+p2_5_x - Team 2 skater slot 5 X position.
+p2_5_y - Team 2 skater slot 5 Y position.
+p2_5_vel_x - Team 2 skater slot 5 X velocity.
+p2_5_vel_y - Team 2 skater slot 5 Y velocity.
+p2_5_ori - Team 2 skater slot 5 facing direction code.
+p2_5_anim - Team 2 skater slot 5 current animation id.
+p2_5_anim_frame - Team 2 skater slot 5 current animation frame.
+p2_5_state_flags - Team 2 skater slot 5 internal state flags.
+
+p2_attackzone - Team 2 attack-zone stat or counter.
+p2_bodychecks - Team 2 body check count.
+p2_faceoffwon - Team 2 faceoffs won count.
+p2_fullstar_x - Team 2 filled star marker X position for the puck carrier.
+p2_fullstar_y - Team 2 filled star marker Y position for the puck carrier.
+p2_onetimer - Team 2 one-timer stat or counter.
+p2_pass_attempts - Team 2 pass attempts count.
+p2_passing - Team 2 passing stat or completed-pass counter.
+p2_score - Team 2 score.
+p2_shots - Team 2 shots count.
+
+period - Period-related value read from the same clock block as time.
+time - Main game clock or timer value.
+
+puck_x - Puck X position.
+puck_y - Puck Y position.
+puck_z - Puck height above the ice.
+puck_vel_x - Puck X velocity.
+puck_vel_y - Puck Y velocity.
+puck_vel_z - Puck vertical velocity.
+puck_owner - Internal player or goalie index that currently owns the puck.
+
+shot_player - Internal player index of the most recent shooter.
+pass_dir - Current engine-selected pass or shot direction code.
+pass_speed - Current engine-selected pass or shot speed value.
+goalie_chk_body - Current goalie collision radius used by puck-goalie checks.
+sflags - Main gameplay state flags word.
+sflags2 - Secondary gameplay state flags word.
+ba_ps_flags - Breakaway, penalty-shot, or shootout context flags.
+word_ffc2f6 - Internal engine word at RAM address FFC2F6; likely shot-context related.
+word_ffc2f8 - Internal engine word at RAM address FFC2F8; used by one-timer and shot logic.
+word_ffc2fa - Internal engine word at RAM address FFC2FA; used by shot mode and special-play logic.
+
+Address alias notes
+- period and time share the same base address in this manifest, so they are two views of the same clock block.
+- p2_faceoffwon and p2_score currently point at the same address in this manifest. If one of those looks wrong in practice, verify the RAM map.
+- fullstar_y and p2_fullstar_y currently point at the same address in this manifest.

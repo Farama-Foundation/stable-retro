@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest  # todo, add more OS systems to see if they work as well
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
-          python-version: 3.9
+          python-version: '3.10'
 
       - name: Install system packages
         run: |
@@ -23,7 +23,7 @@ jobs:
 
       - name: Install pip package and build tests
         run: |
-          cmake .
+          cmake -DCMAKE_DISABLE_FIND_PACKAGE_CapnProto=TRUE .
           make -j2
           make -j2 -f tests/Makefile
 

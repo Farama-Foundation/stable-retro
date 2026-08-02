@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 1.0.1
+
+* move package metadata to `pyproject.toml` so published PyPI metadata exposes current project details correctly
+* update published Python support metadata to match current support: drop Python 3.8 and 3.9, add Python 3.13 and 3.14
+
+## 1.0.0
+
 * add `EzPickle` support for `RetroEnv` to improve compatibility with multiprocessing/vectorized RL tooling
   * pickling recreates environments from constructor arguments
   * live emulator/viewer/movie runtime handles are not serialized

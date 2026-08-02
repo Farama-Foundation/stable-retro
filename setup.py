@@ -7,14 +7,6 @@ import sysconfig
 from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext
 
-VERSION_PATH = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
-    "stable_retro/VERSION.txt",
-)
-
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-README = open(os.path.join(SCRIPT_DIR, "README.md")).read()
-
 
 class CMakeBuild(build_ext):
     def run(self):
@@ -104,20 +96,6 @@ platform_globs = [
 
 
 setup(
-    name="stable-retro",
-    long_description=README,
-    long_description_content_type="text/markdown",
-    author="Farama Foundation",
-    author_email="contact@farama.org",
-    url="https://github.com/farama-foundation/stable-retro",
-    version=open(VERSION_PATH).read().strip(),
-    license="MIT",
-    install_requires=[
-        "gymnasium>=0.27.1",
-        "pyglet>=1.3.2,==1.*",
-        "farama-notifications>=0.0.1",
-    ],
-    python_requires=">=3.8.0,<3.13",
     ext_modules=[Extension("stable_retro._retro", ["CMakeLists.txt", "src/*.cpp"])],
     cmdclass={"build_ext": CMakeBuild},
     packages=[

@@ -189,7 +189,8 @@ function(add_core platform core_name)
   endif()
 
   set(core_ldflags "-w ${STATIC_LDFLAGS}")
-  set(core_cflags "-w")
+  # Vendored cores still rely on pre-C23 function declaration semantics.
+  set(core_cflags "-w -std=gnu17")
   set(core_cxxflags "-w")
 
   if(WIN32 AND NOT CMAKE_CROSSCOMPILING)

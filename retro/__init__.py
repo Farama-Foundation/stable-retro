@@ -42,14 +42,6 @@ sys.modules["retro._retro"] = stable_retro._retro
 sys.modules["retro.enums"] = stable_retro.enums
 sys.modules["retro.retro_env"] = stable_retro.retro_env
 
-# Try to import rendering if it exists
-try:
-    import stable_retro.rendering
-
-    sys.modules["retro.rendering"] = stable_retro.rendering
-except (ImportError, AttributeError):
-    pass
-
 # Re-export commonly used items
 __version__ = _stable_retro.__version__
 __all__ = _stable_retro.__all__

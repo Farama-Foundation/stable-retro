@@ -21,7 +21,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-14]
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v7
@@ -33,7 +33,7 @@ jobs:
           platforms: all
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v4.1.0
+        uses: pypa/cibuildwheel@v4.1.1
         env:
           # Configure cibuildwheel to build native archs, and some emulated ones
           CIBW_ARCHS_LINUX: x86_64 # aarch64 - disable ARM, as it's not working for a moment
@@ -78,13 +78,13 @@ jobs:
       - name: Download wheels Ubuntu
         uses: actions/download-artifact@v8
         with:
-          name: wheels-ubuntu-22.04
+          name: wheels-ubuntu-latest
           path: dist
 
       - name: Download wheels macOS
         uses: actions/download-artifact@v8
         with:
-          name: wheels-macos-14
+          name: wheels-macos-latest
           path: dist
 
       - name: Download sdist

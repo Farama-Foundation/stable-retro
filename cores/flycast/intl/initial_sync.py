@@ -24,17 +24,18 @@ if __name__ == '__main__':
    DIR_PATH = os.path.dirname(os.path.realpath(__file__))
    YAML_PATH = os.path.join(DIR_PATH, 'crowdin.yaml')
 
-   # Apply Crowdin API Key
+   # Apply non-sensitive Crowdin config changes (core name only).
+   # Do NOT write API token into YAML; provide it via environment variable at runtime.
    with open(YAML_PATH, 'r') as crowdin_config_file:
       crowdin_config = crowdin_config_file.read()
-   crowdin_config = re.sub(r'"api_token": "_secret_"',
-                           f'"api_token": "{API_KEY}"',
-                           crowdin_config, 1)
    crowdin_config = re.sub(r'/_core_name_',
                            f'/{CORE_NAME}'
                            , crowdin_config)
    with open(YAML_PATH, 'w') as crowdin_config_file:
       crowdin_config_file.write(crowdin_config)
+
+   crowdin_env = os.environ.copy()
+   crowdin_env['CROWDIN_PERSONAL_TOKEN'] = API_KEY
 
    try:
       # Download Crowdin CLI
@@ -59,8 +60,8 @@ if __name__ == '__main__':
             shutil.rmtree(jar_dir)
 
       print('upload source & translations *.json')
-      subprocess.run(['java', '-jar', jar_path, 'upload', 'sources', '--config', YAML_PATH])
-      subprocess.run(['java', '-jar', jar_path, 'upload', 'translations', '--config', YAML_PATH])
+      subprocess.run(['java', '-jar', jar_path, 'upload', 'sources', '--config', YAML_PATH], env=crowdin_env)
+      subprocess.run(['java', '-jar', jar_path, 'upload', 'translations', '--config', YAML_PATH], env=crowdin_env)
 
       print('wait for crowdin server to process data')
       time.sleep(10)
@@ -108,12 +109,9 @@ if __name__ == '__main__':
          workflow.write(workflow_config)
 
    except Exception as e:
-      # Try really hard to reset Crowdin API Key
+      # Revert non-sensitive YAML mutation (core name placeholder).
       with open(YAML_PATH, 'r') as crowdin_config_file:
          crowdin_config = crowdin_config_file.read()
-      crowdin_config = re.sub(r'"api_token": ".*?"',
-                              '"api_token": "_secret_"',
-                              crowdin_config, 1)
 
       # TODO this is NOT safe!
       crowdin_config = re.sub(re.escape(f'/{CORE_NAME}'),

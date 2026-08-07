@@ -51,4 +51,7 @@ manylinux-x86_64-image = "manylinux_2_28"
 manylinux-aarch64-image = "manylinux_2_28"
 
 [tool.cibuildwheel.macos]
-before-all = "brew install pkg-config capnp lua@5.4 qt5"
+# Wheel builds use bundled LuaJIT, the vendored libzip fallback, and keep the
+# optional Qt integration UI disabled. Avoid Homebrew bootstrap here because
+# GitHub's macOS runners now enforce tap trust and `qt@5` is deprecated.
+before-all = "true"

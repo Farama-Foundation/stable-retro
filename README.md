@@ -173,3 +173,5 @@ List of papers mentioning stable-retro. If you want your paper to be added here 
 *	[General Modular Harness for LLM Agents in Multi-Turn Gaming Environments](https://arxiv.org/abs/2507.11633v1)
 *	[ReactiveGWM: Steering NPC in Reactive Game World Models](https://arxiv.org/pdf/2605.15256)
 *	[Dissecting Discrete Soft Actor-Critic: Limitations and Principled Alternatives](https://arxiv.org/pdf/2509.09838)
+*	[StatePlay: State-Aware Game World Models for Mechanics-Consistent Generation](https://arxiv.org/html/2607.26754v1)
+*	[FootsiesGym: A Fighting Game Benchmark for TwoPlayer Zero-Sum Imperfect-Information Games](https://arxiv.org/pdf/2607.06514)

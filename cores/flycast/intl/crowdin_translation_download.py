@@ -23,12 +23,9 @@ if __name__ == '__main__':
    DIR_PATH = t.os.path.dirname(t.os.path.realpath(__file__))
    YAML_PATH = t.os.path.join(DIR_PATH, 'crowdin.yaml')
 
-   # Apply Crowdin API Key
+   # Apply core name placeholder (do not persist API token to disk)
    with open(YAML_PATH, 'r') as crowdin_config_file:
       crowdin_config = crowdin_config_file.read()
-   crowdin_config = re.sub(r'"api_token": "_secret_"',
-                           f'"api_token": "{API_KEY}"',
-                           crowdin_config, 1)
    crowdin_config = re.sub(r'/_core_name_',
                            f'/{CORE_NAME}'
                            , crowdin_config)
@@ -58,16 +55,11 @@ if __name__ == '__main__':
             shutil.rmtree(jar_dir)
 
       print('download translation *.json')
-      subprocess.run(['java', '-jar', jar_path, 'download', '--config', YAML_PATH])
+      crowdin_env = os.environ.copy()
+      crowdin_env['CROWDIN_PERSONAL_TOKEN'] = API_KEY
+      subprocess.run(['java', '-jar', jar_path, 'download', '--config', YAML_PATH], env=crowdin_env)
 
-      # Reset Crowdin API Key
-      with open(YAML_PATH, 'r') as crowdin_config_file:
-         crowdin_config = crowdin_config_file.read()
-      crowdin_config = re.sub(r'"api_token": ".*?"',
-                              '"api_token": "_secret_"',
-                              crowdin_config, 1)
-
-      # TODO this is NOT safe!
+      # Restore core name placeholder
       crowdin_config = re.sub(re.escape(f'/{CORE_NAME}'),
                               '/_core_name_',
                               crowdin_config)
@@ -76,14 +68,10 @@ if __name__ == '__main__':
          crowdin_config_file.write(crowdin_config)
 
    except Exception as e:
-      # Try really hard to reset Crowdin API Key
+      # Try really hard to restore core name placeholder
       with open(YAML_PATH, 'r') as crowdin_config_file:
          crowdin_config = crowdin_config_file.read()
-      crowdin_config = re.sub(r'"api_token": ".*?"',
-                              '"api_token": "_secret_"',
-                              crowdin_config, 1)
 
-      # TODO this is NOT safe!
       crowdin_config = re.sub(re.escape(f'/{CORE_NAME}'),
                               '/_core_name_',
                               crowdin_config)

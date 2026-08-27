@@ -173,6 +173,81 @@ To define these, you find variables from the game's memory, such as the player's
 
 Note: if the game requires that you hit the `Start` button to play, for instance after dying, then you need to modify the scenario file to allow this as `Start` is disallowed by default.  See the `actions` key in [KidChameleon-Genesis-v0](https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/KidChameleon-Genesis-v0/scenario.json) for an example of this.
 
+(filtered-actions)=
+
+### Filtered Actions (`actions` in `scenario.json`)
+
+Stable Retro supports action filtering to prevent invalid or unwanted button combinations.
+
+By default, each emulator core provides a built-in filter (for example, preventing `UP` + `DOWN` and `LEFT` + `RIGHT` at the same time). For some systems, this default also excludes menu buttons such as `START` and `SELECT`.
+
+You can override those defaults in your game's `scenario.json` by defining an `actions` field.
+
+#### Format
+
+The shape is:
+
+- Outer list: independent action groups.
+- Middle list: allowed choices within one group.
+- Inner list: buttons pressed together for a single choice.
+
+In other words:
+
+```json
+"actions": [
+        [choice_1, choice_2, ...],
+        [choice_1, choice_2, ...],
+        ...
+]
+```
+
+Each `choice` is a list of button names, for example `[]`, `["LEFT"]`, or `["A", "B"]`.
+
+#### How choices are combined
+
+At runtime, the environment picks at most one choice from each group, and combines groups together.
+
+- Use `[]` as one choice in a group to represent "press none of this group".
+- Buttons must match names from `env.buttons` for that system (for example `UP`, `DOWN`, `LEFT`, `RIGHT`, `A`, `B`, `START`, `SELECT`).
+
+#### Practical example
+
+If you want to enforce:
+
+- no `UP` + `DOWN`
+- no `LEFT` + `RIGHT`
+- no `START` + `SELECT`
+
+you can define:
+
+```json
+{
+        "actions": [
+                [[], ["UP"], ["DOWN"]],
+                [[], ["LEFT"], ["RIGHT"]],
+                [[], ["START"], ["SELECT"]]
+        ]
+}
+```
+
+This still allows valid combinations across groups (for example `UP` + `LEFT`).
+
+If you do not want the agent to ever press `START` or `SELECT`, omit them from all groups entirely.
+
+#### Interaction with `use_restricted_actions`
+
+- `Actions.FILTERED` (default): action space is multi-binary, then invalid combinations are filtered to the closest allowed combination.
+- `Actions.DISCRETE` / `Actions.MULTI_DISCRETE`: the action space is built directly from these allowed choices.
+- `Actions.ALL`: no filtering.
+
+#### Common integration pattern
+
+For a new game, a good starting point is:
+
+1. Keep only physically impossible combinations out (`UP` + `DOWN`, `LEFT` + `RIGHT`).
+2. Decide explicitly whether menu buttons (`START`, `SELECT`, etc.) should be available during training.
+3. Add extra restrictions only if they are truly required for your environment design.
+
 ### Done Condition
 
 This is usually the easier of the two.  The best done condition to use is the Game Over or Continue screen after you run out of lives.  For some games this is when you have zero lives left, for some `-1` lives, for others, it can be pretty hard.

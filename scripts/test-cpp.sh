@@ -12,7 +12,10 @@ else
 	jobs="2"
 fi
 
-cmake -S . -B . -DCMAKE_DISABLE_FIND_PACKAGE_CapnProto=TRUE "$@"
-cmake --build . --parallel "${jobs}"
-cmake --build . --parallel "${jobs}" --target build-tests
-ctest --test-dir . --output-on-failure -R '^(data|emulator|memory-overlay|memory|script|search)$'
+cmake -DCMAKE_DISABLE_FIND_PACKAGE_CapnProto=TRUE "$@" .
+cmake --build . -- -j"${jobs}"
+cmake --build . --target build-tests -- -j"${jobs}"
+(
+	cd tests
+	ctest --output-on-failure
+)

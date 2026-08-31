@@ -14,11 +14,19 @@ def require(condition, message):
         raise ManifestError(message)
 
 
+def unique_object(pairs):
+    document = {}
+    for key, value in pairs:
+        require(key not in document, f"duplicate object key {key!r}")
+        document[key] = value
+    return document
+
+
 def load_manifest(path):
     try:
         with path.open(encoding="utf-8") as manifest_file:
-            document = json.load(manifest_file)
-    except (OSError, json.JSONDecodeError) as error:
+            document = json.load(manifest_file, object_pairs_hook=unique_object)
+    except (OSError, json.JSONDecodeError, ManifestError) as error:
         raise ManifestError(f"cannot read {path}: {error}") from error
 
     require(
@@ -129,35 +137,46 @@ def validate_platform(platform, config):
         )
 
 
-def find_extension_owners(manifest_path):
-    owners = {}
-    for sibling in sorted(manifest_path.parent.glob("*.json")):
-        if sibling.resolve() == manifest_path.resolve():
-            continue
-        document = load_manifest(sibling)
-        for platform, config in document.items():
-            for extension in config.get("ext", []):
-                owners.setdefault(extension, []).append(f"{platform} ({sibling.name})")
-    return owners
+def repository_manifest_paths(manifest_path):
+    paths = sorted(manifest_path.parent.glob("*.json"))
+    if not any(path.resolve() == manifest_path.resolve() for path in paths):
+        paths.append(manifest_path)
+    return paths
 
 
 def validate_manifest(manifest_path):
-    document = load_manifest(manifest_path)
-    extension_owners = find_extension_owners(manifest_path)
-    extension_count = 0
+    target_path = manifest_path.resolve()
+    platform_owners = {}
+    extension_owners = {}
+    target_platform_count = 0
+    target_extension_count = 0
 
-    for platform, config in document.items():
-        validate_platform(platform, config)
-        for extension in config["ext"]:
-            owners = extension_owners.get(extension, [])
+    for path in repository_manifest_paths(manifest_path):
+        document = load_manifest(path)
+        for platform, config in document.items():
+            validate_platform(platform, config)
+            owner = f"{platform} ({path.name})"
+            previous_platform_owner = platform_owners.get(platform)
             require(
-                not owners,
-                f"extension {extension!r} is already mapped by {', '.join(owners)}",
+                previous_platform_owner is None,
+                f"platform {platform!r} is already defined by {previous_platform_owner}",
             )
-            extension_count += 1
+            platform_owners[platform] = owner
+
+            for extension in config["ext"]:
+                previous_extension_owner = extension_owners.get(extension)
+                require(
+                    previous_extension_owner is None,
+                    f"extension {extension!r} is already mapped by {previous_extension_owner}",
+                )
+                extension_owners[extension] = owner
+
+            if path.resolve() == target_path:
+                target_platform_count += 1
+                target_extension_count += len(config["ext"])
 
     print(
-        f"Validated {manifest_path}: {len(document)} platform entries, {extension_count} ROM extensions",
+        f"Validated {manifest_path}: {target_platform_count} platform entries, {target_extension_count} ROM extensions",
     )
 
 

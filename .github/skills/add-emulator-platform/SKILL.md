@@ -1,7 +1,6 @@
 ---
 name: add-emulator-platform
 description: "Add or review a new emulator platform, game system, libretro core, ROM extension mapping, or core build target in Stable Retro. Use for platform ports and core integrations, not ordinary game integrations."
-argument-hint: "Describe the platform, libretro core, target operating systems, and available test ROM."
 ---
 
 # Add an Emulator Platform
@@ -44,8 +43,8 @@ Compare one nearby simple platform manifest and one platform with similar render
 Build the new core first:
 
 ```shell
-cmake -S . -B . -DCMAKE_DISABLE_FIND_PACKAGE_CapnProto=TRUE
-cmake --build . --parallel 2 --target <platform>
+cmake -DCMAKE_DISABLE_FIND_PACKAGE_CapnProto=TRUE .
+cmake --build . --target <platform> -- -j2
 ```
 
 Then run the native suite:

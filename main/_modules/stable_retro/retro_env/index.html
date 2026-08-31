@@ -226,7 +226,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../release_notes/">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro">Github</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/master/docs/README.md">Contribute to the Docs</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/main/docs/README.md">    Contribute to the Docs</a></li>
 </ul>
 
 </div>
@@ -287,19 +287,19 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">stable_retro</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">retro</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">stable_retro.data</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;RetroEnv&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"RetroEnv"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="RetroEnv">
 <a class="viewcode-back" href="../../../python/#stable_retro.RetroEnv">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RetroEnv</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Env</span><span class="p">,</span> <span class="n">EzPickle</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Gym Retro environment class</span>
 
 <span class="sd">    Provides a Gym interface to classic video games</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;render_modes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;human&quot;</span><span class="p">,</span> <span class="s2">&quot;rgb_array&quot;</span><span class="p">],</span> <span class="s2">&quot;video.frames_per_second&quot;</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">}</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"render_modes"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"human"</span><span class="p">,</span> <span class="s2">"rgb_array"</span><span class="p">],</span> <span class="s2">"video.frames_per_second"</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">}</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -312,9 +312,9 @@
         <span class="n">players</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">inttype</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Integrations</span><span class="o">.</span><span class="n">STABLE</span><span class="p">,</span>
         <span class="n">obs_type</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">Observations</span><span class="o">.</span><span class="n">IMAGE</span><span class="p">,</span>
-        <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;human&quot;</span><span class="p">,</span>
+        <span class="n">render_mode</span><span class="o">=</span><span class="s2">"human"</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a Retro environment for a specific game/state configuration.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize a Retro environment for a specific game/state configuration."""</span>
         <span class="k">if</span> <span class="n">inttype</span> <span class="ow">is</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Integrations</span><span class="o">.</span><span class="n">DEFAULT</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span>
             <span class="n">inttype</span><span class="p">,</span>
             <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DefaultIntegrations</span><span class="p">,</span>
@@ -335,7 +335,7 @@
             <span class="n">obs_type</span><span class="p">,</span>
             <span class="n">render_mode</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;spec&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"spec"</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">spec</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_obs_type</span> <span class="o">=</span> <span class="n">obs_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">img</span> <span class="o">=</span> <span class="kc">None</span>
@@ -346,13 +346,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="n">players</span>
 
-        <span class="c1"># Don&#39;t return multiple rewards in multiplayer mode by default</span>
-        <span class="c1"># as stable-baselines3 vectorized environments doesn&#39;t support it</span>
+        <span class="c1"># Don't return multiple rewards in multiplayer mode by default</span>
+        <span class="c1"># as stable-baselines3 vectorized environments doesn't support it</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">multi_rewards</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">rom_path</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_original_romfile_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
-        <span class="n">metadata_path</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="s2">&quot;metadata.json&quot;</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
+        <span class="n">metadata_path</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="s2">"metadata.json"</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="n">retro</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">statename</span> <span class="o">=</span> <span class="kc">None</span>
@@ -361,12 +361,12 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">metadata_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                     <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-                <span class="k">if</span> <span class="s2">&quot;default_player_state&quot;</span> <span class="ow">in</span> <span class="n">metadata</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span>
-                    <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;default_player_state&quot;</span><span class="p">],</span>
+                <span class="k">if</span> <span class="s2">"default_player_state"</span> <span class="ow">in</span> <span class="n">metadata</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span>
+                    <span class="n">metadata</span><span class="p">[</span><span class="s2">"default_player_state"</span><span class="p">],</span>
                 <span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">statename</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;default_player_state&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-                <span class="k">elif</span> <span class="s2">&quot;default_state&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">statename</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;default_state&quot;</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">statename</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">"default_player_state"</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="s2">"default_state"</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">statename</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">"default_state"</span><span class="p">]</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">statename</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">):</span>
@@ -378,26 +378,26 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">GameData</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">info</span> <span class="o">=</span> <span class="s2">&quot;data&quot;</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="s2">"data"</span>
 
-        <span class="k">if</span> <span class="n">info</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
-            <span class="c1"># assume it&#39;s a path</span>
+        <span class="k">if</span> <span class="n">info</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".json"</span><span class="p">):</span>
+            <span class="c1"># assume it's a path</span>
             <span class="n">info_path</span> <span class="o">=</span> <span class="n">info</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">info_path</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">info</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
+            <span class="n">info_path</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">info</span> <span class="o">+</span> <span class="s2">".json"</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">scenario</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;scenario&quot;</span>
+            <span class="n">scenario</span> <span class="o">=</span> <span class="s2">"scenario"</span>
 
-        <span class="k">if</span> <span class="n">scenario</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
-            <span class="c1"># assume it&#39;s a path</span>
+        <span class="k">if</span> <span class="n">scenario</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".json"</span><span class="p">):</span>
+            <span class="c1"># assume it's a path</span>
             <span class="n">scenario_path</span> <span class="o">=</span> <span class="n">scenario</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">scenario_path</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">scenario</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
+            <span class="n">scenario_path</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">scenario</span> <span class="o">+</span> <span class="s2">".json"</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">system</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">get_romfile_system</span><span class="p">(</span><span class="n">rom_path</span><span class="p">)</span>
 
-        <span class="c1"># We can&#39;t have more than one emulator per process. Before creating an</span>
+        <span class="c1"># We can't have more than one emulator per process. Before creating an</span>
         <span class="c1"># emulator, ensure that unused ones are garbage-collected</span>
         <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">em</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">RetroEmulator</span><span class="p">(</span><span class="n">rom_path</span><span class="p">)</span>
@@ -405,14 +405,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">em</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 
         <span class="n">core</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">get_system_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">buttons</span> <span class="o">=</span> <span class="n">core</span><span class="p">[</span><span class="s2">&quot;buttons&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buttons</span> <span class="o">=</span> <span class="n">core</span><span class="p">[</span><span class="s2">"buttons"</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_buttons</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buttons</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
                 <span class="n">info_path</span><span class="p">,</span>
                 <span class="n">scenario_path</span><span class="p">,</span>
-            <span class="p">),</span> <span class="s2">&quot;Failed to load info (</span><span class="si">{}</span><span class="s2">) or scenario (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="p">),</span> <span class="s2">"Failed to load info (</span><span class="si">{}</span><span class="s2">) or scenario (</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="n">info_path</span><span class="p">,</span>
                 <span class="n">scenario_path</span><span class="p">,</span>
             <span class="p">)</span>
@@ -464,7 +464,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_screen</span><span class="p">(</span><span class="n">apply_rotation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">img</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unrecognized observation type: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_obs_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unrecognized observation type: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_obs_type</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_rotation_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -486,7 +486,7 @@
         <span class="k">return</span> <span class="n">image</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">action_to_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert an action-space value into per-player button-mask arrays.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Convert an action-space value into per-player button-mask arrays."""</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">):</span>
             <span class="n">action</span> <span class="o">=</span> <span class="mi">0</span>
@@ -513,9 +513,9 @@
         <span class="k">return</span> <span class="n">actions</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Advance one emulator frame and return Gymnasium step outputs.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Advance one emulator frame and return Gymnasium step outputs."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">img</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ram</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Please call env.reset() before env.step()&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Please call env.reset() before env.step()"</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">ap</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">action_to_array</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movie</span><span class="p">:</span>
@@ -530,13 +530,13 @@
         <span class="n">ob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_obs</span><span class="p">()</span>
         <span class="n">rew</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_step</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">==</span> <span class="s2">&quot;human&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">==</span> <span class="s2">"human"</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">ob</span><span class="p">,</span> <span class="n">rew</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">done</span><span class="p">),</span> <span class="kc">False</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset emulator state and return the initial observation and info.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Reset emulator state and return the initial observation and info."""</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span><span class="p">:</span>
@@ -549,7 +549,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">record_movie</span><span class="p">(</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">movie_path</span><span class="p">,</span>
-                    <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">-</span><span class="si">%s</span><span class="s2">-</span><span class="si">%06d</span><span class="s2">.bk2&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gamename</span><span class="p">,</span> <span class="n">rel_statename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">movie_id</span><span class="p">),</span>
+                    <span class="s2">"</span><span class="si">%s</span><span class="s2">-</span><span class="si">%s</span><span class="s2">-</span><span class="si">%06d</span><span class="s2">.bk2"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gamename</span><span class="p">,</span> <span class="n">rel_statename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">movie_id</span><span class="p">),</span>
                 <span class="p">),</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">movie_id</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -558,21 +558,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">update_ram</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">==</span> <span class="s2">&quot;human&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">==</span> <span class="s2">"human"</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_obs</span><span class="p">(),</span> <span class="p">{}</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render the current frame in human mode or return an RGB array.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Render the current frame in human mode or return an RGB array."""</span>
         <span class="n">mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span>
 
         <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">img</span>
         <span class="k">if</span> <span class="n">img</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_screen</span><span class="p">(</span><span class="n">apply_rotation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;rgb_array&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">"rgb_array"</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">img</span>
-        <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;human&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">"human"</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="kn">from</span><span class="w"> </span><span class="nn">stable_retro.rendering</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleImageViewer</span>
 
@@ -581,14 +581,14 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">isopen</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Release emulator and viewer resources.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;em&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Release emulator and viewer resources."""</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"em"</span><span class="p">):</span>
             <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">em</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_action_meaning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">act</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return human-readable button names for an encoded action.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return human-readable button names for an encoded action."""</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">action_to_array</span><span class="p">(</span><span class="n">act</span><span class="p">)):</span>
             <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
@@ -602,7 +602,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_ram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return concatenated emulator RAM blocks as a uint8 array.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return concatenated emulator RAM blocks as a uint8 array."""</span>
         <span class="n">blocks</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">blocks</span><span class="p">):</span>
             <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="n">offset</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
@@ -610,7 +610,7 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_screen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">apply_rotation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the current screen, optionally cropped and rotation-corrected.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the current screen, optionally cropped and rotation-corrected."""</span>
         <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">em</span><span class="o">.</span><span class="n">get_screen</span><span class="p">()</span>
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">crop_info</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">w</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
@@ -630,20 +630,20 @@
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">load_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">statename</span><span class="p">,</span> <span class="n">inttype</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Integrations</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load a named save-state file into ``self.initial_state``.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">statename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.state&quot;</span><span class="p">):</span>
-            <span class="n">statename</span> <span class="o">+=</span> <span class="s2">&quot;.state&quot;</span>
+<span class="w">        </span><span class="sd">"""Load a named save-state file into ``self.initial_state``."""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">statename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".state"</span><span class="p">):</span>
+            <span class="n">statename</span> <span class="o">+=</span> <span class="s2">".state"</span>
 
         <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
             <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gamename</span><span class="p">,</span> <span class="n">statename</span><span class="p">,</span> <span class="n">inttype</span><span class="p">),</span>
-            <span class="s2">&quot;rb&quot;</span><span class="p">,</span>
+            <span class="s2">"rb"</span><span class="p">,</span>
         <span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">statename</span> <span class="o">=</span> <span class="n">statename</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute reward, done flag, and info dictionary from current RAM data.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Compute reward, done flag, and info dictionary from current RAM data."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_rewards</span><span class="p">:</span>
             <span class="n">reward</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">current_reward</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">)]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -652,14 +652,14 @@
         <span class="k">return</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">lookup_all</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">record_movie</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start recording gameplay input to a BK2 movie at ``path``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Start recording gameplay input to a BK2 movie at ``path``."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">movie</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">Movie</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">movie</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gamename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">em</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">movie</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">stop_record</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop movie recording and clear recording state.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Stop movie recording and clear recording state."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">movie_path</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">movie_id</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movie</span><span class="p">:</span>
@@ -667,7 +667,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">movie</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">auto_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enable automatic per-episode movie recording to a directory.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Enable automatic per-episode movie recording to a directory."""</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">movie_path</span> <span class="o">=</span> <span class="n">path</span></div>

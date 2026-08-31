@@ -226,7 +226,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../release_notes/">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro">Github</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/master/docs/README.md">Contribute to the Docs</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/main/docs/README.md">    Contribute to the Docs</a></li>
 </ul>
 
 </div>
@@ -284,50 +284,50 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">stable_retro.retro_env</span><span class="w"> </span><span class="kn">import</span> <span class="n">RetroEnv</span>
 
 <span class="n">ROOT_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-<span class="n">core_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;cores&quot;</span><span class="p">))</span>
+<span class="n">core_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">"cores"</span><span class="p">))</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;VERSION.txt&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">"VERSION.txt"</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">__version__</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;Movie&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;RetroEmulator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Actions&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;State&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Observations&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;get_core_path&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;get_romfile_system&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;get_system_info&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;get_fbneo_rom_name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;is_fbneo_game&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;make&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;RetroEnv&quot;</span><span class="p">,</span>
+    <span class="s2">"Movie"</span><span class="p">,</span>
+    <span class="s2">"RetroEmulator"</span><span class="p">,</span>
+    <span class="s2">"Actions"</span><span class="p">,</span>
+    <span class="s2">"State"</span><span class="p">,</span>
+    <span class="s2">"Observations"</span><span class="p">,</span>
+    <span class="s2">"get_core_path"</span><span class="p">,</span>
+    <span class="s2">"get_romfile_system"</span><span class="p">,</span>
+    <span class="s2">"get_system_info"</span><span class="p">,</span>
+    <span class="s2">"get_fbneo_rom_name"</span><span class="p">,</span>
+    <span class="s2">"is_fbneo_game"</span><span class="p">,</span>
+    <span class="s2">"make"</span><span class="p">,</span>
+    <span class="s2">"RetroEnv"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">init_core_info</span><span class="p">(</span><span class="n">core_path</span><span class="p">())</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_core_path</span><span class="p">(</span><span class="n">corename</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the absolute path to the libretro core binary for ``corename``.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return the absolute path to the libretro core binary for ``corename``."""</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">core_path</span><span class="p">(),</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">EMU_CORES</span><span class="p">[</span><span class="n">corename</span><span class="p">])</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_romfile_system</span><span class="p">(</span><span class="n">rom_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Infer and return the emulator system name from a ROM file extension.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Infer and return the emulator system name from a ROM file extension."""</span>
     <span class="n">extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">rom_path</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">EMU_EXTENSIONS</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">EMU_EXTENSIONS</span><span class="p">[</span><span class="n">extension</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported rom type at path: </span><span class="si">{</span><span class="n">rom_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unsupported rom type at path: </span><span class="si">{</span><span class="n">rom_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_system_info</span><span class="p">(</span><span class="n">system</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return loaded core metadata for the given system name.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return loaded core metadata for the given system name."""</span>
     <span class="k">if</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">EMU_INFO</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">EMU_INFO</span><span class="p">[</span><span class="n">system</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported system type: </span><span class="si">{</span><span class="n">system</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unsupported system type: </span><span class="si">{</span><span class="n">system</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="make">
@@ -338,47 +338,47 @@
     <span class="n">inttype</span><span class="o">=</span><span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Integrations</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and return a ``RetroEnv`` for the requested game and options.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Create and return a ``RetroEnv`` for the requested game and options."""</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_romfile_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="s2">&quot;rom.sha&quot;</span><span class="p">,</span> <span class="n">inttype</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="s2">"rom.sha"</span><span class="p">,</span> <span class="n">inttype</span><span class="p">):</span>
             <span class="k">raise</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Game not found: </span><span class="si">{</span><span class="n">game</span><span class="si">}</span><span class="s2">. Did you make sure to import the ROM?&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Game not found: </span><span class="si">{</span><span class="n">game</span><span class="si">}</span><span class="s2">. Did you make sure to import the ROM?"</span><span class="p">,</span>
             <span class="p">)</span>
     <span class="k">return</span> <span class="n">RetroEnv</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">inttype</span><span class="o">=</span><span class="n">inttype</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_fbneo_rom_name</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">inttype</span><span class="o">=</span><span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Integrations</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Get the original FBNeo ROM name for a game.</span>
-<span class="sd">    Returns None if the game doesn&#39;t have an original_rom_name in metadata.</span>
+<span class="sd">    Returns None if the game doesn't have an original_rom_name in metadata.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        game: Game name</span>
 <span class="sd">        inttype: Integration type (default: DEFAULT)</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        str: Original ROM name (e.g., &quot;mk2.zip&quot;) or None</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        str: Original ROM name (e.g., "mk2.zip") or None</span>
+<span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
-    <span class="n">metadata_path</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="s2">&quot;metadata.json&quot;</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
+    <span class="n">metadata_path</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="s2">"metadata.json"</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">metadata_path</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">metadata_path</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">metadata_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-                <span class="k">return</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;original_rom_name&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"original_rom_name"</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">):</span>
             <span class="k">pass</span>
     <span class="k">return</span> <span class="kc">None</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">is_fbneo_game</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">inttype</span><span class="o">=</span><span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Integrations</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Check if a game is an FBNeo game.</span>
 
 <span class="sd">    Args:</span>
@@ -387,15 +387,15 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        bool: True if the game is an FBNeo game</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
-    <span class="n">metadata_path</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="s2">&quot;metadata.json&quot;</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
+    <span class="n">metadata_path</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="s2">"metadata.json"</span><span class="p">,</span> <span class="n">inttype</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">metadata_path</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">metadata_path</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">metadata_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-                <span class="k">return</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;FBNeo&quot;</span>
+                <span class="k">return</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"system"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"FBNeo"</span>
         <span class="k">except</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">):</span>
             <span class="k">pass</span>
     <span class="k">return</span> <span class="kc">False</span>
@@ -404,8 +404,8 @@
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">farama_notifications</span><span class="w"> </span><span class="kn">import</span> <span class="n">notifications</span>
 
-    <span class="k">if</span> <span class="s2">&quot;stable-retro&quot;</span> <span class="ow">in</span> <span class="n">notifications</span> <span class="ow">and</span> <span class="n">__version__</span> <span class="ow">in</span> <span class="n">notifications</span><span class="p">[</span><span class="s2">&quot;stable-retro&quot;</span><span class="p">]:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">notifications</span><span class="p">[</span><span class="s2">&quot;stable-retro&quot;</span><span class="p">][</span><span class="n">__version__</span><span class="p">],</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">"stable-retro"</span> <span class="ow">in</span> <span class="n">notifications</span> <span class="ow">and</span> <span class="n">__version__</span> <span class="ow">in</span> <span class="n">notifications</span><span class="p">[</span><span class="s2">"stable-retro"</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">notifications</span><span class="p">[</span><span class="s2">"stable-retro"</span><span class="p">][</span><span class="n">__version__</span><span class="p">],</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># nosec</span>
     <span class="k">pass</span>
 </pre></div>

@@ -227,7 +227,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../release_notes/">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro">Github</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/master/docs/README.md">Contribute to the Docs</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/main/docs/README.md">    Contribute to the Docs</a></li>
 </ul>
 
 </div>
@@ -287,8 +287,8 @@
             <section class="tex2jax_ignore mathjax_ignore" id="development">
 <h1>Development<a class="headerlink" href="#development" title="Link to this heading">¶</a></h1>
 <p>Adding new games can be done without recompiling Stable Retro, but if you need to work on the C++ code or make changes to the UI, you will want to compile Stable Retro from source.</p>
-<section id="install-retro-from-source">
-<h2>Install Retro from source<a class="headerlink" href="#install-retro-from-source" title="Link to this heading">¶</a></h2>
+<section id="install-stable-retro-from-source">
+<h2>Install Stable Retro from source<a class="headerlink" href="#install-stable-retro-from-source" title="Link to this heading">¶</a></h2>
 <p>Building Stable Retro requires at least either gcc 5 or clang 3.4.</p>
 <section id="prerequisites">
 <h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h3>
@@ -296,20 +296,14 @@
 You can do this either through your package manager, download from the <a class="reference external" href="https://cmake.org/download/">official site</a> or <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">cmake</span></code>.
 If you’re using the official installer on Windows, make sure to tell CMake to add itself to the system PATH.</p>
 </section>
-<section id="mac-prerequisites">
-<h3>Mac prerequisites<a class="headerlink" href="#mac-prerequisites" title="Link to this heading">¶</a></h3>
-<p>Since LuaJIT does not work properly on macOS you must first install Lua 5.1 from homebrew:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>pkg-config<span class="w"> </span>lua@5.1
-</pre></div>
-</div>
-</section>
 <section id="windows-prerequisites">
 <h3>Windows prerequisites<a class="headerlink" href="#windows-prerequisites" title="Link to this heading">¶</a></h3>
 <p>Install docker</p>
 </section>
 <section id="linux-prerequisites">
 <h3>Linux prerequisites<a class="headerlink" href="#linux-prerequisites" title="Link to this heading">¶</a></h3>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>zlib1g-dev
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>cmake<span class="w"> </span>capnproto<span class="w"> </span>zlib1g-dev<span class="w"> </span>build-essential<span class="w"> </span>pkg-config<span class="w"> </span>libzip-dev<span class="w"> </span>libbz2-dev<span class="w"> </span>xvfb<span class="w"> </span>python3-opengl<span class="w"> </span>libgl1-mesa-dev<span class="w"> </span>libglu1-mesa-dev
 </pre></div>
 </div>
 </section>
@@ -317,9 +311,16 @@ If you’re using the official installer on Windows, make sure to tell CMake to 
 <h3>Building Linux and Mac<a class="headerlink" href="#building-linux-and-mac" title="Link to this heading">¶</a></h3>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/farama-foundation/stable-retro.git<span class="w"> </span>stable-retro
 <span class="nb">cd</span><span class="w"> </span>stable-retro
-pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s1">'.[dev]'</span>
 </pre></div>
 </div>
+<p>Run Python and native tests through the same entry points used by CI:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scripts/test-python.sh
+<span class="nv">CMAKE_BUILD_PARALLEL_LEVEL</span><span class="o">=</span><span class="m">2</span><span class="w"> </span>scripts/test-cpp.sh
+python<span class="w"> </span>-m<span class="w"> </span>pre_commit<span class="w"> </span>run<span class="w"> </span>--all-files
+</pre></div>
+</div>
+<p>The native test command uses an in-source CMake build because the test suite resolves core libraries and ROM fixtures relative to the source tree.</p>
 </section>
 <section id="building-windows">
 <h3>Building Windows<a class="headerlink" href="#building-windows" title="Link to this heading">¶</a></h3>
@@ -331,7 +332,7 @@ pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </
 <p>Then you may pip install</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/farama-foundation/stable-retro.git<span class="w"> </span>stable-retro
 <span class="nb">cd</span><span class="w"> </span>stable-retro
-pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s1">'.[dev]'</span>
 </pre></div>
 </div>
 </section>
@@ -342,10 +343,10 @@ pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </
 <section id="macos">
 <h3>macOS<a class="headerlink" href="#macos" title="Link to this heading">¶</a></h3>
 <p>Note that for Mojave (10.14) you may need to install <code class="docutils literal notranslate"><span class="pre">/Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg</span></code></p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>pkg-config<span class="w"> </span>capnp<span class="w"> </span>lua@5.1<span class="w"> </span>qt5
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>pkg-config<span class="w"> </span>capnp<span class="w"> </span>qt5
 cmake<span class="w"> </span>.<span class="w"> </span>-DCMAKE_PREFIX_PATH<span class="o">=</span>/usr/local/opt/qt<span class="w"> </span>-DBUILD_UI<span class="o">=</span>ON<span class="w"> </span>-UPYLIB_DIRECTORY
 make<span class="w"> </span>-j<span class="k">$(</span>sysctl<span class="w"> </span>hw.ncpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f2<span class="k">)</span>
-open<span class="w"> </span><span class="s2">&quot;Gym Retro Integration.app&quot;</span>
+open<span class="w"> </span><span class="s2">"Gym Retro Integration.app"</span>
 </pre></div>
 </div>
 </section>
@@ -436,9 +437,8 @@ From within WSL2 just launch gym-retro-integration binary like you would on linu
             <div class="toc-tree">
               <ul>
 <li><a class="reference internal" href="#">Development</a><ul>
-<li><a class="reference internal" href="#install-retro-from-source">Install Retro from source</a><ul>
+<li><a class="reference internal" href="#install-stable-retro-from-source">Install Stable Retro from source</a><ul>
 <li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
-<li><a class="reference internal" href="#mac-prerequisites">Mac prerequisites</a></li>
 <li><a class="reference internal" href="#windows-prerequisites">Windows prerequisites</a></li>
 <li><a class="reference internal" href="#linux-prerequisites">Linux prerequisites</a></li>
 <li><a class="reference internal" href="#building-linux-and-mac">Building Linux and Mac</a></li>

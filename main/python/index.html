@@ -227,7 +227,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../release_notes/">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro">Github</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/master/docs/README.md">Contribute to the Docs</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/main/docs/README.md">    Contribute to the Docs</a></li>
 </ul>
 
 </div>
@@ -351,7 +351,7 @@ also specify a string that is the name of the <code class="docutils literal notr
 
 </dd></dl>
 
-<p>You can also create your own action spaces derived from these.  For an example, see <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/master/stable_retro/examples/discretizer.py">discretizer.py</a>.  This file shows how to use <code class="docutils literal notranslate"><span class="pre">stable_retro.Actions.Discrete</span></code> as well as how to make a custom wrapper that reduces the action space from <code class="docutils literal notranslate"><span class="pre">126</span></code> actions to <code class="docutils literal notranslate"><span class="pre">7</span></code></p>
+<p>You can also create your own action spaces derived from these.  For an example, see <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/main/stable_retro/examples/discretizer.py">discretizer.py</a>.  This file shows how to use <code class="docutils literal notranslate"><span class="pre">stable_retro.Actions.Discrete</span></code> as well as how to make a custom wrapper that reduces the action space from <code class="docutils literal notranslate"><span class="pre">126</span></code> actions to <code class="docutils literal notranslate"><span class="pre">7</span></code></p>
 </section>
 <section id="observations">
 <h2>Observations<a class="headerlink" href="#observations" title="Link to this heading">¶</a></h2>
@@ -382,7 +382,7 @@ also specify a string that is the name of the <code class="docutils literal notr
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s2">&quot;Pong-Atari2600&quot;</span><span class="p">,</span> <span class="n">players</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s2">"Pong-Atari2600"</span><span class="p">,</span> <span class="n">players</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="c1"># action_space will by MultiBinary(16) now instead of MultiBinary(8)</span>
@@ -396,7 +396,7 @@ also specify a string that is the name of the <code class="docutils literal notr
     <span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -411,7 +411,7 @@ also specify a string that is the name of the <code class="docutils literal notr
 <p>If you have an agent playing a game, you can record the gameplay to a <code class="docutils literal notranslate"><span class="pre">.bk2</span></code> file for later processing:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">stable_retro</span>
 
-<span class="n">env</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">&#39;Airstriker-Genesis-v0&#39;</span><span class="p">,</span> <span class="n">record</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">'Airstriker-Genesis-v0'</span><span class="p">,</span> <span class="n">record</span><span class="o">=</span><span class="s1">'.'</span><span class="p">)</span>
 <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">terminate</span><span class="p">,</span> <span class="n">truncate</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">())</span>
@@ -425,7 +425,7 @@ also specify a string that is the name of the <code class="docutils literal notr
 <p>Given a <code class="docutils literal notranslate"><span class="pre">.bk2</span></code> file you can load it in python and either play it back or use the actions for training.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">stable_retro</span>
 
-<span class="n">movie</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">Movie</span><span class="p">(</span><span class="s1">&#39;Airstriker-Genesis-Level1-000000.bk2&#39;</span><span class="p">)</span>
+<span class="n">movie</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">Movie</span><span class="p">(</span><span class="s1">'Airstriker-Genesis-Level1-000000.bk2'</span><span class="p">)</span>
 <span class="n">movie</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 
 <span class="n">env</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span>

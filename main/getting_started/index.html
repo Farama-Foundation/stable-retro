@@ -227,7 +227,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../release_notes/">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro">Github</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/master/docs/README.md">Contribute to the Docs</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/main/docs/README.md">    Contribute to the Docs</a></li>
 </ul>
 
 </div>
@@ -295,7 +295,7 @@
 <h2>Create a Retro Environment<a class="headerlink" href="#create-a-retro-environment" title="Link to this heading">¶</a></h2>
 <p>After installing you can now create a <a class="reference external" href="https://gymnasium.farama.org/">Gymnasium</a> environment in Python:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">stable_retro</span>
-<span class="n">env</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">&#39;Airstriker-Genesis-v0&#39;</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">'Airstriker-Genesis-v0'</span><span class="p">)</span>
 </pre></div>
 </div>
 <section id="migration-from-gym-retro-or-older-stable-retro">
@@ -303,16 +303,16 @@
 <p>If you’re migrating from gym-retro or an older version of stable-retro, note that the package import name has changed:</p>
 <p><strong>Old way (deprecated but still works):</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">retro</span>  <span class="c1"># Shows deprecation warning</span>
-<span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">&#39;Airstriker-Genesis-v0&#39;</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">'Airstriker-Genesis-v0'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>New way (recommended):</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">stable_retro</span>  <span class="c1"># Use the full new name</span>
-<span class="n">env</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">&#39;Airstriker-Genesis-v0&#39;</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">'Airstriker-Genesis-v0'</span><span class="p">)</span>
 
 <span class="c1"># Or use an alias for easier migration:</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">stable_retro</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">retro</span>  <span class="c1"># Keeps your code working with minimal changes</span>
-<span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">&#39;Airstriker-Genesis-v0&#39;</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">'Airstriker-Genesis-v0'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The old <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">retro</span></code> syntax will continue to work with a deprecation warning to ease migration.</p>
@@ -339,7 +339,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s2">&quot;Airstriker-Genesis&quot;</span><span class="p">)</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s2">"Airstriker-Genesis"</span><span class="p">)</span>
     <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">action</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
@@ -350,7 +350,7 @@
     <span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -385,7 +385,7 @@
 <span class="n">stable_retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">list_games</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The actual integration data can be see in the <a class="reference external" href="https://github.com/farama-foundation/stable-retro/tree/master/stable_retro/data/stable">Stable Retro Github repo</a>.</p>
+<p>The actual integration data can be seen in the <a class="reference external" href="https://github.com/farama-foundation/stable-retro/tree/main/stable_retro/data/stable">Stable Retro GitHub repository</a>.</p>
 </section>
 <section id="importing-roms">
 <span id="id1"></span><h2>Importing ROMs<a class="headerlink" href="#importing-roms" title="Link to this heading">¶</a></h2>

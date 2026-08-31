@@ -227,7 +227,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../release_notes/">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro">Github</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/master/docs/README.md">Contribute to the Docs</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Farama-Foundation/stable-retro/blob/main/docs/README.md">    Contribute to the Docs</a></li>
 </ul>
 
 </div>
@@ -296,7 +296,7 @@
 <p>If you are going to integrate a new game, you’ll need a ROM for the correct system, see <a class="reference internal" href="#supported-roms"><span class="std std-ref">Supported ROM Types</span></a> for a list.</p>
 <section id="example-integration">
 <h2>Example Integration<a class="headerlink" href="#example-integration" title="Link to this heading">¶</a></h2>
-<p>This is a list of the integration files for the game <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/Airstriker-Genesis-v0">Airstriker-Genesis-v0</a>.</p>
+<p>This is a list of the integration files for the game <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/main/stable_retro/data/stable/Airstriker-Genesis-v0">Airstriker-Genesis-v0</a>.</p>
 <section id="level1-state">
 <h3><code class="docutils literal notranslate"><span class="pre">Level1.state</span></code><a class="headerlink" href="#level1-state" title="Link to this heading">¶</a></h3>
 <p>This is a savestate from the beginning of the game, restarting the environment will put the agent at this point in the game.</p>
@@ -304,14 +304,65 @@
 <section id="data-json">
 <h3><code class="docutils literal notranslate"><span class="pre">data.json</span></code><a class="headerlink" href="#data-json" title="Link to this heading">¶</a></h3>
 <p>This file defines the list of game-related variables that python can see based on their memory addresses in the games</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">"info"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"gameover"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"address"</span><span class="p">:</span> <span class="mi">16712294</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"&gt;u2"</span>
+    <span class="p">},</span>
+    <span class="s2">"lives"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"address"</span><span class="p">:</span> <span class="mi">16712282</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"&gt;u2"</span>
+    <span class="p">},</span>
+    <span class="s2">"score"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"address"</span><span class="p">:</span> <span class="mi">16712270</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"&gt;u4"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 <section id="scenario-json">
 <h3><code class="docutils literal notranslate"><span class="pre">scenario.json</span></code><a class="headerlink" href="#scenario-json" title="Link to this heading">¶</a></h3>
 <p>This file defines the reward function and done condition using the variables defined in <code class="docutils literal notranslate"><span class="pre">data.json</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">"done"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"condition"</span><span class="p">:</span> <span class="s2">"all"</span><span class="p">,</span>
+    <span class="s2">"variables"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"gameover"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"op"</span><span class="p">:</span> <span class="s2">"equal"</span><span class="p">,</span>
+        <span class="s2">"reference"</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="p">},</span>
+      <span class="s2">"lives"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"op"</span><span class="p">:</span> <span class="s2">"zero"</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"reward"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"variables"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"score"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"reward"</span><span class="p">:</span> <span class="mf">1.0</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 <section id="metadata-json">
 <h3><code class="docutils literal notranslate"><span class="pre">metadata.json</span></code><a class="headerlink" href="#metadata-json" title="Link to this heading">¶</a></h3>
 <p>This file defines the default starting state if no state is specified by the user as well as some miscellaneous debugging information.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">"default_state"</span><span class="p">:</span> <span class="s2">"Level1"</span><span class="p">,</span>
+  <span class="s2">"whitelist"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"data.json"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"suspicious type &gt;u2 for lives"</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 <section id="rom-md">
 <h3><code class="docutils literal notranslate"><span class="pre">rom.md</span></code><a class="headerlink" href="#rom-md" title="Link to this heading">¶</a></h3>
@@ -320,6 +371,9 @@
 <section id="rom-sha">
 <h3><code class="docutils literal notranslate"><span class="pre">rom.sha</span></code><a class="headerlink" href="#rom-sha" title="Link to this heading">¶</a></h3>
 <p>This is the SHA1 hash of the <code class="docutils literal notranslate"><span class="pre">rom.md</span></code> file, used for importing ROMs.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a8be7b0ca850119b167f9644e6a4a22e983d61a4</span>
+</pre></div>
+</div>
 <p>These are all the files used in an integration.  The next section will describe the files in more detail.</p>
 </section>
 </section>
@@ -339,10 +393,10 @@
 </ul>
 <p>The following manifest shows an example of a game that has one variable, <code class="docutils literal notranslate"><span class="pre">score</span></code>, located at byte 128 that is 4 bytes wide in unsigned big endian format:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;score&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                        </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span>
-<span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;u4&quot;</span>
+<span class="w">        </span><span class="nt">"info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&gt;u4"</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="p">}</span>
@@ -428,7 +482,7 @@
 <h2>Integrating a Game<a class="headerlink" href="#integrating-a-game" title="Link to this heading">¶</a></h2>
 <p>To integrate a game you need to define a done condition and a reward function.  The done condition lets Stable Retro know when to end a game session, while the reward function provides a simple numeric goal for machine learning agents to maximize.</p>
 <p>To define these, you find variables from the game’s memory, such as the player’s current score and lives remaining, and use those to create the done condition and reward function.  An example done condition is when the <code class="docutils literal notranslate"><span class="pre">lives</span></code> variable is equal to <code class="docutils literal notranslate"><span class="pre">0</span></code>, an example reward function is the change in the <code class="docutils literal notranslate"><span class="pre">score</span></code> variable.</p>
-<p>Note: if the game requires that you hit the <code class="docutils literal notranslate"><span class="pre">Start</span></code> button to play, for instance after dying, then you need to modify the scenario file to allow this as <code class="docutils literal notranslate"><span class="pre">Start</span></code> is disallowed by default.  See the <code class="docutils literal notranslate"><span class="pre">actions</span></code> key in <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/master/retro/data/stable/KidChameleon-Genesis-v0/scenario.json">KidChameleon-Genesis-v0</a> for an example of this.</p>
+<p>Note: if the game requires that you hit the <code class="docutils literal notranslate"><span class="pre">Start</span></code> button to play, for instance after dying, then you need to modify the scenario file to allow this as <code class="docutils literal notranslate"><span class="pre">Start</span></code> is disallowed by default.  See the <code class="docutils literal notranslate"><span class="pre">actions</span></code> key in <a class="reference external" href="https://github.com/farama-foundation/stable-retro/blob/main/stable_retro/data/stable/KidChameleon-Genesis-v0/scenario.json">KidChameleon-Genesis-v0</a> for an example of this.</p>
 <section id="done-condition">
 <h3>Done Condition<a class="headerlink" href="#done-condition" title="Link to this heading">¶</a></h3>
 <p>This is usually the easier of the two.  The best done condition to use is the Game Over or Continue screen after you run out of lives.  For some games this is when you have zero lives left, for some <code class="docutils literal notranslate"><span class="pre">-1</span></code> lives, for others, it can be pretty hard.</p>
@@ -496,14 +550,14 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
         <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Integrations</span><span class="o">.</span><span class="n">add_custom_path</span><span class="p">(</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SCRIPT_DIR</span><span class="p">,</span> <span class="s2">&quot;custom_integrations&quot;</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SCRIPT_DIR</span><span class="p">,</span> <span class="s2">"custom_integrations"</span><span class="p">)</span>
         <span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FakeGame-Nes&quot;</span> <span class="ow">in</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">list_games</span><span class="p">(</span><span class="n">inttype</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Integrations</span><span class="o">.</span><span class="n">ALL</span><span class="p">))</span>
-        <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;FakeGame-Nes&quot;</span><span class="p">,</span> <span class="n">inttype</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Integrations</span><span class="o">.</span><span class="n">ALL</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"FakeGame-Nes"</span> <span class="ow">in</span> <span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">list_games</span><span class="p">(</span><span class="n">inttype</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Integrations</span><span class="o">.</span><span class="n">ALL</span><span class="p">))</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">"FakeGame-Nes"</span><span class="p">,</span> <span class="n">inttype</span><span class="o">=</span><span class="n">retro</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Integrations</span><span class="o">.</span><span class="n">ALL</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
         <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>

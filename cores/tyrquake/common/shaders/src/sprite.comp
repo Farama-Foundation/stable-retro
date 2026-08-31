@@ -1,0 +1,231 @@
+/*
+ * Affine-perspective textured sprite rasterizer (Phase
+ * 5b-05).
+ *
+ * GPU port of d_sprite.c::D_SpriteDrawSpans, dispatched
+ * once per sprite per frame.  The CPU side (R_DrawSprite
+ * + R_SetupAndDrawSprite) does the backface cull,
+ * worldspace polygon assembly, frustum clip, viewspace
+ * transform, and projection -- producing a list of 3..8
+ * screen-space vertices each with (u, v, 1/z, s/z, t/z)
+ * -- and hands the list off to this dispatch via the
+ * backend_vk_dispatch_3d_sprite_impl vtable entry.
+ *
+ * Per pixel inside the polygon's screen-space bounding
+ * box:
+ *   - Walk the triangle fan (v0, v[i], v[i+1] for i in
+ *     1..nump-2).  Test barycentric coordinates against
+ *     each triangle; first triangle that contains the
+ *     pixel is the one we interpolate from.
+ *   - Interpolate (1/z, s/z, t/z) via barycentric.
+ *     Perspective divide: s = (s/z) / (1/z),
+ *     t = (t/z) / (1/z), z = 1 / (1/z).
+ *   - Sample the sprite texture (palette-indexed byte)
+ *     from the texture pool at offset (s, t).
+ *   - Alpha test: skip pixel if sampled byte equals the
+ *     sprite's transparent index (255 in stock Quake).
+ *   - Z-test via imageAtomicMax (matches the Phase 5b-04
+ *     particle behaviour and inherits the same race
+ *     properties -- closer Z wins, residual colour race
+ *     between atomic + colour store is documented in
+ *     particles.comp's prologue and applies here too).
+ *
+ * Vertex layout: the CPU writes each vertex as
+ *   vec4(u, v, inv_z, s_over_z)
+ *   float t_over_z (separate SSBO entry to keep the
+ *                   struct alignment clean at 16 bytes
+ *                   for ivec4 access)
+ * but for simplicity here we pack all five floats into a
+ * single std430 struct.  std430 packs naturally without
+ * the 16-byte slot inflation std140 would impose.
+ *
+ * Triangulation: fan from v0.  Sprite polygons are
+ * already convex (frustum clipping of a planar quad
+ * preserves convexity), so a fan triangulation covers
+ * the interior exactly with no overlap.  Up to nump-2
+ * triangles for an nump-vertex polygon (so up to 6
+ * triangles for an 8-vertex polygon -- the worst case
+ * after all four frustum-plane clips).
+ *
+ * Edge-equation point-in-triangle test: signed 2D cross
+ * products.  For triangle (a, b, c) and pixel p, compute
+ * e0 = (b-a) x (p-a), e1 = (c-b) x (p-b),
+ * e2 = (a-c) x (p-c).  Pixel is inside if all three
+ * have the same sign.  Use top-left fill rule
+ * implicitly by treating zero as "inside" on whichever
+ * edge -- not strictly correct (could produce one-pixel
+ * sliver double-writes between triangles) but the
+ * downstream atomicMax Z-test makes such overlaps
+ * harmless.
+ *
+ * Descriptor set layout (matches backend_vulkan.c's
+ * create_resources):
+ *   set 0, binding 0: storage image u_index    (R8_UINT)
+ *   set 0, binding 1: storage image u_zbuffer  (R32_UINT)
+ *   set 0, binding 2: storage buffer Vertices  (host-mapped pool)
+ *   set 0, binding 3: storage buffer Textures  (host-mapped pool)
+ *
+ * Push constants:
+ *   ivec4 bbox          (x_min, y_min, x_max, y_max in
+ *                        screen pixels)
+ *   ivec4 dispatch_info (vertex_offset, nump, tex_offset,
+ *                        tex_width)
+ *   ivec4 tex_info      (tex_height, transparent_idx,
+ *                        pad, pad)
+ *
+ * 48 bytes, comfortably under the 128 B push-constant
+ * floor.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * Copyright (C) 2026 The libretro team
+ */
+#version 450
+
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
+
+struct SpriteVert {
+    float u;
+    float v;
+    float inv_z;
+    float s_over_z;
+    float t_over_z;
+    float _pad0;
+    float _pad1;
+    float _pad2;
+};
+
+layout(set = 0, binding = 0, r8ui)  uniform uimage2D u_index;
+layout(set = 0, binding = 1, r32ui) uniform uimage2D u_zbuffer;
+
+layout(set = 0, binding = 2, std430) readonly buffer Vertices {
+    SpriteVert v[];
+} verts;
+
+layout(set = 0, binding = 3, std430) readonly buffer Textures {
+    uint packed[];   /* 4 palette-index bytes per uint */
+} tex;
+
+layout(push_constant, std430) uniform PC {
+    ivec4 bbox;
+    ivec4 dispatch_info;
+    ivec4 tex_info;
+} pc;
+
+/* Signed 2D cross product, used as the edge equation. */
+float edge(vec2 a, vec2 b, vec2 c)
+{
+    return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+}
+
+/* Sample one palette-index byte from the packed texture
+ * pool.  4 bytes per std430 uint; the byte at logical
+ * offset `byte_off` is in uint slot `byte_off >> 2` at
+ * lane `(byte_off & 3) << 3`. */
+uint sample_palette(int byte_off)
+{
+    uint slot   = uint(byte_off) >> 2u;
+    uint lane   = uint(byte_off) & 3u;
+    uint packed = tex.packed[slot];
+    return (packed >> (lane * 8u)) & 0xffu;
+}
+
+void main()
+{
+    /* Dispatch is sized to ceil(bbox_w/8) x ceil(bbox_h/8)
+     * workgroups, so gl_GlobalInvocationID covers
+     * [0, bbox_w) x [0, bbox_h) in local terms.  Add the
+     * bbox origin to get the actual screen-pixel
+     * coordinate.  Threads in the last workgroup whose
+     * local index lands past the bbox's right or bottom
+     * edge get culled by the >= check below. */
+    ivec2 pos = ivec2(pc.bbox.xy) + ivec2(gl_GlobalInvocationID.xy);
+
+    /* Bbox reject (upper bound only; the offset above
+     * guarantees pos >= bbox.xy by construction). */
+    if (pos.x >= pc.bbox.z || pos.y >= pc.bbox.w)
+        return;
+
+    int   v_off  = pc.dispatch_info.x;
+    int   nump   = pc.dispatch_info.y;
+    int   t_off  = pc.dispatch_info.z;
+    int   tex_w  = pc.dispatch_info.w;
+    int   tex_h  = pc.tex_info.x;
+    uint  trans  = uint(pc.tex_info.y);
+
+    vec2 p   = vec2(float(pos.x) + 0.5, float(pos.y) + 0.5);
+    vec2 v0  = vec2(verts.v[v_off].u, verts.v[v_off].v);
+
+    float inv_z_0   = verts.v[v_off].inv_z;
+    float s_over_z0 = verts.v[v_off].s_over_z;
+    float t_over_z0 = verts.v[v_off].t_over_z;
+
+    bool  hit       = false;
+    float inv_z     = 0.0;
+    float s_over_z  = 0.0;
+    float t_over_z  = 0.0;
+
+    for (int i = 1; i < nump - 1; i++) {
+        SpriteVert vi = verts.v[v_off + i];
+        SpriteVert vj = verts.v[v_off + i + 1];
+
+        vec2 a = v0;
+        vec2 b = vec2(vi.u, vi.v);
+        vec2 c = vec2(vj.u, vj.v);
+
+        float w0 = edge(b, c, p);
+        float w1 = edge(c, a, p);
+        float w2 = edge(a, b, p);
+
+        /* Detect orientation: triangle area = w0+w1+w2 at
+         * any interior point.  Use its sign to normalise
+         * "all same sign" into "all <= 0" or "all >= 0". */
+        float area = w0 + w1 + w2;
+        if (area == 0.0)
+            continue;   /* degenerate */
+
+        bool inside = (area > 0.0)
+            ? (w0 >= 0.0 && w1 >= 0.0 && w2 >= 0.0)
+            : (w0 <= 0.0 && w1 <= 0.0 && w2 <= 0.0);
+
+        if (inside) {
+            float inv_area = 1.0 / area;
+            float b0 = w0 * inv_area;
+            float b1 = w1 * inv_area;
+            float b2 = w2 * inv_area;
+
+            inv_z     = b0 * inv_z_0   + b1 * vi.inv_z    + b2 * vj.inv_z;
+            s_over_z  = b0 * s_over_z0 + b1 * vi.s_over_z + b2 * vj.s_over_z;
+            t_over_z  = b0 * t_over_z0 + b1 * vi.t_over_z + b2 * vj.t_over_z;
+            hit       = true;
+            break;
+        }
+    }
+
+    if (!hit)
+        return;
+
+    /* Perspective divide. */
+    float z = 1.0 / inv_z;
+    int   s = int(s_over_z * z);
+    int   t = int(t_over_z * z);
+
+    /* Clamp into texture bounds.  Matches d_sprite.c's
+     * bbextents / bbextentt clamp (the SW path clamps
+     * after multiplying by 0x10000; we operate in raw
+     * integer texel coords). */
+    s = clamp(s, 0, tex_w - 1);
+    t = clamp(t, 0, tex_h - 1);
+
+    uint idx = sample_palette(t_off + t * tex_w + s);
+
+    /* Alpha test. */
+    if (idx == trans)
+        return;
+
+    /* Z-test via atomicMax (Phase 5b-04 pattern). */
+    uint izi = uint(inv_z * 32768.0);
+    uint old = imageAtomicMax(u_zbuffer, pos, izi);
+
+    if (old <= izi)
+        imageStore(u_index, pos, uvec4(idx, 0, 0, 0));
+}

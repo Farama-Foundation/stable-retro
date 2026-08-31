@@ -233,6 +233,10 @@ Copyright (c) 1995-2014 by Bradford W. Mott, Stephen Anthony and the Stella Team
 
 Copyright (C) 2008 by Sindre Aamå, licensed under the [GPLv2](https://github.com/libretro/gambatte-libretro/blob/4b98cd4d8ad13de9e08fe583ed814f76d800a0d1/COPYING). See full text at the bottom.
 
+## TyrQuake
+
+Quake is Copyright (C) 1996-1997 Id Software, Inc. TyrQuake and its libretro port are licensed under the [GPLv2 or later](https://github.com/libretro/tyrquake/blob/e57bb11597e8a00380f30f2627d219da960cf69a/LICENSE.txt). The vendored license is in `cores/tyrquake/LICENSE.txt`.
+
 ## mGBA
 
 Copyright (c) 2013-2018 by Jeffrey Pfau, licensed under the [MPLv2](https://github.com/endrift/mgba/blob/5b7917b6ccb92203cd6af2f5f350d048e377692d/LICENSE).

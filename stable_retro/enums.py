@@ -7,7 +7,7 @@ class State(Enum):
     also specify a string that is the name of the ``.state`` file
     """
 
-    DEFAULT = -1  #: Start the game at the default savestate from ``metadata.json``
+    DEFAULT = -1  #: Use the default state or reset mode from ``metadata.json``
     NONE = 0  #: Start the game at the power on screen for the emulator
 
 

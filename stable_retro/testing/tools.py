@@ -43,7 +43,22 @@ def scan_missing():
             stable_retro.data.Integrations.ALL,
         ):
             missing.append((game, "metadata.json"))
-        if not stable_retro.data.list_states(game, stable_retro.data.Integrations.ALL):
+        metadata_path = stable_retro.data.get_file_path(
+            game,
+            "metadata.json",
+            stable_retro.data.Integrations.ALL,
+        )
+        try:
+            with open(metadata_path) as metadata_file:
+                poweron_reset = (
+                    json.load(metadata_file).get("default_reset") == "poweron"
+                )
+        except (json.JSONDecodeError, OSError, TypeError):
+            poweron_reset = False
+        if not poweron_reset and not stable_retro.data.list_states(
+            game,
+            stable_retro.data.Integrations.ALL,
+        ):
             missing.append((game, "*.state"))
         if not stable_retro.data.get_file_path(
             game,
@@ -272,6 +287,10 @@ def verify_default_state(game, inttype, raw=None):
 
     errors = []
     state = metadata.get("default_state")
+    if metadata.get("default_reset") == "poweron":
+        if state:
+            return [], [(file, "default state conflicts with power-on reset")]
+        return [], []
     if not state:
         return [], [(file, "default state missing")]
     if state not in stable_retro.data.list_states(

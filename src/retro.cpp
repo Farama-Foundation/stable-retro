@@ -48,6 +48,10 @@ struct PyRetroEmulator {
 		m_re.run();
 	}
 
+	void reset() {
+		m_re.reset();
+	}
+
 	py::bytes getState() {
 		size_t size = m_re.serializeSize();
 		py::bytes bytes(NULL, size);
@@ -486,6 +490,7 @@ PYBIND11_MODULE(_retro, m) {
 	py::class_<PyRetroEmulator>(m, "RetroEmulator")
 		.def(py::init<const string&>())
 		.def("step", &PyRetroEmulator::step)
+		.def("reset", &PyRetroEmulator::reset)
 		.def("set_button_mask", &PyRetroEmulator::setButtonMask, py::arg("mask"), py::arg("player") = 0)
 		.def("get_state", &PyRetroEmulator::getState)
 		.def("set_state", &PyRetroEmulator::setState)

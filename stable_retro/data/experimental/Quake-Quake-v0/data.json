@@ -1,0 +1,72 @@
+{
+  "info": {
+    "health": {
+      "address": 0,
+      "type": "<i4"
+    },
+    "frags": {
+      "address": 4,
+      "type": "<i4"
+    },
+    "weapon": {
+      "address": 8,
+      "type": "<i4"
+    },
+    "ammo": {
+      "address": 12,
+      "type": "<i4"
+    },
+    "armor": {
+      "address": 16,
+      "type": "<i4"
+    },
+    "shells": {
+      "address": 24,
+      "type": "<i4"
+    },
+    "nails": {
+      "address": 28,
+      "type": "<i4"
+    },
+    "rockets": {
+      "address": 32,
+      "type": "<i4"
+    },
+    "cells": {
+      "address": 36,
+      "type": "<i4"
+    },
+    "active_weapon": {
+      "address": 40,
+      "type": "<i4"
+    },
+    "total_secrets": {
+      "address": 44,
+      "type": "<i4"
+    },
+    "total_monsters": {
+      "address": 48,
+      "type": "<i4"
+    },
+    "found_secrets": {
+      "address": 52,
+      "type": "<i4"
+    },
+    "killed_monsters": {
+      "address": 56,
+      "type": "<i4"
+    },
+    "items": {
+      "address": 60,
+      "type": "<i4"
+    },
+    "intermission": {
+      "address": 128,
+      "type": "<i4"
+    },
+    "completed_time": {
+      "address": 132,
+      "type": "<i4"
+    }
+  }
+}

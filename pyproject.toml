@@ -25,6 +25,9 @@ dependencies = [
 ]
 dynamic = ["version"]
 
+[project.optional-dependencies]
+dev = ["autopep8", "pre-commit", "pytest"]
+
 [project.urls]
 Homepage = "https://github.com/Farama-Foundation/stable-retro"
 Repository = "https://github.com/Farama-Foundation/stable-retro"

@@ -1,0 +1,85 @@
+name: Bug report
+description: Report a reproducible Stable Retro problem.
+title: "[Bug]: "
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - Python API
+        - Native runtime
+        - Emulator core or platform
+        - Game integration
+        - Build or packaging
+        - Integration UI
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Problem
+      description: Describe what went wrong and when it began.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide the smallest complete sequence that reproduces the problem without attaching copyrighted ROMs or BIOS files.
+      placeholder: |
+        1. Install ...
+        2. Run ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Stable Retro version or commit
+      placeholder: 0.9.5 or abc1234
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Operating system and architecture
+      placeholder: Ubuntu 24.04 x86_64
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: 3.12.8
+    validations:
+      required: true
+  - type: input
+    id: emulator
+    attributes:
+      label: Emulator platform and core
+      description: Required for emulator or game-specific problems.
+      placeholder: NintendoDs / melonDS
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and additional context
+      description: Paste complete text logs and remove secrets or copyrighted data.
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues for this problem.
+          required: true
+        - label: I have not attached a commercial ROM, BIOS, key, or other copyrighted asset.
+          required: true

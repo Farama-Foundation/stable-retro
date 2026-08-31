@@ -104,7 +104,7 @@ More advanced examples:
 
 Documentation is available at [https://stable-retro.farama.org/](https://stable-retro.farama.org/) (work in progress)
 
-See [LICENSES.md](https://github.com/Farama-Foundation/stable-retro/blob/master/LICENSES.md) for information on the licenses of the individual cores.
+See [LICENSES.md](https://github.com/Farama-Foundation/stable-retro/blob/main/LICENSES.md) for information on the licenses of the individual cores.
 
 | Topic | Description |
 | --- | --- |
@@ -133,7 +133,7 @@ The following non-commercial Sega Genesis ROM is included with Stable Retro for 
 
 ## Contributing & Support
 
-[See CONTRIBUTING.md](https://github.com/Farama-Foundation/stable-retro/blob/master/CONTRIBUTING.md)
+[See CONTRIBUTING.md](https://github.com/Farama-Foundation/stable-retro/blob/main/CONTRIBUTING.md)
 
 For any issues, suggestions, or discussions related to Stable-Retro, please use [GitHub Issues](https://github.com/Farama-Foundation/stable-retro/issues) or the Farama Foundation's [Discord](https://discord.gg/aPjhD5cf).
 

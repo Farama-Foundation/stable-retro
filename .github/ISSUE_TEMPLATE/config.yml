@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Stable Retro documentation
+    url: https://stable-retro.farama.org/
+    about: Read installation, API, integration, and emulator documentation.

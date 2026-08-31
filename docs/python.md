@@ -28,7 +28,7 @@ There are a few possible action spaces included with {class}`stable_retro.RetroE
    :members:
 ```
 
-You can also create your own action spaces derived from these.  For an example, see [discretizer.py](https://github.com/farama-foundation/stable-retro/blob/master/stable_retro/examples/discretizer.py).  This file shows how to use `stable_retro.Actions.Discrete` as well as how to make a custom wrapper that reduces the action space from `126` actions to `7`
+You can also create your own action spaces derived from these.  For an example, see [discretizer.py](https://github.com/farama-foundation/stable-retro/blob/main/stable_retro/examples/discretizer.py).  This file shows how to use `stable_retro.Actions.Discrete` as well as how to make a custom wrapper that reduces the action space from `126` actions to `7`
 
 ## Observations
 

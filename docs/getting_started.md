@@ -105,7 +105,7 @@ import stable_retro
 stable_retro.data.list_games()
 ```
 
-The actual integration data can be see in the [Stable Retro Github repo](https://github.com/farama-foundation/stable-retro/tree/master/stable_retro/data/stable).
+The actual integration data can be seen in the [Stable Retro GitHub repository](https://github.com/farama-foundation/stable-retro/tree/main/stable_retro/data/stable).
 
 (importing-roms)=
 

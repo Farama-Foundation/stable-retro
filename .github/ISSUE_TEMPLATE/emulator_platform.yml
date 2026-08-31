@@ -1,0 +1,59 @@
+name: Emulator platform or core
+description: Propose support for a new game system or libretro core.
+title: "[Platform]: "
+body:
+  - type: input
+    id: platform
+    attributes:
+      label: Platform or game system
+      placeholder: Nintendo Example System
+    validations:
+      required: true
+  - type: input
+    id: core
+    attributes:
+      label: Proposed libretro core and upstream URL
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Tested upstream revision
+      description: Provide a commit hash or release tag when available.
+  - type: textarea
+    id: license
+    attributes:
+      label: License and redistribution
+      description: Identify the core license and any BIOS, firmware, or key requirements.
+    validations:
+      required: true
+  - type: textarea
+    id: hosts
+    attributes:
+      label: Host platform support
+      description: State what is known for Linux, Windows, macOS x86_64, and macOS arm64.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Runtime behavior
+      description: Cover rendering, audio, input, RAM access, reset, and serialization support.
+    validations:
+      required: true
+  - type: textarea
+    id: testing
+    attributes:
+      label: Test strategy
+      description: Identify a redistributable fixture or explain how automated and manual testing can be performed without commercial assets.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing platform and core requests.
+          required: true
+        - label: I will not submit commercial ROMs, BIOS files, or keys without redistribution permission.
+          required: true

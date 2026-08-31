@@ -1,43 +1,58 @@
 # Stable Retro Contribution Guidelines
 
-At this time we are currently accepting the current forms of contributions:
-
-- Bug reports in either the core functionality or game integrations
-- Pull requests for core functionality bug fixes
-
-Notably, we are not accepting these forms of contributions:
-
-- New game integrations
-- New features
-
-This may change in the future.
-In the meantime if you wish to integrate new games you are more than welcome to maintain unofficial repositories of additional games.
+Stable Retro welcomes bug reports, bug fixes, documentation improvements, new features, game integrations, and emulator platform work. Open an issue before beginning a large feature or core integration so its design, licensing, and platform support can be discussed early.
 
 ## Issue reports
 
-Please include the following information in your issue reports:
+Use the relevant GitHub issue form and include:
 
-- Operating system
+- Operating system and architecture
 - Python version
 - Stable Retro version or git commit
-- A detailed description of the issue
+- Emulator platform and core, when relevant
+- Reproduction steps, expected behavior, and complete error output
 
-## Code contributions
+Do not upload commercial ROMs, BIOS files, encryption keys, or other copyrighted assets to issues or pull requests.
 
-Please try to adhere to the existing code style. There is a linter script included at `scripts/lint.sh`.
-Before creating a pull request, make sure that your new code does not cause any tests to fail. To run the tests, see the instructions below.
+## Development setup
 
-#### Testing on Linux
+On Debian or Ubuntu, install the native dependencies:
+
 ```bash
-sudo apt-get install -y python3-opengl
-python3 -m pip install pytest
-pytest
+sudo apt-get update
+sudo apt-get install -y cmake capnproto zlib1g-dev build-essential pkg-config libzip-dev libbz2-dev xvfb python3-opengl libgl1-mesa-dev libglu1-mesa-dev
 ```
 
-### Python
+Install Stable Retro and its development tools:
 
-Stable Retro is written in a [PEP 8-compliant code style](https://www.python.org/dev/peps/pep-0008/) (minus the line length restriction). Please make sure to maintain this style in any contributions.
+```bash
+python -m pip install -e '.[dev]'
+```
 
-### C++
+## Testing and style
 
-There is a `.clang-format` file that documents as best as possible the code style for Stable Retro. Please make sure to follow it.
+Run Python tests with:
+
+```bash
+scripts/test-python.sh
+```
+
+Run native tests with:
+
+```bash
+CMAKE_BUILD_PARALLEL_LEVEL=2 scripts/test-cpp.sh
+```
+
+Run repository checks on changed files with:
+
+```bash
+python -m pre_commit run --files <changed-files>
+```
+
+Python is formatted and checked by the tools configured in `.pre-commit-config.yaml`. C++ follows `.clang-format`. The legacy `scripts/lint.sh` command rewrites files in place; inspect your diff after using it.
+
+## Integration work
+
+- For a new game integration, follow `docs/integration.md`.
+- For a new emulator system or libretro core, account for licensing, host support, manifest mapping, packaging, native tests, and documentation. The repository workflow is captured in `.github/skills/add-emulator-platform/SKILL.md`.
+- Test fixtures must be freely redistributable and include clear provenance.

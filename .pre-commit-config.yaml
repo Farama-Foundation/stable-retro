@@ -33,10 +33,10 @@ repos:
           - --show-source
           - --statistics
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.10.1
+    rev: v3.21.2
     hooks:
       - id: pyupgrade
-        args: [ "--py37-plus" ]
+        args: [ "--py310-plus" ]
   - repo: https://github.com/PyCQA/isort
     rev: 5.12.0
     hooks:

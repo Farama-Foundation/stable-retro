@@ -169,6 +169,6 @@ python.md
 
 release_notes.md
 Github <https://github.com/Farama-Foundation/stable-retro>
-Contribute to the Docs <https://github.com/Farama-Foundation/stable-retro/blob/master/docs/README.md>
+Contribute to the Docs <https://github.com/Farama-Foundation/stable-retro/blob/main/docs/README.md>
 ```
 [//]: # (release_notes/index)

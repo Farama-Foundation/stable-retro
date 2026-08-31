@@ -2,7 +2,7 @@
 
 Adding new games can be done without recompiling Stable Retro, but if you need to work on the C++ code or make changes to the UI, you will want to compile Stable Retro from source.
 
-## Install Retro from source
+## Install Stable Retro from source
 
 Building Stable Retro requires at least either gcc 5 or clang 3.4.
 
@@ -12,14 +12,6 @@ To build Stable Retro you must first install CMake.
 You can do this either through your package manager, download from the [official site](https://cmake.org/download/) or `pip3 install cmake`.
 If you're using the official installer on Windows, make sure to tell CMake to add itself to the system PATH.
 
-### Mac prerequisites
-
-Since LuaJIT does not work properly on macOS you must first install Lua 5.1 from homebrew:
-
-```shell
-brew install pkg-config lua@5.1
-```
-
 ### Windows prerequisites
 
 Install docker
@@ -27,7 +19,8 @@ Install docker
 ### Linux prerequisites
 
 ```shell
-sudo apt-get install zlib1g-dev
+sudo apt-get update
+sudo apt-get install -y cmake capnproto zlib1g-dev build-essential pkg-config libzip-dev libbz2-dev xvfb python3-opengl libgl1-mesa-dev libglu1-mesa-dev
 ```
 
 ### Building Linux and Mac
@@ -35,8 +28,18 @@ sudo apt-get install zlib1g-dev
 ```shell
 git clone https://github.com/farama-foundation/stable-retro.git stable-retro
 cd stable-retro
-pip3 install -e .
+python -m pip install -e '.[dev]'
 ```
+
+Run Python and native tests through the same entry points used by CI:
+
+```shell
+scripts/test-python.sh
+CMAKE_BUILD_PARALLEL_LEVEL=2 scripts/test-cpp.sh
+python -m pre_commit run --all-files
+```
+
+The native test command uses an in-source CMake build because the test suite resolves core libraries and ROM fixtures relative to the source tree.
 
 ### Building Windows
 
@@ -53,7 +56,7 @@ Then you may pip install
 ```shell
 git clone https://github.com/farama-foundation/stable-retro.git stable-retro
 cd stable-retro
-pip3 install -e .
+python -m pip install -e '.[dev]'
 ```
 
 ## Install Retro UI from source
@@ -65,7 +68,7 @@ First make sure you can install Retro from source, after that follow the instruc
 Note that for Mojave (10.14) you may need to install `/Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg`
 
 ```shell
-brew install pkg-config capnp lua@5.1 qt5
+brew install pkg-config capnp qt5
 cmake . -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DBUILD_UI=ON -UPYLIB_DIRECTORY
 make -j$(sysctl hw.ncpu | cut -d: -f2)
 open "Gym Retro Integration.app"

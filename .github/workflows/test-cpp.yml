@@ -19,13 +19,9 @@ jobs:
       - name: Install system packages
         run: |
           sudo apt-get update
-          sudo apt-get install git cmake capnproto zlib1g-dev build-essential pkg-config libzip-dev software-properties-common libbz2-dev python3-opengl
+          sudo apt-get install -y git cmake capnproto zlib1g-dev build-essential pkg-config libzip-dev software-properties-common libbz2-dev python3-opengl
 
-      - name: Install pip package and build tests
-        run: |
-          cmake -DCMAKE_DISABLE_FIND_PACKAGE_CapnProto=TRUE .
-          make -j2
-          make -j2 -f tests/Makefile
-
-      - name: Run tests
-        run: ctest --progress --verbose
+      - name: Build and run tests
+        run: scripts/test-cpp.sh
+        env:
+          CMAKE_BUILD_PARALLEL_LEVEL: 2

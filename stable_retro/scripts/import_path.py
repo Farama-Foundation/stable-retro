@@ -45,7 +45,9 @@ def main():
                         metadata = json.load(mf)
                     original_name = metadata.get("original_rom_name")
                     if original_name:
-                        with open(os.path.join(game_path, original_name), "wb") as of:
+                        original_path = os.path.join(game_path, original_name)
+                        os.makedirs(os.path.dirname(original_path), exist_ok=True)
+                        with open(original_path, "wb") as of:
                             of.write(data)
                 except (json.JSONDecodeError, OSError):
                     pass

@@ -80,6 +80,7 @@ platforms = [
     "Saturn",
     "N64",
     "Arcade",
+    "Quake",
 ]
 
 # Data folders are named both with and without a version suffix, e.g.

@@ -1139,3 +1139,9 @@ No bundled games found in `stable_retro/data` for this emulator core.
 | Game (folder name) | Dataset |
 | --- | --- |
 | StreetFighter3rdStrike-Dreamcast-v0 | stable |
+
+## TyrQuake (Quake)
+
+| Game (folder name) | Dataset |
+| --- | --- |
+| Quake-Quake-v0 | experimental |

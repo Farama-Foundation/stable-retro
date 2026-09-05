@@ -1,0 +1,164 @@
+/*
+ * Fused water-warp + palette-mapping compute shader
+ * (Phase 5b-03).
+ *
+ * GPU port of d_scan.c::D_WarpScreen, but folded into the
+ * same dispatch that already does the palette-index ->
+ * RGBA lookup (textured_palette.comp).  When the player's
+ * view leaf is in water (CONTENTS_WATER) and r_waterwarp
+ * is on, the per-frame command buffer dispatches THIS
+ * shader instead of the regular palette compute.  When
+ * the view isn't in water, the regular palette compute
+ * runs unchanged.
+ *
+ * The fusion is the architectural change Lib called out:
+ * the SW path downscales the 3D viewport (governed by
+ * the r_waterwarp_scale cvar, default 0.5) and renders
+ * into r_warpbuffer at the reduced resolution, then
+ * D_WarpScreen stretches + warps r_warpbuffer back up to
+ * vid.buffer at full screen.  That downscale-then-
+ * upsample pipeline only existed because per-pixel sin-
+ * warp at full 1080p is prohibitively expensive on CPU.
+ * On GPU it's free: every workgroup invocation does a
+ * couple of integer table lookups and a single sample,
+ * which finishes in microseconds regardless of
+ * resolution.  Skipping the downscale means we keep the
+ * full-resolution detail of the underlying 3D render
+ * and pay no perceptible cost for the warp.
+ *
+ * Algorithm (matches D_WarpScreen's per-pixel formula
+ * but with wratio == hratio == 1, i.e. no source-buffer
+ * downscale):
+ *
+ *   For each output pixel (x, y):
+ *     u_rel = x - scr_vrect.x  (position within the
+ *             warpable 3D viewport)
+ *     v_rel = y - scr_vrect.y
+ *
+ *     If (u_rel, v_rel) is outside scr_vrect: passthrough
+ *       -- sample u_index at (x, y), palette-map, write.
+ *     If inside scr_vrect:
+ *       t_v = intsintable[(phase + (v_rel & 127)) & 255]
+ *         -- horizontal offset that depends on the row
+ *       t_u = intsintable[(phase + (u_rel & 127)) & 255]
+ *         -- vertical offset that depends on the column
+ *       Sample u_index at (x + t_v, y + t_u), clamped to
+ *       image bounds.  Palette-map, write.
+ *
+ * Note that the two offsets are swapped vs the naive
+ * intuition: t_v (sin-of-row-phase) shifts horizontally,
+ * t_u (sin-of-column-phase) shifts vertically -- this
+ * matches the SW path exactly (the row pointer table is
+ * indexed by turb[u & 127], not turb[v & 127], so the
+ * column-phase offset perturbs the vertical sample
+ * position, and vice versa).  Different from the swirl
+ * you'd write from scratch, but matches the visual look
+ * of Quake's water exactly because it preserves the SW
+ * arithmetic.
+ *
+ * Edge handling: SW's downscale formula
+ *     src = vrect_origin + floor(idx * dim * dim
+ *           / (scr_dim * (dim + 2 * TURB_SCREEN_AMP)))
+ * applies a slight inward compression (the
+ * dim / (dim + 2*TURB_SCREEN_AMP) factor, ~0.994 at
+ * 1080p) to keep edge pixels from sampling past the
+ * rendered area in r_warpbuffer.  We don't have an
+ * r_warpbuffer -- u_index is the full-resolution
+ * rendered view -- so we just clamp the sin-offset
+ * sample position to image bounds.  Visually the
+ * difference is a few pixels of edge stability that
+ * are imperceptible in motion (the warp is a
+ * continuously-cycling sin offset, the edges are
+ * always moving anyway).
+ *
+ * Phase increments as ((int)(cl.time * TURB_SPEED) &
+ * (TURB_CYCLE - 1)) where TURB_SPEED = 20 and TURB_
+ * CYCLE = 128; the dispatch pushes the current value
+ * once per frame in the push-constant block.
+ * intsintable has 2 * TURB_CYCLE = 256 entries, each
+ * an int in [0, 2 * TURB_SCREEN_AMP] (i.e. 0..6 with
+ * TURB_SCREEN_AMP == 3).  Uploaded once at backend
+ * init from R_InitTurb's output, lives in a small
+ * UBO -- 1 KiB total, comfortably below the 16 KiB
+ * UBO size floor.
+ *
+ * Descriptor set layout (matches backend_vulkan.c's
+ * create_resources exactly):
+ *   set 0, binding 0:  sampler2D       u_index    (R8_UINT)
+ *   set 0, binding 1:  sampler2D       u_palette  (R8G8B8A8_UNORM)
+ *   set 0, binding 2:  writeonly image2D u_output (R8G8B8A8_UNORM)
+ *   set 0, binding 3:  uniform SinTab  intsintable[256]
+ *
+ * Push constants:
+ *   phase, scr_x, scr_y, scr_w, scr_h (5 ints + pad = 24 B)
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * Copyright (C) 2026 The libretro team
+ */
+#version 450
+
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+layout(set = 0, binding = 0) uniform usampler2D           u_index;
+layout(set = 0, binding = 1) uniform sampler2D            u_palette;
+layout(set = 0, binding = 2, rgba8) uniform writeonly image2D u_output;
+
+/* 256 ints, but std140 packs each scalar into a 16-byte
+ * slot in a uniform block -- expand to ivec4 so all four
+ * lanes of each slot are usable, indexed as a flat 256-
+ * entry array (256 ints = 64 ivec4s).  The host upload
+ * writes the table the same way: ivec4 slots, four
+ * intsintable[] entries per slot. */
+layout(set = 0, binding = 3, std140) uniform SinTab {
+    ivec4 packed[64];
+} sintable;
+
+layout(push_constant, std430) uniform PC {
+    int phase;
+    int scr_x;
+    int scr_y;
+    int scr_w;
+    int scr_h;
+    int _pad0;
+    int _pad1;
+    int _pad2;
+} pc;
+
+#define TURB_CYCLE 128
+
+int sin_at(int i)
+{
+    /* i in [0, 256); look up via packed[i / 4][i & 3]. */
+    return sintable.packed[i >> 2][i & 3];
+}
+
+void main()
+{
+    ivec2 pos     = ivec2(gl_GlobalInvocationID.xy);
+    ivec2 outSize = imageSize(u_output);
+
+    if (pos.x >= outSize.x || pos.y >= outSize.y)
+        return;
+
+    int u_rel = pos.x - pc.scr_x;
+    int v_rel = pos.y - pc.scr_y;
+
+    ivec2 sample_pos;
+    if (u_rel >= 0 && u_rel < pc.scr_w
+     && v_rel >= 0 && v_rel < pc.scr_h) {
+        int t_v = sin_at((pc.phase + (v_rel & (TURB_CYCLE - 1))) & 255);
+        int t_u = sin_at((pc.phase + (u_rel & (TURB_CYCLE - 1))) & 255);
+
+        sample_pos = ivec2(pos.x + t_v, pos.y + t_u);
+        sample_pos = clamp(sample_pos,
+                           ivec2(0),
+                           outSize - ivec2(1));
+    } else {
+        sample_pos = pos;
+    }
+
+    uint idx = texelFetch(u_index,   sample_pos,            0).r;
+    vec3 rgb = texelFetch(u_palette, ivec2(int(idx), 0),   0).rgb;
+
+    imageStore(u_output, pos, vec4(rgb, 1.0));
+}

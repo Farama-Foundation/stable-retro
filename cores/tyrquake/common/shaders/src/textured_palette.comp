@@ -1,0 +1,98 @@
+/*
+ * Palette-indexed textured compute shader.
+ *
+ * Functional equivalent of textured_palette.frag, but
+ * runs as a compute dispatch instead of a fragment-shader
+ * pass.  For every pixel in u_output, reads the palette
+ * index from u_index at the matching texel, looks up the
+ * RGBA colour in u_palette, and writes it to u_output.
+ *
+ * Why compute instead of a render pass:
+ *
+ *   - No render pass / framebuffer / graphics-pipeline
+ *     state to maintain.  The dispatch is the entire
+ *     "present" workload.
+ *
+ *   - Phase 4f reserved a "compute door" by putting
+ *     VK_IMAGE_USAGE_STORAGE_BIT on the render target,
+ *     declaring the descriptor bindings as
+ *     FRAGMENT | COMPUTE, and keeping per-frame command
+ *     recording (Phase 4e) so a compute dispatch could
+ *     swap in for the render-pass draw without
+ *     restructuring the command buffer.  This file is
+ *     that swap.
+ *
+ *   - Sets up the pattern for future compute work --
+ *     HDR tonemap, post-process, eventually a
+ *     compute-based rasterizer that replaces
+ *     R_RenderView -- without needing a graphics
+ *     pipeline at all.
+ *
+ * Workgroup size 16x16 = 256 invocations per group, which
+ * is comfortably within every Vulkan implementation's
+ * maxComputeWorkGroupInvocations floor (128 is the spec
+ * minimum; 256 is what's guaranteed on every desktop GPU
+ * in practice).  Each invocation handles one output pixel.
+ *
+ * Dispatch on the C side is
+ *   ceil(width / 16) by ceil(height / 16) workgroups
+ * with the in-shader bounds check below catching the
+ * out-of-bounds invocations at the right/bottom edges
+ * when width or height is not a multiple of 16.
+ *
+ * texelFetch on u_index avoids the FS-style normalised
+ * UV: we already have the exact integer pixel coordinate
+ * (gl_GlobalInvocationID.xy), no need to round-trip
+ * through u = pos/imageSize.
+ *
+ * u_palette is sampled normally: NEAREST filtering at
+ * u = idx maps the R8_UNORM byte b to texel b exactly
+ * over the 256-wide palette texture (verified in
+ * textured_palette.frag's header).
+ *
+ * Alpha is forced to 1.0 so palette indices 0 and 255
+ * (which VID_SetPalette2 in libretro.c traditionally
+ * stripped alpha on for SW transparency semantics) don't
+ * propagate zero alpha through the output -- matches the
+ * FS behaviour the compute path is replacing.
+ *
+ * Descriptor set layout (matches backend_vulkan.c's
+ * create_resources exactly):
+ *   set 0, binding 0:  sampler2D            u_index    (R8_UNORM)
+ *   set 0, binding 1:  sampler2D            u_palette  (R8G8B8A8_UNORM, 256x1)
+ *   set 0, binding 2:  writeonly image2D    u_output   (R8G8B8A8_UNORM, width x height)
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * Copyright (C) 2026 The libretro team
+ */
+#version 450
+
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+/* Phase 5b-01: u_index switched from sampler2D (R8_UNORM,
+ * normalised-float read) to usampler2D (R8_UINT, integer
+ * read).  vk_texture's format change to R8_UINT was
+ * required to add VK_IMAGE_USAGE_STORAGE_BIT to the
+ * texture so future compute dispatches (particles, alias
+ * model rasterizer, world surface rasterizer, etc.) can
+ * write palette indices into it directly.  R8_UNORM is
+ * not in Vulkan 1.0's mandatory STORAGE format table;
+ * R8_UINT is.  Visual output is identical: the palette
+ * lookup picks the same byte either way. */
+layout(set = 0, binding = 0) uniform usampler2D           u_index;
+layout(set = 0, binding = 1) uniform sampler2D            u_palette;
+layout(set = 0, binding = 2, rgba8) uniform writeonly image2D u_output;
+
+void main()
+{
+    ivec2 pos     = ivec2(gl_GlobalInvocationID.xy);
+    ivec2 outSize = imageSize(u_output);
+
+    if (pos.x >= outSize.x || pos.y >= outSize.y)
+        return;
+
+    uint idx  = texelFetch(u_index,   pos, 0).r;
+    vec3 rgb  = texelFetch(u_palette, ivec2(int(idx), 0), 0).rgb;
+
+    imageStore(u_output, pos, vec4(rgb, 1.0));
+}

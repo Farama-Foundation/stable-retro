@@ -67,6 +67,7 @@ option(BUILD_MANYLINUX "Should use static libraries compatible with manylinux1"
 option(ENABLE_HW_RENDER
        "Enable hardware rendering support for GPU cores (requires EGL/OpenGL)"
        OFF)
+option(BUILD_FBNEO "Build FinalBurn Neo arcade core" ON)
 option(BUILD_N64 "Build Parallel N64 core (requires OpenGL headers)" ON)
 
 set(BUILD_PYTHON
@@ -268,7 +269,11 @@ if(APPLE)
       "FBNeo arcade and parallel N64 emulator is currently not supported on macOS"
   )
 else()
-  add_core(fbneo fbneo)
+  if(BUILD_FBNEO)
+    add_core(fbneo fbneo)
+  else()
+    message(STATUS "BUILD_FBNEO=OFF: skipping FBNeo core")
+  endif()
   if(BUILD_N64)
     if(STABLE_RETRO_HAVE_GL_GL_H)
       add_core(n64 parallel_n64)

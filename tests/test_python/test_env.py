@@ -1,9 +1,36 @@
 import os
 import pickle
+from unittest.mock import Mock
 
 import pytest
 
 import stable_retro as retro
+
+
+def test_reset_without_state_uses_core_reset(monkeypatch, tmp_path):
+    env = object.__new__(retro.RetroEnv)
+    env.initial_state = None
+    env.statename = None
+    env.gamename = "Test"
+    env.em = Mock()
+    env.players = 1
+    env.num_buttons = 1
+    env.movie_path = str(tmp_path)
+    env.movie_id = 0
+    env.movie = None
+    env.record_movie = Mock()
+    env.data = Mock()
+    env.render_mode = "rgb_array"
+    monkeypatch.setattr(env, "_update_obs", lambda: "observation")
+
+    observation, info = env.reset()
+
+    env.em.reset.assert_called_once_with()
+    env.record_movie.assert_called_once_with(
+        os.path.join(tmp_path, "Test-PowerOn-000000.bk2"),
+    )
+    assert observation == "observation"
+    assert info == {}
 
 
 @pytest.fixture(

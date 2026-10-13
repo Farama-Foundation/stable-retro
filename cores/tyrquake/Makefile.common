@@ -1,0 +1,259 @@
+ifeq ($(LIBRETRO_COMM_DIR),)
+LIBRETRO_COMM_DIR  = $(CORE_DIR)/libretro-common
+endif
+LIBFLAC_DIR    = $(CORE_DIR)/deps/libFLAC
+TREMOR_DIR     = $(CORE_DIR)/deps/tremor
+LIBVORBIS_DIR  = $(CORE_DIR)/deps/libvorbis
+LIBOGG_DIR     = $(CORE_DIR)/deps/libogg
+VULKAN_DIR     = $(CORE_DIR)/deps/vulkan
+
+INCFLAGS   := \
+	-I$(CORE_DIR) \
+	-I$(LIBRETRO_COMM_DIR)/include \
+	-I$(CORE_DIR)/include \
+
+ifneq (,$(findstring msvc2003,$(platform)))
+INCFLAGS += -I$(LIBRETRO_COMM_DIR)/include/compat/msvc
+endif
+
+# Vulkan renderer backend.  Off by default so the base build
+# has no dependency on vendored Vulkan headers.  Enable with
+# `make RHI_HAVE_VULKAN=1`; the headers must be vendored under
+# deps/vulkan/include/ (see deps/vulkan/README.md for what
+# goes there and where to fetch from).  When unset, the
+# backend_vulkan.c TU still compiles but its init() returns
+# false unconditionally so the active backend stays software.
+RHI_HAVE_VULKAN ?= 0
+ifeq ($(RHI_HAVE_VULKAN), 1)
+CFLAGS  += -DRHI_HAVE_VULKAN
+INCFLAGS += -I$(VULKAN_DIR)/include
+endif
+
+SOURCES_C :=  \
+	$(CORE_DIR)/common/cl_input.c \
+	$(CORE_DIR)/common/cd_common.c \
+	$(CORE_DIR)/common/alias_model.c \
+	$(CORE_DIR)/common/chase.c \
+	$(CORE_DIR)/common/cl_demo.c \
+	$(CORE_DIR)/common/cl_main.c \
+	$(CORE_DIR)/common/cl_parse.c \
+	$(CORE_DIR)/common/cl_tent.c \
+	$(CORE_DIR)/common/common.c \
+	$(CORE_DIR)/common/cmd.c \
+	$(CORE_DIR)/common/crc.c \
+	$(CORE_DIR)/common/console.c \
+	$(CORE_DIR)/common/cvar.c \
+	$(CORE_DIR)/common/d_edge.c \
+	$(CORE_DIR)/common/d_init.c \
+	$(CORE_DIR)/common/d_part.c \
+	$(CORE_DIR)/common/d_modech.c \
+	$(CORE_DIR)/common/d_polyse.c \
+	$(CORE_DIR)/common/d_scan.c \
+	$(CORE_DIR)/common/d_sky.c \
+	$(CORE_DIR)/common/d_sprite.c \
+	$(CORE_DIR)/common/d_surf.c \
+	$(CORE_DIR)/common/d_vars.c \
+	$(CORE_DIR)/common/draw.c \
+	$(CORE_DIR)/common/host.c \
+	$(CORE_DIR)/common/host_cmd.c \
+	$(CORE_DIR)/common/keys.c \
+	$(CORE_DIR)/common/mathlib.c \
+	$(CORE_DIR)/common/menu.c \
+	$(CORE_DIR)/common/model.c \
+	$(CORE_DIR)/common/net_common.c \
+	$(CORE_DIR)/common/net_loop.c \
+	$(CORE_DIR)/common/net_main.c \
+	$(CORE_DIR)/common/pr_cmds.c \
+	$(CORE_DIR)/common/pr_exec.c \
+	$(CORE_DIR)/common/pr_edict.c \
+	$(CORE_DIR)/common/r_aclip.c \
+	$(CORE_DIR)/common/r_alias.c \
+	$(CORE_DIR)/common/r_bsp.c \
+	$(CORE_DIR)/common/r_draw.c \
+	$(CORE_DIR)/common/r_edge.c \
+	$(CORE_DIR)/common/r_efrag.c \
+	$(CORE_DIR)/common/r_light.c \
+	$(CORE_DIR)/common/r_main.c \
+	$(CORE_DIR)/common/r_misc.c \
+	$(CORE_DIR)/common/r_model.c \
+	$(CORE_DIR)/common/r_part.c \
+	$(CORE_DIR)/common/r_sky.c \
+	$(CORE_DIR)/common/r_sprite.c \
+	$(CORE_DIR)/common/r_subdiv.c \
+	$(CORE_DIR)/common/r_vars.c \
+	$(CORE_DIR)/common/r_surf.c \
+	$(CORE_DIR)/common/rb_tree.c \
+	$(CORE_DIR)/common/rhi.c \
+	$(CORE_DIR)/common/backend_sw.c \
+	$(CORE_DIR)/common/backend_vulkan.c \
+	$(CORE_DIR)/common/sbar.c \
+	$(CORE_DIR)/common/screen.c \
+	$(CORE_DIR)/common/shell.c \
+	$(CORE_DIR)/common/surf_atlas.c \
+	$(CORE_DIR)/common/perf_timing.c \
+	$(CORE_DIR)/common/bgmusic.c \
+	$(CORE_DIR)/common/snd_codec.c \
+	$(CORE_DIR)/common/snd_flac.c \
+	$(CORE_DIR)/common/snd_mikmod.c \
+	$(CORE_DIR)/common/snd_modplug.c \
+	$(CORE_DIR)/common/snd_mp3.c \
+	$(CORE_DIR)/common/snd_mpg123.c \
+	$(CORE_DIR)/common/snd_opus.c \
+	$(CORE_DIR)/common/snd_umx.c \
+	$(CORE_DIR)/common/snd_vorbis.c \
+	$(CORE_DIR)/common/snd_wave.c \
+	$(CORE_DIR)/common/snd_dma.c \
+	$(CORE_DIR)/common/snd_mem.c \
+	$(CORE_DIR)/common/snd_mix.c \
+	$(CORE_DIR)/common/sprite_model.c \
+	$(CORE_DIR)/common/sv_main.c \
+	$(CORE_DIR)/common/sv_move.c \
+	$(CORE_DIR)/common/sv_phys.c \
+	$(CORE_DIR)/common/sv_user.c \
+	$(CORE_DIR)/common/libretro.c \
+	$(CORE_DIR)/common/view.c \
+	$(CORE_DIR)/common/wad.c \
+	$(CORE_DIR)/common/zone.c \
+	$(CORE_DIR)/common/world.c
+
+ifneq ($(STATIC_LINKING),1)
+	SOURCES_C += \
+		     $(LIBRETRO_COMM_DIR)/file/retro_dirent.c \
+		     $(LIBRETRO_COMM_DIR)/encodings/encoding_utf.c \
+		     $(LIBRETRO_COMM_DIR)/string/stdstring.c \
+		     $(LIBRETRO_COMM_DIR)/streams/file_stream.c \
+		     $(LIBRETRO_COMM_DIR)/streams/file_stream_transforms.c \
+		     $(LIBRETRO_COMM_DIR)/vfs/vfs_implementation.c \
+		     $(LIBRETRO_COMM_DIR)/file/file_path.c \
+		     $(LIBRETRO_COMM_DIR)/file/file_path_io.c \
+		     $(LIBRETRO_COMM_DIR)/features/features_cpu.c \
+		     $(LIBRETRO_COMM_DIR)/compat/fopen_utf8.c \
+		     $(LIBRETRO_COMM_DIR)/compat/compat_strl.c \
+		     $(LIBRETRO_COMM_DIR)/compat/compat_posix_string.c \
+		     $(LIBRETRO_COMM_DIR)/compat/compat_strcasestr.c \
+		     $(LIBRETRO_COMM_DIR)/compat/compat_snprintf.c \
+		     $(LIBRETRO_COMM_DIR)/time/rtime.c
+endif
+
+ifeq ($(HAVE_NETWORKING),1)
+SOURCES_C += $(CORE_DIR)/common/net_dgrm.c \
+	$(CORE_DIR)/common/net_udp.c \
+	$(CORE_DIR)/common/net_bsd.c
+
+ifeq ($(platform), ctr)
+SOURCES_C += \
+				 $(LIBRETRO_COMM_DIR)/net/net_compat.c \
+				 $(LIBRETRO_COMM_DIR)/net/net_socket.c
+else ifneq ($(STATIC_LINKING),1)
+SOURCES_C += \
+				 $(LIBRETRO_COMM_DIR)/net/net_compat.c \
+				 $(LIBRETRO_COMM_DIR)/net/net_socket.c
+endif
+else
+SOURCES_C += $(CORE_DIR)/common/net_none.c
+endif
+
+ifeq ($(USE_CODEC_FLAC),1)
+INCFLAGS  += -I$(LIBFLAC_DIR)/include
+SOURCES_C += \
+				 $(LIBFLAC_DIR)/bitreader.c \
+				 $(LIBFLAC_DIR)/crc.c \
+				 $(LIBFLAC_DIR)/fixed.c \
+				 $(LIBFLAC_DIR)/float.c \
+				 $(LIBFLAC_DIR)/format.c \
+				 $(LIBFLAC_DIR)/lpc.c \
+				 $(LIBFLAC_DIR)/md5.c \
+				 $(LIBFLAC_DIR)/memory.c \
+				 $(LIBFLAC_DIR)/ogg_decoder_aspect.c \
+				 $(LIBFLAC_DIR)/ogg_mapping.c \
+				 $(LIBFLAC_DIR)/stream_decoder.c
+endif
+
+ifeq ($(USE_CODEC_VORBIS),1)
+# Vorbis is decoded with the fixed-point Tremor (libvorbisidec) decoder
+# rather than the float libvorbis.  Tremor's integer-only IMDCT yields
+# bit-identical int16 PCM on every platform/FPU, so music decode is
+# deterministic and there is no float->int16 quantization pass.  The
+# snd_vorbis.c wrapper takes its VORBIS_USE_TREMOR code path accordingly;
+# the -DVORBIS_USE_TREMOR define is set by the driver makefiles.
+# snd_vorbis.c reaches Tremor through <tremor/ivorbisfile.h> (-I deps) and
+# Tremor's own sources self-include via quotes, so the deps/tremor directory
+# is deliberately NOT on the -I path: putting it there makes its generically
+# named headers (block.h, os.h, misc.h, window.h...) shadow system headers of
+# the same name on case-insensitive filesystems -- e.g. macOS CoreFoundation's
+# <Block.h> would resolve to deps/tremor/block.h and fail to build.
+INCFLAGS  += -I$(CORE_DIR)/deps \
+				 -I$(LIBOGG_DIR)/include
+
+SOURCES_C += \
+				 $(TREMOR_DIR)/block.c \
+				 $(TREMOR_DIR)/codebook.c \
+				 $(TREMOR_DIR)/floor0.c \
+				 $(TREMOR_DIR)/floor1.c \
+				 $(TREMOR_DIR)/info.c \
+				 $(TREMOR_DIR)/mapping0.c \
+				 $(TREMOR_DIR)/mdct.c \
+				 $(TREMOR_DIR)/registry.c \
+				 $(TREMOR_DIR)/res012.c \
+				 $(TREMOR_DIR)/sharedbook.c \
+				 $(TREMOR_DIR)/synthesis.c \
+				 $(TREMOR_DIR)/vorbisfile.c \
+				 $(TREMOR_DIR)/window.c
+
+SOURCES_C += $(LIBOGG_DIR)/src/bitwise.c \
+				 $(LIBOGG_DIR)/src/framing.c
+
+# Float libvorbis: used only when float audio output is negotiated; decodes
+# straight to float (vs Tremor's int16, which stays the default).  Vendored
+# decode-only -- the encode machinery (psy/envelope/FFT) is replaced by no-op
+# stubs in decode_stubs.c, since every reference to it sits behind an encode-
+# only guard never taken on the decode path.  Symbol-namespaced to fv_* via
+# fvorbis_rename.h (force-included below) so it links beside Tremor without
+# colliding on the shared ov_*/vorbis_* names; the single vendored libogg is
+# shared by both (its symbols are deliberately not renamed).
+#
+# deps/libvorbis/lib is kept OFF the global -I path: its generic header names
+# (block.h, os.h, misc.h, window.h, info.h, ...) would shadow system headers
+# of the same name, the same hazard documented above for deps/tremor.  The
+# per-object CFLAGS add it locally to the vendored TUs only.  snd_vorbis_float.c
+# needs just the public vorbis headers and namespaces the few ov_* entry points
+# it calls in-source, so it only takes -I.../include.
+LIBVORBIS_SOURCES = \
+				 $(LIBVORBIS_DIR)/lib/bitrate.c \
+				 $(LIBVORBIS_DIR)/lib/block.c \
+				 $(LIBVORBIS_DIR)/lib/codebook.c \
+				 $(LIBVORBIS_DIR)/lib/decode_stubs.c \
+				 $(LIBVORBIS_DIR)/lib/floor0.c \
+				 $(LIBVORBIS_DIR)/lib/floor1.c \
+				 $(LIBVORBIS_DIR)/lib/info.c \
+				 $(LIBVORBIS_DIR)/lib/lookup.c \
+				 $(LIBVORBIS_DIR)/lib/lpc.c \
+				 $(LIBVORBIS_DIR)/lib/lsp.c \
+				 $(LIBVORBIS_DIR)/lib/mapping0.c \
+				 $(LIBVORBIS_DIR)/lib/mdct.c \
+				 $(LIBVORBIS_DIR)/lib/registry.c \
+				 $(LIBVORBIS_DIR)/lib/res0.c \
+				 $(LIBVORBIS_DIR)/lib/sharedbook.c \
+				 $(LIBVORBIS_DIR)/lib/synthesis.c \
+				 $(LIBVORBIS_DIR)/lib/vorbisfile.c \
+				 $(LIBVORBIS_DIR)/lib/window.c
+
+SOURCES_C += $(LIBVORBIS_SOURCES) $(CORE_DIR)/common/snd_vorbis_float.c
+
+# Force-include syntax and the uninitialized-warning suppression differ by
+# toolchain.  MSVC's cl.exe spells force-include "-FI<file>" and rejects both
+# the GCC/clang "-include <file>" form and "-Wno-*" outright (command-line
+# error D8021); the GCC warning it suppresses does not exist there anyway.
+ifneq (,$(findstring msvc,$(platform)))
+LIBVORBIS_FORCE_INCLUDE := -FI$(LIBVORBIS_DIR)/lib/fvorbis_rename.h
+LIBVORBIS_EXTRA_CFLAGS  :=
+else
+LIBVORBIS_FORCE_INCLUDE := -include $(LIBVORBIS_DIR)/lib/fvorbis_rename.h
+LIBVORBIS_EXTRA_CFLAGS  := -Wno-maybe-uninitialized
+endif
+
+$(LIBVORBIS_SOURCES:.c=.o): CFLAGS += \
+	$(LIBVORBIS_FORCE_INCLUDE) \
+	-I$(LIBVORBIS_DIR)/lib -I$(LIBVORBIS_DIR)/include \
+	$(LIBVORBIS_EXTRA_CFLAGS)
+endif

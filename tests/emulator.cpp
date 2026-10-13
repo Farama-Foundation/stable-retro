@@ -53,6 +53,17 @@ TEST_F(EmulatorTest, Create) {
 	}
 }
 
+TEST_F(EmulatorTest, QuakeCoreInfo) {
+	ifstream in("../cores/tyrquake.json");
+	ostringstream out;
+	out << in.rdbuf();
+	ASSERT_TRUE(loadCoreInfo(out.str()));
+
+	EXPECT_EQ(coreForRom("id1/pak0.pak"), "Quake");
+	EXPECT_EQ(libForCore("Quake"), "tyrquake");
+	EXPECT_THAT(buttons("Quake"), Contains("FIRE"));
+}
+
 TEST_P(EmulatorTest, Load) {
 	const auto& param = GetParam();
 	Emulator e;

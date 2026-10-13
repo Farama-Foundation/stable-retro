@@ -261,6 +261,7 @@ add_core(pce mednafen_pce_fast)
 add_core(32x picodrive)
 add_core(saturn mednafen_saturn)
 add_core(ds melonds)
+add_core(tyrquake tyrquake)
 
 if(APPLE)
   message(

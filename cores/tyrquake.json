@@ -1,0 +1,16 @@
+{
+    "Quake": {
+        "lib": "tyrquake",
+        "ext": ["pak"],
+        "keybinds": ["Z", "A", "TAB", "ENTER", "UP", "DOWN", "LEFT", "RIGHT", "X", "S", "Q", "W", "E", "R", "T", "Y"],
+        "buttons": ["JUMP", "FIRE", "TOGGLE_RUN", "MENU", "FORWARD", "BACK", "TURN_LEFT", "TURN_RIGHT", "CYCLE_WEAPON", "FREELOOK", "STRAFE_LEFT", "STRAFE_RIGHT", "LOOK_UP", "LOOK_DOWN", "MOVE_DOWN", "SWIM_UP"],
+        "types": ["|u1", "<u2", "<u4", "|i1", "<i2", "<i4", "|d1", "<d2", "<d4", "<d6", "<d8", "<n4", "<n6", "<n8"],
+        "actions": [
+            [[], ["FORWARD"], ["BACK"]],
+            [[], ["TURN_LEFT"], ["TURN_RIGHT"]],
+            [[], ["STRAFE_LEFT"], ["STRAFE_RIGHT"]],
+            [[], ["LOOK_UP"], ["LOOK_DOWN"]],
+            [[], ["JUMP"], ["FIRE"], ["CYCLE_WEAPON"]]
+        ]
+    }
+}

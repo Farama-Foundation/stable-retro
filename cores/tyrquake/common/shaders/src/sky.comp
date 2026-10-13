@@ -1,0 +1,240 @@
+/*
+ * GPU compute port of the sky-surface rasterizer (Phase
+ * 5b-07a).  GPU port of d_sky.c::D_DrawSkyScans8 -- the
+ * per-pixel two-layer sphere-projected sky drawer that SW
+ * runs against an espan_t list for every SURF_DRAWSKY
+ * surface in r_edge.c's pass-1 surface loop.
+ *
+ * The SW raster walks a linked list of horizontal pixel
+ * spans (espan_t {u, v, count}) one surface at a time and
+ * for each pixel performs:
+ *
+ *   (1) Per-pixel screen-to-world direction:
+ *         wu  = (x - xcenter) / xscale
+ *         wv  = (ycenter - y) / yscale
+ *         end = vpn + wu * vright + wv * vup
+ *         end.z *= 3        (vertical squash so the sky
+ *                            sphere doesn't pinch at the
+ *                            horizon)
+ *         normalize(end)
+ *
+ *   (2) Two layered 128x128 cylindrical UVs, the back
+ *       layer drifting once-speed and the front layer
+ *       drifting twice-speed (cf. iskyspeed = 8, iskyspeed2
+ *       = 2; the actual cl.time-derived inputs land in
+ *       skytime via R_SetSkyFrame):
+ *         s_back  = int(timespeed1 + 6*(SKYSIZE/2-1)*end.x)
+ *         t_back  = int(timespeed1 + 6*(SKYSIZE/2-1)*end.y)
+ *         s_front = int(timespeed2 + 6*(SKYSIZE/2-1)*end.x)
+ *         t_front = int(timespeed2 + 6*(SKYSIZE/2-1)*end.y)
+ *
+ *       (SKYSIZE/2 - 1) = 63 in the Quake sky format, so
+ *       the 6*63 = 378 coefficient is hard-coded below;
+ *       the host passes timespeed1 / timespeed2 every frame
+ *       via the SkyUbo.)
+ *
+ *   (3) Two texel fetches with palette-index-0 = transparency
+ *       key on the front layer:
+ *         back  = imageLoad(u_sky_back,  ivec2(s_back  & 127,
+ *                                              t_back  & 127))
+ *         front = imageLoad(u_sky_front, ivec2(s_front & 127,
+ *                                              t_front & 127))
+ *         final = (front != 0) ? front : back
+ *
+ *   (4) Write `final` (a palette index) into u_output at the
+ *       screen pixel.  vk_texture is the shared R8_UINT
+ *       output image that the FS compose stage samples
+ *       through u_palette to produce the final RGB; sky
+ *       pixels pick up gamma / contrast / brightness exactly
+ *       as the rest of the world does.
+ *
+ * Dispatch shape and pixel ownership:
+ *
+ * The host collects every (u, v, count) span across the
+ * frame's SURF_DRAWSKY surfaces and CPU-side buckets them
+ * by scanline.  At dispatch time the host computes the
+ * tight bounding rectangle of every span and dispatches one
+ * workgroup per 8x8 tile covering that rectangle (this
+ * shader's local_size is 8x8).  Each invocation maps to
+ * one screen pixel inside the bbox.  Pixels outside the
+ * bbox are not dispatched at all; pixels inside the bbox
+ * but not claimed by any sky span are quickly filtered by
+ * the per-row span list lookup and early-out.  Pixels in a
+ * sky span run the per-pixel raster above.
+ *
+ * Why per-row bucketing: with ~hundreds of sky spans per
+ * frame in a typical Quake level, a flat-list per-pixel
+ * linear scan would be O(spans) per pixel.  Buckets
+ * collapse that to O(spans-on-this-row), typically 1-3.
+ *
+ * Z handling:
+ *
+ * Sky is conceptually at infinity and the SW path's
+ * D_DrawZSpans still runs (unchanged) for SURF_DRAWSKY in
+ * d_edge.c, writing each sky span's far Z into d_pzbuffer.
+ * That d_pzbuffer is uploaded to vk_zbuffer by the existing
+ * Phase 5b-02 path, and the alias / particle / sprite
+ * compute dispatches imageAtomicMax against vk_zbuffer
+ * exactly as before -- closer geometry correctly wins over
+ * sky pixels.  This shader itself does no Z work.
+ *
+ * Descriptor set layout (matches the host's
+ * vk_sky_dsl exactly):
+ *   set = 0, binding = 0:  r8ui  writeonly  u_output      (vk_texture)
+ *   set = 0, binding = 1:  r8ui  readonly   u_sky_front   (128x128)
+ *   set = 0, binding = 2:  r8ui  readonly   u_sky_back    (128x128)
+ *   set = 0, binding = 3:  std140 UBO       SkyUbo
+ *   set = 0, binding = 4:  std430 SSBO      SkyRows
+ *   set = 0, binding = 5:  std430 SSBO      SkySpans
+ *   set = 0, binding = 6:  r32ui writeonly  u_zbuffer     (vk_zbuffer)
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * Copyright (C) 2026 The libretro team
+ */
+#version 450
+
+layout(local_size_x = 8, local_size_y = 8) in;
+
+layout(set = 0, binding = 0, r8ui) uniform writeonly uimage2D u_output;
+layout(set = 0, binding = 1, r8ui) uniform readonly  uimage2D u_sky_front;
+layout(set = 0, binding = 2, r8ui) uniform readonly  uimage2D u_sky_back;
+/* Per-frame view + bbox parameters.  std140 layout: vec3
+ * occupies 16 bytes (one vec4 slot) so the explicit _pad
+ * floats line up the next fp32 onto a 16-byte boundary,
+ * matching the C-side struct vk_sky_ubo's layout. */
+layout(set = 0, binding = 3, std140) uniform SkyUbo {
+    vec3  u_vpn;       float _pad0;
+    vec3  u_vright;    float _pad1;
+    vec3  u_vup;       float _pad2;
+    float u_xcenter;
+    float u_ycenter;
+    float u_xscale;
+    float u_yscale;
+    float u_timespeed1;
+    float u_timespeed2;
+    uint  u_bbox_min_x;
+    uint  u_bbox_min_y;
+    uint  u_bbox_w;
+    uint  u_bbox_h;
+    uint  _pad3;
+    uint  _pad4;
+};
+
+/* Per-scanline span list metadata.  rows[y] = (first, count)
+ * indexing into spans[]; the row is empty (no sky pixels)
+ * iff count == 0. */
+layout(set = 0, binding = 4, std430) readonly buffer SkyRows {
+    uvec2 rows[];
+};
+
+/* Flat (u, count) pairs.  Spans are NOT sorted within a
+ * row; the per-pixel scan below tests each span in row
+ * order until a hit. */
+layout(set = 0, binding = 5, std430) readonly buffer SkySpans {
+    uvec2 spans[];
+};
+
+/* vk_zbuffer (R32_UINT storage view shared with alias /
+ * particle / sprite compute paths).  We unconditionally
+ * imageStore the far-Z constant 0 at every sky pixel so
+ * the downstream Z-tested compute passes (atomicMax-
+ * against this buffer) correctly see "infinity" at sky
+ * locations and any closer geometry wins.  Lets d_edge.c
+ * skip its SW D_DrawZSpans call for SURF_DRAWSKY -- sky
+ * is the only world-surface case that doesn't need its
+ * actual per-pixel 1/z, since (a) all visible geometry
+ * is closer than sky and (b) the only SW reader of the
+ * sky pixel's d_pzbuffer entry is the pass-2 translucent
+ * raster, where the sky+water overlap case is too rare
+ * to chase. */
+layout(set = 0, binding = 6, r32ui) uniform writeonly uimage2D u_zbuffer;
+
+/* 6 * (SKYSIZE/2 - 1) = 6 * 63.  Matches d_sky.c::D_Sky_uv_-
+ * To_st's 6*(SKYSIZE/2-1) coefficient exactly. */
+const float SKY_UV_SCALE = 378.0;
+
+void main()
+{
+    ivec2 local = ivec2(gl_GlobalInvocationID.xy);
+    if (uint(local.x) >= u_bbox_w || uint(local.y) >= u_bbox_h)
+        return;
+
+    ivec2 pos = ivec2(int(u_bbox_min_x) + local.x,
+                      int(u_bbox_min_y) + local.y);
+
+    /* Row bucket lookup.  rows[pos.y] gives the half-open
+     * [first, first + count) window into spans[] for this
+     * scanline.  Most pixels miss; the early-out is the
+     * common path. */
+    uvec2 rinfo = rows[pos.y];
+    uint  first = rinfo.x;
+    uint  cnt   = rinfo.y;
+    bool  inside = false;
+    uint  i;
+    for (i = 0u; i < cnt; i++) {
+        uvec2 span = spans[first + i];
+        if (uint(pos.x) >= span.x && uint(pos.x) < span.x + span.y) {
+            inside = true;
+            break;
+        }
+    }
+    if (!inside)
+        return;
+
+    /* Per-pixel screen-to-world direction.  Matches the SW
+     * D_Sky_uv_To_st block exactly, including the end.z *= 3
+     * vertical squash that keeps the sky sphere from pinching
+     * near the horizon (Quake's sky is sampled cylindrically
+     * but the projection has this 3x vertical stretch baked
+     * in to balance the cylinder's pole density). */
+    float wu = (float(pos.x) - u_xcenter) / u_xscale;
+    float wv = (u_ycenter - float(pos.y)) / u_yscale;
+    vec3 e;
+    e.x = u_vpn.x + wu * u_vright.x + wv * u_vup.x;
+    e.y = u_vpn.y + wu * u_vright.y + wv * u_vup.y;
+    e.z = (u_vpn.z + wu * u_vright.z + wv * u_vup.z) * 3.0;
+    e   = normalize(e);
+
+    /* Two-layer UVs, integer-truncated then masked to the
+     * 128x128 sky atlas.  The SW path stores these in 16.16
+     * fixed point and extracts the integer column / row via
+     *   ((t & 0x7F0000) >> 8) + ((s & 0x7F0000) >> 16)
+     * with a 256-byte row stride.  Our GPU atlases are
+     * tightly-packed 128x128, so the equivalent index is
+     *   imageLoad(atlas, ivec2(int(s) & 127, int(t) & 127))
+     * and the 0x10000 fixed-point multiplier drops out
+     * entirely -- the integer column = floor(s_value) & 127
+     * regardless of whether s_value is stored as an int
+     * shifted left 16 or as a float truncated to int.
+     *
+     * GLSL int(float) truncates toward zero (matching C's
+     * (int) cast on the SW side); for negative values the
+     * mask & 127 wraps around in the same direction as the
+     * SW bit-and, so the sample point is identical. */
+    int s_back  = int(u_timespeed1 + SKY_UV_SCALE * e.x);
+    int t_back  = int(u_timespeed1 + SKY_UV_SCALE * e.y);
+    int s_front = int(u_timespeed2 + SKY_UV_SCALE * e.x);
+    int t_front = int(u_timespeed2 + SKY_UV_SCALE * e.y);
+
+    uint back  = imageLoad(u_sky_back,
+                           ivec2(s_back  & 127, t_back  & 127)).r;
+    uint front = imageLoad(u_sky_front,
+                           ivec2(s_front & 127, t_front & 127)).r;
+    uint final = (front != 0u) ? front : back;
+
+    imageStore(u_output, pos, uvec4(final, 0u, 0u, 0u));
+
+    /* Sky's far-Z = 0 in the 16.16-fixed-point-shifted-by-
+     * 15 representation vk_zbuffer holds.  The SW path's
+     * D_DrawZSpans would write the actual per-pixel 1/z of
+     * the sky surface plane (a small positive integer); we
+     * write 0 instead because (a) downstream atomicMax-Z
+     * tests in alias / particle / sprite compute always
+     * have alias_z / particle_z / sprite_z > 0 (any finite-
+     * distance geometry has a non-zero 1/z), so 0 acts as
+     * the correct "infinity" sentinel, and (b) using a
+     * constant lets us skip passing per-surface Z parameters
+     * (d_zistepu, d_zistepv, d_ziorigin) through the
+     * dispatch_3d_sky_span boundary. */
+    imageStore(u_zbuffer, pos, uvec4(0u, 0u, 0u, 0u));
+}

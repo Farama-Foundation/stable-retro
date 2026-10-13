@@ -344,7 +344,7 @@ def get_original_romfile_path(game, inttype=Integrations.DEFAULT):
     """
     Return the path to a game's ROM using original name if specified in metadata.
     Falls back to standard rom.[ext] naming if metadata is not present.
-    This is primarily used for FBNeo games that require specific ROM names.
+    This supports cores that require a specific filename or directory layout.
     """
     import json
 
@@ -555,7 +555,7 @@ def merge(*args, quiet=True):
             with open(os.path.join(game_path, "rom%s" % ext), "wb") as f:
                 f.write(data)
 
-            # Check if this game has an original_rom_name in metadata (for FBNeo)
+            # Some cores require a specific filename or directory layout.
             metadata_path = os.path.join(game_path, "metadata.json")
             if os.path.exists(metadata_path):
                 try:
@@ -564,14 +564,13 @@ def merge(*args, quiet=True):
                         if "original_rom_name" in metadata:
                             # Also write the file with its original name
                             original_name = metadata["original_rom_name"]
-                            with open(
-                                os.path.join(game_path, original_name),
-                                "wb",
-                            ) as of:
+                            original_path = os.path.join(game_path, original_name)
+                            os.makedirs(os.path.dirname(original_path), exist_ok=True)
+                            with open(original_path, "wb") as of:
                                 of.write(data)
                             if not quiet:
                                 print(
-                                    f"  Also saved as {original_name} for FBNeo compatibility",
+                                    f"  Also saved as {original_name} for core compatibility",
                                 )
                 except (json.JSONDecodeError, OSError):
                     pass

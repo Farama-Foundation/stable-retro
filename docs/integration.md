@@ -58,6 +58,8 @@ These are all the files used in an integration.  The next section will describe 
 
 Emulation allows the entire state of a video game system to be stored to disk and restored. These files are specific to the emulator, but always end with `.state`. These are identical to the versions used in the standalone versions of the emulators but gzipped.
 
+If a core cannot serialize states but has a deterministic native reset, an integration can set `"default_reset": "poweron"` in `metadata.json` instead of providing a `.state` file. This starts every episode through the core's reset path. It does not support level-specific starting points.
+
 ### Variable Locations `data.json`
 
 Information about the inner workings of games are stored alongside the ROM in a file named `data.json`. This JSON file documents "ground truth" information about a game, including the locations and formats of variables in memory. These manifests are separated into sections, although only one section currently is defined:
@@ -162,6 +164,7 @@ ROM files contain the game itself. Each system has a unique file extension to de
 - `.gg`: Sega Game Gear
 - `.pce`: NEC TurboGrafx-16 (also known as PC Engine)
 - `.sms`: Sega Master System
+- `.pak`: Quake (experimental; select `id1/pak0.pak`)
 
 Sometimes ROMs from these systems use different extensions, e.g. `.gen` for Genesis, `.bin` for Atari, etc. Please rename the ROMs to use the aforementioned extensions in these cases.
 

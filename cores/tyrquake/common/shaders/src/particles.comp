@@ -1,0 +1,180 @@
+/*
+ * Particle compute rasterizer (Phase 5b-02).
+ *
+ * GPU port of d_part.c::D_DrawParticle, dispatched once
+ * per active particle.  One workgroup invocation handles
+ * one particle:
+ *
+ *   - Transform particle origin to camera space via the
+ *     three DotProducts the SW path does (r_pright /
+ *     r_pup / r_ppn, the latter being vpn -- r_pright
+ *     and r_pup arrive pre-scaled by xscaleshrink /
+ *     yscaleshrink as R_DrawParticles does on the C
+ *     side before any draw call).
+ *   - Z-cull (PARTICLE_Z_CLIP == 8.0).
+ *   - Project to screen-space (u, v), screen-rect cull
+ *     against (d_vrectx, d_vrecty, d_vrectright_particle,
+ *     d_vrectbottom_particle).
+ *   - Compute the pixel-size rect from izi = zi * 0x8000,
+ *     pix = clamp(izi >> d_pix_shift, d_pix_min,
+ *     d_pix_max), rect width = pix, height = pix <<
+ *     d_y_aspect_shift.
+ *   - Walk the rect and Z-test each pixel against
+ *     u_zbuffer (R16_UINT, holding the CPU SW raster's
+ *     d_pzbuffer values uploaded earlier in the frame).
+ *     On pass, imageStore the new Z into u_zbuffer and
+ *     the particle's palette index into u_index (the
+ *     R8_UINT vk_texture that the downstream palette
+ *     compute shader reads).
+ *
+ * Race notes (intentional, documented):
+ *
+ *   Phase 5b-04 (this revision) closed the Z-test race
+ *   by switching the read-modify-write on u_zbuffer to a
+ *   single imageAtomicMax, which is atomic against
+ *   concurrent invocations.  The image format widened
+ *   from R16_UINT to R32_UINT to make the atomic legal
+ *   (Vulkan 1.0 mandates atomic ops on R32_UINT
+ *   storage images; R16_UINT atomics need a non-core
+ *   extension).
+ *
+ *   A narrower colour race remains: between the
+ *   atomicMax that establishes "this thread won the Z
+ *   test" and the subsequent imageStore to u_index, a
+ *   different thread can land its own atomicMax-then-
+ *   store on the same pixel.  If the second thread had
+ *   a closer Z (higher izi), it correctly displaces our
+ *   colour write.  If the second thread had a further
+ *   Z, its atomicMax leaves u_zbuffer unchanged and it
+ *   never stores -- the race outcome favours the closer
+ *   particle.  The only true mismatch is when two
+ *   threads have identical izi (a tie): both pass the
+ *   "old_z <= uizi" gate and the later store wins,
+ *   which is arbitrary across runs but visually
+ *   identical (both particles are at the same depth).
+ *
+ *   Closing the residual colour race would require
+ *   packing izi + colour into a single 32-bit value and
+ *   doing one atomicMax for both; the packing would
+ *   over-specialise the data flow to particles before
+ *   we know what alias / world / sprite want.  Left as-
+ *   is: the visual impact is now imperceptible even in
+ *   contrived scenarios.
+ *
+ * Rect clip note: d_vrectright_particle and
+ * d_vrectbottom_particle are computed by D_ViewChanged
+ * as r_refdef.vrectright - d_pix_max and similar -- a
+ * particle whose center passes the cull above is
+ * guaranteed to have its full pix-wide / pix * y_aspect
+ * tall rect fit within r_refdef.vrect.  No per-pixel
+ * imageSize bounds check needed here.
+ *
+ * Descriptor / push-constant layout matches backend_
+ * vulkan.c's particle pipeline setup exactly.  Keep in
+ * sync if either side changes.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * Copyright (C) 2026 The libretro team
+ */
+#version 450
+
+layout(local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
+
+struct GpuParticle {
+    vec3 origin;
+    uint color;
+};
+
+layout(set = 0, binding = 0, std430) readonly buffer Particles {
+    GpuParticle data[];
+} particles;
+
+layout(set = 0, binding = 1, r8ui)  uniform uimage2D u_index;
+layout(set = 0, binding = 2, r32ui) uniform uimage2D u_zbuffer;
+
+layout(push_constant, std430) uniform PC {
+    vec3  r_origin;
+    float xcenter;
+    vec3  r_pright;
+    float ycenter;
+    vec3  r_pup;
+    int   d_y_aspect_shift;
+    vec3  r_ppn;
+    int   d_pix_shift;
+    int   d_vrectx;
+    int   d_vrecty;
+    int   d_vrectright_particle;
+    int   d_vrectbottom_particle;
+    int   d_pix_min;
+    int   d_pix_max;
+    uint  particle_count;
+    uint  _pad;
+} pc;
+
+#define PARTICLE_Z_CLIP 8.0
+
+void main()
+{
+    uint pid = gl_GlobalInvocationID.x;
+    if (pid >= pc.particle_count)
+        return;
+
+    vec3 org   = particles.data[pid].origin;
+    uint color = particles.data[pid].color;
+
+    /* transform to camera space (matches D_DrawParticle) */
+    vec3  local = org - pc.r_origin;
+    float tx    = dot(local, pc.r_pright);
+    float ty    = dot(local, pc.r_pup);
+    float tz    = dot(local, pc.r_ppn);
+
+    if (tz < PARTICLE_Z_CLIP)
+        return;
+
+    /* project */
+    float zi = 1.0 / tz;
+    int   u  = int(pc.xcenter + zi * tx + 0.5);
+    int   v  = int(pc.ycenter - zi * ty + 0.5);
+
+    /* screen-rect cull (matches D_DrawParticle) */
+    if (v > pc.d_vrectbottom_particle ||
+        u > pc.d_vrectright_particle  ||
+        v < pc.d_vrecty                ||
+        u < pc.d_vrectx)
+        return;
+
+    /* pixel-size rect from izi */
+    int izi = int(zi * 32768.0);
+    int pix = izi >> pc.d_pix_shift;
+    pix     = clamp(pix, pc.d_pix_min, pc.d_pix_max);
+
+    int height = pix << pc.d_y_aspect_shift;
+    uint uizi  = uint(izi);
+
+    /* Z-tested plot of the pix x height rect.  Matches the
+     * SW switch-case at d_part.c:92-196: each output pixel
+     * is conditionally written if the new izi is >= the
+     * existing Z value at that pixel.  Two-loop iteration
+     * folds the four-way switch-case in d_part.c into a
+     * single uniform loop; the compiler will not unroll
+     * for variable pix but the early-out culls in the
+     * outer flow keep the common case (pix == d_pix_min
+     * or _max) cheap.
+     *
+     * Phase 5b-04: imageAtomicMax replaces the previous
+     * read-modify-write pair on u_zbuffer.  Returns the
+     * value u_zbuffer held BEFORE the atomic operation;
+     * the gate "old_z <= uizi" is true when our particle
+     * was the closest (or tied), and on that branch we
+     * follow up with the colour imageStore. */
+    for (int dy = 0; dy < height; dy++) {
+        for (int dx = 0; dx < pix; dx++) {
+            ivec2 pos   = ivec2(u + dx, v + dy);
+            uint  old_z = imageAtomicMax(u_zbuffer, pos, uizi);
+
+            if (old_z <= uizi) {
+                imageStore(u_index, pos, uvec4(color, 0, 0, 0));
+            }
+        }
+    }
+}

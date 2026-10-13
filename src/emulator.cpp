@@ -85,6 +85,7 @@ static void (*retro_set_audio_sample)(retro_audio_sample_t);
 static void (*retro_set_audio_sample_batch)(retro_audio_sample_batch_t);
 static void (*retro_set_input_poll)(retro_input_poll_t);
 static void (*retro_set_input_state)(retro_input_state_t);
+static void (*retro_set_controller_port_device)(unsigned port, unsigned device);
 
 Emulator::Emulator() {
 }
@@ -166,6 +167,9 @@ bool Emulator::loadRom(const string& romPath) {
 		m_romData.clear();
 		return false;
 	}
+	if (m_core == "Quake" && retro_set_controller_port_device) {
+		retro_set_controller_port_device(0, RETRO_DEVICE_JOYPAD);
+	}
 
 #ifdef ENABLE_HW_RENDER
 	// If HW rendering was enabled during retro_load_game, now call context_reset
@@ -219,7 +223,9 @@ void Emulator::reset() {
 
 	retro_system_info systemInfo;
 	retro_get_system_info(&systemInfo);
-	if (!strcmp(systemInfo.library_name, "Stella")) {
+	const bool isStella = !strcmp(systemInfo.library_name, "Stella");
+	const bool isTyrQuake = !strcmp(systemInfo.library_name, "TyrQuake");
+	if (isStella) {
 		// Stella does not properly clear everything when reseting or loading a savestate
 		string romPath = m_romPath;
 
@@ -239,6 +245,11 @@ void Emulator::reset() {
 	}
 
 	retro_reset();
+	if (isTyrQuake) {
+		for (int frame = 0; frame < 3; ++frame) {
+			run();
+		}
+	}
 
 	if (m_serializationQuirks & RETRO_SERIALIZATION_QUIRK_MUST_INITIALIZE) {
 		m_needsInitFrame = true;
@@ -360,6 +371,7 @@ bool Emulator::loadCore(const string& corePath) {
 	retro_set_audio_sample_batch = reinterpret_cast<void (*)(retro_audio_sample_batch_t)>(GETSYM(m_coreHandle, "retro_set_audio_sample_batch"));
 	retro_set_input_poll = reinterpret_cast<void (*)(retro_input_poll_t)>(GETSYM(m_coreHandle, "retro_set_input_poll"));
 	retro_set_input_state = reinterpret_cast<void (*)(short (*)(unsigned int, unsigned int, unsigned int, unsigned int))>(GETSYM(m_coreHandle, "retro_set_input_state"));
+	retro_set_controller_port_device = reinterpret_cast<void (*)(unsigned int, unsigned int)>(GETSYM(m_coreHandle, "retro_set_controller_port_device"));
 
 	// The default according to the docs
 	m_imgDepth = 15;

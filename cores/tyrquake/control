@@ -1,0 +1,10 @@
+Package: com.libretro.tyrquake
+Name: tyrquake
+Depends: 
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: Libretro iOS core of tyrQuake
+Maintainer: libretro
+Author: libretro
+Section: System
+Tag: role::developer

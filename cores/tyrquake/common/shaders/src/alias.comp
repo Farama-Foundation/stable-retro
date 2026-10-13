@@ -1,0 +1,368 @@
+/*
+ * Affine-textured alias-model rasterizer (Phase 5b-06).
+ *
+ * GPU port of d_polyse.c::D_PolysetDrawSpans8 + the per-
+ * pixel work in D_PolysetDrawFinalVerts.  The CPU side
+ * (R_AliasDrawModel + R_AliasPreparePoints + R_AliasClip-
+ * Triangle in r_alias.c / r_aclip.c) does the entire
+ * transform / project / cull / clip / shade pipeline and
+ * produces a `finalvert_t` per vertex with six 16.16
+ * fixed-point integer fields:
+ *
+ *   v[0], v[1] : screen pixel position (integer; the .16
+ *                fractional bits are always zero post-
+ *                projection)
+ *   v[2], v[3] : skin texture (s, t) in pixels, fixed-
+ *                point 16.16 -- so `v[2] >> 16` is the
+ *                integer column into the skin
+ *   v[4]       : light value.  Only the high byte
+ *                (`v[4] & 0xff00`) is meaningful; it's
+ *                multiplied by the 256-entry palette row
+ *                stride into acolormap
+ *   v[5]       : 1/z scaled by 2^31 (zi * ziscale where
+ *                ziscale = 0x8000 * 0x10000).  `v[5] >>
+ *                16` is the same `zi * 0x8000 = zi *
+ *                32768` units the particle / sprite Z
+ *                paths use and the units d_pzbuffer
+ *                (and vk_zbuffer) hold
+ *
+ * Triangle list: an array of (a, b, c) vertex indices
+ * into the per-dispatch finalvert pool slice.
+ *
+ * Per pixel inside the dispatch's screen-space bounding
+ * box:
+ *   - Walk this dispatch's triangle list.  For each
+ *     triangle (a, b, c): edge-equation point-in-triangle
+ *     test on integer v[0], v[1] coordinates.  First
+ *     triangle that contains the pixel is the one we
+ *     interpolate from.
+ *   - Interpolate v[2..5] AFFINE in screen space via
+ *     barycentric coordinates.  Quake's SW alias raster
+ *     is itself affine within a triangle (the spans-and-
+ *     subdivide infrastructure in d_polyse.c subdivides
+ *     only to limit affine drift across long spans, not
+ *     to do per-pixel perspective division); a per-pixel
+ *     barycentric interpolation matches the SW non-
+ *     subdivided path D_DrawNonSubdiv exactly modulo
+ *     fixed-point rounding, and is closer to perspective-
+ *     correct than the subdivided path D_DrawSubdiv for
+ *     large triangles.
+ *   - Z-test via imageAtomicMax against vk_zbuffer (the
+ *     Phase 5b-04 / 5b-05 pattern -- closer Z wins
+ *     atomically, residual colour-store race documented
+ *     in particles.comp's prologue and applicable here
+ *     too).
+ *   - On Z-test pass: sample skin[t][s], add the bayer-
+ *     dithered light row to it, look up the final palette
+ *     index in acolormap, write to u_index.
+ *
+ * Descriptor set layout (matches backend_vulkan.c's
+ * create_resources):
+ *   set 0, binding 0: storage image u_index    (R8_UINT)
+ *   set 0, binding 1: storage image u_zbuffer  (R32_UINT)
+ *   set 0, binding 2: storage buffer Vertices  (host-mapped finalvert pool)
+ *   set 0, binding 3: storage buffer Triangles (host-mapped index pool)
+ *   set 0, binding 4: storage buffer Skins     (host-mapped texture pool)
+ *   set 0, binding 5: storage buffer Colormaps (host-mapped 64 x 256 LUT pool)
+ *
+ * Push constants (48 bytes):
+ *   ivec4 bbox          (x_min, y_min, x_max, y_max)
+ *   ivec4 dispatch_info (vert_offset, tri_offset, tri_count, skin_offset)
+ *   ivec4 skin_info     (skin_width, skin_height, colormap_offset, pad)
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * Copyright (C) 2026 The libretro team
+ */
+#version 450
+
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
+
+/* Packed std430 layout -- 24 bytes natural, no padding
+ * needed (the array stride is 24 bytes in std430 since
+ * all members are 4-byte aligned ints).  Matches the
+ * vk_alias_vert struct on the host. */
+struct AliasVert {
+    int v0;  /* screen u */
+    int v1;  /* screen v */
+    int v2;  /* skin s, 16.16 */
+    int v3;  /* skin t, 16.16 */
+    int v4;  /* light, high byte is colormap row offset */
+    int v5;  /* 1/z, 16.16 (zi * ziscale = zi * 2^31) */
+};
+
+/* Triangle: 3 vertex indices.  Matches the host
+ * vk_alias_tri struct; std430 stride = 12 bytes. */
+struct AliasTri {
+    int a;
+    int b;
+    int c;
+};
+
+layout(set = 0, binding = 0, r8ui)  uniform uimage2D u_index;
+layout(set = 0, binding = 1, r32ui) uniform uimage2D u_zbuffer;
+
+layout(set = 0, binding = 2, std430) readonly buffer Vertices {
+    AliasVert v[];
+} verts;
+
+layout(set = 0, binding = 3, std430) readonly buffer Triangles {
+    AliasTri t[];
+} tris;
+
+layout(set = 0, binding = 4, std430) readonly buffer Skins {
+    uint packed[];  /* 4 palette-index bytes per uint, little-endian lanes */
+} skin;
+
+layout(set = 0, binding = 5, std430) readonly buffer Colormaps {
+    uint packed[];  /* same packing as skin */
+} cmap;
+
+layout(push_constant, std430) uniform PC {
+    ivec4 bbox;
+    ivec4 dispatch_info;  /* vert_off, tri_off, tri_count, skin_off */
+    ivec4 skin_info;      /* skin_w, skin_h, cmap_off, _pad */
+} pc;
+
+/* 4x4 Bayer dither matrix.  Copied from d_polyse.c's
+ * dither_bayer4 table -- the SW raster's per-pixel light
+ * dither.  Values are SIGNED offsets in the range [-120,
+ * +120] (NOT 0..0xff00 multiples as a casual reading
+ * might suggest); they're added to the interpolated
+ * light value before the `& 0xff00` mask so they only
+ * perturb the colormap row by 0 or +/- 1.  Earlier
+ * iterations of this shader used 0x000..0xf00 values
+ * here, which pushed the colormap row index up to 15 out
+ * of bounds at typical light levels; the SSBO returned
+ * zeros for the out-of-bounds reads (palette index 0 =
+ * dark colour), producing scattered black pixels in
+ * gaps and, at low-light positions where most of the
+ * model's pixels were affected, entire-model invisibility.
+ *
+ * The shader applies dither unconditionally; SW gates it
+ * on r_lightdither (defaulting to off, with a zero
+ * matrix), but the SW values are small enough that the
+ * always-on version is visually indistinguishable from
+ * always-off for typical content. */
+const int dither_bayer4[16] = int[16](
+    -120,    8,  -88,   40,
+      72,  -56,  104,  -24,
+     -72,   56, -104,   24,
+     120,   -8,   88,  -40
+);
+
+/* Signed 2D integer cross product (edge equation).
+ * v[0], v[1] are integer pixel coordinates and the
+ * product magnitudes fit in int32 for any sane viewport
+ * (worst case at 4K: differences ~4000, product ~16M,
+ * difference of two products ~32M -- well under
+ * INT32_MAX), so integer math is exact and avoids any
+ * float-rounding ambiguity at triangle edges. */
+int edge(ivec2 a, ivec2 b, ivec2 c)
+{
+    return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+}
+
+uint sample_skin(int byte_off)
+{
+    uint addr   = uint(byte_off);
+    uint slot   = addr >> 2u;
+    uint lane   = addr & 3u;
+    uint packed = skin.packed[slot];
+    return (packed >> (lane * 8u)) & 0xffu;
+}
+
+uint sample_cmap(int byte_off)
+{
+    uint addr   = uint(byte_off);
+    uint slot   = addr >> 2u;
+    uint lane   = addr & 3u;
+    uint packed = cmap.packed[slot];
+    return (packed >> (lane * 8u)) & 0xffu;
+}
+
+void main()
+{
+    /* Dispatch is sized to ceil(bbox_w/8) x ceil(bbox_h/8)
+     * workgroups; add bbox origin to get the screen-pixel
+     * coordinate, then cull threads past the exclusive
+     * upper edge (last workgroup's tail). */
+    ivec2 pos = ivec2(pc.bbox.xy) + ivec2(gl_GlobalInvocationID.xy);
+    if (pos.x >= pc.bbox.z || pos.y >= pc.bbox.w)
+        return;
+
+    int v_off    = pc.dispatch_info.x;
+    int t_off    = pc.dispatch_info.y;
+    int t_count  = pc.dispatch_info.z;
+    int s_off    = pc.dispatch_info.w;
+    int skin_w   = pc.skin_info.x;
+    int skin_h   = pc.skin_info.y;
+    int cmap_off = pc.skin_info.z;
+
+    ivec2 p = pos;
+
+    bool hit = false;
+    float iv2 = 0.0, iv3 = 0.0, iv4 = 0.0, iv5 = 0.0;
+    float best_v5 = -1.0e30;
+
+    /* Per-pixel, walk the dispatch's triangle list and
+     * pick the triangle with the highest interpolated 1/z
+     * (= closest to camera).
+     *
+     * SW Quake's D_PolysetDrawSpans8 doesn't need this
+     * search: it rasterises each triangle in mesh order
+     * directly into d_viewbuffer / d_pzbuffer, and its
+     * per-pixel test `if ((lzi >> 16) >= *lpz) { write
+     * pixel; *lpz = lzi >> 16; }` is what resolves multi-
+     * triangle overlap -- whichever triangle wins the z-
+     * test last is the one visible.  An alias model whose
+     * 3D pose puts one front-facing triangle behind
+     * another front-facing triangle (e.g. a dead enemy
+     * collapsed face-down with an arm draped over the
+     * torso, or any geometry that folds onto itself --
+     * pretty common at death frames) relies on that per-
+     * triangle z-test to keep the closer triangle on top.
+     *
+     * Our compute path can't lean on that.  vk_zbuffer's
+     * atomicMax is the right mechanism between dispatches
+     * (one entity vs. another) and between subsystems
+     * (alias vs. particle vs. sprite vs. world), but
+     * within a single dispatch every invocation that
+     * lands on a given pixel executes in parallel and
+     * sees the same pre-dispatch vk_zbuffer state.  We
+     * have to do the within-entity ordering ourselves,
+     * here, before the atomic.
+     *
+     * An earlier iteration of this shader broke on first-
+     * hit and emitted that triangle's (uvs, light, z)
+     * unconditionally.  That worked for entities whose
+     * front-facing triangles don't overlap in screen
+     * space (the common case: a standing monster viewed
+     * from outside its silhouette, where each pixel is
+     * covered by exactly one front-facing triangle).
+     * Death poses break the assumption -- arm and torso
+     * fold into the same screen region, both pass the
+     * front-face test, and whichever sat earlier in mesh
+     * order won regardless of depth.  The visible result
+     * was the farther triangle's UVs and lighting
+     * stamped over the closer one in arm-over-torso
+     * regions, plus -- because the farther triangle's
+     * lower z then went into the atomicMax -- a torch
+     * sprite or world surface behind the body
+     * occasionally winning the inter-dispatch z-test and
+     * bleeding through what should have been an opaque
+     * model.
+     *
+     * Iterating every triangle and keeping the highest
+     * v5 (= 1/z, larger is closer) is the literal
+     * translation of SW's per-pixel resolution and the
+     * minimum correct behaviour.  Cost: t_count edge-
+     * tests per pixel without the early break.  For a
+     * stock Quake monster (~200 tris) on a typical
+     * bounding-box footprint this lands within the same
+     * order of magnitude as the SW spans-and-edges
+     * inner loop the shader replaced. */
+    for (int ti = 0; ti < t_count; ti++) {
+        AliasTri tri = tris.t[t_off + ti];
+        AliasVert va = verts.v[v_off + tri.a];
+        AliasVert vb = verts.v[v_off + tri.b];
+        AliasVert vc = verts.v[v_off + tri.c];
+
+        ivec2 a = ivec2(va.v0, va.v1);
+        ivec2 b = ivec2(vb.v0, vb.v1);
+        ivec2 c = ivec2(vc.v0, vc.v1);
+
+        int w0 = edge(b, c, p);
+        int w1 = edge(c, a, p);
+        int w2 = edge(a, b, p);
+        int area = w0 + w1 + w2;
+
+        /* Back-face / degenerate cull, matching SW's
+         * d_polyse.c::D_DrawNonSubdiv:
+         *
+         *     d_xdenom =
+         *         (y0 - y1)(x0 - x2) - (x0 - x1)(y0 - y2);
+         *     if (d_xdenom >= 0) continue;
+         *
+         * which is the signed 2x area in screen space with
+         * y-down convention.  SW keeps d_xdenom < 0
+         * (screen-CW = visible front-facing).  Our edge()
+         * computes (b - a) x (c - a), which is the
+         * NEGATION of SW's d_xdenom for the same vertex
+         * order -- so SW's d_xdenom < 0 corresponds to our
+         * area > 0.  Worked example with screen-CW
+         * triangle a=(0,0), b=(10,0), c=(5,10):
+         *
+         *     SW d_xdenom = -100  (< 0, kept)
+         *     our area    = +100  (> 0, kept here)
+         *
+         * Cull when area <= 0 (back-facing or degenerate).
+         * The inside test for area > 0 then uses all w_i
+         * non-negative. */
+        if (area <= 0)
+            continue;
+
+        bool inside = (w0 >= 0 && w1 >= 0 && w2 >= 0);
+        if (!inside)
+            continue;
+
+        float ia = 1.0 / float(area);
+        float b0 = float(w0) * ia;
+        float b1 = float(w1) * ia;
+        float b2 = float(w2) * ia;
+
+        float cand_v5 = b0 * float(va.v5)
+                      + b1 * float(vb.v5)
+                      + b2 * float(vc.v5);
+
+        if (cand_v5 <= best_v5)
+            continue;
+
+        best_v5 = cand_v5;
+        iv2 = b0 * float(va.v2) + b1 * float(vb.v2) + b2 * float(vc.v2);
+        iv3 = b0 * float(va.v3) + b1 * float(vb.v3) + b2 * float(vc.v3);
+        iv4 = b0 * float(va.v4) + b1 * float(vb.v4) + b2 * float(vc.v4);
+        iv5 = cand_v5;
+        hit = true;
+    }
+
+    if (!hit)
+        return;
+
+    /* Convert back from float-interpolated 16.16 to the
+     * integer indices the SW path uses. */
+    int s    = int(iv2) >> 16;
+    int t    = int(iv3) >> 16;
+    int light = int(iv4);
+    int z    = int(iv5) >> 16;  /* zi * 0x8000 == vk_zbuffer units */
+
+    /* Clamp skin coords -- the SW path's skintable is
+     * sized to skinwidth * skinheight; out-of-range
+     * indices would walk off the end.  Triangle vertices
+     * should already be in range modulo affine rounding;
+     * clamp for safety. */
+    if (s < 0) s = 0;
+    if (s >= skin_w) s = skin_w - 1;
+    if (t < 0) t = 0;
+    if (t >= skin_h) t = skin_h - 1;
+
+    /* Apply Bayer dither to the light value (matches
+     * D_PolysetDrawSpans8's `llight + drow[span_x & 3]`
+     * with drow = dither_bayer4[span_y & 3]). */
+    int dither = dither_bayer4[((pos.y & 3) << 2) | (pos.x & 3)];
+    int dlight = (light + dither) & 0xff00;
+
+    /* Sample skin, then look up in colormap. */
+    uint skin_pix = sample_skin(s_off + t * skin_w + s);
+    uint final_pix = sample_cmap(cmap_off + int(skin_pix) + dlight);
+
+    /* Z-test via atomicMax.  Same pattern as particles /
+     * sprite -- closer Z wins; the colour store race is
+     * residual and documented. */
+    if (z < 0)
+        return;
+    uint uz = uint(z);
+    uint old = imageAtomicMax(u_zbuffer, pos, uz);
+
+    if (old <= uz)
+        imageStore(u_index, pos, uvec4(final_pix, 0, 0, 0));
+}

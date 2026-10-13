@@ -119,6 +119,24 @@ python3 -m stable_retro.import /path/to/your/ROMs/directory/
 
 This will copy all matching ROMs to their corresponding Stable Retro game integration directories.
 
+### Quake shareware
+
+The experimental `Quake-Quake-v0` integration uses the freely distributable Quake v1.06 shareware data. Download the [pre-extracted shareware archive from Internet Archive](https://archive.org/download/msdos_Quake106_shareware/msdos_Quake106_shareware.zip). It contains `ID1/PAK0.PAK` directly, so DOSBox is not required. The archive SHA-1 is `58cd0c811ab428ebe916ee9fb61d91d867be92c9`.
+
+Download and extract the PAK:
+
+```shell
+mkdir quake-shareware
+wget -O quake-shareware.zip https://archive.org/download/msdos_Quake106_shareware/msdos_Quake106_shareware.zip
+unzip quake-shareware.zip ID1/PAK0.PAK -d quake-shareware
+```
+
+The resulting `quake-shareware/ID1/PAK0.PAK` is 18,689,235 bytes and has SHA-1 `36b42dc7b6313fd9cabc0be8b9e9864840929735`. Import it into the experimental integration:
+
+```shell
+python3 -m stable_retro.import quake-shareware
+```
+
 Your ROMs must be in the {ref}`supported-roms` list and must already have an integration.  To add a ROM yourself, check out {ref}`game-integration`.
 
 Many ROMs should be available from the [No-Intro Collection on Archive.org](https://archive.org/details/No-Intro-Collection_2016-01-03_Fixed) and the import script will search inside of zip files.

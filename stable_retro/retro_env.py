@@ -262,11 +262,17 @@ class RetroEnv(gym.Env, EzPickle):
 
         if self.initial_state:
             self.em.set_state(self.initial_state)
+        else:
+            self.em.reset()
         for p in range(self.players):
             self.em.set_button_mask(np.zeros([self.num_buttons], np.uint8), p)
         self.em.step()
         if self.movie_path is not None:
-            rel_statename = os.path.splitext(os.path.basename(self.statename))[0]
+            rel_statename = (
+                os.path.splitext(os.path.basename(self.statename))[0]
+                if self.statename
+                else "PowerOn"
+            )
             self.record_movie(
                 os.path.join(
                     self.movie_path,

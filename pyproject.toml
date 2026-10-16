@@ -19,7 +19,7 @@ classifiers = [
 ]
 dependencies = [
 	"gymnasium>=1.0.0",
-	"pyglet>=1.5.27,<2",
+	"pyglet>=2.1.2,<3",
 	"farama-notifications>=0.0.1",
 ]
 dynamic = ["version"]

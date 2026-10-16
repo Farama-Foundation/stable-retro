@@ -10,7 +10,7 @@ Legend: ✓ supported, — not supported.
 | Genesis Plus GX (Genesis / SMS / Sega CD) | ✓ | ✓ | ✓ |
 | FCEUmm (NES) | ✓ | ✓ | ✓ |
 | Stella (Atari 2600) | ✓ | ✓ | ✓ |
-| Gambatte (Game Boy) | ✓ | ✓ | ✓* |
+| Gambatte (Game Boy) | ✓ | ✓ | ✓ |
 | mGBA (GBA) | ✓ | ✓ | ✓ |
 | Mednafen PCE Fast (PC Engine) | ✓ | ✓ | ✓ |
 | PicoDrive (Sega 32X) | ✓ | ✓ | ✓ |
@@ -21,8 +21,6 @@ Legend: ✓ supported, — not supported.
 | Flycast (Dreamcast) | ✓‡ | — | — |
 
 [Full list of supported Arcade machines here](https://emulation.gametechwiki.com/index.php/FinalBurn_Neo)
-
-\* On Apple Silicon (arm64), Gambatte (GB) is skipped by default in the CMake build.
 
 † Built by default when `BUILD_N64=ON` and OpenGL headers are available. If headers are missing, the build skips the N64 core.
 

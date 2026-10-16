@@ -31,3 +31,38 @@ jobs:
 
       - name: Run tests
         run: scripts/test-python.sh
+        env:
+          STABLE_RETRO_TEST_RENDERING: '1'
+
+  macos-arm64:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: macos-14
+            python-version: '3.11'
+          - os: macos-26
+            python-version: '3.14'
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Verify native Apple Silicon Python
+        run: python -c "import platform; assert platform.machine() == 'arm64'"
+
+      - name: Build with bundled native dependencies
+        run: |
+          python -m pip install --upgrade "pip<26.2"
+          python -m pip install -e '.[dev]'
+        env:
+          # Exercise the libzip fallback used by macOS wheels as well.
+          CMAKE_ARGS: -DPKG_CONFIG_EXECUTABLE=/usr/bin/false -DCMAKE_DISABLE_FIND_PACKAGE_CapnProto=TRUE
+
+      - name: Test emulation, serialization, and window rendering
+        run: python -m pytest tests/test_python
+        env:
+          STABLE_RETRO_TEST_RENDERING: '1'

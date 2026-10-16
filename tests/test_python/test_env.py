@@ -31,6 +31,8 @@ def generate_test_env(request):
     created_env = []
 
     def create(state=retro.State.NONE, *args, **kwargs):
+        # These tests exercise emulation, including on headless macOS CI.
+        kwargs.setdefault("render_mode", "rgb_array")
         env = retro.make(game=request.param, state=state, *args, **kwargs)
         created_env.append(env)  # noqa: F821
         return env
@@ -58,9 +60,11 @@ def test_env_basic(obs_type, generate_test_env):
     obs, info = env.reset()
     assert obs in env.observation_space
     assert isinstance(info, dict)
+    assert env.viewer is None
 
     obs, rew, terminated, truncated, info = env.step(env.action_space.sample())
     assert obs in env.observation_space
+    assert env.viewer is None
 
     assert isinstance(rew, float)
     assert rew == 0

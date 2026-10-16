@@ -42,7 +42,15 @@ project("Gym Retro" VERSION ${PROJECT_VERSION})
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(CMAKE_MACOSX_DEPLOYMENT_TARGET 10.7)
+# Respect the deployment target selected by the caller (including wheel builds).
+# Apple Silicon was introduced in macOS 11; Intel builds retain a 10.13 floor.
+if(APPLE AND NOT CMAKE_OSX_DEPLOYMENT_TARGET)
+  if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm64|aarch64)$")
+    set(CMAKE_OSX_DEPLOYMENT_TARGET 11.0)
+  else()
+    set(CMAKE_OSX_DEPLOYMENT_TARGET 10.13)
+  endif()
+endif()
 set(CMAKE_CXX_FLAGS
     "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-sign-compare -Wno-missing-field-initializers -fvisibility=hidden"
 )
@@ -101,9 +109,11 @@ else()
   set(LUA_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/third-party/luajit/src")
 
   if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-    set(LUA_FLAGS ${LUA_FLAGS} CC=${CMAKE_C_COMPILER}
-                  LDFLAGS=-mmacosx-version-min=10.7)
-    set(LUA_CFLAGS -mmacosx-version-min=10.7)
+    set(LUA_FLAGS
+        ${LUA_FLAGS} CC=${CMAKE_C_COMPILER}
+        LDFLAGS=-mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}
+        MACOSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET})
+    set(LUA_CFLAGS -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET})
   endif()
 
   if(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" OR CMAKE_SYSTEM_PROCESSOR
@@ -149,7 +159,12 @@ set(COREINFO)
 set(CORE_TARGETS)
 
 function(add_core platform core_name)
+  set(core_archflags)
+  if(ARGV2)
+    set(core_archflags "ARCHFLAGS=${ARGV2}")
+  endif()
   set(target_name ${core_name}_libretro${CMAKE_SHARED_LIBRARY_SUFFIX})
+
   get_filename_component(
     TARGET_PATH "${PYLIB_DIRECTORY}/stable_retro/cores/${target_name}" ABSOLUTE)
   list(APPEND CORES "${TARGET_PATH}")
@@ -202,16 +217,21 @@ function(add_core platform core_name)
   endif()
 
   if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    # Some cores (including Gambatte) do not use fpic in their link command.
+    set(core_ldflags
+        "${core_ldflags} -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}")
     set(core_fpic_flags
-        "${core_fpic_flags} -mmacosx-version-min=10.7 -stdlib=libc++")
+        "${core_fpic_flags} -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET} -stdlib=libc++"
+    )
   endif()
 
   add_custom_command(
     OUTPUT "${TARGET_PATH}"
     COMMAND
       ${CMAKE_COMMAND} -E env CFLAGS=${core_cflags} CXXFLAGS=${core_cxxflags}
-      LDFLAGS=${core_ldflags} $(MAKE) -f ${makefile} CC="${CMAKE_C_COMPILER}"
-      CXX="${CMAKE_CXX_COMPILER}" fpic=${core_fpic_flags} ${libretro_platform}
+      LDFLAGS=${core_ldflags} ${core_archflags} $(MAKE) -f ${makefile}
+      CC="${CMAKE_C_COMPILER}" CXX="${CMAKE_CXX_COMPILER}"
+      fpic=${core_fpic_flags} ${libretro_platform}
     COMMAND ${CMAKE_COMMAND} -E copy "${core_name}_libretro${DYNLIB_SUFFIX}"
             "${TARGET_PATH}"
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/cores/${platform}/${subdir}"
@@ -250,8 +270,10 @@ add_core(genesis genesis_plus_gx)
 add_core(nes fceumm)
 add_core(atari2600 stella)
 
-if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
-  message(warning "Detected Apple Silicon, skipping gambatte (gb)")
+if(APPLE)
+  # gambatte's Makefile defaults ARCHFLAGS to -arch i386 -arch x86_64, which
+  # modern clang cannot build here; pass the host arch explicitly.
+  add_core(gb gambatte "-arch ${CMAKE_SYSTEM_PROCESSOR}")
 else()
   add_core(gb gambatte)
 endif()

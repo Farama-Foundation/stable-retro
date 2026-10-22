@@ -8,7 +8,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:description" content="" />
     <meta property="og:url" content="https://stable-retro.farama.org/python.html" /><meta property="og:image" content="https://stable-retro.farama.org/_static/img/stable-retro-github.svg" /><meta name="twitter:card" content="summary_large_image"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Release Notes" href="../release_notes/" /><link rel="prev" title="Game Integration" href="../integration/" />
+<link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Release Notes" href="../release_notes/" /><link rel="prev" title="Controllers" href="../controllers/" />
         <link rel="canonical" href="https://stable-retro.farama.org/python.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.4.7 and Celshast 0.0.1 -->
@@ -221,6 +221,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../supported_games/">Supported Games</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developing/">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integration/">Game Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers/">Controllers</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Python API</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
@@ -297,7 +298,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="stable_retro.RetroEnv">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">stable_retro.</span></span><span class="sig-name descname"><span class="pre">RetroEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.State.DEFAULT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_restricted_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.Actions.FILTERED</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inttype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.data.Integrations.STABLE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.Observations.IMAGE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'human'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stable_retro/retro_env/#RetroEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stable_retro.RetroEnv" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">stable_retro.</span></span><span class="sig-name descname"><span class="pre">RetroEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.State.DEFAULT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_restricted_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.Actions.FILTERED</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inttype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.data.Integrations.STABLE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">retro.Observations.IMAGE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'human'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controller_devices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stable_retro/retro_env/#RetroEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stable_retro.RetroEnv" title="Link to this definition">¶</a></dt>
 <dd><p>Gym Retro environment class</p>
 <p>Provides a Gym interface to classic video games</p>
 <p>Initialize a Retro environment for a specific game/state configuration.</p>
@@ -377,7 +378,11 @@ also specify a string that is the name of the <code class="docutils literal notr
 </section>
 <section id="multiplayer-environments">
 <h2>Multiplayer Environments<a class="headerlink" href="#multiplayer-environments" title="Link to this heading">¶</a></h2>
-<p>A small number of games support multiplayer.  To use this feature, pass <code class="docutils literal notranslate"><span class="pre">players=&lt;n&gt;</span></code> to <a class="reference internal" href="#stable_retro.RetroEnv" title="stable_retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">stable_retro.RetroEnv</span></code></a>.  Here is an example random agent that controls both paddles in <code class="docutils literal notranslate"><span class="pre">Pong-Atari2600</span></code>:</p>
+<p>A small number of games support multiplayer. To use this feature, pass
+<code class="docutils literal notranslate"><span class="pre">players=&lt;n&gt;</span></code> (one to four) to <a class="reference internal" href="#stable_retro.RetroEnv" title="stable_retro.RetroEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">stable_retro.RetroEnv</span></code></a>. Games requiring a
+multitap or other adapter also need an explicit <code class="docutils literal notranslate"><span class="pre">controller_devices</span></code> mapping;
+see <a class="reference internal" href="../controllers/"><span class="doc">Controllers</span></a>. Here is an example random agent that controls both
+paddles in <code class="docutils literal notranslate"><span class="pre">Pong-Atari2600</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">stable_retro</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">retro</span>
 
 
@@ -473,7 +478,7 @@ also specify a string that is the name of the <code class="docutils literal notr
                 <use href="#svg-arrow-right"></use>
               </svg>
             </a>
-            <a class="prev-page" href="../integration/">
+            <a class="prev-page" href="../controllers/">
               <svg class="furo-related-icon">
                 <use href="#svg-arrow-right"></use>
               </svg>
@@ -482,7 +487,7 @@ also specify a string that is the name of the <code class="docutils literal notr
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Game Integration</div>
+                <div class="title">Controllers</div>
                 
               </div>
             </a>

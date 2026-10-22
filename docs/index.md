@@ -154,6 +154,7 @@ supported_emulators.md
 supported_games.md
 developing.md
 integration.md
+controllers.md
 python.md
 ```
 

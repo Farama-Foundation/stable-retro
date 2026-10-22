@@ -34,8 +34,15 @@ class RetroEnv(gym.Env, EzPickle):
         inttype=retro.data.Integrations.STABLE,
         obs_type=retro.Observations.IMAGE,
         render_mode="human",
+        controller_devices=None,
     ):
         """Initialize a Retro environment for a specific game/state configuration."""
+        if (
+            isinstance(players, bool)
+            or not isinstance(players, int)
+            or not 1 <= players <= retro.RetroEmulator.max_players
+        ):
+            raise ValueError("players must be an integer in 1..4")
         if inttype is retro.data.Integrations.DEFAULT or isinstance(
             inttype,
             retro.data.DefaultIntegrations,
@@ -55,6 +62,7 @@ class RetroEnv(gym.Env, EzPickle):
             inttype,
             obs_type,
             render_mode,
+            controller_devices,
         )
         if not hasattr(self, "spec"):
             self.spec = None
@@ -122,6 +130,12 @@ class RetroEnv(gym.Env, EzPickle):
         # emulator, ensure that unused ones are garbage-collected
         gc.collect()
         self.em = retro.RetroEmulator(rom_path)
+        try:
+            for port, device in (controller_devices or {}).items():
+                self.em.set_controller_port_device(port, device)
+        except Exception:
+            del self.em
+            raise
         self.em.configure_data(self.data)
         self.em.step()
 
@@ -217,7 +231,8 @@ class RetroEnv(gym.Env, EzPickle):
                     a //= len(combo)
                     action |= combo[current]
             elif self.use_restricted_actions == retro.Actions.MULTI_DISCRETE:
-                ap = a[self.num_buttons * p : self.num_buttons * (p + 1)]
+                num_combos = len(self.button_combos)
+                ap = a[num_combos * p : num_combos * (p + 1)]
                 for i in range(len(ap)):
                     buttons = self.button_combos[i]
                     action |= buttons[ap[i]]

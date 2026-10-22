@@ -5,6 +5,8 @@
 
 #include <cstdint>
 #include <string>
+#include <map>
+#include <stdexcept>
 #include <vector>
 #include <cstring>
 #include <stdarg.h>
@@ -14,6 +16,13 @@
 
 #ifdef ENABLE_HW_RENDER
 #include "hwrender.h"
+#endif
+
+#ifndef RETRO_ENVIRONMENT_GET_INPUT_BITMASKS
+#define RETRO_ENVIRONMENT_GET_INPUT_BITMASKS (51 | RETRO_ENVIRONMENT_EXPERIMENTAL)
+#endif
+#ifndef RETRO_DEVICE_ID_JOYPAD_MASK
+#define RETRO_DEVICE_ID_JOYPAD_MASK 256
 #endif
 
 // Backfill serialization quirk definitions if building against an older libretro.h
@@ -27,7 +36,7 @@
 namespace Retro {
 
 const int N_BUTTONS = 16;
-const int MAX_PLAYERS = 2;
+const int MAX_PLAYERS = 4;
 
 class GameData;
 class Emulator {
@@ -61,8 +70,17 @@ public:
 	bool unserialize(const void* data, size_t size);
 	size_t serializeSize();
 
-	void setKey(int port, int key, bool active) { m_buttonMask[port][key] = active; }
-	bool getKey(int port, int key) { return m_buttonMask[port][key]; }
+	void setKey(int port, int key, bool active) {
+		validateKey(port, key);
+		m_buttonMask[port][key] = active;
+	}
+	bool getKey(int port, int key) {
+		validateKey(port, key);
+		return m_buttonMask[port][key];
+	}
+	void setControllerPortDevice(unsigned port, unsigned device);
+	const std::vector<std::map<unsigned, std::string>>& controllerDevices() const { return m_controllerInfo; }
+	static int16_t inputState(unsigned port, unsigned device, unsigned index, unsigned id);
 
 	void clearCheats();
 	void setCheat(unsigned index, bool enabled, const char* code);
@@ -87,6 +105,12 @@ private:
 	static void cbInputPoll();
 	static int16_t cbInputState(unsigned port, unsigned device, unsigned index, unsigned id);
 
+	static void validateKey(int port, int key) {
+		if (port < 0 || port >= MAX_PLAYERS || key < 0 || key >= N_BUTTONS) {
+			throw std::out_of_range("controller port or button out of bounds");
+		}
+	}
+	std::vector<std::map<unsigned, std::string>> m_controllerInfo;
 	bool m_buttonMask[MAX_PLAYERS][N_BUTTONS]{};
 
 	// Video frame info

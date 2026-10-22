@@ -154,4 +154,35 @@ TEST_F(EmulatorTest, HotSwap) {
 	}
 }
 
+TEST_F(EmulatorTest, ControllerInputBoundsAndBitmasks) {
+	Emulator e;
+	EXPECT_EQ(Emulator::inputState(0, RETRO_DEVICE_JOYPAD, 0, 0), 0);
+	EXPECT_THROW(e.setControllerPortDevice(0, RETRO_DEVICE_JOYPAD), std::runtime_error);
+	ASSERT_TRUE(e.loadRom("roms/Dekadence-Dekadrive.md"));
+	e.setControllerPortDevice(0, 1025);
+	for (int port = 0; port < MAX_PLAYERS; ++port) {
+		EXPECT_EQ(Emulator::inputState(port, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_MASK), 0);
+		e.setKey(port, port, true);
+		EXPECT_EQ(Emulator::inputState(port, RETRO_DEVICE_JOYPAD, 0, port), 1);
+		EXPECT_EQ(Emulator::inputState(port, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_MASK), 1 << port);
+	}
+	e.setKey(3, 15, true);
+	EXPECT_EQ(static_cast<uint16_t>(Emulator::inputState(3, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_MASK)), 0x8008);
+	EXPECT_EQ(Emulator::inputState(4, RETRO_DEVICE_JOYPAD, 0, 0), 0);
+	EXPECT_EQ(Emulator::inputState(0, RETRO_DEVICE_JOYPAD, 0, 16), 0);
+	EXPECT_EQ(Emulator::inputState(0, RETRO_DEVICE_MOUSE, 0, 0), 0);
+	EXPECT_EQ(Emulator::inputState(0, RETRO_DEVICE_JOYPAD, 1, 0), 0);
+	EXPECT_THROW(e.setKey(-1, 0, true), std::out_of_range);
+	EXPECT_THROW(e.getKey(0, 16), std::out_of_range);
+	EXPECT_THROW(e.setControllerPortDevice(2, 1025), std::out_of_range);
+	EXPECT_THROW(e.setControllerPortDevice(0, 9999), std::invalid_argument);
+	e.reset();
+	EXPECT_EQ(Emulator::inputState(3, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_MASK), 0);
+	EXPECT_EQ(e.controllerDevices()[0].count(1025), 1);
+	e.run();
+	e.unloadCore();
+	EXPECT_TRUE(e.controllerDevices().empty());
+	EXPECT_EQ(Emulator::inputState(0, RETRO_DEVICE_JOYPAD, 0, 0), 0);
+}
+
 }

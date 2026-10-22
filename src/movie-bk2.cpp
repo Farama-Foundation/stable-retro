@@ -101,11 +101,19 @@ MovieBK2::MovieBK2(unique_ptr<Zip> zip)
 	if (tmp == "[Input]") {
 		tmp = m_log->readline();
 		size_t pos = 0;
-		string token;
 		while ((pos = tmp.find('|')) != std::string::npos) {
-			unsigned player = stoul(tmp.substr(1, 2));
-			if (player > m_players) {
-				m_players = player;
+			string field = tmp.substr(0, pos);
+			size_t start = field.find_first_not_of('#');
+			if (start != string::npos && field[start] == 'P' && field.compare(start, 5, "Power") != 0) {
+				size_t used = 0;
+				unsigned long player = stoul(field.substr(start + 1), &used);
+				if (player < 1 || player > MAX_PLAYERS || start + 1 + used >= field.size()
+				    || field[start + 1 + used] != ' ') {
+					throw std::invalid_argument("invalid movie player declaration");
+				}
+				if (player > m_players) {
+					m_players = player;
+				}
 			}
 			tmp.erase(0, pos + 1);
 		}
@@ -117,6 +125,9 @@ MovieBK2::MovieBK2(unique_ptr<Zip> zip)
 MovieBK2::MovieBK2(const std::string& path, bool write, unsigned players)
 	: m_zip(make_unique<Zip>(path))
 	, m_write(write) {
+	if (players < 1 || players > MAX_PLAYERS) {
+		throw std::invalid_argument("movie players must be in 1..4");
+	}
 	m_players = players;
 	m_zip->open(write);
 	m_log = m_zip->openFile("Input Log.txt", write);
@@ -243,6 +254,9 @@ bool MovieBK2::step() {
 				return false;
 			}
 			for (unsigned i = 0; i < m_players; ++i) {
+				if (iter == tmp.end()) {
+					return false;
+				}
 				m_keys[i] = 0;
 				++iter;
 				while (iter != tmp.end() && *iter != '|') {

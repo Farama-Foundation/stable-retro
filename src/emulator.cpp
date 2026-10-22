@@ -84,6 +84,7 @@ static void (*retro_set_video_refresh)(retro_video_refresh_t);
 static void (*retro_set_audio_sample)(retro_audio_sample_t);
 static void (*retro_set_audio_sample_batch)(retro_audio_sample_batch_t);
 static void (*retro_set_input_poll)(retro_input_poll_t);
+static void (*retro_set_controller_port_device)(unsigned, unsigned);
 static void (*retro_set_input_state)(retro_input_state_t);
 
 Emulator::Emulator() {
@@ -260,6 +261,7 @@ void Emulator::unloadCore() {
 #endif
 	m_coreHandle = nullptr;
 	s_loadedEmulator = nullptr;
+	m_controllerInfo.clear();
 }
 
 void Emulator::unloadRom() {
@@ -354,6 +356,7 @@ bool Emulator::loadCore(const string& corePath) {
 	retro_get_memory_size = reinterpret_cast<size_t (*)(unsigned int)>(GETSYM(m_coreHandle, "retro_get_memory_size"));
 	retro_cheat_reset = reinterpret_cast<void (*)()>(GETSYM(m_coreHandle, "retro_cheat_reset"));
 	retro_cheat_set = reinterpret_cast<void (*)(unsigned int, bool, const char*)>(GETSYM(m_coreHandle, "retro_cheat_set"));
+	retro_set_controller_port_device = reinterpret_cast<void (*)(unsigned, unsigned)>(GETSYM(m_coreHandle, "retro_set_controller_port_device"));
 	retro_set_environment = reinterpret_cast<void (*)(retro_environment_t)>(GETSYM(m_coreHandle, "retro_set_environment"));
 	retro_set_video_refresh = reinterpret_cast<void (*)(retro_video_refresh_t)>(GETSYM(m_coreHandle, "retro_set_video_refresh"));
 	retro_set_audio_sample = reinterpret_cast<void (*)(retro_audio_sample_t)>(GETSYM(m_coreHandle, "retro_set_audio_sample"));
@@ -469,6 +472,22 @@ bool Emulator::cbEnvironment(unsigned cmd, void* data) {
 	assert(s_loadedEmulator);
 
 	switch (cmd) {
+	case RETRO_ENVIRONMENT_SET_CONTROLLER_INFO: {
+		auto& info = s_loadedEmulator->m_controllerInfo;
+		info.clear();
+		const auto* ports = static_cast<const retro_controller_info*>(data);
+		if (ports) {
+			for (unsigned p = 0; p < MAX_PLAYERS && ports[p].types; ++p) {
+				info.emplace_back();
+				for (unsigned i = 0; i < ports[p].num_types; ++i) {
+					info.back()[ports[p].types[i].id] = ports[p].types[i].desc;
+				}
+			}
+		}
+		return true;
+	}
+	case RETRO_ENVIRONMENT_GET_INPUT_BITMASKS:
+		return true;
 	case RETRO_ENVIRONMENT_SET_PIXEL_FORMAT:
 		switch (*reinterpret_cast<retro_pixel_format*>(data)) {
 		case RETRO_PIXEL_FORMAT_XRGB8888:
@@ -611,9 +630,36 @@ void Emulator::cbInputPoll() {
 	assert(s_loadedEmulator);
 }
 
-int16_t Emulator::cbInputState(unsigned port, unsigned, unsigned, unsigned id) {
-	assert(s_loadedEmulator);
-	return s_loadedEmulator->m_buttonMask[port][id];
+void Emulator::setControllerPortDevice(unsigned port, unsigned device) {
+	if (port >= MAX_PLAYERS || (!m_controllerInfo.empty() && port >= m_controllerInfo.size())) {
+		throw std::out_of_range("controller configuration port out of bounds");
+	}
+	if (!m_romLoaded || !retro_set_controller_port_device) {
+		throw std::runtime_error("controller configuration requires a loaded core and ROM");
+	}
+	if ((m_controllerInfo.empty() && device != RETRO_DEVICE_NONE && device != RETRO_DEVICE_JOYPAD)
+	    || (!m_controllerInfo.empty() && !m_controllerInfo[port].count(device))) {
+		throw std::invalid_argument("controller device is not advertised for this port");
+	}
+	retro_set_controller_port_device(port, device);
+}
+
+int16_t Emulator::inputState(unsigned port, unsigned device, unsigned index, unsigned id) {
+	if (!s_loadedEmulator || port >= MAX_PLAYERS || device != RETRO_DEVICE_JOYPAD || index != 0) {
+		return 0;
+	}
+	if (id == RETRO_DEVICE_ID_JOYPAD_MASK) {
+		uint16_t mask = 0;
+		for (unsigned key = 0; key < N_BUTTONS; ++key) {
+			mask |= uint16_t(s_loadedEmulator->m_buttonMask[port][key]) << key;
+		}
+		return static_cast<int16_t>(mask);
+	}
+	return id < N_BUTTONS ? s_loadedEmulator->m_buttonMask[port][id] : 0;
+}
+
+int16_t Emulator::cbInputState(unsigned port, unsigned device, unsigned index, unsigned id) {
+	return inputState(port, device, index, id);
 }
 
 void Emulator::configureData(GameData* data) {

@@ -40,6 +40,7 @@ class ImageRenderer:
         self._texture = None
         self._sprite = None
         self._rotation = None
+        self._framebuffer_size = window.get_framebuffer_size()
 
     def draw(self, arr, rotation=0):
         if arr.ndim != 3 or arr.shape[2] != 3:
@@ -47,6 +48,15 @@ class ImageRenderer:
         height, width, _ = arr.shape
         rotation_steps = int(rotation) % 4
         self.window.switch_to()
+        framebuffer_size = self.window.get_framebuffer_size()
+        if (
+            sys.platform.startswith("linux")
+            and framebuffer_size != self._framebuffer_size
+        ):
+            # GLX/Mesa reallocates a resized drawable lazily at buffer swap.
+            # Do that before drawing, or the first frame uses the old storage.
+            self.window.flip()
+        self._framebuffer_size = framebuffer_size
         if self._texture is None or (width, height) != (
             self._texture.width,
             self._texture.height,

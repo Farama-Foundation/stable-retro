@@ -78,6 +78,9 @@ platforms = [
     "GbAdvance",
     "32x",
     "Saturn",
+    "SCD",
+    "NintendoDS",
+    "Dreamcast",
     "N64",
     "Arcade",
 ]

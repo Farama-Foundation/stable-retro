@@ -159,6 +159,23 @@ set(COREINFO)
 set(CORE_TARGETS)
 
 function(add_core platform core_name)
+  # The outer build must notice vendored source/header changes too. Some core
+  # Makefiles do not track headers, so force their rebuild when inputs change.
+  file(
+    GLOB_RECURSE
+    core_sources
+    "${CMAKE_SOURCE_DIR}/cores/${platform}/*.c"
+    "${CMAKE_SOURCE_DIR}/cores/${platform}/*.cc"
+    "${CMAKE_SOURCE_DIR}/cores/${platform}/*.cpp"
+    "${CMAKE_SOURCE_DIR}/cores/${platform}/*.cxx"
+    "${CMAKE_SOURCE_DIR}/cores/${platform}/*.h"
+    "${CMAKE_SOURCE_DIR}/cores/${platform}/*.hpp"
+    "${CMAKE_SOURCE_DIR}/cores/${platform}/*.inc"
+    "${CMAKE_SOURCE_DIR}/cores/${platform}/*.inl"
+    "${CMAKE_SOURCE_DIR}/cores/${platform}/*.s"
+    "${CMAKE_SOURCE_DIR}/cores/${platform}/*.S"
+    "${CMAKE_SOURCE_DIR}/cores/${platform}/*.mk"
+    "${CMAKE_SOURCE_DIR}/cores/${platform}/Makefile*")
   set(core_archflags)
   if(ARGV2)
     set(core_archflags "ARCHFLAGS=${ARGV2}")
@@ -229,14 +246,15 @@ function(add_core platform core_name)
     OUTPUT "${TARGET_PATH}"
     COMMAND
       ${CMAKE_COMMAND} -E env CFLAGS=${core_cflags} CXXFLAGS=${core_cxxflags}
-      LDFLAGS=${core_ldflags} ${core_archflags} $(MAKE) -f ${makefile}
+      LDFLAGS=${core_ldflags} ${core_archflags} $(MAKE) -B -f ${makefile}
       CC="${CMAKE_C_COMPILER}" CXX="${CMAKE_CXX_COMPILER}"
       fpic=${core_fpic_flags} ${libretro_platform}
     COMMAND ${CMAKE_COMMAND} -E copy "${core_name}_libretro${DYNLIB_SUFFIX}"
             "${TARGET_PATH}"
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/cores/${platform}/${subdir}"
     DEPENDS
-      "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version")
+      "${CMAKE_CURRENT_SOURCE_DIR}/stable_retro/cores/${core_name}-version"
+      ${core_sources})
   unset(core_ldflags)
   add_custom_command(
     OUTPUT "${PYLIB_DIRECTORY}/stable_retro/cores/${core_name}.json"
@@ -484,10 +502,7 @@ if(BUILD_UI)
   add_subdirectory(src/ui)
 endif()
 
-execute_process(
-  COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py --version
-  OUTPUT_VARIABLE CPACK_PACKAGE_VERSION
-  OUTPUT_STRIP_TRAILING_WHITESPACE)
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
 set(CPACK_PACKAGE_VENDOR OpenAI)
 set(CPACK_ZIP_COMPONENT_INSTALL ON)
 

@@ -37,22 +37,28 @@ def assert_corners(window, image):
     window.switch_to()
     width, height = window.get_framebuffer_size()
     for x, y in ((0.25, 0.25), (0.75, 0.25), (0.25, 0.75), (0.75, 0.75)):
+        pixel_x = int(x * width)
+        pixel_y = height - 1 - int(y * height)
         pixel = (gl.GLubyte * 3)()
         gl.glReadPixels(
-            int(x * width),
-            int((1 - y) * height),
+            pixel_x,
+            pixel_y,
             1,
             1,
             gl.GL_RGB,
             gl.GL_UNSIGNED_BYTE,
             pixel,
         )
-        expected = image[int(y * image.shape[0]), int(x * image.shape[1])]
+        # Readback uses a bottom-left origin and samples at pixel centers.
+        # Account for nearest-neighbor scaling when comparing real game frames.
+        source_x = int((pixel_x + 0.5) * image.shape[1] / width)
+        source_y = int((height - 1 - pixel_y + 0.5) * image.shape[0] / height)
+        expected = image[source_y, source_x]
         np.testing.assert_array_equal(list(pixel), expected)
 
 
 @pytest.mark.parametrize("rotation", [0, 1, 2, 3])
-@pytest.mark.parametrize("size", [(160, 100), (90, 150)])
+@pytest.mark.parametrize("size", [(160, 100), (90, 150), (320, 240), (64, 48)])
 def test_frame_orientation_and_resize(window, frame, rotation, size):
     from stable_retro.rendering import ImageRenderer
 
@@ -244,7 +250,10 @@ def test_interactive_run_returns_on_window_close(interactive, monkeypatch):
     assert interactive._env.close_count == 1
 
 
-@pytest.mark.parametrize("game", ["Airstriker-Genesis-v0", "Tetris-GameBoy-v0"])
+@pytest.mark.parametrize(
+    "game",
+    ["Airstriker-Genesis-v0", "Tetris-GameBoy-v0", "SuperMarioWorld-Snes-v0"],
+)
 def test_human_environment_frames(game, monkeypatch):
     import stable_retro as retro
     from stable_retro import rendering
@@ -271,3 +280,24 @@ def test_human_environment_frames(game, monkeypatch):
         env.viewer._renderer.draw(obs)
         assert_corners(window, obs)
     assert window.context is None
+
+
+def test_human_rom_fixtures(generate_test_env, monkeypatch):
+    """Test rendering for all systems with redistributable ROM fixtures."""
+    from pathlib import Path
+
+    from stable_retro import rendering
+
+    create_window = rendering.get_window
+
+    def hidden_window(**kwargs):
+        return create_window(**kwargs, visible=False)
+
+    monkeypatch.setattr(rendering, "get_window", hidden_window)
+    json_path = str(Path(__file__).resolve().parent.parent / "dummy.json")
+    env = generate_test_env(info=json_path, scenario=json_path, render_mode="human")
+    obs, _ = env.reset()
+    for _ in range(16):
+        obs, _, _, _, _ = env.step(env.action_space.sample())
+    env.viewer._renderer.draw(obs)
+    assert_corners(env.viewer.window, obs)

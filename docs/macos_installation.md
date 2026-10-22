@@ -38,6 +38,8 @@ python -m pip install -e .
 
 Pip installs the Python build tools, including CMake. The default build bundles LuaJIT and falls back to vendored libzip when a system libzip is unavailable. Homebrew Lua, Qt, and Cap'n Proto are not required for headless RL training. Gambatte (Game Boy and Game Boy Color) is built on both Intel and Apple Silicon.
 
+Wheels include integration data for Sega CD and Nintendo DS as well as the other platforms. Dreamcast integration data is packaged too, but running its core still requires Linux hardware-rendering support.
+
 CMake normally selects the macOS SDK automatically. If SDK discovery fails, check `xcode-select -p` and, if necessary, set:
 
 ```shell
@@ -91,6 +93,7 @@ open "build-ui/Gym Retro Integration.app"
 - **Wrong architecture / incompatible Mach-O**: Check that Python, Homebrew dependencies, and compiled cores all use the same architecture. Avoid mixing `/usr/local` Intel libraries with `/opt/homebrew` ARM libraries.
 - **A blank, flickering, or crashing human-rendering window**: The viewer and interactive example require pyglet 2.1 and OpenGL 3.3 or later. Upgrade the package dependencies in your virtual environment, and run the headless check above to isolate display failures from emulation failures. Run windows on the main thread in a macOS desktop session; keep RL workers in `rgb_array` mode.
 - **Qt not found**: Qt is needed only for the integration UI. Pass its installation prefix as shown above.
+- **Corrupted SNES graphics or gameplay on Apple Silicon**: Older Snes9x builds misidentified ARM64 as big-endian. Reinstall from updated source to rebuild the core; installing pyglet alone cannot fix this native emulation issue. Core source and header changes now trigger rebuilding the affected emulator.
 - **Unavailable cores**: N64 and FBNeo are currently excluded from macOS builds. Hardware rendering and Dreamcast support currently require Linux.
 
 ## Test Window Rendering
@@ -114,3 +117,12 @@ python -m stable_retro.examples.interactive --game Tetris-GameBoy-v0
 ```
 
 The interactive controls include arrow keys for movement, Z/X for the game buttons, Enter for Start, and Escape to close the viewer.
+
+If you have imported Super Mario World, its SNES viewer check is also available:
+
+```shell
+STABLE_RETRO_TEST_RENDERING=1 python -m pytest tests/test_python/test_rendering.py -k SuperMarioWorld
+python -m stable_retro.examples.interactive --game SuperMarioWorld-Snes-v0
+```
+
+The automated suite exercises all ten redistributable ROM fixtures (NES, SNES, Genesis, Atari 2600, Game Boy, GBA, PC Engine, Game Gear, SMS, and 32X), including state replay and window rendering. It checks the native libretro interface of every installed core as well. Saturn and Nintendo DS have interface checks but currently have no redistributable game fixtures in this repository. When Super Mario World is installed, a reference-frame check also verifies that its imported `Start` state produces the same image on ARM64 and x86-64.

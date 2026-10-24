@@ -6,13 +6,12 @@ build-backend = "setuptools.build_meta"
 name = "stable-retro"
 description = "A maintained fork of OpenAI's gym-retro for Gymnasium."
 readme = "README.md"
-requires-python = ">=3.10.0,<3.15"
+requires-python = ">=3.11.0,<3.15"
 authors = [{ name = "Farama Foundation", email = "contact@farama.org" }]
 license = "MIT"
 license-files = ["LICENSE", "LICENSES.md"]
 classifiers = [
 	"Programming Language :: Python :: 3",
-	"Programming Language :: Python :: 3.10",
 	"Programming Language :: Python :: 3.11",
 	"Programming Language :: Python :: 3.12",
 	"Programming Language :: Python :: 3.13",
@@ -20,7 +19,7 @@ classifiers = [
 ]
 dependencies = [
 	"gymnasium>=1.0.0",
-	"pyglet>=1.5.27,<2",
+	"pyglet>=2.1.2,<3",
 	"farama-notifications>=0.0.1",
 ]
 dynamic = ["version"]
@@ -39,11 +38,11 @@ version = { file = ["stable_retro/VERSION.txt"] }
 
 [tool.cibuildwheel]
 # We need to build for the following Python versions:
-build = "cp{310,311,312,313,314}-*"
+build = "cp{311,312,313,314}-*"
 
 [tool.cibuildwheel.linux]
 # Only manylinux is supported (no musl)
-build = "cp{310,311,312,313,314}-manylinux*"
+build = "cp{311,312,313,314}-manylinux*"
 
 # For manylinux_2_28 we need to install the following dependencies using yum:
 before-all = "yum install -y cmake git pkgconf-pkg-config zlib-devel libzip-devel bzip2-devel"

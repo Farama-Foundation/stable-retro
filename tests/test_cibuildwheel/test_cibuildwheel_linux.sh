@@ -15,7 +15,6 @@ IMAGE_PREFIX="stable-retro_wheels"
 DOCKERFILES_TO_BUILD_AND_RUN=(
     "debian:12 apt-based.Dockerfile ENV LANG C.UTF-8"
     "debian:latest apt-based.Dockerfile ENV LANG C.UTF-8"
-    "ubuntu:22.04 apt-based.Dockerfile"  # Python 3.10
     "ubuntu:24.04 apt-based.Dockerfile"
     "ubuntu:latest apt-based.Dockerfile"
     "continuumio/miniconda3:latest conda-based.Dockerfile"

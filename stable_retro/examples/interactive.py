@@ -6,16 +6,14 @@ An adapter object is defined for each environment to map keyboard commands to ac
 
 import abc
 import argparse
-import ctypes
-import sys
 import time
 
 import numpy as np
 import pyglet
-from pyglet import gl
 from pyglet.window import key as keycodes
 
 import stable_retro as retro
+from stable_retro.rendering import ImageRenderer, get_window
 
 
 class Interactive(abc.ABC):
@@ -35,7 +33,7 @@ class Interactive(abc.ABC):
             aspect_ratio = image_width / image_height
 
         # guess a screen size that doesn't distort the image too much but also is not tiny or huge
-        display = pyglet.canvas.get_display()
+        display = pyglet.display.get_display()
         screen = display.get_default_screen()
         max_win_width = screen.width * 0.9
         max_win_height = screen.height * 0.9
@@ -49,37 +47,20 @@ class Interactive(abc.ABC):
             win_width *= 2
             win_height *= 2
 
-        win = pyglet.window.Window(width=win_width, height=win_height)
+        win = get_window(width=win_width, height=win_height, display=display)
 
         self._key_handler = pyglet.window.key.KeyStateHandler()
         win.push_handlers(self._key_handler)
         win.on_close = self._on_close
 
-        gl.glEnable(gl.GL_TEXTURE_2D)
-        self._texture_id = gl.GLuint(0)
-        gl.glGenTextures(1, ctypes.byref(self._texture_id))
-        gl.glBindTexture(gl.GL_TEXTURE_2D, self._texture_id)
-        gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_S, gl.GL_CLAMP)
-        gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_T, gl.GL_CLAMP)
-        gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MAG_FILTER, gl.GL_NEAREST)
-        gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MIN_FILTER, gl.GL_NEAREST)
-        gl.glTexImage2D(
-            gl.GL_TEXTURE_2D,
-            0,
-            gl.GL_RGBA8,
-            image_width,
-            image_height,
-            0,
-            gl.GL_RGB,
-            gl.GL_UNSIGNED_BYTE,
-            None,
-        )
+        self._renderer = ImageRenderer(win)
+        self._closed = False
 
         self._env = env
         self._win = win
 
         # self._render_human = render_human
-        self._key_previous_states = {}
+        self._key_previous_states = set()
 
         self._steps = 0
         self._episode_steps = 0
@@ -104,18 +85,15 @@ class Interactive(abc.ABC):
         while self._sim_time < self._current_time:
             self._sim_time += 1 / self._tps
 
-            keys_clicked = set()
-            keys_pressed = set()
-            for key_code, pressed in self._key_handler.items():
-                if pressed:
-                    keys_pressed.add(key_code)
-
-                if not self._key_previous_states.get(key_code, False) and pressed:
-                    keys_clicked.add(key_code)
-                self._key_previous_states[key_code] = pressed
+            keys_pressed = {
+                code for code, pressed in self._key_handler.data.items() if pressed
+            }
+            keys_clicked = keys_pressed - self._key_previous_states
+            self._key_previous_states = keys_pressed
 
             if keycodes.ESCAPE in keys_pressed:
                 self._on_close()
+                return
 
             # assume that for async environments, we just want to repeat keys for as long as they are held
             inputs = keys_pressed
@@ -157,38 +135,15 @@ class Interactive(abc.ABC):
                     self._prev_episode_returns = 0
 
     def _draw(self):
-        gl.glBindTexture(gl.GL_TEXTURE_2D, self._texture_id)
-        video_buffer = ctypes.cast(
-            self._image.tobytes(),
-            ctypes.POINTER(ctypes.c_short),
-        )
-        gl.glTexSubImage2D(
-            gl.GL_TEXTURE_2D,
-            0,
-            0,
-            0,
-            self._image.shape[1],
-            self._image.shape[0],
-            gl.GL_RGB,
-            gl.GL_UNSIGNED_BYTE,
-            video_buffer,
-        )
-
-        x = 0
-        y = 0
-        w = self._win.width
-        h = self._win.height
-
-        pyglet.graphics.draw(
-            4,
-            pyglet.gl.GL_QUADS,
-            ("v2f", [x, y, x + w, y, x + w, y + h, x, y + h]),
-            ("t2f", [0, 1, 1, 1, 1, 0, 0, 0]),
-        )
+        self._renderer.draw(self._image)
 
     def _on_close(self):
-        self._env.close()
-        sys.exit(0)
+        if not self._closed:
+            self._closed = True
+            self._renderer.close()
+            self._win.close()
+            self._env.close()
+        return pyglet.event.EVENT_HANDLED
 
     @abc.abstractmethod
     def get_image(self, obs, venv):
@@ -211,18 +166,22 @@ class Interactive(abc.ABC):
         """
         Run the interactive window until the user quits
         """
-        # pyglet.app.run() has issues like https://bitbucket.org/pyglet/pyglet/issues/199/attempting-to-resize-or-close-pyglet
-        # and also involves inverting your code to run inside the pyglet framework
-        # avoid both by using a while loop
-        prev_frame_time = time.time()
-        while True:
-            self._win.switch_to()
-            self._win.dispatch_events()
-            now = time.time()
-            self._update(now - prev_frame_time)
-            prev_frame_time = now
-            self._draw()
-            self._win.flip()
+        prev_frame_time = time.perf_counter()
+        try:
+            while not self._closed:
+                self._win.dispatch_events()
+                if self._closed:
+                    break
+                now = time.perf_counter()
+                self._update(now - prev_frame_time)
+                prev_frame_time = now
+                if self._closed:
+                    break
+                self._draw()
+                self._win.flip()
+                time.sleep(max(0, 1 / self._tps - (time.perf_counter() - now)))
+        finally:
+            self._on_close()
 
 
 class RetroInteractive(Interactive):

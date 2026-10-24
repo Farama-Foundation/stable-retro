@@ -19,7 +19,7 @@ A fork of [gym-retro](https://github.com/openai/retro) ('lets you turn classic v
 | SNES| ✓ | ✓ | ✓ |
 | Nintendo 64 | ✓† | ✓† | — |
 | Nintendo DS | ✓ | ✓ | ✓ |
-| Gameboy/Color | ✓ | ✓ | ✓* |
+| Gameboy/Color | ✓ | ✓ | ✓ |
 | Gameboy Advance| ✓ | ✓ | ✓ |
 | Sega Genesis | ✓ | ✓ | ✓ |
 | Sega Master System | ✓ | ✓ | ✓ |
@@ -29,8 +29,6 @@ A fork of [gym-retro](https://github.com/openai/retro) ('lets you turn classic v
 | Sega Dreamcast | ✓‡ | — | — |
 | PC Engine | ✓ | ✓ | ✓ |
 | Arcade Machines | ✓ | ✓ | — |
-
-\* On Apple Silicon (arm64), Gambatte (GB) is skipped by default in the CMake build.
 
 † Built by default when BUILD_N64=ON and OpenGL headers are available. If headers are missing, the build skips the N64 core.
 
@@ -56,7 +54,7 @@ Currently over 1000 games are integrated including:
 
 ## Installation
 
-Stable Retro supports Python 3.10 through 3.14.
+Stable Retro supports Python 3.11 through 3.14.
 
 ```
 pip3 install stable-retro
@@ -145,7 +143,7 @@ Platforms:
 - Linux (manylinux1). Ubuntu 24.04 is recommended
 
 Python:
-- Python 3.10 through 3.14
+- Python 3.11 through 3.14
 
 CPU with `SSE3` or better
 

@@ -10,6 +10,7 @@ static inline T _hypot(T x, T y) {
 #endif
 #include <pybind11/pybind11.h>
 #include <pybind11/numpy.h>
+#include <pybind11/stl.h>
 
 #include "coreinfo.h"
 #include "data.h"
@@ -21,7 +22,9 @@ static inline T _hypot(T x, T y) {
 #include "movie.h"
 #include "movie-bk2.h"
 
+#include <cstring>
 #include <map>
+#include <stdexcept>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -51,7 +54,12 @@ struct PyRetroEmulator {
 	py::bytes getState() {
 		size_t size = m_re.serializeSize();
 		py::bytes bytes(NULL, size);
-		m_re.serialize(PyBytes_AsString(bytes.ptr()), size);
+		char* data = PyBytes_AsString(bytes.ptr());
+		// Some cores leave unused bytes in their fixed-size state buffers.
+		std::memset(data, 0, size);
+		if (!m_re.serialize(data, size)) {
+			throw std::runtime_error("Could not serialize emulator state");
+		}
 		return bytes;
 	}
 
@@ -116,14 +124,17 @@ struct PyRetroEmulator {
 	}
 
 	void setButtonMask(py::array_t<uint8_t> mask, unsigned player) {
+		if (mask.ndim() != 1 || !(mask.flags() & py::array::c_style)) {
+			throw std::invalid_argument("button mask must be a contiguous vector");
+		}
 		if (mask.size() > N_BUTTONS) {
 			throw std::runtime_error("mask.size() > N_BUTTONS");
 		}
 		if (player >= MAX_PLAYERS) {
 			throw std::runtime_error("player >= MAX_PLAYERS");
 		}
-		for (int key = 0; key < mask.size(); ++key) {
-			m_re.setKey(player, key, mask.data()[key]);
+		for (int key = 0; key < N_BUTTONS; ++key) {
+			m_re.setKey(player, key, key < mask.size() && mask.data()[key]);
 		}
 	}
 
@@ -419,6 +430,9 @@ struct PyMovie {
 	std::unique_ptr<Retro::Movie> m_movie;
 	bool recording = false;
 	PyMovie(py::str name, bool record, unsigned players) {
+		if (players < 1 || players > MAX_PLAYERS) {
+			throw std::invalid_argument("movie players must be in 1..4");
+		}
 		recording = record;
 		if (record) {
 			m_movie = std::make_unique<MovieBK2>(name, true, players);
@@ -485,6 +499,11 @@ PYBIND11_MODULE(_retro, m) {
 
 	py::class_<PyRetroEmulator>(m, "RetroEmulator")
 		.def(py::init<const string&>())
+		.def_property_readonly_static("max_players", [](py::object) { return MAX_PLAYERS; })
+		.def_property_readonly("controller_devices", [](const PyRetroEmulator& em) { return em.m_re.controllerDevices(); })
+		.def("set_controller_port_device", [](PyRetroEmulator& em, unsigned port, unsigned device) {
+			em.m_re.setControllerPortDevice(port, device);
+		}, py::arg("port"), py::arg("device"))
 		.def("step", &PyRetroEmulator::step)
 		.def("set_button_mask", &PyRetroEmulator::setButtonMask, py::arg("mask"), py::arg("player") = 0)
 		.def("get_state", &PyRetroEmulator::getState)

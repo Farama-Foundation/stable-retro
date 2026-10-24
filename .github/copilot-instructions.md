@@ -14,7 +14,7 @@ Stable Retro is an actively developed Gymnasium-compatible fork of OpenAI Gym Re
 
 ## Environment and build
 
-- Supported Python versions are 3.10 through 3.14. Do not require a newer Python runtime.
+- Supported Python versions are 3.11 through 3.14. Do not require a newer Python runtime.
 - On Debian/Ubuntu, install `cmake capnproto zlib1g-dev build-essential pkg-config libzip-dev libbz2-dev xvfb python3-opengl libgl1-mesa-dev libglu1-mesa-dev`.
 - Install the package and development tools with `python -m pip install -e '.[dev]'`.
 - The tested native workflow uses an in-source CMake build because native tests resolve cores and ROM fixtures relative to the source tree.

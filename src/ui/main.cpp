@@ -19,6 +19,9 @@ int main(int argc, char* argv[]) {
 #ifdef Q_OS_WIN
 	QCoreApplication::setAttribute(Qt::AA_NativeWindows);
 #endif
+#ifdef Q_OS_MACOS
+	QCoreApplication::setAttribute(Qt::AA_DontUseNativeDialogs);
+#endif
 
 	QApplication app(argc, argv);
 

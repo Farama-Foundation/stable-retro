@@ -17,7 +17,7 @@ jobs:
 
       - uses: actions/setup-python@v7
         with:
-            python-version: '3.10'
+            python-version: '3.11'
 
       - name: Install system packages
         run: |
@@ -46,6 +46,7 @@ jobs:
         run: rm -r _build/.doctrees
 
       - name: Upload to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _build

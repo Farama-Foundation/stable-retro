@@ -22,7 +22,9 @@ static inline T _hypot(T x, T y) {
 #include "movie.h"
 #include "movie-bk2.h"
 
+#include <cstring>
 #include <map>
+#include <stdexcept>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -52,7 +54,12 @@ struct PyRetroEmulator {
 	py::bytes getState() {
 		size_t size = m_re.serializeSize();
 		py::bytes bytes(NULL, size);
-		m_re.serialize(PyBytes_AsString(bytes.ptr()), size);
+		char* data = PyBytes_AsString(bytes.ptr());
+		// Some cores leave unused bytes in their fixed-size state buffers.
+		std::memset(data, 0, size);
+		if (!m_re.serialize(data, size)) {
+			throw std::runtime_error("Could not serialize emulator state");
+		}
 		return bytes;
 	}
 

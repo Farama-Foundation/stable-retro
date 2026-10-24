@@ -1,5 +1,6 @@
 """Controller bounds use bundled homebrew ROMs; no commercial ROM is needed."""
 
+import ctypes
 import gc
 import pickle
 import zipfile
@@ -73,11 +74,24 @@ def test_movie_rejects_invalid_counts(tmp_path, players):
         retro.Movie(str(tmp_path / "invalid.bk2"), True, players)
 
 
+def test_state_serialization_initializes_unused_bytes(emulator):
+    snapshot = emulator.get_state()
+    core = ctypes.CDLL(retro.get_core_path("Genesis"))
+    core.retro_serialize.argtypes = [ctypes.c_void_p, ctypes.c_size_t]
+    core.retro_serialize.restype = ctypes.c_bool
+    # Genesis leaves part of its fixed-size state buffer unwritten.
+    expected = (ctypes.c_ubyte * len(snapshot))()
+    assert core.retro_serialize(expected, len(expected))
+    assert snapshot == bytes(expected)
+    assert emulator.get_state() == snapshot
+
+
 def test_movie_indices_and_four_player_roundtrip(tmp_path, emulator):
     path = str(tmp_path / "four.bk2")
     movie = retro.Movie(path, True, 4)
     movie.configure("homebrew", emulator)
-    movie.set_state(emulator.get_state())
+    snapshot = emulator.get_state()
+    movie.set_state(snapshot)
     for key, player in ((0, 0), (15, 3)):
         movie.set_key(key, True, player)
         assert movie.get_key(key, player)
@@ -92,7 +106,7 @@ def test_movie_indices_and_four_player_roundtrip(tmp_path, emulator):
     movie.close()
     replay = retro.Movie(path)
     assert replay.players == 4
-    assert replay.get_state() == emulator.get_state()
+    assert replay.get_state() == snapshot
     assert replay.step()
     assert replay.get_key(0, 0) and replay.get_key(7, 3)
     replay.close()

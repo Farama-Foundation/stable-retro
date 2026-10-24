@@ -65,14 +65,7 @@ First make sure you can install Retro from source, after that follow the instruc
 
 ### macOS
 
-Note that for Mojave (10.14) you may need to install `/Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg`
-
-```shell
-brew install pkg-config capnp qt5
-cmake . -DCMAKE_PREFIX_PATH=/usr/local/opt/qt -DBUILD_UI=ON -UPYLIB_DIRECTORY
-make -j$(sysctl hw.ncpu | cut -d: -f2)
-open "Gym Retro Integration.app"
-```
+Follow the [macOS installation guide](macos_installation.md#build-the-integration-ui) for native Apple Silicon and Intel build instructions.
 
 ### Linux
 

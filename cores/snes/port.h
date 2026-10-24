@@ -297,11 +297,23 @@ void _makepath (char *, const char *, const char *, const char *, const char *);
 #define TITLE "Snes9x"
 #endif
 
-#if defined(__i386__) || defined(__i486__) || defined(__i586__) || defined(__i686__) || defined(__x86_64__) || defined(__alpha__) || defined(__MIPSEL__) || defined(_M_IX86) || defined(_M_X64) || defined(_XBOX1) || defined(ARM) || defined(ANDROID)
+// Prefer the compiler's byte order over an architecture whitelist. In particular,
+// Apple Silicon defines __aarch64__, not ARM, and previously took the MSB path.
+#if defined(__BYTE_ORDER__) && defined(__ORDER_LITTLE_ENDIAN__) && defined(__ORDER_BIG_ENDIAN__)
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
 #define LSB_FIRST
-#define FAST_LSB_WORD_ACCESS
 #else
 #define MSB_FIRST
+#endif
+#elif defined(__i386__) || defined(__i486__) || defined(__i586__) || defined(__i686__) || defined(__x86_64__) || defined(__alpha__) || defined(__MIPSEL__) || defined(_M_IX86) || defined(_M_X64) || defined(_M_ARM64) || defined(_XBOX1) || defined(ARM) || defined(ANDROID)
+#define LSB_FIRST
+#else
+#define MSB_FIRST
+#endif
+
+// Direct word reads also require a CPU that supports unaligned access.
+#if defined(LSB_FIRST) && (defined(__i386__) || defined(__i486__) || defined(__i586__) || defined(__i686__) || defined(__x86_64__) || defined(__alpha__) || defined(__MIPSEL__) || defined(_M_IX86) || defined(_M_X64) || defined(_M_ARM64) || defined(__aarch64__) || defined(_XBOX1) || defined(ARM) || defined(ANDROID))
+#define FAST_LSB_WORD_ACCESS
 #endif
 
 #ifdef FAST_LSB_WORD_ACCESS

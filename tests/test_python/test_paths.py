@@ -5,6 +5,20 @@ import pytest
 import stable_retro as retro
 
 
+@pytest.mark.parametrize(
+    "game",
+    [
+        "MortalKombat-SCD-v0",
+        "UltimateMortalKombatM5-NintendoDS-v0",
+        "StreetFighter3rdStrike-Dreamcast-v0",
+    ],
+)
+def test_packaged_platform_integrations(game):
+    # These integrations must survive wheel packaging even without local ROMs.
+    for filename in ("rom.sha", "data.json", "scenario.json"):
+        assert retro.data.get_file_path(game, filename) is not None
+
+
 @pytest.fixture
 def custom_cleanup():
     retro.data.Integrations.clear_custom_paths()

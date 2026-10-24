@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+* initialize unused save-state bytes for deterministic serialization and movie roundtrips
+
 ## 1.0.1
 
 * move package metadata to `pyproject.toml` so published PyPI metadata exposes current project details correctly

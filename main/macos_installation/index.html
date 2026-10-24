@@ -287,119 +287,107 @@
             
             <section class="tex2jax_ignore mathjax_ignore" id="macos-installation">
 <h1>macOS Installation<a class="headerlink" href="#macos-installation" title="Link to this heading">¶</a></h1>
-<p>This guide covers installing Stable Retro on macOS, including both Intel and Apple Silicon Macs.</p>
-<section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>Python 3.11 to 3.14</p></li>
-<li><p>macOS 10.13 (High Sierra) or later</p></li>
-</ul>
-</section>
+<p>Stable Retro supports native Intel and Apple Silicon builds with Python 3.11 through 3.14. The default source-build deployment target is macOS 10.13 on Intel and macOS 11.0 on Apple Silicon. Your Python distribution and optional dependencies may require a newer macOS version.</p>
 <section id="standard-installation">
 <h2>Standard Installation<a class="headerlink" href="#standard-installation" title="Link to this heading">¶</a></h2>
-<p>For most users, the simplest installation method is via pip:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>stable-retro
+<p>Use a virtual environment:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>stable-retro
 </pre></div>
 </div>
-<p>If the above doesn’t work for your platform:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>git+https://github.com/Farama-Foundation/stable-retro.git
-</pre></div>
-</div>
+<p>If a wheel is unavailable for your Python and architecture, pip builds from source. See the requirements below.</p>
 </section>
-<section id="development-installation">
-<h2>Development Installation<a class="headerlink" href="#development-installation" title="Link to this heading">¶</a></h2>
-<p>If you plan to integrate new ROMs, states or emulator cores, or plan to edit an existing environment:</p>
+<section id="build-from-source">
+<h2>Build from Source<a class="headerlink" href="#build-from-source" title="Link to this heading">¶</a></h2>
+<p>Install Apple’s command line tools if needed:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>xcode-select<span class="w"> </span>--install
+</pre></div>
+</div>
+<p>Use a native Python interpreter. On Apple Silicon, this should print <code class="docutils literal notranslate"><span class="pre">arm64</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">'import platform; print(platform.machine())'</span>
+</pre></div>
+</div>
+<p>Then build in your virtual environment:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Farama-Foundation/stable-retro.git
 <span class="nb">cd</span><span class="w"> </span>stable-retro
-pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
 </pre></div>
 </div>
+<p>Pip installs the Python build tools, including CMake. The default build bundles LuaJIT and falls back to vendored libzip when a system libzip is unavailable. Homebrew Lua, Qt, and Cap’n Proto are not required for headless RL training. Gambatte (Game Boy and Game Boy Color) is built on both Intel and Apple Silicon.</p>
+<p>Wheels include integration data for Sega CD and Nintendo DS as well as the other platforms. Dreamcast integration data is packaged too, but running its core still requires Linux hardware-rendering support.</p>
+<p>CMake normally selects the macOS SDK automatically. If SDK discovery fails, check <code class="docutils literal notranslate"><span class="pre">xcode-select</span> <span class="pre">-p</span></code> and, if necessary, set:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">SDKROOT</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>xcrun<span class="w"> </span>--sdk<span class="w"> </span>macosx<span class="w"> </span>--show-sdk-path<span class="k">)</span><span class="s2">"</span>
+</pre></div>
+</div>
+<p>A custom deployment target can be passed through to CMake, for example:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">"-DCMAKE_OSX_DEPLOYMENT_TARGET=14.0"</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Build for the native architecture of your Python interpreter. Reusing a checkout previously built under Rosetta can leave incompatible CMake caches, core objects, or libraries; use a fresh checkout when changing architectures.</p>
 </section>
-<section id="apple-silicon-installation">
-<h2>Apple Silicon Installation<a class="headerlink" href="#apple-silicon-installation" title="Link to this heading">¶</a></h2>
-<p>These instructions were originally tested on Python 3.10. Current releases require Python 3.11 through 3.14.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The Game Boy (gambatte) emulator is not supported on Apple Silicon.</p>
-</div>
-<section id="build-from-source">
-<h3>Build from Source<a class="headerlink" href="#build-from-source" title="Link to this heading">¶</a></h3>
-<ol class="arabic">
-<li><p>Install build dependencies:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cmake<span class="w"> </span>wheel
-</pre></div>
-</div>
-</li>
-<li><p>Install system dependencies via Homebrew:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>pkg-config<span class="w"> </span>lua@5.3<span class="w"> </span>libzip<span class="w"> </span>qt@5<span class="w"> </span>capnp
-</pre></div>
-</div>
-</li>
-<li><p>Add Qt to your PATH:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s1">'export PATH="/opt/homebrew/opt/qt@5/bin:$PATH"'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
-</pre></div>
-</div>
-</li>
-<li><p>Set the SDK root:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">SDKROOT</span><span class="o">=</span><span class="k">$(</span>xcrun<span class="w"> </span>--sdk<span class="w"> </span>macosx<span class="w"> </span>--show-sdk-path<span class="k">)</span>
-</pre></div>
-</div>
-</li>
-<li><p>Install the package:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
-</pre></div>
-</div>
-</li>
-</ol>
-</section>
-<section id="build-integration-ui">
-<h3>Build Integration UI<a class="headerlink" href="#build-integration-ui" title="Link to this heading">¶</a></h3>
-<p>After building from source, you can optionally build the Integration UI:</p>
-<ol class="arabic">
-<li><p>Configure CMake with UI support:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>.<span class="w"> </span>-DCMAKE_PREFIX_PATH<span class="o">=</span>/usr/local/opt/qt<span class="w"> </span>-DBUILD_UI<span class="o">=</span>ON<span class="w"> </span>-UPYLIB_DIRECTORY
-</pre></div>
-</div>
-</li>
-<li><p>Build the application:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>-j<span class="k">$(</span>sysctl<span class="w"> </span>hw.ncpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f2<span class="k">)</span>
-</pre></div>
-</div>
-</li>
-<li><p>Launch the Integration UI:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>open<span class="w"> </span><span class="s2">"Gym Retro Integration.app"</span>
-</pre></div>
-</div>
-</li>
-</ol>
-</section>
-</section>
-<section id="docker-for-apple-silicon">
-<h2>Docker for Apple Silicon<a class="headerlink" href="#docker-for-apple-silicon" title="Link to this heading">¶</a></h2>
-<p>An alternative option for M1/M2/M3 Macs is to use Docker:</p>
-<p><a class="reference external" href="https://github.com/arvganesh/stable-retro-docker">https://github.com/arvganesh/stable-retro-docker</a></p>
-</section>
-<section id="verify-installation">
-<h2>Verify Installation<a class="headerlink" href="#verify-installation" title="Link to this heading">¶</a></h2>
-<p>After installation, verify it works by running:</p>
+<section id="verify-headless-training">
+<h2>Verify Headless Training<a class="headerlink" href="#verify-headless-training" title="Link to this heading">¶</a></h2>
+<p>The bundled Airstriker ROM allows testing without importing a commercial game. Select <code class="docutils literal notranslate"><span class="pre">rgb_array</span></code> explicitly: the default <code class="docutils literal notranslate"><span class="pre">human</span></code> mode opens a pyglet window on reset and step.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">stable_retro</span>
-<span class="n">env</span> <span class="o">=</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s1">'Airstriker-Genesis-v0'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Installation successful!"</span><span class="p">)</span>
-<span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">stable_retro</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="s2">"Airstriker-Genesis-v0"</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">"rgb_array"</span><span class="p">)</span> <span class="k">as</span> <span class="n">env</span><span class="p">:</span>
+    <span class="n">observation</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">120</span><span class="p">):</span>
+        <span class="n">observation</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span>
+            <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">terminated</span> <span class="ow">or</span> <span class="n">truncated</span><span class="p">:</span>
+            <span class="n">observation</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Headless emulation successful:"</span><span class="p">,</span> <span class="n">observation</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Use this mode in RL workers as well. It returns CPU image observations without creating an OpenGL window; it does not require a display server or Xvfb on macOS.</p>
 </section>
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
-<section id="common-issues">
-<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">¶</a></h3>
+<section id="build-the-integration-ui">
+<h2>Build the Integration UI<a class="headerlink" href="#build-the-integration-ui" title="Link to this heading">¶</a></h2>
+<p>The optional integration application still uses Qt 5. Install it separately, if available for your Homebrew installation:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>qt@5
+cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build-ui<span class="w"> </span>-DBUILD_UI<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_PREFIX_PATH<span class="o">=</span><span class="s2">"</span><span class="k">$(</span>brew<span class="w"> </span>--prefix<span class="w"> </span>qt@5<span class="k">)</span><span class="s2">"</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build-ui<span class="w"> </span>--parallel<span class="w"> </span><span class="m">2</span>
+open<span class="w"> </span><span class="s2">"build-ui/Gym Retro Integration.app"</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">--prefix</span></code> works with both Apple Silicon and Intel Homebrew paths. Qt 5 is deprecated upstream; availability is separate from the default Python package build.</p>
+</section>
+<section id="troubleshooting-and-limitations">
+<h2>Troubleshooting and Limitations<a class="headerlink" href="#troubleshooting-and-limitations" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Import errors</strong>: Ensure you have the correct Python version (3.11-3.14)</p></li>
-<li><p><strong>Build failures on Apple Silicon</strong>: Make sure you’ve set <code class="docutils literal notranslate"><span class="pre">SDKROOT</span></code> correctly</p></li>
-<li><p><strong>Qt not found</strong>: Verify Qt is in your PATH after running the export command</p></li>
-<li><p><strong>Game Boy games not working on Apple Silicon</strong>: This is expected; the gambatte core is not supported on arm64</p></li>
+<li><p><strong>Wrong architecture / incompatible Mach-O</strong>: Check that Python, Homebrew dependencies, and compiled cores all use the same architecture. Avoid mixing <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> Intel libraries with <code class="docutils literal notranslate"><span class="pre">/opt/homebrew</span></code> ARM libraries.</p></li>
+<li><p><strong>A blank, flickering, or crashing human-rendering window</strong>: The viewer and interactive example require pyglet 2.1 and OpenGL 3.3 or later. Upgrade the package dependencies in your virtual environment, and run the headless check above to isolate display failures from emulation failures. Run windows on the main thread in a macOS desktop session; keep RL workers in <code class="docutils literal notranslate"><span class="pre">rgb_array</span></code> mode.</p></li>
+<li><p><strong>Qt not found</strong>: Qt is needed only for the integration UI. Pass its installation prefix as shown above.</p></li>
+<li><p><strong>Corrupted SNES graphics or gameplay on Apple Silicon</strong>: Older Snes9x builds misidentified ARM64 as big-endian. Reinstall from updated source to rebuild the core; installing pyglet alone cannot fix this native emulation issue. Core source and header changes now trigger rebuilding the affected emulator.</p></li>
+<li><p><strong>Unavailable cores</strong>: N64 and FBNeo are currently excluded from macOS builds. Hardware rendering and Dreamcast support currently require Linux.</p></li>
 </ul>
 </section>
+<section id="test-window-rendering">
+<h2>Test Window Rendering<a class="headerlink" href="#test-window-rendering" title="Link to this heading">¶</a></h2>
+<p>The human viewer and interactive example share a shader-based image renderer. It uses nearest-neighbor scaling and supports rotated frames, window resizing, and displays where framebuffer pixels differ from window coordinates.</p>
+<p>Run the OpenGL regression tests from a desktop session:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s1">'.[dev]'</span>
+<span class="nv">STABLE_RETRO_TEST_RENDERING</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_python/test_rendering.py
+</pre></div>
+</div>
+<p>These tests create temporary windows and check the rendered pixels, keyboard state, and window cleanup. They are skipped by default when the environment variable is absent. On Linux they can run under Xvfb; macOS requires a WindowServer session.</p>
+<p>If you have imported a Tetris ROM, run its viewer check with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">STABLE_RETRO_TEST_RENDERING</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_python/test_rendering.py<span class="w"> </span>-k<span class="w"> </span>Tetris
+python<span class="w"> </span>-m<span class="w"> </span>stable_retro.examples.interactive<span class="w"> </span>--game<span class="w"> </span>Tetris-GameBoy-v0
+</pre></div>
+</div>
+<p>The interactive controls include arrow keys for movement, Z/X for the game buttons, Enter for Start, and Escape to close the viewer.</p>
+<p>If you have imported Super Mario World, its SNES viewer check is also available:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">STABLE_RETRO_TEST_RENDERING</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_python/test_rendering.py<span class="w"> </span>-k<span class="w"> </span>SuperMarioWorld
+python<span class="w"> </span>-m<span class="w"> </span>stable_retro.examples.interactive<span class="w"> </span>--game<span class="w"> </span>SuperMarioWorld-Snes-v0
+</pre></div>
+</div>
+<p>The automated suite exercises all ten redistributable ROM fixtures (NES, SNES, Genesis, Atari 2600, Game Boy, GBA, PC Engine, Game Gear, SMS, and 32X), including state replay and window rendering. A generated, original Nintendo DS graphics program also checks CPU execution, framebuffer output, state replay, and window rendering without proprietary BIOS files. Run it with <code class="docutils literal notranslate"><span class="pre">STABLE_RETRO_TEST_RENDERING=1</span> <span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pytest</span> <span class="pre">tests/test_python/test_ds_runtime.py</span></code>. This small program does not establish compatibility with commercial DS games or BIOS-dependent homebrew.</p>
+<p>The suite checks the native libretro interface of every installed core as well. Saturn currently has interface coverage only; running a game requires a compatible local disc image and the appropriate BIOS (<code class="docutils literal notranslate"><span class="pre">sega_101.bin</span></code> for Japan or <code class="docutils literal notranslate"><span class="pre">mpr-17933.bin</span></code> for North America/Europe) in <code class="docutils literal notranslate"><span class="pre">stable_retro/cores</span></code>. Sega CD and PC Engine CD also require suitable disc/BIOS assets and are not covered by the cartridge fixtures. When Super Mario World is installed, a reference-frame check also verifies that its imported <code class="docutils literal notranslate"><span class="pre">Start</span></code> state produces the same image on ARM64 and x86-64.</p>
 </section>
 </section>
 
@@ -473,20 +461,12 @@ pip3<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </
             <div class="toc-tree">
               <ul>
 <li><a class="reference internal" href="#">macOS Installation</a><ul>
-<li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#standard-installation">Standard Installation</a></li>
-<li><a class="reference internal" href="#development-installation">Development Installation</a></li>
-<li><a class="reference internal" href="#apple-silicon-installation">Apple Silicon Installation</a><ul>
 <li><a class="reference internal" href="#build-from-source">Build from Source</a></li>
-<li><a class="reference internal" href="#build-integration-ui">Build Integration UI</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#docker-for-apple-silicon">Docker for Apple Silicon</a></li>
-<li><a class="reference internal" href="#verify-installation">Verify Installation</a></li>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
-<li><a class="reference internal" href="#common-issues">Common Issues</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#verify-headless-training">Verify Headless Training</a></li>
+<li><a class="reference internal" href="#build-the-integration-ui">Build the Integration UI</a></li>
+<li><a class="reference internal" href="#troubleshooting-and-limitations">Troubleshooting and Limitations</a></li>
+<li><a class="reference internal" href="#test-window-rendering">Test Window Rendering</a></li>
 </ul>
 </li>
 </ul>

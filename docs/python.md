@@ -41,7 +41,11 @@ The default observations are RGB images of the game, but you can view RAM values
 
 ## Multiplayer Environments
 
-A small number of games support multiplayer.  To use this feature, pass `players=<n>` to {class}`stable_retro.RetroEnv`.  Here is an example random agent that controls both paddles in `Pong-Atari2600`:
+A small number of games support multiplayer. To use this feature, pass
+`players=<n>` (one to four) to {class}`stable_retro.RetroEnv`. Games requiring a
+multitap or other adapter also need an explicit `controller_devices` mapping;
+see {doc}`controllers`. Here is an example random agent that controls both
+paddles in `Pong-Atari2600`:
 
 ```{literalinclude} ../stable_retro/examples/trivial_random_agent_multiplayer.py
 ```

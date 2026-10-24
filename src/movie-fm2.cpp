@@ -14,7 +14,7 @@ std::unique_ptr<Movie> MovieFM2::load(const std::string& path) {
 	unique_ptr<ifstream> stream = make_unique<ifstream>(path);
 	string tmp;
 	getline(*stream, tmp);
-	if (tmp.back() == '\r') {
+	if (!tmp.empty() && tmp.back() == '\r') {
 		tmp.pop_back();
 	}
 	if (tmp != "version 3") {
@@ -50,7 +50,7 @@ MovieFM2::MovieFM2(std::unique_ptr<std::istream> stream)
 	string tmp;
 	while (m_stream->good() && (tmp.size() < 6 || tmp.substr(0, 6) != "port2 ")) {
 		getline(*m_stream, tmp);
-		if (tmp.back() == '\r') {
+		if (!tmp.empty() && tmp.back() == '\r') {
 			tmp.pop_back();
 		}
 		if (tmp == "port1 1") {
@@ -61,11 +61,11 @@ MovieFM2::MovieFM2(std::unique_ptr<std::istream> stream)
 
 bool MovieFM2::step() {
 	string tmp = "?";
-	while (m_stream->good() && tmp[0] != '|') {
+	while (m_stream->good() && (tmp.empty() || tmp[0] != '|')) {
 		getline(*m_stream, tmp);
 	}
 	auto iter = tmp.begin();
-	if (*iter == '|') {
+	if (iter != tmp.end() && *iter == '|') {
 		++iter;
 		while (iter != tmp.end() && *iter != '|') {
 			// Ignore commands
@@ -75,6 +75,9 @@ bool MovieFM2::step() {
 			return false;
 		}
 		for (unsigned i = 0; i < m_players; ++i) {
+			if (iter == tmp.end()) {
+				return false;
+			}
 			m_keys[i] = 0;
 			++iter;
 			while (iter != tmp.end() && *iter != '|') {

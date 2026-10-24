@@ -28,10 +28,16 @@ std::unique_ptr<Movie> Movie::load(const string& path) {
 }
 
 bool Movie::getKey(int key, unsigned player) {
+	if (player >= m_players || key < 0 || key >= N_BUTTONS) {
+		throw std::out_of_range("movie player or key out of bounds");
+	}
 	return (m_keys[player] >> key) & 1;
 }
 
 void Movie::setKey(int key, bool set, unsigned player) {
+	if (player >= m_players || key < 0 || key >= N_BUTTONS) {
+		throw std::out_of_range("movie player or key out of bounds");
+	}
 	m_keys[player] &= ~(1 << key);
 	m_keys[player] |= set << key;
 }

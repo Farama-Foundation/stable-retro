@@ -52,6 +52,11 @@ archs = "x86_64 aarch64"
 manylinux-x86_64-image = "manylinux_2_28"
 manylinux-aarch64-image = "manylinux_2_28"
 
+[[tool.cibuildwheel.overrides]]
+select = "*-manylinux_aarch64"
+# FBNeo ships x86 object files and Parallel N64 uses an x86 dynarec.
+environment = { CMAKE_ARGS = "-DBUILD_FBNEO=OFF -DBUILD_N64=OFF" }
+
 [tool.cibuildwheel.macos]
 # Wheel builds use bundled LuaJIT, the vendored libzip fallback, and keep the
 # optional Qt integration UI disabled. Avoid Homebrew bootstrap here because
